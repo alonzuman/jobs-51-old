@@ -1,0 +1,17 @@
+{
+  "addJob": "פרסום עבודה",
+  "companyName": "שם החברה",
+  "type": "סוג",
+  "location": "מיקום",
+  "contactPerson": "איש קשר",
+  "description": "תיאור",
+  "requirements": "דרישות",
+  "email": "כתובת דוא״ל",
+  "phone": "מספר טלפון",
+  "post": "פרסום",
+  "valueTooShort": "הערך שהזנת קצר מדי",
+  "signIn": "התחברות",
+  "editJob": "עריכת פרסום",
+  "removeJob": "מחיקת פרסום",
+  "couldntFindJobs": "לא נמצאו פרסומים"
+}
