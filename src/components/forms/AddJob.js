@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
-import { Box, TextField, Button } from '@material-ui/core'
+import { v4 as uuidv4 } from 'uuid';
+import { Box, TextField, Button, CircularProgress } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { addJob, setAlert } from '../../actions'
+import FileUploader from '../general/FileUploader'
+import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
 
 const AddJob = () => {
   const { translation } = useSelector(state => state.theme)
+  const { loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
+
+  // General
+  const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   // TODO Multi steps
   const [step, setStep] = useState(0)
 
   // Job fields
+  const [imageUrl, setImageUrl] = useState('')
   const [company, setCompany] = useState('')
   const [type, setType] = useState('')
   const [location, setLocation] = useState('')
@@ -24,6 +33,7 @@ const AddJob = () => {
     e.preventDefault()
 
     const job = {
+      image: imageUrl,
       company,
       type,
       location,
@@ -40,6 +50,8 @@ const AddJob = () => {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
+        {uploading && <CircularProgressWithLabel value={progress} />}
+        {!uploading && <FileUploader fileName={uuidv4()} folder={'job-images'} setProgress={setProgress} setIsUploading={setUploading} setImageUrl={setImageUrl} />}
         <TextField required label={translation?.companyName} value={company} onChange={e => setCompany(e.target.value)} variant='outlined' />
         <TextField required label={translation?.type} value={type} onChange={e => setType(e.target.value)} variant='outlined' />
         <TextField required label={translation?.location} value={location} onChange={e => setLocation(e.target.value)} variant='outlined' />
@@ -49,7 +61,7 @@ const AddJob = () => {
         <TextField required label={translation?.requirements} value={requirements} onChange={e => setRequirements(e.target.value)} variant='outlined' />
         <TextField required label={translation?.email} value={email} onChange={e => setEmail(e.target.value)} variant='outlined' />
         <TextField required label={translation?.phone} value={phone} onChange={e => setPhone(e.target.value)} variant='outlined' />
-        <Button type='submit'>{translation?.post}</Button>
+        <Button disabled={uploading} type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
       </form>
     </Box>
   )

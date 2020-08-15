@@ -4,10 +4,14 @@ import { Dialog, DialogTitle, DialogContent } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
 import AddJob from '../forms/AddJob'
 import EditJob from '../forms/EditJob'
+import SignIn from '../forms/SignIn'
+import SignUp from '../forms/SignUp'
+import EditProfile from '../forms/EditProfile'
+import Settings from '../forms/Settings'
 
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, direction } = useSelector(state => state.theme)
   const {
     signingIn,
     signingUp,
@@ -41,17 +45,17 @@ const Dialogs = () => {
   ])
 
   return (
-    <Dialog open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
+    <Dialog style={{ direction }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
       <DialogTitle>
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
         {editingJob && translation.editJob}
       </DialogTitle>
       <DialogContent>
-        {signingIn && <h1>signing in</h1>}
-        {signingUp && <h1>signing in</h1>}
-        {editingProfile && <h1>signing in</h1>}
-        {settings && <h1>signing in</h1>}
+        {signingIn && <SignIn />}
+        {signingUp && <SignUp />}
+        {editingProfile && <EditProfile />}
+        {settings && <Settings />}
         {addingJob && <AddJob />}
         {editingJob && <EditJob />}
       </DialogContent>

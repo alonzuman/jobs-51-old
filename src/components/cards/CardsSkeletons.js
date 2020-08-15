@@ -1,18 +1,25 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
-import { Card, CardContent } from '@material-ui/core'
+import { Card, CardContent, Grid } from '@material-ui/core'
+import { useSelector } from 'react-redux'
 
 const CardsSkeletons = () => {
   const arr = [1, 2, 3]
 
   return (
-    <div>
+    <Grid spacing={2} container >
       {arr.map((x, i) => <CardSkeleton key={i} />)}
-    </div>
+    </Grid>
   )
 }
 
 const CardSkeleton = () => {
+  const { direction } = useSelector(state => state.theme)
+
+  const cardStyle = {
+    direction
+  }
+
   const avatarStyle = {
     height: 60,
     width: 60,
@@ -45,20 +52,22 @@ const CardSkeleton = () => {
   }
 
   return (
-  <Card>
-    <div style={flexHeaderStyle}>
-      <Skeleton style={avatarStyle} variant='circle' />
-      <div>
-        <Skeleton style={cardHeaderStyle1} variant='text' />
-        <Skeleton style={cardHeaderStyle2} variant='text' />
+  <Grid item xs={12} md={6} lg={3}>
+    <Card style={cardStyle}>
+      <div style={flexHeaderStyle}>
+        <Skeleton style={avatarStyle} variant='circle' />
+        <div>
+          <Skeleton style={cardHeaderStyle1} variant='text' />
+          <Skeleton style={cardHeaderStyle2} variant='text' />
+        </div>
       </div>
-    </div>
-    <CardContent style={cardContentStyle}>
-      <Skeleton style={cardBodyStyle} variant='text' />
-      <Skeleton style={cardBodyStyle} variant='text' />
-      <Skeleton style={cardBodyStyle} variant='text' />
-    </CardContent>
-  </Card>
+      <CardContent style={cardContentStyle}>
+        <Skeleton style={cardBodyStyle} variant='text' />
+        <Skeleton style={cardBodyStyle} variant='text' />
+        <Skeleton style={cardBodyStyle} variant='text' />
+      </CardContent>
+    </Card>
+  </Grid>
   )
 }
 

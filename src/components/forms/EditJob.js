@@ -1,14 +1,23 @@
 import React, { useState } from 'react'
-import { Box, TextField, Button } from '@material-ui/core'
+import { Box, TextField, Button, CircularProgress } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { editJob, removeJob } from '../../actions'
+import { v4 as uuidv4} from 'uuid'
+import FileUploader from '../general/FileUploader'
+import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
 
 
 const EditJob = () => {
   const dispatch = useDispatch()
-  const { job } = useSelector(state => state.jobs)
+  const { job, loading } = useSelector(state => state.jobs)
   const { translation } = useSelector(state => state.theme)
+
+  // General
+  const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState(0)
+
   // Fields
+  const [imageUrl, setImageUrl] = useState(job?.iamge)
   const [company, setCompany] = useState(job?.company)
   const [type, setType] = useState(job?.type)
   const [location, setLocation] = useState(job?.location)
@@ -22,6 +31,7 @@ const EditJob = () => {
     e.preventDefault()
 
     const newJob = {
+      image: imageUrl,
       company,
       type,
       location,
@@ -32,12 +42,16 @@ const EditJob = () => {
       phone,
       id: job.id
     }
+    console.log(newJob)
+
     dispatch(editJob(newJob, job?.id))
   }
 
   return (
     <Box>
       <form onSubmit={handleSubmit}>
+        {uploading && <CircularProgressWithLabel value={progress} />}
+        {!uploading && <FileUploader fileName={uuidv4()} folder={'job-images'} setProgress={setProgress} setIsUploading={setUploading} setImageUrl={setImageUrl} />}
         <TextField required label={translation?.companyName} value={company} onChange={e => setCompany(e.target.value)} variant='outlined' />
         <TextField required label={translation?.type} value={type} onChange={e => setType(e.target.value)} variant='outlined' />
         <TextField required label={translation?.location} value={location} onChange={e => setLocation(e.target.value)} variant='outlined' />
@@ -47,8 +61,8 @@ const EditJob = () => {
         <TextField required label={translation?.requirements} value={requirements} onChange={e => setRequirements(e.target.value)} variant='outlined' />
         <TextField required label={translation?.email} value={email} onChange={e => setEmail(e.target.value)} variant='outlined' />
         <TextField required label={translation?.phone} value={phone} onChange={e => setPhone(e.target.value)} variant='outlined' />
-        <Button type='submit'>{translation?.post}</Button>
-        <Button onClick={() => dispatch(removeJob(job.id))}>{translation?.removeJob}</Button>
+        <Button variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
+        <Button variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job.id))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
       </form>
     </Box>
   )

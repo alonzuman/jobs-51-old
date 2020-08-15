@@ -6,4 +6,19 @@
 
 .MuiFormControl-root {
   width: 100%;
+  margin: 0 0 .5rem 0!important;
+}
+
+.MuiCardHeader-avatar {
+  margin: 0 0 0 1rem;
+  margin-right: 0!important;
+}
+
+.button-spinner {
+  height: 24px!important;
+  width: 24px!important;
+}
+
+#file-upload {
+  display: none;
 }

@@ -1,11 +1,12 @@
 import React from 'react'
-import { Card, CardHeader, IconButton } from '@material-ui/core'
-import { useDispatch } from 'react-redux'
+import { Card, CardHeader, IconButton, Grid, CardContent, Typography, Avatar } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeJob, openEditingJob, setJob } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
 
 const JobCard = ({ job }) => {
   const dispatch = useDispatch()
+  const { translation, direction } = useSelector(state => state.theme)
 
   const handleClick = () => {
     dispatch(openEditingJob())
@@ -15,12 +16,21 @@ const JobCard = ({ job }) => {
   console.log(job)
 
   return (
-    <Card>
-      <CardHeader
-        title={job?.company}
-        subheader={job?.location}
-        action={<IconButton onClick={handleClick}><EditIcon /></IconButton>} />
-    </Card>
+    <Grid item xs={12} md={6} lg={4}>
+      <Card style={{ direction }}>
+        <CardHeader
+          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0].toUpperCase()}</Avatar>}
+          title={job?.company}
+          subheader={job?.location}
+          action={<IconButton onClick={handleClick}><EditIcon /></IconButton>} />
+        <CardContent>
+          <Typography variant='body1'>{translation.type}</Typography>
+          <Typography variant='body1'>{job?.type}</Typography>
+          <Typography variant='body1'>{translation.description}</Typography>
+          <Typography variant='body1'>{job?.description}</Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   )
 }
 
