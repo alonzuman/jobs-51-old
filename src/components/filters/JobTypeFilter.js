@@ -6,6 +6,7 @@ import { closeDialogs } from '../../actions'
 
 const JobTypeFilter = () => {
   const dispatch = useDispatch()
+  const { translation } = useSelector(state => state.theme)
   const { jobTypes, loading } = useSelector(state => state.jobs)
   const [chosenFilters, setChosenFilters] = useState([])
 
@@ -47,7 +48,7 @@ const JobTypeFilter = () => {
       )}
       </Grid>}
       <br />
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button className='full-width' color='primary' variant='outlined' onClick={handleSubmit}>{translation.apply}</Button>
     </>
   )
 }

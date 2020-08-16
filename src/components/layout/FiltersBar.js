@@ -19,7 +19,7 @@ const FiltersBar = ({ filters }) => {
         {filters?.map((filter, index) =>
         <Grid key={index} item><Chip onClick={filter.onClick} className='chip-button' variant='outlined' label={filter.label} /></Grid>)}
       </Grid>
-      <Grid style={{ direction: 'ltr' }} container>
+      <Grid style={{ width: 'fit-content', direction: 'ltr' }} container>
         <Grid item><Chip onClick={() => dispatch(getJobs())} label={translation.clear} /></Grid>
       </Grid>
     </Box>
