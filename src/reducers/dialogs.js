@@ -5,6 +5,9 @@ const initialState = {
   settings: false,
   addingJob: false,
   editingJob: false,
+  datesFilter: false,
+  jobTypeFilter: false,
+  locationFilter: false
 }
 
 export const dialogsReducer = (state = initialState, action) => {
@@ -40,6 +43,21 @@ export const dialogsReducer = (state = initialState, action) => {
       return {
         ...state,
         editingJob: true
+      }
+    case 'DATES_FILTER_DIALOG':
+      return {
+        ...state,
+        datesFilter: true
+      }
+    case 'JOB_TYPE_FILTER_DIALOG':
+      return {
+        ...state,
+        jobTypeFilter: true
+      }
+    case 'LOCATION_FILTER_DIALOG':
+      return {
+        ...state,
+        locationFilter: true
       }
     case 'CLOSE_DIALOGS':
       return {

@@ -1,5 +1,4 @@
 export const openSigningIn = () => async dispatch => {
-  console.log('opening')
   dispatch({
     type: 'SIGNING_IN'
   })
@@ -35,15 +34,27 @@ export const openEditingJob = () => async dispatch => {
   })
 }
 
-export const closeDialogs = () => async dispatch => {
+
+export const openDatesFilterDialog = () => async dispatch => {
   dispatch({
-    type: 'CLOSE_DIALOGS'
+    type: 'DATES_FILTER_DIALOG',
   })
 }
 
-export const setJob = (job) => async dispatch => {
-  dispatch ({
-    type: 'SET_JOB',
-    payload: { job }
+export const openJobTypeFilterDialog = () => async dispatch => {
+  dispatch({
+    type: 'JOB_TYPE_FILTER_DIALOG'
+  })
+}
+
+export const openLocationFilterDialog = () => async dispatch => {
+  dispatch({
+    type: 'LOCATION_FILTER_DIALOG'
+  })
+}
+
+export const closeDialogs = () => async dispatch => {
+  dispatch({
+    type: 'CLOSE_DIALOGS'
   })
 }

@@ -5,6 +5,7 @@ import { editJob, removeJob } from '../../actions'
 import { v4 as uuidv4} from 'uuid'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
+import AddChips from './AddChips'
 
 
 const EditJob = () => {
@@ -31,7 +32,7 @@ const EditJob = () => {
     e.preventDefault()
 
     const newJob = {
-      image: imageUrl,
+      image: imageUrl ? imageUrl : '',
       company,
       type,
       location,
@@ -57,12 +58,11 @@ const EditJob = () => {
         <TextField required label={translation?.location} value={location} onChange={e => setLocation(e.target.value)} variant='outlined' />
         <TextField required label={translation?.contactPerson} value={contactPerson} onChange={e => setContactPerson(e.target.value)} variant='outlined' />
         <TextField required multiline rowsMax={4} label={translation?.description} value={description} onChange={e => setDescription(e.target.value)} variant='outlined' />
-        {/* TODO */}
-        <TextField required label={translation?.requirements} value={requirements} onChange={e => setRequirements(e.target.value)} variant='outlined' />
+        <AddChips label={translation?.requirements} chips={requirements} setChips={setRequirements} />
         <TextField required label={translation?.email} value={email} onChange={e => setEmail(e.target.value)} variant='outlined' />
         <TextField required label={translation?.phone} value={phone} onChange={e => setPhone(e.target.value)} variant='outlined' />
         <Button variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
-        <Button variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job.id))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
+        <Button variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job?.id))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
       </form>
     </Box>
   )

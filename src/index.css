@@ -9,6 +9,19 @@
   margin: 0 0 .5rem 0!important;
 }
 
+.no-margin {
+  margin: 0!important;
+}
+
+.chip-button {
+  cursor: pointer!important;
+  transition: .3s border ease-in-out;
+}
+
+.chip-button:hover {
+  border: 1px solid black;
+}
+
 .MuiCardHeader-avatar {
   margin: 0 0 0 1rem;
   margin-right: 0!important;

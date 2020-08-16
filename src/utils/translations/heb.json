@@ -14,5 +14,8 @@
   "editJob": "עריכת פרסום",
   "removeJob": "מחיקת פרסום",
   "couldntFindJobs": "לא נמצאו פרסומים",
-  "uploadPhoto": "העלאת תמונה"
+  "uploadPhoto": "העלאת תמונה",
+  "requirements": "דרישות",
+  "datePosted": "תאריך פרסום",
+  "clear": "נקה"
 }

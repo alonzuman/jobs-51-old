@@ -8,6 +8,9 @@ import SignIn from '../forms/SignIn'
 import SignUp from '../forms/SignUp'
 import EditProfile from '../forms/EditProfile'
 import Settings from '../forms/Settings'
+import LocationFilter from '../filters/LocationFilter'
+import JobTypeFilter from '../filters/JobTypeFilter'
+import DatesFilter from '../filters/DatesFilter'
 
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -18,7 +21,10 @@ const Dialogs = () => {
     editingProfile,
     settings,
     addingJob,
-    editingJob
+    editingJob,
+    datesFilter,
+    jobTypeFilter,
+    locationFilter
   } = useSelector(state => state.dialogs)
   const dispatch = useDispatch()
 
@@ -29,7 +35,10 @@ const Dialogs = () => {
       editingProfile === true ||
       settings === true ||
       addingJob === true ||
-      editingJob === true
+      editingJob === true ||
+      datesFilter === true ||
+      jobTypeFilter === true ||
+      locationFilter === true
     ) {
       setDialogOpen(true)
     } else {
@@ -41,7 +50,10 @@ const Dialogs = () => {
     editingProfile,
     settings,
     addingJob,
-    editingJob
+    editingJob,
+    datesFilter,
+    jobTypeFilter,
+    locationFilter
   ])
 
   return (
@@ -50,6 +62,10 @@ const Dialogs = () => {
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
         {editingJob && translation.editJob}
+
+        {datesFilter && translation.datePosted}
+        {jobTypeFilter && translation.type}
+        {locationFilter && translation.location}
       </DialogTitle>
       <DialogContent>
         {signingIn && <SignIn />}
@@ -58,6 +74,9 @@ const Dialogs = () => {
         {settings && <Settings />}
         {addingJob && <AddJob />}
         {editingJob && <EditJob />}
+        {datesFilter && <DatesFilter />}
+        {jobTypeFilter && <JobTypeFilter />}
+        {locationFilter && <LocationFilter />}
       </DialogContent>
     </Dialog>
   )

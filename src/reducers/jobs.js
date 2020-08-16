@@ -1,6 +1,7 @@
 const initialState = {
   job: {},
   jobs: [],
+  jobTypes: [],
   loading: false
 }
 
@@ -13,6 +14,11 @@ export const jobsReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'JOB_ERROR':
+      return {
+        ...state,
+        loading: false
+      }
     case 'SET_JOB':
       return {
         ...state,
@@ -24,8 +30,15 @@ export const jobsReducer = (state = initialState, action) => {
         loading: false
       }
     case 'ADD_JOB':
+      console.log(payload)
       return {
         jobs: [...state.jobs, payload.job],
+        loading: false
+      }
+    case 'SET_JOB_TYPES':
+      return {
+        ...state,
+        jobTypes: payload.jobTypes,
         loading: false
       }
     case 'REMOVE_JOB':

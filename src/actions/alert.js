@@ -13,6 +13,6 @@ export const setAlert = ({ msg, type }) => async dispatch => {
     }
   })
   setTimeout(() => {
-    clearAlert()
+    dispatch(clearAlert())
   }, 3000);
 }

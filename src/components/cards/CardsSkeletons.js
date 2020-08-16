@@ -6,8 +6,12 @@ import { useSelector } from 'react-redux'
 const CardsSkeletons = () => {
   const arr = [1, 2, 3]
 
+  const gridStyle = {
+    padding: '1rem 0'
+  }
+
   return (
-    <Grid spacing={2} container >
+    <Grid style={gridStyle} spacing={2} container >
       {arr.map((x, i) => <CardSkeleton key={i} />)}
     </Grid>
   )
@@ -52,7 +56,7 @@ const CardSkeleton = () => {
   }
 
   return (
-  <Grid item xs={12} md={6} lg={3}>
+  <Grid item xs={12} md={6} lg={4}>
     <Card style={cardStyle}>
       <div style={flexHeaderStyle}>
         <Skeleton style={avatarStyle} variant='circle' />
@@ -62,6 +66,7 @@ const CardSkeleton = () => {
         </div>
       </div>
       <CardContent style={cardContentStyle}>
+        <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
