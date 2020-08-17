@@ -11,6 +11,7 @@ import Settings from '../forms/Settings'
 import LocationFilter from '../filters/LocationFilter'
 import JobTypeFilter from '../filters/JobTypeFilter'
 import DatesFilter from '../filters/DatesFilter'
+import SavedJobs from '../dialogs/SavedJobs'
 
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -24,7 +25,8 @@ const Dialogs = () => {
     editingJob,
     datesFilter,
     jobTypeFilter,
-    locationFilter
+    locationFilter,
+    savedJobs
   } = useSelector(state => state.dialogs)
   const dispatch = useDispatch()
 
@@ -38,7 +40,8 @@ const Dialogs = () => {
       editingJob === true ||
       datesFilter === true ||
       jobTypeFilter === true ||
-      locationFilter === true
+      locationFilter === true ||
+      savedJobs === true
     ) {
       setDialogOpen(true)
     } else {
@@ -53,11 +56,12 @@ const Dialogs = () => {
     editingJob,
     datesFilter,
     jobTypeFilter,
-    locationFilter
+    locationFilter,
+    savedJobs
   ])
 
   return (
-    <Dialog style={{ direction }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
+    <Dialog style={{ direction, width: '100%' }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
       <DialogTitle>
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
@@ -66,6 +70,7 @@ const Dialogs = () => {
         {datesFilter && translation.datePosted}
         {jobTypeFilter && translation.type}
         {locationFilter && translation.location}
+        {savedJobs && translation.savedJobs}
       </DialogTitle>
       <DialogContent>
         {signingIn && <SignIn />}
@@ -77,6 +82,7 @@ const Dialogs = () => {
         {datesFilter && <DatesFilter />}
         {jobTypeFilter && <JobTypeFilter />}
         {locationFilter && <LocationFilter />}
+        {savedJobs && <SavedJobs />}
       </DialogContent>
     </Dialog>
   )

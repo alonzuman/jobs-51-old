@@ -1,4 +1,4 @@
-import { db } from '../firebase'
+import { db, app } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 
@@ -7,7 +7,12 @@ export const addJob = (job) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    const res = await db.collection('jobs').add(job)
+    const ref = db.collection('jobs').doc()
+    const newJob = {
+      ...job,
+      id: ref.id
+    }
+    await db.collection('jobs').doc(ref.id).set(newJob)
     const jobType = await db.collection('jobTypes').doc(job.type).get()
     if (jobType.data()) {
       const oldJobType = jobType.data()
@@ -20,10 +25,6 @@ export const addJob = (job) => async dispatch => {
       await db.collection('jobTypes').doc(job.type).set({
         count: 1
       })
-    }
-    const newJob = {
-      ...job,
-      id: res.id
     }
 
     dispatch({
@@ -86,6 +87,32 @@ export const removeJob = (id) => async dispatch => {
       msg: 'Server error, please try again',
       type: 'error'
     }))
+  }
+}
+
+export const getSavedJobs = ({ savedJobs }) => async dispatch => {
+  dispatch({
+    type: 'JOB_LOADING'
+  })
+  if (savedJobs.length > 0) {
+    try {
+      const jobsRef = await db.collection('jobs').where('id', 'in', savedJobs).get()
+      let jobs = []
+      jobsRef.forEach(doc => jobs.push(doc.data()))
+      dispatch({
+        type: 'SET_JOBS',
+        payload: { jobs }
+      })
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: 'JOB_FAIL'
+      })
+      dispatch(setAlert({
+        type: 'error',
+        msg: 'Server error, please try again'
+      }))
+    }
   }
 }
 
@@ -161,6 +188,10 @@ export const savedJob = (uid, jobId) => async dispatch => {
     await db.collection('users').doc(uid).set({
       savedJobs: [jobId]
     }, { merge: true })
+    dispatch({
+      type: 'SAVE_JOB',
+      payload: { jobId }
+    })
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
@@ -178,6 +209,10 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
       savedJobs: snapshot.data().savedJobs.filter(job => job !== jobId)
     }
     await db.collection('users').doc(uid).set(user, { merge: true })
+    dispatch({
+      type: 'UNSAVE_JOB',
+      payload: { jobId }
+    })
   } catch (error) {
     console.log(error)
     dispatch(setAlert({

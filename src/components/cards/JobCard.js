@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, IconButton, Grid, CardContent, Typography, Avatar, Chip } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeJob, openEditingJob, setJob, savedJob, unsaveJob } from '../../actions'
+import { openEditingJob, setJob, savedJob, unsaveJob } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const JobCard = ({ job }) => {
-  const [saved, setSaved] = useState(false)
+  const { uid, authenticated, savedJobs } = useSelector(state => state.auth)
+  const [saved, setSaved] = useState()
   const dispatch = useDispatch()
-  const { uid, authenticated } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
+
+  const isSaved = () => savedJobs.includes(job.id)
+
+  useEffect(() => { isSaved() }, [savedJobs])
 
   const handleClick = () => {
     dispatch(openEditingJob())
@@ -20,6 +24,7 @@ const JobCard = ({ job }) => {
   const favoriteIconStyle = {
     color: 'red'
   }
+
 
   const handleClickFavorite = () => {
     if (saved) {

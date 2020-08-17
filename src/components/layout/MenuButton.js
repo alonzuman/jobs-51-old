@@ -13,7 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 // Mui
 import { Avatar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAddingJob, openSettings, openSigningIn } from '../../actions';
+import { openAddingJob, openSettings, openSigningIn, openSavedDialog } from '../../actions';
 
 const MenuButton = () => {
   const { authenticated, avatar, firstName } = useSelector(state => state.auth)
@@ -24,7 +24,7 @@ const MenuButton = () => {
     { icon: <Avatar src={avatar} alt={firstName}/>, name: 'Profile', handleClick: () => dispatch(openSigningIn()) },
     { icon: <AddIcon />, name: 'Add', handleClick: () => dispatch(openAddingJob()) },
     { icon: <SettingsIcon />, name: 'Settings', handleClick: () => dispatch(openSettings()) },
-    { icon: <FavoriteIcon />, name: 'Like', icon: <FavoriteIcon /> },
+    { icon: <FavoriteIcon />, name: 'Like', icon: <FavoriteIcon />, handleClick: () => dispatch(openSavedDialog()) },
   ]
 
   const speedDialStyle = {

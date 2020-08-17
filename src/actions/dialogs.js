@@ -58,3 +58,5 @@ export const closeDialogs = () => async dispatch => {
     type: 'CLOSE_DIALOGS'
   })
 }
+
+export const openSavedDialog = () => async dispatch => dispatch({ type: 'SAVED_JOBS_DIALOG' })

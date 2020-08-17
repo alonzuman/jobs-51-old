@@ -30,7 +30,6 @@ export const jobsReducer = (state = initialState, action) => {
         loading: false
       }
     case 'ADD_JOB':
-      console.log(payload)
       return {
         jobs: [...state.jobs, payload.job],
         loading: false
@@ -39,6 +38,11 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         jobTypes: payload.jobTypes,
+        loading: false
+      }
+    case 'JOB_FAIL':
+      return {
+        ...state,
         loading: false
       }
     case 'REMOVE_JOB':

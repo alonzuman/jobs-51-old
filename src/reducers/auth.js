@@ -4,6 +4,7 @@ const initialState = {
   firstName: '',
   lastName: '',
   avatar: '',
+  savedJobs: [],
   loading: false
 }
 
@@ -25,6 +26,16 @@ export const authReducer = (state = initialState, action) => {
         ...payload,
         authenticated: true,
         loading: false
+      }
+    case 'SAVE_JOB':
+      return {
+        ...state,
+        savedJobs: [...state.savedJobs, payload.jobId]
+      }
+    case 'UNSAVE_JOB':
+      return {
+        ...state,
+        savedJobs: [...state.savedJobs.filter(job => job !== payload.jobId)]
       }
     case 'NOT_SIGNED_IN':
       return initialState
