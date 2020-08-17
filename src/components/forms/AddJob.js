@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { Box, TextField, Button, CircularProgress, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { addJob, setAlert } from '../../actions'
+import { addJob } from '../../actions'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
 import AddChips from './AddChips';
 
 const AddJob = () => {
+  const { uid } = useSelector(state => state.auth )
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
@@ -15,9 +16,6 @@ const AddJob = () => {
   // General
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-
-  // TODO Multi steps
-  const [step, setStep] = useState(0)
 
   // Job fields
   const [imageUrl, setImageUrl] = useState('')
@@ -47,6 +45,7 @@ const AddJob = () => {
       requirements,
       email,
       phone,
+      uid,
       dateCreated: new Date()
     }
     dispatch(addJob(job))
@@ -68,7 +67,6 @@ const AddJob = () => {
         </Grid>
         <TextField required label={translation?.contactPerson} value={contactPerson} onChange={e => setContactPerson(e.target.value)} variant='outlined' />
         <TextField required multiline rows={4} label={translation?.description} value={description} onChange={e => setDescription(e.target.value)} variant='outlined' />
-        {/* TODO */}
         <AddChips label={translation?.requirements} chips={requirements} setChips={setRequirements} />
         <Grid container spacing={1}>
           <Grid item xs={6}>

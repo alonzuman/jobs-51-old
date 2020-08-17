@@ -18,5 +18,16 @@
   "requirements": "דרישות",
   "datePosted": "תאריך פרסום",
   "clear": "נקה",
-  "apply": "אישור"
+  "apply": "אישור",
+  "password": "סיסמא",
+  "confirmPassword": "אימות סיסמא",
+  "signUp": "הרשמה",
+  "alreadySignedUp": "כבר רשומ/ה? ",
+  "notSignedUp": "לא רשומ/ה?",
+  "lastName": "שם משפחה",
+  "firstName": "שם פרטי",
+  "signOut": "התנתקות",
+  "settings": "הגדרות",
+  "postingAJob": "מפרסם משרה",
+  "lookingForAJob": "מחפש משרה"
 }

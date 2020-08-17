@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <div>
-      <Button onClick={() => dispatch(openAddingJob())}>{translation.addJob}</Button>
+      <Button>{translation.addJob}</Button>
       <Button onClick={() => dispatch(openSigningIn())}>{translation.signIn}</Button>
       <Jobs />
     </div>

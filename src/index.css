@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .full-width {
   width: 100%;
 }
@@ -38,4 +42,8 @@
 
 #file-upload {
   display: none;
+}
+
+.anchor {
+  cursor: pointer;
 }

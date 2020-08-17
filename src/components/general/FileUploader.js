@@ -48,7 +48,7 @@ const FileUploader = ({ fileName, folder, setImageUrl, setProgress, setIsUploadi
     <div style={fileUploadContainer}>
       <input id='file-upload' type='file' onChange={handleChange} />
       <Button variant='outlined' color='primary'>
-        <label style={labelStyle} for='file-upload'>
+        <label style={labelStyle} htmlFor='file-upload'>
           {translation.uploadPhoto}
         <PhotoCameraIcon style={iconStyle} />
         </label>

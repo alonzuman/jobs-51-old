@@ -155,3 +155,34 @@ export const getJobTypes = () => async dispatch => {
     }))
   }
 }
+
+export const savedJob = (uid, jobId) => async dispatch => {
+  try {
+    await db.collection('users').doc(uid).set({
+      savedJobs: [jobId]
+    }, { merge: true })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error, please try again'
+    }))
+  }
+}
+
+export const unsaveJob = (uid, jobId) => async dispatch => {
+  try {
+    const snapshot = await db.collection('users').doc(uid).get()
+    const user = {
+      ...snapshot.data(),
+      savedJobs: snapshot.data().savedJobs.filter(job => job !== jobId)
+    }
+    await db.collection('users').doc(uid).set(user, { merge: true })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error, please try again'
+    }))
+  }
+}

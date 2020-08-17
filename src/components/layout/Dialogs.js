@@ -62,7 +62,7 @@ const Dialogs = () => {
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
         {editingJob && translation.editJob}
-
+        {settings && translation.settings}
         {datesFilter && translation.datePosted}
         {jobTypeFilter && translation.type}
         {locationFilter && translation.location}
