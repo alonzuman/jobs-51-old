@@ -7,7 +7,7 @@ import { closeDialogs } from '../../actions'
 const LocationFilter = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
-  const { loading, jobLocations } = useSelector(state => state.jobs)
+  const { filtersLoading, jobLocations } = useSelector(state => state.jobs)
   const [chosenFilters, setChosenFilters] = useState([])
 
 
@@ -39,8 +39,8 @@ const LocationFilter = () => {
 
   return (
     <Box>
-      {loading && <CircularProgress />}
-      {!loading &&
+      {filtersLoading && <CircularProgress />}
+      {!filtersLoading &&
         <Grid container spacing={1}>
           {jobLocations?.length > 0 && jobLocations.map((jobLocation, index) =>
             <Grid key={index} item>

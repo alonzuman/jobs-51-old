@@ -7,7 +7,7 @@ import { closeDialogs } from '../../actions'
 const JobTypeFilter = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
-  const { jobTypes, loading } = useSelector(state => state.jobs)
+  const { jobTypes, filtersLoading } = useSelector(state => state.jobs)
   const [chosenFilters, setChosenFilters] = useState([])
 
   const handleChosenFilter = (newFilter) => {
@@ -36,14 +36,10 @@ const JobTypeFilter = () => {
     border: `1px solid black`
   }
 
-  const boxStyle = {
-    minHeight: '180px',
-  }
-
   return (
-    <Box style={boxStyle}>
-      {loading && <CircularProgress />}
-      {!loading &&
+    <Box>
+      {filtersLoading && <CircularProgress />}
+      {!filtersLoading &&
       <Grid container spacing={1}>
         {jobTypes?.length > 0 && jobTypes.map((jobType, index) =>
         <Grid key={index} item>

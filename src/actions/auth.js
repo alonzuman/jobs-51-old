@@ -115,7 +115,7 @@ export const editProfile = (user, uid) => async dispatch =>{
     await db.collection('users').doc(uid).set(user, { merge: true })
     dispatch({
       type: 'SET_USER',
-      payload: { uid, user }
+      payload: { uid, ...user, avatar: user.avatar.length > 0 && user.avatar }
     })
     dispatch(setAlert({
       type: 'success',

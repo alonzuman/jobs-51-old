@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { editProfile } from '../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { TextField, Button, Typography, Box, Grid } from '@material-ui/core'
+import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
 import FormSkeleton from './FormSkeleton'
@@ -26,7 +26,7 @@ const EditProfile = () => {
       firstName,
       lastName,
       phone,
-      avatar: avatar ? avatar : authState.avatar
+      avatar: avatar.length > 0 ? avatar : authState.avatar
     }
     dispatch(editProfile(user, authState.uid))
   }
@@ -63,7 +63,7 @@ const EditProfile = () => {
           </Grid>
         </Grid>
         <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
-        <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{translation.signUp}</Button>
+        <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner'/> : translation.signUp}</Button>
       </form>
     )
   }

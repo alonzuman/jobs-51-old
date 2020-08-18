@@ -1,3 +1,5 @@
+// TODO set filters reducer with spread operator
+
 const initialState = {
   job: {},
   jobs: [],
@@ -52,13 +54,13 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         jobTypes: payload.jobTypes,
-        loading: false
+        filtersLoading: false
       }
     case 'SET_JOB_LOCATIONS':
       return {
         ...state,
         jobLocations: payload.jobLocations,
-        loading: false
+        filtersLoading: false
       }
     case 'JOB_FAIL':
       return {

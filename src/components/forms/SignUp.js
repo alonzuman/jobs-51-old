@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { signUp, closeDialogs, openSigningIn, setAlert } from '../../actions'
-import { TextField, Button, Typography, Box, Grid } from '@material-ui/core'
+import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
 
 const SignUp = () => {
   const { translation } = useSelector(state => state.theme)
+  const authState = useSelector(state => state.auth)
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const dispatch = useDispatch()
@@ -76,7 +77,7 @@ const SignUp = () => {
       <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{translation.signUp}</Button>
       <br/>
       <br/>
-      <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{translation.signIn}</a></Typography>
+      <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</a></Typography>
     </form>
   )
 }

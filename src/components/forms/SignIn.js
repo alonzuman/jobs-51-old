@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { TextField, Button, Typography } from '@material-ui/core'
+import { TextField, Button, Typography, CircularProgress } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { signIn, closeDialogs, openSigningUp } from '../../actions'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const authState = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -26,7 +27,7 @@ const SignIn = () => {
       <Button className='button-style' color='primary' variant='contained' type='submit'>{translation.signIn}</Button>
       <br />
       <br />
-      <Typography variant='body1'>{translation.notSignedUp}<a className='anchor' onClick={handleClick}>{translation.signUp}</a></Typography>
+      <Typography variant='body1'>{translation.notSignedUp}<a className='anchor' onClick={handleClick}>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</a></Typography>
     </form>
   )
 }
