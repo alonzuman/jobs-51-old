@@ -1,6 +1,7 @@
 import { db } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
+import store from '../store'
 
 export const addJob = (job) => async dispatch => {
   dispatch({
@@ -247,10 +248,12 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
       savedJobs: snapshot.data().savedJobs.filter(job => job !== jobId)
     }
     await db.collection('users').doc(uid).set(user, { merge: true })
-    dispatch({
-      type: 'REMOVE_SAVED_JOB',
-      payload: { id: jobId }
-    })
+    if (store.getState().jobs.savedJobs) {
+      dispatch({
+        type: 'REMOVE_SAVED_JOB',
+        payload: { id: jobId }
+      })
+    }
     dispatch({
       type: 'UNSAVE_JOB',
       payload: { jobId }

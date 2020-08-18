@@ -21,8 +21,6 @@ const SavedJobs = () => {
     paddingBottom: '1rem'
   }
 
-  console.log(savedJobs)
-
   return (
     <div style={{width: '100%', height: '100%'}}>
       {savedJobsLoading && <CardsSkeletons count={1} />}
