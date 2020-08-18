@@ -125,7 +125,7 @@ export const removeJob = (id, job) => async dispatch => {
 
 export const getSavedJobs = ({ savedJobs }) => async dispatch => {
   dispatch({
-    type: 'JOB_LOADING'
+    type: 'SAVED_JOBS_LOADING'
   })
   if (savedJobs.length > 0) {
     try {
@@ -247,6 +247,10 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
       savedJobs: snapshot.data().savedJobs.filter(job => job !== jobId)
     }
     await db.collection('users').doc(uid).set(user, { merge: true })
+    dispatch({
+      type: 'REMOVE_SAVED_JOB',
+      payload: { id: jobId }
+    })
     dispatch({
       type: 'UNSAVE_JOB',
       payload: { jobId }

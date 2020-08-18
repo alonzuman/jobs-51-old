@@ -7,7 +7,7 @@ import JobCard from '../cards/JobCard'
 
 const SavedJobs = () => {
   const authState = useSelector(state => state.auth)
-  const { loading, savedJobs } = useSelector(state => state.jobs)
+  const { savedJobsLoading, savedJobs } = useSelector(state => state.jobs)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -25,9 +25,9 @@ const SavedJobs = () => {
 
   return (
     <div style={{width: '100%', height: '100%'}}>
-      {loading && <CardsSkeletons count={1} />}
-      {!loading && authState?.savedJobs.length === 0 && <Typography variant='body1'>{translation.couldntFindJobs}</Typography>}
-      {!loading && savedJobs &&
+      {savedJobsLoading && <CardsSkeletons count={1} />}
+      {!savedJobsLoading && authState?.savedJobs.length === 0 && <Typography variant='body1'>{translation.couldntFindJobs}</Typography>}
+      {!savedJobsLoading && savedJobs &&
       <Grid style={gridStyle} container spacing={1}>
         {savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
       </Grid>}

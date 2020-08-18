@@ -14,7 +14,9 @@ const JobCard = ({ job }) => {
 
   const isSaved = () => savedJobs?.includes(job.id)
 
-  useEffect(() => { isSaved() }, [savedJobs])
+  useEffect(() => {
+    setSaved(isSaved())
+  }, [savedJobs])
 
   const handleClick = () => {
     dispatch(openEditingJob())
@@ -43,7 +45,8 @@ const JobCard = ({ job }) => {
           avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0].toUpperCase()}</Avatar>}
           title={job?.company}
           subheader={job?.location}
-          action={ (authenticated && job?.uid === uid) ? <IconButton onClick={handleClick}><EditIcon /></IconButton>:
+          action={ (authenticated && job?.uid === uid) ?
+          <IconButton onClick={handleClick}><EditIcon /></IconButton>:
           authenticated ? <IconButton onClick={handleClickFavorite}>{saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}</IconButton> : null}
         />
         <CardContent>
