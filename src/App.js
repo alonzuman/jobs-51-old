@@ -42,27 +42,25 @@ function App() {
   app.auth().onAuthStateChanged(() => validateUser())
 
   useEffect(() => { validateUser() }, [app.auth().currentUser])
-  useEffect(() => { {
-    const localTheme = localStorage.getItem('theme')
-    document.querySelector('body').style.backgroundColor = (localTheme && localTheme === 'dark') ? '#303030' : '#fff'
-    setTheme()
-  } }, [theme])
+  useEffect(() => { setTheme() }, [theme])
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Dialogs />
-        <CustomAlert />
-        <MenuButton />
-        <Switch>
-          <Container>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/results' component={Home} />
-            <ProtectedRoute path='/results/jobs' component={Jobs} />
-            <Route path='/results/users' component={Employees} />
-          </Container>
-        </Switch>
-      </Router>
+      <Paper className='paper-background'>
+        <Router>
+          <Dialogs />
+          <CustomAlert />
+          <MenuButton />
+          <Switch>
+            <Container>
+              <Route exact path='/' component={LandingPage} />
+              <Route exact path='/results' component={Home} />
+              <ProtectedRoute path='/results/jobs' component={Jobs} />
+              <Route path='/results/users' component={Employees} />
+            </Container>
+          </Switch>
+        </Router>
+      </Paper>
   </ThemeProvider>
   )
 }

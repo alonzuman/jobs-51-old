@@ -32,7 +32,6 @@ const LandingPage = () => {
 
   const textStyle = {
     direction,
-    color: theme.palette.type === 'dark' ? '#fff' : '#303030'
   }
 
   return (

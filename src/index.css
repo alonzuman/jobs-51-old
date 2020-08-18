@@ -8,6 +8,18 @@ a {
   text-decoration: none;
 }
 
+.paper-background {
+  border-radius: 0!important;
+  width: 100%!important;
+  height: 100%!important;
+  position: fixed!important;
+  bottom: 0!important;
+  top: 0!important;
+  left: 0!important;
+  right: 0!important;
+  overflow-y: scroll!important;
+}
+
 .MuiContainer-root {
   overflow: scroll!important;
   height: 100%!important;
