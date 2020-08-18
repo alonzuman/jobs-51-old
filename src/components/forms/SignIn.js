@@ -7,7 +7,7 @@ const SignIn = () => {
   const authState = useSelector(state => state.auth)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
   const handleSubmit = e => {
@@ -20,14 +20,21 @@ const SignIn = () => {
     dispatch(openSigningUp())
   }
 
+  const anchorStyle = {
+    color: theme.palette.primary.main,
+    fontWeight: 'bold',
+    cursor: 'pointer'
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
       <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
-      <Button className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</Button>
+      <Button className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
       <br />
       <br />
-      <Typography variant='body1'>{translation.notSignedUp}<a className='anchor' onClick={handleClick}>{translation.signUp}</a></Typography>
+      <br />
+      <Typography variant='body1'>{translation.notSignedUp}<a style={anchorStyle} onClick={handleClick}> {translation.signUp}</a></Typography>
     </form>
   )
 }

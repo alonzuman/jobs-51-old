@@ -7,7 +7,7 @@ import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
 
 const SignUp = () => {
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const authState = useSelector(state => state.auth)
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -55,6 +55,12 @@ const SignUp = () => {
     minHeight: '220px'
   }
 
+  const anchorStyle = {
+    color: theme.palette.primary.main,
+    fontWeight: 'bold',
+    cursor: 'pointer'
+  }
+
   return (
     <form style={formStyle} onSubmit={handleSubmit}>
       <Box style={boxStyle}>
@@ -77,7 +83,8 @@ const SignUp = () => {
       <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</Button>
       <br/>
       <br/>
-      <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{translation.signIn}</a></Typography>
+      <br/>
+      <Typography variant='body1'>{translation.alreadySignedUp}<a style={anchorStyle} onClick={handleClick}> {translation.signIn}</a></Typography>
     </form>
   )
 }
