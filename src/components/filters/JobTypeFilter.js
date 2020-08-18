@@ -20,7 +20,7 @@ const JobTypeFilter = () => {
 
   useEffect(() => {
     dispatch(getJobTypes())
-  }, [])
+  }, [dispatch])
 
   const handleSubmit = () => {
     dispatch(getJobs({ type: chosenFilters }))

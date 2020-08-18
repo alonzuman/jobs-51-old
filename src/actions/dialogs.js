@@ -1,5 +1,3 @@
-import { getJobs } from "./jobs"
-
 export const dialogLoading = () => async dispatch => dispatch({ type: 'DIALOG_LOADING' })
 
 export const openSigningIn = () => async dispatch => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Typography, IconButton, Box, Grid, Chip } from '@material-ui/core'
+import { TextField, IconButton, Box, Grid, Chip } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 
 const AddChips = ({ label, chips, setChips }) => {

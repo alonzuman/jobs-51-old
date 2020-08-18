@@ -1,4 +1,4 @@
-import React, { useEffect, Component } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // Components
@@ -12,8 +12,8 @@ import Employees from './pages/Employees'
 
 // Mui
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Container, CircularProgress } from '@material-ui/core'
-import { setUser, signOut } from './actions'
+import { Container } from '@material-ui/core'
+import { setUser } from './actions'
 import { app } from './firebase'
 
 // Redux

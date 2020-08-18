@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { signUp, closeDialogs, editProfile, setAlert } from '../../actions'
+import { editProfile } from '../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button, Typography, Box, Grid } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
-import { auth } from 'firebase'
 import FormSkeleton from './FormSkeleton'
 
 const EditProfile = () => {

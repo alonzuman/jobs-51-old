@@ -10,7 +10,7 @@ const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
   const { jobs, loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
-  useEffect(() => { dispatch(getJobs()) }, [])
+  useEffect(() => { dispatch(getJobs()) }, [dispatch])
 
   const filters = [
     { label: translation.datePosted, onClick: () => dispatch(openDatesFilterDialog()), values: ['היי', 'ביי'] },

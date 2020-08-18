@@ -1,4 +1,4 @@
-import { db, app } from '../firebase'
+import { db } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 

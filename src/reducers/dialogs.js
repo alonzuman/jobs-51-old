@@ -1,3 +1,5 @@
+// TODO change payload to type of dialog then only dispatch 'opendialog(type of dialog)'
+
 const initialState = {
   signingIn: false,
   signingUp: false,
@@ -13,7 +15,7 @@ const initialState = {
 }
 
 export const dialogsReducer = (state = initialState, action) => {
-  const { type, payload } = action
+  const { type } = action
 
   switch (type) {
     case 'DIALOG_LOADING':

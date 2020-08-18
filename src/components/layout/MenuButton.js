@@ -27,7 +27,7 @@ const MenuButton = () => {
     { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.editProfile, handleClick: authenticated ? () => dispatch(openEditingProfile()) : () => dispatch(openSigningIn()) },
     { icon: <AddIcon />, name: translation.addJob, handleClick: () => dispatch(openAddingJob()) },
     { icon: <SettingsIcon />, name: translation.settings, handleClick: () => dispatch(openSettings()) },
-    { icon: <FavoriteIcon />, name: translation.savedJobs, icon: <FavoriteIcon />, handleClick: () => dispatch(openSavedDialog()) },
+    { icon: <FavoriteIcon />, name: translation.savedJobs, handleClick: () => dispatch(openSavedDialog()) },
   ]
 
   const speedDialStyle = {
