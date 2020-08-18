@@ -46,7 +46,8 @@ function App() {
     borderRadius: 0,
     width: '100%',
     height: '100%',
-    position: 'fixed'
+    position: 'fixed',
+    backgroundColor: theme.palette.background.paper || '#fff'
   }
 
   return (
