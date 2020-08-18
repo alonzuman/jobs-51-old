@@ -24,7 +24,7 @@ const SavedJobs = () => {
   return (
     <div style={{width: '100%', height: '100%'}}>
       {savedJobsLoading && <CardsSkeletons count={1} />}
-      {!savedJobsLoading && authState?.savedJobs.length === 0 && <Typography variant='body1'>{translation.couldntFindJobs}</Typography>}
+      {!savedJobsLoading && authState?.savedJobs.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
       {!savedJobsLoading && savedJobs &&
       <Grid style={gridStyle} container spacing={1}>
         {savedJobs.map((job, index) => <JobCard key={index} job={job} />)}

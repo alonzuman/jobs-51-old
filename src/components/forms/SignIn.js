@@ -34,7 +34,7 @@ const SignIn = () => {
       <br />
       <br />
       <br />
-      <Typography variant='body1'>{translation.notSignedUp}<a style={anchorStyle} onClick={handleClick}> {translation.signUp}</a></Typography>
+      <Typography variant='body1'>{translation.notSignedUp}<span style={anchorStyle} onClick={handleClick}> {translation.signUp}</span></Typography>
     </form>
   )
 }

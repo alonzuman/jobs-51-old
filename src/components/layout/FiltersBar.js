@@ -9,9 +9,9 @@ const FiltersBar = ({ filters }) => {
   const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    document.addEventListener('scroll', () => setScrollPosition(window.scrollY))
-  }, [scrollPosition])
+  // useEffect(() => {
+  //   document.addEventListener('scroll', () => setScrollPosition(window.scrollY))
+  // }, [scrollPosition])
 
   const appBarStyle = {
     direction: 'rtl',
@@ -19,7 +19,8 @@ const FiltersBar = ({ filters }) => {
     alignItems: 'center',
     padding: '.25rem 1rem',
     backgroundColor: theme.palette.background.paper,
-    boxShadow: scrollPosition > 0 ? '0 0 10px #00000025' : 'none',
+    // boxShadow: scrollPosition > 0 ? '0 0 10px #00000025' : 'none',
+    boxShadow:  '0 0 10px #00000025',
     transition: 'box-shadow .5s ease-in-out'
   }
 

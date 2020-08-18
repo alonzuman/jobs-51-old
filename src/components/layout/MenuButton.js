@@ -36,27 +36,31 @@ const MenuButton = () => {
     right: '1rem'
   }
 
-  return (
-    <SpeedDial
-      style={speedDialStyle}
-      ariaLabel="SpeedDial openIcon example"
-      icon={<SpeedDialIcon icon={authenticated ? <MenuIcon /> : <AccountCircleIcon />} openIcon={authenticated ? <CloseIcon /> : <AccountCircleIcon />} />}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      onClick={() => !authenticated && dispatch(openSigningIn())}
-      open={open}
-    >
-      {authenticated && actions.map((action) => (
-        <SpeedDialAction
-          key={action.name}
-          icon={action.icon}
-          onClick={action.handleClick}
-          tooltipTitle={action.name}
-          onClick={action.handleClick}
-        />
-      ))}
-    </SpeedDial>
-  )
+  if (!authenticated) {
+    return <div/>
+  } else {
+    return (
+      <SpeedDial
+        style={speedDialStyle}
+        ariaLabel="SpeedDial openIcon example"
+        icon={<SpeedDialIcon icon={authenticated ? <MenuIcon /> : <AccountCircleIcon />} openIcon={authenticated ? <CloseIcon /> : <AccountCircleIcon />} />}
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        onClick={() => !authenticated && dispatch(openSigningIn())}
+        open={open}
+      >
+        {authenticated && actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            onClick={action.handleClick}
+            tooltipTitle={action.name}
+            onClick={action.handleClick}
+          />
+        ))}
+      </SpeedDial>
+    )
+  }
 }
 
 export default MenuButton

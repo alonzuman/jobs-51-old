@@ -84,7 +84,7 @@ const SignUp = () => {
       <br/>
       <br/>
       <br/>
-      <Typography variant='body1'>{translation.alreadySignedUp}<a style={anchorStyle} onClick={handleClick}> {translation.signIn}</a></Typography>
+      <Typography variant='body1'>{translation.alreadySignedUp}<span style={anchorStyle} onClick={handleClick}> {translation.signIn}</span></Typography>
     </form>
   )
 }

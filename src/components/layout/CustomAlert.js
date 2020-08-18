@@ -13,7 +13,8 @@ const CustomAlert = () => {
     bottom: 0,
     width: '100%',
     padding: '1rem 1rem 5rem 1rem',
-    zIndex: 999999
+    zIndex: 999999,
+    maxWidth: 500
   }
 
   if (isOn) {
