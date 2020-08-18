@@ -74,7 +74,7 @@ const EditJob = () => {
           </Grid>
         </Grid>
         <Button className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
-        <Button className='button-style' variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job?.id))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
+        <Button className='button-style' variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job?.id, job))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
       </form>
     </Box>
   )

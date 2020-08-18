@@ -14,6 +14,16 @@ export const addJob = (job) => async dispatch => {
     }
     await db.collection('jobs').doc(ref.id).set(newJob)
     const jobType = await db.collection('jobTypes').doc(job.type).get()
+    const jobLocation = await db.collection('jobLocations').doc(job.location).get()
+
+    if (jobLocation.data()) {
+      const oldJobLocationCount = jobLocation.data().count
+      const newJobLocationCount = oldJobLocationCount + 1
+      await db.collection('jobLocations').doc(job.location).set({ count: newJobLocationCount })
+    } else {
+      await db.collection('jobLocations').doc(job.location).set({ count: 1 })
+    }
+
     if (jobType.data()) {
       const oldJobType = jobType.data()
       const oldCount = oldJobType.count
@@ -66,12 +76,35 @@ export const editJob = (job, id) => async dispatch => {
   }
 }
 
-export const removeJob = (id) => async dispatch => {
+export const removeJob = (id, job) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
+    const jobRef = await db.collection('jobs').doc(id).get()
     await db.collection('jobs').doc(id).delete()
+    const jobTypeRef = await db.collection('jobTypes').doc(jobRef.data().type).get()
+    const jobLocationRef = await db.collection('jobLocations').doc(jobRef.data().location).get()
+
+    if (jobLocationRef.data().count <= 1) {
+      await db.collection('jobLocations').doc(jobRef.data().location).delete()
+    } else {
+      const oldCount = jobLocationRef.data().count
+      const newCount = oldCount - 1
+      await db.collection('jobLocations').doc(jobRef.data().location).set({
+        count: newCount
+      })
+    }
+
+    if (jobTypeRef.data().count <= 1) {
+      await db.collection('jobTypes').doc(jobRef.data().type).delete()
+    } else {
+      const oldCount = jobTypeRef.data().count
+      const newCount = oldCount - 1
+      await db.collection('jobTypes').doc(jobRef.data().type).set({
+        count: newCount
+      })
+    }
     dispatch({
       type: 'REMOVE_JOB',
       payload: { id }
@@ -231,4 +264,29 @@ export const emptyJobs = () => async dispatch => {
   dispatch({
     type: 'EMPTY_JOBS'
   })
+}
+
+export const getJobLocations = () => async dispatch => {
+  dispatch({
+    type: 'JOB_FILTERS_LOADING'
+  })
+  try {
+    const snapshot = await db.collection('jobLocations').get()
+    let jobLocations = []
+    snapshot.forEach(jobLocation => jobLocations.push(jobLocation.id))
+    dispatch({
+      type: 'SET_JOB_LOCATIONS',
+      payload: {
+        jobLocations
+      }
+    })
+  } catch (error) {
+    dispatch({
+      type: 'JOB_ERROR'
+    })
+    dispatch(setAlert({
+      msg: 'Server error, please try again',
+      type: 'error'
+    }))
+  }
 }

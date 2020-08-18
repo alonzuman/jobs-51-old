@@ -37,7 +37,7 @@ const JobTypeFilter = () => {
   }
 
   const boxStyle = {
-    minHeight: '180px'
+    minHeight: '180px',
   }
 
   return (

@@ -51,6 +51,7 @@ a {
 .button-style {
   float: left!important;
   width: 100%!important;
+  margin-bottom: .5rem!important;
 }
 
 @media (max-width: 768px) {

@@ -43,7 +43,7 @@ const EditProfile = () => {
     margin: '0 1rem'
   }
 
-  if (authState.loading || dialogState.loading) {
+  if (authState.loading || dialogState.loading || !authState.authenticated) {
     return <FormSkeleton />
   } else {
     return (

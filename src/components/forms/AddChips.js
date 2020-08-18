@@ -37,7 +37,7 @@ const AddChips = ({ label, chips, setChips }) => {
         <IconButton onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>
-        {chips?.length > 0 && chips?.map((chip, index) => <Grid style={gridItemStyle} item><Chip style={chipStyle} onDelete={() => setChips([...chips.filter(x => x !== chip)])} key={index} label={chip} /></Grid>)}
+        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} style={gridItemStyle} item><Chip style={chipStyle} onDelete={() => setChips([...chips.filter(x => x !== chip)])} label={chip} /></Grid>)}
       </Grid>
     </div>
   )
