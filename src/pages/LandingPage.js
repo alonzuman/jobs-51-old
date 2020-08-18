@@ -3,7 +3,7 @@ import { Button, Grid, Typography, Box } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { openSigningIn, openAddingJob } from '../actions'
-import { ReactComponent as Logo } from '../shaldagLogo.svg'
+import ShaldagLogo from '../ShaldagLogo'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
@@ -30,22 +30,20 @@ const LandingPage = () => {
     width: 'fit-content'
   }
 
-  const logoStyle = {
-    width: '100%'
-  }
-
   return (
     <div style={containerStyle}>
-      <Logo style={logoStyle} />
+      <ShaldagLogo />
       <Box style={textBoxStyle} className='text-box'>
         <Typography style={{ direction }} variant='body1'>{translation.landingPageText1}</Typography>
+        <br />
         <Typography style={{ direction }} variant='body1'>{translation.landingPageText2}</Typography>
+        <br />
         <Typography style={{ direction }} variant='body1'>{translation.platformForMembersOnly}</Typography>
       </Box>
       {!authenticated &&
       <Grid style={gridStyle} container spacing={1}>
         <Grid item>
-          <Button color='default' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
+          <Button color='default' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
         </Grid>
         <Grid item>
           <Button color='primary' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
@@ -59,7 +57,7 @@ const LandingPage = () => {
         </Grid>
         <Grid item>
           <Link to='/results/jobs'>
-            <Button color='primary' variant='outlined'>{translation.lookingForAJob}</Button>
+            <Button color='primary' variant='contained'>{translation.lookingForAJob}</Button>
           </Link>
         </Grid>
       </Grid>}

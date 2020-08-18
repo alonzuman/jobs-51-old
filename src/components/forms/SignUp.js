@@ -74,10 +74,10 @@ const SignUp = () => {
         </Grid>
       </Grid>
       <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
-      <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{translation.signUp}</Button>
+      <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</Button>
       <br/>
       <br/>
-      <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</a></Typography>
+      <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{translation.signIn}</a></Typography>
     </form>
   )
 }

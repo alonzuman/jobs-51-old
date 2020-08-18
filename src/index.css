@@ -8,6 +8,12 @@ a {
   text-decoration: none;
 }
 
+.MuiContainer-root {
+  overflow: scroll!important;
+  height: 100%!important;
+  padding: 4rem 1rem 4rem 1rem!important;
+}
+
 .full-width {
   width: 100%;
 }
@@ -38,6 +44,8 @@ a {
 .button-spinner {
   height: 24px!important;
   width: 24px!important;
+  background-color: #f4f4f4!important;
+  color: #f4f4f4!important;
 }
 
 #file-upload {

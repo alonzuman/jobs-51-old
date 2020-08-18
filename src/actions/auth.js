@@ -111,6 +111,9 @@ export const signOut = () => async dispatch =>{
 }
 
 export const editProfile = (user, uid) => async dispatch =>{
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
   try {
     await db.collection('users').doc(uid).set(user, { merge: true })
     dispatch({

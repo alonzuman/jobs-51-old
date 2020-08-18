@@ -6,7 +6,7 @@ import { closeDialogs } from '../../actions'
 
 const LocationFilter = () => {
   const dispatch = useDispatch()
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const { filtersLoading, jobLocations } = useSelector(state => state.jobs)
   const [chosenFilters, setChosenFilters] = useState([])
 
@@ -33,8 +33,7 @@ const LocationFilter = () => {
   }
 
   const chosenChipStyle = {
-    // TODO connect to theme color
-    border: `1px solid black`
+    border: `1px solid ${theme.palette.primary.main}`
   }
 
   return (
@@ -49,7 +48,7 @@ const LocationFilter = () => {
           )}
         </Grid>}
       <br />
-      <Button className='full-width' color='primary' variant='outlined' onClick={handleSubmit}>{translation.apply}</Button>
+      <Button className='full-width' color='primary' variant='contained' onClick={handleSubmit}>{translation.apply}</Button>
     </Box>
   )
 }

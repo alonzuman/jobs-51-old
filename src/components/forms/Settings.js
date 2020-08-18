@@ -1,15 +1,28 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Button, Switch, Box } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { signOut } from '../../actions'
+import { signOut, setTheme } from '../../actions'
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 const Settings = () => {
   const { authenticated } = useSelector(state => state.auth)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
+  const [checked, setChecked] = useState(theme.palette.type === 'dark')
   const dispatch = useDispatch()
+
+  const handleCheck = () => {
+    setChecked(!checked)
+    dispatch(setTheme())
+  }
 
   return (
     <div>
+      <Box style={{ display: 'flex', alignItems: 'center' }}>
+        <Brightness4Icon />
+        <Switch color='primary' checked={checked} onChange={handleCheck} />
+      </Box>
+      <br />
+      <br />
       {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={() => dispatch(signOut())}>{translation.signOut}</Button>}
     </div>
   )

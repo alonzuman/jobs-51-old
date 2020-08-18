@@ -63,7 +63,7 @@ const EditProfile = () => {
           </Grid>
         </Grid>
         <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
-        <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner'/> : translation.signUp}</Button>
+        <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner'/> : translation.update}</Button>
       </form>
     )
   }

@@ -6,7 +6,7 @@ import BackButton from './BackButton'
 
 const FiltersBar = ({ filters }) => {
   const [scrollPosition, setScrollPosition] = useState(0)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -18,8 +18,7 @@ const FiltersBar = ({ filters }) => {
     display: 'flex',
     alignItems: 'center',
     padding: '.25rem 1rem',
-    // TODO change background color to theme.palette
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.background.paper,
     boxShadow: scrollPosition > 0 ? '0 0 10px #00000025' : 'none',
     transition: 'box-shadow .5s ease-in-out'
   }

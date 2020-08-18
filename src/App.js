@@ -11,9 +11,9 @@ import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
 
 // Mui
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Container } from '@material-ui/core'
-import { setUser } from './actions'
+import { ThemeProvider } from '@material-ui/core/styles';
+import { Container, Paper } from '@material-ui/core'
+import { setUser, setTheme } from './actions'
 import { app } from './firebase'
 
 // Redux
@@ -21,12 +21,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 
-const theme = createMuiTheme({
-  direction: 'rtl',
-});
 
 function App() {
   const dispatch = useDispatch()
+  const { theme } = useSelector(state => state.theme)
   const validateUser = () => {
     dispatch({
       type: 'AUTH_LOADING'
@@ -41,20 +39,25 @@ function App() {
       }
     })
   }
+
   useEffect(() => { validateUser() }, [])
 
-  const containerStyle = {
-    padding: '4rem 1rem'
+  const paperStyle = {
+    borderRadius: 0,
+    width: '100%',
+    height: '100%',
+    position: 'fixed'
   }
 
   return (
     <ThemeProvider theme={theme}>
+      <Paper style={paperStyle}>
         <Router>
           <Dialogs />
           <CustomAlert />
           <MenuButton />
           <Switch>
-            <Container style={containerStyle}>
+            <Container>
               <Route exact path='/' component={LandingPage} />
               <Route exact path='/results' component={Home} />
               <ProtectedRoute path='/results/jobs' component={Jobs} />
@@ -62,6 +65,7 @@ function App() {
             </Container>
           </Switch>
         </Router>
+      </Paper>
     </ThemeProvider>
   )
 }
