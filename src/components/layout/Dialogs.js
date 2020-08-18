@@ -74,6 +74,7 @@ const Dialogs = () => {
       <DialogTitle>
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
+        {signingUp && translation.signUp}
         {editingProfile && translation.editingProfile}
         {editingJob && translation.editJob}
         {settings && translation.settings}
