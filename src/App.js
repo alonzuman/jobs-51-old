@@ -41,33 +41,28 @@ function App() {
   }
 
   useEffect(() => { validateUser() }, [])
-
-  const paperStyle = {
-    borderRadius: 0,
-    width: '100%',
-    height: '100%',
-    position: 'fixed',
-    backgroundColor: theme.palette.background.paper || '#fff'
-  }
+  useEffect(() => { {
+    const localTheme = localStorage.getItem('theme')
+    document.querySelector('body').style.backgroundColor = (localTheme && localTheme === 'dark') ? '#303030' : '#fff'
+    setTheme()
+  } }, [theme])
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={paperStyle}>
-        <Router>
-          <Dialogs />
-          <CustomAlert />
-          <MenuButton />
-          <Switch>
-            <Container>
-              <Route exact path='/' component={LandingPage} />
-              <Route exact path='/results' component={Home} />
-              <ProtectedRoute path='/results/jobs' component={Jobs} />
-              <Route path='/results/users' component={Employees} />
-            </Container>
-          </Switch>
-        </Router>
-      </Paper>
-    </ThemeProvider>
+      <Router>
+        <Dialogs />
+        <CustomAlert />
+        <MenuButton />
+        <Switch>
+          <Container>
+            <Route exact path='/' component={LandingPage} />
+            <Route exact path='/results' component={Home} />
+            <ProtectedRoute path='/results/jobs' component={Jobs} />
+            <Route path='/results/users' component={Employees} />
+          </Container>
+        </Switch>
+      </Router>
+  </ThemeProvider>
   )
 }
 

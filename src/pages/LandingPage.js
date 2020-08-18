@@ -6,7 +6,7 @@ import { openSigningIn, openAddingJob } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 
 const LandingPage = () => {
-  const { translation, direction } = useSelector(state => state.theme)
+  const { translation, direction, theme } = useSelector(state => state.theme)
   const { authenticated } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
@@ -30,15 +30,20 @@ const LandingPage = () => {
     width: 'fit-content'
   }
 
+  const textStyle = {
+    direction,
+    color: theme.palette.type === 'dark' ? '#fff' : '#303030'
+  }
+
   return (
     <div style={containerStyle}>
       <ShaldagLogo />
       <Box style={textBoxStyle} className='text-box'>
-        <Typography style={{ direction }} variant='body1'>{translation.landingPageText1}</Typography>
+        <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
         <br />
-        <Typography style={{ direction }} variant='body1'>{translation.landingPageText2}</Typography>
+        <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
         <br />
-        <Typography style={{ direction }} variant='body1'>{translation.platformForMembersOnly}</Typography>
+        <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
       </Box>
       {!authenticated &&
       <Grid style={gridStyle} container spacing={1}>
