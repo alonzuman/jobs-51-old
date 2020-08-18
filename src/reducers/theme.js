@@ -26,6 +26,10 @@ const theme = createMuiTheme({
     },
     typography: {
       fontFamily: ['Assistant', 'sans-serif']
+    },
+    background: {
+      paper: localTheme === 'dark' ? '#424242' : '#fff',
+      default: localTheme === 'dark' ? '#303030' : '#fafafa'
     }
 });
 
