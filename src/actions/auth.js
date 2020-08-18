@@ -68,7 +68,8 @@ export const signUp = (user) => async dispatch =>{
       firstName,
       lastName,
       avatar,
-      phone
+      phone,
+      dateCreated: new Date()
     }
     await db.collection('users').doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
@@ -111,7 +112,16 @@ export const signOut = () => async dispatch =>{
 
 export const editProfile = (user, uid) => async dispatch =>{
   try {
-    const snapshot = await db.collection('users').doc(uid).set(user, { merge: true })
+    await db.collection('users').doc(uid).set(user, { merge: true })
+    dispatch({
+      type: 'SET_USER',
+      payload: { uid, user }
+    })
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'Success'
+    }))
+    dispatch(closeDialogs())
   } catch (error) {
     console.log(error)
     dispatch(setAlert({

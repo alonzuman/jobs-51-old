@@ -8,23 +8,26 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import AddIcon from '@material-ui/icons/Add'
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings'
 
 // Mui
 import { Avatar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAddingJob, openSettings, openSigningIn, openSavedDialog } from '../../actions';
+import { openAddingJob, openSettings, openSigningIn, openSavedDialog, openEditingProfile } from '../../actions';
 
 const MenuButton = () => {
-  const { authenticated, avatar, firstName } = useSelector(state => state.auth)
+  const { translation } = useSelector(state => state.theme)
+  const { authenticated } = useSelector(state => state.auth)
+  const authState = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
   const actions = [
-    { icon: <Avatar src={avatar} alt={firstName}/>, name: 'Profile', handleClick: () => dispatch(openSigningIn()) },
-    { icon: <AddIcon />, name: 'Add', handleClick: () => dispatch(openAddingJob()) },
-    { icon: <SettingsIcon />, name: 'Settings', handleClick: () => dispatch(openSettings()) },
-    { icon: <FavoriteIcon />, name: 'Like', icon: <FavoriteIcon />, handleClick: () => dispatch(openSavedDialog()) },
+    { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.editProfile, handleClick: authenticated ? () => dispatch(openEditingProfile()) : () => dispatch(openSigningIn()) },
+    { icon: <AddIcon />, name: translation.addJob, handleClick: () => dispatch(openAddingJob()) },
+    { icon: <SettingsIcon />, name: translation.settings, handleClick: () => dispatch(openSettings()) },
+    { icon: <FavoriteIcon />, name: translation.savedJobs, icon: <FavoriteIcon />, handleClick: () => dispatch(openSavedDialog()) },
   ]
 
   const speedDialStyle = {
@@ -37,12 +40,13 @@ const MenuButton = () => {
     <SpeedDial
       style={speedDialStyle}
       ariaLabel="SpeedDial openIcon example"
-      icon={<SpeedDialIcon icon={<MenuIcon />} openIcon={<CloseIcon />} />}
+      icon={<SpeedDialIcon icon={authenticated ? <MenuIcon /> : <AccountCircleIcon />} openIcon={authenticated ? <CloseIcon /> : <AccountCircleIcon />} />}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
+      onClick={() => !authenticated && dispatch(openSigningIn())}
       open={open}
     >
-      {actions.map((action) => (
+      {authenticated && actions.map((action) => (
         <SpeedDialAction
           key={action.name}
           icon={action.icon}

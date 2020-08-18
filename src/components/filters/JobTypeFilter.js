@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getJobTypes, getJobs } from '../../actions/jobs'
-import { CircularProgress, Grid, Chip, Button } from '@material-ui/core'
+import { CircularProgress, Grid, Chip, Button, Box } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
 
 const JobTypeFilter = () => {
@@ -36,8 +36,12 @@ const JobTypeFilter = () => {
     border: `1px solid black`
   }
 
+  const boxStyle = {
+    minHeight: '180px'
+  }
+
   return (
-    <>
+    <Box style={boxStyle}>
       {loading && <CircularProgress />}
       {!loading &&
       <Grid container spacing={1}>
@@ -49,7 +53,7 @@ const JobTypeFilter = () => {
       </Grid>}
       <br />
       <Button className='full-width' color='primary' variant='outlined' onClick={handleSubmit}>{translation.apply}</Button>
-    </>
+    </Box>
   )
 }
 

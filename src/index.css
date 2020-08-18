@@ -47,3 +47,12 @@ a {
 .anchor {
   cursor: pointer;
 }
+
+.button-style {
+  float: left!important;
+  width: 100%!important;
+}
+
+@media (max-width: 768px) {
+
+}

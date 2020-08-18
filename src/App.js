@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import React, { useEffect, Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // Components
 import Dialogs from './components/layout/Dialogs'
@@ -12,12 +12,12 @@ import Employees from './pages/Employees'
 
 // Mui
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Container } from '@material-ui/core'
+import { Container, CircularProgress } from '@material-ui/core'
 import { setUser, signOut } from './actions'
 import { app } from './firebase'
 
 // Redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 
@@ -57,13 +57,23 @@ function App() {
             <Container style={containerStyle}>
               <Route exact path='/' component={LandingPage} />
               <Route exact path='/results' component={Home} />
-              <Route path='/results/jobs' component={Jobs} />
+              <ProtectedRoute path='/results/jobs' component={Jobs} />
               <Route path='/results/users' component={Employees} />
             </Container>
           </Switch>
         </Router>
     </ThemeProvider>
   )
+}
+
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const { loading, authenticated } = useSelector(state => state.auth)
+
+    if (!loading && authenticated) {
+      return <Route {...rest} render={props => <Route exact {...props} component={Component} />} />
+    } else {
+      return <Redirect to='/' />
+    }
 }
 
 export default App;

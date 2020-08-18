@@ -15,6 +15,15 @@ import SavedJobs from '../dialogs/SavedJobs'
 
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
+
+  const maxWidth = () => {
+    switch (true) {
+      case (signingIn || signingUp || editingProfile || settings || addingJob): return 'xs'
+      case (savedJobs):  return 'lg'
+      default: return 'xs'
+    }
+  }
+
   const { translation, direction } = useSelector(state => state.theme)
   const {
     signingIn,
@@ -61,10 +70,11 @@ const Dialogs = () => {
   ])
 
   return (
-    <Dialog style={{ direction, width: '100%' }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
+    <Dialog maxWidth={maxWidth()} fullWidth style={{ direction, width: '100%' }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
       <DialogTitle>
         {addingJob && translation.addJob}
         {signingIn && translation.signIn}
+        {editingProfile && translation.editingProfile}
         {editingJob && translation.editJob}
         {settings && translation.settings}
         {datesFilter && translation.datePosted}

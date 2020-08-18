@@ -4,6 +4,7 @@ const initialState = {
   firstName: '',
   lastName: '',
   avatar: '',
+  phone: '',
   savedJobs: [],
   loading: false
 }

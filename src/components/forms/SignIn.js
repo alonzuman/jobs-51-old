@@ -23,7 +23,7 @@ const SignIn = () => {
     <form onSubmit={handleSubmit}>
       <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
       <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
-      <Button color='primary' variant='contained' type='submit'>{translation.signIn}</Button>
+      <Button className='button-style' color='primary' variant='contained' type='submit'>{translation.signIn}</Button>
       <br />
       <br />
       <Typography variant='body1'>{translation.notSignedUp}<a className='anchor' onClick={handleClick}>{translation.signUp}</a></Typography>

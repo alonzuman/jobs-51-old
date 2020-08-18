@@ -3,8 +3,8 @@ import { Skeleton } from '@material-ui/lab'
 import { Card, CardContent, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-const CardsSkeletons = () => {
-  const arr = [1, 2, 3]
+const CardsSkeletons = ({ count }) => {
+  const arr = [...Array(count || 3)]
 
   const gridStyle = {
     padding: '1rem 0'

@@ -50,8 +50,12 @@ const SignUp = () => {
     margin: '0 1rem'
   }
 
+  const formStyle = {
+    minHeight: '220px'
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={formStyle} onSubmit={handleSubmit}>
       <Box style={boxStyle}>
         {uploading && <CircularProgressWithLabel value={progress} />}
         {!uploading && <FileUploader setProgress={setProgress} fileName={uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
@@ -69,7 +73,7 @@ const SignUp = () => {
         </Grid>
       </Grid>
       <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
-      <Button variant='contained' color='primary' disabled={uploading} type='submit'>{translation.signUp}</Button>
+      <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{translation.signUp}</Button>
       <br/>
       <br/>
       <Typography variant='body1'>{translation.alreadySignedUp}<a className='anchor' onClick={handleClick}>{translation.signIn}</a></Typography>

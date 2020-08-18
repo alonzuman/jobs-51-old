@@ -10,7 +10,7 @@ const Settings = () => {
 
   return (
     <div>
-      {authenticated && <Button color='primary' variant='outlined' onClick={() => dispatch(signOut())}>{translation.signOut}</Button>}
+      {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={() => dispatch(signOut())}>{translation.signOut}</Button>}
     </div>
   )
 }

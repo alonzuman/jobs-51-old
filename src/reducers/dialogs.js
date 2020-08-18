@@ -9,61 +9,77 @@ const initialState = {
   jobTypeFilter: false,
   locationFilter: false,
   savedJobs: false,
+  loading: true
 }
 
 export const dialogsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case 'DIALOG_LOADING':
+      return {
+        ...state,
+        loading: true
+      }
     case 'SIGNING_IN':
       return {
         ...state,
-        signingIn: true
+        signingIn: true,
+        loading: false
       }
     case 'SIGNING_UP':
       return {
         ...state,
-        signingUp: true
+        signingUp: true,
+        loading: false
       }
     case 'EDITING_PROFILE':
       return {
         ...state,
-        editingProfile: true
+        editingProfile: true,
+        loading: false
       }
     case 'SAVED_JOBS_DIALOG':
       return {
         ...state,
-        savedJobs: true
+        savedJobs: true,
+        loading: false
       }
     case 'OPEN_SETTINGS':
       return {
         ...state,
-        settings: true
+        settings: true,
+        loading: false
       }
     case 'ADDING_JOB':
       return {
         ...state,
-        addingJob: true
+        addingJob: true,
+        loading: false
       }
     case 'EDITING_JOB':
       return {
         ...state,
-        editingJob: true
+        editingJob: true,
+        loading: false
       }
     case 'DATES_FILTER_DIALOG':
       return {
         ...state,
-        datesFilter: true
+        datesFilter: true,
+        loading: false
       }
     case 'JOB_TYPE_FILTER_DIALOG':
       return {
         ...state,
-        jobTypeFilter: true
+        jobTypeFilter: true,
+        loading: false
       }
     case 'LOCATION_FILTER_DIALOG':
       return {
         ...state,
-        locationFilter: true
+        locationFilter: true,
+        loading: false
       }
     case 'CLOSE_DIALOGS':
       return {

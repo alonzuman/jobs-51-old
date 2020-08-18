@@ -76,7 +76,7 @@ const AddJob = () => {
             <TextField required label={translation?.phone} value={phone} onChange={e => setPhone(e.target.value)} variant='outlined' />
           </Grid>
         </Grid>
-        <Button color='primary' variant='outlined' style={buttonStyle} disabled={uploading} type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
+        <Button className='button-style' color='primary' variant='outlined' style={buttonStyle} disabled={uploading} type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
       </form>
     </Box>
   )

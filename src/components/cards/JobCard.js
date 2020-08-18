@@ -12,7 +12,7 @@ const JobCard = ({ job }) => {
   const dispatch = useDispatch()
   const { translation, direction } = useSelector(state => state.theme)
 
-  const isSaved = () => savedJobs.includes(job.id)
+  const isSaved = () => savedJobs?.includes(job.id)
 
   useEffect(() => { isSaved() }, [savedJobs])
 
@@ -22,7 +22,7 @@ const JobCard = ({ job }) => {
   }
 
   const favoriteIconStyle = {
-    color: 'red'
+    color: '#f02422'
   }
 
 
@@ -43,8 +43,7 @@ const JobCard = ({ job }) => {
           avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0].toUpperCase()}</Avatar>}
           title={job?.company}
           subheader={job?.location}
-          action={job?.uid === uid ?
-          <IconButton onClick={handleClick}><EditIcon /></IconButton>:
+          action={ (authenticated && job?.uid === uid) ? <IconButton onClick={handleClick}><EditIcon /></IconButton>:
           authenticated ? <IconButton onClick={handleClickFavorite}>{saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}</IconButton> : null}
         />
         <CardContent>

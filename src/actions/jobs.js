@@ -100,7 +100,7 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
       let jobs = []
       jobsRef.forEach(doc => jobs.push(doc.data()))
       dispatch({
-        type: 'SET_JOBS',
+        type: 'SET_SAVED_JOBS',
         payload: { jobs }
       })
     } catch (error) {
@@ -113,6 +113,11 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
         msg: 'Server error, please try again'
       }))
     }
+  } else {
+    dispatch({
+      type: 'SET_SAVED_JOBS',
+      payload: { jobs: [] }
+    })
   }
 }
 
@@ -160,7 +165,7 @@ export const setJob = (job) => async dispatch => {
 
 export const getJobTypes = () => async dispatch => {
   dispatch({
-    type: 'JOB_LOADING'
+    type: 'JOB_FILTERS_LOADING'
   })
   try {
     const snapshot = await db.collection('jobTypes').get()
@@ -220,4 +225,10 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
       msg: 'Server error, please try again'
     }))
   }
+}
+
+export const emptyJobs = () => async dispatch => {
+  dispatch({
+    type: 'EMPTY_JOBS'
+  })
 }
