@@ -16,7 +16,6 @@ export const authReducer = (state = initialState, action) => {
     case 'AUTH_LOADING':
       return {
         ...state,
-        authenticated: true,
         loading: true
       }
     case 'UPDATED_PROFILE':

@@ -5,7 +5,7 @@ import { getJobs } from '../../actions/jobs'
 import BackButton from './BackButton'
 
 const FiltersBar = ({ filters }) => {
-  const [scrollPosition, setScrollPosition] = useState(0)
+  // const [scrollPosition, setScrollPosition] = useState(0)
   const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 

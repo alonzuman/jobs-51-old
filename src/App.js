@@ -12,7 +12,7 @@ import Employees from './pages/Employees'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Container, Paper } from '@material-ui/core'
+import { Container, Paper, CircularProgress } from '@material-ui/core'
 import { setUser, setTheme } from './actions'
 import { app } from './firebase'
 
@@ -23,8 +23,8 @@ import LandingPage from './pages/LandingPage'
 
 
 function App() {
-  const dispatch = useDispatch()
   const { theme } = useSelector(state => state.theme)
+  const dispatch = useDispatch()
   const validateUser = () => {
     dispatch({
       type: 'AUTH_LOADING'
@@ -44,9 +44,13 @@ function App() {
   useEffect(() => { validateUser() }, [app.auth().currentUser])
   useEffect(() => { setTheme() }, [theme])
 
+  const paperStyle = {
+    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#fafafa'
+  }
+
   return (
     <ThemeProvider theme={theme}>
-      <Paper className='paper-background'>
+      <Paper style={paperStyle} className='paper-background'>
         <Router>
           <Dialogs />
           <CustomAlert />
@@ -67,11 +71,11 @@ function App() {
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const { loading, authenticated } = useSelector(state => state.auth)
 
-    if (!loading && authenticated) {
-      return <Route {...rest} render={props => <Route exact {...props} component={Component} />} />
-    } else {
-      return <Redirect to='/' />
-    }
+  return (
+    !loading ?
+    <Route {...rest} render={props => authenticated ? <Component {...props} /> : <Redirect to='/' />} />:
+    <CircularProgress />
+  )
 }
 
 export default App;

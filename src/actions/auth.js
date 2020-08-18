@@ -4,6 +4,9 @@ import { closeDialogs } from './dialogs'
 
 export const setUser = (user) => async dispatch => {
   const { uid } = user
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
   try {
     const snapshot = await db.collection('users').doc(uid).get()
     dispatch({

@@ -34,9 +34,9 @@ const LandingPage = () => {
     direction,
   }
 
-  if (!loading && authenticated === true) {
-    return <Redirect to='/results/jobs' />
-  }
+  // if (!loading && authenticated === true) {
+  //   return <Redirect to='/results/jobs' />
+  // }
 
   return (
     <div style={containerStyle}>
