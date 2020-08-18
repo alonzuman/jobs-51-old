@@ -11,7 +11,7 @@ import AddChips from './AddChips'
 const EditJob = () => {
   const dispatch = useDispatch()
   const { job, loading } = useSelector(state => state.jobs)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
 
   // General
   const [uploading, setUploading] = useState(false)
@@ -74,7 +74,7 @@ const EditJob = () => {
           </Grid>
         </Grid>
         <Button className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
-        <Button className='button-style' variant='outlined' color='secondary' onClick={() => dispatch(removeJob(job?.id, job))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
+        <Button style={{ backgroundColor: theme.palette.error.main }} className='button-style' variant='outlined' onClick={() => dispatch(removeJob(job?.id, job))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
       </form>
     </Box>
   )
