@@ -39,8 +39,9 @@ function App() {
       }
     })
   }
+  app.auth().onAuthStateChanged(() => validateUser())
 
-  useEffect(() => { validateUser() }, [])
+  useEffect(() => { validateUser() }, [app.auth().currentUser])
   useEffect(() => { {
     const localTheme = localStorage.getItem('theme')
     document.querySelector('body').style.backgroundColor = (localTheme && localTheme === 'dark') ? '#303030' : '#fff'
