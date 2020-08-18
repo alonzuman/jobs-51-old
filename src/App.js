@@ -54,7 +54,6 @@ function App() {
           <Switch>
             <Container>
               <Route exact path='/' component={LandingPage} />
-              <Route exact path='/results' component={Home} />
               <ProtectedRoute path='/results/jobs' component={Jobs} />
               <Route path='/results/users' component={Employees} />
             </Container>

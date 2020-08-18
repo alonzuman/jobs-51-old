@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button, Grid, Typography, Box } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { openSigningIn, openAddingJob } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 
 const LandingPage = () => {
-  const { translation, direction, theme } = useSelector(state => state.theme)
-  const { authenticated } = useSelector(state => state.auth)
+  const { translation, direction } = useSelector(state => state.theme)
+  const { authenticated, loading } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const containerStyle = {
@@ -32,6 +32,10 @@ const LandingPage = () => {
 
   const textStyle = {
     direction,
+  }
+
+  if (!loading && authenticated === true) {
+    return <Redirect to='/results/jobs' />
   }
 
   return (

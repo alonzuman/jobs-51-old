@@ -17,7 +17,7 @@ const FiltersBar = ({ filters }) => {
     direction: 'rtl',
     display: 'flex',
     alignItems: 'center',
-    padding: '.25rem 1rem',
+    padding: '.5rem 1rem',
     backgroundColor: theme.palette.background.paper,
     // boxShadow: scrollPosition > 0 ? '0 0 10px #00000025' : 'none',
     boxShadow:  '0 0 10px #00000025',
@@ -46,9 +46,9 @@ const FiltersBar = ({ filters }) => {
         <Grid style={gridStyle} spacing={1} container>
           {filters?.map((filter, index) =>
           <Grid key={index} item><Chip onClick={filter.onClick} className='chip-button' variant='outlined' label={filter.label} /></Grid>)}
-          <Grid item><Chip style={clearStyle} onClick={() => dispatch(getJobs())} label={translation.clear} /></Grid>
         </Grid>
-        <BackButton />
+        <Grid item><Chip style={clearStyle} onClick={() => dispatch(getJobs())} label={translation.clear} /></Grid>
+        {/* <BackButton /> */}
       </Box>
     </AppBar>
   )
