@@ -48,10 +48,10 @@ const LandingPage = () => {
       {!authenticated &&
       <Grid style={gridStyle} container spacing={1}>
         <Grid item>
-          <Button color='default' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
+          <Button color='default' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
         </Grid>
         <Grid item>
-          <Button color='primary' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
+          <Button color='primary' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
         </Grid>
       </Grid>}
 

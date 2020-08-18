@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-const localTheme = localStorage.getItem('theme')
+const localTheme = localStorage.setItem('theme', 'light')
 
 export const theme = createMuiTheme({
   direction: 'rtl',

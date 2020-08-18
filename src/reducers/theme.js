@@ -14,7 +14,7 @@ const themeType = () => {
 const theme = createMuiTheme({
     direction: 'rtl',
     palette: {
-      type: localTheme,
+      type: themeType(),
       primary: {
         light: localTheme === 'dark' ? '#286cba' : '#185288',
         main: localTheme === 'dark' ? '#286cba' : '#093660',
