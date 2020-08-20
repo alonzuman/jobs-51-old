@@ -29,28 +29,23 @@ function App() {
   const { theme } = useSelector(state => state.theme)
 
   useEffect(() => {
+    document.querySelector('body').style.backgroundColor = localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
     setTheme()
   }, [theme])
-
-  const paperStyle = {
-    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
-  }
 
   return (
     <ThemeProvider theme={theme}>
       <RtlProvider>
-        <Paper style={paperStyle} className='paper-background'>
-          <Router>
-            <Dialogs />
-            <CustomAlert />
-            <MenuButton />
-            <Switch>
-              <Route exact path='/' component={LandingPage} />
-              <ProtectedRoute exact path='/results/jobs' component={Jobs} />
-              <ProtectedRoute exact path='/results/users' component={Employees} />
-            </Switch>
-          </Router>
-        </Paper>
+        <Router>
+          <Dialogs />
+          <CustomAlert />
+          <MenuButton />
+          <Switch>
+            <Route exact path='/' component={LandingPage} />
+            <ProtectedRoute exact path='/results/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/results/users' component={Employees} />
+          </Switch>
+        </Router>
       </RtlProvider>
   </ThemeProvider>
   )

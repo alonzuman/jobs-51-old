@@ -45,9 +45,17 @@ export const themeReducer = (state = initialState, action) => {
 
   switch (type) {
     case 'SET_THEME':
+      console.log(state.theme.palette.type)
+      console.log(payload.type)
       return {
         ...state,
-        theme: { ...state.theme, type: payload.type }
+        theme: {
+          ...state.theme,
+          palette: {
+            ...state.theme.palette,
+            type: payload.type
+          }
+        }
       }
     default: return state
   }

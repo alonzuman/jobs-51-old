@@ -14,13 +14,16 @@ const CustomAlert = () => {
     width: '100%',
     padding: '1rem 1rem 5rem 1rem',
     zIndex: 999999,
-    maxWidth: 500
+  }
+
+  const alertStyle = {
+
   }
 
   if (isOn) {
     return (
     <Box style={boxStyle}>
-      {isOn && <Alert severity={type} onClose={() => dispatch(clearAlert())}>{msg}</Alert>}
+      {isOn && <Alert severity={type} style={alertStyle} onClose={() => dispatch(clearAlert())}>{msg}</Alert>}
     </Box>
   )} else {
     return null

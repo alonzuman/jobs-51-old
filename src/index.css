@@ -43,6 +43,19 @@ a {
   margin: 0!important;
 }
 
+.MuiAlert-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.MuiAlert-action {
+  padding: 0!important;
+}
+
 .chip-button {
   cursor: pointer!important;
   transition: .3s border ease-in-out;
