@@ -12,21 +12,21 @@ import Employees from './pages/Employees'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Container, Paper, CircularProgress } from '@material-ui/core'
-import { setUser, setTheme, signOut } from './actions'
-import { app } from './firebase'
+import { Paper } from '@material-ui/core'
+import { setTheme } from './actions'
+import jss from 'jss'
+import rtl from 'jss-rtl'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
+import RtlProvider from './contexts/RtlContext'
 
 
 function App() {
   const { theme } = useSelector(state => state.theme)
-  const { loading } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     setTheme()
@@ -38,18 +38,20 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={paperStyle} className='paper-background'>
-        <Router>
-          <Dialogs />
-          <CustomAlert />
-          <MenuButton />
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <ProtectedRoute exact path='/results/jobs' component={Jobs} />
-            <ProtectedRoute exact path='/results/users' component={Employees} />
-          </Switch>
-        </Router>
-      </Paper>
+      <RtlProvider>
+        <Paper style={paperStyle} className='paper-background'>
+          <Router>
+            <Dialogs />
+            <CustomAlert />
+            <MenuButton />
+            <Switch>
+              <Route exact path='/' component={LandingPage} />
+              <ProtectedRoute exact path='/results/jobs' component={Jobs} />
+              <ProtectedRoute exact path='/results/users' component={Employees} />
+            </Switch>
+          </Router>
+        </Paper>
+      </RtlProvider>
   </ThemeProvider>
   )
 }

@@ -34,39 +34,41 @@ const LandingPage = () => {
     direction,
   }
 
-    return (
-      <Container style={containerStyle}>
-        <ShaldagLogo />
-        <Box style={textBoxStyle} className='text-box'>
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
-        </Box>
-        {!authenticated &&
-        <Grid style={gridStyle} container spacing={1}>
-          <Grid item>
-            <Button color='default' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
-          </Grid>
-          <Grid item>
-            <Button color='primary' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
-          </Grid>
-        </Grid>}
+  if (authenticated) return <Redirect to='/results/jobs' />
 
-        {authenticated &&
-        <Grid style={gridStyle} container spacing={1}>
-          <Grid item>
-            <Button onClick={() => dispatch(openAddingJob())} color='default' variant='outlined'>{translation.postingAJob}</Button>
-          </Grid>
-          <Grid item>
-            <Link to='/results/jobs'>
-              <Button color='primary' variant='contained'>{translation.lookingForAJob}</Button>
-            </Link>
-          </Grid>
-        </Grid>}
-      </Container>
-    )
-  }
+  return (
+    <Container style={containerStyle}>
+      <ShaldagLogo />
+      <Box style={textBoxStyle} className='text-box'>
+        <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
+        <br />
+        <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
+        <br />
+        <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
+      </Box>
+      {!authenticated &&
+      <Grid style={gridStyle} container spacing={1}>
+        <Grid item>
+          <Button color='default' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
+        </Grid>
+        <Grid item>
+          <Button color='primary' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
+        </Grid>
+      </Grid>}
+
+      {authenticated &&
+      <Grid style={gridStyle} container spacing={1}>
+        <Grid item>
+          <Button onClick={() => dispatch(openAddingJob())} color='default' variant='outlined'>{translation.postingAJob}</Button>
+        </Grid>
+        <Grid item>
+          <Link to='/results/jobs'>
+            <Button color='primary' variant='contained'>{translation.lookingForAJob}</Button>
+          </Link>
+        </Grid>
+      </Grid>}
+    </Container>
+  )
+}
 
 export default LandingPage

@@ -18,7 +18,11 @@ const dialogTitleStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 1rem'
+  padding: '0'
+}
+
+const buttonStyle = {
+  margin: '0 .5rem'
 }
 
 const Dialogs = () => {
@@ -91,7 +95,7 @@ const Dialogs = () => {
           {locationFilter && translation.location}
           {savedJobs && translation.savedJobs}
         </DialogTitle>
-        <IconButton onClick={() => dispatch(closeDialogs())}>
+        <IconButton style={buttonStyle} onClick={() => dispatch(closeDialogs())}>
           <CloseIcon />
         </IconButton>
       </Box>

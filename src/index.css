@@ -26,6 +26,10 @@ a {
   padding: 4rem 1rem 4rem 1rem!important;
 }
 
+.MuiDialogContent-root {
+  padding: 16px!important;
+}
+
 .full-width {
   width: 100%;
 }
@@ -66,7 +70,6 @@ a {
 .button-style {
   float: left!important;
   width: 100%!important;
-  margin-bottom: .5rem!important;
 }
 
 @media (max-width: 768px) {

@@ -53,7 +53,7 @@ const AddJob = () => {
   }
 
   return (
-    <Box>
+    <Box dir='rtl'>
       {!authenticated && <FormSkeleton />}
       {authenticated && <form onSubmit={handleSubmit}>
         {uploading && <CircularProgressWithLabel value={progress} />}

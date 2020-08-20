@@ -27,6 +27,10 @@ const JobCard = ({ job }) => {
     color: '#f02422'
   }
 
+  const cardContainerStyle = {
+    boxShadow: '0 0 10px #00000015',
+    direction
+  }
 
   const handleClickFavorite = () => {
     if (saved) {
@@ -40,7 +44,7 @@ const JobCard = ({ job }) => {
 
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Card style={{ direction }}>
+      <Card style={cardContainerStyle}>
         <CardHeader
           avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0].toUpperCase()}</Avatar>}
           title={job?.company}
