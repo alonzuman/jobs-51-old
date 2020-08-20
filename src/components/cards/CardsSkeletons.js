@@ -7,7 +7,7 @@ const CardsSkeletons = ({ count }) => {
   const arr = [...Array(count || 3)]
 
   const gridStyle = {
-    padding: '1rem 0'
+    padding: '0 0 1rem 0'
   }
 
   return (

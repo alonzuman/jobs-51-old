@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Dialog, DialogTitle, DialogContent, IconButton, Box } from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContent, IconButton, Box, Paper } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
 import AddJob from '../forms/AddJob'
 import EditJob from '../forms/EditJob'
@@ -49,7 +49,6 @@ const Dialogs = () => {
     }
   }
 
-
   useEffect(() => {
     if (
       signingIn === true ||
@@ -80,37 +79,43 @@ const Dialogs = () => {
     savedJobs
   ])
 
+  const paperStyle = {
+    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
+  }
+
   return (
     <Dialog maxWidth={maxWidth()} fullWidth style={{ direction, width: '100%' }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
-      <Box style={dialogTitleStyle}>
-        <DialogTitle>
-          {addingJob && translation.addJob}
-          {signingIn && translation.signIn}
-          {signingUp && translation.signUp}
-          {editingProfile && translation.editingProfile}
-          {editingJob && translation.editJob}
-          {settings && translation.settings}
-          {datesFilter && translation.datePosted}
-          {jobTypeFilter && translation.type}
-          {locationFilter && translation.location}
-          {savedJobs && translation.savedJobs}
-        </DialogTitle>
-        <IconButton style={buttonStyle} onClick={() => dispatch(closeDialogs())}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <DialogContent>
-        {signingIn && <SignIn />}
-        {signingUp && <SignUp />}
-        {editingProfile && <EditProfile />}
-        {settings && <Settings />}
-        {addingJob && <AddJob />}
-        {editingJob && <EditJob />}
-        {datesFilter && <DatesFilter />}
-        {jobTypeFilter && <JobTypeFilter />}
-        {locationFilter && <LocationFilter />}
-        {savedJobs && <SavedJobs />}
-      </DialogContent>
+      <Paper style={paperStyle}>
+        <Box style={dialogTitleStyle}>
+          <DialogTitle>
+            {addingJob && translation.addJob}
+            {signingIn && translation.signIn}
+            {signingUp && translation.signUp}
+            {editingProfile && translation.editingProfile}
+            {editingJob && translation.editJob}
+            {settings && translation.settings}
+            {datesFilter && translation.datePosted}
+            {jobTypeFilter && translation.type}
+            {locationFilter && translation.location}
+            {savedJobs && translation.savedJobs}
+          </DialogTitle>
+          <IconButton style={buttonStyle} onClick={() => dispatch(closeDialogs())}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <DialogContent>
+          {signingIn && <SignIn />}
+          {signingUp && <SignUp />}
+          {editingProfile && <EditProfile />}
+          {settings && <Settings />}
+          {addingJob && <AddJob />}
+          {editingJob && <EditJob />}
+          {datesFilter && <DatesFilter />}
+          {jobTypeFilter && <JobTypeFilter />}
+          {locationFilter && <LocationFilter />}
+          {savedJobs && <SavedJobs />}
+        </DialogContent>
+      </Paper>
     </Dialog>
   )
 }

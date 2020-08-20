@@ -28,7 +28,6 @@ const JobCard = ({ job }) => {
   }
 
   const cardContainerStyle = {
-    boxShadow: '0 0 10px #00000015',
     direction
   }
 

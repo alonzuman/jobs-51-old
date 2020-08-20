@@ -33,7 +33,7 @@ function App() {
   }, [theme])
 
   const paperStyle = {
-    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#fafafa'
+    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
   }
 
   return (

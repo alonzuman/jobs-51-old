@@ -20,7 +20,7 @@ const Jobs = () => {
 
   const gridStyle = {
     direction: 'rtl',
-    padding: '1rem 0'
+    padding: '0 0 1rem 0'
   }
 
   return (

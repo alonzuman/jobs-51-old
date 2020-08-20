@@ -48,6 +48,11 @@ a {
   transition: .3s border ease-in-out;
 }
 
+.MuiCard-root {
+  border-radius: 1rem!important;
+  box-shadow: none!important;
+}
+
 .MuiCardHeader-avatar {
   margin: 0 0 0 1rem;
   margin-right: 0!important;
