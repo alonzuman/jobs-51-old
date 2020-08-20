@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getJobLocations, getJobs } from '../../actions/jobs'
-import { CircularProgress, Grid, Chip, Button, Box } from '@material-ui/core'
+import { Grid, Chip, Button, Box } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
+import ChipsSkeleton from '../layout/ChipsSkeleton'
 
 const LocationFilter = () => {
   const dispatch = useDispatch()
@@ -38,7 +39,7 @@ const LocationFilter = () => {
 
   return (
     <Box>
-      {filtersLoading && <CircularProgress />}
+      {filtersLoading && <ChipsSkeleton />}
       {!filtersLoading &&
         <Grid container spacing={1}>
           {jobLocations?.length > 0 && jobLocations.map((jobLocation, index) =>

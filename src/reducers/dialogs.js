@@ -1,5 +1,3 @@
-// TODO change payload to type of dialog then only dispatch 'opendialog(type of dialog)'
-
 const initialState = {
   signingIn: false,
   signingUp: false,

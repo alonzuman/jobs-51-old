@@ -55,7 +55,6 @@ const MenuButton = () => {
             icon={action.icon}
             onClick={action.handleClick}
             tooltipTitle={action.name}
-            onClick={action.handleClick}
           />
         ))}
       </SpeedDial>

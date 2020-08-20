@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJobTypes, getJobs } from '../../actions/jobs'
 import { CircularProgress, Grid, Chip, Button, Box } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
+import ChipsSkeleton from '../layout/ChipsSkeleton'
 
 const JobTypeFilter = () => {
   const dispatch = useDispatch()
@@ -37,7 +38,7 @@ const JobTypeFilter = () => {
 
   return (
     <Box>
-      {filtersLoading && <CircularProgress />}
+      {filtersLoading && <ChipsSkeleton />}
       {!filtersLoading &&
       <Grid container spacing={1}>
         {jobTypes?.length > 0 && jobTypes.map((jobType, index) =>

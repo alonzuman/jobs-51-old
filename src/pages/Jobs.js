@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openLocationFilterDialog, openDatesFilterDialog, openJobTypeFilterDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, Container } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
 
 const Jobs = () => {
@@ -24,14 +24,14 @@ const Jobs = () => {
   }
 
   return (
-    <>
+    <Container>
     <FiltersBar filters={filters} />
+    {loading && <CardsSkeletons />}
     <Grid style={gridStyle} container spacing={2}>
       {(jobs?.length === 0 && !loading) && <Typography variant='body1'>{translation?.couldntFindJobs}</Typography>}
-      {loading && <CardsSkeletons />}
       {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
     </Grid>
-    </>
+    </Container>
   )
 }
 

@@ -13,36 +13,24 @@ import Employees from './pages/Employees'
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Container, Paper, CircularProgress } from '@material-ui/core'
-import { setUser, setTheme } from './actions'
+import { setUser, setTheme, signOut } from './actions'
 import { app } from './firebase'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
+import ProtectedRoute from './ProtectedRoute'
 
 
 function App() {
   const { theme } = useSelector(state => state.theme)
+  const { loading } = useSelector(state => state.auth)
   const dispatch = useDispatch()
-  const validateUser = () => {
-    dispatch({
-      type: 'AUTH_LOADING'
-    })
-    app.auth().onAuthStateChanged(user => {
-      if (user) {
-        dispatch(setUser(user))
-      } else {
-        dispatch({
-          type: 'NOT_SIGNED_IN'
-        })
-      }
-    })
-  }
-  app.auth().onAuthStateChanged(() => validateUser())
 
-  useEffect(() => { validateUser() }, [app.auth().currentUser])
-  useEffect(() => { setTheme() }, [theme])
+  useEffect(() => {
+    setTheme()
+  }, [theme])
 
   const paperStyle = {
     backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#fafafa'
@@ -56,25 +44,13 @@ function App() {
           <CustomAlert />
           <MenuButton />
           <Switch>
-            <Container>
-              <Route exact path='/' component={LandingPage} />
-              <ProtectedRoute path='/results/jobs' component={Jobs} />
-              <Route path='/results/users' component={Employees} />
-            </Container>
+            <Route exact path='/' component={LandingPage} />
+            <ProtectedRoute exact path='/results/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/results/users' component={Employees} />
           </Switch>
         </Router>
       </Paper>
   </ThemeProvider>
-  )
-}
-
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { loading, authenticated } = useSelector(state => state.auth)
-
-  return (
-    !loading ?
-    <Route {...rest} render={props => authenticated ? <Component {...props} /> : <Redirect to='/' />} />:
-    <CircularProgress />
   )
 }
 

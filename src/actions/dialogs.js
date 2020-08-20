@@ -1,4 +1,6 @@
-export const dialogLoading = () => async dispatch => dispatch({ type: 'DIALOG_LOADING' })
+export const dialogLoading = () => async dispatch => {
+  dispatch({ type: 'DIALOG_LOADING' })
+}
 
 export const openSigningIn = () => async dispatch => {
   dispatch(dialogLoading())

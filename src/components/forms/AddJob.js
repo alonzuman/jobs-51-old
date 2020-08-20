@@ -6,9 +6,10 @@ import { addJob } from '../../actions'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
 import AddChips from './AddChips';
+import FormSkeleton from './FormSkeleton';
 
 const AddJob = () => {
-  const { uid } = useSelector(state => state.auth )
+  const { uid, authenticated } = useSelector(state => state.auth )
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
@@ -53,7 +54,8 @@ const AddJob = () => {
 
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      {!authenticated && <FormSkeleton />}
+      {authenticated && <form onSubmit={handleSubmit}>
         {uploading && <CircularProgressWithLabel value={progress} />}
         {!uploading && <FileUploader fileName={uuidv4()} folder={'job-images'} setProgress={setProgress} setIsUploading={setUploading} setImageUrl={setImageUrl} />}
         <TextField required label={translation?.companyName} value={company} onChange={e => setCompany(e.target.value)} variant='outlined' />
@@ -77,7 +79,7 @@ const AddJob = () => {
           </Grid>
         </Grid>
         <Button className='button-style' color='primary' variant='contained' style={buttonStyle} disabled={uploading} type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
-      </form>
+      </form>}
     </Box>
   )
 }

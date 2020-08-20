@@ -6,19 +6,21 @@ import { v4 as uuidv4} from 'uuid'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from '../forms/CircularProgressWithLabel'
 import AddChips from './AddChips'
+import FormSkeleton from './FormSkeleton'
 
 
 const EditJob = () => {
   const dispatch = useDispatch()
+  const { authenticated, uid } = useSelector(state => state.auth)
   const { job, loading } = useSelector(state => state.jobs)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
 
   // General
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
 
   // Fields
-  const [imageUrl, setImageUrl] = useState(job?.iamge)
+  const [imageUrl, setImageUrl] = useState(job?.image)
   const [company, setCompany] = useState(job?.company)
   const [type, setType] = useState(job?.type)
   const [location, setLocation] = useState(job?.location)
@@ -41,18 +43,33 @@ const EditJob = () => {
       requirements,
       email,
       phone,
+      uid: job.uid || uid,
       id: job.id
     }
-    console.log(newJob)
-
     dispatch(editJob(newJob, job?.id))
+  }
+
+  const boxStyle = {
+    display: 'flex',
+    alignItems: 'top'
+  }
+
+  const thumbnailStyle = {
+    width: '36px',
+    height: '36px',
+    objectFit: 'cover',
+    margin: '0 1rem'
   }
 
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
-        {uploading && <CircularProgressWithLabel value={progress} />}
-        {!uploading && <FileUploader fileName={uuidv4()} folder={'job-images'} setProgress={setProgress} setIsUploading={setUploading} setImageUrl={setImageUrl} />}
+      {!authenticated && <FormSkeleton />}
+      {authenticated && <form onSubmit={handleSubmit}>
+        <Box style={boxStyle}>
+          {uploading && <CircularProgressWithLabel value={progress} />}
+          {!uploading && <FileUploader fileName={uuidv4()} folder={'job-images'} setProgress={setProgress} setIsUploading={setUploading} setImageUrl={setImageUrl} />}
+          {(job?.image || imageUrl) && <img style={thumbnailStyle} src={job?.image || imageUrl} />}
+        </Box>
         <TextField required label={translation?.companyName} value={company} onChange={e => setCompany(e.target.value)} variant='outlined' />
         <Grid container spacing={1}>
         <Grid item xs={6}>
@@ -73,9 +90,9 @@ const EditJob = () => {
             <TextField required label={translation?.phone} value={phone} onChange={e => setPhone(e.target.value)} variant='outlined' />
           </Grid>
         </Grid>
-        <Button className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
-        <Button style={{ backgroundColor: theme.palette.error.main }} className='button-style' variant='outlined' onClick={() => dispatch(removeJob(job?.id, job))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
-      </form>
+        <Button disabled={uploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation?.post}</Button>
+        <Button disabled={uploading} className='button-style' variant='outlined' onClick={() => dispatch(removeJob(job?.id, job))}>{loading ? <CircularProgress className='button-spinner'/> : translation?.removeJob}</Button>
+      </form>}
     </Box>
   )
 }
