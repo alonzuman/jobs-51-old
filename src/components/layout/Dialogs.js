@@ -80,11 +80,16 @@ const Dialogs = () => {
   ])
 
   const paperStyle = {
-    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
+    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef',
+    height: '100%',
+  }
+
+  const dialogStyle = {
+    direction,
   }
 
   return (
-    <Dialog maxWidth={maxWidth()} fullWidth style={{ direction, width: '100%' }} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
+    <Dialog maxWidth={maxWidth()} fullWidth style={dialogStyle} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
       <Paper style={paperStyle}>
         <Box style={dialogTitleStyle}>
           <DialogTitle>

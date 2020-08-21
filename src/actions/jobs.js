@@ -11,32 +11,10 @@ export const addJob = (job) => async dispatch => {
     const ref = db.collection('jobs').doc()
     const newJob = {
       ...job,
-      id: ref.id
+      id: ref.id,
+      dateCreated: new Date()
     }
     await db.collection('jobs').doc(ref.id).set(newJob)
-    const jobType = await db.collection('jobTypes').doc(job.type).get()
-    const jobLocation = await db.collection('jobLocations').doc(job.location).get()
-
-    if (jobLocation.data()) {
-      const oldJobLocationCount = jobLocation.data().count
-      const newJobLocationCount = oldJobLocationCount + 1
-      await db.collection('jobLocations').doc(job.location).set({ count: newJobLocationCount })
-    } else {
-      await db.collection('jobLocations').doc(job.location).set({ count: 1 })
-    }
-
-    if (jobType.data()) {
-      const oldJobType = jobType.data()
-      const oldCount = oldJobType.count
-      const newJobType = {
-        count: oldCount + 1
-      }
-      await db.collection('jobTypes').doc(job.type).set(newJobType)
-    } else {
-      await db.collection('jobTypes').doc(job.type).set({
-        count: 1
-      })
-    }
 
     dispatch({
       type: 'ADD_JOB',
@@ -164,6 +142,11 @@ export const getJobs = (filters) => async dispatch => {
       const snapshot = await db.collection("jobs").where(Object.keys(filters)[0], "in", Object.values(filters)[0]).get()
       let jobs = []
       snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id}))
+      console.log(jobs)
+      const sortedJobs = jobs.sort((a, b) => {
+        return a.dateCreated - b.dateCreated
+      })
+      console.log(sortedJobs)
       dispatch({
         type: 'SET_JOBS',
         payload: {

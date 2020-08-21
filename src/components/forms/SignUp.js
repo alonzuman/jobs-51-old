@@ -8,10 +8,10 @@ import CircularProgressWithLabel from './CircularProgressWithLabel'
 
 const SignUp = () => {
   const { translation, theme } = useSelector(state => state.theme)
+  const dispatch = useDispatch()
   const authState = useSelector(state => state.auth)
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')

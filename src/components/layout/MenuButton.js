@@ -24,9 +24,8 @@ const MenuButton = () => {
   const [open, setOpen] = useState(false)
 
   const actions = [
-    { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.editProfile, handleClick: authenticated ? () => dispatch(openEditingProfile()) : () => dispatch(openSigningIn()) },
+    { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.myProfile, handleClick: authenticated ? () => dispatch(openEditingProfile()) : () => dispatch(openSigningIn()) },
     { icon: <AddIcon />, name: translation.addJob, handleClick: () => dispatch(openAddingJob()) },
-    { icon: <SettingsIcon />, name: translation.settings, handleClick: () => dispatch(openSettings()) },
     { icon: <FavoriteIcon />, name: translation.savedJobs, handleClick: () => dispatch(openSavedDialog()) },
   ]
 

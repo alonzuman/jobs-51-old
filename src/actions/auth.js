@@ -113,7 +113,26 @@ export const signOut = () => async dispatch =>{
   }
 }
 
-export const editProfile = (user, uid) => async dispatch =>{
+export const addPersonalDetails = (user, personalDetails, uid) => async dispatch => {
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
+  try {
+    await db.collection('users').doc(uid).set(personalDetails, { merge: true })
+    dispatch({
+      type: 'SET_USER',
+      payload: { uid, ...user, ...personalDetails }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error, please try again'
+    }))
+  }
+}
+
+export const editProfile = (user, uid) => async dispatch => {
   dispatch({
     type: 'AUTH_LOADING'
   })

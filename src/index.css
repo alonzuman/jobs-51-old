@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+form {
+  margin: 1rem 0 0 0;
+}
+
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
@@ -37,6 +41,10 @@ a {
 .MuiFormControl-root {
   width: 100%;
   margin: 0 0 .5rem 0!important;
+}
+
+.MuiChip-deleteIcon {
+  margin: 0 4px!important;
 }
 
 .no-margin {

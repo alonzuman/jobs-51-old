@@ -21,7 +21,7 @@ const AddJob = () => {
   // Job fields
   const [imageUrl, setImageUrl] = useState('')
   const [company, setCompany] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState([])
   const [location, setLocation] = useState('')
   const [contactPerson, setContactPerson] = useState('')
   const [description, setDescription] = useState('')
@@ -39,7 +39,7 @@ const AddJob = () => {
     const job = {
       image: imageUrl,
       company,
-      type,
+      type: type,
       location,
       contactPerson,
       description,
@@ -61,15 +61,13 @@ const AddJob = () => {
         <TextField required label={translation?.companyName} value={company} onChange={e => setCompany(e.target.value)} variant='outlined' />
         <Grid container spacing={1}>
           <Grid item xs={6}>
-            <TextField required label={translation?.type} value={type} onChange={e => setType(e.target.value)} variant='outlined' />
-          </Grid>
-          <Grid item xs={6}>
             <TextField required label={translation?.location} value={location} onChange={e => setLocation(e.target.value)} variant='outlined' />
           </Grid>
         </Grid>
         <TextField required label={translation?.contactPerson} value={contactPerson} onChange={e => setContactPerson(e.target.value)} variant='outlined' />
         <TextField required multiline rows={4} label={translation?.description} value={description} onChange={e => setDescription(e.target.value)} variant='outlined' />
         <AddChips label={translation?.requirements} chips={requirements} setChips={setRequirements} />
+        <AddChips label={translation?.jobTypes} chips={type} setChips={setType} />
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <TextField required label={translation?.email} value={email} onChange={e => setEmail(e.target.value)} variant='outlined' />

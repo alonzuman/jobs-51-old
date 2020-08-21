@@ -12,7 +12,7 @@ import Employees from './pages/Employees'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core'
+import { Paper, Dialog } from '@material-ui/core'
 import { setTheme } from './actions'
 import jss from 'jss'
 import rtl from 'jss-rtl'
@@ -23,6 +23,8 @@ import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
+import EditProfile from './components/forms/EditProfile'
+import AddJob from './components/forms/job/AddJob'
 
 
 function App() {
@@ -37,6 +39,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <RtlProvider>
         <Router>
+          {/* <Dialog open={true}>
+            <AddJob />
+          </Dialog> */}
           <Dialogs />
           <CustomAlert />
           <MenuButton />

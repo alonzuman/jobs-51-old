@@ -8,7 +8,7 @@ const AddChips = ({ label, chips, setChips }) => {
   const [chipToAdd, setChipToAdd] = useState('')
 
   const addChip = chip => {
-    if (!chips.includes(chip) && chipToAdd.trim().length !== 0) {
+    if (!chips.includes(chip) && chipToAdd.trim().length !== 0 && chips.length <= 4) {
       setChips([...chips, chip])
       setChipToAdd('')
     }

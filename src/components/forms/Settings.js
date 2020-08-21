@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Switch, Box } from '@material-ui/core'
+import { Button, Switch, Box, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOut, setTheme } from '../../actions'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
@@ -17,6 +17,7 @@ const Settings = () => {
 
   return (
     <div>
+      <Typography variant='body2'>{translation.displaySettings}</Typography>
       <Box style={{ display: 'flex', alignItems: 'center' }}>
         <Brightness4Icon />
         <Switch color='primary' checked={checked} onChange={handleCheck} />
