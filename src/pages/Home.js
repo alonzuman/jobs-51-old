@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { openSigningIn, addJob, getJobs, openAddingJob } from '../actions'
+import { openDialog, addJob, getJobs, openAddingJob } from '../actions'
 import Jobs from './Jobs'
 import { Button } from '@material-ui/core'
 
@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <Button>{translation.addJob}</Button>
-      <Button onClick={() => dispatch(openSigningIn())}>{translation.signIn}</Button>
+      <Button onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signIn}</Button>
       <Jobs />
     </div>
   )

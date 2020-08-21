@@ -25,7 +25,11 @@ const theme = createMuiTheme({
       }
     },
     typography: {
-      fontFamily: ['Assistant', 'sans-serif']
+      fontFamily: ['Assistant', 'sans-serif'],
+      subtitle1: {
+        fontSize: '.6rem',
+        color: '#f7f7f7'
+      }
     },
     background: {
       paper: localTheme === 'dark' ? '#424242' : '#fff',

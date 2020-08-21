@@ -52,7 +52,7 @@ export const signIn = ({ email, password }) => async dispatch =>{
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
@@ -88,27 +88,27 @@ export const signUp = (user) => async dispatch =>{
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
 
 export const signOut = () => async dispatch =>{
   try {
-    await app.auth().signOut()
+    app.auth().signOut()
     dispatch({
       type: 'SIGN_OUT'
     })
     dispatch(closeDialogs())
     dispatch(setAlert({
       type: 'success',
-      msg: 'Signed out successfully'
+      msg: 'SignedOutSuccess'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
@@ -127,7 +127,7 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
@@ -151,7 +151,7 @@ export const editProfile = (user, uid) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }

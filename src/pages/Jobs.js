@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getJobs, openLocationFilterDialog, openDatesFilterDialog, openJobTypeFilterDialog } from '../actions'
+import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import { Grid, Typography, Container } from '@material-ui/core'
@@ -14,8 +14,8 @@ const Jobs = () => {
 
   const filters = [
     // { label: translation.datePosted, onClick: () => dispatch(openDatesFilterDialog()) },
-    { label: translation.type, onClick: () => dispatch(openJobTypeFilterDialog())  },
-    { label: translation.location, onClick: () => dispatch(openLocationFilterDialog())  },
+    { label: translation.categories, onClick: () => dispatch(openDialog({ type: 'ChipsWithInputFilter', title: 'categories' }))  },
+    { label: translation.location, onClick: () => dispatch(openDialog({ type: 'ChipsWithInputFilter', title: 'location' }))  },
   ]
 
   const gridStyle = {

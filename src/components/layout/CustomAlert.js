@@ -6,9 +6,11 @@ import { clearAlert } from '../../actions';
 
 const CustomAlert = () => {
   const dispatch = useDispatch()
+  const { translation } = useSelector(state => state.theme)
   const { isOn, msg, type } = useSelector(state => state.alert)
 
   const boxStyle = {
+    direction: 'rtl',
     position: 'fixed',
     bottom: 0,
     width: '100%',
@@ -16,14 +18,10 @@ const CustomAlert = () => {
     zIndex: 999999,
   }
 
-  const alertStyle = {
-
-  }
-
   if (isOn) {
     return (
     <Box style={boxStyle}>
-      {isOn && <Alert severity={type} style={alertStyle} onClose={() => dispatch(clearAlert())}>{msg}</Alert>}
+      {isOn && <Alert severity={type} onClose={() => dispatch(clearAlert())}>{translation[msg]}</Alert>}
     </Box>
   )} else {
     return null

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, IconButton, Grid, CardContent, Typography, Avatar, Chip } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { openEditingJob, setJob, savedJob, unsaveJob } from '../../actions'
+import { openEditingJob, setJob, savedJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -19,7 +19,7 @@ const JobCard = ({ job }) => {
   }, [savedJobs])
 
   const handleClick = () => {
-    dispatch(openEditingJob())
+    dispatch(openDialog({ type: 'EditJob', title: 'Edit Job' }))
     dispatch(setJob(job))
   }
 
@@ -53,13 +53,11 @@ const JobCard = ({ job }) => {
           authenticated ? <IconButton onClick={handleClickFavorite}>{saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}</IconButton> : null}
         />
         <CardContent>
-          <Typography variant='body1'>{translation.type}</Typography>
-          <Typography variant='body1'>{job?.type}</Typography>
-          <Typography variant='body1'>{translation.description}</Typography>
+          <Typography className='subtitle1' variant='subtitle1'>{translation.description}</Typography>
           <Typography variant='body1'>{job?.description}</Typography>
-          <Typography variant='body1'>{translation.requirements}</Typography>
+          <Typography className='subtitle1' variant='subtitle1'>{translation.categories}</Typography>
           <Grid container spacing={1}>
-            {job?.requirements?.map((req, index) => <Grid item key={index}><Chip label={req} /></Grid>)}
+            {job?.categories?.map((req, index) => <Grid item key={index}><Chip label={req} /></Grid>)}
           </Grid>
         </CardContent>
       </Card>

@@ -14,7 +14,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 // Mui
 import { Avatar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAddingJob, openSettings, openSigningIn, openSavedDialog, openEditingProfile } from '../../actions';
+import { openDialog } from '../../actions';
 
 const MenuButton = () => {
   const { translation } = useSelector(state => state.theme)
@@ -24,9 +24,9 @@ const MenuButton = () => {
   const [open, setOpen] = useState(false)
 
   const actions = [
-    { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.myProfile, handleClick: authenticated ? () => dispatch(openEditingProfile()) : () => dispatch(openSigningIn()) },
-    { icon: <AddIcon />, name: translation.addJob, handleClick: () => dispatch(openAddingJob()) },
-    { icon: <FavoriteIcon />, name: translation.savedJobs, handleClick: () => dispatch(openSavedDialog()) },
+    { icon: <Avatar src={authState?.avatar} alt={authState?.firstName}/>, name: translation.myProfile, handleClick: authenticated ? () => dispatch(openDialog({ type: 'EditProfile', title: 'editProfile' })) : () => dispatch(openDialog({ type: 'SignIn', title: 'signIn' })) },
+    { icon: <AddIcon />, name: translation.addJob, handleClick: () => dispatch(openDialog({ type: 'AddJob', title: 'addJob' })) },
+    { icon: <FavoriteIcon />, name: translation.savedJobs, handleClick: () => dispatch(openDialog({ type: 'SavedJobs', title: 'savedJobs' })) },
   ]
 
   const speedDialStyle = {
@@ -45,7 +45,7 @@ const MenuButton = () => {
         icon={<SpeedDialIcon icon={authenticated ? <MenuIcon /> : <AccountCircleIcon />} openIcon={authenticated ? <CloseIcon /> : <AccountCircleIcon />} />}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
-        onClick={() => !authenticated && dispatch(openSigningIn())}
+        onClick={() => !authenticated && dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}
         open={open}
       >
         {authenticated && actions.map((action) => (

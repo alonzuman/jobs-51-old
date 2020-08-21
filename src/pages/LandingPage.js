@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Grid, Typography, Box, Container, Paper } from '@material-ui/core'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { openSigningIn, openAddingJob } from '../actions'
+import { openDialog } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 
 const LandingPage = () => {
@@ -63,17 +63,17 @@ const LandingPage = () => {
         {!authenticated &&
         <Grid style={gridStyle} container spacing={1}>
           <Grid item>
-            <Button color='default' variant='outlined' onClick={() => dispatch(openSigningIn())}>{translation.postingAJob}</Button>
+            <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
           </Grid>
           <Grid item>
-            <Button color='primary' variant='contained' onClick={() => dispatch(openSigningIn())}>{translation.lookingForAJob}</Button>
+            <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
           </Grid>
         </Grid>}
 
         {authenticated &&
         <Grid style={gridStyle} container spacing={1}>
           <Grid item>
-            <Button onClick={() => dispatch(openAddingJob())} color='default' variant='outlined'>{translation.postingAJob}</Button>
+            <Button onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} color='default' variant='outlined'>{translation.postingAJob}</Button>
           </Grid>
           <Grid item>
             <Link to='/results/jobs'>

@@ -18,7 +18,7 @@ import jss from 'jss'
 import rtl from 'jss-rtl'
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
@@ -39,9 +39,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <RtlProvider>
         <Router>
-          {/* <Dialog open={true}>
-            <AddJob />
-          </Dialog> */}
           <Dialogs />
           <CustomAlert />
           <MenuButton />

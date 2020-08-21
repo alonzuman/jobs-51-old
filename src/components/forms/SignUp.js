@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp, closeDialogs, openSigningIn, setAlert } from '../../actions'
+import { signUp, closeDialogs, openSigningIn, setAlert, openDialog } from '../../actions'
 import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (password !== confirmPassword) return dispatch(setAlert({ type: 'error', msg: 'Passwords dont match' }))
+    if (password !== confirmPassword) return dispatch(setAlert({ type: 'error', msg: 'PasswordsDontMatch' }))
     const user = {
       email,
       password,
@@ -36,7 +36,7 @@ const SignUp = () => {
 
   const handleClick = () => {
     dispatch(closeDialogs())
-    dispatch(openSigningIn())
+    dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))
   }
 
   const boxStyle = {
@@ -81,6 +81,7 @@ const SignUp = () => {
       </Grid>
       <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
       <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signUp}</Button>
+      <br/>
       <br/>
       <br/>
       <br/>

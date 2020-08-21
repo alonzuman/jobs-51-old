@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSavedJobs, emptyJobs } from '../../actions'
+import { getSavedJobs } from '../../actions'
 import CardsSkeletons from '../cards/CardsSkeletons'
 import { Grid, Typography } from '@material-ui/core'
 import JobCard from '../cards/JobCard'

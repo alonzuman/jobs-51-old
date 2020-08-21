@@ -48,7 +48,7 @@ const PersonalDetails = () => {
       <TextField label={translation.lastPosition} variant='outlined' name='lastPosition' value={personalDetails.lastPosition} onChange={handleInputChange} />
       <TextField label={translation.preferredLocation} variant='outlined' name='preferredLocation' value={personalDetails.preferredLocation} onChange={handleInputChange} />
       <AddChips label={translation.skills} chips={skillsArray} setChips={setSkillsArray} />
-      <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.approve}</Button>
+      <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
       </>}
     </form>
   )

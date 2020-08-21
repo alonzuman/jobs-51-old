@@ -12,6 +12,14 @@ form {
   margin: 1rem 0 0 0;
 }
 
+.subtitle1 {
+  color: #9c9c9c!important;
+}
+
+.MuiCardContent-root:last-child {
+  padding-bottom: 1rem!important;
+}
+
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
@@ -62,6 +70,7 @@ form {
 
 .MuiAlert-action {
   padding: 0!important;
+  margin: 0!important;
 }
 
 .chip-button {

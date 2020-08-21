@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dialog, DialogTitle, DialogContent, IconButton, Box, Paper } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
-import AddJob from '../forms/AddJob'
-import EditJob from '../forms/EditJob'
+import AddJob from '../forms/job/AddJob'
+import EditJob from '../forms/job/EditJob'
 import SignIn from '../forms/SignIn'
 import SignUp from '../forms/SignUp'
 import EditProfile from '../forms/EditProfile'
 import Settings from '../forms/Settings'
-import LocationFilter from '../filters/LocationFilter'
-import JobTypeFilter from '../filters/JobTypeFilter'
-import DatesFilter from '../filters/DatesFilter'
 import SavedJobs from '../dialogs/SavedJobs'
 import CloseIcon from '@material-ui/icons/Close'
+import ChipsWithInputFilter from '../filters/ChipsWithInputFilter'
 
 const dialogTitleStyle = {
   display: 'flex',
@@ -28,56 +26,27 @@ const buttonStyle = {
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
   const { translation, direction } = useSelector(state => state.theme)
-  const {
-    signingIn,
-    signingUp,
-    editingProfile,
-    settings,
-    addingJob,
-    editingJob,
-    datesFilter,
-    jobTypeFilter,
-    locationFilter,
-    savedJobs
-  } = useSelector(state => state.dialogs)
+  const { title, type, open } = useSelector(state => state.dialogs)
   const dispatch = useDispatch()
   const maxWidth = () => {
-    switch (true) {
-      case (signingIn || signingUp || editingProfile || settings || addingJob): return 'xs'
-      case (savedJobs):  return 'lg'
+    switch (type) {
+      case 'SignUp':
+      case 'EditProfile':
+      case 'Settings':
+      case 'AddJob':
+      case 'SignIn': return 'xs'
+      case 'SavedJobs':  return 'lg'
       default: return 'xs'
     }
   }
 
   useEffect(() => {
-    if (
-      signingIn === true ||
-      signingUp === true ||
-      editingProfile === true ||
-      settings === true ||
-      addingJob === true ||
-      editingJob === true ||
-      datesFilter === true ||
-      jobTypeFilter === true ||
-      locationFilter === true ||
-      savedJobs === true
-    ) {
+    if (open) {
       setDialogOpen(true)
     } else {
       setDialogOpen(false)
     }
-  }, [
-    signingIn,
-    signingUp,
-    editingProfile,
-    settings,
-    addingJob,
-    editingJob,
-    datesFilter,
-    jobTypeFilter,
-    locationFilter,
-    savedJobs
-  ])
+  }, [open])
 
   const paperStyle = {
     backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef',
@@ -88,37 +57,30 @@ const Dialogs = () => {
     direction,
   }
 
+  const component = () => {
+    switch (type) {
+      case 'SignIn': return <SignIn/>
+      case 'SignUp': return <SignUp/>
+      case 'Settings': return <Settings/>
+      case 'AddJob': return <AddJob/>
+      case 'EditJob': return <EditJob/>
+      case 'EditProfile': return <EditProfile />
+      case 'SavedJobs': return <SavedJobs/>
+      case 'ChipsWithInputFilter': return <ChipsWithInputFilter/>
+    }
+  }
+
   return (
     <Dialog maxWidth={maxWidth()} fullWidth style={dialogStyle} open={dialogOpen} onClose={() => dispatch(closeDialogs())}>
       <Paper style={paperStyle}>
         <Box style={dialogTitleStyle}>
-          <DialogTitle>
-            {addingJob && translation.addJob}
-            {signingIn && translation.signIn}
-            {signingUp && translation.signUp}
-            {editingProfile && translation.editingProfile}
-            {editingJob && translation.editJob}
-            {settings && translation.settings}
-            {datesFilter && translation.datePosted}
-            {jobTypeFilter && translation.type}
-            {locationFilter && translation.location}
-            {savedJobs && translation.savedJobs}
-          </DialogTitle>
+          <DialogTitle>{translation[title]}</DialogTitle>
           <IconButton style={buttonStyle} onClick={() => dispatch(closeDialogs())}>
             <CloseIcon />
           </IconButton>
         </Box>
         <DialogContent>
-          {signingIn && <SignIn />}
-          {signingUp && <SignUp />}
-          {editingProfile && <EditProfile />}
-          {settings && <Settings />}
-          {addingJob && <AddJob />}
-          {editingJob && <EditJob />}
-          {datesFilter && <DatesFilter />}
-          {jobTypeFilter && <JobTypeFilter />}
-          {locationFilter && <LocationFilter />}
-          {savedJobs && <SavedJobs />}
+          {component()}
         </DialogContent>
       </Paper>
     </Dialog>

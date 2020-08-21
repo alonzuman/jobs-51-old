@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, Button, Typography, CircularProgress } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { signIn, closeDialogs, openSigningUp } from '../../actions'
+import { signIn, closeDialogs, openDialog } from '../../actions'
 
 const SignIn = () => {
   const authState = useSelector(state => state.auth)
@@ -17,7 +17,7 @@ const SignIn = () => {
 
   const handleClick = () => {
     dispatch(closeDialogs())
-    dispatch(openSigningUp())
+    dispatch(openDialog({ type: 'SignUp', title: 'signUp' }))
   }
 
   const anchorStyle = {
@@ -31,6 +31,7 @@ const SignIn = () => {
       <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
       <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
       <Button className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
+      <br />
       <br />
       <br />
       <br />

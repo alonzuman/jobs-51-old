@@ -22,13 +22,13 @@ export const addJob = (job) => async dispatch => {
     })
     dispatch(closeDialogs())
     dispatch(setAlert({
-      msg: 'Success!',
+      msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
@@ -43,13 +43,13 @@ export const editJob = (job, id) => async dispatch => {
     dispatch(closeDialogs())
     dispatch(getJobs())
     dispatch(setAlert({
-      msg: 'Success!',
+      msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
@@ -90,13 +90,13 @@ export const removeJob = (id, job) => async dispatch => {
     })
     dispatch(closeDialogs())
     dispatch(setAlert({
-      msg: 'Success!',
+      msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
@@ -122,7 +122,7 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
       })
       dispatch(setAlert({
         type: 'error',
-        msg: 'Server error, please try again'
+        msg: 'ServerError'
       }))
     }
   } else {
@@ -167,7 +167,7 @@ export const getJobs = (filters) => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
@@ -199,7 +199,7 @@ export const getJobTypes = () => async dispatch => {
       type: 'JOB_ERROR'
     })
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
@@ -218,7 +218,7 @@ export const savedJob = (uid, jobId) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
@@ -245,7 +245,7 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       type: 'error',
-      msg: 'Server error, please try again'
+      msg: 'ServerError'
     }))
   }
 }
@@ -275,7 +275,7 @@ export const getJobLocations = () => async dispatch => {
       type: 'JOB_ERROR'
     })
     dispatch(setAlert({
-      msg: 'Server error, please try again',
+      msg: 'ServerError',
       type: 'error'
     }))
   }
