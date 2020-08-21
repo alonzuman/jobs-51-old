@@ -4,7 +4,7 @@ import { TextField, Button, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
-import { addJob } from '../../../actions'
+import { addJob, editJob } from '../../../actions'
 import FormSkeleton from '../FormSkeleton'
 
 const AddJob = () => {
@@ -46,8 +46,7 @@ const AddJob = () => {
       categories,
       uid
     }
-    dispatch(addJob(jobToAdd))
-    console.log(jobToAdd)
+    dispatch(editJob(jobToAdd, job.id))
   }
 
   return (

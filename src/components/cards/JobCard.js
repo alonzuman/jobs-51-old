@@ -19,7 +19,7 @@ const JobCard = ({ job }) => {
   }, [savedJobs])
 
   const handleClick = () => {
-    dispatch(openDialog({ type: 'EditJob', title: 'Edit Job' }))
+    dispatch(openDialog({ type: 'EditJob', title: 'editJob' }))
     dispatch(setJob(job))
   }
 
