@@ -20,15 +20,15 @@ const AddJob = () => {
 
   useEffect(() => {
     setEdittedJob({
-      image: job.image,
-      company: job.company,
-      contactPerson: job.contactPerson,
-      email: job.email,
-      phone: job.phone,
-      location: job.location,
-      description: job.description,
+      image: job?.image,
+      company: job?.company,
+      contactPerson: job?.contactPerson,
+      email: job?.email,
+      phone: job?.phone,
+      location: job?.location,
+      description: job?.description,
     })
-    setCategories(job.categories)
+    setCategories(job?.categories)
   }, [job])
 
   const handleJobChange = e => {
