@@ -59,5 +59,6 @@
   "signInWithFacebook": "התחברות באמצעות פייסבוק",
   "or": "או",
   "signInWithEmail": "התחברות באמצעות כתובת דוא״ל",
-  "signInWithSocialMedia": "התחברות/הרשמה באמצעות פייסבוק/גוגל"
+  "signInWithSocialMedia": "התחברות/הרשמה באמצעות פייסבוק/גוגל",
+  "orWithEmail": "או התחברו באמצעות כתובת דוא״ל"
 }

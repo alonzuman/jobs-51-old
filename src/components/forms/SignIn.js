@@ -31,7 +31,8 @@ const SignIn = () => {
   }
 
   const boxStyle = {
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: '.5rem 0'
   }
 
   return (
@@ -42,15 +43,16 @@ const SignIn = () => {
       <Box style={boxStyle}>
         <Typography variant='body1'>{translation.or}</Typography>
       </Box>
-        <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
+      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
     </>}
     {!socialMedia &&
     <form onSubmit={handleSubmit}>
-      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-user-friends button-icon"></i></Button>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-users button-icon"></i></Button>
+      <br />
+      <br />
+      <Box style={boxStyle}>
+        <Typography variant='body1'>{translation.orWithEmail}</Typography>
+      </Box>
       <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
       <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
       <Button className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
