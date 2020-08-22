@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp, closeDialogs, openSigningIn, setAlert, openDialog } from '../../actions'
+import { signUp, closeDialogs, setAlert, openDialog } from '../../actions'
 import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
-import SocielMediaSignIn from './SocielMediaSignIn'
 
 const SignUp = () => {
   const { translation, theme } = useSelector(state => state.theme)

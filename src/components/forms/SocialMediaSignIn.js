@@ -7,7 +7,7 @@ const signInWithStyle = {
   marginBottom: '.5rem'
 }
 
-const SocielMediaSignIn = () => {
+const SocialMediaSignIn = () => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -22,4 +22,4 @@ const SocielMediaSignIn = () => {
   )
 }
 
-export default SocielMediaSignIn
+export default SocialMediaSignIn

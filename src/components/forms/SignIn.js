@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { TextField, Button, Typography, CircularProgress, Divider, Box } from '@material-ui/core'
+import { TextField, Button, Typography, CircularProgress, Box } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { signIn, closeDialogs, openDialog, signInWithGoogle, signInWithFacebook } from '../../actions'
+import { signIn, closeDialogs, openDialog } from '../../actions'
 import FacebookIcon from '@material-ui/icons/Facebook';
-import SocielMediaSignIn from './SocielMediaSignIn';
+import SocialMediaSignIn from './SocialMediaSignIn';
 
 
 const SignIn = () => {
   const authState = useSelector(state => state.auth)
+  const [socialMedia, setSocialMedia] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { translation, theme } = useSelector(state => state.theme)
@@ -33,17 +34,23 @@ const SignIn = () => {
     textAlign: 'center'
   }
 
-  const borderStyle = {
-
-  }
-
   return (
     <>
-    <SocielMediaSignIn />
-    <Box style={boxStyle}>
-      <Typography variant='body1'>{translation.or}</Typography>
-    </Box>
+    {socialMedia &&
+    <>
+      <SocialMediaSignIn />
+      <Box style={boxStyle}>
+        <Typography variant='body1'>{translation.or}</Typography>
+      </Box>
+        <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
+    </>}
+    {!socialMedia &&
     <form onSubmit={handleSubmit}>
+      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-user-friends button-icon"></i></Button>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
       <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
       <Button className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
@@ -52,7 +59,7 @@ const SignIn = () => {
       <br />
       <br />
       <Typography variant='body1'>{translation.notSignedUp}<span style={anchorStyle} onClick={handleClick}> {translation.signUp}</span></Typography>
-    </form>
+    </form>}
     </>
   )
 }

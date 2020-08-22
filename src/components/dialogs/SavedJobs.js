@@ -27,7 +27,7 @@ const SavedJobs = () => {
       {!savedJobsLoading && authState?.savedJobs.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
       {!savedJobsLoading && savedJobs &&
       <Grid style={gridStyle} container spacing={1}>
-        {savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
+        {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
       </Grid>}
     </div>
   )
