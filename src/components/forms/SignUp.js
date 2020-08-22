@@ -5,6 +5,7 @@ import { signUp, closeDialogs, openSigningIn, setAlert, openDialog } from '../..
 import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
+import SocielMediaSignIn from './SocielMediaSignIn'
 
 const SignUp = () => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -62,6 +63,7 @@ const SignUp = () => {
   }
 
   return (
+    <>
     <form style={formStyle} onSubmit={handleSubmit}>
       <Box style={boxStyle}>
         {uploading && <CircularProgressWithLabel value={progress} />}
@@ -87,6 +89,7 @@ const SignUp = () => {
       <br/>
       <Typography variant='body1'>{translation.alreadySignedUp}<span style={anchorStyle} onClick={handleClick}> {translation.signIn}</span></Typography>
     </form>
+    </>
   )
 }
 

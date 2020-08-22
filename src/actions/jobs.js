@@ -109,6 +109,13 @@ export const removeJob = (id, job) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
+    job.categories.forEach(async category => {
+      const categoryRef = await db.collection('categories').doc(category)
+      categoryRef.update('count', firebase.firestore.FieldValue.increment(-1))
+    })
+
+    await db.collection('locations').doc(job.location).update('count', firebase.firestore.FieldValue.increment(-1))
+
     await jobsRef.doc(id).delete()
 
     dispatch({

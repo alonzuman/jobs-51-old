@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { app } from './firebase'
 import { setUser, signOut } from './actions'
@@ -19,6 +19,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       } else {
         dispatch(signOut())
         setLoading(false)
+        window.location.reload()
       }
     })
   }, [])

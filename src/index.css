@@ -110,3 +110,8 @@ form {
 @media (max-width: 768px) {
 
 }
+
+.button-icon {
+  position: absolute;
+  left: 1rem;
+}

@@ -54,5 +54,8 @@
   "SignedOutSuccess": "התנתקת בהצלחה",
   "PasswordsDontMatch": "הססמאות לא תואמות, אנא נסו שנית",
   "cancel": "ביטול",
-  "areYouSure": "האם את/ה בטוח/ה?"
+  "areYouSure": "האם את/ה בטוח/ה?",
+  "signInWithGoogle": "התחברות באמצעות גוגל",
+  "signInWithFacebook": "התחברות באמצעות פייסבוק",
+  "or": "או"
 }

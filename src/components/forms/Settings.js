@@ -3,6 +3,7 @@ import { Button, Switch, Box, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOut, setTheme } from '../../actions'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import { Redirect } from 'react-router-dom';
 
 const Settings = () => {
   const { authenticated } = useSelector(state => state.auth)
@@ -15,6 +16,10 @@ const Settings = () => {
     dispatch(setTheme())
   }
 
+  const handleSignOut = () => {
+    dispatch(signOut())
+  }
+
   return (
     <div>
       <Typography variant='body2'>{translation.displaySettings}</Typography>
@@ -24,7 +29,7 @@ const Settings = () => {
       </Box>
       <br />
       <br />
-      {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={() => dispatch(signOut())}>{translation.signOut}</Button>}
+      {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>}
     </div>
   )
 }

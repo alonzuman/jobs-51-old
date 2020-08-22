@@ -1,4 +1,5 @@
 import { app, db } from '../firebase'
+import firebase from 'firebase'
 import { setAlert } from "./alert"
 import { closeDialogs } from './dialogs'
 
@@ -21,6 +22,80 @@ export const setUser = (user) => async dispatch => {
     dispatch(setAlert({
       type: 'error',
       payload: 'Not authenticated'
+    }))
+  }
+}
+
+export const signInWithFacebook = () => async dispatch => {
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
+  try {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    const result = await firebase.auth().signInWithPopup(provider)
+
+    const { uid, displayName, email, photoURL, phoneNumber } = result.user
+    const newUser = {
+      uid,
+      email,
+      firstName: displayName.split(' ')[0] || '',
+      lastName: displayName.split(' ')[1] || '',
+      avatar: photoURL || '',
+      phone: phoneNumber || '',
+      dateCreated: Date.now()
+    }
+    await db.collection('users').doc(uid).set(newUser, { merge: true })
+    dispatch(closeDialogs())
+    dispatch({
+      type: 'SIGNED_UP',
+      payload: { newUser }
+    })
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'Welcome'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
+}
+
+export const signInWithGoogle = () => async dispatch => {
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    const result = await firebase.auth().signInWithPopup(provider)
+
+    const { uid, displayName, email, photoURL, phoneNumber } = result.user
+    const newUser = {
+      uid,
+      email,
+      firstName: displayName.split(' ')[0] || '',
+      lastName: displayName.split(' ')[1] || '',
+      avatar: photoURL || '',
+      phone: phoneNumber || '',
+      dateCreated: Date.now()
+    }
+    await db.collection('users').doc(uid).set(newUser, { merge: true })
+    dispatch(closeDialogs())
+    dispatch({
+      type: 'SIGNED_UP',
+      payload: { newUser }
+    })
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'Welcome'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
     }))
   }
 }
