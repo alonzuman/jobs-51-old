@@ -2,19 +2,20 @@ import { db } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 import store from '../store'
+const jobsRef = db.collection('jobs')
 
 export const addJob = (job) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    const ref = db.collection('jobs').doc()
+    const ref = jobsRef.doc()
     const newJob = {
       ...job,
       id: ref.id,
       dateCreated: new Date()
     }
-    await db.collection('jobs').doc(ref.id).set(newJob)
+    await jobsRef.doc(ref.id).set(newJob)
 
     dispatch({
       type: 'ADD_JOB',
@@ -39,7 +40,7 @@ export const editJob = (job, id) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    await db.collection('jobs').doc(id).set({...job})
+    await jobsRef.doc(id).set({...job})
     dispatch(closeDialogs())
     dispatch(getJobs())
     dispatch(setAlert({
@@ -55,35 +56,12 @@ export const editJob = (job, id) => async dispatch => {
   }
 }
 
-export const removeJob = (id, job) => async dispatch => {
+export const removeJob = (id) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    const jobRef = await db.collection('jobs').doc(id).get()
-    await db.collection('jobs').doc(id).delete()
-    const jobTypeRef = await db.collection('jobTypes').doc(jobRef.data().type).get()
-    const jobLocationRef = await db.collection('jobLocations').doc(jobRef.data().location).get()
-
-    if (jobLocationRef.data().count <= 1) {
-      await db.collection('jobLocations').doc(jobRef.data().location).delete()
-    } else {
-      const oldCount = jobLocationRef.data().count
-      const newCount = oldCount - 1
-      await db.collection('jobLocations').doc(jobRef.data().location).set({
-        count: newCount
-      })
-    }
-
-    if (jobTypeRef.data().count <= 1) {
-      await db.collection('jobTypes').doc(jobRef.data().type).delete()
-    } else {
-      const oldCount = jobTypeRef.data().count
-      const newCount = oldCount - 1
-      await db.collection('jobTypes').doc(jobRef.data().type).set({
-        count: newCount
-      })
-    }
+    await jobsRef.doc(id).delete()
     dispatch({
       type: 'REMOVE_JOB',
       payload: { id }
@@ -108,7 +86,7 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
   })
   if (savedJobs.length > 0) {
     try {
-      const jobsRef = await db.collection('jobs').where('id', 'in', savedJobs).get()
+      const jobsRef = await jobsRef.where('id', 'in', savedJobs).get()
       let jobs = []
       jobsRef.forEach(doc => jobs.push(doc.data()))
       dispatch({
@@ -154,7 +132,7 @@ export const getJobs = (filters) => async dispatch => {
         }
       })
     } else {
-      const snapshot = await db.collection('jobs').get()
+      const snapshot = await jobsRef.get()
       let jobs = []
       snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id }))
       dispatch({

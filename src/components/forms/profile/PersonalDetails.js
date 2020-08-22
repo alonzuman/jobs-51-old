@@ -11,7 +11,12 @@ const PersonalDetails = () => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
   const [skillsArray, setSkillsArray] = useState(user?.skills || [])
-  const [personalDetails, setPersonalDetails] = useState({})
+  const [personalDetails, setPersonalDetails] = useState({
+    serviceYear: user.serviceYear || '',
+    lastPosition: user.lastPosition || '',
+    preferredLocation: user.preferredLocation || '',
+    skills: user.skills || ''
+  })
 
   useEffect(() => {
     setPersonalDetails({
@@ -41,14 +46,13 @@ const PersonalDetails = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {!user && <FormSkeleton />}
-      {!user.loading &&
+      {user &&
       <>
-      <TextField label={translation.serviceYear} variant='outlined' name='serviceYear' value={personalDetails.serviceYear} onChange={handleInputChange} />
-      <TextField label={translation.lastPosition} variant='outlined' name='lastPosition' value={personalDetails.lastPosition} onChange={handleInputChange} />
-      <TextField label={translation.preferredLocation} variant='outlined' name='preferredLocation' value={personalDetails.preferredLocation} onChange={handleInputChange} />
-      <AddChips label={translation.skills} chips={skillsArray} setChips={setSkillsArray} />
-      <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
+        <TextField label={translation.serviceYear} variant='outlined' name='serviceYear' value={personalDetails.serviceYear} onChange={handleInputChange} />
+        <TextField label={translation.lastPosition} variant='outlined' name='lastPosition' value={personalDetails.lastPosition} onChange={handleInputChange} />
+        <TextField label={translation.preferredLocation} variant='outlined' name='preferredLocation' value={personalDetails.preferredLocation} onChange={handleInputChange} />
+        <AddChips label={translation.skills} chips={skillsArray} setChips={setSkillsArray} />
+        <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
       </>}
     </form>
   )

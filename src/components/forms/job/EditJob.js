@@ -4,11 +4,13 @@ import { TextField, Button, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
-import { addJob, editJob } from '../../../actions'
+import { addJob, editJob, removeJob } from '../../../actions'
 import FormSkeleton from '../FormSkeleton'
+import ApprovalBox from '../../dialogs/ApprovalBox'
 
 const AddJob = () => {
   const dispatch = useDispatch()
+  const [deleting, setDeleting] = useState(false)
   const { uid } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading, job } = useSelector(state => state.jobs)
@@ -16,7 +18,15 @@ const AddJob = () => {
   const [progress, setProgress] = useState(0)
   const [image, setImage] = useState('')
   const [categories, setCategories] = useState([])
-  const [edittedJob, setEdittedJob] = useState({})
+  const [edittedJob, setEdittedJob] = useState({
+    image: '',
+    company: '',
+    contactPerson: '',
+    email: '',
+    phone: '',
+    location: '',
+    description: '',
+  })
 
   useEffect(() => {
     setEdittedJob({
@@ -51,9 +61,6 @@ const AddJob = () => {
 
   return (
     <form style={{ direction }} onSubmit={handleJobSubmit}>
-      {loading && <FormSkeleton />}
-      {!loading && job &&
-      <>
       <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />
         <TextField label={translation.companyName} variant='outlined' value={edittedJob['company']} name='company' onChange={handleJobChange} />
       <Grid container spacing={1}>
@@ -75,7 +82,8 @@ const AddJob = () => {
         <TextField multiline rows={4} label={translation.description} variant='outlined' value={edittedJob['description']} name='description' onChange={handleJobChange} />
       <AddChips chips={categories} setChips={setCategories} label={translation.categories} />
       <Button disabled={isUploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
-      </>}
+      <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={isUploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
+      {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id))} />}
     </form>
   )
 }

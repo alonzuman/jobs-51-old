@@ -52,5 +52,7 @@
   "ServerError": "אירעה שגיאה, אנא נסו שנית",
   "Success": "הפעולה בוצעה בהצלחה!",
   "SignedOutSuccess": "התנתקת בהצלחה",
-  "PasswordsDontMatch": "הססמאות לא תואמות, אנא נסו שנית"
+  "PasswordsDontMatch": "הססמאות לא תואמות, אנא נסו שנית",
+  "cancel": "ביטול",
+  "areYouSure": "האם את/ה בטוח/ה?"
 }

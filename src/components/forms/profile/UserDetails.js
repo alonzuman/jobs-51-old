@@ -9,7 +9,6 @@ import FormSkeleton from '../FormSkeleton'
 
 const UserDetails = () => {
   const authState = useSelector(state => state.auth)
-  const dialogState = useSelector(state => state.dialogs)
   const { translation } = useSelector(state => state.theme)
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
