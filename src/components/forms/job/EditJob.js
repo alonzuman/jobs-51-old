@@ -7,6 +7,7 @@ import AddChips from '../AddChips'
 import { addJob, editJob, removeJob } from '../../../actions'
 import FormSkeleton from '../FormSkeleton'
 import ApprovalBox from '../../dialogs/ApprovalBox'
+import CircularProgressWithLabel from '../CircularProgressWithLabel'
 
 const AddJob = () => {
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const AddJob = () => {
   const { uid } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading, job } = useSelector(state => state.jobs)
-  const [isUploading, setIsUploading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [image, setImage] = useState('')
   const [categories, setCategories] = useState([])
@@ -59,9 +60,18 @@ const AddJob = () => {
     dispatch(editJob(jobToAdd, job.id))
   }
 
+  const thumbnailStyle = {
+    width: '36px',
+    height: '36px',
+    objectFit: 'cover',
+    margin: '0 1rem'
+  }
+
   return (
     <form style={{ direction }} onSubmit={handleJobSubmit}>
-      <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />
+      {uploading && <CircularProgressWithLabel value={progress} />}
+      {!uploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setUploading} setProgress={setProgress} />}
+      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} />}
         <TextField label={translation.companyName} variant='outlined' value={edittedJob['company']} name='company' onChange={handleJobChange} />
       <Grid container spacing={1}>
         <Grid item xs={6}>
@@ -81,8 +91,8 @@ const AddJob = () => {
       </Grid>
         <TextField multiline rows={4} label={translation.description} variant='outlined' value={edittedJob['description']} name='description' onChange={handleJobChange} />
       <AddChips chips={categories} setChips={setCategories} label={translation.categories} />
-      <Button disabled={isUploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
-      <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={isUploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
+      <Button disabled={uploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
+      <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
       {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id, job))} />}
     </form>
   )

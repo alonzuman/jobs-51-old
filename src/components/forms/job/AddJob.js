@@ -5,6 +5,7 @@ import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
 import { addJob } from '../../../actions'
+import CircularProgressWithLabel from '../CircularProgressWithLabel'
 
 const AddJob = () => {
   const dispatch = useDispatch()
@@ -42,9 +43,18 @@ const AddJob = () => {
     dispatch(addJob(jobToAdd))
   }
 
+  const thumbnailStyle = {
+    width: '36px',
+    height: '36px',
+    objectFit: 'cover',
+    margin: '0 1rem'
+  }
+
   return (
     <form style={{direction}} onSubmit={handleJobSubmit}>
-      <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />
+      {isUploading && <CircularProgressWithLabel value={progress} />}
+      {!isUploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />}
+      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} />}
       <TextField label={translation.companyName} variant='outlined' value={job['company']} name='company' onChange={handleJobChange} />
       <Grid container spacing={1}>
         <Grid item xs={6}>
