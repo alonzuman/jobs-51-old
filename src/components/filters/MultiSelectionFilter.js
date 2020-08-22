@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, Chip } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import SelectionChip from './SelectionChip'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
 import ChipsSkeleton from '../layout/ChipsSkeleton'
 
 const MultiSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()
+  const jobsState = useSelector(state => state.jobs)
   const { translation } = useSelector(state => state.theme)
   const [selections, setSelections] = useState([])
   const [filters, setFilters] = useState([])
@@ -14,6 +14,9 @@ const MultiSelectionFilter = ({ type }) => {
   const fetch = async () => {
     const res = await dispatch(getFilters(type))
     setSelections(res)
+    if (jobsState.filters[type]) {
+      setFilters(jobsState?.filters[type])
+    }
   }
 
   useEffect(() => { fetch() }, [])
@@ -37,8 +40,8 @@ const MultiSelectionFilter = ({ type }) => {
       <Grid container spacing={1}>
         {selections.length === 0 && <ChipsSkeleton />}
         {selections.length > 0 && selections.map((filter, index) =>
-          <Grid key={index} item onClick={() => handleFilterClick(filter)}>
-            <SelectionChip label={filter} />
+          <Grid key={index} item>
+            <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={filter} />
           </Grid>)}
       </Grid>
       <br/>

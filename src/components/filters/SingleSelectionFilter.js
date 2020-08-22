@@ -6,6 +6,7 @@ import ChipsSkeleton from '../layout/ChipsSkeleton'
 
 const SingleSelectionFilter = ({ type }) => {
   const { translation } = useSelector(state => state.theme)
+  const { filters } = useSelector(state => state.jobs)
   const [selections, setSelections] = useState([])
   const [filter, setFilter] = useState('')
   const dispatch = useDispatch()
@@ -13,6 +14,9 @@ const SingleSelectionFilter = ({ type }) => {
   const fetch = async () => {
     const res = await dispatch(getFilters(type))
     setSelections(res)
+    if (Object.keys(filters).length > 0) {
+      setFilter(filters[type])
+    }
   }
 
   useEffect(() => { fetch() }, [])
