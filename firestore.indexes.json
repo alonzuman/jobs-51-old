@@ -1,4 +1,33 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "location",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }
