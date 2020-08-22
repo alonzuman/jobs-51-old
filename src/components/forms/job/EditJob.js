@@ -4,7 +4,7 @@ import { TextField, Button, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
-import { addJob, editJob, removeJob } from '../../../actions'
+import { addJob, editJob, removeJob, addFilter, removeFilter } from '../../../actions'
 import FormSkeleton from '../FormSkeleton'
 import ApprovalBox from '../../dialogs/ApprovalBox'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
@@ -52,11 +52,14 @@ const AddJob = () => {
   const handleJobSubmit = e => {
     e.preventDefault()
     const jobToAdd = {
+      ...job,
       ...edittedJob,
       image,
       categories,
       uid
     }
+    dispatch(removeFilter({ collection: 'locations', value: job.location }))
+    dispatch(addFilter({ collection: 'locations', value: jobToAdd.location }))
     dispatch(editJob(jobToAdd, job.id))
   }
 
@@ -90,7 +93,7 @@ const AddJob = () => {
         </Grid>
       </Grid>
         <TextField multiline rows={4} label={translation.description} variant='outlined' value={edittedJob['description']} name='description' onChange={handleJobChange} />
-      <AddChips chips={categories} setChips={setCategories} label={translation.categories} />
+      <AddChips collection='categories' chips={categories} setChips={setCategories} label={translation.categories} />
       <Button disabled={uploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
       <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
       {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id, job))} />}

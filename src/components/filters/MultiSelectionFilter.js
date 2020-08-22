@@ -8,12 +8,13 @@ const MultiSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()
   const jobsState = useSelector(state => state.jobs)
   const { translation } = useSelector(state => state.theme)
-  const [selections, setSelections] = useState([])
+  const [selections, setSelections] = useState({})
   const [filters, setFilters] = useState([])
 
   const fetch = async () => {
     const res = await dispatch(getFilters(type))
-    setSelections(res)
+    console.log(res)
+    setSelections({...res})
     if (jobsState.filters[type]) {
       setFilters(jobsState?.filters[type])
     }
@@ -38,11 +39,17 @@ const MultiSelectionFilter = ({ type }) => {
   return (
     <div>
       <Grid container spacing={1}>
-        {selections.length === 0 && <ChipsSkeleton />}
-        {selections.length > 0 && selections.map((filter, index) =>
-          <Grid key={index} item>
-            <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={filter} />
-          </Grid>)}
+        {Object.keys(selections).length === 0 && <ChipsSkeleton />}
+        {Object.keys(selections).length > 0 && Object.keys(selections).map((filter, index) => {
+          console.log(Object.keys(selections)[index], Object.values(selections)[index])
+          if (Object.values(selections)[index] !== 0) {
+            return (
+              <Grid key={index} item>
+                <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />
+              </Grid>
+            )
+          }
+        })}
       </Grid>
       <br/>
       <Button variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>

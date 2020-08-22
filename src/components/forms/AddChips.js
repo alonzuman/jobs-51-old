@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
 import { TextField, IconButton, Box, Grid, Chip } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addFilter, removeFilter } from '../../actions/jobs';
 
-const AddChips = ({ label, chips, setChips }) => {
+const AddChips = ({ label, chips, setChips, collection }) => {
   const { direction } = useSelector(state => state.theme)
+  const dispatch = useDispatch()
   const [chipToAdd, setChipToAdd] = useState('')
 
   const addChip = chip => {
     if (!chips) {
       setChips([chip])
       setChipToAdd('')
+      dispatch(addFilter({ collection, value: chip }))
     } else if (!chips.includes(chip) && chipToAdd.trim().length !== 0 && chips.length <= 4) {
       setChips([...chips, chip])
       setChipToAdd('')
+      dispatch(addFilter({ collection, value: chip }))
     }
+  }
+
+  const removeChip = chip => {
+    setChips([...chips.filter(x => x !== chip)])
+    dispatch(removeFilter({ collection, value: chip }))
   }
 
   const boxStyle = {
@@ -46,7 +55,7 @@ const AddChips = ({ label, chips, setChips }) => {
         <IconButton style={iconButtonStyle} onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>
-        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} style={gridItemStyle} item><Chip style={chipStyle} onDelete={() => setChips([...chips.filter(x => x !== chip)])} label={chip} /></Grid>)}
+        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} style={gridItemStyle} item><Chip style={chipStyle} onDelete={() => removeChip(chip)} label={chip} /></Grid>)}
       </Grid>
     </div>
   )

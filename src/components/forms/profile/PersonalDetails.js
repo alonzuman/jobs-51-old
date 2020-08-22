@@ -29,7 +29,7 @@ const PersonalDetails = () => {
       <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
       <TextField label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
       <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
-      <AddChips label={translation.skills} chips={skills} setChips={setSkills} />
+      <AddChips collection='skills' label={translation.skills} chips={skills} setChips={setSkills} />
       <Button className='button-style' variant='contained' color='primary' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.update}</Button>
     </form>
   )

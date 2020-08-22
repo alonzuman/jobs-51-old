@@ -52,7 +52,7 @@ const JobCard = ({ job }) => {
     <Grid item xs={12} md={6} lg={4}>
       <Card style={cardContainerStyle}>
         <CardHeader
-          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0].toUpperCase()}</Avatar>}
+          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
           title={job?.company}
           subheader={job?.location}
           action={ (authenticated && job?.uid === uid) ?

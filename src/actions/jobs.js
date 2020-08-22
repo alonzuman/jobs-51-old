@@ -7,11 +7,42 @@ const jobsRef = db.collection('jobs')
 const categoriesRef = db.collection('categories')
 const locationsRef = db.collection('locations')
 
+export const addFilter = ({ collection, value }) => async dispatch => {
+  try {
+    const valueRef = await db.collection(collection).doc(value).get()
+
+    if (valueRef.exists) {
+      valueRef.ref.update('count', firebase.firestore.FieldValue.increment(1))
+    } else {
+      valueRef.ref.set({ count: 1 })
+    }
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error'
+    }))
+  }
+}
+
+export const removeFilter = ({ collection, value }) => async dispatch => {
+  try {
+    const valueRef = await db.collection(collection).doc(value).get()
+    valueRef.ref.update('count', firebase.firestore.FieldValue.increment(-1))
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error'
+    }))
+  }
+}
+
 export const getFilters = (type) => async dispatch => {
   try {
     const filtersRef = await db.collection(type).get()
-    let filters = []
-    filtersRef.forEach(doc => filters.push(doc.id))
+    let filters = {}
+    filtersRef.forEach(doc => filters[doc.id] = doc.data().count)
     return filters
   } catch (error) {
     console.log(error)
@@ -34,23 +65,6 @@ export const addJob = (job) => async dispatch => {
       dateCreated: Date.now()
     }
     await jobsRef.doc(ref.id).set(newJob)
-
-    job.categories.forEach(async category => {
-      const categorySnapshot = await categoriesRef.doc(category).get()
-      if (categorySnapshot.exists) {
-        categorySnapshot.ref.update('count', firebase.firestore.FieldValue.increment(1))
-      } else {
-        categorySnapshot.ref.set({ count: 1 })
-      }
-    })
-
-    const locationSnapshot = await locationsRef.doc(job.location).get()
-    if (locationSnapshot.exists) {
-      locationSnapshot.ref.update('count', firebase.firestore.FieldValue.increment(1))
-    } else (
-      locationSnapshot.ref.set({ count: 1 })
-    )
-
     dispatch({
       type: 'ADD_JOB',
       payload: { job: newJob }
@@ -95,14 +109,6 @@ export const removeJob = (id, job) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    job.categories.forEach(async category => {
-      const categorySnapshot = await categoriesRef.doc(category).get()
-      categorySnapshot.ref.update('count', firebase.firestore.FieldValue.increment(-1))
-    })
-
-    const locationSnapshot = await locationsRef.doc(job.location).get()
-    locationSnapshot.ref.update('count', firebase.firestore.FieldValue.increment(-1))
-
     await jobsRef.doc(id).delete()
 
     dispatch({
