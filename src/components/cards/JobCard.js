@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, IconButton, Grid, CardContent, Typography, Avatar, Chip } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { openEditingJob, setJob, savedJob, unsaveJob, openDialog } from '../../actions'
+import { setJob, savedJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import moment from 'moment'
+import 'moment/locale/he'
 
 const JobCard = ({ job }) => {
   const { uid, authenticated, savedJobs } = useSelector(state => state.auth)
@@ -13,6 +15,11 @@ const JobCard = ({ job }) => {
   const { translation, direction } = useSelector(state => state.theme)
 
   const isSaved = () => savedJobs?.includes(job.id)
+
+  const timeAgo = () => {
+    moment.locale('he')
+    return moment(job?.dateCreated).fromNow()
+  }
 
   useEffect(() => {
     setSaved(isSaved())
@@ -53,6 +60,7 @@ const JobCard = ({ job }) => {
           authenticated ? <IconButton onClick={handleClickFavorite}>{saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}</IconButton> : null}
         />
         <CardContent>
+          <Chip style={{direction: 'ltr'}} label={timeAgo()} size='small' variant='outlined' color='primary'/>
           <Typography className='subtitle1' variant='subtitle1'>{translation.description}</Typography>
           <Typography variant='body1'>{job?.description}</Typography>
           <Typography className='subtitle1' variant='subtitle1'>{translation.categories}</Typography>

@@ -13,7 +13,7 @@ export const addJob = (job) => async dispatch => {
     const newJob = {
       ...job,
       id: ref.id,
-      dateCreated: new Date()
+      dateCreated: Date.now()
     }
     await jobsRef.doc(ref.id).set(newJob)
 
@@ -86,9 +86,9 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
   })
   if (savedJobs.length > 0) {
     try {
-      const jobsRef = await jobsRef.where('id', 'in', savedJobs).get()
+      const snapshot = await jobsRef.where('id', 'in', savedJobs).get()
       let jobs = []
-      jobsRef.forEach(doc => jobs.push(doc.data()))
+      snapshot.forEach(doc => jobs.push(doc.data()))
       dispatch({
         type: 'SET_SAVED_JOBS',
         payload: { jobs }
@@ -131,23 +131,22 @@ export const getJobs = () => async dispatch => {
   })
   try {
     let snapshot
-    if (filters.categories && filters.locations) {
-      console.log('im in both only')
-      snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories)
-        .where('location', 'in', filters.locations).get()
-    } else if (filters.categories) {
-      console.log('im in categories only')
-      snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).get()
-    } else if (filters.locations) {
-      console.log('im in locations only')
-      snapshot = await jobsRef.where('location', 'in', filters.locations).get()
+    if (filters) {
+      if (filters.categories && filters.locations) {
+        snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).where('location', '==', filters.locations).get()
+      } else if (filters.categories) {
+        snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).get()
+      } else if (filters.locations) {
+        snapshot = await jobsRef.where('location', '==', filters.locations).get()
+      } else {
+        snapshot = await jobsRef.get()
+      }
     } else {
       snapshot = await jobsRef.get()
     }
 
     let jobs = []
     snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id}))
-    console.log(jobs)
     dispatch({
       type: 'SET_JOBS',
       payload: {

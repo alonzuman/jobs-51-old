@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, clearGlobalFilters } from '../../actions/jobs'
 import BackButton from './BackButton'
 
-const FiltersBar = ({ filters }) => {
+const FiltersBar = ({ filterOptions }) => {
+  const { filters } = useSelector(state => state.jobs)
   const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -38,8 +39,14 @@ const FiltersBar = ({ filters }) => {
     <AppBar style={appBarStyle}>
       <Box style={boxStyle}>
         <Grid style={gridStyle} spacing={1} container>
-          {filters?.map((filter, index) =>
-          <Grid key={index} item><Chip onClick={filter.onClick} className='chip-button' variant='outlined' label={filter.label} /></Grid>)}
+          {filterOptions?.map((filter, index) =>
+          <Grid key={index} item>
+            <Chip
+              color={(filters && filters[filter.type]) ? 'primary' : 'default'}
+              onClick={filter.onClick}
+              label={filter.label}
+            />
+          </Grid>)}
         </Grid>
         <Grid item><Chip style={clearStyle} onClick={() => dispatch(clearGlobalFilters())} label={translation.clear} /></Grid>
       </Box>

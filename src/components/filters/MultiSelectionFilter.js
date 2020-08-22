@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Grid, Button, TextField } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import SelectionChip from './SelectionChip'
 import { setGlobalFilters, closeDialogs } from '../../actions'
 
-const ChipsWithInputFilter = ({ type, values }) => {
+const MultiSelectionFilter = ({ type, values }) => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const [filters, setFilters] = useState([])
@@ -25,8 +25,6 @@ const ChipsWithInputFilter = ({ type, values }) => {
 
   return (
     <div>
-      {/* TODO autocomplete */}
-      {/* <TextField  /> */}
       <Grid container spacing={1}>
         {values.map((filter, index) =>
           <Grid key={index} item onClick={() => handleFilterClick(filter)}>
@@ -38,4 +36,4 @@ const ChipsWithInputFilter = ({ type, values }) => {
     </div>
   )
 }
-export default ChipsWithInputFilter
+export default MultiSelectionFilter

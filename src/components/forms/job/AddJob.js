@@ -40,7 +40,6 @@ const AddJob = () => {
       uid
     }
     dispatch(addJob(jobToAdd))
-    console.log(jobToAdd)
   }
 
   return (

@@ -7,51 +7,33 @@ import { auth } from 'firebase'
 import FormSkeleton from '../FormSkeleton'
 
 const PersonalDetails = () => {
-  const user = useSelector(state => state.auth)
+  const authState = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
-  const [skillsArray, setSkillsArray] = useState(user?.skills || [])
-  const [personalDetails, setPersonalDetails] = useState({
-    serviceYear: user.serviceYear || '',
-    lastPosition: user.lastPosition || '',
-    preferredLocation: user.preferredLocation || '',
-    skills: user.skills || ''
-  })
-
-  useEffect(() => {
-    setPersonalDetails({
-      serviceYear: user.serviceYear,
-      lastPosition: user.lastPosition,
-      preferredLocation: user.preferredLocation,
-      skills: user.skills
-    })
-    setSkillsArray(user.skills)
-  }, [user])
-
-  const handleInputChange = e => {
-    setPersonalDetails({
-      ...personalDetails,
-      [e.target.name]: e.target.value
-    })
-  }
+  const [skills, setSkills] = useState(authState.skills)
+  const [serviceYear, setServiceYear] = useState(authState.serviceYear)
+  const [lastPosition, setLastPosition] = useState(authState.lastPosition)
+  const [preferredLocation, setPreferredLocation] = useState(authState.preferredLocation)
 
   const handleSubmit = e => {
     e.preventDefault()
-    const userPersonalDetails = {
-      ...personalDetails,
-      skills: skillsArray
+    const personalDetails = {
+      serviceYear,
+      lastPosition,
+      preferredLocation,
+      skills
     }
-    dispatch(addPersonalDetails(user, userPersonalDetails, user.uid))
+    dispatch(addPersonalDetails(authState, personalDetails, authState.uid))
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      {user &&
+      {authState &&
       <>
-        <TextField label={translation.serviceYear} variant='outlined' name='serviceYear' value={personalDetails.serviceYear} onChange={handleInputChange} />
-        <TextField label={translation.lastPosition} variant='outlined' name='lastPosition' value={personalDetails.lastPosition} onChange={handleInputChange} />
-        <TextField label={translation.preferredLocation} variant='outlined' name='preferredLocation' value={personalDetails.preferredLocation} onChange={handleInputChange} />
-        <AddChips label={translation.skills} chips={skillsArray} setChips={setSkillsArray} />
+        <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
+        <TextField label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
+        <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
+        <AddChips label={translation.skills} chips={skills} setChips={setSkills} />
         <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
       </>}
     </form>

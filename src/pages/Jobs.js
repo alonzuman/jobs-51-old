@@ -14,8 +14,8 @@ const Jobs = () => {
 
   const filtersBar = [
     // { label: translation.datePosted, onClick: () => dispatch(openDatesFilterDialog()) },
-    { label: translation.categories, onClick: () => dispatch(openDialog({ type: 'CategoriesFilter', title: 'categories' }))  },
-    { label: translation.location, onClick: () => dispatch(openDialog({ type: 'LocationsFilter', title: 'location' }))  },
+    { type: 'categories', label: translation.categories, onClick: () => dispatch(openDialog({ type: 'CategoriesFilter', title: 'categories' }))  },
+    { type: 'locations',  label: translation.location, onClick: () => dispatch(openDialog({ type: 'LocationsFilter', title: 'location' }))  },
   ]
 
   const gridStyle = {
@@ -25,7 +25,7 @@ const Jobs = () => {
 
   return (
     <Container>
-      <FiltersBar filters={filtersBar} />
+      <FiltersBar filterOptions={filtersBar} />
     {loading && <CardsSkeletons />}
     <Grid style={gridStyle} container spacing={2}>
       {(jobs?.length === 0 && !loading) && <Typography variant='body1'>{translation?.couldntFindJobs}</Typography>}

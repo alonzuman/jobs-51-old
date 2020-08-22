@@ -10,7 +10,8 @@ import EditProfile from '../forms/EditProfile'
 import Settings from '../forms/Settings'
 import SavedJobs from '../dialogs/SavedJobs'
 import CloseIcon from '@material-ui/icons/Close'
-import ChipsWithInputFilter from '../filters/ChipsWithInputFilter'
+import SingleSelectionFilter from '../filters/SingleSelectionFilter'
+import MultiSelectionFilter from '../filters/MultiSelectionFilter'
 
 const dialogTitleStyle = {
   display: 'flex',
@@ -74,8 +75,8 @@ const Dialogs = () => {
       case 'EditJob': return <EditJob/>
       case 'EditProfile': return <EditProfile />
       case 'SavedJobs': return <SavedJobs/>
-      case 'CategoriesFilter': return <ChipsWithInputFilter type='categories' values={dummyCategories} />
-      case 'LocationsFilter': return <ChipsWithInputFilter type='locations' values={dummyLocations} />
+      case 'CategoriesFilter': return <MultiSelectionFilter type='categories' values={dummyCategories} />
+      case 'LocationsFilter': return <SingleSelectionFilter type='locations' values={dummyLocations} />
     }
   }
 
