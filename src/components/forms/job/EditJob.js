@@ -83,7 +83,7 @@ const AddJob = () => {
       <AddChips chips={categories} setChips={setCategories} label={translation.categories} />
       <Button disabled={isUploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
       <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={isUploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
-      {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id))} />}
+      {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id, job))} />}
     </form>
   )
 }

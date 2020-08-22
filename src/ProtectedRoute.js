@@ -7,7 +7,6 @@ import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWit
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
-  const { authenticated } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
 

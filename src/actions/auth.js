@@ -118,11 +118,12 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
     type: 'AUTH_LOADING'
   })
   try {
-    await db.collection('users').doc(uid).set(personalDetails, { merge: true })
+    await db.collection('users').doc(uid).set({...personalDetails}, { merge: true })
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...user, ...personalDetails }
     })
+    dispatch(closeDialogs())
   } catch (error) {
     console.log(error)
     dispatch(setAlert({

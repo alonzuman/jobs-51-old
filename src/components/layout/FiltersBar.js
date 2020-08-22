@@ -1,8 +1,7 @@
 import React from 'react'
 import { Box, Chip, Grid, AppBar } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { getJobs, clearGlobalFilters } from '../../actions/jobs'
-import BackButton from './BackButton'
+import { clearGlobalFilters } from '../../actions/jobs'
 
 const FiltersBar = ({ filterOptions }) => {
   const { filters } = useSelector(state => state.jobs)

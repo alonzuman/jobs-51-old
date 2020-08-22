@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { editProfile } from '../../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
+import { TextField, Button, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
-import FormSkeleton from '../FormSkeleton'
 
 const UserDetails = () => {
   const authState = useSelector(state => state.auth)

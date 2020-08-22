@@ -2,7 +2,25 @@ import { db } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 import store from '../store'
+import firebase from 'firebase'
 const jobsRef = db.collection('jobs')
+const categoriesRef = db.collection('categories')
+const locationsRef = db.collection('locations')
+
+export const getFilters = (type) => async dispatch => {
+  try {
+    const filtersRef = await db.collection(type).get()
+    let filters = []
+    filtersRef.forEach(doc => filters.push(doc.id))
+    return filters
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'Server error'
+    }))
+  }
+}
 
 export const addJob = (job) => async dispatch => {
   dispatch({
@@ -16,6 +34,22 @@ export const addJob = (job) => async dispatch => {
       dateCreated: Date.now()
     }
     await jobsRef.doc(ref.id).set(newJob)
+
+    job.categories.forEach(async category => {
+      const categorySnapshot = await categoriesRef.doc(category).get()
+      if (categorySnapshot.exists) {
+        categorySnapshot.ref.update('count', firebase.firestore.FieldValue.increment(1))
+      } else {
+        categorySnapshot.ref.set({ count: 1 })
+      }
+    })
+
+    const locationSnapshot = await locationsRef.doc(job.location).get()
+    if (locationSnapshot.exists) {
+      locationSnapshot.ref.update('count', firebase.firestore.FieldValue.increment(1))
+    } else (
+      locationSnapshot.ref.set({ count: 1 })
+    )
 
     dispatch({
       type: 'ADD_JOB',
@@ -56,12 +90,21 @@ export const editJob = (job, id) => async dispatch => {
   }
 }
 
-export const removeJob = (id) => async dispatch => {
+export const removeJob = (id, job) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
+    job.categories.forEach(async category => {
+      const categorySnapshot = await categoriesRef.doc(category).get()
+      categorySnapshot.ref.update('count', firebase.firestore.FieldValue.increment(-1))
+    })
+
+    const locationSnapshot = await locationsRef.doc(job.location).get()
+    locationSnapshot.ref.update('count', firebase.firestore.FieldValue.increment(-1))
+
     await jobsRef.doc(id).delete()
+
     dispatch({
       type: 'REMOVE_JOB',
       payload: { id }
@@ -151,6 +194,8 @@ export const getJobs = () => async dispatch => {
       } else {
         snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
       }
+    } else {
+      snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
     }
 
     let jobs = []
