@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Box, Chip, Grid, AppBar } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { getJobs } from '../../actions/jobs'
+import { getJobs, clearGlobalFilters } from '../../actions/jobs'
 import BackButton from './BackButton'
 
 const FiltersBar = ({ filters }) => {
@@ -41,7 +41,7 @@ const FiltersBar = ({ filters }) => {
           {filters?.map((filter, index) =>
           <Grid key={index} item><Chip onClick={filter.onClick} className='chip-button' variant='outlined' label={filter.label} /></Grid>)}
         </Grid>
-        <Grid item><Chip style={clearStyle} onClick={() => dispatch(getJobs())} label={translation.clear} /></Grid>
+        <Grid item><Chip style={clearStyle} onClick={() => dispatch(clearGlobalFilters())} label={translation.clear} /></Grid>
       </Box>
     </AppBar>
   )

@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { Grid, Button, TextField } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import SelectionChip from './SelectionChip'
+import { setGlobalFilters, closeDialogs } from '../../actions'
 
-const dummyData = [
-  'UX/UI', 'Photoshop', 'Web Developer', 'Design', 'Music', 'שמירה', 'Security'
-]
-
-const ChipsWithInputFilter = () => {
+const ChipsWithInputFilter = ({ type, values }) => {
+  const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const [filters, setFilters] = useState([])
 
@@ -15,14 +13,14 @@ const ChipsWithInputFilter = () => {
     if (!filters.includes(filter)) {
       setFilters([...filters, filter])
     } else {
-      setFilters([...filters.filter(x => x!== filter)])
+      setFilters([...filters.filter(x => x !== filter)])
     }
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    // Dispatch setFilters by key and value
-    console.log(filters)
+    dispatch(setGlobalFilters({ [type]: filters }))
+    dispatch(closeDialogs())
   }
 
   return (
@@ -30,7 +28,7 @@ const ChipsWithInputFilter = () => {
       {/* TODO autocomplete */}
       {/* <TextField  /> */}
       <Grid container spacing={1}>
-        {dummyData.map((filter, index) =>
+        {values.map((filter, index) =>
           <Grid key={index} item onClick={() => handleFilterClick(filter)}>
             <SelectionChip label={filter} />
           </Grid>)}

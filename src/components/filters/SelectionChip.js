@@ -5,7 +5,7 @@ const SelectionChip = ({ label }) => {
   const [selected, setSelected] = useState(false)
 
   return (
-    <Chip color={selected ? 'primary' : ''} className={selected && 'selected-chip'} onClick={() => setSelected(!selected)} label={label} />
+    <Chip color={selected ? 'primary' : 'default'} className={selected ? 'selected-chip' : ''} onClick={() => setSelected(!selected)} label={label} />
   )
 }
 

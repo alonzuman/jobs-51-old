@@ -8,14 +8,14 @@ import FiltersBar from '../components/layout/FiltersBar'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
-  const { jobs, loading } = useSelector(state => state.jobs)
+  const { jobs, loading, filters } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
-  useEffect(() => { dispatch(getJobs()) }, [dispatch])
+  useEffect(() => { dispatch(getJobs()) }, [dispatch, filters])
 
-  const filters = [
+  const filtersBar = [
     // { label: translation.datePosted, onClick: () => dispatch(openDatesFilterDialog()) },
-    { label: translation.categories, onClick: () => dispatch(openDialog({ type: 'ChipsWithInputFilter', title: 'categories' }))  },
-    { label: translation.location, onClick: () => dispatch(openDialog({ type: 'ChipsWithInputFilter', title: 'location' }))  },
+    { label: translation.categories, onClick: () => dispatch(openDialog({ type: 'CategoriesFilter', title: 'categories' }))  },
+    { label: translation.location, onClick: () => dispatch(openDialog({ type: 'LocationsFilter', title: 'location' }))  },
   ]
 
   const gridStyle = {
@@ -25,7 +25,7 @@ const Jobs = () => {
 
   return (
     <Container>
-    <FiltersBar filters={filters} />
+      <FiltersBar filters={filtersBar} />
     {loading && <CardsSkeletons />}
     <Grid style={gridStyle} container spacing={2}>
       {(jobs?.length === 0 && !loading) && <Typography variant='body1'>{translation?.couldntFindJobs}</Typography>}

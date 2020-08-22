@@ -111,37 +111,49 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
   }
 }
 
-export const getJobs = (filters) => async dispatch => {
+export const clearGlobalFilters = () => async dispatch => {
+  dispatch({
+    type: 'CLEAR_FILTERS'
+  })
+}
+
+export const setGlobalFilters = (filters) => async dispatch => {
+  dispatch({
+    type: 'SET_FILTERS',
+    payload: { filters }
+  })
+}
+
+export const getJobs = () => async dispatch => {
+  const { filters } = store.getState().jobs
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    if (filters) {
-      const snapshot = await db.collection("jobs").where(Object.keys(filters)[0], "in", Object.values(filters)[0]).get()
-      let jobs = []
-      snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id}))
-      console.log(jobs)
-      const sortedJobs = jobs.sort((a, b) => {
-        return a.dateCreated - b.dateCreated
-      })
-      console.log(sortedJobs)
-      dispatch({
-        type: 'SET_JOBS',
-        payload: {
-          jobs
-        }
-      })
+    let snapshot
+    if (filters.categories && filters.locations) {
+      console.log('im in both only')
+      snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories)
+        .where('location', 'in', filters.locations).get()
+    } else if (filters.categories) {
+      console.log('im in categories only')
+      snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).get()
+    } else if (filters.locations) {
+      console.log('im in locations only')
+      snapshot = await jobsRef.where('location', 'in', filters.locations).get()
     } else {
-      const snapshot = await jobsRef.get()
-      let jobs = []
-      snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id }))
-      dispatch({
-        type: 'SET_JOBS',
-        payload: {
-          jobs
-        }
-      })
+      snapshot = await jobsRef.get()
     }
+
+    let jobs = []
+    snapshot.forEach(doc => jobs.push({...doc.data(), id: doc.id}))
+    console.log(jobs)
+    dispatch({
+      type: 'SET_JOBS',
+      payload: {
+        jobs
+      }
+    })
   } catch (error) {
     console.log(error)
     dispatch(setAlert({

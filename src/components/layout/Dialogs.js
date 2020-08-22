@@ -57,6 +57,14 @@ const Dialogs = () => {
     direction,
   }
 
+  const dummyCategories = [
+    'UX/UI', 'Photoshop', 'Web Developer', 'Design', 'Music', 'שמירה', 'Security'
+  ]
+
+  const dummyLocations = [
+    'חיפה', 'תל אביב'
+  ]
+
   const component = () => {
     switch (type) {
       case 'SignIn': return <SignIn/>
@@ -66,7 +74,8 @@ const Dialogs = () => {
       case 'EditJob': return <EditJob/>
       case 'EditProfile': return <EditProfile />
       case 'SavedJobs': return <SavedJobs/>
-      case 'ChipsWithInputFilter': return <ChipsWithInputFilter/>
+      case 'CategoriesFilter': return <ChipsWithInputFilter type='categories' values={dummyCategories} />
+      case 'LocationsFilter': return <ChipsWithInputFilter type='locations' values={dummyLocations} />
     }
   }
 
