@@ -28,14 +28,11 @@ const PersonalDetails = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {authState &&
-      <>
-        <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
-        <TextField label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
-        <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
-        <AddChips label={translation.skills} chips={skills} setChips={setSkills} />
-        <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
-      </>}
+      <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
+      <TextField label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
+      <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
+      <AddChips label={translation.skills} chips={skills} setChips={setSkills} />
+      <Button className='button-style' variant='contained' color='primary' type='submit'>{translation.update}</Button>
     </form>
   )
 }

@@ -133,16 +133,24 @@ export const getJobs = () => async dispatch => {
     let snapshot
     if (filters) {
       if (filters.categories && filters.locations) {
-        snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).where('location', '==', filters.locations).get()
+        snapshot = await jobsRef
+                          .where('categories', 'array-contains-any', filters.categories)
+                          .where('location', '==', filters.locations)
+                          .orderBy('dateCreated', 'desc')
+                          .get()
       } else if (filters.categories) {
-        snapshot = await jobsRef.where('categories', 'array-contains-any', filters.categories).get()
+        snapshot = await jobsRef
+                          .where('categories', 'array-contains-any', filters.categories)
+                          .orderBy('dateCreated', 'desc')
+                          .get()
       } else if (filters.locations) {
-        snapshot = await jobsRef.where('location', '==', filters.locations).get()
+        snapshot = await jobsRef
+                          .where('location', '==', filters.locations)
+                          .orderBy('dateCreated', 'desc')
+                          .get()
       } else {
-        snapshot = await jobsRef.get()
+        snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
       }
-    } else {
-      snapshot = await jobsRef.get()
     }
 
     let jobs = []
@@ -194,7 +202,7 @@ export const getJobTypes = () => async dispatch => {
   }
 }
 
-export const savedJob = (uid, jobId) => async dispatch => {
+export const saveJob = (uid, jobId) => async dispatch => {
   try {
     await db.collection('users').doc(uid).set({
       savedJobs: [jobId]

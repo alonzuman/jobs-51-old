@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, IconButton, Grid, CardContent, Typography, Avatar, Chip } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { setJob, savedJob, unsaveJob, openDialog } from '../../actions'
+import { setJob, saveJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -44,7 +44,7 @@ const JobCard = ({ job }) => {
       dispatch(unsaveJob(uid, job.id))
     } else {
       setSaved(true)
-      dispatch(savedJob(uid, job.id))
+      dispatch(saveJob(uid, job.id))
     }
   }
 
