@@ -13,8 +13,8 @@ const SingleSelectionFilter = ({ type }) => {
 
   const fetch = async () => {
     const res = await dispatch(getFilters(type))
-    setSelections(res)
-    if (Object.keys(filters).length > 0) {
+    setSelections({...res})
+    if (filters && Object.keys(filters).length > 0) {
       setFilter(filters[type])
     }
   }
@@ -29,11 +29,15 @@ const SingleSelectionFilter = ({ type }) => {
   return (
     <div>
       <Grid container spacing={1}>
-        {selections.length === 0 && <ChipsSkeleton />}
-        {selections.length > 0 && selections.map((value, index) =>
-          <Grid key={index} item>
-            <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={value} />
-          </Grid>)}
+        {Object.keys(selections).length === 0 && <ChipsSkeleton />}
+        {Object.keys(selections).length > 0 && Object.keys(selections).map((value, index) => {
+          if (Object.values(selections)[index] !== 0) {
+            return (
+              <Grid key={index} item>
+                <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />
+              </Grid>)
+              }}
+            )}
       </Grid>
       <br />
       <Button variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>

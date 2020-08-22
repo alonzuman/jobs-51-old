@@ -13,9 +13,8 @@ const MultiSelectionFilter = ({ type }) => {
 
   const fetch = async () => {
     const res = await dispatch(getFilters(type))
-    console.log(res)
     setSelections({...res})
-    if (jobsState.filters[type]) {
+    if (jobsState.filters && jobsState?.filters[type]) {
       setFilters(jobsState?.filters[type])
     }
   }
@@ -41,7 +40,6 @@ const MultiSelectionFilter = ({ type }) => {
       <Grid container spacing={1}>
         {Object.keys(selections).length === 0 && <ChipsSkeleton />}
         {Object.keys(selections).length > 0 && Object.keys(selections).map((filter, index) => {
-          console.log(Object.keys(selections)[index], Object.values(selections)[index])
           if (Object.values(selections)[index] !== 0) {
             return (
               <Grid key={index} item>
