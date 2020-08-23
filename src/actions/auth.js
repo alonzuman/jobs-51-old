@@ -97,7 +97,7 @@ export const signInWithGoogle = () => async dispatch => {
       phone: user.phone || phoneNumber,
       dateCreated: user.dateCreated || Date.now()
     }
-    await analytics.logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
+    await analytics().logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
     await db.collection('users').doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
     dispatch({
