@@ -1,5 +1,6 @@
 import { app, db } from '../firebase'
-import firebase, { analytics } from 'firebase'
+import firebase from 'firebase'
+import { analytics } from '../firebase'
 import { setAlert } from "./alert"
 import { closeDialogs } from './dialogs'
 
