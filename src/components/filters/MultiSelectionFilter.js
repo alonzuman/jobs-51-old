@@ -50,7 +50,7 @@ const MultiSelectionFilter = ({ type }) => {
         })}
       </Grid>
       <br/>
-      <Button disabled={filters.length === 0} variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
+      <Button disabled={filters?.length === 0} variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
     </div>
   )
 }
