@@ -4,14 +4,14 @@ import 'firebase/auth'
 import 'firebase/storage'
 
 export const app = firebase.initializeApp({
-  apiKey: "AIzaSyBlwYofd1KpSUEAaNBW50ZrBMSi-FBcCuM",
-  authDomain: "jobs-51.firebaseapp.com",
-  databaseURL: "https://jobs-51.firebaseio.com",
-  projectId: "jobs-51",
-  storageBucket: "jobs-51.appspot.com",
-  messagingSenderId: "275815227889",
-  appId: "1:275815227889:web:5acc97bb80f2b82e17e450",
-  measurementId: "G-5ZFDZB092K"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 })
 
 export const storage = app.storage()

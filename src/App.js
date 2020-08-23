@@ -6,7 +6,6 @@ import Dialogs from './components/layout/Dialogs'
 import CustomAlert from './components/layout/CustomAlert'
 
 // Pages
-import Home from './pages/Home'
 import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
 
@@ -15,7 +14,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { Paper, Dialog } from '@material-ui/core'
 import { setTheme } from './actions'
 import jss from 'jss'
-import rtl from 'jss-rtl'
 
 // Redux
 import { useSelector } from 'react-redux'
@@ -23,8 +21,6 @@ import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
-import EditProfile from './components/forms/EditProfile'
-import AddJob from './components/forms/job/AddJob'
 
 
 function App() {

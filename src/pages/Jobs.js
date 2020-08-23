@@ -5,6 +5,7 @@ import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import { Grid, Typography, Container, Paper } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
+import dotenv from 'dotenv'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -26,8 +27,9 @@ const Jobs = () => {
   return (
     <Container>
       <FiltersBar filterOptions={filtersBar} />
-    {loading && <CardsSkeletons />}
-    <Grid style={gridStyle} container spacing={2}>
+      {loading && <CardsSkeletons />}
+      <Grid style={gridStyle} container spacing={2}>
+        <h1>{process.env.API_KEY}</h1>
         {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='h5'>{translation?.couldntFindJobs}</Typography>}
       {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
     </Grid>
