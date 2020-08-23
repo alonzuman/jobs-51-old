@@ -40,7 +40,7 @@ const SingleSelectionFilter = ({ type }) => {
             )}
       </Grid>
       <br />
-      <Button variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
+      <Button disabled={filter.trim().length === 0} variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
     </div>
   )
 }
