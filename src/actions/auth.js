@@ -38,11 +38,11 @@ export const signInWithFacebook = () => async dispatch => {
     const newUser = {
       uid,
       email,
-      firstName: displayName.split(' ')[0] || '',
-      lastName: displayName.split(' ')[1] || '',
-      avatar: photoURL || '',
-      phone: phoneNumber || '',
-      dateCreated: Date.now()
+      firstName: user.firstName || displayName.split(' ')[0],
+      lastName: user.lastName || displayName.split(' ')[1] || '',
+      avatar: user.avatar || photoURL,
+      phone: user.phone || phoneNumber,
+      dateCreated: user.dateCreated || Date.now()
     }
     await db.collection('users').doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
