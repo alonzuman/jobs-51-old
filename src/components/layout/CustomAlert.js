@@ -12,9 +12,9 @@ const CustomAlert = () => {
   const boxStyle = {
     direction: 'rtl',
     position: 'fixed',
-    bottom: 0,
+    bottom: '5rem',
     width: '100%',
-    padding: '1rem 1rem 5rem 1rem',
+    padding: '1rem',
     zIndex: 999999,
   }
 

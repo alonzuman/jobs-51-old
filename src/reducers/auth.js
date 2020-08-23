@@ -18,6 +18,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'AUTH_FAIL':
+      return {
+        ...state,
+        loading: false
+      }
     case 'UPDATED_PROFILE':
     case 'SIGNED_UP':
     case 'SIGNED_IN':

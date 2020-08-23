@@ -56,9 +56,19 @@ export const signInWithFacebook = () => async dispatch => {
     }))
   } catch (error) {
     console.log(error)
+    const msg = () => {
+      switch (error.code) {
+        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail'
+        default: return 'Server error'
+      }
+    }
+
+    dispatch({
+      type: 'AUTH_FAIL'
+    })
     dispatch(setAlert({
       type: 'error',
-      msg: 'ServerError'
+      msg: msg()
     }))
   }
 }
