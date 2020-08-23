@@ -18,6 +18,8 @@ const UserDetails = () => {
   const [avatar, setAvatar] = useState('')
   const dispatch = useDispatch()
 
+  // TODO set all props on useeffect
+
   const handleSubmit = e => {
     e.preventDefault()
     const user = {
@@ -31,7 +33,8 @@ const UserDetails = () => {
 
   const boxStyle = {
     display: 'flex',
-    alignItems: 'top'
+    alignItems: 'top',
+    direction: 'rtl'
   }
 
   const thumbnailStyle = {

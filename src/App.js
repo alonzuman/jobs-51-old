@@ -21,9 +21,13 @@ import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
+import SavedJobs from './components/dialogs/SavedJobs'
+import Navbar from './components/layout/Navbar'
+import EditProfile from './components/forms/EditProfile'
 
 
 function App() {
+  const { authenticated } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)
 
   useEffect(() => {
@@ -37,12 +41,14 @@ function App() {
         <Router>
           <Dialogs />
           <CustomAlert />
-          <MenuButton />
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <ProtectedRoute exact path='/results/jobs' component={Jobs} />
             <ProtectedRoute exact path='/results/users' component={Employees} />
+            <ProtectedRoute exact path='/saved-jobs' component={SavedJobs} />
+            <ProtectedRoute exact path='/my-profile' component={EditProfile} />
           </Switch>
+          {authenticated && <Navbar />}
         </Router>
       </RtlProvider>
   </ThemeProvider>

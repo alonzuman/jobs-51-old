@@ -28,8 +28,7 @@ const Jobs = () => {
     <Container>
       <FiltersBar filterOptions={filtersBar} />
       {loading && <CardsSkeletons />}
-      <Grid style={gridStyle} container spacing={2}>
-        <h1>{process.env.API_KEY}</h1>
+      <Grid className='jobs-container' style={gridStyle} container spacing={2}>
         {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='h5'>{translation?.couldntFindJobs}</Typography>}
       {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
     </Grid>

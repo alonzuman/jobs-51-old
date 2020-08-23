@@ -20,6 +20,29 @@ form {
   padding-bottom: 1rem!important;
 }
 
+/* .MuiBottomNavigation-root {
+  justify-content: space-around!important;
+} */
+
+.MuiBottomNavigationAction-iconOnly {
+  padding-top: 0!important;
+}
+
+.MuiTabs-flexContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.MuiBottomNavigationAction-root .Mui-selected {
+  padding-top: 0!important;
+}
+
+.MuiBottomNavigationAction-root {
+  max-width: none!important;
+  height: 100%!important;
+  width: 100%!important;
+}
+
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
@@ -29,13 +52,15 @@ form {
   top: 0!important;
   left: 0!important;
   right: 0!important;
-  overflow-y: scroll!important;
+}
+
+.jobs-container {
+  padding-top: 4rem!important;
 }
 
 .MuiContainer-root {
-  overflow: scroll!important;
   height: 100%!important;
-  padding: 4rem 1rem 4rem 1rem!important;
+  padding: 0 1rem!important;
 }
 
 .MuiDialogContent-root {
