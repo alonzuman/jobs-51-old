@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import firebase from 'firebase'
 
 // Components
 import Dialogs from './components/layout/Dialogs'
@@ -17,7 +18,6 @@ import jss from 'jss'
 
 // Redux
 import { useSelector } from 'react-redux'
-import MenuButton from './components/layout/MenuButton'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'

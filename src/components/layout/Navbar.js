@@ -10,6 +10,7 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const Navbar = () => {
+  const { theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
@@ -23,7 +24,7 @@ const Navbar = () => {
     position: 'fixed',
     bottom: 0,
     width: '100%',
-    boxShadow: '0 0 10px #00000015'
+    borderBottom: `1px solid ${theme.palette.background.default}`
   }
 
   const fabStyle = {

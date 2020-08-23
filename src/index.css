@@ -76,6 +76,14 @@ form {
   margin: 0 0 .75rem 0!important;
 }
 
+.MuiBottomNavigationAction-root {
+  padding-top: 0!important;
+}
+
+.MuiBottomNavigationAction-root .Mui-selected {
+  padding-top: 0!important;
+}
+
 .MuiChip-deleteIcon {
   margin: 0 4px!important;
 }

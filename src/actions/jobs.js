@@ -1,4 +1,4 @@
-import { db } from '../firebase'
+import { db, analytics } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 import store from '../store'
@@ -265,6 +265,7 @@ export const saveJob = (uid, jobId) => async dispatch => {
     await db.collection('users').doc(uid).set({
       savedJobs: [jobId]
     }, { merge: true })
+    await analytics.logEvent('job_saved', { uid, jobId })
     dispatch({
       type: 'SAVE_JOB',
       payload: { jobId }

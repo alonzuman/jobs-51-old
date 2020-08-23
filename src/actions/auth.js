@@ -1,5 +1,5 @@
 import { app, db } from '../firebase'
-import firebase from 'firebase'
+import firebase, { analytics } from 'firebase'
 import { setAlert } from "./alert"
 import { closeDialogs } from './dialogs'
 
@@ -47,6 +47,7 @@ export const signInWithFacebook = () => async dispatch => {
       phone: user.phone || phoneNumber,
       dateCreated: user.dateCreated || Date.now()
     }
+    await analytics().logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
     await db.collection('users').doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
     dispatch({
@@ -96,6 +97,7 @@ export const signInWithGoogle = () => async dispatch => {
       phone: user.phone || phoneNumber,
       dateCreated: user.dateCreated || Date.now()
     }
+    await analytics.logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
     await db.collection('users').doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
     dispatch({

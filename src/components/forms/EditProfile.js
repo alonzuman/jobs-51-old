@@ -7,13 +7,19 @@ import Settings from './Settings'
 
 const EditProfile = () => {
   const [value, setValue] = useState(0)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
 
   const handleValueChange = (newValue) => setValue(newValue)
 
+  const paperStyle = {
+    borderRadius: 0,
+    boxShadow: 'none',
+    borderBottom: `1px solid ${theme.palette.background.default}`
+  }
+
   return (
     <div style={{direction: 'rtl'}}>
-    <Paper>
+    <Paper style={paperStyle}>
       <Tabs indicatorColor='primary' value={value}>
         <Tab label={translation.userDetails} onClick={() => handleValueChange(0)} />
         <Tab label={translation.personalDetails} onClick={() => handleValueChange(1)}  />

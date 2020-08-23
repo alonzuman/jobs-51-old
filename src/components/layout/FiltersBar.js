@@ -14,7 +14,8 @@ const FiltersBar = ({ filterOptions }) => {
     alignItems: 'center',
     padding: '.5rem 1rem',
     backgroundColor: theme.palette.background.paper,
-    boxShadow:  '0 0 10px #00000025',
+    boxShadow: 'none',
+    borderBottom: `1px solid ${theme.palette.background.default}`,
     transition: 'box-shadow .5s ease-in-out'
   }
 

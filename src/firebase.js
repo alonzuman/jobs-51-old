@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/firestore';
 import 'firebase/auth'
 import 'firebase/storage'
+import 'firebase/analytics'
 
 export const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,3 +17,4 @@ export const app = firebase.initializeApp({
 
 export const storage = app.storage()
 export const db = app.firestore()
+export const analytics = app.analytics()
