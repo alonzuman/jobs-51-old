@@ -35,6 +35,9 @@ export const signInWithFacebook = () => async dispatch => {
     const result = await firebase.auth().signInWithPopup(provider)
 
     const { uid, displayName, email, photoURL, phoneNumber } = result.user
+
+    const fetchedUser = await db.collection('users').doc(uid).get()
+    const user = fetchedUser.data()
     const newUser = {
       uid,
       email,
