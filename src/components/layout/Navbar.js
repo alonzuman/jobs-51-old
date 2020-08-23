@@ -23,6 +23,7 @@ const Navbar = () => {
     position: 'fixed',
     bottom: 0,
     width: '100%',
+    boxShadow: '0 0 10px #00000015'
   }
 
   const fabStyle = {
