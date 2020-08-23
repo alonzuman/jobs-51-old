@@ -17,10 +17,6 @@ const SavedJobs = () => {
     }
   }, [authState])
 
-  const gridStyle = {
-    padding: '.5rem'
-  }
-
   return (
     <Container style={{direction: 'rtl'}}>
       {/* TODO */}
@@ -28,7 +24,7 @@ const SavedJobs = () => {
       {savedJobsLoading && <CardsSkeletons count={1} />}
       {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
       {!savedJobsLoading && savedJobs &&
-      <Grid style={gridStyle} container spacing={2}>
+      <Grid container spacing={2}>
         {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
       </Grid>}
     </Container>

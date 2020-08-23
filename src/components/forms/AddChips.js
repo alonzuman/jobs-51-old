@@ -32,11 +32,7 @@ const AddChips = ({ label, chips, setChips, collection }) => {
   }
 
   const gridStyle = {
-    margin: '0 0 .5rem 0'
-  }
-
-  const gridItemStyle = {
-    padding: 0
+    padding: '.5rem 0'
   }
 
   const iconButtonStyle = {
@@ -45,7 +41,6 @@ const AddChips = ({ label, chips, setChips, collection }) => {
 
   const chipStyle = {
     direction: 'ltr',
-    margin: '.25rem .25rem .25rem .25rem'
   }
 
   return (
@@ -55,7 +50,7 @@ const AddChips = ({ label, chips, setChips, collection }) => {
         <IconButton style={iconButtonStyle} onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>
-        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} style={gridItemStyle} item><Chip style={chipStyle} onDelete={() => removeChip(chip)} label={chip} /></Grid>)}
+        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} item><Chip style={chipStyle} onDelete={() => removeChip(chip)} label={chip} /></Grid>)}
       </Grid>
     </div>
   )

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
-import { Grid, Typography, Container, Paper } from '@material-ui/core'
+import { Grid, Typography, Container, Paper, Box } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
 import dotenv from 'dotenv'
 
@@ -27,11 +27,13 @@ const Jobs = () => {
   return (
     <Container>
       <FiltersBar filterOptions={filtersBar} />
-      {loading && <CardsSkeletons />}
-      <Grid className='jobs-container' style={gridStyle} container spacing={2}>
-        {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='h5'>{translation?.couldntFindJobs}</Typography>}
-      {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
-    </Grid>
+      <Box style={{paddingTop: '4.5rem'}}>
+        {loading && <CardsSkeletons />}
+        <Grid style={gridStyle} container spacing={2}>
+          {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='h5'>{translation?.couldntFindJobs}</Typography>}
+          {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
+        </Grid>
+      </Box>
     </Container>
   )
 }

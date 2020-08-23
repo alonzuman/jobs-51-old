@@ -35,6 +35,10 @@ const theme = createMuiTheme({
       subtitle1: {
         fontSize: '.6rem',
         color: '#f7f7f7'
+      },
+      body2: {
+        fontSize: '.9rem',
+        color: localTheme === 'dark' ? '#f7f7f7' : 'black',
       }
     },
     background: {
