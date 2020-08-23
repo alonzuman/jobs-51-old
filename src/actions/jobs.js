@@ -265,7 +265,7 @@ export const saveJob = (uid, jobId) => async dispatch => {
     await db.collection('users').doc(uid).set({
       savedJobs: [jobId]
     }, { merge: true })
-    await analytics.logEvent('job_saved', { uid, jobId })
+    await analytics().logEvent('job_saved', { uid, jobId })
     dispatch({
       type: 'SAVE_JOB',
       payload: { jobId }
