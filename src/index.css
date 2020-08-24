@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+body {
+  padding: env(safe-area-inset-top) env (safe-area-inset-right) env (safe-area-inset-bottom);
+}
+
 a {
   text-decoration: none;
 }
