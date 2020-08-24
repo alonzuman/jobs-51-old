@@ -27,7 +27,7 @@ const theme = createMuiTheme({
     typography: {
       fontFamily: ['Assistant', 'sans-serif'],
       h1: {
-        fontSize: '2.5rem',
+        fontSize: '2rem',
         fontWeight: 400,
         padding: '.5rem 0',
         color: localTheme === 'dark' ? '#white' : '#black',

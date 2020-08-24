@@ -1,6 +1,5 @@
 import { app, db } from '../firebase'
 import firebase from 'firebase'
-import { analytics } from '../firebase'
 import { setAlert } from "./alert"
 import { closeDialogs } from './dialogs'
 
@@ -33,32 +32,33 @@ export const signInWithFacebook = () => async dispatch => {
   })
   try {
     const provider = new firebase.auth.FacebookAuthProvider()
-    const result = await firebase.auth().signInWithPopup(provider)
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
+      const result = await firebase.auth().signInWithPopup(provider)
 
-    const { uid, displayName, email, photoURL, phoneNumber } = result.user
+      const { uid, displayName, email, photoURL, phoneNumber } = result.user
 
-    const fetchedUser = await db.collection('users').doc(uid).get()
-    const user = fetchedUser.data()
-    const newUser = {
-      uid,
-      email,
-      firstName: user.firstName || displayName.split(' ')[0],
-      lastName: user.lastName || displayName.split(' ')[1] || '',
-      avatar: user.avatar || photoURL,
-      phone: user.phone || phoneNumber,
-      dateCreated: user.dateCreated || Date.now()
-    }
-    await analytics().logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
-    await db.collection('users').doc(uid).set(newUser, { merge: true })
-    dispatch(closeDialogs())
-    dispatch({
-      type: 'SIGNED_UP',
-      payload: { newUser }
+      const fetchedUser = await db.collection('users').doc(uid).get()
+      const user = fetchedUser.data()
+      const newUser = {
+        uid,
+        email,
+        firstName: user.firstName || displayName.split(' ')[0],
+        lastName: user.lastName || displayName.split(' ')[1] || '',
+        avatar: user.avatar || photoURL,
+        phone: user.phone || phoneNumber,
+        dateCreated: user.dateCreated || Date.now()
+      }
+      await db.collection('users').doc(uid).set(newUser, { merge: true })
+      dispatch(closeDialogs())
+      dispatch({
+        type: 'SIGNED_UP',
+        payload: { ...newUser }
+      })
+      dispatch(setAlert({
+        type: 'success',
+        msg: 'Welcome'
+      }))
     })
-    dispatch(setAlert({
-      type: 'success',
-      msg: 'Welcome'
-    }))
   } catch (error) {
     console.log(error)
     const msg = () => {
@@ -83,32 +83,33 @@ export const signInWithGoogle = () => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    const result = await firebase.auth().signInWithPopup(provider)
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      const result = await firebase.auth().signInWithPopup(provider)
 
-    const { uid, displayName, email, photoURL, phoneNumber } = result.user
-    const fetchedUser = await db.collection('users').doc(uid).get()
-    const user = fetchedUser.data()
-    const newUser = {
-      uid,
-      email,
-      firstName: user.firstName || displayName.split(' ')[0],
-      lastName: user.lastName || displayName.split(' ')[1] || '',
-      avatar: user.avatar || photoURL,
-      phone: user.phone || phoneNumber,
-      dateCreated: user.dateCreated || Date.now()
-    }
-    await analytics().logEvent('facebook_sign_in', { email, firstName: newUser.firstName, lastName: newUser.lastName })
-    await db.collection('users').doc(uid).set(newUser, { merge: true })
-    dispatch(closeDialogs())
-    dispatch({
-      type: 'SIGNED_UP',
-      payload: { newUser }
+      const { uid, displayName, email, photoURL, phoneNumber } = result.user
+      const fetchedUser = await db.collection('users').doc(uid).get()
+      const user = fetchedUser.data()
+      const newUser = {
+        uid,
+        email,
+        firstName: user.firstName || displayName.split(' ')[0],
+        lastName: user.lastName || displayName.split(' ')[1] || '',
+        avatar: user.avatar || photoURL,
+        phone: user.phone || phoneNumber,
+        dateCreated: user.dateCreated || Date.now()
+      }
+      await db.collection('users').doc(uid).set(newUser, { merge: true })
+      dispatch(closeDialogs())
+      dispatch({
+        type: 'SIGNED_UP',
+        payload: { newUser }
+      })
+      dispatch(setAlert({
+        type: 'success',
+        msg: 'Welcome'
+      }))
     })
-    dispatch(setAlert({
-      type: 'success',
-      msg: 'Welcome'
-    }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
@@ -171,7 +172,7 @@ export const signUp = (user) => async dispatch =>{
     dispatch(closeDialogs())
     dispatch({
       type: 'SIGNED_UP',
-      payload: { newUser }
+      payload: { ...newUser }
     })
     dispatch(setAlert({
       type: 'success',

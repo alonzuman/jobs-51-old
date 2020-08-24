@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Grid, Typography, Box, Container, Paper } from '@material-ui/core'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { openDialog } from '../actions'
+import { openDialog, setUser } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
+import { app } from '../firebase'
+import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
   const { authenticated } = useSelector(state => state.auth)
   const dispatch = useDispatch()
+  const currentUser = app.auth().currentUser
 
   const containerStyle = {
     display: 'flex',
@@ -47,40 +50,32 @@ const LandingPage = () => {
     alignItems: 'center'
   }
 
-  if (authenticated) return <Redirect to='/results/jobs' />
+  useEffect(() => {
+    app.auth().onAuthStateChanged(user => {
+      if (user) return dispatch(setUser(user))
+    })
+  })
 
+  if (currentUser) return <Redirect to='/results/jobs' />
   return (
     <Container style={containerStyle}>
       <Paper style={paperStyle}>
-        <ShaldagLogo />
-        <Box style={textBoxStyle} className='text-box'>
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
-        </Box>
-        {!authenticated &&
-        <Grid style={gridStyle} container spacing={1}>
-          <Grid item>
-            <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
+          <ShaldagLogo />
+          <Box style={textBoxStyle} className='text-box'>
+            <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
+            <br />
+            <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
+            <br />
+            <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
+          </Box>
+          <Grid style={gridStyle} container spacing={1}>
+            <Grid item>
+              <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
+            </Grid>
+            <Grid item>
+              <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
-          </Grid>
-        </Grid>}
-
-        {authenticated &&
-        <Grid style={gridStyle} container spacing={1}>
-          <Grid item>
-            <Button onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} color='default' variant='outlined'>{translation.postingAJob}</Button>
-          </Grid>
-          <Grid item>
-            <Link to='/results/jobs'>
-              <Button color='primary' variant='contained'>{translation.lookingForAJob}</Button>
-            </Link>
-          </Grid>
-        </Grid>}
       </Paper>
     </Container>
   )

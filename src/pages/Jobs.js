@@ -24,10 +24,15 @@ const Jobs = () => {
     padding: '0 0 1rem 0'
   }
 
+  const boxStyle = {
+    paddingTop: '4.5rem',
+    paddingBottom: '4.5rem'
+  }
+
   return (
     <Container>
       <FiltersBar filterOptions={filtersBar} />
-      <Box style={{paddingTop: '4.5rem'}}>
+      <Box style={boxStyle}>
         {loading && <CardsSkeletons />}
         <Grid style={gridStyle} container spacing={2}>
           {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='h5'>{translation?.couldntFindJobs}</Typography>}

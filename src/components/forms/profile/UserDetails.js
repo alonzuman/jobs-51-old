@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { editProfile } from '../../../actions'
+import { editProfile, setUser } from '../../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { TextField, Button, Box, Grid, CircularProgress } from '@material-ui/core'
+import { TextField, Button, Box, Grid, CircularProgress, Avatar } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
+import CircularSpinnerWithContainer from '../../layout/CircularSpinnerWithContainer'
+import { app } from '../../../firebase'
 
 const UserDetails = () => {
   const authState = useSelector(state => state.auth)
@@ -20,12 +22,14 @@ const UserDetails = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setEmail(authState.email)
-    setFirstName(authState.firstName)
-    setLastName(authState.lastName)
-    setPhone(authState.phone)
-    setAvatar(authState.avatar)
-    setLoading(false)
+    if (authState) {
+      setEmail(authState.email)
+      setFirstName(authState.firstName)
+      setLastName(authState.lastName)
+      setPhone(authState.phone)
+      setAvatar(authState.avatar)
+      setLoading(false)
+    }
   }, [authState])
 
   const handleSubmit = e => {
@@ -45,22 +49,19 @@ const UserDetails = () => {
     direction: 'rtl'
   }
 
-  const thumbnailStyle = {
-    width: '36px',
-    height: '36px',
-    objectFit: 'cover',
-    margin: '0 1rem'
+  const avatarStyle = {
+    margin: '0 .5rem'
   }
 
-  if (loading) {
-    return <CircularProgress />
+  if (!authState || loading) {
+    return <CircularSpinnerWithContainer />
   } else {
     return (
       <form onSubmit={handleSubmit}>
         <Box style={boxStyle}>
           {uploading && <CircularProgressWithLabel value={progress} />}
           {!uploading && <FileUploader setProgress={setProgress} fileName={authState.avatar || uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
-          {(authState?.avatar?.trim().length > 0 || avatar.trim().length > 0) && <img style={thumbnailStyle} src={authState.avatar || avatar} />}
+          {(authState?.avatar?.trim().length > 0 || avatar?.trim().length > 0) && <Avatar style={avatarStyle} src={authState.avatar || avatar} alt={authState.firstName} />}
         </Box>
         <TextField disabled type='email' required variant='outlined' label={translation.email} value={email} onChange={e => setEmail(e.target.value)} />
         <Grid container spacing={1}>

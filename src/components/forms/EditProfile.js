@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserDetails from './profile/UserDetails'
 import PersonalDetails from './profile/PersonalDetails'
 import { Tabs, Tab, Container, Paper } from '@material-ui/core'
@@ -8,7 +8,6 @@ import Settings from './Settings'
 const EditProfile = () => {
   const [value, setValue] = useState(0)
   const { translation, theme } = useSelector(state => state.theme)
-
   const handleValueChange = (newValue) => setValue(newValue)
 
   const paperStyle = {

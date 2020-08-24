@@ -19,7 +19,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       } else {
         dispatch(signOut())
         setLoading(false)
-        window.location.reload()
+        return <Redirect to='/' />
       }
     })
   }, [])
