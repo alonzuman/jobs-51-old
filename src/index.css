@@ -4,10 +4,6 @@
   margin: 0;
 }
 
-body {
-  padding: env(safe-area-inset-top) env (safe-area-inset-right) env (safe-area-inset-bottom);
-}
-
 a {
   text-decoration: none;
 }
@@ -23,10 +19,6 @@ form {
 .MuiCardContent-root:last-child {
   padding-bottom: 1rem!important;
 }
-
-/* .MuiBottomNavigation-root {
-  justify-content: space-around!important;
-} */
 
 .MuiBottomNavigationAction-iconOnly {
   padding-top: 0!important;
@@ -152,4 +144,8 @@ form {
   position: absolute;
   left: 1rem;
   top: .6rem;
+}
+
+.MuiBottomNavigationAction-root {
+  padding-bottom: max(16px, env(safe-area-inset-bottom))!important;
 }
