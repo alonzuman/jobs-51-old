@@ -14,14 +14,12 @@ const TopBar = ({ children }) => {
     alignItems: 'center',
     height: 'fit-content',
     justifyContent: 'center',
-    padding: '.25rem 1rem',
     backgroundColor: theme.palette.background.paper,
-    borderBottom: `1px solid ${theme.palette.background.default}`
+    borderBottom: `1px solid ${theme.palette.border.main}`
   }
 
   const childrenContainerStyle = {
     width: '100%',
-    padding: '.25rem 0'
   }
 
   return (

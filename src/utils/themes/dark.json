@@ -10,6 +10,9 @@
     "secondary": {
       "main": "#E89C68"
     },
+    "border": {
+      "main": "gray"
+    },
     "background": {
     }
   },

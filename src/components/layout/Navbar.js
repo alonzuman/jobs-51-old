@@ -29,7 +29,7 @@ const Navbar = () => {
     width: '100%',
     zIndex: 9,
     backgroundColor: theme.palette.background.paper,
-    borderTop: `1px solid ${theme.palette.background.default}`
+    borderTop: `1px solid ${theme.palette.border.main}`
   }
 
   const fabStyle = {

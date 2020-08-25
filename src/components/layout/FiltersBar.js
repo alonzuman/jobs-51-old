@@ -8,22 +8,13 @@ const FiltersBar = ({ filterOptions }) => {
   const { translation, theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  const appBarStyle = {
-    direction: 'rtl',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '.5rem 1rem',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: 'none',
-    borderBottom: `1px solid ${theme.palette.background.default}`,
-  }
-
   const containerStyle = {
     direction: 'rtl',
     display: 'flex',
     width: '100%',
     height: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '.5rem 1rem'
   }
 
   const boxStyle = {

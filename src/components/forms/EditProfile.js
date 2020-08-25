@@ -11,7 +11,7 @@ const EditProfile = () => {
   const handleValueChange = (newValue) => setValue(newValue)
 
   const paperStyle = {
-    borderBottom: `1px solid ${theme.palette.background.default}`,
+    borderBottom: `1px solid ${theme.palette.border.main}`,
     padding: '0 1rem',
   }
 
