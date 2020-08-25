@@ -8,6 +8,11 @@ import CustomAlert from './components/layout/CustomAlert'
 // Pages
 import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
+import SavedJobs from './components/dialogs/SavedJobs'
+import Navbar from './components/layout/Navbar'
+import EditProfile from './components/forms/EditProfile'
+import Activity from './pages/Activity'
+import Notifications from './pages/Notifications'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -20,9 +25,6 @@ import { useSelector } from 'react-redux'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
-import SavedJobs from './components/dialogs/SavedJobs'
-import Navbar from './components/layout/Navbar'
-import EditProfile from './components/forms/EditProfile'
 
 
 function App() {
@@ -42,10 +44,12 @@ function App() {
           <CustomAlert />
           <Switch>
             <Route exact path='/' component={LandingPage} />
-            <ProtectedRoute exact path='/results/jobs' component={Jobs} />
-            <ProtectedRoute exact path='/results/users' component={Employees} />
-            <ProtectedRoute exact path='/saved-jobs' component={SavedJobs} />
-            <ProtectedRoute exact path='/my-profile' component={EditProfile} />
+            <ProtectedRoute exact path='/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/saved' component={SavedJobs} />
+            <ProtectedRoute exact path='/activity' component={Activity} />
+            <ProtectedRoute exact path='/notifications' component={Notifications} />
+            <ProtectedRoute exact path='/profile' component={EditProfile} />
+            <ProtectedRoute exact path='/users' component={Employees} />
           </Switch>
           {authenticated && <Navbar />}
         </Router>

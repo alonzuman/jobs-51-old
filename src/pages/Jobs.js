@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
-import { Grid, Typography, Container, Paper, Box } from '@material-ui/core'
+import { Grid, Typography, Fab, Container, Paper, Box } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
-import ShaldagLogo from '../ShaldagLogo'
 import TopBar from '../components/layout/TopBar'
+import AddIcon from '@material-ui/icons/Add'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -30,8 +30,20 @@ const Jobs = () => {
     paddingBottom: '4.5rem'
   }
 
+  const fabStyle = {
+    position: 'fixed',
+    margin: '0 auto',
+    bottom: '4.5rem',
+    left: '50%',
+    transform: 'translate(-50%, 0)'
+  }
+
   return (
     <>
+    <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} style={fabStyle}>
+      <AddIcon />
+      <span style={{margin: '0 .5rem'}}>{translation.addJob}</span>
+    </Fab>
     <TopBar>
       <Typography style={{paddingLeft: '1rem', paddingRight: '1rem'}} variant='h1'>{translation.findJob}</Typography>
       <FiltersBar filterOptions={filtersBar} />
