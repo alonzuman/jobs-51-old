@@ -1,0 +1,89 @@
+[debug] [2020-08-25T20:03:18.238Z] ----------------------------------------------------------------------
+[debug] [2020-08-25T20:03:18.240Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-08-25T20:03:18.241Z] CLI Version:   8.4.3
+[debug] [2020-08-25T20:03:18.241Z] Platform:      darwin
+[debug] [2020-08-25T20:03:18.241Z] Node Version:  v12.18.0
+[debug] [2020-08-25T20:03:18.242Z] Time:          Tue Aug 25 2020 23:03:18 GMT+0300 (Israel Daylight Time)
+[debug] [2020-08-25T20:03:18.243Z] ----------------------------------------------------------------------
+[debug] [2020-08-25T20:03:18.243Z] 
+[debug] [2020-08-25T20:03:18.256Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-08-25T20:03:18.256Z] > authorizing via signed-in user
+[debug] [2020-08-25T20:03:18.257Z] [iam] checking project jobs-51 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-08-25T20:03:18.260Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-08-25T20:03:18.260Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-08-25T20:03:18.714Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:18 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:18.731Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jobs-51:testIamPermissions  
+ {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2020-08-25T20:03:19.725Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:19 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=621","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:19.728Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/jobs-51  
+ 
+[debug] [2020-08-25T20:03:20.230Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:20 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'jobs-51'...
+[info] 
+[info] i  deploying storage, firestore, hosting 
+[debug] [2020-08-25T20:03:20.236Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/jobs-51  
+ 
+[debug] [2020-08-25T20:03:20.743Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:20 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firebase.storage: checking storage.rules for compilation errors... 
+[debug] [2020-08-25T20:03:20.749Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/jobs-51:test  
+ {"source":{"files":[{"name":"storage.rules","content":"service firebase.storage {\n  match /b/{bucket}/o {\n    match /{allPaths=**} {\n      allow read, write: if true;\n    }\n  }\n}\n"}]}}
+[debug] [2020-08-25T20:03:21.772Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:21 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  [W] undefined:undefined - Ruleset uses old version (version [1]). Please update to the latest version (version [2]). 
+[info] ✔  firebase.storage: rules file storage.rules compiled successfully 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2020-08-25T20:03:21.780Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/jobs-51:test  
+ {"source":{"files":[{"name":"firestore.rules","content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{jobs}/documents {\n    match /{document=**} {\n      allow read: if true;\n      allow create: if request.auth != null;\n      allow update, delete: if request.auth.uid == resource.data.uid\n    }\n  }\n}\n"}]}}
+[debug] [2020-08-25T20:03:22.694Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2020-08-25T20:03:22.697Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/jobs-51/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-08-25T20:03:24.242Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:24.245Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/jobs-51/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-08-25T20:03:25.152Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:25.155Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/jobs-51/rulesets/c4a621e7-1a00-4aab-923e-0160af2d098a  
+ 
+[debug] [2020-08-25T20:03:26.028Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  storage: latest version of storage.rules already up to date, skipping upload... 
+[debug] [2020-08-25T20:03:26.034Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/jobs-51/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-08-25T20:03:26.035Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/jobs-51/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2020-08-25T20:03:26.422Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:26.423Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/jobs-51/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2020-08-25T20:03:26.779Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firestore: The following indexes are defined in your project but are not present in your firestore indexes file:
+	(activities) -- (uid,ASCENDING) (date,DESCENDING)  
+[debug] [2020-08-25T20:03:26.935Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:03:26.937Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/jobs-51/rulesets/ce640bd5-6a23-4bb8-8ebe-d4cb0396c5ab  
+ 
+[debug] [2020-08-25T20:03:27.834Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:03:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firestore: latest version of firestore.rules already up to date, skipping upload... 
+[debug] [2020-08-25T20:22:52.398Z] Skipping existing index: {"collectionGroup":"jobs","queryScope":"COLLECTION","fields":[{"fieldPath":"categories","arrayConfig":"CONTAINS"},{"fieldPath":"dateCreated","order":"DESCENDING"}]}
+[debug] [2020-08-25T20:22:52.398Z] Skipping existing index: {"collectionGroup":"jobs","queryScope":"COLLECTION","fields":[{"fieldPath":"location","order":"ASCENDING"},{"fieldPath":"dateCreated","order":"DESCENDING"}]}
+[info] ✔  firestore: deployed indexes in firestore.indexes.json successfully 
+[info] i  hosting[jobs-51]: beginning deploy... 
+[info] i  hosting[jobs-51]: found 18 files in build 
+[debug] [2020-08-25T20:22:53.071Z] [hosting] hash cache [YnVpbGQ] stored for 18 files
+[debug] [2020-08-25T20:22:53.071Z] [hosting][hash queue][FINAL] {"max":646,"min":10,"avg":50.72222222222222,"active":0,"complete":18,"success":18,"errored":0,"retried":0,"total":18,"elapsed":657}
+[debug] [2020-08-25T20:22:53.071Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/jobs-51/versions/7f5b36685a5c2c41:populateFiles  
+ <request body omitted>
+[debug] [2020-08-25T20:22:54.579Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:22:54 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:22:54.592Z] [hosting][populate queue][FINAL] {"max":1515,"min":1515,"avg":1515,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1525}
+[debug] [2020-08-25T20:22:54.592Z] [hosting] uploads queued: 8
+[debug] [2020-08-25T20:23:01.439Z] [hosting][upload queue][FINAL] {"max":6856,"min":1970,"avg":3329.5,"active":0,"complete":8,"success":8,"errored":0,"retried":0,"total":8,"elapsed":6858}
+[info] ✔  hosting[jobs-51]: file upload complete 
+[debug] [2020-08-25T20:23:01.439Z] [hosting] deploy completed after 9040ms
+[debug] [2020-08-25T20:23:01.715Z] [rules] releasing firebase.storage/jobs-51.appspot.com with ruleset projects/jobs-51/rulesets/c4a621e7-1a00-4aab-923e-0160af2d098a
+[debug] [2020-08-25T20:23:01.715Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/jobs-51/releases/firebase.storage/jobs-51.appspot.com  
+ {"release":{"name":"projects/jobs-51/releases/firebase.storage/jobs-51.appspot.com","rulesetName":"projects/jobs-51/rulesets/c4a621e7-1a00-4aab-923e-0160af2d098a"}}
+[debug] [2020-08-25T20:23:03.079Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 25 Aug 2020 20:23:02 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-25T20:23:03.079Z] [rules] updated release projects/jobs-51/releases/firebase.storage/jobs-51.appspot.com
+[info] ✔  storage: released rules storage.rules to firebase.storage 
+[debug] [2020-08-25T20:23:03.080Z] [rules] releasing cloud.firestore with ruleset projects/jobs-51/rulesets/ce640bd5-6a23-4bb8-8ebe-d4cb0396c5ab
+[debug] [2020-08-25T20:23:03.081Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/jobs-51/releases/cloud.firestore  
+ {"release":{"name":"projects/jobs-51/releases/cloud.firestore","rulesetName":"projects/jobs-51/rulesets/ce640bd5-6a23-4bb8-8ebe-d4cb0396c5ab"}}

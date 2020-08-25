@@ -151,3 +151,7 @@ form {
   padding-bottom: max(16px, env(safe-area-inset-bottom))!important;
   padding-top: max(8px, env(safe-area-inset-bottom))!important;
 } */
+
+.MuiFab-root {
+  box-shadow: 0 0 10px #00000005!important;
+}

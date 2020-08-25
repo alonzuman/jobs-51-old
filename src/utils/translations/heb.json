@@ -75,5 +75,6 @@
   "fillActivityType": "אנא בחרו סוג פעילות",
   "startTime": "תאריך התחלה",
   "endTime": "תאריך סיום",
-  "hoursNoGood": "אנא בחרו תאריך סיום נכון"
+  "hoursNoGood": "אנא בחרו תאריך סיום נכון",
+  "latestActivities": "פעילות אחרונה"
 }

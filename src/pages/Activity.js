@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Paper, Typography, Fab, List, Box } from '@material-ui/core'
+import { Paper, Typography, Fab, List, Box, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
@@ -12,6 +12,7 @@ const Activity = () => {
   const dispatch = useDispatch()
   const { loading, activities } = useSelector(state => state.activities)
   const { translation, theme } = useSelector(state => state.theme)
+  const { pending, approved } = useSelector(state => state.auth).activities
 
   useEffect(() => {
     dispatch(getMyActivities())
@@ -34,6 +35,15 @@ const Activity = () => {
     transform: 'translate(-50%, 0)'
   }
 
+  const statsPaperStyle = {
+    width: '100%',
+    height: 120,
+    display: 'flex',
+    borderRadius: '1rem',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
   return (
     <div style={{ direction: 'rtl' }}>
       <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} style={fabStyle}>
@@ -44,6 +54,19 @@ const Activity = () => {
         <Typography variant='h1'>{translation.activity}</Typography>
       </Paper>
       <Box style={boxStyle}>
+        <Grid container spacing={2}>
+          <Grid xs={6} md={6} lg={6} item>
+            <Paper style={statsPaperStyle} elevation={0}>
+              <Typography variant='h1'>{pending}</Typography>
+            </Paper>
+          </Grid>
+          <Grid xs={6} md={6} lg={6} item>
+            <Paper style={statsPaperStyle} elevation={0}>
+              <Typography variant='h1'>{approved}</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Typography variant='h2'>{translation.latestActivities}</Typography>
         {loading && <CardsSkeletons count={1} />}
         {!loading && activities.length === 0 && <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>}
         {!loading && activities &&

@@ -20,9 +20,15 @@
       "fontFamily": ["Assistant", "sans-serif"],
     "h1": {
       "fontSize": "2rem",
-      "fontWeight": 400,
+      "fontWeight": 500,
       "padding": ".5rem 0",
       "color": "black"
+    },
+    "h2": {
+      "fontSize": "1.5rem",
+      "fontWeight": 400,
+      "color": "black",
+      "padding": ".5rem 0"
     },
     "subtitle1": {
       "fontSize": ".6rem"
