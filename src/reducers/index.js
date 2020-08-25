@@ -4,11 +4,13 @@ import { authReducer } from './auth';
 import { jobsReducer } from './jobs';
 import { themeReducer } from './theme';
 import { dialogsReducer } from './dialogs';
+import { activitiesReducer } from './activities';
 
 export default combineReducers({
   alert: alertReducer,
   auth: authReducer,
   jobs: jobsReducer,
   theme: themeReducer,
-  dialogs: dialogsReducer
+  dialogs: dialogsReducer,
+  activities: activitiesReducer
 });

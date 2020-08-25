@@ -12,9 +12,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
   useEffect(() => {
     dispatch({ type: 'AUTH_LOADING' })
-    app.auth().onAuthStateChanged(user => {
+    app.auth().onAuthStateChanged(async user => {
       if (user) {
-        dispatch(setUser(user))
+        await dispatch(setUser(user))
         setLoading(false)
       } else {
         dispatch(signOut())

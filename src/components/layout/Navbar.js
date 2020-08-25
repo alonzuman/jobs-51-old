@@ -23,7 +23,7 @@ const Navbar = () => {
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 

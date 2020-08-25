@@ -9,6 +9,7 @@ import SignUp from '../forms/SignUp'
 import EditProfile from '../forms/EditProfile'
 import Settings from '../forms/Settings'
 import SavedJobs from '../dialogs/SavedJobs'
+import AddActivity from '../forms/activity/AddActivity'
 import CloseIcon from '@material-ui/icons/Close'
 import SingleSelectionFilter from '../filters/SingleSelectionFilter'
 import MultiSelectionFilter from '../filters/MultiSelectionFilter'
@@ -35,6 +36,7 @@ const Dialogs = () => {
       case 'EditProfile':
       case 'Settings':
       case 'AddJob':
+      case 'AddActivity':
       case 'SignIn': return 'xs'
       case 'SavedJobs':  return 'lg'
       default: return 'xs'
@@ -62,6 +64,7 @@ const Dialogs = () => {
       case 'SignIn': return <SignIn/>
       case 'SignUp': return <SignUp/>
       case 'Settings': return <Settings/>
+      case 'AddActivity': return <AddActivity/>
       case 'AddJob': return <AddJob/>
       case 'EditJob': return <EditJob/>
       case 'EditProfile': return <EditProfile />

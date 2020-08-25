@@ -4,8 +4,6 @@ import { closeDialogs } from './dialogs'
 import store from '../store'
 import firebase from 'firebase'
 const jobsRef = db.collection('jobs')
-const categoriesRef = db.collection('categories')
-const locationsRef = db.collection('locations')
 
 export const addFilter = ({ collection, value }) => async dispatch => {
   try {

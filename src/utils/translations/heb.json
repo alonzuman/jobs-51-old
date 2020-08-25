@@ -68,5 +68,7 @@
   "notificationsEmptyState": "אין התראות",
   "addActivity": "הזנת פעילות",
   "admin": "ניהול",
-  "adminEmptyState": "אין מידע להציג"
+  "adminEmptyState": "אין מידע להציג",
+  "activityAdded": "פעילות נוספה בהצלחה!",
+  "activitiesEmptyState": "לא נמצאו פעילויות"
 }
