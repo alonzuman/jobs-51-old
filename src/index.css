@@ -74,6 +74,7 @@ form {
 
 .MuiBottomNavigationAction-root {
   padding-top: 0!important;
+  min-width: 0!important;
 }
 
 .MuiBottomNavigationAction-root .Mui-selected {
