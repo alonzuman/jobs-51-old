@@ -23,7 +23,8 @@ const SavedJobs = () => {
   }
 
   const boxStyle = {
-    padding: '1rem'
+    padding: '1rem',
+    paddingBottom: '4.5rem'
   }
 
   return (

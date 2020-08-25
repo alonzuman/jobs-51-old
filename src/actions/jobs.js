@@ -260,8 +260,11 @@ export const getJobTypes = () => async dispatch => {
 
 export const saveJob = (uid, jobId) => async dispatch => {
   try {
+    const snapshot = await db.collection('users').doc(uid).get()
+    const oldUser = snapshot.data()
     await db.collection('users').doc(uid).set({
-      savedJobs: [jobId]
+      ...oldUser,
+      savedJobs: [...oldUser.savedJobs, jobId]
     }, { merge: true })
     dispatch({
       type: 'SAVE_JOB',
