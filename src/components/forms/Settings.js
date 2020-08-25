@@ -22,9 +22,10 @@ const Settings = () => {
 
   return (
     <div>
+      <br />
       <Typography variant='body2'>{translation.displaySettings}</Typography>
       <Box style={{ display: 'flex', alignItems: 'center' }}>
-        <Brightness4Icon />
+        <Brightness4Icon style={{color: theme.typography.body1.color }}  />
         <Switch color='primary' checked={checked} onChange={handleCheck} />
       </Box>
       <br />

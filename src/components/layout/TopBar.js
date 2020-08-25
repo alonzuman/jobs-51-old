@@ -1,12 +1,13 @@
 import React from 'react'
-import { AppBar, Box } from '@material-ui/core'
-import ShaldagLogo from '../../ShaldagLogo'
+import { AppBar } from '@material-ui/core'
+import ShaldagLogoSmall from '../../ShaldagLogoSmall'
 import { useSelector } from 'react-redux'
 
 const TopBar = ({ children }) => {
   const { theme } = useSelector(state => state.theme)
 
   const containerStyle = {
+    direction: 'rtl',
     position: 'fixed',
     top: 0,
     width: '100%',
@@ -24,7 +25,6 @@ const TopBar = ({ children }) => {
 
   return (
     <AppBar elevation={0} style={containerStyle}>
-      <ShaldagLogo height={48} />
       <div style={childrenContainerStyle}>
         { children }
       </div>

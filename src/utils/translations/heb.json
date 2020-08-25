@@ -61,5 +61,6 @@
   "signInWithEmail": "התחברות באמצעות כתובת דוא״ל",
   "signInWithSocialMedia": "התחברות/הרשמה באמצעות פייסבוק/גוגל",
   "orWithEmail": "או התחברו באמצעות כתובת דוא״ל",
-  "accountAlreadyExistsWithEmail": "קיים כבר משתמש עם כתובת הדוא״ל הזו"
+  "accountAlreadyExistsWithEmail": "קיים כבר משתמש עם כתובת הדוא״ל הזו",
+  "findJob": "מאגר עבודות"
 }

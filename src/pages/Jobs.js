@@ -26,13 +26,14 @@ const Jobs = () => {
   }
 
   const boxStyle = {
-    paddingTop: '7rem',
+    paddingTop: '7.5rem',
     paddingBottom: '4.5rem'
   }
 
   return (
     <>
     <TopBar>
+      <Typography style={{paddingLeft: '1rem', paddingRight: '1rem'}} variant='h1'>{translation.findJob}</Typography>
       <FiltersBar filterOptions={filtersBar} />
     </TopBar>
     <Container>
