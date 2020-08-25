@@ -63,7 +63,7 @@ const LandingPage = () => {
           <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
         </Box>
         <Button style={{ marginBottom: '.5rem' }} className='button-style' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signIn}</Button>
-        <Button className='button-style' color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signUp}</Button>
+        <Button className='button-style' color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'SignUp', title: 'signUp' }))}>{translation.signUp}</Button>
     </Paper>
   </Container>
   )
