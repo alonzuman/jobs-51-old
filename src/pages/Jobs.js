@@ -41,23 +41,23 @@ const Jobs = () => {
 
   return (
     <>
-    <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} style={fabStyle}>
-      <AddIcon />
-      <span style={{margin: '0 .5rem'}}>{translation.addJob}</span>
-    </Fab>
-    <TopBar>
-      <Typography style={{paddingLeft: '1rem', paddingRight: '1rem'}} variant='h1'>{translation.findJob}</Typography>
-      <FiltersBar filterOptions={filtersBar} />
-    </TopBar>
-    <Container>
-      <Box style={boxStyle}>
-        {loading && <CardsSkeletons />}
-        <Grid style={gridStyle} container spacing={2}>
-          {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
-          {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
-        </Grid>
-      </Box>
-    </Container>
+      <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} style={fabStyle}>
+        <AddIcon />
+        <span style={{margin: '0 .5rem'}}>{translation.addJob}</span>
+      </Fab>
+      <TopBar>
+        <Typography style={{paddingLeft: '1rem', paddingRight: '1rem'}} variant='h1'>{translation.findJob}</Typography>
+        <FiltersBar filterOptions={filtersBar} />
+      </TopBar>
+      <Container>
+        <Box style={boxStyle}>
+          {loading && <CardsSkeletons />}
+          <Grid style={gridStyle} container spacing={2}>
+            {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
+            {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
+          </Grid>
+        </Box>
+      </Container>
     </>
   )
 }

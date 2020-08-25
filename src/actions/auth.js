@@ -51,6 +51,10 @@ export const signInWithProvider = (provider) => async dispatch => {
           lastName: displayName?.split(' ')[1] || '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
+          activities: {
+            pending: 0,
+            approved: 0
+          },
           role: 'user',
           dateCreated: Date.now()
         }
@@ -141,6 +145,10 @@ export const signUp = (user) => async dispatch =>{
       lastName,
       avatar,
       phone,
+      activities: {
+        pending: 0,
+        approved: 0
+      },
       role: 'user',
       dateCreated: new Date()
     }

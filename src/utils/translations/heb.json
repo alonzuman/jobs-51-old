@@ -71,5 +71,9 @@
   "adminEmptyState": "אין מידע להציג",
   "activityAdded": "פעילות נוספה בהצלחה!",
   "activitiesEmptyState": "לא נמצאו פעילויות",
-  "enter": "כניסה"
+  "enter": "כניסה",
+  "fillActivityType": "אנא בחרו סוג פעילות",
+  "startTime": "תאריך התחלה",
+  "endTime": "תאריך סיום",
+  "hoursNoGood": "אנא בחרו תאריך סיום נכון"
 }

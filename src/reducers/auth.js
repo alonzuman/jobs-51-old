@@ -6,6 +6,10 @@ const initialState = {
   avatar: '',
   phone: '',
   savedJobs: [],
+  activities: {
+    pending: 0,
+    approved: 0,
+  },
   loading: false
 }
 

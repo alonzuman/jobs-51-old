@@ -54,7 +54,7 @@ function App() {
           {authenticated && <Navbar />}
         </Router>
       </RtlProvider>
-  </ThemeProvider>
+    </ThemeProvider>
   )
 }
 

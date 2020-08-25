@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Paper, Typography, Fab, Grid, Box } from '@material-ui/core'
+import { Paper, Typography, Fab, List, Box } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
 import { getMyActivities, addActivity } from '../actions/activities'
 import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
+import ActivityCard from '../components/cards/ActivityCard'
 
 const Activity = () => {
   const dispatch = useDispatch()
@@ -46,12 +47,7 @@ const Activity = () => {
         {loading && <CardsSkeletons count={1} />}
         {!loading && activities.length === 0 && <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>}
         {!loading && activities &&
-        <Grid container spacing={2}>
-          {activities?.map((activity, index) =>
-            <Grid key={index} item xs={12} md={6} lg={4}>
-              <h3>{activity.description}</h3>
-            </Grid>)}
-        </Grid>}
+        <List>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</List>}
       </Box>
     </div>
   )

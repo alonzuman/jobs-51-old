@@ -1,5 +1,6 @@
 const initialState = {
   activities: [],
+  types: [],
   loading: false
 }
 
@@ -22,6 +23,12 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         activities: [...payload.activities],
+        loading: false
+      }
+    case 'SET_ACTIVITY_TYPES':
+      return {
+        ...state,
+        types: [...payload.types],
         loading: false
       }
     default: return state

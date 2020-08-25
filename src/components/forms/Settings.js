@@ -29,7 +29,6 @@ const Settings = () => {
         <Switch color='primary' checked={checked} onChange={handleCheck} />
       </Box>
       <br />
-      <br />
       {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>}
     </div>
   )
