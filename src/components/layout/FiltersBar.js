@@ -16,7 +16,14 @@ const FiltersBar = ({ filterOptions }) => {
     backgroundColor: theme.palette.background.paper,
     boxShadow: 'none',
     borderBottom: `1px solid ${theme.palette.background.default}`,
-    transition: 'box-shadow .5s ease-in-out'
+  }
+
+  const containerStyle = {
+    direction: 'rtl',
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center'
   }
 
   const boxStyle = {
@@ -36,7 +43,7 @@ const FiltersBar = ({ filterOptions }) => {
   }
 
   return (
-    <AppBar style={appBarStyle}>
+    <div style={containerStyle}>
       <Box style={boxStyle}>
         <Grid style={gridStyle} spacing={1} container>
           {filterOptions?.map((filter, index) =>
@@ -50,7 +57,7 @@ const FiltersBar = ({ filterOptions }) => {
         </Grid>
         <Grid item><Chip style={clearStyle} onClick={() => dispatch(clearGlobalFilters())} label={translation.clear} /></Grid>
       </Box>
-    </AppBar>
+    </div>
   )
 }
 

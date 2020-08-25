@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSavedJobs } from '../../actions'
 import CardsSkeletons from '../cards/CardsSkeletons'
-import { Grid, Typography, Container } from '@material-ui/core'
+import { Grid, Typography, Paper, Box } from '@material-ui/core'
 import JobCard from '../cards/JobCard'
 
 const SavedJobs = () => {
@@ -17,17 +17,28 @@ const SavedJobs = () => {
     }
   }, [authState])
 
+  const paperStyle = {
+    padding: '0 1rem'
+  }
+
+  const boxStyle = {
+    padding: '1rem'
+  }
+
   return (
-    <Container style={{direction: 'rtl'}}>
-      {/* TODO */}
-      <Typography style={{color: theme.palette.type === 'dark' ? 'white' : 'black' }} variant='h1'>{translation.savedJobs}</Typography>
-      {savedJobsLoading && <CardsSkeletons count={1} />}
-      {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
-      {!savedJobsLoading && savedJobs &&
-      <Grid container spacing={2}>
-        {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
-      </Grid>}
-    </Container>
+    <div style={{ direction: 'rtl' }}>
+      <Paper style={paperStyle} elevation={0} square>
+        <Typography variant='h1'>{translation.savedJobs}</Typography>
+      </Paper>
+      <Box style={boxStyle}>
+        {savedJobsLoading && <CardsSkeletons count={1} />}
+        {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
+        {!savedJobsLoading && savedJobs &&
+        <Grid container spacing={2}>
+          {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
+        </Grid>}
+      </Box>
+    </div>
   )
 }
 

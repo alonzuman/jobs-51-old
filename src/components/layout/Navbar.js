@@ -27,7 +27,9 @@ const Navbar = () => {
     position: 'fixed',
     bottom: 0,
     width: '100%',
-    borderBottom: `1px solid ${theme.palette.background.default}`
+    zIndex: 9,
+    backgroundColor: theme.palette.background.default,
+    borderTop: `1px solid ${theme.palette.background.paper}`
   }
 
   const fabStyle = {

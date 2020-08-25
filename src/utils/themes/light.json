@@ -1,0 +1,35 @@
+{
+  "direction": "rtl",
+  "palette": {
+    "type": "light",
+    "primary": {
+      "light": "#286cba",
+      "main": "#286cba",
+      "dark": "#286cba"
+    },
+    "secondary": {
+        "main": "#E89C68"
+      },
+      "background": {
+      }
+    },
+    "typography": {
+      "fontFamily": ["Assistant", "sans-serif"],
+    "h1": {
+      "fontSize": "2rem",
+      "fontWeight": 400,
+      "padding": ".5rem 0",
+      "color": "black"
+    },
+    "subtitle1": {
+      "fontSize": ".6rem"
+    },
+    "body1": {
+      "fontSize": "1rem",
+      "color": "black"
+    },
+    "body2": {
+      "fontSize": ".9rem"
+    }
+  }
+}

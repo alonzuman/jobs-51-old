@@ -10,5 +10,4 @@ export const setTheme = () => async dispatch => {
     localStorage.setItem('theme', 'dark')
     dispatch({ type: 'SET_THEME', payload: { type: 'dark' } })
   }
-  return window.location.reload()
 }

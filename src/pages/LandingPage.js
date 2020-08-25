@@ -60,24 +60,24 @@ const LandingPage = () => {
   return (
     <Container style={containerStyle}>
       <Paper style={paperStyle}>
-          <ShaldagLogo />
-          <Box style={textBoxStyle} className='text-box'>
-            <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
-            <br />
-            <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
-            <br />
-            <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
-          </Box>
-          <Grid style={gridStyle} container spacing={1}>
-            <Grid item>
-              <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
-            </Grid>
-            <Grid item>
-              <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
-            </Grid>
+        <ShaldagLogo />
+        <Box style={textBoxStyle} className='text-box'>
+          <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
+          <br />
+          <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
+          <br />
+          <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
+        </Box>
+        <Grid style={gridStyle} container spacing={1}>
+          <Grid item>
+            <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
           </Grid>
-      </Paper>
-    </Container>
+          <Grid item>
+            <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
+          </Grid>
+        </Grid>
+    </Paper>
+  </Container>
   )
 }
 

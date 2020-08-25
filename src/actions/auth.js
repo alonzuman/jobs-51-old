@@ -26,38 +26,54 @@ export const setUser = (user) => async dispatch => {
   }
 }
 
-export const signInWithFacebook = () => async dispatch => {
+export const signInWithProvider = (provider) => async dispatch => {
   dispatch({
     type: 'AUTH_LOADING'
   })
   try {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
-      const result = await firebase.auth().signInWithPopup(provider)
+    const firebaseProvider = () => {
+      switch (provider) {
+        case 'facebook': return new firebase.auth.FacebookAuthProvider();
+        case 'google': return new firebase.auth.GoogleAuthProvider()
+      }
+    }
 
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
+      const result = await firebase.auth().signInWithPopup(firebaseProvider())
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
-
       const fetchedUser = await db.collection('users').doc(uid).get()
       const user = fetchedUser.data()
-      const newUser = {
-        uid,
-        email,
-        firstName: user.firstName || displayName.split(' ')[0],
-        lastName: user.lastName || displayName.split(' ')[1] || '',
-        avatar: user.avatar || photoURL,
-        phone: user.phone || phoneNumber,
-        dateCreated: user.dateCreated || Date.now()
+      if (!user) {
+        const newUser = {
+          uid,
+          email,
+          firstName: displayName?.split(' ')[0] || '',
+          lastName: displayName?.split(' ')[1] || '',
+          avatar: photoURL || '',
+          phone: phoneNumber || '',
+          dateCreated: Date.now()
+        }
+        await db.collection('users').doc(uid).set(newUser, { merge: true })
+        dispatch(closeDialogs())
+        dispatch({
+          type: 'SIGNED_UP',
+          payload: { ...newUser }
+        })
+        dispatch(setAlert({
+          type: 'success',
+          msg: 'Welcome'
+        }))
+      } else {
+        dispatch(closeDialogs())
+        dispatch({
+          type: 'SIGNED_UP',
+          payload: { ...user }
+        })
+        dispatch(setAlert({
+          type: 'success',
+          msg: 'Welcome'
+        }))
       }
-      await db.collection('users').doc(uid).set(newUser, { merge: true })
-      dispatch(closeDialogs())
-      dispatch({
-        type: 'SIGNED_UP',
-        payload: { ...newUser }
-      })
-      dispatch(setAlert({
-        type: 'success',
-        msg: 'Welcome'
-      }))
     })
   } catch (error) {
     console.log(error)
@@ -67,54 +83,12 @@ export const signInWithFacebook = () => async dispatch => {
         default: return 'Server error'
       }
     }
-
     dispatch({
       type: 'AUTH_FAIL'
     })
     dispatch(setAlert({
       type: 'error',
       msg: msg()
-    }))
-  }
-}
-
-export const signInWithGoogle = () => async dispatch => {
-  dispatch({
-    type: 'AUTH_LOADING'
-  })
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      const result = await firebase.auth().signInWithPopup(provider)
-
-      const { uid, displayName, email, photoURL, phoneNumber } = result.user
-      const fetchedUser = await db.collection('users').doc(uid).get()
-      const user = fetchedUser.data()
-      const newUser = {
-        uid,
-        email,
-        firstName: user.firstName || displayName.split(' ')[0],
-        lastName: user.lastName || displayName.split(' ')[1] || '',
-        avatar: user.avatar || photoURL,
-        phone: user.phone || phoneNumber,
-        dateCreated: user.dateCreated || Date.now()
-      }
-      await db.collection('users').doc(uid).set(newUser, { merge: true })
-      dispatch(closeDialogs())
-      dispatch({
-        type: 'SIGNED_UP',
-        payload: { newUser }
-      })
-      dispatch(setAlert({
-        type: 'success',
-        msg: 'Welcome'
-      }))
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setAlert({
-      type: 'error',
-      msg: 'ServerError'
     }))
   }
 }
@@ -190,10 +164,10 @@ export const signUp = (user) => async dispatch =>{
 export const signOut = () => async dispatch =>{
   try {
     app.auth().signOut()
+    dispatch(closeDialogs())
     dispatch({
       type: 'SIGN_OUT'
     })
-    dispatch(closeDialogs())
     dispatch(setAlert({
       type: 'success',
       msg: 'SignedOutSuccess'
@@ -217,7 +191,10 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
       type: 'SET_USER',
       payload: { uid, ...user, ...personalDetails }
     })
-    dispatch(closeDialogs())
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'Success'
+    }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
@@ -241,7 +218,6 @@ export const editProfile = (user, uid) => async dispatch => {
       type: 'success',
       msg: 'Success'
     }))
-    dispatch(closeDialogs())
   } catch (error) {
     console.log(error)
     dispatch(setAlert({

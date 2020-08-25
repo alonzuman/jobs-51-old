@@ -5,7 +5,8 @@ import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import { Grid, Typography, Container, Paper, Box } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
-import dotenv from 'dotenv'
+import ShaldagLogo from '../ShaldagLogo'
+import TopBar from '../components/layout/TopBar'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -25,13 +26,16 @@ const Jobs = () => {
   }
 
   const boxStyle = {
-    paddingTop: '4.5rem',
+    paddingTop: '7rem',
     paddingBottom: '4.5rem'
   }
 
   return (
-    <Container>
+    <>
+    <TopBar>
       <FiltersBar filterOptions={filtersBar} />
+    </TopBar>
+    <Container>
       <Box style={boxStyle}>
         {loading && <CardsSkeletons />}
         <Grid style={gridStyle} container spacing={2}>
@@ -40,6 +44,7 @@ const Jobs = () => {
         </Grid>
       </Box>
     </Container>
+    </>
   )
 }
 

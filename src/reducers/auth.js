@@ -20,7 +20,7 @@ export const authReducer = (state = initialState, action) => {
       }
     case 'AUTH_FAIL':
       return {
-        ...state,
+        ...initialState,
         loading: false
       }
     case 'UPDATED_PROFILE':
@@ -28,6 +28,7 @@ export const authReducer = (state = initialState, action) => {
     case 'SIGNED_IN':
     case 'SET_USER':
       return {
+        ...state,
         ...payload,
         authenticated: true,
         loading: false

@@ -50,7 +50,6 @@ const Dialogs = () => {
   }, [open])
 
   const paperStyle = {
-    backgroundColor: localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef',
     height: '100%',
   }
 
