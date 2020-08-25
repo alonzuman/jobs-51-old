@@ -70,5 +70,6 @@
   "admin": "ניהול",
   "adminEmptyState": "אין מידע להציג",
   "activityAdded": "פעילות נוספה בהצלחה!",
-  "activitiesEmptyState": "לא נמצאו פעילויות"
+  "activitiesEmptyState": "לא נמצאו פעילויות",
+  "enter": "כניסה"
 }
