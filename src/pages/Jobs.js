@@ -32,6 +32,7 @@ const Jobs = () => {
 
   const fabStyle = {
     position: 'fixed',
+    direction: 'rtl',
     margin: '0 auto',
     bottom: '4.5rem',
     left: '50%',

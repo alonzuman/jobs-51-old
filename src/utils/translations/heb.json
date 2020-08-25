@@ -65,5 +65,8 @@
   "findJob": "מאגר עבודות",
   "activity": "הפעילות שלי",
   "notifications": "התראות",
-  "notificationsEmptyState": "אין התראות"
+  "notificationsEmptyState": "אין התראות",
+  "addActivity": "הזנת פעילות",
+  "admin": "ניהול",
+  "adminEmptyState": "אין מידע להציג"
 }

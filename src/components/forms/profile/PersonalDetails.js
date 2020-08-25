@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Button, CircularProgress } from '@material-ui/core'
+import { TextField, Button, CircularProgress, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
 import { addPersonalDetails } from '../../../actions'
@@ -26,9 +26,15 @@ const PersonalDetails = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
+      <Grid container spacing={1}>
+        <Grid item xs={6}>
+          <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
+        </Grid>
+      </Grid>
       <TextField label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
-      <TextField label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
       <AddChips collection='skills' label={translation.skills} chips={skills} setChips={setSkills} />
       <Button className='button-style' variant='contained' color='primary' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.update}</Button>
     </form>

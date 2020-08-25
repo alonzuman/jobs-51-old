@@ -18,19 +18,12 @@ const LandingPage = () => {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: '70vh'
+    minHeight: '70vh',
   }
 
   const textBoxStyle = {
     maxWidth: 700,
     margin: '2rem 1rem'
-  }
-
-  const gridStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 'fit-content'
   }
 
   const textStyle = {
@@ -47,7 +40,8 @@ const LandingPage = () => {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '1rem'
   }
 
   useEffect(() => {
@@ -56,7 +50,7 @@ const LandingPage = () => {
     })
   })
 
-  if (currentUser) return <Redirect to='/results/jobs' />
+  if (currentUser) return <Redirect to='/jobs' />
   return (
     <Container style={containerStyle}>
       <Paper style={paperStyle}>
@@ -68,14 +62,8 @@ const LandingPage = () => {
           <br />
           <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
         </Box>
-        <Grid style={gridStyle} container spacing={1}>
-          <Grid item>
-            <Button color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>{translation.postingAJob}</Button>
-          </Grid>
-          <Grid item>
-            <Button color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.lookingForAJob}</Button>
-          </Grid>
-        </Grid>
+        <Button style={{ marginBottom: '.5rem' }} className='button-style' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signIn}</Button>
+        <Button className='button-style' color='default' variant='outlined' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signUp}</Button>
     </Paper>
   </Container>
   )

@@ -51,6 +51,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           lastName: displayName?.split(' ')[1] || '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
+          role: 'user',
           dateCreated: Date.now()
         }
         await db.collection('users').doc(uid).set(newUser, { merge: true })
@@ -140,6 +141,7 @@ export const signUp = (user) => async dispatch =>{
       lastName,
       avatar,
       phone,
+      role: 'user',
       dateCreated: new Date()
     }
     await db.collection('users').doc(uid).set(newUser, { merge: true })

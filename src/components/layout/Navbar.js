@@ -13,13 +13,17 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
+import { checkPermissions } from '../../utils'
 
 const Navbar = () => {
+  const { role } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 
@@ -37,7 +41,7 @@ const Navbar = () => {
     <BottomNavigation value={value} onChange={handleChange} style={navbarStyle}>
       <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
       <BottomNavigationAction component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
-      <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />
+      {checkPermissions(role) >= 2 && <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
       <BottomNavigationAction
         component={Link}
         to='/notifications'
@@ -50,6 +54,7 @@ const Navbar = () => {
           </Badge>
         } />
       <BottomNavigationAction component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
+      {checkPermissions(role) >= 3 && <BottomNavigationAction component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
     </BottomNavigation>
   )
 }

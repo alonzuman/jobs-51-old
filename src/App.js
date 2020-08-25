@@ -13,12 +13,11 @@ import Navbar from './components/layout/Navbar'
 import EditProfile from './components/forms/EditProfile'
 import Activity from './pages/Activity'
 import Notifications from './pages/Notifications'
+import Admin from './pages/Admin'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Paper, Dialog } from '@material-ui/core'
 import { setTheme } from './actions'
-import jss from 'jss'
 
 // Redux
 import { useSelector } from 'react-redux'
@@ -50,6 +49,7 @@ function App() {
             <ProtectedRoute exact path='/notifications' component={Notifications} />
             <ProtectedRoute exact path='/profile' component={EditProfile} />
             <ProtectedRoute exact path='/users' component={Employees} />
+            <ProtectedRoute exact path='/admin' component={Admin} />
           </Switch>
           {authenticated && <Navbar />}
         </Router>
