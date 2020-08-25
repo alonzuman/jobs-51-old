@@ -1,37 +1,37 @@
 {
-    "direction": "rtl",
-    "palette": {
-      "type": "dark",
-      "primary": {
-        "light": "#286cba",
-        "main": "#286cba",
-        "dark": "#286cba"
+  "direction": "rtl",
+  "palette": {
+    "type": "dark",
+    "primary": {
+      "light": "#286cba",
+      "main": "#286cba",
+      "dark": "#286cba"
     },
-      "secondary": {
-        "main": "#E89C68"
-      },
-      "background": {
-      }
+    "secondary": {
+      "main": "#E89C68"
     },
-    "typography": {
-      "fontFamily": ["Assistant", "sans-serif"],
-      "h1": {
-        "fontSize": "2rem",
-        "fontWeight": 400,
-        "padding": ".5rem 0",
-        "color": "white"
+    "background": {
+    }
+  },
+  "typography": {
+    "fontFamily": ["Assistant", "sans-serif"],
+    "h1": {
+      "fontSize": "2rem",
+      "fontWeight": 400,
+      "padding": ".5rem 0",
+      "color": "white"
     },
-      "subtitle1": {
-        "fontSize": ".6rem",
-        "color": "#f7f7f7"
+    "subtitle1": {
+      "fontSize": ".6rem",
+      "color": "#f7f7f7"
     },
-      "body1": {
-        "fontSize": "1rem",
-        "color": "white"
+    "body1": {
+      "fontSize": "1rem",
+      "color": "white"
     },
-      "body2": {
-        "fontSize": ".9rem",
-        "color": "#f7f7f7"
+    "body2": {
+      "fontSize": ".9rem",
+      "color": "#f7f7f7"
     }
   }
 }

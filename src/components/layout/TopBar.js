@@ -15,8 +15,8 @@ const TopBar = ({ children }) => {
     height: 'fit-content',
     justifyContent: 'center',
     padding: '.25rem 1rem',
-    backgroundColor: theme.palette.background.default,
-    borderBottom: `1px solid ${theme.palette.background.paper}`
+    backgroundColor: theme.palette.background.paper,
+    borderBottom: `1px solid ${theme.palette.background.default}`
   }
 
   const childrenContainerStyle = {

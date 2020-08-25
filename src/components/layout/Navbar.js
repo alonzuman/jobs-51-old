@@ -28,8 +28,8 @@ const Navbar = () => {
     bottom: 0,
     width: '100%',
     zIndex: 9,
-    backgroundColor: theme.palette.background.default,
-    borderTop: `1px solid ${theme.palette.background.paper}`
+    backgroundColor: theme.palette.background.paper,
+    borderTop: `1px solid ${theme.palette.background.default}`
   }
 
   const fabStyle = {
