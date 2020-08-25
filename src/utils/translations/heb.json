@@ -76,5 +76,7 @@
   "startTime": "תאריך התחלה",
   "endTime": "תאריך סיום",
   "hoursNoGood": "אנא בחרו תאריך סיום נכון",
-  "latestActivities": "פעילות אחרונה"
+  "latestActivities": "פעילות אחרונה",
+  "pending": "ממתין לאישור",
+  "approved": "מאושר"
 }

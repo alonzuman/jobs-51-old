@@ -41,7 +41,8 @@ const Activity = () => {
     display: 'flex',
     borderRadius: '1rem',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
   }
 
   return (
@@ -58,11 +59,13 @@ const Activity = () => {
           <Grid xs={6} md={6} lg={6} item>
             <Paper style={statsPaperStyle} elevation={0}>
               <Typography variant='h1'>{pending}</Typography>
+              <Typography variant='body1'>{translation.pending}</Typography>
             </Paper>
           </Grid>
           <Grid xs={6} md={6} lg={6} item>
             <Paper style={statsPaperStyle} elevation={0}>
               <Typography variant='h1'>{approved}</Typography>
+              <Typography variant='body1'>{translation.approved}</Typography>
             </Paper>
           </Grid>
         </Grid>
