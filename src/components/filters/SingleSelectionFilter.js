@@ -3,6 +3,7 @@ import { Grid, Chip, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
 import ChipsSkeleton from '../layout/ChipsSkeleton'
+import { dateFilters } from '../../utils'
 
 const SingleSelectionFilter = ({ type }) => {
   const { translation } = useSelector(state => state.theme)
@@ -12,10 +13,14 @@ const SingleSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()
 
   const fetch = async () => {
-    const res = await dispatch(getFilters(type))
-    setSelections({...res})
-    if (filters && Object.keys(filters).length > 0) {
-      setFilter(filters[type])
+    if (type === 'dates') {
+      setSelections([...dateFilters()])
+    } else {
+      const res = await dispatch(getFilters(type))
+      setSelections({...res})
+      if (filters && Object.keys(filters).length > 0) {
+        setFilter(filters[type])
+      }
     }
   }
 
@@ -34,13 +39,14 @@ const SingleSelectionFilter = ({ type }) => {
           if (Object.values(selections)[index] !== 0) {
             return (
               <Grid key={index} item>
-                <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />
+                {type !== 'dates' && <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />}
+                {type === 'dates' && <Chip onClick={() => setFilter(selections[index].value)} color={filter === selections[index].value ? 'primary' : 'default'} label={selections[index].label} />}
               </Grid>)
               }}
             )}
       </Grid>
       <br />
-      <Button disabled={filter?.trim().length === 0} variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
+      <Button disabled={filter?.length === 0} variant='contained' color='primary' className='button-style' onClick={handleSubmit}>{translation.apply}</Button>
     </div>
   )
 }

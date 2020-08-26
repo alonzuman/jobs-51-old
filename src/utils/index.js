@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const checkPermissions = (role) => {
   switch (role) {
     case 'user': return 1;
@@ -23,4 +25,15 @@ export const calcHours = (startHour, endHour, date) => {
   const hours = minutes / 60
   const total = Math.round(hours * 100) / 100;
   return total
+}
+
+export const dateFilters = () => {
+  const day = 86400000
+  // TODO fix the calculations
+
+  return [
+    { label: 'Day', value: Date.now() - day },
+    { label: 'Week', value: Date.now() - (day * 7) },
+    { label: 'Month', value: Date.now() - (day * 30) },
+  ]
 }

@@ -15,13 +15,12 @@ const Jobs = () => {
   useEffect(() => { dispatch(getJobs()) }, [dispatch, filters])
 
   const filtersBar = [
-    // { label: translation.datePosted, onClick: () => dispatch(openDatesFilterDialog()) },
     { type: 'categories', label: translation.categories, onClick: () => dispatch(openDialog({ type: 'CategoriesFilter', title: 'categories' }))  },
     { type: 'locations',  label: translation.location, onClick: () => dispatch(openDialog({ type: 'LocationsFilter', title: 'location' }))  },
+    { type: 'dates', label: translation.datePosted, onClick: () => dispatch(openDialog({ type: 'DatesFilter', title: 'date' })) },
   ]
 
   const gridStyle = {
-    direction: 'rtl',
     padding: '0 0 1rem 0'
   }
 
@@ -32,7 +31,6 @@ const Jobs = () => {
 
   const fabStyle = {
     position: 'fixed',
-    direction: 'rtl',
     margin: '0 auto',
     bottom: '4.5rem',
     left: '50%',

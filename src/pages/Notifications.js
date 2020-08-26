@@ -1,6 +1,7 @@
 import React from 'react'
 import { Paper, Typography, Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+import PageHeader from '../components/layout/PageHeader'
 
 const Notifications = () => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -15,14 +16,12 @@ const Notifications = () => {
   }
 
   return (
-    <div style={{ direction: 'rtl' }}>
-      <Paper style={paperStyle} elevation={0} square>
-        <Typography variant='h1'>{translation.notifications}</Typography>
-      </Paper>
+    <>
+      <PageHeader title={translation.notifications} />
       <Box style={boxStyle}>
         <Typography variant='body1'>{translation.notificationsEmptyState}</Typography>
       </Box>
-    </div>
+    </>
   )
 }
 

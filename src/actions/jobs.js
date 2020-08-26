@@ -185,28 +185,28 @@ export const getJobs = () => async dispatch => {
   })
   try {
     let snapshot
+    const categoriesQuery = ['categories', 'array-contains-any', filters.categories]
+    const locationsQuery = ['location', '==', filters.locations]
+    const dateQuery = ['dateCreated', '>=', filters.dates]
+
     if (filters) {
-      if (filters.categories && filters.locations) {
-        snapshot = await jobsRef
-                          .where('categories', 'array-contains-any', filters.categories)
-                          .where('location', '==', filters.locations)
-                          .orderBy('dateCreated', 'desc')
-                          .get()
-      } else if (filters.categories) {
-        snapshot = await jobsRef
-                          .where('categories', 'array-contains-any', filters.categories)
-                          .orderBy('dateCreated', 'desc')
-                          .get()
+      if (filters.categories && filters.locations && filters.dateQuery) {
+        snapshot = await jobsRef.where(...categoriesQuery).where(...locationsQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
+      } else if (filters.categories && filters.locations) {
+        snapshot = await jobsRef.where(...categoriesQuery).where(...locationsQuery).orderBy('dateCreated', 'desc').get()
+      } else if (filters.categories && filters.dates) {
+        snapshot = await jobsRef.where(...categoriesQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
+      } else if (filters.locations && filters.dates) {
+        snapshot = await jobsRef.where(...locationsQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
       } else if (filters.locations) {
-        snapshot = await jobsRef
-                          .where('location', '==', filters.locations)
-                          .orderBy('dateCreated', 'desc')
-                          .get()
+        snapshot = await jobsRef.where(...locationsQuery).orderBy('dateCreated', 'desc').get()
+      } else if (filters.categories) {
+        snapshot = await jobsRef.where(...categoriesQuery).orderBy('dateCreated', 'desc').get()
+      } else if (filters.dates) {
+        snapshot = await jobsRef.where(...dateQuery).orderBy('dateCreated', 'desc').get()
       } else {
         snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
       }
-    } else {
-      snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
     }
 
     let jobs = []

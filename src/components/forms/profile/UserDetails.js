@@ -46,7 +46,6 @@ const UserDetails = () => {
   const boxStyle = {
     display: 'flex',
     alignItems: 'top',
-    direction: 'rtl'
   }
 
   const avatarStyle = {

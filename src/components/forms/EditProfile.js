@@ -4,6 +4,8 @@ import PersonalDetails from './profile/PersonalDetails'
 import { Tabs, Tab, Container, Paper, Typography, Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Settings from './Settings'
+import TopBar from '../layout/TopBar'
+import PageHeader from '../layout/PageHeader'
 
 const EditProfile = () => {
   const [value, setValue] = useState(0)
@@ -15,22 +17,25 @@ const EditProfile = () => {
     padding: '0 1rem',
   }
 
+  const containerStyle = {
+    padding: '7rem 1rem 4rem 1rem!important'
+  }
+
   return (
-    <div style={{direction: 'rtl'}}>
-      <Paper style={paperStyle} square elevation={0}>
-      <Typography variant='h1'>{translation.myProfile}</Typography>
+    <>
+      <PageHeader title={translation.myProfile} >
         <Tabs indicatorColor='primary' value={value}>
           <Tab label={translation.userDetails} onClick={() => handleValueChange(0)} />
           <Tab label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
           <Tab label={translation.settings} onClick={() => handleValueChange(2)}  />
         </Tabs>
-      </Paper>
-      <Container>
+      </PageHeader >
+      <Container style={containerStyle}>
         {value === 0 && <UserDetails />}
         {value === 1 && <PersonalDetails />}
         {value === 2 && <Settings />}
       </Container>
-    </div>
+    </>
   )
 }
 

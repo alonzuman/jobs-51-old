@@ -78,5 +78,7 @@
   "hoursNoGood": "אנא בחרו תאריך סיום נכון",
   "latestActivities": "פעילות אחרונה",
   "pending": "ממתין לאישור",
-  "approved": "מאושר"
+  "approved": "מאושר",
+  "manageActivities": "ניהול פעילויות",
+  "manageUsers": "ניהול משתמשים"
 }

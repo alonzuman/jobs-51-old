@@ -4,11 +4,15 @@ import { Route, Redirect } from 'react-router-dom'
 import { app } from './firebase'
 import { setUser, signOut } from './actions'
 import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
+import { checkPermissions } from './utils'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
+  const { role } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
+  const { requiredRole } = rest
+
 
   useEffect(() => {
     dispatch({ type: 'AUTH_LOADING' })
@@ -24,10 +28,20 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     })
   }, [])
 
+  const checkRole = () => {
+    if (requiredRole && currentUser) {
+      const requirement =  checkPermissions(requiredRole)
+      const currentUserRole = checkPermissions(role)
+      return (currentUserRole >= requirement)
+    } else {
+      return true
+    }
+  }
+
   return (
     <>
       {loading && <CircularSpinnerWithContainer />}
-      {!loading && currentUser && <Route {...rest} render={props => <Component {...props} />} />}
+      {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
       {!loading && !currentUser && <Redirect to='/' />}
     </>
   )

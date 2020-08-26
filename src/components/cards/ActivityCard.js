@@ -1,11 +1,10 @@
 import React from 'react'
-import { Grid, Card, CardHeader, ListItem, ListItemAvatar, ListItemText, Chip, Box, Typography, Paper } from '@material-ui/core'
+import { ListItem, ListItemText, Chip, Box, Typography, Paper } from '@material-ui/core'
 
 const ActivityCard = ({ activity }) => {
   const listItemStyle = {
-    direction: 'rtl',
     borderRadius: '1rem',
-    padding: 0
+    padding: 0,
   }
 
   const paperStyle = {

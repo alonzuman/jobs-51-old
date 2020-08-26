@@ -4,6 +4,7 @@ import { getSavedJobs } from '../../actions'
 import CardsSkeletons from '../cards/CardsSkeletons'
 import { Grid, Typography, Paper, Box } from '@material-ui/core'
 import JobCard from '../cards/JobCard'
+import PageHeader from '../layout/PageHeader'
 
 const SavedJobs = () => {
   const authState = useSelector(state => state.auth)
@@ -28,10 +29,8 @@ const SavedJobs = () => {
   }
 
   return (
-    <div style={{ direction: 'rtl' }}>
-      <Paper style={paperStyle} elevation={0} square>
-        <Typography variant='h1'>{translation.savedJobs}</Typography>
-      </Paper>
+    <>
+      <PageHeader title={translation.savedJobs} />
       <Box style={boxStyle}>
         {savedJobsLoading && <CardsSkeletons count={1} />}
         {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
@@ -40,7 +39,7 @@ const SavedJobs = () => {
           {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
         </Grid>}
       </Box>
-    </div>
+    </>
   )
 }
 

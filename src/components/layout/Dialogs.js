@@ -71,6 +71,7 @@ const Dialogs = () => {
       case 'SavedJobs': return <SavedJobs/>
       case 'CategoriesFilter': return <MultiSelectionFilter type='categories' />
       case 'LocationsFilter': return <SingleSelectionFilter type='locations' />
+      case 'DatesFilter': return <SingleSelectionFilter type='dates' />
     }
   }
 

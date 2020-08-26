@@ -9,7 +9,6 @@ const FiltersBar = ({ filterOptions }) => {
   const dispatch = useDispatch()
 
   const containerStyle = {
-    direction: 'rtl',
     display: 'flex',
     width: '100%',
     height: '100%',

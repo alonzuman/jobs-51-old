@@ -10,7 +10,6 @@ const CustomAlert = () => {
   const { isOn, msg, type } = useSelector(state => state.alert)
 
   const boxStyle = {
-    direction: 'rtl',
     position: 'fixed',
     bottom: '5rem',
     width: '100%',

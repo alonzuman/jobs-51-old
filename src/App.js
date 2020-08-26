@@ -24,6 +24,8 @@ import { useSelector } from 'react-redux'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
+import ManageUsers from './pages/admin/ManageUsers'
+import ManageActivities from './pages/admin/ManageActivities'
 
 
 function App() {
@@ -42,14 +44,18 @@ function App() {
           <Dialogs />
           <CustomAlert />
           <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <ProtectedRoute exact path='/jobs' component={Jobs} />
-            <ProtectedRoute exact path='/saved' component={SavedJobs} />
-            <ProtectedRoute exact path='/activity' component={Activity} />
-            <ProtectedRoute exact path='/notifications' component={Notifications} />
-            <ProtectedRoute exact path='/profile' component={EditProfile} />
-            <ProtectedRoute exact path='/users' component={Employees} />
-            <ProtectedRoute exact path='/admin' component={Admin} />
+            <div style={{direction: 'rtl'}}>
+              <Route exact path='/' component={LandingPage} />
+              <ProtectedRoute exact path='/jobs' component={Jobs} />
+              <ProtectedRoute exact path='/saved' component={SavedJobs} />
+              <ProtectedRoute exact path='/activity' component={Activity} />
+              <ProtectedRoute exact path='/notifications' component={Notifications} />
+              <ProtectedRoute exact path='/profile' component={EditProfile} />
+              <ProtectedRoute exact path='/users' component={Employees} />
+              <ProtectedRoute requiredRole='manager' exact path='/admin' component={Admin} />
+              <ProtectedRoute requiredRole='manager' exact path='/admin/users' component={ManageUsers} />
+              <ProtectedRoute requiredRole='manager' exact path='/admin/activities' component={ManageActivities} />
+            </div>
           </Switch>
           {authenticated && <Navbar />}
         </Router>

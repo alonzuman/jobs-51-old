@@ -7,6 +7,7 @@ import { getMyActivities, addActivity } from '../actions/activities'
 import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import ActivityCard from '../components/cards/ActivityCard'
+import PageHeader from '../components/layout/PageHeader'
 
 const Activity = () => {
   const dispatch = useDispatch()
@@ -46,15 +47,14 @@ const Activity = () => {
   }
 
   return (
-    <div style={{ direction: 'rtl' }}>
+    <>
       <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} style={fabStyle}>
         <AddIcon />
         <span style={{ margin: '0 .5rem' }}>{translation.addActivity}</span>
       </Fab>
-      <Paper style={paperStyle} elevation={0} square>
-        <Typography variant='h1'>{translation.activity}</Typography>
-      </Paper>
+      <PageHeader title={translation.activity} />
       <Box style={boxStyle}>
+        <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Grid container spacing={2}>
           <Grid xs={6} md={6} lg={6} item>
             <Paper style={statsPaperStyle} elevation={0}>
@@ -75,7 +75,7 @@ const Activity = () => {
         {!loading && activities &&
         <List>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</List>}
       </Box>
-    </div>
+    </>
   )
 }
 

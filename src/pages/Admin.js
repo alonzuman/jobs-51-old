@@ -1,28 +1,48 @@
 import React from 'react'
-import { Paper, Typography, Box } from '@material-ui/core'
+import { Paper, Typography, Box, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import PageHeader from '../components/layout/PageHeader'
 
 const Admin = () => {
-  const { translation, theme } = useSelector(state => state.theme)
-
-  const paperStyle = {
-    padding: '0 1rem',
-    borderBottom: `1px solid ${theme.palette.border.main}`
-  }
+  const { translation } = useSelector(state => state.theme)
 
   const boxStyle = {
     padding: '1rem'
   }
 
+  const actionPaperStyle = {
+    width: '100%',
+    height: 120,
+    display: 'flex',
+    borderRadius: '1rem',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  }
+
   return (
-    <div style={{ direction: 'rtl' }}>
-      <Paper style={paperStyle} elevation={0} square>
-        <Typography variant='h1'>{translation.admin}</Typography>
-      </Paper>
+    <>
+      <PageHeader title={translation.admin} />
       <Box style={boxStyle}>
-        <Typography variant='body1'>{translation.adminEmptyState}</Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={4} lg={4}>
+            <Link to='/admin/users'>
+              <Paper style={actionPaperStyle}>
+                Users
+              </Paper>
+            </Link>
+          </Grid>
+          <Grid item xs={6} md={4} lg={4}>
+            <Link to='/admin/activities'>
+              <Paper style={actionPaperStyle}>
+                Activities
+              </Paper>
+            </Link>
+          </Grid>
+        </Grid>
       </Box>
-    </div>
+    </>
   )
 }
 

@@ -7,7 +7,6 @@ const TopBar = ({ children }) => {
   const { theme } = useSelector(state => state.theme)
 
   const containerStyle = {
-    direction: 'rtl',
     position: 'fixed',
     top: 0,
     width: '100%',
