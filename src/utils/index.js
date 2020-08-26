@@ -32,8 +32,8 @@ export const dateFilters = () => {
   // TODO fix the calculations
 
   return [
-    { label: 'Day', value: Date.now() - day },
-    { label: 'Week', value: Date.now() - (day * 7) },
-    { label: 'Month', value: Date.now() - (day * 30) },
+    { label: 'יום', value: Date.now() - day },
+    { label: 'שבוע', value: Date.now() - (day * 7) },
+    { label: 'חודש', value: Date.now() - (day * 30) },
   ]
 }
