@@ -20,7 +20,7 @@ export const calcHours = (startHour, endHour, date) => {
   const endDate = new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endHourArr[0], endHourArr[1])
 
   const ms = endDate - startDate
-  const seconds = ms / 1000 // Convert to seconds
+  const seconds = ms / 1000
   const minutes = seconds / 60
   const hours = minutes / 60
   const total = Math.round(hours * 100) / 100;
@@ -30,10 +30,9 @@ export const calcHours = (startHour, endHour, date) => {
 export const dateFilters = () => {
   const day = 86400000
   // TODO fix the calculations
-
   return [
-    { label: 'יום', value: Date.now() - day },
-    { label: 'שבוע', value: Date.now() - (day * 7) },
-    { label: 'חודש', value: Date.now() - (day * 30) },
+    { label: 'היום', value: Date.now() - (2 * day) },
+    { label: 'השבוע', value: Date.now() - (8 * day) },
+    { label: 'החודש', value: Date.now() - (30 * day) },
   ]
 }
