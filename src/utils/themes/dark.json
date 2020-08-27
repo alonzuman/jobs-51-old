@@ -17,7 +17,7 @@
     }
   },
   "typography": {
-    "fontFamily": ["Assistant", "sans-serif"],
+    "fontFamily": ["Rubik", "sans-serif"],
     "h1": {
       "fontSize": "2rem",
       "fontWeight": 500,
@@ -25,13 +25,13 @@
       "color": "white"
     },
     "h2": {
-      "fontSize": "1.5rem",
+      "fontSize": "1.3rem",
       "fontWeight": 400,
       "color": "white",
       "padding": ".5rem 0"
     },
     "subtitle1": {
-      "fontSize": ".6rem",
+      "fontSize": ".75rem",
       "color": "#f7f7f7"
     },
     "body1": {

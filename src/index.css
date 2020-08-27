@@ -12,10 +12,6 @@ form {
   margin: 1rem 0 0 0;
 }
 
-.subtitle1 {
-  color: #9c9c9c!important;
-}
-
 .MuiCardContent-root:last-child {
   padding-bottom: 1rem!important;
 }
@@ -60,7 +56,7 @@ form {
 }
 
 .MuiDialogContent-root {
-  padding: 16px!important;
+  padding: 0 16px 16px 16px!important;
 }
 
 .full-width {

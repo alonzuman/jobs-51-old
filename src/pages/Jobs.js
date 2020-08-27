@@ -26,7 +26,7 @@ const Jobs = () => {
 
   const boxStyle = {
     paddingTop: '7.5rem',
-    paddingBottom: '4.5rem'
+    paddingBottom: '7.5rem'
   }
 
   const fabStyle = {

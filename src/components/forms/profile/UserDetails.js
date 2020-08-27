@@ -49,7 +49,9 @@ const UserDetails = () => {
   }
 
   const avatarStyle = {
-    margin: '0 .5rem'
+    margin: '0 .5rem',
+    height: '2.2rem',
+    width: '2.2rem'
   }
 
   if (!authState || loading) {

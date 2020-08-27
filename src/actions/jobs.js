@@ -185,11 +185,11 @@ export const getJobs = () => async dispatch => {
   })
   try {
     let snapshot
-    const categoriesQuery = ['categories', 'array-contains-any', filters.categories]
-    const locationsQuery = ['location', '==', filters.locations]
-    const dateQuery = ['dateCreated', '>=', filters.dates]
-
     if (filters) {
+      const categoriesQuery = ['categories', 'array-contains-any', filters.categories]
+      const locationsQuery = ['location', '==', filters.locations]
+      const dateQuery = ['dateCreated', '>=', filters.dates]
+
       if (filters.categories && filters.locations && filters.dateQuery) {
         snapshot = await jobsRef.where(...categoriesQuery).where(...locationsQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
       } else if (filters.categories && filters.locations) {
@@ -207,6 +207,8 @@ export const getJobs = () => async dispatch => {
       } else {
         snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
       }
+    } else {
+      snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
     }
 
     let jobs = []

@@ -3,12 +3,12 @@ import { setAlert } from "./alert"
 import firebase from 'firebase'
 import store from '../store'
 import { closeDialogs } from "./dialogs"
-const activitiesRef = db.collection('activities')
 const usersRef = db.collection('users')
+const activitiesRef = db.collection('activities')
 const activityTypesRef = db.collection('activity-types')
 
 export const addActivity = (activity) => async dispatch => {
-  const { uid } = store.getState().auth
+  const { uid, activities } = store.getState().auth
   dispatch({
     type: 'ACTIVITY_LOADING'
   })
@@ -29,6 +29,15 @@ export const addActivity = (activity) => async dispatch => {
     dispatch({
       type: 'ADD_ACTIVITY',
       payload: { newActivity }
+    })
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        activities: {
+          pending: activities.pending + total,
+          approved: activities.approved
+        }
+      }
     })
     dispatch(setAlert({
       type: 'success',
@@ -86,21 +95,117 @@ export const getActivityTypes = () => async dispatch => {
   }
 }
 
-// TODO
+export const approveActivity = (activity) => async dispatch => {
+  // TODO add condition that checks if its unapproved already
+  try {
+    const { activities } = store.getState().auth
+    const { id, total, uid } = activity
+    await activitiesRef.doc(id).set({ approved: true }, { merge: true })
+    const increment = firebase.firestore.FieldValue.increment(total);
+    const decrement = firebase.firestore.FieldValue.increment(-total);
 
+    const userRef = await usersRef.doc(uid)
+    await userRef.update('activities.pending', decrement)
+    await userRef.update('activities.approved', increment)
 
-export const incrementUserHours = () => {
-
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'ActivityApproved'
+    }))
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        activities: {
+          pending: activities.pending - total,
+          approved:  activities.approved + total
+        }
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
 }
 
-export const decrementUserHours = () => {
+export const unApproveActivity = (activity) => async dispatch => {
+  // TODO add condition that checks if its unapproved already
+  try {
+    const { activities } = store.getState().auth
+    const { id, total, uid } = activity
+    await activitiesRef.doc(id).set({ approved: false }, { merge: true })
+    const increment = firebase.firestore.FieldValue.increment(total);
+    const decrement = firebase.firestore.FieldValue.increment(-total);
 
+    const userRef = await usersRef.doc(uid)
+    await userRef.update('activities.approved', decrement)
+    await userRef.update('activities.pending', increment)
+
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'ActivityApproved'
+    }))
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        activities: {
+          pending: activities.pending + total,
+          approved: activities.approved - total
+        }
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
 }
 
-export const approveActivity = () => {
+export const deleteActivity = (activity) => async dispatch => {
+  dispatch({
+    type: 'ACTIVITY_LOADING'
+  })
+  try {
+    const { activities } = store.getState().auth
+    const { id, uid, total } = activity
+    await activitiesRef.doc(id).delete()
+    const userRef = await usersRef.doc(uid)
+    const decrement = firebase.firestore.FieldValue.increment(-total);
 
-}
-
-export const unApproveActivity = () => {
-
+    if (activity.approved) {
+      await userRef.update('activities.approved', decrement)
+    } else {
+      await userRef.update('activities.pending', decrement)
+    }
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        activities: {
+          pending: activity.approved ? activities.pending : activities.pending - total,
+          approved: !activity.approved ? activities.approved : activities.approved - total,
+        }
+      }
+    })
+    dispatch({
+      type: 'REMOVE_ACTIVITY',
+      payload: id
+    })
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'ActivityRemoved'
+    }))
+    dispatch({
+      type: 'ACITIVITIES_STOP_LOADING'
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
 }

@@ -5,7 +5,7 @@ const ShaldagLogo = ({ height = 134, width = 279 }) => {
   const { theme } = useSelector(state => state.theme)
 
   return (
-    <svg width={width} height={height} viewBox="0 0 279 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg style={{direction: 'ltr'}} width={width} height={height} viewBox="0 0 279 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Artboard">
           <g id="Group" fill={theme.palette.primary.main}>

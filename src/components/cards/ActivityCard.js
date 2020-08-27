@@ -1,7 +1,14 @@
-import React from 'react'
-import { ListItem, ListItemText, Chip, Box, Typography, Paper } from '@material-ui/core'
+import React, { useState } from 'react'
+import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Button } from '@material-ui/core'
+import { translateDate } from '../../utils'
+import { useSelector } from 'react-redux'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ActivityCardActions from './ActivityCardActions';
 
 const ActivityCard = ({ activity }) => {
+  const [open, setOpen] = useState(false)
+  const { theme, translation } = useSelector(state => state.theme)
+
   const listItemStyle = {
     borderRadius: '1rem',
     padding: 0,
@@ -11,25 +18,58 @@ const ActivityCard = ({ activity }) => {
     width: '100%',
     height: '100%',
     borderRadius: '1rem',
-    padding: '1rem',
     display: 'flex'
   }
 
+  const dateStyle = {
+    borderLeft: `1px solid ${theme.palette.border.main}`,
+    textAlign: 'center',
+    padding: '1rem',
+    minWidth: 72
+  }
+
+  const detailsStyle = {
+    padding: '1rem 1rem 1rem 0',
+    width: '100%'
+  }
+
+  const actionBoxStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+  const iconStyle = {
+    transform: open ? 'rotate(-90deg)' : 'none',
+    transition: '.15s transform ease-in-out'
+  }
+
+  const [day, month, number] = translateDate(activity.date)
   return (
-    <ListItem style={listItemStyle} button>
+    <>
+    <ListItem style={listItemStyle}>
       <Paper style={paperStyle} elevation={0}>
-        <Box>
-          <Typography variant='h2'>{activity.date}</Typography>
+        <Box style={dateStyle}>
+          <Typography variant='subtitle1'>{month}</Typography>
+          <Typography variant='h2'>{number}</Typography>
+          <Typography variant='body1'>{day}</Typography>
         </Box>
-        <Box>
+        <Box style={detailsStyle}>
           <Chip label={activity.type} size='small' variant='outlined' color='primary' />
           <ListItemText
             primary={activity.description}
             secondary={activity.total}
           />
         </Box>
+        <Box style={actionBoxStyle}>
+          <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </Box>
       </Paper>
     </ListItem>
+    {open && <ActivityCardActions activity={activity} />}
+    </>
   )
 }
 

@@ -1,5 +1,3 @@
-// TODO set filters reducer with spread operator
-
 const initialState = {
   job: {},
   jobs: [],

@@ -39,11 +39,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   }
 
   return (
-    <>
+    <div style={{ direction: 'rtl' }}>
       {loading && <CircularSpinnerWithContainer />}
       {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
       {!loading && !currentUser && <Redirect to='/' />}
-    </>
+    </div>
   )
 }
 

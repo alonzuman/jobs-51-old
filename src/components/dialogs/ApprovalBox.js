@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 
 const ApprovalBox = ({ open, setOpen, action, text }) => {
   const { translation, direction } = useSelector(state => state.theme)
-
   return (
     <Dialog style={{direction}} open={open} onClose={() => setOpen(false)}>
       <DialogContent>
+        <br/>
         <Typography variant='body1'>{text}</Typography>
       </DialogContent>
       <DialogActions >

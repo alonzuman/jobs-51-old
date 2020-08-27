@@ -236,3 +236,22 @@ export const editProfile = (user, uid) => async dispatch => {
     }))
   }
 }
+
+export const setUserRegion = (region, uid) => async dispatch => {
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
+  try {
+    await db.collection('users').doc(uid).set({ region }, { merge: true })
+    dispatch({
+      type: 'SET_USER',
+      payload: { region }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
+}

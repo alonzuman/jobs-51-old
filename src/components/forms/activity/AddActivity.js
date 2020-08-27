@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Button, TextField, Grid, Chip, Typography, CircularProgress } from '@material-ui/core'
+import { Button, TextField, Grid, Chip, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 import { addActivity, getActivityTypes } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../../actions/alert';
 import { calcHours } from '../../../utils';
+import { setUserRegion } from '../../../actions/auth';
+
+const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 
 const AddActivity = () => {
-  const { uid } = useSelector(state => state.auth)
+  const { uid, region } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { loading, types } = useSelector(state => state.activities)
   const [activity, setActivity] = useState({
     type: '',
     description: '',
+    region: region ? region : '',
     date: '2020-08-10',
     startHour: '10:00',
     endHour: '17:30',
@@ -24,6 +28,14 @@ const AddActivity = () => {
     dispatch(getActivityTypes())
   }, [])
 
+  const handleRegionChange = e => {
+    dispatch(setUserRegion(e.target.value, uid))
+    setActivity({
+      ...activity,
+      ['region']: e.target.value
+    })
+  }
+
   const handleChange = e => {
     const totalHours = calcHours(activity['startHour'], activity['endHour'], activity['date'])
     setActivity({
@@ -35,7 +47,6 @@ const AddActivity = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const totalHours = calcHours(activity['startHour'], activity['endHour'], activity['date'])
     if (activity['type'].trim().length === 0) {
       return dispatch(setAlert({
         type: 'error',
@@ -55,7 +66,14 @@ const AddActivity = () => {
       {!types && <CircularProgress />}
       {types &&
       <>
-        <Typography variant='body1'>{translation.type}</Typography>
+        <FormControl variant="outlined">
+          <InputLabel>{translation.region}</InputLabel>
+          <Select disabled={region ? true : false} value={activity['region']} name='region' onChange={handleRegionChange} label={region ? region : translation.selectRegion}>
+            {regions.map((region, index) => <MenuItem key={index} value={region}>{region}</MenuItem>)}
+          </Select>
+          { region && <Typography variant='subtitle1'>{translation.changeRegionContact}</Typography> }
+        </FormControl>
+        <InputLabel style={{ marginBottom: '.5rem' }}>{translation.type}</InputLabel>
         <Grid container spacing={1}>
           {types?.map((type, index) => <Grid key={index} item ><Chip onClick={() => setActivity({ ...activity, type })} label={type} color={activity['type'] === type ? 'primary' : 'default'} /></Grid>)}
         </Grid>

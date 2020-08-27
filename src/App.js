@@ -44,18 +44,16 @@ function App() {
           <Dialogs />
           <CustomAlert />
           <Switch>
-            <div style={{direction: 'rtl'}}>
-              <Route exact path='/' component={LandingPage} />
-              <ProtectedRoute exact path='/jobs' component={Jobs} />
-              <ProtectedRoute exact path='/saved' component={SavedJobs} />
-              <ProtectedRoute exact path='/activity' component={Activity} />
-              <ProtectedRoute exact path='/notifications' component={Notifications} />
-              <ProtectedRoute exact path='/profile' component={EditProfile} />
-              <ProtectedRoute exact path='/users' component={Employees} />
-              <ProtectedRoute requiredRole='manager' exact path='/admin' component={Admin} />
-              <ProtectedRoute requiredRole='manager' exact path='/admin/users' component={ManageUsers} />
-              <ProtectedRoute requiredRole='manager' exact path='/admin/activities' component={ManageActivities} />
-            </div>
+            <ProtectedRoute exact path='/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/saved' component={SavedJobs} />
+            <ProtectedRoute exact path='/activity' component={Activity} />
+            <ProtectedRoute exact path='/notifications' component={Notifications} />
+            <ProtectedRoute exact path='/profile' component={EditProfile} />
+            <ProtectedRoute exact path='/users' component={Employees} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
+            <Route exact path='/' component={LandingPage} />
           </Switch>
           {authenticated && <Navbar />}
         </Router>

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
 import { getMyActivities, addActivity } from '../actions/activities'
-import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import ActivityCard from '../components/cards/ActivityCard'
 import PageHeader from '../components/layout/PageHeader'
@@ -25,7 +24,8 @@ const Activity = () => {
   }
 
   const boxStyle = {
-    padding: '1rem'
+    padding: '1rem',
+    paddingBottom: '7.5rem'
   }
 
   const fabStyle = {
@@ -33,7 +33,8 @@ const Activity = () => {
     margin: '0 auto',
     bottom: '4.5rem',
     left: '50%',
-    transform: 'translate(-50%, 0)'
+    transform: 'translate(-50%, 0)',
+    zIndex: 999
   }
 
   const statsPaperStyle = {
@@ -54,7 +55,7 @@ const Activity = () => {
       </Fab>
       <PageHeader title={translation.activity} />
       <Box style={boxStyle}>
-        <Typography variant='h2'>{translation.latestActivities}</Typography>
+        <Typography variant='h2'>{translation.totalActivities}</Typography>
         <Grid container spacing={2}>
           <Grid xs={6} md={6} lg={6} item>
             <Paper style={statsPaperStyle} elevation={0}>

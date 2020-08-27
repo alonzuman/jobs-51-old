@@ -80,5 +80,38 @@
   "pending": "ממתין לאישור",
   "approved": "מאושר",
   "manageActivities": "ניהול פעילויות",
-  "manageUsers": "ניהול משתמשים"
+  "manageUsers": "ניהול משתמשים",
+  "totalActivities": "סיכום שעות פעילות",
+  "weekDays": {
+    "Sun": "ראשון",
+    "Mon": "שני",
+    "Tue": "שלישי",
+    "Wed": "רביעי",
+    "Thu": "חמישי",
+    "Fri": "שישי",
+    "Sat": "שבת"
+  },
+  "months": {
+    "Jan": "ינואר",
+    "Feb": "פברואר",
+    "Mar": "מרץ",
+    "Apr": "אפריל",
+    "May": "מאי",
+    "Jun": "יוני",
+    "Jul": "יולי",
+    "Aug": "אוגוסט",
+    "Sep": "ספטמבר",
+    "Oct": "אוקטובר",
+    "Nov": "נובמבר",
+    "Dec": "דצמבר"
+  },
+  "region": "מחוז",
+  "selectRegion": "בחירת מחוז",
+  "changeRegionContact": "על מנת לשנות, יש ליצור קשר עם מנהל המחוז שלך.",
+  "approveActivity": "אישור פעילות",
+  "unApproveActivity": "ביטול פעילות",
+  "deleteActivity": "מחיקת פעילות",
+  "ActivityApproved": "פעילות אושרה",
+  "ActivityUnApproved": "פעילות בוטלה",
+  "ActivityRemoved": "פעילות נמחקה בהצלחה"
 }

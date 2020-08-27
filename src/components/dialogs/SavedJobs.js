@@ -18,11 +18,6 @@ const SavedJobs = () => {
     }
   }, [authState])
 
-  const paperStyle = {
-    padding: '0 1rem',
-    borderBottom: `1px solid ${theme.palette.border.main}`
-  }
-
   const boxStyle = {
     padding: '1rem',
     paddingBottom: '4.5rem'

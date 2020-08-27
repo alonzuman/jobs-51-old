@@ -5,15 +5,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { openDialog, setUser } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 import { app } from '../firebase'
-import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
-  const { authenticated } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
 
   const containerStyle = {
+    direction: 'rtl',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

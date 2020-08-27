@@ -61,9 +61,9 @@ const JobCard = ({ job }) => {
         />
         <CardContent>
           <Chip style={{direction: 'ltr'}} label={timeAgo()} size='small' variant='outlined' color='primary'/>
-          <Typography className='subtitle1' variant='subtitle1'>{translation.description}</Typography>
+          <Typography variant='subtitle1'>{translation.description}</Typography>
           <Typography variant='body1'>{job?.description}</Typography>
-          <Typography className='subtitle1' variant='subtitle1'>{translation.categories}</Typography>
+          <Typography variant='subtitle1'>{translation.categories}</Typography>
           <Grid container spacing={1}>
             {job?.categories?.map((req, index) => <Grid item key={index}><Chip label={req} /></Grid>)}
           </Grid>

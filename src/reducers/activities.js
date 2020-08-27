@@ -16,7 +16,7 @@ export const activitiesReducer = (state = initialState, action) => {
     case 'ADD_ACTIVITY':
       return {
         ...state,
-        activities: [...state.activities, payload.newActivity],
+        activities: [payload.newActivity, ...state.activities],
         loading: false
       }
     case 'SET_ACTIVITIES':
@@ -29,6 +29,16 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         types: [...payload.types],
+        loading: false
+      }
+    case 'REMOVE_ACTIVITY':
+      return {
+        ...state,
+        activities: [...state.activities.filter(activity => activity.id !== payload)]
+      }
+    case 'ACITIVITIES_STOP_LOADING':
+      return {
+        ...state,
         loading: false
       }
     default: return state

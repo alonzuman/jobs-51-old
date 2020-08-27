@@ -7,7 +7,7 @@ const BackButton = () => {
   const history = useHistory()
 
   const buttonStyle = {
-    margin: '.5rem 0 .5rem 1rem'
+    margin: '0 0 0 .5rem'
   }
 
   return <IconButton style={buttonStyle} onClick={() => history.goBack()}><ArrowForwardIcon /></IconButton>

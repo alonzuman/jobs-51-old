@@ -1,4 +1,5 @@
 import moment from 'moment'
+import store from '../store';
 
 export const checkPermissions = (role) => {
   switch (role) {
@@ -35,4 +36,16 @@ export const dateFilters = () => {
     { label: 'השבוע', value: Date.now() - (8 * day) },
     { label: 'החודש', value: Date.now() - (30 * day) },
   ]
+}
+
+export const translateDate = (date) => {
+  const { weekDays, months } = store.getState().theme.translation
+
+  const fullDate = new Date(date).toString().split(' ')
+
+  const day = weekDays[fullDate[0]]
+  const month = months[fullDate[1]]
+  const number = fullDate[2]
+
+  return [day, month, number]
 }

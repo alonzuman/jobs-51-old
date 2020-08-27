@@ -28,15 +28,15 @@ const Admin = () => {
         <Grid container spacing={2}>
           <Grid item xs={6} md={4} lg={4}>
             <Link to='/admin/users'>
-              <Paper style={actionPaperStyle}>
-                Users
+              <Paper elevation={0} style={actionPaperStyle}>
+                <Typography variant='body1'>{translation.manageUsers}</Typography>
               </Paper>
             </Link>
           </Grid>
           <Grid item xs={6} md={4} lg={4}>
             <Link to='/admin/activities'>
-              <Paper style={actionPaperStyle}>
-                Activities
+              <Paper elevation={0} style={actionPaperStyle}>
+                <Typography variant='body1'>{translation.manageActivities}</Typography>
               </Paper>
             </Link>
           </Grid>
