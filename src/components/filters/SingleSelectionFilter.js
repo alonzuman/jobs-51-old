@@ -33,13 +33,13 @@ const SingleSelectionFilter = ({ type }) => {
 
   return (
     <div>
+      {Object.keys(selections).length === 0 && <ChipsSkeleton />}
       <Grid container spacing={1}>
-        {Object.keys(selections).length === 0 && <ChipsSkeleton />}
         {Object.keys(selections).length > 0 && Object.keys(selections).map((value, index) => {
           if (Object.values(selections)[index] !== 0) {
             return (
               <Grid key={index} item>
-                {type !== 'dates' && <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />}
+                {type !== 'dates' && <Chip onClick={() => setFilter(value)} color={filter === value ? 'primary' : 'default'} label={Object.keys(selections)[index]} />}
                 {type === 'dates' && <Chip onClick={() => setFilter(selections[index].value)} color={filter === selections[index].value ? 'primary' : 'default'} label={selections[index].label} />}
               </Grid>)
               }}

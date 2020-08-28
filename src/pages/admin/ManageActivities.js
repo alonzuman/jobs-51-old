@@ -40,6 +40,11 @@ const ManageActivities = () => {
     justifyContent: 'space-between'
   }
 
+  const clearStyle = {
+    backgroundColor: 'transparent',
+    border: 'none'
+  }
+
   return (
     <>
     <TopBar>
@@ -57,7 +62,7 @@ const ManageActivities = () => {
               <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
             </Grid>
           </Grid>
-          <Chip label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
+          <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
         </Box>
       </FiltersBar>
     </TopBar>

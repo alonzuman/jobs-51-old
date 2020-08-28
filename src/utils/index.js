@@ -3,12 +3,13 @@ import store from '../store';
 
 export const checkPermissions = (role) => {
   switch (role) {
+    case 'pending': return 0;
     case 'user': return 1;
     case 'volunteer': return 2;
     case 'manager': return 3;
     case 'moderator': return 4;
     case 'admin': return 5;
-    default: return 1;
+    default: return 0;
   }
 }
 
@@ -48,4 +49,8 @@ export const translateDate = (date) => {
   const number = fullDate[2]
 
   return [day, month, number]
+}
+
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

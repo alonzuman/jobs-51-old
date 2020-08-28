@@ -114,5 +114,16 @@
   "ActivityApproved": "פעילות אושרה",
   "ActivityUnApproved": "פעילות בוטלה",
   "ActivityRemoved": "פעילות נמחקה בהצלחה",
-  "status": "סטטוס"
+  "status": "סטטוס",
+  "usersEmptyState": "לא נמצאו תוצאות",
+  "roles": {
+    "pending": "ממתין לאישור",
+    "user": "חבר עמותה",
+    "volunteer": "מתנדב",
+    "manager": "מנהל",
+    "moderator": "מנהל מחוז",
+    "admin": "מנהל בכיר"
+  },
+  "joined": "שנת גיוס ליחידה",
+  "search": "חיפוש"
 }

@@ -14,6 +14,7 @@ import EditProfile from './components/forms/EditProfile'
 import Activity from './pages/Activity'
 import Notifications from './pages/Notifications'
 import Admin from './pages/Admin'
+import User from './pages/User'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -53,6 +54,7 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
+            <ProtectedRoute exact requiredRole='manager' path='/users/:id' component={User} />
             <Route exact path='/' component={LandingPage} />
           </Switch>
           {authenticated && <Navbar />}

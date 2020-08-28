@@ -5,6 +5,7 @@ import { jobsReducer } from './jobs';
 import { themeReducer } from './theme';
 import { dialogsReducer } from './dialogs';
 import { activitiesReducer } from './activities';
+import { usersReducer } from './users';
 
 export default combineReducers({
   alert: alertReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   jobs: jobsReducer,
   theme: themeReducer,
   dialogs: dialogsReducer,
-  activities: activitiesReducer
+  activities: activitiesReducer,
+  users: usersReducer
 });

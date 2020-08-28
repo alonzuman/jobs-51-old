@@ -218,7 +218,7 @@ export const deleteActivity = (activity) => async dispatch => {
 
 export const getActivities = () => async dispatch => {
   dispatch({
-    type: 'ACTIVITIES_LOADING'
+    type: 'ACTIVITY_LOADING'
   })
   try {
     const { region } = store.getState().auth
