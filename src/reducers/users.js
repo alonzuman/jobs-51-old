@@ -25,6 +25,12 @@ export const usersReducer = (state = initialState, action) => {
         filters: { ...payload.filter },
         loading: false
       }
+    case 'CLEAR_USERS_FILTERS':
+      return {
+        ...state,
+        filters: {},
+        loading: false
+      }
     default: return state
   }
 }

@@ -5,6 +5,9 @@ import { capitalizeFirstLetter } from "../utils"
 const usersRef = db.collection('users')
 
 export const getUsers = () => async dispatch => {
+  dispatch({
+    type: 'USERS_LOADING'
+  })
   const { filters } = store.getState().users
   try {
     let snapshot
@@ -33,5 +36,11 @@ export const setUserFilters = (filter) => async dispatch => {
   dispatch({
     type: 'SET_USERS_FILTER',
     payload: { filter }
+  })
+}
+
+export const clearUserFilters = () => async dispatch => {
+  dispatch({
+    type: 'CLEAR_USERS_FILTERS'
   })
 }

@@ -14,14 +14,14 @@ const UsersList = () => {
 
   if (loading) {
     return <CardsSkeletons count={5} />
-  } else if (!loading && users) {
+  } else if (!loading && users.length === 0) {
+    return <Typography variant='body1'>{translation.usersEmptyState}</Typography>
+  } else {
     return (
       <Grid container spacing={2}>
         {users?.map((user, index) => <UserCard key={index} user={user} />)}
       </Grid>
     )
-  } else {
-    return <Typography variant='body1'>{translation.usersEmptyState}</Typography>
   }
 
 }
