@@ -264,9 +264,10 @@ export const saveJob = (uid, jobId) => async dispatch => {
   try {
     const snapshot = await db.collection('users').doc(uid).get()
     const oldUser = snapshot.data()
+    const oldJobs = (oldUser.savedJobs && oldUser.savedJobs.length > 0) ? oldUser.savedJobs : []
     await db.collection('users').doc(uid).set({
       ...oldUser,
-      savedJobs: [...oldUser.savedJobs, jobId]
+      savedJobs: [...oldJobs, jobId]
     }, { merge: true })
     dispatch({
       type: 'SAVE_JOB',
