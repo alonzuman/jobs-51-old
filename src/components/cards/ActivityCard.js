@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Button } from '@material-ui/core'
+import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton } from '@material-ui/core'
 import { translateDate } from '../../utils'
 import { useSelector } from 'react-redux'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';

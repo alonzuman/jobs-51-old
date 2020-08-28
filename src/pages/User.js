@@ -4,7 +4,6 @@ import { getUser } from '../actions/users'
 import { Avatar, Box, Typography } from '@material-ui/core'
 import UserRoleActions from './admin/components/UserRoleActions'
 import TopBar from '../components/layout/TopBar'
-import BackButton from '../components/layout/BackButton'
 
 const User = ({ match }) => {
   const { loading, user } = useSelector(state => state.users)

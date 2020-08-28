@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { editProfile, setUser } from '../../../actions'
+import { editProfile } from '../../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button, Box, Grid, CircularProgress, Avatar } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 import CircularSpinnerWithContainer from '../../layout/CircularSpinnerWithContainer'
-import { app } from '../../../firebase'
 
 const UserDetails = () => {
   const authState = useSelector(state => state.auth)

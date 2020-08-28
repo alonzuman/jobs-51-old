@@ -1,4 +1,3 @@
-import moment from 'moment'
 import store from '../store';
 
 export const checkPermissions = (role) => {

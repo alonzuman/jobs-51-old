@@ -9,14 +9,14 @@ import TopBar from '../layout/TopBar'
 const SavedJobs = () => {
   const authState = useSelector(state => state.auth)
   const { savedJobsLoading, savedJobs } = useSelector(state => state.jobs)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (authState?.savedJobs?.length > 0) {
       dispatch(getSavedJobs({ savedJobs: authState?.savedJobs }))
     }
-  }, [authState])
+  }, [authState, dispatch])
 
   return (
     <>

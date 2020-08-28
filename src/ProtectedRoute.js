@@ -27,7 +27,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         return <Redirect to='/' />
       }
     })
-  }, [])
+  }, [dispatch])
 
   const checkRole = () => {
     if (requiredRole && currentUser) {

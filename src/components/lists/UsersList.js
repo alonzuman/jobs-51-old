@@ -10,7 +10,7 @@ const UsersList = () => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(getUsers()) }, [filters])
+  useEffect(() => { dispatch(getUsers()) }, [filters, dispatch])
 
   if (loading) {
     return <CardsSkeletons count={5} />

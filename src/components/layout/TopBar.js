@@ -1,6 +1,5 @@
 import React from 'react'
 import { AppBar, Typography, Paper } from '@material-ui/core'
-import ShaldagLogoSmall from '../../ShaldagLogoSmall'
 import { useSelector } from 'react-redux'
 import BackButton from './BackButton'
 

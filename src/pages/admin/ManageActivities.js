@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import { Typography, Box, Container, Grid, Chip } from '@material-ui/core'
-import FiltersBar from './components/FiltersBar'
+import { Box, Container, Grid, Chip } from '@material-ui/core'
 import MultiSelectionChips from './components/MultiSelectionChips'
-import { getActivities, clearActivityFilters } from '../../actions'
-import BackButton from '../../components/layout/BackButton'
+import { clearActivityFilters } from '../../actions'
 import ActivitiesList from '../../components/lists/ActivitiesList'
 import SingleSelectionChips from './components/SingleSelectionChips'
 
@@ -17,10 +15,6 @@ const ManageActivities = () => {
   const { filters } = useSelector(state => state.activities)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
-
-  const listBoxStyle = {
-    padding: '1rem'
-  }
 
   const filtersContainerStyle = {
     padding: '.5rem 1rem',

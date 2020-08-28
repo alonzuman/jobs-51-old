@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import UserDetails from './profile/UserDetails'
 import PersonalDetails from './profile/PersonalDetails'
-import { Tabs, Tab, Container, Paper, Typography, Box } from '@material-ui/core'
+import { Tabs, Tab, Container } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Settings from './Settings'
 import TopBar from '../layout/TopBar'
 
 const EditProfile = () => {
   const [value, setValue] = useState(0)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const handleValueChange = (newValue) => setValue(newValue)
 
   return (

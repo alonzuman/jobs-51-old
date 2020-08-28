@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Typography, Fab, Box, Grid, Container } from '@material-ui/core'
+import { Paper, Typography, Fab, Grid, Container } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
@@ -8,7 +8,7 @@ import TopBar from '../components/layout/TopBar'
 
 const Activity = () => {
   const dispatch = useDispatch()
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const { pending, approved } = useSelector(state => state.auth).activities
 
   const fabStyle = {

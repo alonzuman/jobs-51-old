@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { TextField, Button, CircularProgress, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'

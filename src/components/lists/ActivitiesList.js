@@ -16,7 +16,7 @@ const ActivitiesList = ({ type = 'personal' }) => {
     } else {
       dispatch(getActivities())
     }
-  }, [filters])
+  }, [filters, dispatch, type])
 
   if (loading) {
     return <CardsSkeletons count={1} />

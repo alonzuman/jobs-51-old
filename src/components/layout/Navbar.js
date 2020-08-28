@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, IconButton, BottomNavigation, Fab, BottomNavigationAction, Badge } from '@material-ui/core'
-import { NavLink, Link, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import { Link, useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
@@ -11,8 +11,6 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import { checkPermissions } from '../../utils'
@@ -43,17 +41,6 @@ const Navbar = () => {
         <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
         <BottomNavigationAction component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
         {checkPermissions(role) >= 2 && <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
-        {/* <BottomNavigationAction
-          component={Link}
-          to='/notifications'
-          value='/notifications'
-          icon={<Badge
-            color="secondary"
-            variant="dot"
-            invisible={false}
-            > {value === '/notifications' ? <NotificationsIcon /> : <NotificationsNoneOutlinedIcon /> }
-            </Badge>
-          } /> */}
         <BottomNavigationAction component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
         {checkPermissions(role) >= 3 && <BottomNavigationAction component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
       </BottomNavigation>

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { TextField, Button, Box, Chip } from '@material-ui/core'
-import { db } from '../../firebase'
-import { capitalizeFirstLetter } from '../../utils'
 import { setUserFilters } from '../../actions/users'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -18,7 +16,7 @@ const SearchBar = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    dispatch(setUserFilters({ ['search']: value }))
+    dispatch(setUserFilters({ 'search': value }))
     setOpen(false)
   }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Button, Box } from '@material-ui/core'
+import { Button, Box } from '@material-ui/core'
 import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
 import ApprovalBox from '../dialogs/ApprovalBox'

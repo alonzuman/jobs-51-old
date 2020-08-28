@@ -26,13 +26,13 @@ const AddActivity = () => {
 
   useEffect(() => {
     dispatch(getActivityTypes())
-  }, [])
+  }, [dispatch])
 
   const handleRegionChange = e => {
     dispatch(setUserRegion(e.target.value, uid))
     setActivity({
       ...activity,
-      ['region']: e.target.value
+      region: e.target.value
     })
   }
 
@@ -41,7 +41,7 @@ const AddActivity = () => {
     setActivity({
       ...activity,
       [e.target.name]: e.target.value,
-      ['total']: totalHours
+      total: totalHours
     })
   }
 

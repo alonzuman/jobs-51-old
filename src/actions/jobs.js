@@ -1,4 +1,4 @@
-import { db, analytics } from '../firebase'
+import { db } from '../firebase'
 import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 import store from '../store'

@@ -34,7 +34,8 @@ export const signInWithProvider = (provider) => async dispatch => {
     const firebaseProvider = () => {
       switch (provider) {
         case 'facebook': return new firebase.auth.FacebookAuthProvider();
-        case 'google': return new firebase.auth.GoogleAuthProvider()
+        case 'google': return new firebase.auth.GoogleAuthProvider();
+        default: return null
       }
     }
 
