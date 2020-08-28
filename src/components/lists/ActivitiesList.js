@@ -20,10 +20,10 @@ const ActivitiesList = ({ type = 'personal' }) => {
 
   if (loading) {
     return <CardsSkeletons count={1} />
-  } else if (!loading && activities) {
-    return <List>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</List>
-  } else {
+  } else if (!loading && activities.length === 0) {
     return <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>
+  } else {
+    return <List>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</List>
   }
 }
 

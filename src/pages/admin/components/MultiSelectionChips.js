@@ -48,7 +48,7 @@ const MultiSelectionChips = ({ filters, selections, action, label, type }) => {
         </Box>
         <DialogContent>
           {Object.keys(selections).length === 0 && <ChipsSkeleton />}
-          <Grid style={{padding: '1rem'}} container spacing={1}>
+          <Grid style={{direction: 'rtl'}} container spacing={1}>
             {selections.map((selection, index) => {
               return (
                 <Grid key={index} item>
@@ -62,6 +62,7 @@ const MultiSelectionChips = ({ filters, selections, action, label, type }) => {
               )
             })}
           </Grid>
+          <br />
           <Button variant='contained' color='primary' disabled={values.length <= 0} className='button-style' onClick={setFilters}>{translation.apply}</Button>
         </DialogContent>
       </Dialog>

@@ -7,7 +7,6 @@ const PageHeader = ({ title, backButton = false, children }) => {
   const { theme } = useSelector(state => state.theme)
 
   const paperStyle = {
-    padding: '0 1rem',
     borderBottom: `1px solid ${theme.palette.border.main}`
   }
 

@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom'
 
 const UserCard = ({ user }) => {
   const { translation } = useSelector(state => state.theme)
+  const paperStyle = {
+    borderRadius: '1rem'
+  }
+
   return (
     <Grid item xs={12} md={6} lg={4}>
       <Link to={`/users/${user.uid}`}>
-        <Paper>
+        <Paper style={paperStyle} elevation={0}>
         <Card>
           <CardHeader
             avatar={<Avatar src={user.avatar} alt={user.firstName}>{user.firstName.charAt(0)}</Avatar>}

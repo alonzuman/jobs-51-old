@@ -44,7 +44,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
         </Box>
         <DialogContent>
           {Object.keys(selections).length === 0 && <ChipsSkeleton />}
-          <Grid style={{ padding: '1rem' }} container spacing={1}>
+          <Grid style={{ direction: 'rtl' }} container spacing={1}>
             {selections.map((selection, index) => {
               return (
                 <Grid key={index} item>
@@ -57,6 +57,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
               )
             })}
           </Grid>
+          <br />
           <Button variant='contained' color='primary' disabled={!filter} className='button-style' onClick={updateFilter}>{translation.apply}</Button>
         </DialogContent>
       </Dialog>

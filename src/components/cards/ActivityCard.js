@@ -24,7 +24,8 @@ const ActivityCard = ({ activity }) => {
   const dateStyle = {
     borderLeft: `1px solid ${theme.palette.border.main}`,
     textAlign: 'center',
-    padding: '1rem',
+    padding: '0 1rem',
+    margin: '1rem 0',
     minWidth: 72
   }
 
