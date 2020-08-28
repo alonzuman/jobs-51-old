@@ -43,11 +43,11 @@ const SignIn = () => {
       <Box style={boxStyle}>
         <Typography variant='body1'>{translation.or}</Typography>
       </Box>
-      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
+      <Button variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
     </>}
     {!socialMedia &&
     <form onSubmit={handleSubmit}>
-      <Button variant='outlined' className='button-style' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-users button-icon"></i></Button>
+      <Button variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-users button-icon"></i></Button>
       <br />
       <br />
       <Box style={boxStyle}>

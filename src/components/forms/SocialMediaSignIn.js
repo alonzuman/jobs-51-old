@@ -16,6 +16,10 @@ const buttonStyle = {
   marginBottom: '.5rem'
 }
 
+const buttonsContainerStyle = {
+  width: '100%'
+}
+
 const SocialMediaSignIn = () => {
   const { loading } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
@@ -25,10 +29,10 @@ const SocialMediaSignIn = () => {
     <Box style={boxStyle}>
       {loading && <CircularProgress />}
       {!loading &&
-      <>
-        <Button style={buttonStyle} variant='outlined' style={signInWithStyle} className='button-style' color='default' onClick={() => dispatch(signInWithProvider('facebook'))}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
-        <Button variant='outlined' style={signInWithStyle} className='button-style' color='default' onClick={() => dispatch(signInWithProvider('google'))}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
-      </>}
+      <div style={buttonsContainerStyle}>
+        <Button style={{marginBottom: '.5rem'}} variant='outlined' className='button-style full-width' color='default' onClick={() => dispatch(signInWithProvider('facebook'))}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
+        <Button style={{ marginBottom: '.5rem' }} variant='outlined' className='button-style full-width' color='default' onClick={() => dispatch(signInWithProvider('google'))}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
+      </div>}
     </Box>
   )
 }

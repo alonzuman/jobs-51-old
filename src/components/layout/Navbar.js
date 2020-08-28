@@ -18,7 +18,7 @@ import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountO
 import { checkPermissions } from '../../utils'
 
 const Navbar = () => {
-  const { role } = useSelector(state => state.auth)
+  const { loading, role } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
@@ -37,26 +37,30 @@ const Navbar = () => {
     borderTop: `1px solid ${theme.palette.border.main}`
   }
 
-  return (
-    <BottomNavigation value={value} onChange={handleChange} style={navbarStyle}>
-      <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
-      <BottomNavigationAction component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
-      {checkPermissions(role) >= 2 && <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
-      {/* <BottomNavigationAction
-        component={Link}
-        to='/notifications'
-        value='/notifications'
-        icon={<Badge
-          color="secondary"
-          variant="dot"
-          invisible={false}
-          > {value === '/notifications' ? <NotificationsIcon /> : <NotificationsNoneOutlinedIcon /> }
-          </Badge>
-        } /> */}
-      <BottomNavigationAction component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
-      {checkPermissions(role) >= 3 && <BottomNavigationAction component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
-    </BottomNavigation>
-  )
+  if (!loading && checkPermissions(role) !== 0) {
+    return (
+      <BottomNavigation value={value} onChange={handleChange} style={navbarStyle}>
+        <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
+        <BottomNavigationAction component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
+        {checkPermissions(role) >= 2 && <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
+        {/* <BottomNavigationAction
+          component={Link}
+          to='/notifications'
+          value='/notifications'
+          icon={<Badge
+            color="secondary"
+            variant="dot"
+            invisible={false}
+            > {value === '/notifications' ? <NotificationsIcon /> : <NotificationsNoneOutlinedIcon /> }
+            </Badge>
+          } /> */}
+        <BottomNavigationAction component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
+        {checkPermissions(role) >= 3 && <BottomNavigationAction component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
+      </BottomNavigation>
+    )
+  } else {
+    return <div/>
+  }
 }
 
 export default Navbar

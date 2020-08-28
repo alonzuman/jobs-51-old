@@ -20,13 +20,8 @@ const Jobs = () => {
     { type: 'dates', label: translation.datePosted, onClick: () => dispatch(openDialog({ type: 'DatesFilter', title: 'datePosted' })) },
   ]
 
-  const gridStyle = {
-    padding: '0 0 1rem 0'
-  }
-
-  const boxStyle = {
-    paddingTop: '7.5rem',
-    paddingBottom: '7.5rem'
+  const containerStyle = {
+    padding: '1rem'
   }
 
   const fabStyle = {
@@ -43,18 +38,15 @@ const Jobs = () => {
         <AddIcon />
         <span style={{margin: '0 .5rem'}}>{translation.addJob}</span>
       </Fab>
-      <TopBar>
-        <Typography style={{paddingLeft: '1rem', paddingRight: '1rem'}} variant='h1'>{translation.findJob}</Typography>
+      <TopBar title={translation.findJob}>
         <FiltersBar filterOptions={filtersBar} />
       </TopBar>
-      <Container>
-        <Box style={boxStyle}>
-          {loading && <CardsSkeletons />}
-          <Grid style={gridStyle} container spacing={2}>
-            {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
-            {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
-          </Grid>
-        </Box>
+      <Container style={containerStyle}>
+        {loading && <CardsSkeletons />}
+        <Grid container spacing={2}>
+          {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
+          {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
+        </Grid>
       </Container>
     </>
   )

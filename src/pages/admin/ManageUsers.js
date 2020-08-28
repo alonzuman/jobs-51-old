@@ -1,9 +1,7 @@
 import React from 'react'
-import PageHeader from '../../components/layout/PageHeader'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import BackButton from '../../components/layout/BackButton'
-import { Typography, Box, Grid, Chip } from '@material-ui/core'
+import { Box, Grid, Chip, Container } from '@material-ui/core'
 import UsersList from '../../components/lists/UsersList'
 import SearchBar from '../../components/filters/SearchBar'
 import { clearUserFilters } from '../../actions/users'
@@ -12,20 +10,10 @@ const ManageUsers = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
 
-  const boxStyle = {
-    display: 'flex',
-    alignItems: 'center'
-  }
-
-  const listBoxStyle = {
-    marginTop: '6.5rem',
-    marginBottom: '4rem',
-    padding: '1rem'
-  }
-
   const filtersContainerStyle = {
-    padding: '.5rem',
+    padding: '.5rem 1rem',
     display: 'flex',
+    width: '100%',
     justifyContent: 'space-between'
   }
 
@@ -36,11 +24,7 @@ const ManageUsers = () => {
 
   return (
     <>
-      <TopBar>
-        <Box style={boxStyle}>
-          <BackButton />
-          <Typography variant='h1'>{translation.manageUsers}</Typography>
-        </Box>
+      <TopBar backButton={true} title={translation.manageUsers}>
         <Box style={filtersContainerStyle}>
           <Grid container spacing={1}>
             <Grid item><SearchBar /></Grid>
@@ -48,9 +32,9 @@ const ManageUsers = () => {
           <Chip style={clearStyle} onClick={() => dispatch(clearUserFilters())} label={translation.clear} />
         </Box>
       </TopBar>
-      <Box style={listBoxStyle}>
+      <Container>
         <UsersList />
-      </Box>
+      </Container>
     </>
   )
 }

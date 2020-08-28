@@ -1,15 +1,11 @@
 import React from 'react'
-import { Paper, Typography, Box, Grid } from '@material-ui/core'
+import { Paper, Typography, Grid, Container } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import PageHeader from '../components/layout/PageHeader'
+import TopBar from '../components/layout/TopBar'
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme)
-
-  const boxStyle = {
-    padding: '1rem'
-  }
 
   const actionPaperStyle = {
     width: '100%',
@@ -23,8 +19,8 @@ const Admin = () => {
 
   return (
     <>
-      <PageHeader title={translation.admin} />
-      <Box style={boxStyle}>
+      <TopBar title={translation.admin} />
+      <Container>
         <Grid container spacing={2}>
           <Grid item xs={6} md={4} lg={4}>
             <Link to='/admin/users'>
@@ -41,7 +37,7 @@ const Admin = () => {
             </Link>
           </Grid>
         </Grid>
-      </Box>
+      </Container>
     </>
   )
 }

@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react'
-import { Paper, Typography, Fab, List, Box, Grid } from '@material-ui/core'
+import React from 'react'
+import { Paper, Typography, Fab, Box, Grid, Container } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
-import { getMyActivities, addActivity } from '../actions/activities'
-import CardsSkeletons from '../components/cards/CardsSkeletons'
-import ActivityCard from '../components/cards/ActivityCard'
-import PageHeader from '../components/layout/PageHeader'
 import ActivitiesList from '../components/lists/ActivitiesList'
+import TopBar from '../components/layout/TopBar'
 
 const Activity = () => {
   const dispatch = useDispatch()
   const { translation, theme } = useSelector(state => state.theme)
   const { pending, approved } = useSelector(state => state.auth).activities
-
-  const boxStyle = {
-    padding: '1rem',
-    paddingBottom: '7.5rem'
-  }
 
   const fabStyle = {
     position: 'fixed',
@@ -44,10 +36,10 @@ const Activity = () => {
         <AddIcon />
         <span style={{ margin: '0 .5rem' }}>{translation.addActivity}</span>
       </Fab>
-      <PageHeader title={translation.activity} />
-      <Box style={boxStyle}>
+      <TopBar title={translation.activity} />
+      <Container>
         <Typography variant='h2'>{translation.totalActivities}</Typography>
-        <Grid container spacing={2}>
+        <Grid  container spacing={2}>
           <Grid xs={6} md={6} lg={6} item>
             <Paper style={statsPaperStyle} elevation={0}>
               <Typography variant='h1'>{pending}</Typography>
@@ -63,7 +55,7 @@ const Activity = () => {
         </Grid>
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <ActivitiesList type='personal' />
-      </Box>
+      </Container>
     </>
   )
 }

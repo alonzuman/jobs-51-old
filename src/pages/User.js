@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import PageHeader from '../components/layout/PageHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../actions/users'
-import { Avatar, Box } from '@material-ui/core'
+import { Avatar, Box, Typography } from '@material-ui/core'
 import UserRoleActions from './admin/components/UserRoleActions'
+import TopBar from '../components/layout/TopBar'
+import BackButton from '../components/layout/BackButton'
 
 const User = ({ match }) => {
   const { loading, user } = useSelector(state => state.users)
@@ -31,7 +32,7 @@ const User = ({ match }) => {
   } else {
     return (
       <>
-        <PageHeader backButton={true} title={`${user?.firstName} ${user?.lastName}`} />
+        <TopBar title={`${user?.firstName} ${user?.lastName}`} backButton={true} />
         <Box style={boxStyle}>
           <Avatar style={avatarStyle} src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar>
           <UserRoleActions />

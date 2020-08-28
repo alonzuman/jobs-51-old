@@ -18,25 +18,14 @@ const ManageActivities = () => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  const headerStyle = {
-    paddingLeft: '1rem',
-    paddingRight: '1rem'
-  }
-
-  const boxStyle = {
-    display: 'flex',
-    alignItems: 'center'
-  }
-
   const listBoxStyle = {
-    marginTop: '6.5rem',
-    marginBottom: '4rem',
     padding: '1rem'
   }
 
   const filtersContainerStyle = {
-    padding: '.5rem',
+    padding: '.5rem 1rem',
     display: 'flex',
+    width: '100%',
     justifyContent: 'space-between'
   }
 
@@ -47,28 +36,22 @@ const ManageActivities = () => {
 
   return (
     <>
-    <TopBar>
-      <Box style={boxStyle}>
-        <BackButton />
-        <Typography style={headerStyle} variant='h1'>{translation.manageActivities}</Typography>
-      </Box>
-      <FiltersBar>
-        <Box style={filtersContainerStyle}>
-          <Grid container spacing={1}>
-            <Grid item>
-              <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.region} selections={regions} />
-            </Grid>
-            <Grid item>
-              <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
-            </Grid>
+    <TopBar backButton={true} title={translation.manageActivities}>
+      <Box style={filtersContainerStyle}>
+        <Grid container spacing={1}>
+          <Grid item>
+            <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.region} selections={regions} />
           </Grid>
-          <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
-        </Box>
-      </FiltersBar>
+          <Grid item>
+            <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
+          </Grid>
+        </Grid>
+        <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
+      </Box>
     </TopBar>
-    <Box style={listBoxStyle}>
+    <Container>
       <ActivitiesList type='admin' />
-    </Box>
+    </Container>
     </>
   )
 }

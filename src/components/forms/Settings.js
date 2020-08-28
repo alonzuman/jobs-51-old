@@ -21,8 +21,7 @@ const Settings = () => {
   }
 
   return (
-    <div>
-      <br />
+    <>
       <Typography variant='body2'>{translation.displaySettings}</Typography>
       <Box style={{ display: 'flex', alignItems: 'center' }}>
         <Brightness4Icon style={{color: theme.typography.body1.color }}  />
@@ -30,7 +29,7 @@ const Settings = () => {
       </Box>
       <br />
       {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>}
-    </div>
+    </>
   )
 }
 

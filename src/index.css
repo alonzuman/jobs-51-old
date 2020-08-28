@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none!important;
+}
+
 form {
   margin: 1rem 0 0 0;
 }
@@ -52,7 +56,7 @@ form {
 
 .MuiContainer-root {
   height: 100%!important;
-  padding: 0 1rem!important;
+  padding: 1rem!important;
 }
 
 .MuiDialogContent-root {
@@ -133,10 +137,6 @@ form {
   width: 100%!important;
 }
 
-@media (max-width: 768px) {
-
-}
-
 .button-icon {
   position: absolute;
   left: 1rem;
@@ -162,4 +162,15 @@ form {
 
 .MuiListItem-root:first-of-type {
   margin-top: 0!important;
+}
+
+@media (min-width: 768px) {
+  .button-style {
+    width: fit-content!important;
+    min-width: fit-content!important;
+  }
+
+  .full-width {
+    width: 100%!important;
+  }
 }

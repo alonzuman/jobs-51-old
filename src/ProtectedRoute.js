@@ -5,6 +5,7 @@ import { app } from './firebase'
 import { setUser, signOut } from './actions'
 import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
 import { checkPermissions } from './utils'
+import NoPermissions from './NoPermissions'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
@@ -38,13 +39,17 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     }
   }
 
-  return (
-    <div style={{ direction: 'rtl' }}>
-      {loading && <CircularSpinnerWithContainer />}
-      {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
-      {!loading && !currentUser && <Redirect to='/' />}
-    </div>
-  )
+  if (!loading && checkPermissions(role)  === 0) {
+    return <NoPermissions />
+  } else {
+    return (
+      <div style={{ direction: 'rtl', paddingBottom: '7.5rem' }}>
+        {loading && <CircularSpinnerWithContainer />}
+        {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
+        {!loading && !currentUser && <Redirect to='/' />}
+      </div>
+    )
+  }
 }
 
 export default ProtectedRoute
