@@ -73,6 +73,7 @@ form {
 
 .padding-bottom-24 {
   padding-bottom: 24px!important;
+  transition: padding-bottom .2s ease-in-out;
 }
 
 .MuiChip-deleteIcon {
