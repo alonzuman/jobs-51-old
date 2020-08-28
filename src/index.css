@@ -73,12 +73,12 @@ form {
 }
 
 .MuiBottomNavigationAction-root {
-  padding-top: 0!important;
-  min-width: 0!important;
+  padding: .5rem!important;
+  width: fit-content!important;
 }
 
-.MuiBottomNavigationAction-root .Mui-selected {
-  padding-top: 0!important;
+.padding-bottom-16 {
+  padding-bottom: 16px!important;
 }
 
 .MuiChip-deleteIcon {
