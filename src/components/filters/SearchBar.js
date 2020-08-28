@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextField, Button, Box, Chip } from '@material-ui/core'
 import { db } from '../../firebase'
 import { capitalizeFirstLetter } from '../../utils'
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const SearchBar = () => {
   const { translation } = useSelector(state => state.theme)
   const { filters } = useSelector(state => state.users)
-  const [value, setValue] = useState(filters.search ? filters.search : '')
+  const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -33,7 +33,7 @@ const SearchBar = () => {
 
   return (
     <>
-    <Chip color={filters.search ? 'primary' : 'default'} onClick={() => setOpen(!open)} label={translation.search} />
+    <Chip color={(open || filters.search) ? 'primary' : 'default'} onClick={() => setOpen(!open)} label={translation.search} />
     {open &&
     <form style={formStyle} onSubmit={handleSubmit}>
       <Box style={boxStyle}>

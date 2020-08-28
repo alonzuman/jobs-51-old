@@ -12,7 +12,6 @@ export const getUsers = () => async dispatch => {
   try {
     let snapshot
     if (filters.search) {
-      console.log(filters.search)
       snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).get()
     } else {
       snapshot = await usersRef.get()
