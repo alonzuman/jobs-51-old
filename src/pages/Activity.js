@@ -7,21 +7,12 @@ import { getMyActivities, addActivity } from '../actions/activities'
 import CardsSkeletons from '../components/cards/CardsSkeletons'
 import ActivityCard from '../components/cards/ActivityCard'
 import PageHeader from '../components/layout/PageHeader'
+import ActivitiesList from '../components/lists/ActivitiesList'
 
 const Activity = () => {
   const dispatch = useDispatch()
-  const { loading, activities } = useSelector(state => state.activities)
   const { translation, theme } = useSelector(state => state.theme)
   const { pending, approved } = useSelector(state => state.auth).activities
-
-  useEffect(() => {
-    dispatch(getMyActivities())
-  }, [])
-
-  const paperStyle = {
-    padding: '0 1rem',
-    borderBottom: `1px solid ${theme.palette.border.main}`
-  }
 
   const boxStyle = {
     padding: '1rem',
@@ -71,10 +62,7 @@ const Activity = () => {
           </Grid>
         </Grid>
         <Typography variant='h2'>{translation.latestActivities}</Typography>
-        {loading && <CardsSkeletons count={1} />}
-        {!loading && activities.length === 0 && <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>}
-        {!loading && activities &&
-        <List>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</List>}
+        <ActivitiesList type='personal' />
       </Box>
     </>
   )

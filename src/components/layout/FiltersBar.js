@@ -1,11 +1,11 @@
 import React from 'react'
-import { Box, Chip, Grid, AppBar } from '@material-ui/core'
+import { Box, Chip, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearGlobalFilters } from '../../actions/jobs'
 
 const FiltersBar = ({ filterOptions }) => {
   const { filters } = useSelector(state => state.jobs)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
   const containerStyle = {

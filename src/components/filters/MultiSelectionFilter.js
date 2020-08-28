@@ -37,13 +37,13 @@ const MultiSelectionFilter = ({ type }) => {
 
   return (
     <div>
+      {Object.keys(selections).length === 0 && <ChipsSkeleton />}
       <Grid container spacing={1}>
-        {Object.keys(selections).length === 0 && <ChipsSkeleton />}
         {Object.keys(selections).length > 0 && Object.keys(selections).map((filter, index) => {
-          if (Object.values(selections)[index] !== 0) {
+          if (Object.values(selections)[index] > 0) {
             return (
               <Grid key={index} item>
-                <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]} (${Object.values(selections)[index]})`} />
+                <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]}`} />
               </Grid>
             )
           }

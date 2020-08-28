@@ -113,5 +113,6 @@
   "deleteActivity": "מחיקת פעילות",
   "ActivityApproved": "פעילות אושרה",
   "ActivityUnApproved": "פעילות בוטלה",
-  "ActivityRemoved": "פעילות נמחקה בהצלחה"
+  "ActivityRemoved": "פעילות נמחקה בהצלחה",
+  "status": "סטטוס"
 }

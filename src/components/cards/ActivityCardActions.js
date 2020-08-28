@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, Box } from '@material-ui/core'
 import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
 import ApprovalBox from '../dialogs/ApprovalBox'
@@ -13,39 +13,41 @@ const ActivityCardActions = ({ activity }) => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  const handleApprove = () => {
+  const handleApprove = async () => {
     setDisabled(true)
-    setTimeout(() => {
-      setDisabled(false)
-    }, 1000)
-    dispatch(approveActivity(activity))
+    await dispatch(approveActivity(activity))
     setApproved(true)
+    setDisabled(false)
   }
 
-  const handleUnapprove = () => {
+  const handleUnapprove = async () => {
     setDisabled(true)
-    setTimeout(() => {
-      setDisabled(false)
-    }, 1000)
-    dispatch(unApproveActivity(activity))
+    await dispatch(unApproveActivity(activity))
     setApproved(false)
+    setDisabled(false)
+  }
+
+  const handleDelete = async () => {
+    setDisabled(true)
+    await dispatch(deleteActivity(activity))
+    setDisabled(false)
+  }
+
+  const boxStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'space-between'
   }
 
   return (
-    <Grid container>
+    <Box style={boxStyle}>
       {checkPermissions(role) >= 3 && !approved &&
-      <Grid item>
-        <Button disabled={disabled} onClick={handleApprove} color='primary'>{translation.approveActivity}</Button>
-      </Grid>}
+      <Button className='button-style' disabled={disabled} onClick={handleApprove} color='primary'>{translation.approveActivity}</Button>}
       {checkPermissions(role) >= 3 && approved &&
-      <Grid item>
-        <Button disabled={disabled} onClick={handleUnapprove} color='default'>{translation.unApproveActivity}</Button>
-      </Grid>}
-      <Grid item>
-        <Button disabled={disabled} onClick={() => setApprovalOpen(true)} color='default'>{translation.deleteActivity}</Button>
-      </Grid>
-      <ApprovalBox text={translation.areYouSure} open={approvalOpen} setOpen={setApprovalOpen} action={() => dispatch(deleteActivity(activity))} />
-    </Grid>
+      <Button className='button-style' disabled={disabled} onClick={handleUnapprove} color='default'>{translation.unApproveActivity}</Button>}
+      <Button className='button-style' disabled={disabled} onClick={() => setApprovalOpen(true)} color='default'>{translation.deleteActivity}</Button>
+      <ApprovalBox text={translation.areYouSure} open={approvalOpen} setOpen={setApprovalOpen} action={handleDelete} />
+    </Box>
   )
 }
 

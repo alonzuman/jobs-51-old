@@ -1,6 +1,7 @@
 const initialState = {
   activities: [],
   types: [],
+  filters: {},
   loading: false
 }
 
@@ -35,6 +36,18 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         activities: [...state.activities.filter(activity => activity.id !== payload)]
+      }
+    case 'SET_ACTIVITY_FILTERS':
+      return {
+        ...state,
+        filters: {...state.filters, ...payload },
+        loading: false
+      }
+    case 'CLEAR_ACTIVITY_FILTERS':
+      return {
+        ...state,
+        filters: {},
+        loading: false
       }
     case 'ACITIVITIES_STOP_LOADING':
       return {

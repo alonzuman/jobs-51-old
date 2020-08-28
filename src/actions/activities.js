@@ -98,7 +98,7 @@ export const getActivityTypes = () => async dispatch => {
 export const approveActivity = (activity) => async dispatch => {
   // TODO add condition that checks if its unapproved already
   try {
-    const { activities } = store.getState().auth
+    const authState = store.getState().auth
     const { id, total, uid } = activity
     await activitiesRef.doc(id).set({ approved: true }, { merge: true })
     const increment = firebase.firestore.FieldValue.increment(total);
@@ -108,19 +108,22 @@ export const approveActivity = (activity) => async dispatch => {
     await userRef.update('activities.pending', decrement)
     await userRef.update('activities.approved', increment)
 
+    if (authState.uid === uid) {
+      dispatch({
+        type: 'SET_USER',
+        payload: {
+          activities: {
+            pending: authState.activities.pending - total,
+            approved: authState.activities.approved + total
+          }
+        }
+      })
+    }
+
     dispatch(setAlert({
       type: 'success',
       msg: 'ActivityApproved'
     }))
-    dispatch({
-      type: 'SET_USER',
-      payload: {
-        activities: {
-          pending: activities.pending - total,
-          approved:  activities.approved + total
-        }
-      }
-    })
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
@@ -133,7 +136,7 @@ export const approveActivity = (activity) => async dispatch => {
 export const unApproveActivity = (activity) => async dispatch => {
   // TODO add condition that checks if its unapproved already
   try {
-    const { activities } = store.getState().auth
+    const authState = store.getState().auth
     const { id, total, uid } = activity
     await activitiesRef.doc(id).set({ approved: false }, { merge: true })
     const increment = firebase.firestore.FieldValue.increment(total);
@@ -143,19 +146,22 @@ export const unApproveActivity = (activity) => async dispatch => {
     await userRef.update('activities.approved', decrement)
     await userRef.update('activities.pending', increment)
 
+    if (authState.uid === uid) {
+      dispatch({
+        type: 'SET_USER',
+        payload: {
+          activities: {
+            pending: authState.activities.pending + total,
+            approved: authState.activities.approved - total
+          }
+        }
+      })
+    }
+
     dispatch(setAlert({
       type: 'success',
       msg: 'ActivityApproved'
     }))
-    dispatch({
-      type: 'SET_USER',
-      payload: {
-        activities: {
-          pending: activities.pending + total,
-          approved: activities.approved - total
-        }
-      }
-    })
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
@@ -208,4 +214,42 @@ export const deleteActivity = (activity) => async dispatch => {
       msg: 'ServerError'
     }))
   }
+}
+
+export const getActivities = () => async dispatch => {
+  dispatch({
+    type: 'ACTIVITIES_LOADING'
+  })
+  try {
+    const { region } = store.getState().auth
+    const { filters } = store.getState().activities
+    let activities = []
+    let snapshot
+    if (filters.regions && filters.status) {
+      snapshot = await activitiesRef.where('region', 'in', filters.regions).where('approved', '==', filters.status === 'approved').orderBy('dateCreated', 'desc').get()
+    } else if (filters.regions) {
+      snapshot = await activitiesRef.where('region', 'in', filters.regions).orderBy('dateCreated', 'desc').get()
+    } else if (filters.status) {
+      snapshot = await activitiesRef.where('approved', '==', filters.status === 'approved').where('region', 'in', [region]).orderBy('dateCreated', 'desc').get()
+    } else {
+      snapshot = await activitiesRef.where('region', '==', region).orderBy('dateCreated', 'desc').get()
+    }
+    snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: 'SET_ACTIVITIES',
+      payload: { activities }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
+}
+
+export const clearActivityFilters = () => async dispatch => {
+  dispatch({
+    type: 'CLEAR_ACTIVITY_FILTERS'
+  })
 }
