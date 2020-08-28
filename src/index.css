@@ -33,12 +33,6 @@ form {
   padding-top: 0!important;
 }
 
-.MuiBottomNavigationAction-root {
-  max-width: none!important;
-  height: 100%!important;
-  width: 100%!important;
-}
-
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
@@ -74,11 +68,11 @@ form {
 
 .MuiBottomNavigationAction-root {
   padding: .5rem!important;
-  width: fit-content!important;
+  min-width: 0!important;
 }
 
-.padding-bottom-16 {
-  padding-bottom: 16px!important;
+.padding-bottom-24 {
+  padding-bottom: 24px!important;
 }
 
 .MuiChip-deleteIcon {
@@ -142,11 +136,6 @@ form {
   left: 1rem;
   top: .6rem;
 }
-
-/* .MuiBottomNavigationAction-root {
-  padding-bottom: max(16px, env(safe-area-inset-bottom))!important;
-  padding-top: max(8px, env(safe-area-inset-bottom))!important;
-} */
 
 .MuiFab-root {
   box-shadow: 0 0 10px #00000005!important;
