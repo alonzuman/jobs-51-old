@@ -67,7 +67,7 @@ form {
 }
 
 .MuiBottomNavigationAction-root {
-  padding: .5rem!important;
+  padding: 1rem .5rem!important;
   min-width: 0!important;
 }
 
