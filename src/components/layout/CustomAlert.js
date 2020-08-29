@@ -7,7 +7,7 @@ import { clearAlert } from '../../actions';
 const CustomAlert = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
-  const { isOn, msg, type } = useSelector(state => state.alert)
+  const { isOn, msg, type } = useSelector(state => state.alerts)
 
   const boxStyle = {
     position: 'fixed',
