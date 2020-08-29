@@ -13,16 +13,12 @@ export const alertReducer = (state = initialState, action) => {
       console.log('alert is on', msg, type)
       return {
         ...state,
-        isOn: true,
-        type,
-        msg
+        ...payload
       }
     case 'CLEAR_ALERT':
       return {
         ...state,
-        isOn: false,
-        msg: '',
-        type: ''
+        ...payload
       }
     default: return state
   }
