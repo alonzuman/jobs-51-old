@@ -17,7 +17,7 @@ import { checkPermissions } from '../../utils'
 import useWindowSize from '../../hooks/useWindowSize'
 
 const Navbar = () => {
-  const { loading, role } = useSelector(state => state.auth)
+  const { role } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
@@ -37,7 +37,7 @@ const Navbar = () => {
     borderTop: `1px solid ${theme.palette.border.main}`,
   }
 
-  if (!loading && checkPermissions(role) !== 0) {
+  if (checkPermissions(role) !== 0) {
     return (
       <BottomNavigation value={value} onChange={handleChange} style={navbarStyle}>
         <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />

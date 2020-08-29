@@ -129,5 +129,6 @@
   "saveChanges": "שמירת שינויים",
   "noPermission": "בקשתך להצטרף בטיפול, אנא צור קשר עם..",
   "backToHome": "בחזרה לעמוד הראשי",
-  "noPermissionsToThisPage": "אין לך גישה לעמוד זה"
+  "noPermissionsToThisPage": "אין לך גישה לעמוד זה",
+  "actionSuccedded": "הפעולה בוצעה בהצלחה"
 }

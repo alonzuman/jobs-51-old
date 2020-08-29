@@ -19,9 +19,12 @@ const CustomAlert = () => {
 
   if (isOn) {
     return (
-    <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
-      {isOn && <Alert severity={type} onClose={() => dispatch(clearAlert())}>{translation[msg]}</Alert>}
-    </Box>
+      <>
+      <h1>HIIIIIIIII</h1>
+      <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
+        {isOn && <Alert severity={type} onClose={() => dispatch(clearAlert())}>{translation[msg]}</Alert>}
+      </Box>
+      </>
   )} else {
     return null
   }

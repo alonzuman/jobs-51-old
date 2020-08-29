@@ -2,6 +2,7 @@ import { app, db } from '../firebase'
 import firebase from 'firebase'
 import { setAlert } from "./alert"
 import { closeDialogs } from './dialogs'
+const usersRef = db.collection('users')
 
 export const setUser = (user) => async dispatch => {
   const { uid } = user
@@ -9,7 +10,7 @@ export const setUser = (user) => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    const snapshot = await db.collection('users').doc(uid).get()
+    const snapshot = await usersRef.doc(uid).get()
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...snapshot.data() }
@@ -42,7 +43,7 @@ export const signInWithProvider = (provider) => async dispatch => {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
       const result = await firebase.auth().signInWithPopup(firebaseProvider())
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
-      const fetchedUser = await db.collection('users').doc(uid).get()
+      const fetchedUser = await usersRef.doc(uid).get()
       const user = fetchedUser.data()
       if (!user) {
         const newUser = {
@@ -52,6 +53,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           lastName: displayName?.split(' ')[1] || '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
+          lookingForJob: false,
           activities: {
             pending: 0,
             approved: 0
@@ -59,7 +61,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           role: 'user',
           dateCreated: Date.now()
         }
-        await db.collection('users').doc(uid).set(newUser, { merge: true })
+        await usersRef.doc(uid).set(newUser, { merge: true })
         dispatch(closeDialogs())
         dispatch({
           type: 'SIGNED_UP',
@@ -106,7 +108,7 @@ export const signIn = ({ email, password }) => async dispatch =>{
   try {
     const res = await app.auth().signInWithEmailAndPassword(email, password)
     const { uid } = res.user
-    const snapshot = await db.collection('users').doc(uid).get()
+    const snapshot = await usersRef.doc(uid).get()
     const { userInfo } = snapshot.data()
     const user = {
       uid,
@@ -150,10 +152,11 @@ export const signUp = (user) => async dispatch =>{
         pending: 0,
         approved: 0
       },
+      lookingForJob: false,
       role: 'user',
       dateCreated: new Date()
     }
-    await db.collection('users').doc(uid).set(newUser, { merge: true })
+    await usersRef.doc(uid).set(newUser, { merge: true })
     dispatch(closeDialogs())
     dispatch({
       type: 'SIGNED_UP',
@@ -197,7 +200,7 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
     type: 'AUTH_LOADING'
   })
   try {
-    await db.collection('users').doc(uid).set({...personalDetails}, { merge: true })
+    await usersRef.doc(uid).set({...personalDetails}, { merge: true })
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...user, ...personalDetails }
@@ -220,7 +223,7 @@ export const editProfile = (user, uid) => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    await db.collection('users').doc(uid).set(user, { merge: true })
+    await usersRef.doc(uid).set(user, { merge: true })
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...user, avatar: user.avatar.length > 0 && user.avatar }
@@ -243,7 +246,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    await db.collection('users').doc(uid).set({ region }, { merge: true })
+    await usersRef.doc(uid).set({ region }, { merge: true })
     dispatch({
       type: 'SET_USER',
       payload: { region }
@@ -254,5 +257,24 @@ export const setUserRegion = (region, uid) => async dispatch => {
       type: 'error',
       msg: 'ServerError'
     }))
+  }
+}
+
+export const toggleLookingForJob = ({ uid }) => async dispatch => {
+  try {
+    await usersRef.doc(uid).set({
+      lookingForJob: true
+    }, { merge: true })
+    dispatch(setAlert({
+      type: 'success',
+      msg: 'actionSuccedded'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+
   }
 }
