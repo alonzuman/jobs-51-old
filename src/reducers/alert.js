@@ -8,7 +8,6 @@ export const alertReducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
     case 'SET_ALERT':
-      console.log('from new reducer')
       const { msg, type } = payload
       return {
         ...state,
@@ -16,14 +15,7 @@ export const alertReducer = (state = initialState, action) => {
         msg,
         type
       }
-    case 'CLEAR_ALERT':
-      console.log('from new reducer')
-      return {
-        ...state,
-        isOn: false,
-        msg: '',
-        type: ''
-      }
+    case 'CLEAR_ALERT': return initialState
     default: return state
   }
 }
