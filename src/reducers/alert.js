@@ -1,24 +1,27 @@
 const initialState = {
   isOn: false,
-  type: '',
-  msg: ''
+  msg: '',
+  type: ''
 }
 
 export const alertReducer = (state = initialState, action) => {
   const { type, payload } = action
-
   switch (type) {
     case 'SET_ALERT':
-      const { type, msg } = payload
-      console.log('alert is on', msg, type)
+      const { msg, type } = payload
       return {
         ...state,
-        ...payload
+        isOn: true,
+        msg,
+        type
       }
     case 'CLEAR_ALERT':
+      console.log('from new reducer')
       return {
         ...state,
-        ...payload
+        isOn: false,
+        msg: '',
+        type: ''
       }
     default: return state
   }

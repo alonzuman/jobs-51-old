@@ -6,10 +6,9 @@ import { themeReducer } from './theme';
 import { dialogsReducer } from './dialogs';
 import { activitiesReducer } from './activities';
 import { usersReducer } from './users';
-import { alertsReducer } from './alerts';
 
 export default combineReducers({
-  alerts: alertsReducer,
+  alerts: alertReducer,
   auth: authReducer,
   jobs: jobsReducer,
   theme: themeReducer,
