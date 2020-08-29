@@ -262,6 +262,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
 
 export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => {
   try {
+    console.log(currentValue)
     await usersRef.doc(uid).set({
       lookingForJob: !!currentValue
     }, { merge: true })
