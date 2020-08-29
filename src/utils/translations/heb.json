@@ -130,5 +130,6 @@
   "noPermission": "בקשתך להצטרף בטיפול, אנא צור קשר עם..",
   "backToHome": "בחזרה לעמוד הראשי",
   "noPermissionsToThisPage": "אין לך גישה לעמוד זה",
-  "actionSuccedded": "הפעולה בוצעה בהצלחה"
+  "actionSuccedded": "הפעולה בוצעה בהצלחה",
+  "lookingForJob": "הצג אותי בתור מחפש עבודה"
 }

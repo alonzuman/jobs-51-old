@@ -18,15 +18,8 @@ const CustomAlert = () => {
     zIndex: 999999,
   }
 
-  if (!isOn) {
-    return (
-      <>
-      <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
-        <Alert severity={'success'} onClose={() => dispatch(clearAlert())}>{'translation[msg]'}</Alert>
-      </Box>
-      </>
-    )
-  } else if (1 == 2) {
+  if (isOn) {
+    console.log('is on')
     return (
       <>
       <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
@@ -35,7 +28,7 @@ const CustomAlert = () => {
       </>
     )
   } else {
-    return null
+    return <div/>
   }
 }
 
