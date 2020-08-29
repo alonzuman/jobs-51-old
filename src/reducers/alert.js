@@ -10,6 +10,7 @@ export const alertReducer = (state = initialState, action) => {
   switch (type) {
     case 'SET_ALERT':
       const { type, msg } = payload
+      console.log('alert is on', msg, type)
       return {
         isOn: true,
         type,
