@@ -14,18 +14,27 @@ const CustomAlert = () => {
     bottom: '5rem',
     width: '100%',
     padding: '1rem',
+    direction: 'rtl',
     zIndex: 999999,
   }
 
-  if (isOn) {
+  if (!isOn) {
     return (
       <>
-      <h1>HIIIIIIIII</h1>
       <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
-        {isOn && <Alert severity={type} onClose={() => dispatch(clearAlert())}>{translation[msg]}</Alert>}
+        <Alert severity={'success'} onClose={() => dispatch(clearAlert())}>{'translation[msg]'}</Alert>
       </Box>
       </>
-  )} else {
+    )
+  } else if (1 == 2) {
+    return (
+      <>
+      <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>
+        <Alert severity={type} onClose={() => dispatch(clearAlert())}>{translation[msg]}</Alert>
+      </Box>
+      </>
+    )
+  } else {
     return null
   }
 }

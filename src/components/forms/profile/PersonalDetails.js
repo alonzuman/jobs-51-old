@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { TextField, Button, CircularProgress, Grid } from '@material-ui/core'
+import { TextField, Button, CircularProgress, Grid, Switch } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
-import { addPersonalDetails } from '../../../actions'
+import { addPersonalDetails, toggleLookingForJob } from '../../../actions'
 
 const PersonalDetails = () => {
   const authState = useSelector(state => state.auth)
@@ -26,6 +26,7 @@ const PersonalDetails = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Switch color='primary' checked={authState.lookingForJob} onChange={() => dispatch(toggleLookingForJob({ uid: authState.uid, currentValue: authState.lookingForJob }))} />
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
