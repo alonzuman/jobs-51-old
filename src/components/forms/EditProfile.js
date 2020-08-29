@@ -27,7 +27,14 @@ const EditProfile = () => {
         {value === 1 && <PersonalDetails />}
         {value === 2 && <Settings />}
       </Container>
-      <Button onClick={() => dispatch(setAlert({ type: 'error', msg: 'tf' }))}>Hi</Button>
+      <Button onClick={() => dispatch({
+        type: 'SET_ALERT',
+        payload: {
+          type: 'error',
+          msg: 'tf'
+        }
+        }
+      )}>Hi</Button>
     </>
   )
 }
