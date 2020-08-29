@@ -1,6 +1,6 @@
 import { app, db } from '../firebase'
 import firebase from 'firebase'
-import { setAlert } from "./alert"
+import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
 const usersRef = db.collection('users')
 
