@@ -260,12 +260,19 @@ export const setUserRegion = (region, uid) => async dispatch => {
   }
 }
 
-export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => {
+export const toggleLookingForJob = ({ uid, currentValue, user }) => async dispatch => {
+  dispatch({
+    type: 'USER_LOADING'
+  })
   try {
-    console.log(currentValue)
-    await usersRef.doc(uid).set({
-      lookingForJob: !!currentValue
-    }, { merge: true })
+    const userRef = usersRef.doc(uid)
+    await userRef.update('lookingForJob', currentValue)
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        lookingForJob: currentValue
+      }
+    })
     dispatch(setAlert({
       type: 'success',
       msg: 'actionSuccedded'

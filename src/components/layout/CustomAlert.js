@@ -19,7 +19,6 @@ const CustomAlert = () => {
   }
 
   if (isOn) {
-    console.log('is on')
     return (
       <>
       <Box onClick={() => dispatch(clearAlert())} style={boxStyle}>

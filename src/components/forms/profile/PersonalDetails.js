@@ -24,10 +24,17 @@ const PersonalDetails = () => {
     dispatch(addPersonalDetails(authState, personalDetails, authState.uid))
   }
 
+  const handleLookingForJobChange = () => {
+    dispatch(toggleLookingForJob({
+      uid: authState.uid,
+      currentValue: !authState.lookingForJob,
+    }))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <InputLabel>{translation.lookingForJob}</InputLabel>
-      <Switch color='primary' checked={authState.lookingForJob} onChange={() => dispatch(toggleLookingForJob({ uid: authState.uid, currentValue: authState.lookingForJob }))} />
+      <Switch color='primary' checked={authState.lookingForJob} onChange={handleLookingForJobChange} />
       <br />
       <br />
       <Grid container spacing={1}>
