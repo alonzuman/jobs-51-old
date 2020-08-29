@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import UserCard from '../cards/UserCard'
-import CardsSkeletons from '../cards/CardsSkeletons'
+import CardsSkeletons from '../skeletons/CardsSkeletons'
 import { getUsers } from '../../actions/users'
 
 const UsersList = () => {

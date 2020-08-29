@@ -5,20 +5,12 @@ import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
 import ActivitiesList from '../components/lists/ActivitiesList'
 import TopBar from '../components/layout/TopBar'
+import FloatingActionButton from '../components/layout/FloatingActionButton'
 
 const Activity = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const { pending, approved } = useSelector(state => state.auth).activities
-
-  const fabStyle = {
-    position: 'fixed',
-    margin: '0 auto',
-    bottom: '4.5rem',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    zIndex: 999
-  }
 
   const statsPaperStyle = {
     width: '100%',
@@ -32,10 +24,12 @@ const Activity = () => {
 
   return (
     <>
-      <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} style={fabStyle}>
+      <FloatingActionButton variant='extended' color='primary' action={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} title={translation.addActivity}>
         <AddIcon />
+      </FloatingActionButton>
+      {/* <Fab variant='extended' color='primary' onClick={} style={fabStyle}>
         <span style={{ margin: '0 .5rem' }}>{translation.addActivity}</span>
-      </Fab>
+      </Fab> */}
       <TopBar title={translation.activity} />
       <Container>
         <Typography variant='h2'>{translation.totalActivities}</Typography>

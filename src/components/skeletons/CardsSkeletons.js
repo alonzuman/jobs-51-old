@@ -69,7 +69,6 @@ const CardSkeleton = () => {
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
-        <Skeleton style={cardBodyStyle} variant='text' />
         <br />
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />

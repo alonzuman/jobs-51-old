@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Typography, List } from '@material-ui/core'
 import ActivityCard from '../cards/ActivityCard'
-import CardsSkeletons from '../cards/CardsSkeletons'
+import CardsSkeletons from '../skeletons/CardsSkeletons'
 import { getMyActivities, getActivities } from '../../actions'
 
 const ActivitiesList = ({ type = 'personal' }) => {

@@ -20,17 +20,9 @@ form {
   padding-bottom: 1rem!important;
 }
 
-.MuiBottomNavigationAction-iconOnly {
-  padding-top: 0!important;
-}
-
 .MuiTabs-flexContainer {
   display: flex;
   justify-content: space-evenly;
-}
-
-.MuiBottomNavigationAction-root .Mui-selected {
-  padding-top: 0!important;
 }
 
 .paper-background {
@@ -55,10 +47,6 @@ form {
 
 .MuiDialogContent-root {
   padding: 0 16px 16px 16px!important;
-}
-
-.full-width {
-  width: 100%;
 }
 
 .MuiFormControl-root {
@@ -163,4 +151,49 @@ form {
   .full-width {
     width: 100%!important;
   }
+}
+
+/* FLEXBOX LAYOUT */
+
+.align__center {
+  align-items: center!important;
+}
+
+.justify__between {
+  justify-content: space-between;
+}
+
+.justify__center {
+  justify-content: center!important;
+}
+
+.text__center {
+  text-align: center;
+}
+
+.flex {
+  display: flex!important;
+}
+
+.full__width {
+  width: 100%;
+}
+
+.flex__column {
+  flex-direction: column!important;
+}
+
+/* AVATARS */
+.avatar__lg {
+  height: 90px;
+  width: 90px;
+}
+
+.avatar__md {
+  height: 56px!important;
+  width: 56px!important;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
 }

@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
-import CardsSkeletons from '../components/cards/CardsSkeletons'
+import CardsSkeletons from '../components/skeletons/CardsSkeletons'
 import { Grid, Typography, Fab, Container, Paper, Box } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
 import TopBar from '../components/layout/TopBar'
 import AddIcon from '@material-ui/icons/Add'
+import FloatingActionButton from '../components/layout/FloatingActionButton'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -34,10 +35,9 @@ const Jobs = () => {
 
   return (
     <>
-      <Fab variant='extended' color='primary' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} style={fabStyle}>
+      <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>
         <AddIcon />
-        <span style={{margin: '0 .5rem'}}>{translation.addJob}</span>
-      </Fab>
+      </FloatingActionButton>
       <TopBar title={translation.findJob}>
         <FiltersBar filterOptions={filtersBar} />
       </TopBar>

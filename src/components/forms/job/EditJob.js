@@ -5,7 +5,7 @@ import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
 import { addJob, editJob, removeJob, addFilter, removeFilter } from '../../../actions'
-import FormSkeleton from '../FormSkeleton'
+import FormSkeleton from '../../skeletons/FormSkeleton'
 import ApprovalBox from '../../dialogs/ApprovalBox'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 

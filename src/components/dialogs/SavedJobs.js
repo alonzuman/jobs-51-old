@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSavedJobs } from '../../actions'
-import CardsSkeletons from '../cards/CardsSkeletons'
+import CardsSkeletons from '../skeletons/CardsSkeletons'
 import { Grid, Typography, Container } from '@material-ui/core'
 import JobCard from '../cards/JobCard'
 import TopBar from '../layout/TopBar'

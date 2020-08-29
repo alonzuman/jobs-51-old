@@ -128,5 +128,6 @@
   "search": "חיפוש",
   "saveChanges": "שמירת שינויים",
   "noPermission": "בקשתך להצטרף בטיפול, אנא צור קשר עם..",
-  "backToHome": "בחזרה לעמוד הראשי"
+  "backToHome": "בחזרה לעמוד הראשי",
+  "noPermissionsToThisPage": "אין לך גישה לעמוד זה"
 }

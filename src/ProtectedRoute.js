@@ -6,6 +6,7 @@ import { setUser, signOut } from './actions'
 import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
 import { checkPermissions } from './utils'
 import NoPermissions from './NoPermissions'
+import NoPermissionPage from './NoPermissionPage'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
@@ -45,6 +46,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
       <div style={{ direction: 'rtl', paddingBottom: '7.5rem' }}>
         {loading && <CircularSpinnerWithContainer />}
+        {!loading && !checkRole() && <NoPermissionPage />}
         {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
         {!loading && !currentUser && <Redirect to='/' />}
       </div>

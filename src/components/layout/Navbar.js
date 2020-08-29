@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
+import './Navbar.css'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -21,7 +21,6 @@ const Navbar = () => {
   const { theme } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
-  const { width, height } = useWindowSize()
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -41,11 +40,11 @@ const Navbar = () => {
   if (!loading && checkPermissions(role) !== 0) {
     return (
       <BottomNavigation value={value} onChange={handleChange} style={navbarStyle}>
-        <BottomNavigationAction className={height >= 812 ? 'padding-bottom-24' : ''} component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
-        <BottomNavigationAction className={height >= 812 ? 'padding-bottom-24' : ''} component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
-        {checkPermissions(role) >= 2 && <BottomNavigationAction className={height >= 812 ? 'padding-bottom-24' : ''} component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
-        <BottomNavigationAction className={height >= 812 ? 'padding-bottom-24' : ''} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
-        {checkPermissions(role) >= 3 && <BottomNavigationAction className={height >= 812 ? 'padding-bottom-24' : ''} component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
+        <BottomNavigationAction component={Link} to='/jobs' value='/jobs' icon={value === '/jobs' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
+        <BottomNavigationAction component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
+        {checkPermissions(role) >= 2 && <BottomNavigationAction component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
+        <BottomNavigationAction component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
+        {checkPermissions(role) >= 3 && <BottomNavigationAction component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
       </BottomNavigation>
     )
   } else {

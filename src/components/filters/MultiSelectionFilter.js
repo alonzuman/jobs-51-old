@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Grid, Button, Chip } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
-import ChipsSkeleton from '../layout/ChipsSkeleton'
+import ChipsSkeleton from '../skeletons/ChipsSkeleton'
 
 const MultiSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()

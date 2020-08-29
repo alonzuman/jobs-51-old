@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Chip, Dialog, Box, DialogTitle, IconButton, DialogContent, Grid, Button } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import ChipsSkeleton from '../../../components/layout/ChipsSkeleton'
+import ChipsSkeleton from '../../../components/skeletons/ChipsSkeleton'
 import { useDispatch, useSelector } from 'react-redux'
 
 const SingleSelectionChips = ({ existingFilter, action, selections, label, type }) => {

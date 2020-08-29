@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Grid, Chip, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
-import ChipsSkeleton from '../layout/ChipsSkeleton'
+import ChipsSkeleton from '../skeletons/ChipsSkeleton'
 import { dateFilters } from '../../utils'
 
 const SingleSelectionFilter = ({ type }) => {
