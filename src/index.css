@@ -238,3 +238,11 @@ form {
   font-size: .6rem!important;
   margin-top: .25rem;
 }
+
+.transparent {
+  background-color: transparent!important;
+}
+
+.border__radius_1 {
+  border-radius: 1rem!important;
+}

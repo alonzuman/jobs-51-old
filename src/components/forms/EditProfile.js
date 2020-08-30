@@ -14,13 +14,12 @@ const EditProfile = () => {
 
   return (
     <>
-      <TopBar title={translation.myProfile}>
-        <Tabs style={{width: '100%'}} indicatorColor='primary' value={value}>
-          <Tab label={translation.userDetails} onClick={() => handleValueChange(0)} />
-          <Tab label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
-          <Tab label={translation.settings} onClick={() => handleValueChange(2)}  />
-        </Tabs>
-      </TopBar >
+      <TopBar title={translation.myProfile} />
+      <Tabs className='full__width' indicatorColor='primary' value={value}>
+        <Tab label={translation.userDetails} onClick={() => handleValueChange(0)} />
+        <Tab label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
+        <Tab label={translation.settings} onClick={() => handleValueChange(2)}  />
+      </Tabs>
       <PageContainer>
         {value === 0 && <UserDetails />}
         {value === 1 && <PersonalDetails />}

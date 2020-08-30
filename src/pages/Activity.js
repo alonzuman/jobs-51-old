@@ -26,9 +26,9 @@ const Activity = () => {
       </FloatingActionButton>
       <TopBar title={translation.activity} />
       <PageContainer>
-        <Typography variant='h2'>{translation.totalActivities}</Typography>
+        <Typography variant='h3'>{translation.totalActivities}</Typography>
         <StatsList items={statsListItems} />
-        <Typography variant='h2'>{translation.latestActivities}</Typography>
+        <Typography variant='h3'>{translation.latestActivities}</Typography>
         <ActivitiesList type='personal' />
       </PageContainer>
     </>

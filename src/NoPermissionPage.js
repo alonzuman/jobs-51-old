@@ -8,7 +8,7 @@ const NoPermissionPage = () => {
   const { translation } = useSelector(state => state.theme)
 
   return (
-    <PageContainer className='flex justify__center align__center flex__column'>
+    <PageContainer style={{textAlign: 'center'}} className='flex justify__center align__center flex__column text__center'>
       <Typography className='text__center' variant='h1'>
         {translation.noPermissionsToThisPage}
       </Typography>

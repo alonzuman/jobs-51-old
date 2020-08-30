@@ -35,6 +35,11 @@
       "color": "#3B3439",
       "padding": ".5rem 0"
     },
+    "h3": {
+      "fontSize": "1.1rem",
+      "color": "#797979",
+      "margin": "1.5rem 0 .5rem 0"
+    },
     "subtitle1": {
       "fontSize": ".75rem",
       "color": "#9c9c9c"

@@ -4,12 +4,12 @@ import { Grid } from '@material-ui/core'
 
 const skeletonStyle = {
   height: '2rem',
-  width: '3rem',
+  width: '4rem',
   borderRadius: '1rem'
 }
 
-const ChipsSkeleton = () => {
-  const arr = [1, 2, 3]
+const ChipsSkeleton = ({ count = 3 }) => {
+  const arr = [...Array(count)]
 
   return (
     <Grid container spacing={1}>
