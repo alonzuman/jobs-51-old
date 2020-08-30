@@ -78,16 +78,24 @@ const AddActivity = () => {
           {types?.map((type, index) => <Grid key={index} item ><Chip onClick={() => setActivity({ ...activity, type })} label={type} color={activity['type'] === type ? 'primary' : 'default'} /></Grid>)}
         </Grid>
         <br />
-        <TextField required label={translation.description} variant='outlined' name='description' value={activity['description']} onChange={handleChange} />
+        <FormControl>
+          <TextField required label={translation.description} variant='outlined' name='description' value={activity['description']} onChange={handleChange} />
+        </FormControl>
         <Grid container spacing={1}>
           <Grid item xs={6}>
-            <TextField InputLabelProps={{shrink: true}} type='time' required label={translation.startHour} variant='outlined' name='startHour' value={activity['startHour']} onChange={handleChange} />
+            <FormControl>
+              <TextField InputLabelProps={{shrink: true}} type='time' required label={translation.startHour} variant='outlined' name='startHour' value={activity['startHour']} onChange={handleChange} />
+            </FormControl>
           </Grid>
           <Grid item xs={6}>
-            <TextField InputLabelProps={{ shrink: true }} type='time' required label={translation.endHour} variant='outlined' name='endHour' value={activity['endHour']} onChange={handleChange} />
+            <FormControl>
+              <TextField InputLabelProps={{ shrink: true }} type='time' required label={translation.endHour} variant='outlined' name='endHour' value={activity['endHour']} onChange={handleChange} />
+            </FormControl>
           </Grid>
         </Grid>
-        <TextField InputLabelProps={{ shrink: true }} type='date' required label={translation.date} variant='outlined' name='date' value={activity['date']} onChange={handleChange} />
+        <FormControl>
+          <TextField InputLabelProps={{ shrink: true }} type='date' required label={translation.date} variant='outlined' name='date' value={activity['date']} onChange={handleChange} />
+        </FormControl>
         <Button className='button-style' color='primary' variant='contained' type='submit' >{loading ? <CircularProgress className='button-spinner' /> : translation.addActivity}</Button>
       </>}
     </form>

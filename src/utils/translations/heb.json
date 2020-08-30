@@ -134,5 +134,12 @@
   "lookingForJob": "הצג אותי בתור מחפש עבודה",
   "jobs": "לוח עבודות",
   "saved": "שמור",
-  "profile": "הפרופיל שלי"
+  "profile": "הפרופיל שלי",
+  "startHour": "שעת התחלה",
+  "endHour": "שעת סיום",
+  "date": "תאריך",
+  "iAmLookingForAJob": "מחפש/ת עבודה",
+  "skillsInterestedIn": "תחומי עיסוק",
+  "contactDetails": "פרטי יצירת קשר",
+  "IVolunteerIn": "אני מתנדב/ת במחוז"
 }
