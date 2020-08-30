@@ -6,6 +6,7 @@ import UserRoleActions from './admin/components/UserRoleActions'
 import TopBar from '../components/layout/TopBar'
 import { Skeleton } from '@material-ui/lab'
 import { checkPermissions } from '../utils'
+import PageContainer from '../components/layout/PageContainer'
 
 const User = ({ match }) => {
   const { translation } = useSelector(state => state.theme)
@@ -19,7 +20,7 @@ const User = ({ match }) => {
   return (
     <>
       <TopBar backButton={true} />
-      <Container className='flex justify__between align__center flex__column'>
+      <PageContainer className='flex justify__between align__center flex__column'>
         <div className='mb-1 flex justify__between align__center full__width'>
           <div>
             <Typography variant='h1'>{!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={140} />}</Typography>
@@ -28,7 +29,7 @@ const User = ({ match }) => {
           {loading ? <Skeleton variant='circle' className='avatar__md' /> : <Avatar className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar>}
         </div>
         {checkPermissions(role) >= 4 && <UserRoleActions />}
-      </Container>
+      </PageContainer>
     </>
   )
 }

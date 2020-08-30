@@ -1,7 +1,8 @@
 import React from 'react'
-import { Grid, Avatar, Paper, Card, CardHeader, Chip } from '@material-ui/core'
+import { Grid, Avatar, Paper, CardHeader, Chip } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import CardContainer from './CardContainer'
 
 const UserCard = ({ user }) => {
   const { translation } = useSelector(state => state.theme)
@@ -13,14 +14,14 @@ const UserCard = ({ user }) => {
     <Grid item xs={12} md={6} lg={4}>
       <Link to={`/users/${user.uid}`}>
         <Paper style={paperStyle} elevation={0}>
-        <Card>
-          <CardHeader
-            avatar={<Avatar src={user.avatar} alt={user.firstName}>{user.firstName.charAt(0)}</Avatar>}
-            title={`${user.firstName} ${user.lastName}`}
-            subheader={user.serviceYear ? `${translation.joined} ${user.serviceYear}` : ''}
-            action={<Chip size='small' color='primary' variant='outlined' label={translation.roles[user.role]} />}
-          />
-        </Card>
+          <CardContainer>
+            <CardHeader
+              avatar={<Avatar src={user.avatar} alt={user.firstName}>{user.firstName.charAt(0)}</Avatar>}
+              title={`${user.firstName} ${user.lastName}`}
+              subheader={user.serviceYear ? `${translation.joined} ${user.serviceYear}` : ''}
+              action={<Chip size='small' color='primary' variant='outlined' label={translation.roles[user.role]} />}
+            />
+          </CardContainer>
         </Paper>
       </Link>
     </Grid>

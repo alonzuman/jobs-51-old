@@ -5,6 +5,7 @@ import { Tabs, Tab, Container } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Settings from './Settings'
 import TopBar from '../layout/TopBar'
+import PageContainer from '../layout/PageContainer'
 
 const EditProfile = () => {
   const [value, setValue] = useState(0)
@@ -20,11 +21,11 @@ const EditProfile = () => {
           <Tab label={translation.settings} onClick={() => handleValueChange(2)}  />
         </Tabs>
       </TopBar >
-      <Container>
+      <PageContainer>
         {value === 0 && <UserDetails />}
         {value === 1 && <PersonalDetails />}
         {value === 2 && <Settings />}
-      </Container>
+      </PageContainer>
     </>
   )
 }

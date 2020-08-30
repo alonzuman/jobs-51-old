@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { openDialog, setUser } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 import { app } from '../firebase'
+import PageContainer from '../components/layout/PageContainer'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
@@ -51,7 +52,7 @@ const LandingPage = () => {
 
   if (currentUser) return <Redirect to='/jobs' />
   return (
-    <Container style={containerStyle}>
+    <PageContainer style={containerStyle}>
       <Paper style={paperStyle}>
         <ShaldagLogo />
         <Box style={textBoxStyle} className='text-box'>
@@ -63,7 +64,7 @@ const LandingPage = () => {
         </Box>
         <Button style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
     </Paper>
-  </Container>
+    </PageContainer>
   )
 }
 

@@ -1,11 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import { Box, Container, Grid, Chip } from '@material-ui/core'
+import { Box, Grid, Chip } from '@material-ui/core'
 import MultiSelectionChips from './components/MultiSelectionChips'
 import { clearActivityFilters } from '../../actions'
 import ActivitiesList from '../../components/lists/ActivitiesList'
 import SingleSelectionChips from './components/SingleSelectionChips'
+import PageContainer from '../../components/layout/PageContainer'
+import SecondaryBar from '../../components/layout/SecondaryBar'
 
 const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 const statuses = ['approved', 'pending']
@@ -30,22 +32,23 @@ const ManageActivities = () => {
 
   return (
     <>
-    <TopBar backButton={true} title={translation.manageActivities}>
-      <Box style={filtersContainerStyle}>
-        <Grid container spacing={1}>
-          <Grid item>
-            <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.region} selections={regions} />
+      <TopBar backButton={true} title={translation.manageActivities} />
+      <SecondaryBar>
+        <Box style={filtersContainerStyle}>
+          <Grid container spacing={1}>
+            <Grid item>
+              <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.region} selections={regions} />
+            </Grid>
+            <Grid item>
+              <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
+            </Grid>
           </Grid>
-          <Grid item>
-            <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
-          </Grid>
-        </Grid>
-        <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
-      </Box>
-    </TopBar>
-    <Container>
-      <ActivitiesList type='admin' />
-    </Container>
+          <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
+        </Box>
+      </SecondaryBar>
+      <PageContainer>
+        <ActivitiesList type='admin' />
+      </PageContainer>
     </>
   )
 }

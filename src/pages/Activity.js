@@ -1,55 +1,36 @@
 import React from 'react'
-import { Paper, Typography, Fab, Grid, Container } from '@material-ui/core'
+import { Paper, Typography, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
 import ActivitiesList from '../components/lists/ActivitiesList'
 import TopBar from '../components/layout/TopBar'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
+import PageContainer from '../components/layout/PageContainer'
+import StatsList from '../components/lists/StatsList'
 
 const Activity = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const { pending, approved } = useSelector(state => state.auth).activities
 
-  const statsPaperStyle = {
-    width: '100%',
-    height: 120,
-    display: 'flex',
-    borderRadius: '1rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
-  }
+  const statsListItems = [
+    { label: translation.approved, big: approved },
+    { label: translation.pending, big: pending },
+  ]
 
   return (
     <>
       <FloatingActionButton variant='extended' color='primary' action={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>
-      {/* <Fab variant='extended' color='primary' onClick={} style={fabStyle}>
-        <span style={{ margin: '0 .5rem' }}>{translation.addActivity}</span>
-      </Fab> */}
       <TopBar title={translation.activity} />
-      <Container>
+      <PageContainer>
         <Typography variant='h2'>{translation.totalActivities}</Typography>
-        <Grid  container spacing={2}>
-          <Grid xs={6} md={6} lg={6} item>
-            <Paper style={statsPaperStyle} elevation={0}>
-              <Typography variant='h1'>{pending}</Typography>
-              <Typography variant='body1'>{translation.pending}</Typography>
-            </Paper>
-          </Grid>
-          <Grid xs={6} md={6} lg={6} item>
-            <Paper style={statsPaperStyle} elevation={0}>
-              <Typography variant='h1'>{approved}</Typography>
-              <Typography variant='body1'>{translation.approved}</Typography>
-            </Paper>
-          </Grid>
-        </Grid>
+        <StatsList items={statsListItems} />
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <ActivitiesList type='personal' />
-      </Container>
+      </PageContainer>
     </>
   )
 }

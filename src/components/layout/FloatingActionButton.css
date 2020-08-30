@@ -1,6 +1,6 @@
 .MuiFab-root {
   position: fixed!important;
-  bottom: 4.5rem!important;
+  bottom: 5.5rem!important;
   margin: 0 auto!important;
   left: 50%!important;
   transform: translate(-50%, 0)!important;
@@ -9,6 +9,6 @@
 
 @media (min-height: 812px) {
   .MuiFab-root {
-    bottom: 5.5rem!important;
+    bottom: 6.5rem!important;
   }
 }

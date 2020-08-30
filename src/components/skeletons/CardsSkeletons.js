@@ -1,7 +1,8 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
-import { Card, CardContent, Grid } from '@material-ui/core'
+import { CardContent, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+import CardContainer from '../cards/CardContainer'
 
 const CardsSkeletons = ({ count }) => {
   const arr = [...Array(count || 3)]
@@ -57,7 +58,7 @@ const CardSkeleton = () => {
 
   return (
   <Grid item xs={12} md={6} lg={4}>
-    <Card style={cardStyle}>
+    <CardContainer style={cardStyle}>
       <div style={flexHeaderStyle}>
         <Skeleton style={avatarStyle} variant='circle' />
         <div>
@@ -73,7 +74,7 @@ const CardSkeleton = () => {
         <Skeleton style={cardBodyStyle} variant='text' />
         <Skeleton style={cardBodyStyle} variant='text' />
       </CardContent>
-    </Card>
+    </CardContainer>
   </Grid>
   )
 }

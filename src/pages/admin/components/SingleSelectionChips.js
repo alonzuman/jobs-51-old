@@ -42,7 +42,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
             <CloseIcon />
           </IconButton>
         </Box>
-        <DialogContent style={{minWidth: 'fit-content'}}>
+        <DialogContent style={{minWidth: 206}} className='full__width'>
           {Object.keys(selections).length === 0 && <ChipsSkeleton />}
           <Grid style={{ direction: 'rtl' }} container spacing={1}>
             {selections.map((selection, index) => {

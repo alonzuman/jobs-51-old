@@ -34,7 +34,7 @@ function App() {
   const { theme } = useSelector(state => state.theme)
 
   useEffect(() => {
-    document.querySelector('body').style.backgroundColor = localStorage.getItem('theme') === 'dark' ? '#303030' : '#efefef'
+    document.querySelector('body').style.backgroundColor = theme?.palette?.background?.main || 'white'
     setTheme()
   }, [theme])
 

@@ -4,6 +4,7 @@ import { translateDate } from '../../utils'
 import { useSelector } from 'react-redux'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ActivityCardActions from './ActivityCardActions';
+import CardContainer from './CardContainer';
 
 const ActivityCard = ({ activity }) => {
   const [open, setOpen] = useState(false)
@@ -49,25 +50,27 @@ const ActivityCard = ({ activity }) => {
   return (
     <>
     <ListItem style={listItemStyle}>
-      <Paper style={paperStyle} elevation={0}>
-        <Box style={dateStyle}>
-          <Typography variant='subtitle1'>{month}</Typography>
-          <Typography variant='h2'>{number}</Typography>
-          <Typography variant='body1'>{day}</Typography>
-        </Box>
-        <Box style={detailsStyle}>
-          <Chip label={activity.type} size='small' variant='outlined' color='primary' />
-          <ListItemText
-            primary={activity.description}
-            secondary={activity.total}
-          />
-        </Box>
-        <Box style={actionBoxStyle}>
-          <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Box>
-      </Paper>
+      <CardContainer>
+        <Paper style={paperStyle} elevation={0}>
+          <Box style={dateStyle}>
+            <Typography variant='subtitle1'>{month}</Typography>
+            <Typography variant='h2'>{number}</Typography>
+            <Typography variant='body1'>{day}</Typography>
+          </Box>
+          <Box style={detailsStyle}>
+            <Chip label={activity.type} size='small' variant='outlined' color='primary' />
+            <ListItemText
+              primary={activity.description}
+              secondary={activity.total}
+            />
+          </Box>
+          <Box style={actionBoxStyle}>
+            <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Box>
+        </Paper>
+      </CardContainer>
     </ListItem>
     {open && <ActivityCardActions activity={activity} />}
     </>

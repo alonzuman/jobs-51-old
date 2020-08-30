@@ -1,10 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import { Box, Grid, Chip, Container } from '@material-ui/core'
+import { Box, Grid, Chip } from '@material-ui/core'
 import UsersList from '../../components/lists/UsersList'
 import SearchBar from '../../components/filters/SearchBar'
 import { clearUserFilters } from '../../actions/users'
+import PageContainer from '../../components/layout/PageContainer'
+import SecondaryBar from '../../components/layout/SecondaryBar'
+import FiltersBar from '../../components/layout/FiltersBar'
 
 const ManageUsers = () => {
   const dispatch = useDispatch()
@@ -24,17 +27,18 @@ const ManageUsers = () => {
 
   return (
     <>
-      <TopBar backButton={true} title={translation.manageUsers}>
+      <TopBar backButton={true} title={translation.manageUsers} />
+      <SecondaryBar>
         <Box style={filtersContainerStyle}>
           <Grid container spacing={1}>
             <Grid item><SearchBar /></Grid>
           </Grid>
           <Chip style={clearStyle} onClick={() => dispatch(clearUserFilters())} label={translation.clear} />
         </Box>
-      </TopBar>
-      <Container>
+      </SecondaryBar>
+      <PageContainer>
         <UsersList />
-      </Container>
+      </PageContainer>
     </>
   )
 }

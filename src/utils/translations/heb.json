@@ -131,5 +131,8 @@
   "backToHome": "בחזרה לעמוד הראשי",
   "noPermissionsToThisPage": "אין לך גישה לעמוד זה",
   "actionSuccedded": "הפעולה בוצעה בהצלחה",
-  "lookingForJob": "הצג אותי בתור מחפש עבודה"
+  "lookingForJob": "הצג אותי בתור מחפש עבודה",
+  "jobs": "לוח עבודות",
+  "saved": "שמור",
+  "profile": "הפרופיל שלי"
 }

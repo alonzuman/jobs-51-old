@@ -1,18 +1,20 @@
 import React from 'react'
-import { CircularProgress, Container } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
+import PageContainer from './PageContainer'
 
-const containerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '75vh'
-}
 
 const CircularSpinnerWithContainer = () => {
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '75vh',
+  }
+
   return (
-    <Container style={containerStyle}>
+    <PageContainer style={containerStyle}>
       <CircularProgress />
-    </Container>
+    </PageContainer>
   )
 }
 

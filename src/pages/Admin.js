@@ -1,43 +1,26 @@
 import React from 'react'
-import { Paper, Typography, Grid, Container } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import TopBar from '../components/layout/TopBar'
+import PageContainer from '../components/layout/PageContainer'
+import StatsList from '../components/lists/StatsList'
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme)
 
-  const actionPaperStyle = {
-    width: '100%',
-    height: 120,
-    display: 'flex',
-    borderRadius: '1rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
-  }
+  const items = [
+    { label: translation.manageUsers, big: <PeopleAltIcon />, link: '/admin/users' },
+    { label: translation.manageActivities, big: <AssignmentIcon />, link: '/admin/activities' },
+  ]
 
   return (
     <>
       <TopBar title={translation.admin} />
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={6} md={4} lg={4}>
-            <Link to='/admin/users'>
-              <Paper elevation={0} style={actionPaperStyle}>
-                <Typography variant='body1'>{translation.manageUsers}</Typography>
-              </Paper>
-            </Link>
-          </Grid>
-          <Grid item xs={6} md={4} lg={4}>
-            <Link to='/admin/activities'>
-              <Paper elevation={0} style={actionPaperStyle}>
-                <Typography variant='body1'>{translation.manageActivities}</Typography>
-              </Paper>
-            </Link>
-          </Grid>
-        </Grid>
-      </Container>
+      <PageContainer>
+        <StatsList items={items} />
+      </PageContainer>
     </>
   )
 }

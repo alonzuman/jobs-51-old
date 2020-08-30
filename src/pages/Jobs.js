@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/skeletons/CardsSkeletons'
-import { Grid, Typography, Fab, Container, Paper, Box } from '@material-ui/core'
+import { Grid, Typography, Paper, Box } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
 import TopBar from '../components/layout/TopBar'
 import AddIcon from '@material-ui/icons/Add'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
+import PageContainer from '../components/layout/PageContainer'
+import SecondaryBar from '../components/layout/SecondaryBar'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -25,29 +27,22 @@ const Jobs = () => {
     padding: '1rem'
   }
 
-  const fabStyle = {
-    position: 'fixed',
-    margin: '0 auto',
-    bottom: '4.5rem',
-    left: '50%',
-    transform: 'translate(-50%, 0)'
-  }
-
   return (
     <>
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>
         <AddIcon />
       </FloatingActionButton>
-      <TopBar title={translation.findJob}>
+      <TopBar title={translation.findJob} />
+      <SecondaryBar>
         <FiltersBar filterOptions={filtersBar} />
-      </TopBar>
-      <Container style={containerStyle}>
+      </SecondaryBar>
+      <PageContainer style={containerStyle}>
         {loading && <CardsSkeletons />}
         <Grid container spacing={2}>
           {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
           {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
         </Grid>
-      </Container>
+      </PageContainer>
     </>
   )
 }

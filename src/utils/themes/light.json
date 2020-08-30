@@ -11,9 +11,14 @@
         "main": "#E89C68"
       },
       "border": {
-        "main": "#e7e7e7"
+        "light": "#f8f8f8",
+        "main": "#e7e7e7",
+        "dark": ""
       },
       "background": {
+        "light": "white",
+        "main": "main",
+        "dark": "#f7f7f7"
       }
     },
     "typography": {
@@ -27,7 +32,7 @@
     "h2": {
       "fontSize": "1.3rem",
       "fontWeight": 400,
-      "color": "black",
+      "color": "#707070",
       "padding": ".5rem 0"
     },
     "subtitle1": {
