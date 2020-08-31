@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import BackButton from './BackButton'
 import './TopBar.css'
 
-const TopBar = ({ subtitle = '', title = '', children, backButton = false, sticky = false, action = {} }) => {
+const TopBar = ({ subtitle = '', title = '', children, backButton = false, sticky = false, action = null }) => {
   const { theme } = useSelector(state => state.theme)
 
   const containerStyle = {
@@ -24,7 +24,7 @@ const TopBar = ({ subtitle = '', title = '', children, backButton = false, stick
             <Typography variant='h1'>{title}</Typography>
             <Typography variant='subtitle1'>{subtitle}</Typography>
           </div>
-          <h1>hi</h1>
+          { action }
           { children }
         </div>
       </Paper>

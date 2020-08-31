@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
 import PageContainer from '../components/layout/PageContainer'
 import SecondaryBar from '../components/layout/SecondaryBar'
+import ToggleLookingForJob from '../components/forms/profile/ToggleLookingForJob'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -32,7 +33,7 @@ const Jobs = () => {
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>
         <AddIcon />
       </FloatingActionButton>
-      <TopBar backButton={true} title={translation.findJob} />
+      <TopBar action={<ToggleLookingForJob />} backButton={true} title={translation.findJob} />
       <SecondaryBar>
         <FiltersBar filterOptions={filtersBar} />
       </SecondaryBar>

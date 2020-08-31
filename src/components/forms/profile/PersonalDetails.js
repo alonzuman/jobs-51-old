@@ -3,6 +3,7 @@ import { TextField, Button, CircularProgress, Grid, Switch, FormControl, InputLa
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
 import { addPersonalDetails, toggleLookingForJob } from '../../../actions'
+import ToggleLookingForJob from './ToggleLookingForJob'
 
 const PersonalDetails = () => {
   const authState = useSelector(state => state.auth)
@@ -24,17 +25,9 @@ const PersonalDetails = () => {
     dispatch(addPersonalDetails(authState, personalDetails, authState.uid))
   }
 
-  const handleLookingForJobChange = () => {
-    dispatch(toggleLookingForJob({
-      uid: authState.uid,
-      currentValue: !authState.lookingForJob,
-    }))
-  }
-
   return (
     <form onSubmit={handleSubmit}>
-      <InputLabel>{translation.lookingForJob}</InputLabel>
-      <Switch color='primary' checked={authState.lookingForJob} onChange={handleLookingForJobChange} />
+      <ToggleLookingForJob />
       <br />
       <br />
       <Grid container spacing={1}>
