@@ -245,3 +245,56 @@ form {
 .border__radius_1 {
   border-radius: 1rem!important;
 }
+
+.max__width {
+  max-width: 1280px!important;
+}
+
+.margin__center {
+  margin: 0 auto;
+}
+
+.min__fit__content {
+  min-width: fit-content!important;
+}
+
+.mr-1 {
+  margin-right: 1rem!important;
+}
+
+.mr-2 {
+  margin-right: 2rem!important;
+}
+
+.mr-3 {
+  margin-right: 3rem!important;
+}
+
+.mr-4 {
+  margin-right: 4rem!important;
+}
+
+.mr-5 {
+  margin-right: .5rem!important;
+}
+
+.ml-1 {
+  margin-right: 1rem!important;
+}
+
+.ml-2 {
+  margin-right: 2rem!important;
+}
+
+.ml-3 {
+  margin-right: 3rem!important;
+}
+
+.ml-4 {
+  margin-right: 4rem!important;
+}
+
+.ml-5 {
+  margin-right: .5rem!important;
+}
+

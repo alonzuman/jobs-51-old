@@ -15,7 +15,7 @@ const EditProfile = () => {
   return (
     <>
       <TopBar title={translation.myProfile} />
-      <Tabs className='full__width' indicatorColor='primary' value={value}>
+      <Tabs className='max__width margin__center full__width' indicatorColor='primary' value={value}>
         <Tab style={{ color: theme.typography.subtitle1.color }} label={translation.userDetails} onClick={() => handleValueChange(0)} />
         <Tab style={{ color: theme.typography.subtitle1.color }} label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
         <Tab style={{ color: theme.typography.subtitle1.color }} label={translation.settings} onClick={() => handleValueChange(2)}  />

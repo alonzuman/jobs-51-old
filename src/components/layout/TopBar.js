@@ -19,7 +19,7 @@ const TopBar = ({ subtitle = '', title = '', children, backButton = false, stick
     <AppBar elevation={0} style={containerStyle} className={`topbar__container ${sticky ? 'sticky' : 'relative'}`}>
       <Paper style={paperStyle} elevation={0} className='paper__background'>
         {backButton && <BackButton />}
-        <div className={`transparent top__row__container flex justify__between align__center full__width ${backButton ? '' : 'mt-3'}`}>
+        <div className={`margin__center max__width transparent top__row__container flex justify__between align__center full__width ${backButton ? '' : 'mt-3'}`}>
           <div>
             <Typography variant='h1'>{title}</Typography>
             <Typography variant='subtitle1'>{subtitle}</Typography>

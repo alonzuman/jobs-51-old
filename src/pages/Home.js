@@ -22,16 +22,18 @@ const Home = () => {
     <PageContainer style={containerStyle}>
       <Typography variant='h1'>{translation.homeText1}</Typography>
       <Typography variant='body1'>{translation.landingPageText1}</Typography>
-      <Link className='full__width mb-5 mt-1' to='/jobs'>
-        <Button className='button-style' variant='outlined' color='primary'>
-          {translation.lookingForAJob}
-        </Button>
-      </Link>
-      <Link className='full__width' to='/events'>
-        <Button className='button-style' variant='outlined' color='primary'>
-          {translation.lookingForAnActivity}
-        </Button>
-      </Link>
+      <div className='flex full__width align__center justify__center'>
+        <Link className='mb-5 mt-1 mr-1 ml-5' to='/jobs'>
+          <Button className='button-style' variant='outlined' color='primary'>
+            {translation.lookingForAJob}
+          </Button>
+        </Link>
+        <Link className='mb-5 mt-1 mr-5 ml-5' to='/events'>
+          <Button className='button-style' variant='outlined' color='primary'>
+            {translation.lookingForAnActivity}
+          </Button>
+        </Link>
+      </div>
     </PageContainer>
   )
 }
