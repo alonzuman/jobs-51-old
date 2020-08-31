@@ -39,7 +39,7 @@ const Navbar = () => {
   if (checkPermissions(role) !== 0) {
     return (
       <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
-        <BottomNavigationAction label={translation.main} component={Link} to='/main' value='/main' icon={value === '/main' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
+        <BottomNavigationAction label={translation.main} component={Link} to='/home' value='/home' icon={value === '/home' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
         <BottomNavigationAction label={translation.saved} component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
         {checkPermissions(role) >= 2 && <BottomNavigationAction label={translation.activity} component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
         <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />

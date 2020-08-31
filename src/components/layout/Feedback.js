@@ -12,7 +12,8 @@ const Feedback = () => {
     position: 'fixed',
     bottom: '6.5rem',
     zIndex: 999,
-    width: '100%'
+    width: '100%',
+    padding: '1rem'
   }
 
   const feedbackStyle = {

@@ -47,7 +47,7 @@ function App() {
           <Dialogs />
           <Feedback />
           <Switch>
-            <ProtectedRoute exact path='/main' component={Home} />
+            <ProtectedRoute exact path='/home' component={Home} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />
             <ProtectedRoute exact path='/events' component={Events} />
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
