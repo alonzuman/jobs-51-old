@@ -29,7 +29,6 @@ const Home = () => {
             {translation.lookingForAJob}
           </Button>
         </Link>
-        <Button onClick={() => dispatch(setFeedback({ msg: 'hi', type: 'error' }))}>Feedback</Button>
         <Link className='mb-5 mt-1 mr-5 ml-5' to='/events'>
           <Button className='button-style' variant='outlined' color='primary'>
             {translation.lookingForAnActivity}
