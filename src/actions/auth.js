@@ -1,7 +1,7 @@
 import { app, db } from '../firebase'
 import firebase from 'firebase'
-import { setAlert } from './alert'
 import { closeDialogs } from './dialogs'
+import { setFeedback } from './feedback'
 const usersRef = db.collection('users')
 
 export const setUser = (user) => async dispatch => {
@@ -20,7 +20,7 @@ export const setUser = (user) => async dispatch => {
     dispatch({
       type: 'SIGN_OUT'
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       payload: 'Not authenticated'
     }))
@@ -67,7 +67,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           type: 'SIGNED_UP',
           payload: { ...newUser }
         })
-        dispatch(setAlert({
+        dispatch(setFeedback({
           type: 'success',
           msg: 'Welcome'
         }))
@@ -77,7 +77,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           type: 'SIGNED_UP',
           payload: { ...user }
         })
-        dispatch(setAlert({
+        dispatch(setFeedback({
           type: 'success',
           msg: 'Welcome'
         }))
@@ -94,7 +94,7 @@ export const signInWithProvider = (provider) => async dispatch => {
     dispatch({
       type: 'AUTH_FAIL'
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: msg()
     }))
@@ -120,13 +120,13 @@ export const signIn = ({ email, password }) => async dispatch =>{
       type: 'SIGNED_IN',
       payload: { ...user }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'Welcome'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -162,13 +162,13 @@ export const signUp = (user) => async dispatch =>{
       type: 'SIGNED_UP',
       payload: { ...newUser }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'Welcome'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -182,13 +182,13 @@ export const signOut = () => async dispatch =>{
     dispatch({
       type: 'SIGN_OUT'
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'SignedOutSuccess'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -205,13 +205,13 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
       type: 'SET_USER',
       payload: { uid, ...user, ...personalDetails }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'Success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -228,13 +228,13 @@ export const editProfile = (user, uid) => async dispatch => {
       type: 'SET_USER',
       payload: { uid, ...user, avatar: user.avatar.length > 0 && user.avatar }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'Success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -253,7 +253,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -273,13 +273,13 @@ export const toggleLookingForJob = ({ uid, currentValue, user }) => async dispat
         lookingForJob: currentValue
       }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'actionSuccedded'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))

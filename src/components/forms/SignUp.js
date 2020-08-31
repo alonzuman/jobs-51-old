@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp, closeDialogs, setAlert, openDialog } from '../../actions'
+import { signUp, closeDialogs, setFeedback, openDialog } from '../../actions'
 import { TextField, Button, Typography, Box, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../general/FileUploader'
 import CircularProgressWithLabel from './CircularProgressWithLabel'
@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (password !== confirmPassword) return dispatch(setAlert({ type: 'error', msg: 'PasswordsDontMatch' }))
+    if (password !== confirmPassword) return dispatch(setFeedback({ type: 'error', msg: 'PasswordsDontMatch' }))
     const user = {
       email,
       password,

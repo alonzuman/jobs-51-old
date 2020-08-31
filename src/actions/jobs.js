@@ -1,5 +1,5 @@
 import { db } from '../firebase'
-import { setAlert } from './alert'
+import { setFeedback } from './feedback'
 import { closeDialogs } from './dialogs'
 import store from '../store'
 import firebase from 'firebase'
@@ -16,7 +16,7 @@ export const addFilter = ({ collection, value }) => async dispatch => {
     }
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'Server error'
     }))
@@ -29,7 +29,7 @@ export const removeFilter = ({ collection, value }) => async dispatch => {
     valueRef.ref.update('count', firebase.firestore.FieldValue.increment(-1))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'Server error'
     }))
@@ -44,7 +44,7 @@ export const getFilters = (type) => async dispatch => {
     return filters
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'Server error'
     }))
@@ -68,13 +68,13 @@ export const addJob = (job) => async dispatch => {
       payload: { job: newJob }
     })
     dispatch(closeDialogs())
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))
@@ -89,13 +89,13 @@ export const editJob = (job, id) => async dispatch => {
     await jobsRef.doc(id).set({...job})
     dispatch(closeDialogs())
     dispatch(getJobs())
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))
@@ -121,13 +121,13 @@ export const removeJob = (id, job) => async dispatch => {
       payload: { id }
     })
     dispatch(closeDialogs())
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'Success',
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))
@@ -152,7 +152,7 @@ export const getSavedJobs = ({ savedJobs }) => async dispatch => {
       dispatch({
         type: 'JOB_FAIL'
       })
-      dispatch(setAlert({
+      dispatch(setFeedback({
         type: 'error',
         msg: 'ServerError'
       }))
@@ -221,7 +221,7 @@ export const getJobs = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))
@@ -253,7 +253,7 @@ export const getJobTypes = () => async dispatch => {
     dispatch({
       type: 'JOB_ERROR'
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))
@@ -275,7 +275,7 @@ export const saveJob = (uid, jobId) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -302,7 +302,7 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -333,7 +333,7 @@ export const getJobLocations = () => async dispatch => {
     dispatch({
       type: 'JOB_ERROR'
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: 'ServerError',
       type: 'error'
     }))

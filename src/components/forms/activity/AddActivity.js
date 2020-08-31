@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, TextField, Grid, Chip, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 import { addActivity, getActivityTypes } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAlert } from '../../../actions/alert';
+import { setFeedback } from '../../../actions';
 import { calcHours } from '../../../utils';
 import { setUserRegion } from '../../../actions/auth';
 
@@ -48,12 +48,12 @@ const AddActivity = () => {
   const handleSubmit = e => {
     e.preventDefault()
     if (activity['type'].trim().length === 0) {
-      return dispatch(setAlert({
+      return dispatch(setFeedback({
         type: 'error',
         msg: 'fillActivityType'
       }))
     } else if (activity['startHour'] > activity['endHour']) {
-      return dispatch(setAlert({
+      return dispatch(setFeedback({
         type: 'error',
         msg: 'hoursNoGood'
       }))

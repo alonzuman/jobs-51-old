@@ -1,7 +1,7 @@
 import store from "../store"
 import { db } from "../firebase"
-import { setAlert } from "./alert"
 import { capitalizeFirstLetter } from "../utils"
+import { setFeedback } from "./feedback"
 const usersRef = db.collection('users')
 
 export const getUser = (uid) => async dispatch => {
@@ -16,7 +16,7 @@ export const getUser = (uid) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -43,7 +43,7 @@ export const getUsers = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -76,7 +76,7 @@ export const changeUserRole = (uid, role) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
