@@ -2,18 +2,31 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { openDialog, addJob, getJobs, openAddingJob } from '../actions'
 import Jobs from './Jobs'
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
+import PageContainer from '../components/layout/PageContainer'
 
 const Home = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
 
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  }
+
   return (
-    <div>
-      <Button>{translation.addJob}</Button>
-      <Button onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.signIn}</Button>
-      <Jobs />
-    </div>
+    <PageContainer style={containerStyle}>
+      <Typography variant='h1'>{translation.homeText1}</Typography>
+      <Typography variant='body1'>{translation.landingPageText1}</Typography>
+      <Button>
+        {translation.lookingForAJob}
+      </Button>
+      <Button>
+        {translation.lookingForAnActivity}
+      </Button>
+    </PageContainer>
   )
 }
 

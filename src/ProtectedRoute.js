@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { app } from './firebase'
-import { setUser, signOut } from './actions'
+import { setUser, signOut, closeDialogs } from './actions'
 import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
 import { checkPermissions } from './utils'
 import NoPermissions from './NoPermissions'
@@ -21,6 +21,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
+        dispatch(closeDialogs())
         setLoading(false)
       } else {
         dispatch(signOut())
@@ -43,6 +44,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   if (!loading && checkPermissions(role)  === 0) {
     return <NoPermissions />
   } else {
+
     return (
       <div style={{ direction: 'rtl', paddingBottom: '7.5rem' }}>
         {loading && <CircularSpinnerWithContainer />}

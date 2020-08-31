@@ -27,6 +27,7 @@ import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
 import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
+import Home from './pages/Home'
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Dialogs />
           <CustomAlert />
           <Switch>
+            <ProtectedRoute exact path='/main' component={Home} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />
