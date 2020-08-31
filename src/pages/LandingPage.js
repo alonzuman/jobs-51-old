@@ -50,7 +50,7 @@ const LandingPage = () => {
     })
   })
 
-  if (currentUser) return <Redirect to='/jobs' />
+  if (currentUser) return <Redirect to='/home' />
   return (
     <PageContainer style={containerStyle}>
       <Paper style={paperStyle}>
