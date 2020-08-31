@@ -143,6 +143,8 @@
   "contactDetails": "פרטי יצירת קשר",
   "IVolunteerIn": "אני מתנדב/ת במחוז",
   "main": "ראשי",
-  "lookingForAnActivity": "אירועים",
-  "homeText1": "ברוכים הבאים לאפליקציה של עמותת יוצאי שלדג"
+  "lookingForAnActivity": "אירועי עמותה",
+  "events": "אירועים",
+  "homeText1": "ברוכים הבאים לאפליקציה של עמותת יוצאי שלדג",
+  "soon": "בקרוב..."
 }

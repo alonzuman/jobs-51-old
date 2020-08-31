@@ -4,6 +4,7 @@ import { openDialog, addJob, getJobs, openAddingJob } from '../actions'
 import Jobs from './Jobs'
 import { Button, Typography } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -13,19 +14,24 @@ const Home = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    minHeight: '70vh'
   }
 
   return (
     <PageContainer style={containerStyle}>
       <Typography variant='h1'>{translation.homeText1}</Typography>
       <Typography variant='body1'>{translation.landingPageText1}</Typography>
-      <Button>
-        {translation.lookingForAJob}
-      </Button>
-      <Button>
-        {translation.lookingForAnActivity}
-      </Button>
+      <Link className='full__width mb-5 mt-1' to='/jobs'>
+        <Button className='button-style' variant='outlined' color='primary'>
+          {translation.lookingForAJob}
+        </Button>
+      </Link>
+      <Link className='full__width' to='/events'>
+        <Button className='button-style' variant='outlined' color='primary'>
+          {translation.lookingForAnActivity}
+        </Button>
+      </Link>
     </PageContainer>
   )
 }

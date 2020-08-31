@@ -28,6 +28,7 @@ import RtlProvider from './contexts/RtlContext'
 import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/Home'
+import Events from './pages/Events'
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Switch>
             <ProtectedRoute exact path='/main' component={Home} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/events' component={Events} />
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />
             <ProtectedRoute exact path='/notifications' component={Notifications} />
