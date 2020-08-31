@@ -16,9 +16,9 @@
       "dark": ""
     },
     "background": {
-      "light": "",
+      "light": "#424242",
       "main": "#424242",
-      "dark": ""
+      "dark": "#424242"
     }
   },
   "typography": {
