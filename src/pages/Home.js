@@ -5,6 +5,7 @@ import Jobs from './Jobs'
 import { Button, Typography } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import { Link } from 'react-router-dom'
+import { setFeedback } from '../actions/feedback'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Home = () => {
             {translation.lookingForAJob}
           </Button>
         </Link>
+        <Button onClick={() => dispatch(setFeedback({ msg: 'hi', type: 'error' }))}>Feedback</Button>
         <Link className='mb-5 mt-1 mr-5 ml-5' to='/events'>
           <Button className='button-style' variant='outlined' color='primary'>
             {translation.lookingForAnActivity}

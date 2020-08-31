@@ -33,7 +33,7 @@ const Jobs = () => {
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>
         <AddIcon />
       </FloatingActionButton>
-      <TopBar action={<ToggleLookingForJob />} backButton={true} title={translation.findJob} />
+      <TopBar action={<ToggleLookingForJob style={{ textAlign: 'left' }} />} backButton={true} title={translation.findJob} />
       <SecondaryBar>
         <FiltersBar filterOptions={filtersBar} />
       </SecondaryBar>

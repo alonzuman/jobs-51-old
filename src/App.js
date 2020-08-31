@@ -29,6 +29,7 @@ import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/Home'
 import Events from './pages/Events'
+import Feedback from './components/layout/Feedback'
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
       <RtlProvider>
         <Router>
           <Dialogs />
+          <Feedback />
           <CustomAlert />
           <Switch>
             <ProtectedRoute exact path='/main' component={Home} />

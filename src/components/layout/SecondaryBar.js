@@ -15,7 +15,7 @@ const SecondaryBar = ({ children }) => {
 
   return (
     <Box style={containerStyle}>
-      <div className='margin__center max__width'>
+      <div style={{ backgroundColor: theme.palette.background.light }} className='margin__center max__width'>
         { children }
       </div>
     </Box>
