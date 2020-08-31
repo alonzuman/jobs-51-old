@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // Components
 import Dialogs from './components/layout/Dialogs'
-import CustomAlert from './components/layout/CustomAlert'
 
 // Pages
 import Jobs from './pages/Jobs'
@@ -47,7 +46,6 @@ function App() {
         <Router>
           <Dialogs />
           <Feedback />
-          <CustomAlert />
           <Switch>
             <ProtectedRoute exact path='/main' component={Home} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />

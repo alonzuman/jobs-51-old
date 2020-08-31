@@ -1,7 +1,6 @@
 export * from './jobs'
 export * from './dialogs'
 export * from './auth'
-export * from './alert'
 export * from './theme'
 export * from './activities'
 export * from './feedback'
