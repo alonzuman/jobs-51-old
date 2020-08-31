@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <PageContainer style={containerStyle}>
       <Typography variant='h1'>{translation.homeText1}</Typography>
-      <Typography variant='body1'>{translation.landingPageText1}</Typography>
+      <Typography style={{ maxWidth: 768 }} variant='body1'>{translation.landingPageText1}</Typography>
       <div className='flex full__width align__center justify__center'>
         <Link className='mb-5 mt-1 mr-1 ml-5' to='/jobs'>
           <Button className='button-style' variant='outlined' color='primary'>
