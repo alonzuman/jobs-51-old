@@ -20,11 +20,6 @@ form {
   padding-bottom: 1rem!important;
 }
 
-.MuiTabs-flexContainer {
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
