@@ -1,8 +1,8 @@
-import { db } from "../firebase"
-import { setAlert } from "./alert"
+import { db } from '../firebase'
+import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
-import { closeDialogs } from "./dialogs"
+import { closeDialogs } from './dialogs'
 const usersRef = db.collection('users')
 const activitiesRef = db.collection('activities')
 const activityTypesRef = db.collection('activity-types')
@@ -39,13 +39,13 @@ export const addActivity = (activity) => async dispatch => {
         }
       }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'activityAdded'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -67,7 +67,7 @@ export const getMyActivities = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -88,7 +88,7 @@ export const getActivityTypes = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -120,13 +120,13 @@ export const approveActivity = (activity) => async dispatch => {
       })
     }
 
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'ActivityApproved'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -158,13 +158,13 @@ export const unApproveActivity = (activity) => async dispatch => {
       })
     }
 
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'ActivityApproved'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -200,7 +200,7 @@ export const deleteActivity = (activity) => async dispatch => {
       type: 'REMOVE_ACTIVITY',
       payload: id
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'success',
       msg: 'ActivityRemoved'
     }))
@@ -209,7 +209,7 @@ export const deleteActivity = (activity) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
@@ -241,7 +241,7 @@ export const getActivities = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       type: 'error',
       msg: 'ServerError'
     }))
