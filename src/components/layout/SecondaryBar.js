@@ -10,7 +10,7 @@ const SecondaryBar = ({ children }) => {
     position: 'sticky',
     top: 0,
     backgroundColor: theme.palette.background.light,
-    zIndex: 9999
+    zIndex: 99
   }
 
   return (

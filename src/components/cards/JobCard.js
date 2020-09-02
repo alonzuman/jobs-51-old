@@ -45,6 +45,25 @@ const JobCard = ({ job }) => {
     }
   }
 
+  const action = () => {
+    if (authenticated && job?.uid === uid) {
+      return <IconButton onClick={handleClick}><EditIcon /></IconButton>
+    } else {
+      if (authenticated) {
+        return (
+        <IconButton onClick={handleClickFavorite}>
+          {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
+        </IconButton>)
+      } else {
+        return null
+      }
+    }
+  }
+
+  const chipStyle = {
+    direction: 'ltr'
+  }
+
   return (
     <Grid item xs={12} md={6} lg={4}>
       <CardContainer>
@@ -52,12 +71,10 @@ const JobCard = ({ job }) => {
           avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
           title={job?.company}
           subheader={job?.location}
-          action={ (authenticated && job?.uid === uid) ?
-          <IconButton onClick={handleClick}><EditIcon /></IconButton>:
-          authenticated ? <IconButton onClick={handleClickFavorite}>{saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}</IconButton> : null}
+          action={action()}
         />
         <CardContent>
-          <Chip style={{direction: 'ltr'}} label={timeAgo()} size='small' variant='outlined' color='primary'/>
+          <Chip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary'/>
           <Typography variant='subtitle1'>{translation.description}</Typography>
           <Typography variant='body1'>{job?.description}</Typography>
           <Typography variant='subtitle1'>{translation.categories}</Typography>
