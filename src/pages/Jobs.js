@@ -15,8 +15,13 @@ import ToggleLookingForJob from '../components/forms/profile/ToggleLookingForJob
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
   const { jobs, loading, filters } = useSelector(state => state.jobs)
+  const authState = useSelector(state => state.auth)
   const dispatch = useDispatch()
   useEffect(() => { dispatch(getJobs()) }, [dispatch, filters])
+
+  if (!authState.loading && !authState.serviceYear) {
+    dispatch(openDialog({ title: 'noPersonalInfo', type: 'PersonalDetails' }))
+  }
 
   const filtersBar = [
     { type: 'categories', label: translation.categories, onClick: () => dispatch(openDialog({ type: 'CategoriesFilter', title: 'categories' }))  },

@@ -12,7 +12,7 @@ export const setFeedback = ({ msg, type }) => async dispatch => {
 }
 
 export const removeFeedback = () => async dispatch => {
-  return {
+  dispatch({
     type: 'REMOVE_FEEDBACK'
-  }
+  })
 }

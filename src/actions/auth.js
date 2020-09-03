@@ -209,6 +209,7 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
       type: 'success',
       msg: 'Success'
     }))
+    dispatch(closeDialogs())
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({

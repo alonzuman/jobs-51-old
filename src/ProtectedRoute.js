@@ -21,7 +21,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
-        dispatch(closeDialogs())
         setLoading(false)
       } else {
         dispatch(signOut())
