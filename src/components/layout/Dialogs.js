@@ -15,20 +15,9 @@ import SingleSelectionFilter from '../filters/SingleSelectionFilter'
 import MultiSelectionFilter from '../filters/MultiSelectionFilter'
 import PersonalDetails from '../forms/profile/PersonalDetails'
 
-const dialogTitleStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '0'
-}
-
-const buttonStyle = {
-  margin: '0 .5rem'
-}
-
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const { translation, direction } = useSelector(state => state.theme)
+  const { translation, direction, theme } = useSelector(state => state.theme)
   const { title, type, open } = useSelector(state => state.dialogs)
   const dispatch = useDispatch()
   const maxWidth = () => {
@@ -52,6 +41,21 @@ const Dialogs = () => {
     }
   }, [open])
 
+
+  const dialogTitleStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0',
+    top: 0,
+    position: 'sticky',
+    backgroundColor: theme.palette.background.paper,
+    zIndex: 999
+  }
+
+  const buttonStyle = {
+    margin: '0 .5rem'
+  }
   const paperStyle = {
     height: '100%',
   }

@@ -1,15 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { openDialog, addJob, getJobs, openAddingJob } from '../actions'
-import Jobs from './Jobs'
+import { openDialog } from '../actions'
 import { Button, Typography } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import { Link } from 'react-router-dom'
-import { setFeedback } from '../actions/feedback'
 
 const Home = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
+  const { role } = useSelector(state => state.auth)
 
   const containerStyle = {
     display: 'flex',
@@ -24,7 +23,7 @@ const Home = () => {
       <Typography variant='h1'>{translation.homeText1}</Typography>
       <Typography style={{ maxWidth: 768 }} variant='body1'>{translation.landingPageText1}</Typography>
       <div className='mt-2 flex full__width align__center justify__center'>
-        <Link className='full__width' to='/jobs'>
+        <Link className='button-link' to='/jobs'>
           <Button className='button-style ml-5' variant='outlined' color='primary'>
             {translation.lookingForAJob}
           </Button>
@@ -33,6 +32,7 @@ const Home = () => {
           {translation.addJob}
         </Button>
       </div>
+      { role === 'admin' && <Link to='/users'><Button>Looking for job</Button></Link>}
     </PageContainer>
   )
 }

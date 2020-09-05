@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton } from '@material-ui/core'
+import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Grid } from '@material-ui/core'
 import { translateDate } from '../../utils'
 import { useSelector } from 'react-redux'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -9,12 +9,6 @@ import CardContainer from './CardContainer';
 const ActivityCard = ({ activity }) => {
   const [open, setOpen] = useState(false)
   const { theme, translation } = useSelector(state => state.theme)
-
-  const listItemStyle = {
-    borderRadius: '1rem',
-    padding: 0,
-  }
-
   const paperStyle = {
     width: '100%',
     height: '100%',
@@ -49,30 +43,32 @@ const ActivityCard = ({ activity }) => {
   const [day, month, number] = translateDate(activity.date)
   return (
     <>
-    <ListItem style={listItemStyle}>
-      <CardContainer>
-        <Paper style={paperStyle} elevation={0}>
-          <Box style={dateStyle}>
-            <Typography variant='subtitle1'>{month}</Typography>
-            <Typography variant='h2'>{number}</Typography>
-            <Typography variant='body1'>{day}</Typography>
-          </Box>
-          <Box style={detailsStyle}>
-            <Chip label={activity.type} size='small' variant='outlined' color='primary' />
-            <ListItemText
-              primary={activity.description}
-              secondary={activity.total}
-            />
-          </Box>
-          <Box style={actionBoxStyle}>
-            <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Box>
-        </Paper>
-      </CardContainer>
-    </ListItem>
-    {open && <ActivityCardActions activity={activity} />}
+    <Grid item xs={12} md={6} lg={4}>
+      <ListItem className='br-1' onClick={() => setOpen(!open)} button>
+        <CardContainer>
+          <Paper style={paperStyle} elevation={0}>
+            <Box style={dateStyle}>
+              <Typography variant='subtitle1'>{month}</Typography>
+              <Typography variant='h2'>{number}</Typography>
+              <Typography variant='body1'>{day}</Typography>
+            </Box>
+            <Box style={detailsStyle}>
+              <Chip label={activity.type} size='small' variant='outlined' color='primary' />
+              <ListItemText
+                primary={activity.description}
+                secondary={activity.total}
+              />
+            </Box>
+            <Box style={actionBoxStyle}>
+              <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Box>
+          </Paper>
+        </CardContainer>
+      </ListItem>
+      {open && <ActivityCardActions activity={activity} />}
+    </Grid>
     </>
   )
 }

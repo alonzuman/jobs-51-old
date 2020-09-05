@@ -21,7 +21,7 @@ const Activity = () => {
 
   return (
     <>
-      <FloatingActionButton variant='extended' color='primary' action={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} title={translation.addActivity}>
+      <FloatingActionButton color='primary' action={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>
       <TopBar title={translation.activity} />

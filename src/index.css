@@ -137,10 +137,18 @@ form {
   margin-top: 0!important;
 }
 
+.button-link {
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .button-style {
     width: fit-content!important;
     min-width: fit-content!important;
+  }
+
+  .button-link {
+    width: fit-content;
   }
 
   .full-width {
@@ -298,3 +306,11 @@ form {
   margin-right: .5rem!important;
 }
 
+.MuiListItem-root {
+  padding: 0!important;
+  margin: 0!important;
+}
+
+.br-1 {
+  border-radius: 1rem!important;
+}

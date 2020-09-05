@@ -20,11 +20,15 @@ const Feedback = () => {
     maxWidth: 600
   }
 
-  return (
-    <div onClick={() => dispatch(removeFeedback())} style={feedbackContainer}>
-      {isOn && <Alert style={feedbackStyle} severity={type} onClose={() => dispatch(removeFeedback())}>{translation[msg]}</Alert>}
-    </div>
-  )
+  if (isOn) {
+    return (
+      <div onClick={() => dispatch(removeFeedback())} style={feedbackContainer}>
+        {isOn && <Alert style={feedbackStyle} severity={type} onClose={() => dispatch(removeFeedback())}>{translation[msg]}</Alert>}
+      </div>
+    )
+  } else {
+    return <div />
+  }
 }
 
 export default Feedback

@@ -339,3 +339,25 @@ export const getJobLocations = () => async dispatch => {
     }))
   }
 }
+
+export const getJob = (id) => async dispatch => {
+  dispatch({
+    type: 'JOB_LOADING'
+  })
+  try {
+    const snapshot = await jobsRef.doc(id).get()
+    const job = { id: snapshot.id, ...snapshot.data() }
+    dispatch({
+      type: 'SET_JOB',
+      payload: { job }
+    })
+  } catch (error) {
+    dispatch({
+      type: 'JOB_ERROR'
+    })
+    dispatch(setFeedback({
+      msg: 'ServerError',
+      type: 'error'
+    }))
+  }
+}

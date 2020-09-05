@@ -49,7 +49,8 @@ export const jobsReducer = (state = initialState, action) => {
     case 'SET_JOB':
       return {
         ...state,
-        job: payload.job
+        job: payload.job,
+        loading: false
       }
     case 'SET_JOBS':
       return {

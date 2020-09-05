@@ -29,6 +29,7 @@ import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/Home'
 import Events from './pages/Events'
 import Feedback from './components/layout/Feedback'
+import Job from './pages/Job'
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Switch>
             <ProtectedRoute exact path='/home' component={Home} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />
+            <ProtectedRoute exact path='/jobs/:id' component={Job} />
             <ProtectedRoute exact path='/events' component={Events} />
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />
