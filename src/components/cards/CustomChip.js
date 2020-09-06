@@ -6,7 +6,7 @@ const CustomChip = ({ style, size, onClick, label, color, variant }) => {
     <Chip
       style={{...style}}
       onClick={onClick}
-      size={size ? size : ''}
+      size={size ? size : 'medium'}
       color={color ? color : 'default'}
       variant={variant ? variant : 'default'}
       label={label}

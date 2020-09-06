@@ -23,13 +23,14 @@ const User = ({ match }) => {
   useEffect(() => { dispatch(getUser(uid)) }, [])
 
   const items = [
-    { label: translation.approved, big: user?.activities?.approved },
-    { label: translation.pending, big: user?.activities?.pending }
+    { label: translation.approved, big: user?.activities?.approved, link: `/users/${uid}/activities` },
+    { label: translation.pending, big: user?.activities?.pending, link: `/users/${uid}/activities` }
   ]
 
   return (
     <>
       <TopBar
+        sticky={true}
         backButton={true}
         title={!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
         subtitle={!loading ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : '' : <Skeleton width={100} />}

@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Grid } from '@material-ui/core'
-import { translateDate, activityTypeColor } from '../../utils'
+import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Grid, Avatar } from '@material-ui/core'
+import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ActivityCardActions from './ActivityCardActions';
 import CardContainer from './CardContainer';
 import CustomChip from './CustomChip';
+import { Link } from 'react-router-dom';
 
-const ActivityCard = ({ activity }) => {
+const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
-  const { theme, translation } = useSelector(state => state.theme)
+  const { theme } = useSelector(state => state.theme)
+  const { role } = useSelector(state => state.auth)
   const paperStyle = {
     width: '100%',
     height: '100%',
@@ -36,8 +38,16 @@ const ActivityCard = ({ activity }) => {
     justifyContent: 'center',
   }
 
+  const userInfoStlye = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: '1rem'
+  }
+
   const iconStyle = {
-    transform: open ? 'rotate(-90deg)' : 'none',
+    transform: open ? 'rotate(-180deg)' : 'none',
     transition: '.15s transform ease-in-out'
   }
 
@@ -50,7 +60,7 @@ const ActivityCard = ({ activity }) => {
   return (
     <>
     <Grid item xs={12} md={6} lg={4}>
-      <ListItem className='br-1' onClick={() => setOpen(!open)} button>
+      <ListItem className='br-1' button>
         <CardContainer>
           <Paper style={paperStyle} elevation={0}>
             <Box style={dateStyle}>
@@ -65,12 +75,19 @@ const ActivityCard = ({ activity }) => {
                 secondary={activity.total}
               />
             </Box>
-            <Box style={actionBoxStyle}>
-              <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Box>
+            {showUser &&
+            <Link to={checkPermissions(role) >= 5 && `/users/${activity.uid}`}>
+              <Box style={userInfoStlye}>
+                <Avatar src={activity?.user?.avatar} />
+                <Typography style={{ textAlign: 'center' }} variant='subtitle1'>{activity?.user?.firstName} {activity?.user?.lastName}</Typography>
+              </Box>
+            </Link>}
           </Paper>
+          <Box style={actionBoxStyle}>
+            <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+              <KeyboardArrowDownIcon />
+            </IconButton>
+          </Box>
         </CardContainer>
       </ListItem>
       {open && <ActivityCardActions activity={activity} />}

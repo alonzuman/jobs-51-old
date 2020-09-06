@@ -9,7 +9,7 @@ import { setUserRegion } from '../../../actions/auth';
 const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 
 const AddActivity = () => {
-  const { uid, region } = useSelector(state => state.auth)
+  const { uid, phone, region, avatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { loading, types } = useSelector(state => state.activities)
   const [activity, setActivity] = useState({
@@ -20,6 +20,13 @@ const AddActivity = () => {
     startHour: '10:00',
     endHour: '17:30',
     approved: false,
+    user: {
+      firstName: firstName ? firstName : '',
+      lastName: lastName ? lastName : '',
+      avatar: avatar ? avatar : '',
+      region: region ? region : '',
+      phone: phone ? phone : ''
+    },
     uid
   })
   const dispatch = useDispatch()

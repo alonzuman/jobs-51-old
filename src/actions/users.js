@@ -107,3 +107,33 @@ export const getEmployees = () => async dispatch => {
     }))
   }
 }
+
+export const getUserAndActivities = (uid) => async dispatch => {
+  dispatch({
+    type: 'USERS_LOADING'
+  })
+  try {
+    const userSnapshot = await usersRef.doc(uid).get()
+    const activitySnapshot = await db.collection('activities').where('uid', '==', uid).get()
+    const user = { id: userSnapshot.id, ...userSnapshot.data() }
+    let activities = []
+    activitySnapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: 'SET_USER_PAGE',
+      payload: { ...user }
+    })
+    dispatch({
+      type: 'SET_ACTIVITIES',
+      payload: { activities }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'USER_STOP_LOADING'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+  }
+}

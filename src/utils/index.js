@@ -14,9 +14,7 @@ export const checkPermissions = (role) => {
 }
 
 export const activityTypeColor = (type) => {
-  console.log(theme)
   if (theme) {
-    console.log(type)
     switch (type) {
       case 'עידוד לשירות משמעותי': return '#4caf50';
       case 'אירוע עמותה': return '#009688';

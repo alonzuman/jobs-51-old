@@ -30,6 +30,7 @@ import Home from './pages/Home'
 import Events from './pages/Events'
 import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
+import UserActivities from './pages/UserActivities'
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
             <ProtectedRoute exact path='/notifications' component={Notifications} />
             <ProtectedRoute exact path='/profile' component={EditProfile} />
             <ProtectedRoute exact path='/users' component={Employees} />
+            <ProtectedRoute exact path='/users/:id/activities' component={UserActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
