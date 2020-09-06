@@ -34,7 +34,7 @@ export const usersReducer = (state = initialState, action) => {
     case 'SET_USERS_FILTER':
       return {
         ...state,
-        filters: { ...payload.filter },
+        filters: { ...state.filters, ...payload },
         loading: false
       }
     case 'CLEAR_USERS_FILTERS':

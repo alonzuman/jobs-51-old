@@ -32,6 +32,10 @@ export const getUsers = () => async dispatch => {
     let snapshot
     if (filters.search) {
       snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).get()
+    } else if (filters.status) {
+      snapshot = await usersRef.where('role', '==', filters.status).get()
+    } else if (filters.search && filters.status) {
+      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).get()
     } else {
       snapshot = await usersRef.get()
     }
@@ -53,7 +57,7 @@ export const getUsers = () => async dispatch => {
 export const setUserFilters = (filter) => async dispatch => {
   dispatch({
     type: 'SET_USERS_FILTER',
-    payload: { filter }
+    payload: { ...filter }
   })
 }
 

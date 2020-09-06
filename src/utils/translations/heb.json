@@ -148,5 +148,12 @@
   "homeText1": "ברוכים הבאים לאפליקציה של עמותת יוצאי שלדג",
   "soon": "בקרוב...",
   "noPersonalInfo": "מילוי פרטים אישיים",
-  "usersLookingForJob": "חברים שמחפשים עבודה"
+  "usersLookingForJob": "חברים שמחפשים עבודה",
+  "userStatus": "סטטוס משתמש",
+  "pending": "ממתין לאישור",
+  "user": "חבר עמותה",
+  "volunteer": "מתנדב",
+  "manager": "מנהל",
+  "moderator": "מנהל מחוז",
+  "admin": "מנהל בכיר"
 }

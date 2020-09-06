@@ -37,10 +37,10 @@ const ManageActivities = () => {
         <Box style={filtersContainerStyle}>
           <Grid container spacing={1}>
             <Grid item>
-              <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.region} selections={regions} />
+              <MultiSelectionChips filters={region ? { region } : filters.regions} type='regions' action={'SET_ACTIVITY_FILTERS'} label={translation.region} selections={regions} />
             </Grid>
             <Grid item>
-              <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} selectedFilters={filters} label={translation.status} selections={statuses} />
+              <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} label={translation.status} selections={statuses} />
             </Grid>
           </Grid>
           <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
