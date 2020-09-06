@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ActivityCardActions from './ActivityCardActions';
 import CardContainer from './CardContainer';
+import CustomChip from './CustomChip';
 
 const ActivityCard = ({ activity }) => {
   const [open, setOpen] = useState(false)
@@ -58,7 +59,7 @@ const ActivityCard = ({ activity }) => {
               <Typography variant='body1'>{day}</Typography>
             </Box>
             <Box style={detailsStyle}>
-              <Chip label={activity.type} size='small' variant='outlined' style={chipStyle} />
+              <CustomChip label={activity.type} size='small' variant='outlined' style={chipStyle} />
               <ListItemText
                 primary={activity.description}
                 secondary={activity.total}

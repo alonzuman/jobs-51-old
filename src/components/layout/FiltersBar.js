@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Chip, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearGlobalFilters } from '../../actions/jobs'
+import CustomChip from '../cards/CustomChip'
 
 const FiltersBar = ({ filterOptions }) => {
   const { filters } = useSelector(state => state.jobs)
@@ -38,14 +39,14 @@ const FiltersBar = ({ filterOptions }) => {
         <Grid style={gridStyle} spacing={1} container>
           {filterOptions?.map((filter, index) =>
           <Grid key={index} item>
-            <Chip
+            <CustomChip
               color={(filters && filters[filter.type]) ? 'primary' : 'default'}
               onClick={filter.onClick}
               label={filter.label}
             />
           </Grid>)}
         </Grid>
-        <Grid item><Chip style={clearStyle} onClick={() => dispatch(clearGlobalFilters())} label={translation.clear} /></Grid>
+        <Grid item><CustomChip style={clearStyle} onClick={() => dispatch(clearGlobalFilters())} label={translation.clear} /></Grid>
       </Box>
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleLookingForJob } from '../../../actions'
-import { InputLabel, Switch } from '@material-ui/core'
+import { Switch, Typography } from '@material-ui/core'
 
 const ToggleLookingForJob = ({ style }) => {
   const { lookingForJob, uid } = useSelector(state => state.auth)
@@ -14,7 +14,7 @@ const ToggleLookingForJob = ({ style }) => {
 
   return (
     <div style={{ ...style }}>
-      <InputLabel>{translation.iAmLookingForAJob}</InputLabel>
+      <Typography variant='subtitle1'>{translation.iAmLookingForAJob}</Typography>
       <Switch color='primary' checked={lookingForJob} onChange={handleLookingForJobChange} />
     </div>
   )

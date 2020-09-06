@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import { useSelector } from 'react-redux';
 
-const FileUploader = ({ fileName, folder, setImageUrl, setProgress, setIsUploading }) => {
+const FileUploader = ({ label, fileName, folder, setImageUrl, setProgress, setIsUploading }) => {
   const { translation, direction } = useSelector(state => state.theme)
 
   const handleChange = async e => {
@@ -49,7 +49,7 @@ const FileUploader = ({ fileName, folder, setImageUrl, setProgress, setIsUploadi
       <input id='file-upload' type='file' onChange={handleChange} />
       <Button variant='outlined' color='primary'>
         <label style={labelStyle} htmlFor='file-upload'>
-          {translation.uploadPhoto}
+          {label ? label : translation.uploadPhoto}
         <PhotoCameraIcon style={iconStyle} />
         </label>
       </Button>

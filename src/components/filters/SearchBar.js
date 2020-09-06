@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField, Button, Box, Chip } from '@material-ui/core'
 import { setUserFilters } from '../../actions/users'
 import { useDispatch, useSelector } from 'react-redux'
+import CustomChip from '../cards/CustomChip'
 
 const SearchBar = () => {
   const { translation } = useSelector(state => state.theme)
@@ -31,7 +32,7 @@ const SearchBar = () => {
 
   return (
     <>
-    <Chip color={(open || filters.search) ? 'primary' : 'default'} onClick={() => setOpen(!open)} label={translation.search} />
+    <CustomChip color={(open || filters.search) ? 'primary' : 'default'} onClick={() => setOpen(!open)} label={translation.search} />
     {open &&
     <form style={formStyle} onSubmit={handleSubmit}>
       <Box style={boxStyle}>

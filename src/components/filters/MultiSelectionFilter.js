@@ -3,11 +3,12 @@ import { Grid, Button, Chip } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
 import ChipsSkeleton from '../skeletons/ChipsSkeleton'
+import CustomChip from '../cards/CustomChip'
 
 const MultiSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()
   const jobsState = useSelector(state => state.jobs)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const [selections, setSelections] = useState({})
   const [filters, setFilters] = useState([])
 
@@ -35,6 +36,10 @@ const MultiSelectionFilter = ({ type }) => {
     dispatch(closeDialogs())
   }
 
+  const chipStyle = {
+    backgroundColor: theme.palette.background.dark
+  }
+
   return (
     <div>
       {Object.keys(selections).length === 0 && <ChipsSkeleton />}
@@ -43,7 +48,7 @@ const MultiSelectionFilter = ({ type }) => {
           if (Object.values(selections)[index] > 0) {
             return (
               <Grid key={index} item>
-                <Chip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]}`} />
+                <CustomChip style={chipStyle} onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]}`} />
               </Grid>
             )
           }

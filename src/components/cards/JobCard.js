@@ -9,12 +9,13 @@ import moment from 'moment'
 import 'moment/locale/he'
 import CardContainer from './CardContainer';
 import { Link } from 'react-router-dom';
+import CustomChip from './CustomChip';
 
 const JobCard = ({ job }) => {
   const { uid, authenticated, savedJobs } = useSelector(state => state.auth)
   const [saved, setSaved] = useState()
   const dispatch = useDispatch()
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
 
   const isSaved = () => savedJobs?.includes(job.id)
 
@@ -77,12 +78,12 @@ const JobCard = ({ job }) => {
           />
           <Link to={`/jobs/${job?.id}`}>
             <CardContent>
-              <Chip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary'/>
+              <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary'/>
               <Typography variant='subtitle1'>{translation.description}</Typography>
               <Typography variant='body1'>{job?.description}</Typography>
               <Typography variant='subtitle1'>{translation.categories}</Typography>
               <Grid container spacing={1}>
-                {job?.categories?.map((req, index) => <Grid item key={index}><Chip label={req} /></Grid>)}
+                {job?.categories?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
               </Grid>
             </CardContent>
           </Link>

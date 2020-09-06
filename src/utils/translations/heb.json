@@ -38,6 +38,7 @@
   "platformForMembersOnly": "הפלטפורמה תהיה מורשית לחברי עמותה בלבד.",
   "editProfile": "עריכת פרופיל",
   "update": "עדכון",
+  "updatePhoto": "עדכון תמונה",
   "preferredLocation": "איזור מועדף לעבודה",
   "skills": "תחום ותפקיד רצוי",
   "lastPosition": "משרה אחרונה בה עבדתי",
@@ -156,5 +157,6 @@
   "manager": "מנהל",
   "moderator": "מנהל מחוז",
   "admin": "מנהל בכיר",
-  "lookingForJobFillDetails": "אנא מלאו את הפרטים הבאים על מנת שנוכל להתאים לכם את העבודה הרלוונטית לכם"
+  "lookingForJobFillDetails": "אנא מלאו את הפרטים הבאים על מנת שנוכל להתאים לכם את העבודה הרלוונטית לכם",
+  "userType": "סוג משתמש"
 }

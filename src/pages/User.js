@@ -10,6 +10,7 @@ import PageContainer from '../components/layout/PageContainer'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import StatsList from '../components/lists/StatsList'
 import ImageLightbox from '../components/general/ImageLightbox'
+import PaperContainer from '../components/layout/PaperContainer'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -33,14 +34,14 @@ const User = ({ match }) => {
         title={!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
         subtitle={!loading ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : '' : <Skeleton width={100} />}
       >
-        {!loading ? <Avatar className='clickable' onClick={user?.avatar ? () => setImageOpen(true) : null} className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
+        {!loading ? <Avatar style={{cursor: 'pointer'}} onClick={user?.avatar ? () => setImageOpen(true) : null} className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
       </TopBar>
       <PageContainer className='flex justify__between align__center flex__column'>
         {user?.lookingForJob && <Chip color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
         <br />
 
         {user?.role === 'volunteer' &&
-        <>
+        <PaperContainer>
           <Typography variant='subtitle1'>{!loading ? translation.IVolunteerIn : <Skeleton height={18} width={80} />}</Typography>
           <Typography variant='body1'>{!loading ? (user?.region ? user?.region : '') : <Skeleton height={32} width={120}/> }</Typography>
           <br />
@@ -56,32 +57,37 @@ const User = ({ match }) => {
           </div>}
           <br />
 
-        </>}
+        </PaperContainer>}
         <br />
 
-        <Typography variant='subtitle1'>{!loading ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
-        <Typography variant='body1'>{!loading ? user?.email : <Skeleton height={32} width={120} />}</Typography>
-        <Typography variant='body1'>{!loading ? (user?.phone ? user?.phone : '') : <Skeleton height={32} width={90} />}</Typography>
-        {user?.preferredLocation && <Typography variant='body1'>{!loading ? user?.preferredLocation : <Skeleton height={32} width={110} />}</Typography>}
+        <PaperContainer>
+          <Typography variant='subtitle1'>{!loading ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
+          <Typography variant='body1'>{!loading ? user?.email : <Skeleton height={32} width={120} />}</Typography>
+          <Typography variant='body1'>{!loading ? (user?.phone ? user?.phone : '') : <Skeleton height={32} width={90} />}</Typography>
+          {user?.preferredLocation && <Typography variant='body1'>{!loading ? user?.preferredLocation : <Skeleton height={32} width={110} />}</Typography>}
+        </PaperContainer>
         <br />
-
 
         {!loading ? user?.lastPosition &&
-        (<>
+        (<PaperContainer>
           <Typography variant='subtitle1'>{translation.lastPosition}</Typography>
           <Typography variant='body1'>{user?.lastPosition}</Typography>
-        </>) : <Skeleton height={32} width={110} />}
+        </PaperContainer>) : <Skeleton height={32} width={110} />}
         <br />
 
         {!loading ? user?.skills &&
-        <>
+        <PaperContainer>
           <Typography variant='subtitle1'>{translation.skillsInterestedIn}</Typography>
           <Grid container spacing={1}>
             {user?.skills?.map((skill, index) => <Grid item key={index}><Chip label={skill} /></Grid>)}
           </Grid>
-        </> : <ChipsSkeleton count={4} />}
+        </PaperContainer> : <ChipsSkeleton count={4} />}
         <br />
-        {checkPermissions(role) >= 5 && <UserRoleActions />}
+
+        <PaperContainer>
+          <Typography variant='subtitle1'>{translation.userType}</Typography>
+          {checkPermissions(role) >= 5 && <UserRoleActions />}
+        </PaperContainer>
         <ImageLightbox open={imageOpen} onClose={() => setImageOpen(false)} imgUrl={user?.avatar} />
       </PageContainer>
     </>
