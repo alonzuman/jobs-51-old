@@ -17,7 +17,7 @@ const Employees = () => {
     <>
       <TopBar
         backButton={true}
-        title={loading ? <Skeleton variant='rect' height={42} width={320} /> : translation.lookingForJob}
+        title={loading ? <Skeleton variant='rect' height={42} width={320} /> : translation.usersLookingForJob}
       />
       <PageContainer>
         <UsersList />

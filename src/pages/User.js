@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../actions/users'
 import { Avatar, Box, Typography, Container, Grid, Chip } from '@material-ui/core'
@@ -9,8 +9,10 @@ import { checkPermissions } from '../utils'
 import PageContainer from '../components/layout/PageContainer'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import StatsList from '../components/lists/StatsList'
+import ImageLightbox from '../components/general/ImageLightbox'
 
 const User = ({ match }) => {
+  const [imageOpen, setImageOpen] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
   const { loading, user } = useSelector(state => state.users)
@@ -31,7 +33,7 @@ const User = ({ match }) => {
         title={!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
         subtitle={!loading ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : '' : <Skeleton width={100} />}
       >
-        {!loading ? <Avatar className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
+        {!loading ? <Avatar className='clickable' onClick={user?.avatar ? () => setImageOpen(true) : null} className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
       </TopBar>
       <PageContainer className='flex justify__between align__center flex__column'>
         {user?.lookingForJob && <Chip color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
@@ -79,7 +81,8 @@ const User = ({ match }) => {
           </Grid>
         </> : <ChipsSkeleton count={4} />}
         <br />
-        {checkPermissions(role) >= 4 && <UserRoleActions />}
+        {checkPermissions(role) >= 5 && <UserRoleActions />}
+        <ImageLightbox open={imageOpen} onClose={() => setImageOpen(false)} imgUrl={user?.avatar} />
       </PageContainer>
     </>
   )

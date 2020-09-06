@@ -233,6 +233,10 @@ form {
   margin-top: 4rem;
 }
 
+.mt-5 {
+  margin-top: .5rem;
+}
+
 .sticky {
   position: sticky!important;
 }
@@ -264,6 +268,10 @@ form {
 
 .min__fit__content {
   min-width: fit-content!important;
+}
+
+.p-1 {
+  padding: 1rem!important
 }
 
 .mr-1 {
@@ -306,11 +314,19 @@ form {
   margin-right: .5rem!important;
 }
 
-.MuiListItem-root {
+.cards__container .MuiListItem-root {
   padding: 0!important;
   margin: 0!important;
 }
 
 .br-1 {
   border-radius: 1rem!important;
+}
+
+.clickable {
+  cursor: pointer!important;
+}
+
+.clickable:hover {
+  cursor: pointer!important;
 }

@@ -23,7 +23,7 @@ const ActivitiesList = ({ type = 'personal' }) => {
   } else if (!loading && activities.length === 0) {
     return <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>
   } else {
-    return <Grid container spacing={2}>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</Grid>
+    return <Grid className='cards__container' container spacing={2}>{activities?.map((activity, index) => <ActivityCard key={index} activity={activity} />)}</Grid>
   }
 }
 

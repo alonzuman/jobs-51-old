@@ -44,7 +44,7 @@ const Jobs = () => {
       </SecondaryBar>
       <PageContainer style={containerStyle}>
         {loading && <CardsSkeletons />}
-        <Grid container spacing={2}>
+        <Grid className='cards__container' container spacing={2}>
           {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
           {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
         </Grid>

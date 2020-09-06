@@ -15,8 +15,8 @@ const Activity = () => {
   const { pending, approved } = useSelector(state => state.auth).activities
 
   const statsListItems = [
-    { label: translation.approved, big: approved },
-    { label: translation.pending, big: pending },
+    { label: translation.approved, big: Math.round((approved + Number.EPSILON) * 100) / 100 },
+    { label: translation.pending, big: Math.round((pending + Number.EPSILON) * 100) / 100 },
   ]
 
   return (

@@ -32,7 +32,12 @@ const Home = () => {
           {translation.addJob}
         </Button>
       </div>
-      { role === 'admin' && <Link to='/users'><Button>Looking for job</Button></Link>}
+      {role === 'admin' &&
+      <Link className='button-link mt-5' to='/users'>
+        <Button className='button-style' variant='contained' color='primary'>
+          {translation.usersLookingForJob}
+        </Button>
+      </Link>}
     </PageContainer>
   )
 }

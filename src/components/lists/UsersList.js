@@ -18,7 +18,7 @@ const UsersList = () => {
     return <Typography variant='body1'>{translation.usersEmptyState}</Typography>
   } else {
     return (
-      <Grid container spacing={2}>
+      <Grid className='cards__container' container spacing={2}>
         {users?.map((user, index) => <UserCard key={index} user={user} />)}
       </Grid>
     )

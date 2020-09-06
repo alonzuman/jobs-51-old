@@ -35,7 +35,7 @@ const UserRoleActions = () => {
       <>
         <InputLabel>{translation.role}</InputLabel>
         <Select value={value} onChange={handleRoleChange} variant='outlined' className='full__width'>
-          {roles.map((role, index) => <MenuItem key={index} value={role}>{translation.roles[role]}</MenuItem>)}
+          {roles.map((role, index) => <MenuItem style={{ direction: 'rtl' }} key={index} value={role}>{translation.roles[role]}</MenuItem>)}
         </Select>
         <br />
         {button && <Button className='button-style' onClick={handleSubmit}>{loading ? <CircularProgress className='button-spinner' /> : translation.saveChanges}</Button>}
