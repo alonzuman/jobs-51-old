@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import Settings from './Settings'
 import TopBar from '../layout/TopBar'
 import PageContainer from '../layout/PageContainer'
+import SecondaryBar from '../layout/SecondaryBar'
 
 const EditProfile = () => {
   const [value, setValue] = useState(0)
@@ -20,11 +21,13 @@ const EditProfile = () => {
   return (
     <>
       <TopBar title={translation.myProfile} />
-      <Tabs style={tabStyle} className='max__width margin__center full__width' indicatorColor='primary' value={value}>
-        <Tab style={tabStyle} label={translation.userDetails} onClick={() => handleValueChange(0)} />
-        <Tab style={tabStyle} label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
-        <Tab style={tabStyle} label={translation.settings} onClick={() => handleValueChange(2)}  />
-      </Tabs>
+      <SecondaryBar>
+        <Tabs style={tabStyle} className='max__width margin__center full__width' indicatorColor='primary' value={value}>
+          <Tab style={tabStyle} label={translation.userDetails} onClick={() => handleValueChange(0)} />
+          <Tab style={tabStyle} label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
+          <Tab style={tabStyle} label={translation.settings} onClick={() => handleValueChange(2)}  />
+        </Tabs>
+      </SecondaryBar>
       <PageContainer>
         {value === 0 && <UserDetails />}
         {value === 1 && <PersonalDetails />}
