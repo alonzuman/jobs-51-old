@@ -1,22 +1,14 @@
 import React from 'react'
 import { Chip } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 const CustomChip = ({ style, size, onClick, label, color, variant }) => {
-  const { theme } = useSelector(state => state.theme)
-
-  const chipStyle = {
-    backgroundColor: theme.palette.background.main,
-    ...style,
-  }
-
   return (
     <Chip
+      style={{...style}}
       onClick={onClick}
-      style={chipStyle}
       size={size ? size : ''}
-      color={color ? color : ''}
-      variant={variant ? variant : 'outlined'}
+      color={color ? color : 'default'}
+      variant={variant ? variant : 'default'}
       label={label}
     />
   )

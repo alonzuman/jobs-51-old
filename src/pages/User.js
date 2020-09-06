@@ -38,14 +38,10 @@ const User = ({ match }) => {
       </TopBar>
       <PageContainer className='flex justify__between align__center flex__column'>
         {user?.lookingForJob && <Chip color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
-        <br />
-
         {user?.role === 'volunteer' &&
-        <PaperContainer>
+        <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{!loading ? translation.IVolunteerIn : <Skeleton height={18} width={80} />}</Typography>
           <Typography variant='body1'>{!loading ? (user?.region ? user?.region : '') : <Skeleton height={32} width={120}/> }</Typography>
-          <br />
-
           {!loading ?
           <>
             <Typography style={{ marginBottom: '.5rem' }} variant='subtitle1'>{!loading ? translation.totalActivities : <Skeleton height={18} width={80} />}</Typography>
@@ -55,36 +51,26 @@ const User = ({ match }) => {
             <Skeleton className='border__radius_1' style={{ marginLeft: '1rem' }} height={180} width={'100%'} />
             <Skeleton className='border__radius_1' height={180} width={'100%'} />
           </div>}
-          <br />
-
         </PaperContainer>}
-        <br />
-
-        <PaperContainer>
+        <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{!loading ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
           <Typography variant='body1'>{!loading ? user?.email : <Skeleton height={32} width={120} />}</Typography>
           <Typography variant='body1'>{!loading ? (user?.phone ? user?.phone : '') : <Skeleton height={32} width={90} />}</Typography>
           {user?.preferredLocation && <Typography variant='body1'>{!loading ? user?.preferredLocation : <Skeleton height={32} width={110} />}</Typography>}
         </PaperContainer>
-        <br />
-
         {!loading ? user?.lastPosition &&
-        (<PaperContainer>
+        (<PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{translation.lastPosition}</Typography>
           <Typography variant='body1'>{user?.lastPosition}</Typography>
         </PaperContainer>) : <Skeleton height={32} width={110} />}
-        <br />
-
         {!loading ? user?.skills &&
-        <PaperContainer>
+        <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{translation.skillsInterestedIn}</Typography>
           <Grid container spacing={1}>
             {user?.skills?.map((skill, index) => <Grid item key={index}><Chip label={skill} /></Grid>)}
           </Grid>
         </PaperContainer> : <ChipsSkeleton count={4} />}
-        <br />
-
-        <PaperContainer>
+        <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{translation.userType}</Typography>
           {checkPermissions(role) >= 5 && <UserRoleActions />}
         </PaperContainer>

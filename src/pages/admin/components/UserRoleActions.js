@@ -29,7 +29,7 @@ const UserRoleActions = () => {
   }
 
   return (
-    <FormControl>
+    <FormControl className='m-0'>
       {(loading || !user) && <Skeleton variant='rect' width={'100%'} height={60} />}
       {(!loading && user.role) &&
       <>
@@ -37,8 +37,7 @@ const UserRoleActions = () => {
         <Select value={value} onChange={handleRoleChange} variant='outlined' className='full__width'>
           {roles.map((role, index) => <MenuItem style={{ direction: 'rtl' }} key={index} value={role}>{translation.roles[role]}</MenuItem>)}
         </Select>
-        <br />
-        {button && <Button className='button-style' onClick={handleSubmit}>{loading ? <CircularProgress className='button-spinner' /> : translation.saveChanges}</Button>}
+        {button && <Button className='button-style mt-1' onClick={handleSubmit}>{loading ? <CircularProgress className='button-spinner' /> : translation.saveChanges}</Button>}
       </>}
     </FormControl>
   )
