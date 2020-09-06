@@ -17,7 +17,7 @@ const Admin = () => {
 
   return (
     <>
-      <TopBar title={translation.admin} />
+      <TopBar title={translation.adminPage} />
       <PageContainer>
         <StatsList items={items} />
       </PageContainer>
