@@ -12,7 +12,7 @@ const TopBar = ({ subtitle = '', title = '', children, backButton = false, stick
   }
 
   const paperStyle = {
-    backgroundColor: theme.palette.background.main
+    backgroundColor: theme.palette.background.light
   }
 
   return (

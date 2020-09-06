@@ -14,11 +14,11 @@ const StatsList = ({ items }) => {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    border: `1px solid ${theme.palette.border.main}`
+    // border: `1px solid ${theme.palette.border.main}`
   }
 
   return (
-    <Grid container spacing={2}>
+    <Grid className='cards__container' container spacing={2}>
       {items.map((item, index) => (
         <Grid key={index} xs={6} md={6} lg={6} item>
           <Link to={item.link}>

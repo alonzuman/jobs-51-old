@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Button, CircularProgress, Grid, Switch, FormControl, InputLabel } from '@material-ui/core'
+import { TextField, Button, CircularProgress, Grid, Switch, FormControl, InputLabel, Typography } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
 import { addPersonalDetails, toggleLookingForJob } from '../../../actions'
@@ -27,9 +27,8 @@ const PersonalDetails = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {!serviceYear && <Typography variant='body1'>{translation.lookingForJobFillDetails}</Typography>}
       <ToggleLookingForJob />
-      <br />
-      <br />
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <TextField label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />

@@ -1,4 +1,5 @@
 import store from '../store';
+const { theme } = store.getState().theme
 
 export const checkPermissions = (role) => {
   switch (role) {
@@ -9,6 +10,20 @@ export const checkPermissions = (role) => {
     case 'moderator': return 4;
     case 'admin': return 5;
     default: return 0;
+  }
+}
+
+export const activityTypeColor = (type) => {
+  console.log(theme)
+  if (theme) {
+    console.log(type)
+    switch (type) {
+      case 'עידוד לשירות משמעותי': return '#4caf50';
+      case 'אירוע עמותה': return '#009688';
+      case 'ליווי קשישים וניצולי שואה': return '#1de9b6';
+      case 'אירוע שיא': return '#ff9800';
+      default: return `${theme?.palette?.primary?.main}`
+    }
   }
 }
 

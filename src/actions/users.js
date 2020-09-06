@@ -30,12 +30,12 @@ export const getUsers = () => async dispatch => {
   const { filters } = store.getState().users
   try {
     let snapshot
-    if (filters.search) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).get()
+    if (filters.search && filters.status) {
+      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).get()
     } else if (filters.status) {
       snapshot = await usersRef.where('role', '==', filters.status).get()
-    } else if (filters.search && filters.status) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).get()
+    } else if (filters.search) {
+      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).get()
     } else {
       snapshot = await usersRef.get()
     }

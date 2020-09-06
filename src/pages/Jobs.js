@@ -29,20 +29,16 @@ const Jobs = () => {
     { type: 'dates', label: translation.datePosted, onClick: () => dispatch(openDialog({ type: 'DatesFilter', title: 'datePosted' })) },
   ]
 
-  const containerStyle = {
-    padding: '1rem'
-  }
-
   return (
     <>
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))}>
         <AddIcon />
       </FloatingActionButton>
-      <TopBar action={<ToggleLookingForJob style={{ textAlign: 'left' }} />} backButton={true} title={translation.findJob} />
+      <TopBar backButton={true} title={translation.findJob} />
       <SecondaryBar>
         <FiltersBar filterOptions={filtersBar} />
       </SecondaryBar>
-      <PageContainer style={containerStyle}>
+      <PageContainer>
         {loading && <CardsSkeletons />}
         <Grid className='cards__container' container spacing={2}>
           {(jobs?.length === 0 && !loading) && <Typography color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}

@@ -13,13 +13,14 @@ const EditProfile = () => {
   const handleValueChange = (newValue) => setValue(newValue)
 
   const tabStyle = {
-    color: theme.typography.subtitle1.color
+    color: theme.typography.subtitle1.color,
+    backgroundColor: theme.palette.background.light
   }
 
   return (
     <>
       <TopBar title={translation.myProfile} />
-      <Tabs className='max__width margin__center full__width' indicatorColor='primary' value={value}>
+      <Tabs style={tabStyle} className='max__width margin__center full__width' indicatorColor='primary' value={value}>
         <Tab style={tabStyle} label={translation.userDetails} onClick={() => handleValueChange(0)} />
         <Tab style={tabStyle} label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
         <Tab style={tabStyle} label={translation.settings} onClick={() => handleValueChange(2)}  />

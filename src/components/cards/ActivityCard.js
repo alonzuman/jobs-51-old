@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Grid } from '@material-ui/core'
-import { translateDate } from '../../utils'
+import { translateDate, activityTypeColor } from '../../utils'
 import { useSelector } from 'react-redux'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ActivityCardActions from './ActivityCardActions';
@@ -40,6 +40,11 @@ const ActivityCard = ({ activity }) => {
     transition: '.15s transform ease-in-out'
   }
 
+  const chipStyle = {
+    color: activityTypeColor(activity.type),
+    border: `1px solid ${activityTypeColor(activity.type)}`
+  }
+
   const [day, month, number] = translateDate(activity.date)
   return (
     <>
@@ -53,7 +58,7 @@ const ActivityCard = ({ activity }) => {
               <Typography variant='body1'>{day}</Typography>
             </Box>
             <Box style={detailsStyle}>
-              <Chip label={activity.type} size='small' variant='outlined' color='primary' />
+              <Chip label={activity.type} size='small' variant='outlined' style={chipStyle} />
               <ListItemText
                 primary={activity.description}
                 secondary={activity.total}

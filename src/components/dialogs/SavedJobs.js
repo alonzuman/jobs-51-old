@@ -26,7 +26,7 @@ const SavedJobs = () => {
         {savedJobsLoading && <CardsSkeletons count={1} />}
         {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
         {!savedJobsLoading && savedJobs &&
-        <Grid container spacing={2}>
+        <Grid className='cards__container' container spacing={2}>
           {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
         </Grid>}
       </PageContainer>

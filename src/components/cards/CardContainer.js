@@ -9,7 +9,7 @@ const CardContainer = ({ children, style }) => {
   const cardContainerStyle = {
     direction,
     ...style,
-    border: `1px solid ${theme.palette.border.main}`
+    // border: `1px solid ${theme.palette.border.main}`
   }
 
   return (

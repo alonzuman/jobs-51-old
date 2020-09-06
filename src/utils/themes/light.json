@@ -8,21 +8,21 @@
       "dark": "#286cba"
     },
     "secondary": {
-        "main": "#E89C68"
-      },
-      "border": {
-        "light": "#f8f8f8",
-        "main": "#e7e7e7",
-        "dark": ""
-      },
-      "background": {
-        "light": "white",
-        "main": "main",
-        "dark": "#f7f7f7"
-      }
+      "main": "#E89C68"
     },
-    "typography": {
-      "fontFamily": ["Rubik", "sans-serif"],
+    "border": {
+      "light": "#f8f8f8",
+      "main": "#f8f8f8",
+      "dark": ""
+    },
+    "background": {
+      "light": "white",
+      "main": "#f8f8f8",
+      "dark": "#f7f7f7"
+    }
+  },
+  "typography": {
+    "fontFamily": ["Rubik", "sans-serif"],
     "h1": {
       "fontSize": "2rem",
       "fontWeight": 500,

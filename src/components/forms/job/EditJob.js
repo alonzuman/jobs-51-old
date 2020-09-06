@@ -94,8 +94,8 @@ const AddJob = () => {
       </Grid>
         <TextField multiline rows={4} label={translation.description} variant='outlined' value={edittedJob['description']} name='description' onChange={handleJobChange} />
       <AddChips collection='categories' chips={categories} setChips={setCategories} label={translation.categories} />
-      <Button disabled={uploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
-      <Button style={{marginTop: '.5rem'}} onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
+      <Button disabled={uploading} className='button-style mb-5' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
+      <Button onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
       {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id, job))} />}
     </form>
   )

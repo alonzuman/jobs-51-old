@@ -4,19 +4,20 @@
     "type": "dark",
     "primary": {
       "light": "#286cba",
-      "main": "#286cba",
+      "main": "#3a96ff",
       "dark": "#286cba"
     },
     "secondary": {
       "main": "#E89C68"
     },
     "border": {
-      "light": "",
+      "light": "#535353",
       "main": "#535353",
       "dark": ""
     },
     "background": {
-      "light": "#424242",
+      "paper": "#616161",
+      "light": "#616161",
       "main": "#424242",
       "dark": "#424242"
     }

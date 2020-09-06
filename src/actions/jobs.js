@@ -345,8 +345,12 @@ export const getJob = (id) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    const snapshot = await jobsRef.doc(id).get()
-    const job = { id: snapshot.id, ...snapshot.data() }
+    const jobSnapshot = await jobsRef.doc(id).get()
+    let job = { id: jobSnapshot.id, ...jobSnapshot.data() }
+    const { uid } = job
+    const userSnapshot = await db.collection('users').doc(uid).get()
+    const user = { id: userSnapshot.id, ...userSnapshot.data() }
+    job = { ...job, user }
     dispatch({
       type: 'SET_JOB',
       payload: { job }

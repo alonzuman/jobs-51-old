@@ -8,6 +8,7 @@ import { Typography, Avatar, Grid, Chip } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import TitleAndBody from '../components/general/TitleAndBody'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
+import UserInfo from '../components/cards/UserInfo'
 
 const Job = () => {
   const { id } = useRouteMatch().params
@@ -17,7 +18,7 @@ const Job = () => {
 
   useEffect(() => { dispatch(getJob(id)) }, [])
 
-  console.log(job)
+  // console.log(job)
   return (
     <>
       <TopBar
@@ -32,14 +33,10 @@ const Job = () => {
           title={loading ? <Skeleton height={32} width={300} /> : translation.description}
           body={loading ? <Skeleton height={48} width={220} /> : job.description}
         />
-        <TitleAndBody
-          title={loading ? <Skeleton height={32} width={300} /> : translation.contactPerson}
-          body={loading ? <Skeleton height={48} width={220} /> : job.contactPerson}
-        />
-        <Typography variant='body1'>{loading ? <Skeleton height={48} width={220} /> : job.phone}</Typography>
-        <Typography variant='body1'>{loading ? <Skeleton height={48} width={220} /> : job.email}</Typography>
         <Typography variant='subtitle1'>{loading ? <Skeleton height={48} width={220} /> : translation.categories}</Typography>
         {loading ? <ChipsSkeleton count={3} /> : <Grid container spacing={1}>{job?.categories?.map((x, i) => <Grid key={i} item><Chip label={x} /></Grid>)}</Grid>}
+        <Typography variant='subtitle1'>{translation.contactPerson}</Typography>
+        <UserInfo user={job.user} />
       </PageContainer>
     </>
   )
