@@ -3,6 +3,7 @@ import { Grid, Avatar, Paper, CardHeader, Chip, ListItem } from '@material-ui/co
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CardContainer from './CardContainer'
+import CustomChip from './CustomChip'
 
 const UserCard = ({ user }) => {
   const { translation } = useSelector(state => state.theme)
@@ -20,7 +21,7 @@ const UserCard = ({ user }) => {
                 avatar={<Avatar src={user.avatar} alt={user.firstName}>{user.firstName.charAt(0)}</Avatar>}
                 title={`${user.firstName} ${user.lastName}`}
                 subheader={user.serviceYear ? `${translation.joined} ${user.serviceYear}` : ''}
-                action={<Chip size='small' color='primary' variant='outlined' label={translation.roles[user.role]} />}
+                action={<CustomChip size='small' color='primary' variant='outlined' label={translation.roles[user.role]} />}
               />
             </CardContainer>
           </Paper>

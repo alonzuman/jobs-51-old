@@ -3,6 +3,7 @@ import { TextField, IconButton, Box, Grid, Chip } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFilter, removeFilter } from '../../actions/jobs';
+import CustomChip from '../cards/CustomChip';
 
 const AddChips = ({ label, chips, setChips, collection }) => {
   const { direction } = useSelector(state => state.theme)
@@ -50,7 +51,7 @@ const AddChips = ({ label, chips, setChips, collection }) => {
         <IconButton style={iconButtonStyle} onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>
-        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} item><Chip style={chipStyle} onDelete={() => removeChip(chip)} label={chip} /></Grid>)}
+        {chips?.length > 0 && chips?.map((chip, index) => <Grid key={index} item><CustomChip style={chipStyle} onDelete={() => removeChip(chip)} label={chip} /></Grid>)}
       </Grid>
     </div>
   )

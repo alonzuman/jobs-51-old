@@ -11,6 +11,7 @@ import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import StatsList from '../components/lists/StatsList'
 import ImageLightbox from '../components/general/ImageLightbox'
 import PaperContainer from '../components/layout/PaperContainer'
+import CustomChip from '../components/cards/CustomChip'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -38,7 +39,7 @@ const User = ({ match }) => {
         {!loading ? <Avatar style={{cursor: 'pointer'}} onClick={user?.avatar ? () => setImageOpen(true) : null} className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
       </TopBar>
       <PageContainer className='flex justify__between align__center flex__column'>
-        {user?.lookingForJob && <Chip color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
+        {user?.lookingForJob && <CustomChip style={{marginBottom: '1rem'}} color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
         {user?.role === 'volunteer' &&
         <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{!loading ? translation.IVolunteerIn : <Skeleton height={18} width={80} />}</Typography>

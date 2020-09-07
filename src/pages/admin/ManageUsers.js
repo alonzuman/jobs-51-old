@@ -8,6 +8,7 @@ import { clearUserFilters } from '../../actions/users'
 import PageContainer from '../../components/layout/PageContainer'
 import SecondaryBar from '../../components/layout/SecondaryBar'
 import SingleSelectionChips from './components/SingleSelectionChips'
+import CustomChip from '../../components/cards/CustomChip'
 
 const statuses = ['pending', 'user', 'volunteer', 'manager', 'moderator', 'admin']
 
@@ -45,7 +46,7 @@ const ManageUsers = () => {
               />
             </Grid>
           </Grid>
-          <Chip style={clearStyle} onClick={() => dispatch(clearUserFilters())} label={translation.clear} />
+          <CustomChip style={clearStyle} onClick={() => dispatch(clearUserFilters())} label={translation.clear} />
         </Box>
       </SecondaryBar>
       <PageContainer>

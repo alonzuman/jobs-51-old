@@ -10,6 +10,7 @@ import TitleAndBody from '../components/general/TitleAndBody'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import UserInfo from '../components/cards/UserInfo'
 import PaperContainer from '../components/layout/PaperContainer'
+import CustomChip from '../components/cards/CustomChip'
 
 const Job = () => {
   const { id } = useRouteMatch().params
@@ -38,7 +39,7 @@ const Job = () => {
         </PaperContainer>
         <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{loading ? <Skeleton height={48} width={220} /> : translation.categories}</Typography>
-          {loading ? <ChipsSkeleton count={3} /> : <Grid container spacing={1}>{job?.categories?.map((x, i) => <Grid key={i} item><Chip label={x} /></Grid>)}</Grid>}
+          {loading ? <ChipsSkeleton count={3} /> : <Grid container spacing={1}>{job?.categories?.map((x, i) => <Grid key={i} item><CustomChip label={x} /></Grid>)}</Grid>}
         </PaperContainer>
         <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{translation.contactPerson}</Typography>

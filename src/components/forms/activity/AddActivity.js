@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFeedback } from '../../../actions';
 import { calcHours } from '../../../utils';
 import { setUserRegion } from '../../../actions/auth';
+import CustomChip from '../../cards/CustomChip';
 
 const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 
@@ -82,7 +83,7 @@ const AddActivity = () => {
         </FormControl>
         <InputLabel style={{ marginBottom: '.5rem' }}>{translation.type}</InputLabel>
         <Grid container spacing={1}>
-          {types?.map((type, index) => <Grid key={index} item ><Chip onClick={() => setActivity({ ...activity, type })} label={type} color={activity['type'] === type ? 'primary' : 'default'} /></Grid>)}
+          {types?.map((type, index) => <Grid key={index} item ><CustomChip onClick={() => setActivity({ ...activity, type })} label={type} color={activity['type'] === type ? 'primary' : 'default'} /></Grid>)}
         </Grid>
         <br />
         <FormControl>

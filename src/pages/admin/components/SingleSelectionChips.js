@@ -3,6 +3,7 @@ import { Chip, Dialog, Box, DialogTitle, IconButton, DialogContent, Grid, Button
 import CloseIcon from '@material-ui/icons/Close'
 import ChipsSkeleton from '../../../components/skeletons/ChipsSkeleton'
 import { useDispatch, useSelector } from 'react-redux'
+import CustomChip from '../../../components/cards/CustomChip'
 
 const SingleSelectionChips = ({ existingFilter, action, selections, label, type }) => {
   const { translation } = useSelector(state => state.theme)
@@ -32,7 +33,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
 
   return (
     <>
-      <Chip color={filter ? 'primary' : 'default'} onClick={() => setOpen(true)} label={label} />
+      <CustomChip color={filter ? 'primary' : 'default'} onClick={() => setOpen(true)} label={label} />
       <Dialog open={open} onClose={() => setOpen(false)}>
         <Box style={boxStyle}>
           <DialogTitle>

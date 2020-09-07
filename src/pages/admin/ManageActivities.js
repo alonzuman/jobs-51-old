@@ -8,6 +8,7 @@ import ActivitiesList from '../../components/lists/ActivitiesList'
 import SingleSelectionChips from './components/SingleSelectionChips'
 import PageContainer from '../../components/layout/PageContainer'
 import SecondaryBar from '../../components/layout/SecondaryBar'
+import CustomChip from '../../components/cards/CustomChip'
 
 const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 const statuses = ['approved', 'pending']
@@ -43,7 +44,7 @@ const ManageActivities = () => {
               <SingleSelectionChips existingFilter={filters} type='status' action={'SET_ACTIVITY_FILTERS'} label={translation.status} selections={statuses} />
             </Grid>
           </Grid>
-          <Chip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
+          <CustomChip style={clearStyle} label={translation.clear} onClick={() => dispatch(clearActivityFilters())} />
         </Box>
       </SecondaryBar>
       <PageContainer>

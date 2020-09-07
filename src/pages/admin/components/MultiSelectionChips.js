@@ -3,6 +3,7 @@ import ChipsSkeleton from '../../../components/skeletons/ChipsSkeleton'
 import { Grid, Chip, Dialog, Button, DialogTitle, IconButton, Box, DialogContent } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close'
+import CustomChip from '../../../components/cards/CustomChip'
 
 const MultiSelectionChips = ({ filters, selections, action, label, type }) => {
   const { translation } = useSelector(state => state.theme)
@@ -36,7 +37,7 @@ const MultiSelectionChips = ({ filters, selections, action, label, type }) => {
 
   return (
     <>
-      <Chip color={values.length > 0 ? 'primary' : 'default'} onClick={() => setOpen(true)} label={label} />
+      <CustomChip color={values.length > 0 ? 'primary' : 'default'} onClick={() => setOpen(true)} label={label} />
       <Dialog open={open} onClose={() => setOpen(false)}>
         <Box style={boxStyle}>
           <DialogTitle>
@@ -52,7 +53,7 @@ const MultiSelectionChips = ({ filters, selections, action, label, type }) => {
             {selections.map((selection, index) => {
               return (
                 <Grid key={index} item>
-                  <Chip
+                  <CustomChip
                     color={values.includes(selection) ? 'primary' : 'default'}
                     name={selection}
                     label={selection}
