@@ -66,15 +66,10 @@ const User = ({ match }) => {
             <Skeleton width={100} />
           )
         }
+        actionOnClick={() => setEditing(!editing)}
         action={
-          checkPermissions(role) >= 3 && (
-            <IconButton>
-              {editing ? (
-                <DoneIcon onClick={() => setEditing(false)} />
-              ) : (
-                <EditIcon onClick={() => setEditing(true)} />
-              )}
-            </IconButton>
+          checkPermissions(role) > checkPermissions(user?.role) && (
+            <IconButton>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>
           )
         }
       >
@@ -94,7 +89,7 @@ const User = ({ match }) => {
       </TopBar>
       <PageContainer className="flex justify__between align__center flex__column">
         {editing && checkPermissions(role) >= 3 && (
-          <PaperContainer style={{ marginTop: "1rem", marginBottom: '1rem' }}>
+          <PaperContainer style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Grid container spacing={1}>
               <Grid item xs={6}>
                 <Typography variant="subtitle1">
@@ -112,14 +107,14 @@ const User = ({ match }) => {
             <ToggleVolunteer user={user} />
           </PaperContainer>
         )}
-        {user?.lookingForJob && (
+        {!editing && user?.lookingForJob && (
           <CustomChip
             style={{ marginBottom: "1rem" }}
             color="primary"
             label={user.lookingForJob ? translation.iAmLookingForAJob : ""}
           />
         )}
-        {user?.volunteer && user?.region && (
+        {!editing && user?.volunteer && user?.region && (
           <PaperContainer style={{ marginBottom: "1rem" }}>
             {!loading ? (
               <>
@@ -152,40 +147,43 @@ const User = ({ match }) => {
             )}
           </PaperContainer>
         )}
-        <PaperContainer style={{ marginBottom: "1rem" }}>
-          <Typography variant="subtitle1">
-            {!loading ? (
-              translation.contactDetails
-            ) : (
-              <Skeleton height={18} width={70} />
-            )}
-          </Typography>
-          <Typography variant="body1">
-            {!loading ? user?.email : <Skeleton height={32} width={120} />}
-          </Typography>
-          <Typography variant="body1">
-            {!loading ? (
-              user?.phone ? (
-                user?.phone
+        {!editing && (
+          <PaperContainer style={{ marginBottom: "1rem" }}>
+            <Typography variant="subtitle1">
+              {!editing && !loading ? (
+                translation.contactDetails
               ) : (
-                ""
-              )
-            ) : (
-              <Skeleton height={32} width={90} />
-            )}
-          </Typography>
-          {user?.preferredLocation && (
-            <Typography variant="body1">
-              {!loading ? (
-                user?.preferredLocation
-              ) : (
-                <Skeleton height={32} width={110} />
+                <Skeleton height={18} width={70} />
               )}
             </Typography>
-          )}
-        </PaperContainer>
+            <Typography variant="body1">
+              {!loading ? user?.email : <Skeleton height={32} width={120} />}
+            </Typography>
+            <Typography variant="body1">
+              {!loading ? (
+                user?.phone ? (
+                  user?.phone
+                ) : (
+                  ""
+                )
+              ) : (
+                <Skeleton height={32} width={90} />
+              )}
+            </Typography>
+            {user?.preferredLocation && (
+              <Typography variant="body1">
+                {!loading ? (
+                  user?.preferredLocation
+                ) : (
+                  <Skeleton height={32} width={110} />
+                )}
+              </Typography>
+            )}
+          </PaperContainer>
+        )}
         {!loading ? (
-          user?.lastPosition && (
+          user?.lastPosition &&
+          !editing && (
             <PaperContainer style={{ marginBottom: "1rem" }}>
               <Typography variant="subtitle1">
                 {translation.lastPosition}

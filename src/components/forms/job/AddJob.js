@@ -9,7 +9,7 @@ import CircularProgressWithLabel from '../CircularProgressWithLabel'
 
 const AddJob = () => {
   const dispatch = useDispatch()
-  const { uid } = useSelector(state => state.auth)
+  const { uid, firstName, lastName, avatar, role, email, phone } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
   const [isUploading, setIsUploading] = useState(false)
@@ -38,7 +38,15 @@ const AddJob = () => {
       ...job,
       image,
       categories,
-      uid
+      uid,
+      user: {
+        firstName,
+        lastName,
+        role,
+        email,
+        phone,
+        avatar
+      }
     }
     dispatch(addFilter({ collection: 'locations', value: jobToAdd.location }))
     dispatch(addJob(jobToAdd))

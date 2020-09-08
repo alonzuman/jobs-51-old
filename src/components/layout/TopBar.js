@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import BackButton from './BackButton'
 import './TopBar.css'
 
-const TopBar = ({ subtitle = '', title = '', children, backButton = false, sticky = false, action = null }) => {
+const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton = false, sticky = false, action }) => {
   const { theme } = useSelector(state => state.theme)
 
   const containerStyle = {
@@ -22,9 +22,9 @@ const TopBar = ({ subtitle = '', title = '', children, backButton = false, stick
       className={`topbar__container ${sticky ? "sticky" : "relative"}`}
     >
       <Paper style={paperStyle} elevation={0} className="paper__background">
-        <div className='flex align__center justify__between'>
+        <div className="flex align__center justify__between">
           {backButton && <BackButton />}
-          {action}
+          <span onClick={actionOnClick}>{action}</span>
         </div>
         <div
           className={`margin__center max__width transparent top__row__container flex justify__between align__center full__width ${

@@ -31,13 +31,13 @@ export const getUsers = () => async dispatch => {
   try {
     let snapshot
     if (filters.search && filters.status) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).get()
+      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).orderBy('dateCreated', 'desc').get()
     } else if (filters.status) {
-      snapshot = await usersRef.where('role', '==', filters.status).get()
+      snapshot = await usersRef.where('role', '==', filters.status).orderBy('dateCreated', 'desc').get()
     } else if (filters.search) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).get()
+      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).orderBy('dateCreated', 'desc').get()
     } else {
-      snapshot = await usersRef.get()
+      snapshot = await usersRef.orderBy('dateCreated', 'desc').get()
     }
     let users = []
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
@@ -139,15 +139,25 @@ export const getUserAndActivities = (uid) => async dispatch => {
 }
 
 export const toggleVolunteer = ({ uid, currentValue }) => async dispatch => {
+  const authState = store.getState().auth
   dispatch({
     type: 'USER_LOADING'
   })
   try {
     await usersRef.doc(uid).update('volunteer', currentValue)
-    dispatch({
-      type: 'TOGGLE_VOLUNTEER',
-      payload: { uid, currentValue }
-    })
+    if (uid === authState.uid) {
+      dispatch({
+        type: 'UPDATED_PROFILE',
+        payload: {
+          volunteer: currentValue
+        }
+      })
+    } else {
+      dispatch({
+        type: 'TOGGLE_VOLUNTEER',
+        payload: { uid, currentValue }
+      })
+    }
     dispatch(setFeedback({
       type: 'success',
       msg: 'Success'

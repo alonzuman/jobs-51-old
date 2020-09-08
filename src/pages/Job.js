@@ -11,6 +11,8 @@ import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import UserInfo from '../components/cards/UserInfo'
 import PaperContainer from '../components/layout/PaperContainer'
 import CustomChip from '../components/cards/CustomChip'
+import moment from 'moment'
+import UserCard from '../components/cards/UserCard'
 
 const Job = () => {
   const { id } = useRouteMatch().params
@@ -18,36 +20,74 @@ const Job = () => {
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
+  const timeAgo = () => {
+    moment.locale("he");
+    return moment(job?.dateCreated).fromNow();
+  };
+
   useEffect(() => { dispatch(getJob(id)) }, [])
 
-  // console.log(job)
   return (
     <>
       <TopBar
         backButton={true}
-        title={loading ? <Skeleton height={48} width={240} /> : job.company }
-        subtitle={loading ? <Skeleton height={32} width={120} /> : job.location }
+        title={loading ? <Skeleton height={48} width={240} /> : job.company}
+        subtitle={loading ? <Skeleton height={32} width={120} /> : job.location}
       >
-        {loading ? <Skeleton variant='circle' className='avatar__md' /> : <Avatar className='avatar__md' src={job?.avatar} alt={job?.company}>{job?.company?.charAt(0)}</Avatar>}
+        {loading ? (
+          <Skeleton variant="circle" className="avatar__md" />
+        ) : (
+          <Avatar className="avatar__md" src={job?.avatar} alt={job?.company}>
+            {job?.company?.charAt(0)}
+          </Avatar>
+        )}
       </TopBar>
       <PageContainer>
-        <PaperContainer style={{ marginBottom: '1rem' }}>
+        <CustomChip
+          style={{marginBottom: '1rem'}}
+          label={timeAgo()}
+          size="small"
+          variant="outlined"
+          color="primary"
+        />
+        <PaperContainer style={{ marginBottom: "1rem" }}>
           <TitleAndBody
-            title={loading ? <Skeleton height={32} width={300} /> : translation.description}
-            body={loading ? <Skeleton height={48} width={220} /> : job.description}
+            title={
+              loading ? (
+                <Skeleton height={32} width={300} />
+              ) : (
+                translation.description
+              )
+            }
+            body={
+              loading ? <Skeleton height={48} width={220} /> : job.description
+            }
           />
         </PaperContainer>
-        <PaperContainer style={{ marginBottom: '1rem' }}>
-          <Typography variant='subtitle1'>{loading ? <Skeleton height={48} width={220} /> : translation.categories}</Typography>
-          {loading ? <ChipsSkeleton count={3} /> : <Grid container spacing={1}>{job?.categories?.map((x, i) => <Grid key={i} item><CustomChip label={x} /></Grid>)}</Grid>}
+        <PaperContainer style={{ marginBottom: "1rem" }}>
+          <Typography variant="subtitle1">
+            {loading ? (
+              <Skeleton height={48} width={220} />
+            ) : (
+              translation.categories
+            )}
+          </Typography>
+          {loading ? (
+            <ChipsSkeleton count={3} />
+          ) : (
+            <Grid container spacing={1}>
+              {job?.categories?.map((x, i) => (
+                <Grid key={i} item>
+                  <CustomChip label={x} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
         </PaperContainer>
-        <PaperContainer style={{ marginBottom: '1rem' }}>
-          <Typography variant='subtitle1'>{translation.contactPerson}</Typography>
-          <UserInfo user={job.user} />
-        </PaperContainer>
+        <UserCard label={translation.contactPerson} containerStyle={{ padding: 0 }} user={{ ...job.user, uid: job.uid }} />
       </PageContainer>
     </>
-  )
+  );
 }
 
 export default Job
