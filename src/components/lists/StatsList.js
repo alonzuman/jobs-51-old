@@ -2,10 +2,9 @@ import React from 'react'
 import { Grid, Paper, Typography, ListItem } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import CardMarker from '../cards/CardMarker'
 
 const StatsList = ({ items }) => {
-  const { theme } = useSelector(state => state.theme)
-
   const statsPaperStyle = {
     width: '100%',
     height: 120,
@@ -14,7 +13,6 @@ const StatsList = ({ items }) => {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    // border: `1px solid ${theme.palette.border.main}`
   }
 
   return (
@@ -24,6 +22,7 @@ const StatsList = ({ items }) => {
           <ListItem className='br-1' button>
             <Link className='full__width' to={item.link && item.link}>
               <Paper style={statsPaperStyle} elevation={0}>
+                {item.marker && <CardMarker color={item.marker} />}
                 <Typography variant='h1'>{item.big}</Typography>
                 <Typography variant='body1'>{item.label}</Typography>
               </Paper>

@@ -7,6 +7,7 @@ import ActivityCardActions from './ActivityCardActions';
 import CardContainer from './CardContainer';
 import CustomChip from './CustomChip';
 import { Link } from 'react-router-dom';
+import CardMarker from './CardMarker';
 
 const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
@@ -59,41 +60,58 @@ const ActivityCard = ({ activity, showUser = true }) => {
   const [day, month, number] = translateDate(activity.date)
   return (
     <>
-    <Grid item xs={12} md={6} lg={4}>
-      <ListItem className='br-1' button>
-        <CardContainer>
-          <Paper style={paperStyle} elevation={0}>
-            <Box style={dateStyle}>
-              <Typography variant='subtitle1'>{month}</Typography>
-              <Typography variant='h2'>{number}</Typography>
-              <Typography variant='body1'>{day}</Typography>
-            </Box>
-            <Box style={detailsStyle}>
-              <CustomChip label={activity.type} size='small' variant='outlined' style={chipStyle} />
-              <ListItemText
-                primary={activity.description}
-                secondary={activity.total}
-              />
-            </Box>
-            {showUser &&
-            <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
-              <Box style={userInfoStlye}>
-                <Avatar src={activity?.user?.avatar} />
-                <Typography style={{ textAlign: 'center' }} variant='subtitle1'>{activity?.user?.firstName} {activity?.user?.lastName}</Typography>
+      <Grid item xs={12} md={6} lg={4}>
+        <ListItem className="br-1" button>
+          <CardContainer>
+            <Paper style={paperStyle} elevation={0}>
+              <Box style={dateStyle}>
+                <CardMarker
+                  style={{ bottom: "3.5rem" }}
+                  color={activity.approved ? "#4caf50" : "#e15757"}
+                />
+                <Typography variant="subtitle1">{month}</Typography>
+                <Typography variant="h2">{number}</Typography>
+                <Typography variant="body1">{day}</Typography>
               </Box>
-            </Link>}
-          </Paper>
-          <Box style={actionBoxStyle}>
-            <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
-              <KeyboardArrowDownIcon />
-            </IconButton>
-          </Box>
-        </CardContainer>
-      </ListItem>
-      {open && <ActivityCardActions activity={activity} />}
-    </Grid>
+              <Box style={detailsStyle}>
+                <CustomChip
+                  label={activity.type}
+                  size="small"
+                  variant="outlined"
+                  style={chipStyle}
+                />
+                <ListItemText
+                  primary={activity.description}
+                  secondary={activity.total}
+                />
+              </Box>
+              {showUser && (
+                <Link
+                  to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}
+                >
+                  <Box style={userInfoStlye}>
+                    <Avatar src={activity?.user?.avatar} />
+                    <Typography
+                      style={{ textAlign: "center" }}
+                      variant="subtitle1"
+                    >
+                      {activity?.user?.firstName} {activity?.user?.lastName}
+                    </Typography>
+                  </Box>
+                </Link>
+              )}
+            </Paper>
+            <Box style={actionBoxStyle}>
+              <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+                <KeyboardArrowDownIcon />
+              </IconButton>
+            </Box>
+          </CardContainer>
+        </ListItem>
+        {open && <ActivityCardActions activity={activity} />}
+      </Grid>
     </>
-  )
+  );
 }
 
 export default ActivityCard

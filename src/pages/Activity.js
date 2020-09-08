@@ -15,9 +15,9 @@ const Activity = () => {
   const { pending, approved } = useSelector(state => state.auth).activities
 
   const statsListItems = [
-    { label: translation.approved, big: approved.toFixed(1) },
-    { label: translation.pending, big: pending.toFixed(1) },
-  ]
+    { label: translation.approved, big: approved.toFixed(1), marker: "#4caf50" },
+    { label: translation.pending, big: pending.toFixed(1), marker: "#e15757" },
+  ];
 
   return (
     <>

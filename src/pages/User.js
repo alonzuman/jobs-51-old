@@ -26,9 +26,19 @@ const User = ({ match }) => {
   useEffect(() => { dispatch(getUser(uid)) }, [])
 
   const items = [
-    { label: translation.approved, big: user?.activities?.approved.toFixed(1), link: `/users/${uid}/activities` },
-    { label: translation.pending, big: user?.activities?.pending.toFixed(1) , link: `/users/${uid}/activities` }
-  ]
+    {
+      label: translation.approved,
+      big: user?.activities?.approved.toFixed(1),
+      link: `/users/${uid}/activities`,
+      marker: "#4caf50",
+    },
+    {
+      label: translation.pending,
+      big: user?.activities?.pending.toFixed(1),
+      link: `/users/${uid}/activities`,
+      marker: "#e15757",
+    },
+  ];
 
   return (
     <>
