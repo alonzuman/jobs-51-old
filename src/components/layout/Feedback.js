@@ -11,7 +11,7 @@ const Feedback = () => {
   const feedbackContainer = {
     position: 'fixed',
     bottom: '6.5rem',
-    zIndex: 999,
+    zIndex: 9999999999999,
     width: '100%',
     padding: '1rem'
   }

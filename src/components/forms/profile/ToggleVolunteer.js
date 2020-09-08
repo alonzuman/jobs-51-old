@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { Switch, Typography } from "@material-ui/core";
 import { toggleVolunteer } from '../../../actions/users';
 
-const ToggleVolunteer = ({ style }) => {
+const ToggleVolunteer = ({ style, user }) => {
   const { translation } = useSelector(state => state.theme)
-  const { user } = useSelector(state => state.users)
   const dispatch = useDispatch()
 
   const handleVolunteerChange = () => {

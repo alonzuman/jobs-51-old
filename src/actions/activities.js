@@ -218,9 +218,11 @@ export const deleteActivity = (activity) => async dispatch => {
 
 export const getActivities = () => async dispatch => {
   dispatch({
+    type: 'CLEAR_ACTIVITIES'
+  })
+  dispatch({
     type: 'ACTIVITY_LOADING'
   })
-  console.log('hi')
   try {
     const { region } = store.getState().auth
     const { filters } = store.getState().activities

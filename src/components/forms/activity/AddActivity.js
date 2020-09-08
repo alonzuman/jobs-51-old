@@ -13,13 +13,12 @@ const AddActivity = () => {
   const { uid, phone, region, avatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { loading, types } = useSelector(state => state.activities)
+  const [total, setTotal] = useState('')
   const [activity, setActivity] = useState({
     type: '',
     description: '',
     region: region ? region : '',
     date: '2020-08-10',
-    startHour: '10:00',
-    endHour: '17:30',
     approved: false,
     user: {
       firstName: firstName ? firstName : '',
@@ -45,16 +44,21 @@ const AddActivity = () => {
   }
 
   const handleChange = e => {
-    const totalHours = calcHours(activity['startHour'], activity['endHour'], activity['date'])
     setActivity({
       ...activity,
       [e.target.name]: e.target.value,
-      total: totalHours
     })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
+    const totalInt = parseFloat(total)
+    if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number') {
+      return dispatch(setFeedback({
+        type: 'error',
+        msg: 'invalidInput'
+      }))
+    }
     if (activity['type'].trim().length === 0) {
       return dispatch(setFeedback({
         type: 'error',
@@ -66,48 +70,108 @@ const AddActivity = () => {
         msg: 'hoursNoGood'
       }))
     }
-    dispatch(addActivity(activity))
+    dispatch(addActivity({
+      ...activity,
+      total: totalInt
+    }))
   }
 
   return (
-    <form className='mt-1' onSubmit={handleSubmit}>
+    <form className="mt-1" onSubmit={handleSubmit}>
       {!types && <CircularProgress />}
-      {types &&
-      <>
-        <FormControl variant="outlined">
-          <InputLabel>{translation.region}</InputLabel>
-          <Select disabled={region ? true : false} value={activity['region']} name='region' onChange={handleRegionChange} label={region ? region : translation.selectRegion}>
-            {regions.map((region, index) => <MenuItem key={index} value={region}>{region}</MenuItem>)}
-          </Select>
-          { region && <Typography variant='subtitle1'>{translation.changeRegionContact}</Typography> }
-        </FormControl>
-        <InputLabel style={{ marginBottom: '.5rem' }}>{translation.type}</InputLabel>
-        <Grid container spacing={1}>
-          {types?.map((type, index) => <Grid key={index} item ><CustomChip onClick={() => setActivity({ ...activity, type })} label={type} color={activity['type'] === type ? 'primary' : 'default'} /></Grid>)}
-        </Grid>
-        <br />
-        <FormControl>
-          <TextField required label={translation.description} variant='outlined' name='description' value={activity['description']} onChange={handleChange} />
-        </FormControl>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <FormControl>
-              <TextField InputLabelProps={{shrink: true}} type='time' required label={translation.startHour} variant='outlined' name='startHour' value={activity['startHour']} onChange={handleChange} />
-            </FormControl>
+      {types && (
+        <>
+          <FormControl variant="outlined">
+            <InputLabel>{translation.region}</InputLabel>
+            <Select
+              disabled={region ? true : false}
+              value={activity["region"]}
+              name="region"
+              onChange={handleRegionChange}
+              label={region ? region : translation.selectRegion}
+            >
+              {regions.map((region, index) => (
+                <MenuItem key={index} value={region}>
+                  {region}
+                </MenuItem>
+              ))}
+            </Select>
+            {region && (
+              <Typography variant="subtitle1">
+                {translation.changeRegionContact}
+              </Typography>
+            )}
+          </FormControl>
+          <InputLabel style={{ marginBottom: ".5rem" }}>
+            {translation.type}
+          </InputLabel>
+          <Grid container spacing={1}>
+            {types?.map((type, index) => (
+              <Grid key={index} item>
+                <CustomChip
+                  onClick={() => setActivity({ ...activity, type })}
+                  label={type}
+                  color={activity["type"] === type ? "primary" : "default"}
+                />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={6}>
-            <FormControl>
-              <TextField InputLabelProps={{ shrink: true }} type='time' required label={translation.endHour} variant='outlined' name='endHour' value={activity['endHour']} onChange={handleChange} />
-            </FormControl>
+          <br />
+          <FormControl>
+            <TextField
+              required
+              label={translation.description}
+              variant="outlined"
+              name="description"
+              value={activity["description"]}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <FormControl>
+                <TextField
+                  type="number"
+                  required
+                  step='.01'
+                  value={total}
+                  label={translation.totalHours}
+                  variant="outlined"
+                  onChange={e => setTotal(e.target.value)}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl>
+                <TextField
+                  InputLabelProps={{ shrink: true }}
+                  type="date"
+                  required
+                  label={translation.date}
+                  variant="outlined"
+                  name="date"
+                  value={activity["date"]}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Grid>
           </Grid>
-        </Grid>
-        <FormControl>
-          <TextField InputLabelProps={{ shrink: true }} type='date' required label={translation.date} variant='outlined' name='date' value={activity['date']} onChange={handleChange} />
-        </FormControl>
-        <Button className='button-style' color='primary' variant='contained' type='submit' >{loading ? <CircularProgress className='button-spinner' /> : translation.addActivity}</Button>
-      </>}
+          <Button
+            className="button-style"
+            color="primary"
+            variant="contained"
+            type="submit"
+          >
+            {loading ? (
+              <CircularProgress className="button-spinner" />
+            ) : (
+              translation.addActivity
+            )}
+          </Button>
+        </>
+      )}
     </form>
-  )
+  );
 }
 
 export default AddActivity

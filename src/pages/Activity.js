@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Typography, Grid } from '@material-ui/core'
+import { Paper, Typography, Grid, CircularProgress } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import { openDialog } from '../actions/dialogs'
@@ -8,6 +8,7 @@ import TopBar from '../components/layout/TopBar'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
 import PageContainer from '../components/layout/PageContainer'
 import StatsList from '../components/lists/StatsList'
+import CircularProgressWithLabel from '../components/forms/CircularProgressWithLabel'
 
 const Activity = () => {
   const dispatch = useDispatch()

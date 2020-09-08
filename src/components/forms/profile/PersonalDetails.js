@@ -5,6 +5,7 @@ import AddChips from '../AddChips'
 import { addPersonalDetails, toggleLookingForJob } from '../../../actions'
 import ToggleLookingForJob from './ToggleLookingForJob'
 import PaperContainer from '../../layout/PaperContainer'
+import ToggleVolunteer from './ToggleVolunteer'
 
 const PersonalDetails = () => {
   const authState = useSelector(state => state.auth)
@@ -31,6 +32,7 @@ const PersonalDetails = () => {
       <form onSubmit={handleSubmit}>
         {!serviceYear && <Typography variant='body1'>{translation.lookingForJobFillDetails}</Typography>}
         <ToggleLookingForJob />
+        <ToggleVolunteer user={authState} />
         <br />
         <Grid container spacing={1}>
           <Grid item xs={6}>

@@ -8,6 +8,7 @@ import CardContainer from './CardContainer';
 import CustomChip from './CustomChip';
 import { Link } from 'react-router-dom';
 import CardMarker from './CardMarker';
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 
 const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
@@ -82,7 +83,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
                 />
                 <ListItemText
                   primary={activity.description}
-                  secondary={activity.total}
+                  secondary={<span className='flex align__center'><AccessTimeIcon style={{ height: '.75rem', width: '.75rem', marginLeft: '.25rem', marginBottom: '.1rem' }} />{activity.total}</span>}
                 />
               </Box>
               {showUser && (

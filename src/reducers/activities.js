@@ -20,6 +20,11 @@ export const activitiesReducer = (state = initialState, action) => {
         activities: [payload.newActivity, ...state.activities],
         loading: false
       }
+    case 'CLEAR_ACTIVITIES':
+      return {
+        ...state,
+        activities: []
+      }
     case 'SET_ACTIVITIES':
       return {
         ...state,
