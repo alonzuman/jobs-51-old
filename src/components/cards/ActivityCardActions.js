@@ -5,7 +5,7 @@ import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
 import ApprovalBox from '../dialogs/ApprovalBox'
 
-const ActivityCardActions = ({ activity }) => {
+const ActivityCardActions = ({ activity, style }) => {
   const [approved, setApproved] = useState(activity.approved)
   const [disabled, setDisabled] = useState(false)
   const [approvalOpen, setApprovalOpen] = useState(false)
@@ -36,7 +36,8 @@ const ActivityCardActions = ({ activity }) => {
   const boxStyle = {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'space-between'
+    alignItems: 'space-between',
+    ...style
   }
 
   return (

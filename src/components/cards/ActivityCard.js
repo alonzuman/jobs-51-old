@@ -109,7 +109,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
             </Box>
           </CardContainer>
         </ListItem>
-        {open && <ActivityCardActions activity={activity} />}
+        {open && <ActivityCardActions style={{ marginTop: '.5rem' }} activity={activity} />}
       </Grid>
     </>
   );
