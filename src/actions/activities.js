@@ -220,6 +220,7 @@ export const getActivities = () => async dispatch => {
   dispatch({
     type: 'ACTIVITY_LOADING'
   })
+  console.log('hi')
   try {
     const { region } = store.getState().auth
     const { filters } = store.getState().activities

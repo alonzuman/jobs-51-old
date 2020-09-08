@@ -119,12 +119,12 @@ export const getUserAndActivities = (uid) => async dispatch => {
     let activities = []
     activitySnapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
     dispatch({
+      type: "SET_ACTIVITIES",
+      payload: { activities },
+    });
+    dispatch({
       type: 'SET_USER_PAGE',
       payload: { ...user }
-    })
-    dispatch({
-      type: 'SET_ACTIVITIES',
-      payload: { activities }
     })
   } catch (error) {
     console.log(error)
@@ -135,5 +135,65 @@ export const getUserAndActivities = (uid) => async dispatch => {
       type: 'error',
       msg: 'ServerError'
     }))
+  }
+}
+
+export const toggleVolunteer = ({ uid, currentValue }) => async dispatch => {
+  dispatch({
+    type: 'USER_LOADING'
+  })
+  try {
+    await usersRef.doc(uid).update('volunteer', currentValue)
+    dispatch({
+      type: 'TOGGLE_VOLUNTEER',
+      payload: { uid, currentValue }
+    })
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'Success'
+    }))
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "USER_STOP_LOADING",
+    });
+    dispatch(
+      setFeedback({
+        type: "error",
+        msg: "ServerError",
+      })
+    );
+  }
+}
+
+export const toggleRegion = ({ uid, region }) => async dispatch => {
+  dispatch({
+    type: 'USER_LOADING'
+  })
+  try {
+    await usersRef.doc(uid).update('region', region)
+    dispatch({
+      type: 'UPDATE_USER',
+      payload: {
+        region
+      }
+    })
+    dispatch(
+      setFeedback({
+        type: "success",
+        msg: "Success",
+      })
+    );
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "USER_STOP_LOADING",
+    });
+    dispatch(
+      setFeedback({
+        type: "error",
+        msg: "ServerError",
+      })
+    );
   }
 }

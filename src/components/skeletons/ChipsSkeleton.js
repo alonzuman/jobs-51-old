@@ -8,11 +8,11 @@ const skeletonStyle = {
   borderRadius: '1rem'
 }
 
-const ChipsSkeleton = ({ count = 3 }) => {
+const ChipsSkeleton = ({ style, count = 3 }) => {
   const arr = [...Array(count)]
 
   return (
-    <Grid container spacing={1}>
+    <Grid style={style} container spacing={1}>
       {arr.map((x, i) => <Grid key={i} item><Skeleton variant='rect' style={skeletonStyle} /></Grid>)}
     </Grid>
   )

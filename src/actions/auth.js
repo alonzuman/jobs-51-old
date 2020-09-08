@@ -261,7 +261,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
   }
 }
 
-export const toggleLookingForJob = ({ uid, currentValue, user }) => async dispatch => {
+export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => {
   dispatch({
     type: 'USER_LOADING'
   })

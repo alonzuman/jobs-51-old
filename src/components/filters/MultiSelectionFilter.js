@@ -36,10 +36,6 @@ const MultiSelectionFilter = ({ type }) => {
     dispatch(closeDialogs())
   }
 
-  const chipStyle = {
-    backgroundColor: theme.palette.background.dark
-  }
-
   return (
     <div>
       {Object.keys(selections).length === 0 && <ChipsSkeleton />}
@@ -48,7 +44,7 @@ const MultiSelectionFilter = ({ type }) => {
           if (Object.values(selections)[index] > 0) {
             return (
               <Grid key={index} item>
-                <CustomChip style={chipStyle} onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]}`} />
+                <CustomChip onClick={() => handleFilterClick(filter)} color={filters.includes(filter) ? 'primary' : 'default'} label={`${Object.keys(selections)[index]}`} />
               </Grid>
             )
           }

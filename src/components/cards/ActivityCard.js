@@ -76,7 +76,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
               />
             </Box>
             {showUser &&
-            <Link to={checkPermissions(role) >= 5 && `/users/${activity.uid}`}>
+            <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
               <Box style={userInfoStlye}>
                 <Avatar src={activity?.user?.avatar} />
                 <Typography style={{ textAlign: 'center' }} variant='subtitle1'>{activity?.user?.firstName} {activity?.user?.lastName}</Typography>

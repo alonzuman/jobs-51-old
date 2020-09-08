@@ -49,7 +49,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
             {selections.map((selection, index) => {
               return (
                 <Grid key={index} item>
-                  <Chip
+                  <CustomChip
                     color={filter === selection ? 'primary' : 'default'}
                     label={translation[selection]}
                     onClick={() => setFilter(selection)}

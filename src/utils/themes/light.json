@@ -10,6 +10,9 @@
     "secondary": {
       "main": "#E89C68"
     },
+    "default": {
+      "main": "f8f8f8"
+    },
     "border": {
       "light": "#f8f8f8",
       "main": "#f8f8f8",

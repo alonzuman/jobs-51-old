@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { changeUserRole } from '../../../actions/users'
 import { Skeleton } from '@material-ui/lab'
 
-const roles = ['pending', 'user', 'volunteer', 'manager', 'moderator', 'admin']
+const roles = ['pending', 'user', 'manager', 'moderator', 'admin']
 
 const UserRoleActions = () => {
   const { translation } = useSelector(state => state.theme)

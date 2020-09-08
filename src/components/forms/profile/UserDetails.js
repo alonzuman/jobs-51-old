@@ -35,8 +35,8 @@ const UserDetails = () => {
   const handleSubmit = e => {
     e.preventDefault()
     const user = {
-      firstName,
-      lastName,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       phone,
       avatar: avatar.length > 0 ? avatar : authState.avatar
     }
@@ -63,7 +63,7 @@ const UserDetails = () => {
           <Box style={boxStyle}>
             {uploading && <CircularProgressWithLabel value={progress} />}
             {!uploading && <FileUploader label={translation.updatePhoto} setProgress={setProgress} fileName={authState.avatar || uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
-            {(authState?.avatar?.trim().length > 0 || avatar?.trim().length > 0) && <Avatar style={avatarStyle} src={authState.avatar || avatar} alt={authState.firstName} />}
+            {(authState?.avatar?.length > 0 || avatar?.length > 0) && <Avatar style={avatarStyle} src={authState.avatar || avatar} alt={authState.firstName} />}
           </Box>
           <TextField disabled type='email' required variant='outlined' label={translation.email} value={email} onChange={e => setEmail(e.target.value)} />
           <Grid container spacing={1}>

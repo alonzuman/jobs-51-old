@@ -12,10 +12,6 @@ a:hover {
   text-decoration: none!important;
 }
 
-form {
-  margin: 1rem 0 0 0;
-}
-
 .MuiCardContent-root:last-child {
   padding-bottom: 1rem!important;
 }

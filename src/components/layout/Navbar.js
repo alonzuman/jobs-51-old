@@ -16,7 +16,7 @@ import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountO
 import { checkPermissions } from '../../utils'
 
 const Navbar = () => {
-  const { role } = useSelector(state => state.auth)
+  const { role, volunteer } = useSelector(state => state.auth)
   const { theme, translation } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
@@ -41,7 +41,7 @@ const Navbar = () => {
       <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
         <BottomNavigationAction label={translation.main} component={Link} to='/home' value='/home' icon={value === '/home' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
         <BottomNavigationAction label={translation.saved} component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
-        {checkPermissions(role) >= 2 && <BottomNavigationAction label={translation.activity} component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
+        {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
         <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
         {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
       </BottomNavigation>

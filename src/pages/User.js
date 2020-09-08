@@ -12,6 +12,8 @@ import StatsList from '../components/lists/StatsList'
 import ImageLightbox from '../components/general/ImageLightbox'
 import PaperContainer from '../components/layout/PaperContainer'
 import CustomChip from '../components/cards/CustomChip'
+import ToggleVolunteer from '../components/forms/profile/ToggleVolunteer'
+import ChangeRegion from '../components/forms/profile/ChangeRegion'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -24,8 +26,8 @@ const User = ({ match }) => {
   useEffect(() => { dispatch(getUser(uid)) }, [])
 
   const items = [
-    { label: translation.approved, big: user?.activities?.approved, link: `/users/${uid}/activities` },
-    { label: translation.pending, big: user?.activities?.pending, link: `/users/${uid}/activities` }
+    { label: translation.approved, big: user?.activities?.approved.toFixed(1), link: `/users/${uid}/activities` },
+    { label: translation.pending, big: user?.activities?.pending.toFixed(1) , link: `/users/${uid}/activities` }
   ]
 
   return (
@@ -40,7 +42,7 @@ const User = ({ match }) => {
       </TopBar>
       <PageContainer className='flex justify__between align__center flex__column'>
         {user?.lookingForJob && <CustomChip style={{marginBottom: '1rem'}} color='primary' label={user.lookingForJob ? translation.iAmLookingForAJob : ''} />}
-        {user?.role === 'volunteer' &&
+        {user?.volunteer &&
         <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{!loading ? translation.IVolunteerIn : <Skeleton height={18} width={80} />}</Typography>
           <Typography variant='body1'>{!loading ? (user?.region ? user?.region : '') : <Skeleton height={32} width={120}/> }</Typography>
@@ -65,17 +67,27 @@ const User = ({ match }) => {
           <Typography variant='subtitle1'>{translation.lastPosition}</Typography>
           <Typography variant='body1'>{user?.lastPosition}</Typography>
         </PaperContainer>) : <Skeleton height={32} width={110} />}
-        {!loading ? user?.skills &&
+        {!loading ? user?.skills && user.skills.length > 0 &&
         <PaperContainer style={{ marginBottom: '1rem' }}>
           <Typography variant='subtitle1'>{translation.skillsInterestedIn}</Typography>
           <Grid container spacing={1}>
             {user?.skills?.map((skill, index) => <Grid item key={index}><Chip label={skill} /></Grid>)}
           </Grid>
-        </PaperContainer> : <ChipsSkeleton count={4} />}
-        <PaperContainer style={{ marginBottom: '1rem' }}>
-          <Typography variant='subtitle1'>{translation.userType}</Typography>
-          {checkPermissions(role) >= 5 && <UserRoleActions />}
-        </PaperContainer>
+        </PaperContainer>:
+        <ChipsSkeleton style={{ marginBottom: '.5rem', marginTop: '.5rem' }} count={4} />}
+        {checkPermissions(role) >= 3 && <PaperContainer style={{ marginBottom: '1rem' }}>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <Typography variant='subtitle1'>{translation.userType}</Typography>
+              <UserRoleActions />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant='subtitle1'>{translation.region}</Typography>
+              <ChangeRegion />
+            </Grid>
+          </Grid>
+          <ToggleVolunteer />
+        </PaperContainer>}
         <ImageLightbox open={imageOpen} onClose={() => setImageOpen(false)} imgUrl={user?.avatar} />
       </PageContainer>
     </>

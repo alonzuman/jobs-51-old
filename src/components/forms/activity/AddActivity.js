@@ -70,7 +70,7 @@ const AddActivity = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='mt-1' onSubmit={handleSubmit}>
       {!types && <CircularProgress />}
       {types &&
       <>

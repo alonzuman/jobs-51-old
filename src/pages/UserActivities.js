@@ -26,7 +26,7 @@ const UserActivities = ({ match }) => {
       {!loading ? <Avatar style={{ cursor: 'pointer' }} className='avatar__md' src={user?.avatar} alt={user?.firstName}>{user?.firstName?.charAt(0)}</Avatar> : <Skeleton variant='circle' className='avatar__md' />}
       </TopBar>
       <PageContainer>
-        <ActivitiesList />
+        <ActivitiesList type='otherUser' />
       </PageContainer>
     </>
   )

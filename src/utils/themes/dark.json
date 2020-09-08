@@ -10,17 +10,18 @@
     "secondary": {
       "main": "#E89C68"
     },
+    "default": {
+      "main": "#808080"
+    },
     "border": {
       "light": "#424242",
       "main": "#535353",
       "dark": ""
     },
     "background": {
-      "chip": "#808080",
-      "light": "#616161",
-      "paper": "#616161",
-      "main": "#424242",
-      "dark": "#424242"
+      "light": "#484848",
+      "paper": "#484848",
+      "main": "#303030"
     }
   },
   "typography": {

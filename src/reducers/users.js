@@ -19,11 +19,27 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+    case 'UPDATE_USER':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...payload
+        }
+      }
     case 'SET_USER_PAGE':
       return {
         ...state,
         user: { ...payload },
         loading: false
+      }
+    case 'TOGGLE_VOLUNTEER':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          volunteer: payload.currentValue
+        }
       }
     case 'SET_USERS':
       return {

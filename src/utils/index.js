@@ -1,14 +1,14 @@
 import store from '../store';
+import { db } from '../firebase';
 const { theme } = store.getState().theme
 
 export const checkPermissions = (role) => {
   switch (role) {
     case 'pending': return 0;
     case 'user': return 1;
-    case 'volunteer': return 2;
-    case 'manager': return 3;
-    case 'moderator': return 4;
-    case 'admin': return 5;
+    case 'manager': return 2;
+    case 'moderator': return 3;
+    case 'admin': return 4;
     default: return 0;
   }
 }
@@ -43,7 +43,6 @@ export const calcHours = (startHour, endHour, date) => {
 
 export const dateFilters = () => {
   const day = 86400000
-  // TODO fix the calculations
   return [
     { label: 'היום', value: Date.now() - (2 * day) },
     { label: 'השבוע', value: Date.now() - (8 * day) },
@@ -66,3 +65,19 @@ export const translateDate = (date) => {
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+// export const fixDB = async () => {
+//   const ref = await db.collection('users').get()
+//   let users = []
+//   ref.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
+//   console.log(users)
+//   users.forEach(async user => {
+//     await db.collection('users').doc(user.id).set({
+//       ...user,
+//       volunteer: user.role === 'volunteer' || user.role === 'admin' || user.role === 'moderator' || user.role === 'manager' ? true : false
+//     }, { merge: true })
+//   })
+// }
+
+// fixDB()
+

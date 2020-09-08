@@ -13,7 +13,7 @@ const ActivitiesList = ({ type = 'personal' }) => {
   useEffect(() => {
     if (type === 'personal') {
       dispatch(getMyActivities())
-    } else {
+    } else if (type !== 'otherUser') {
       dispatch(getActivities())
     }
   }, [filters, dispatch, type])
