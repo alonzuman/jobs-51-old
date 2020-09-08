@@ -194,7 +194,7 @@ const User = ({ match }) => {
         ) : (
           <Skeleton height={32} width={110} />
         )}
-        {!loading ? (
+        {!editing &&!loading ? (
           user?.skills &&
           user.skills.length > 0 && (
             <PaperContainer style={{ marginBottom: "1rem" }}>
@@ -211,7 +211,7 @@ const User = ({ match }) => {
             </PaperContainer>
           )
         ) : (
-          <ChipsSkeleton
+          !editing && <ChipsSkeleton
             style={{ marginBottom: ".5rem", marginTop: ".5rem" }}
             count={4}
           />
