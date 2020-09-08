@@ -133,7 +133,7 @@ const AddActivity = () => {
                 <TextField
                   type="number"
                   required
-                  step='.01'
+                  step='.001'
                   value={total}
                   label={translation.totalHours}
                   variant="outlined"
