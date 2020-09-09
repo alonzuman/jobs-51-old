@@ -31,6 +31,7 @@ import Events from './pages/Events'
 import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
 import UserActivities from './pages/UserActivities'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Feedback />
           <Switch>
             <ProtectedRoute exact path='/home' component={Home} />
+            <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
             <ProtectedRoute exact path='/jobs' component={Jobs} />
             <ProtectedRoute exact path='/jobs/:id' component={Job} />
             <ProtectedRoute exact path='/events' component={Events} />
