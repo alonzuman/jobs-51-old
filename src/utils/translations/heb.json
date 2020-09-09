@@ -163,5 +163,7 @@
   "adminPage": "ניהול",
   "totalHours": "סה״כ שעות",
   "totalHoursInRegion": "סיכום שעות הפעילות שלי במחוז",
-  "invalidInput": "מספר שעות אינו תקין, אנא נסו שנית"
+  "invalidInput": "מספר שעות אינו תקין, אנא נסו שנית",
+  "exportActivities": "ייצוא שעות התנדבות",
+  "download": "הורדה"
 }

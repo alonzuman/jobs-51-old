@@ -131,8 +131,9 @@ const AddActivity = () => {
             <Grid item xs={6}>
               <FormControl>
                 <TextField
-                  type="number"
-                  step='.001'
+                  step='any'
+                  min='1'
+                  max='24'
                   value={total}
                   label={translation.totalHours}
                   variant="outlined"

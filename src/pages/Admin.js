@@ -13,6 +13,7 @@ const Admin = () => {
   const items = [
     { label: translation.manageUsers, big: <PeopleAltIcon />, link: '/admin/users' },
     { label: translation.manageActivities, big: <AssignmentIcon />, link: '/admin/activities' },
+    { label: translation.exportActivities, big: <AssignmentIcon />, link: '/admin/export-activities' },
   ]
 
   return (
