@@ -53,7 +53,7 @@ const AddActivity = () => {
   const handleSubmit = e => {
     e.preventDefault()
     const totalInt = parseFloat(total)
-    if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number') {
+    if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number' || !totalInt) {
       return dispatch(setFeedback({
         type: 'error',
         msg: 'invalidInput'
@@ -132,7 +132,6 @@ const AddActivity = () => {
               <FormControl>
                 <TextField
                   type="number"
-                  required
                   step='.001'
                   value={total}
                   label={translation.totalHours}
