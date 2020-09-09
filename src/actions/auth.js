@@ -45,7 +45,7 @@ export const signInWithProvider = (provider) => async dispatch => {
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
       const fetchedUser = await usersRef.doc(uid).get()
       const user = fetchedUser.data()
-      if (!user) {
+      if (!user?.uid || !user) {
         const newUser = {
           uid,
           email,
@@ -58,7 +58,7 @@ export const signInWithProvider = (provider) => async dispatch => {
             pending: 0,
             approved: 0
           },
-          role: 'pending',
+          role: user?.role ? user?.role : 'pending',
           dateCreated: Date.now()
         }
         await usersRef.doc(uid).set(newUser, { merge: true })

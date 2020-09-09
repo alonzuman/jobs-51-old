@@ -18,3 +18,4 @@ export const app = firebase.initializeApp({
 export const storage = app.storage()
 export const db = app.firestore()
 export const analytics = app.analytics()
+export const auth = app.auth()
