@@ -7,7 +7,7 @@ const CardMarker = ({ color, style }) => {
     marginRight: "-.25rem",
     borderRadius: ".5rem",
     width: ".5rem",
-    height: "2rem",
+    height: "1.5rem",
     backgroundColor: color,
     ...style
   };

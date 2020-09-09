@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import CardMarker from '../cards/CardMarker'
 
 const StatsList = ({ items }) => {
+  const { theme } = useSelector(state => state.theme)
+
   const statsPaperStyle = {
     width: '100%',
     height: 120,

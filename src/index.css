@@ -294,6 +294,10 @@ a:hover {
   min-width: fit-content!important;
 }
 
+.p-5 {
+  padding: .5rem!important;
+}
+
 .p-1 {
   padding: 1rem!important
 }
@@ -353,4 +357,13 @@ a:hover {
 
 .clickable:hover {
   cursor: pointer!important;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar {
+  display: none!important;
+}
+
+.MuiTableContainer-root {
+  -ms-overflow-style: none!important;  /* IE and Edge */
+  scrollbar-width: none!important;  /* Firefox */
 }

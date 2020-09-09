@@ -165,5 +165,9 @@
   "totalHoursInRegion": "סיכום שעות הפעילות שלי במחוז",
   "invalidInput": "מספר שעות אינו תקין, אנא נסו שנית",
   "exportActivities": "ייצוא שעות התנדבות",
-  "download": "הורדה"
+  "download": "הורדה",
+  "all": "הכל",
+  "table": "טבלה",
+  "grid": "רשימה",
+  "noDataToShow": "אין מידע להציג"
 }

@@ -218,9 +218,6 @@ export const deleteActivity = (activity) => async dispatch => {
 
 export const getActivities = () => async dispatch => {
   dispatch({
-    type: 'CLEAR_ACTIVITIES'
-  })
-  dispatch({
     type: 'ACTIVITY_LOADING'
   })
   try {
@@ -228,11 +225,11 @@ export const getActivities = () => async dispatch => {
     const { filters } = store.getState().activities
     let activities = []
     let snapshot
-    if (filters.regions && filters.status) {
+    if (filters.regions && filters.status && filters.status !== 'all') {
       snapshot = await activitiesRef.where('region', 'in', filters.regions).where('approved', '==', filters.status === 'approved').orderBy('dateCreated', 'desc').get()
     } else if (filters.regions) {
       snapshot = await activitiesRef.where('region', 'in', filters.regions).orderBy('dateCreated', 'desc').get()
-    } else if (filters.status) {
+    } else if (filters.status && filters.status !== 'all') {
       snapshot = await activitiesRef.where('approved', '==', filters.status === 'approved').where('region', 'in', [region]).orderBy('dateCreated', 'desc').get()
     } else {
       snapshot = await activitiesRef.where('region', '==', region).orderBy('dateCreated', 'desc').get()
@@ -254,5 +251,12 @@ export const getActivities = () => async dispatch => {
 export const clearActivityFilters = () => async dispatch => {
   dispatch({
     type: 'CLEAR_ACTIVITY_FILTERS'
+  })
+}
+
+export const changeView = (type) => async dispatch => {
+  dispatch({
+    type: 'CHANGE_VIEW',
+    payload: type
   })
 }

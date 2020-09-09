@@ -115,38 +115,12 @@ const User = ({ match }) => {
           />
         )}
         {!editing && user?.volunteer && user?.region && (
-          <PaperContainer style={{ marginBottom: "1rem" }}>
-            {!loading ? (
-              <>
-                <Typography
-                  style={{ marginBottom: ".5rem" }}
-                  variant="subtitle1"
-                >
-                  {!loading ? (
-                    `${translation.totalHoursInRegion} ${user?.region}`
-                  ) : (
-                    <Skeleton height={18} width={80} />
-                  )}
-                </Typography>
-                <StatsList items={items} />
-              </>
-            ) : (
-              <div className="flex justify__between align__center">
-                <Skeleton
-                  className="border__radius_1"
-                  style={{ marginLeft: "1rem" }}
-                  height={180}
-                  width={"100%"}
-                />
-                <Skeleton
-                  className="border__radius_1"
-                  height={180}
-                  width={"100%"}
-                />
-              </div>
-            )}
-          </PaperContainer>
-        )}
+          <div className='mb-1'>
+            <Typography className='mb-1' variant="body1">
+              {`${translation.totalHoursInRegion} ${user?.region}`}
+            </Typography>
+          <StatsList items={items} />
+          </div>)}
         {!editing && (
           <PaperContainer style={{ marginBottom: "1rem" }}>
             <Typography variant="subtitle1">

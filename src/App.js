@@ -31,7 +31,6 @@ import Events from './pages/Events'
 import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
 import UserActivities from './pages/UserActivities'
-import ExportActivities from './pages/admin/ExportActivities'
 
 
 function App() {
@@ -63,7 +62,6 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
-            <ProtectedRoute exact requiredRole='manager' path='/admin/export-activities' component={ExportActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/users/:id' component={User} />
             <Route exact path='/' component={LandingPage} />
           </Switch>

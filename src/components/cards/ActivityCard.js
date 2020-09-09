@@ -45,7 +45,8 @@ const ActivityCard = ({ activity, showUser = true }) => {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: '1rem'
+    padding: '1rem',
+    minWidth: 80
   }
 
   const iconStyle = {
@@ -66,10 +67,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
           <CardContainer>
             <Paper style={paperStyle} elevation={0}>
               <Box style={dateStyle}>
-                <CardMarker
-                  style={{ bottom: "3.5rem" }}
-                  color={activity.approved ? "#4caf50" : "#e15757"}
-                />
+                <CardMarker color={activity.approved ? "#4caf50" : "#e15757"} />
                 <Typography variant="subtitle1">{month}</Typography>
                 <Typography variant="h2">{number}</Typography>
                 <Typography variant="body1">{day}</Typography>
@@ -93,7 +91,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
                   <Box style={userInfoStlye}>
                     <Avatar src={activity?.user?.avatar} />
                     <Typography
-                      style={{ textAlign: "center" }}
+                      style={{ marginTop: '.25rem', textAlign: "center" }}
                       variant="subtitle1"
                     >
                       {activity?.user?.firstName} {activity?.user?.lastName}

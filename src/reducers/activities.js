@@ -2,6 +2,7 @@ const initialState = {
   activities: [],
   types: [],
   filters: {},
+  view: '',
   loading: false
 }
 
@@ -53,6 +54,11 @@ export const activitiesReducer = (state = initialState, action) => {
         ...state,
         filters: {},
         loading: false
+      }
+    case 'CHANGE_VIEW':
+      return {
+        ...state,
+        view: payload
       }
     case 'ACITIVITIES_STOP_LOADING':
       return {
