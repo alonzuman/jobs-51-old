@@ -39,7 +39,7 @@ const ChangeRegion = () => {
         ))}
       </Select>
       {button &&
-        <Button onClick={() => handleSubmit()}>
+        <Button className='mt-1' onClick={() => handleSubmit()}>
           {loading ? <CircularProgress className="button-spinner" /> : translation.saveChanges}
         </Button>}
       </>}

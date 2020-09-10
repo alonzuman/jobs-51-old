@@ -1,5 +1,5 @@
 {
-  "addJob": "פרסום עבודה",
+  "addJob": "פרסום משרה",
   "companyName": "שם החברה",
   "type": "סוג",
   "location": "מיקום",
@@ -42,7 +42,7 @@
   "preferredLocation": "איזור מועדף לעבודה",
   "skills": "תחום ותפקיד רצוי",
   "lastPosition": "משרה אחרונה בה עבדתי",
-  "serviceYear": "שנת שירות ביחידה",
+  "serviceYear": "שנת גיוס ליחידה",
   "approve": "אישור",
   "userDetails": "פרטי התחברות",
   "personalDetails": "פרטים אישיים",

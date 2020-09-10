@@ -45,46 +45,29 @@ const Job = () => {
       <PageContainer>
         <CustomChip
           style={{marginBottom: '1rem'}}
-          label={timeAgo()}
+          label={loading ? <Skeleton width={80} height={18} /> : timeAgo()}
           size="small"
           variant="outlined"
           color="primary"
         />
+        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={300} /> : translation.description}</Typography>
         <PaperContainer style={{ marginBottom: "1rem" }}>
-          <TitleAndBody
-            title={
-              loading ? (
-                <Skeleton height={32} width={300} />
-              ) : (
-                translation.description
-              )
-            }
-            body={
-              loading ? <Skeleton height={48} width={220} /> : job.description
-            }
-          />
+          <Typography variant='body1'>{loading ? <Skeleton height={48} width={220} /> : job.description}</Typography>
         </PaperContainer>
+        <Typography variant="subtitle1">
+          {loading ? <Skeleton height={24} width={220} /> : translation.categories}
+        </Typography>
         <PaperContainer style={{ marginBottom: "1rem" }}>
-          <Typography variant="subtitle1">
-            {loading ? (
-              <Skeleton height={48} width={220} />
-            ) : (
-              translation.categories
-            )}
-          </Typography>
-          {loading ? (
-            <ChipsSkeleton count={3} />
-          ) : (
-            <Grid container spacing={1}>
+          {loading ? <ChipsSkeleton count={3} />:<Grid container spacing={1}>
               {job?.categories?.map((x, i) => (
                 <Grid key={i} item>
                   <CustomChip label={x} />
                 </Grid>
               ))}
-            </Grid>
-          )}
+            </Grid>}
         </PaperContainer>
-        <UserCard label={translation.contactPerson} containerStyle={{ padding: 0 }} user={{ ...job.user, uid: job.uid }} />
+        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={100}/> : translation.contactPerson}</Typography>
+        <UserCard loading={loading} containerStyle={{ padding: 0 }} user={{ ...job.user, uid: job.uid }} />
       </PageContainer>
     </>
   );

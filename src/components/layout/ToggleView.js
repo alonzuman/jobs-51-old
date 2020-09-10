@@ -9,6 +9,7 @@ const options = ['table', 'grid']
 
 const ToggleView = ({ selection }) => {
   const { translation, theme } = useSelector(state => state.theme)
+  const { view } = useSelector(state => state.activities)
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -31,7 +32,7 @@ const ToggleView = ({ selection }) => {
 
   return (
     <div>
-      <CustomChip color={'primary'} onClick={() => setOpen(true)} label={translation.displaySettings} />
+      <CustomChip color={'default'} onClick={() => setOpen(true)} label={translation[view]} />
       <Dialog open={open} onClose={() => setOpen(false)}>
         <div style={dialogTitleStyle}>
           <DialogTitle>{translation.displaySettings}</DialogTitle>

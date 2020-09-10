@@ -16,11 +16,15 @@ import ToggleVolunteer from '../components/forms/profile/ToggleVolunteer'
 import ChangeRegion from '../components/forms/profile/ChangeRegion'
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
+import MailIcon from '@material-ui/icons/Mail';
+import PhoneIcon from '@material-ui/icons/Phone';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import WorkIcon from '@material-ui/icons/Work';
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
   const [editing, setEditing] = useState(false)
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
   const { loading, user } = useSelector(state => state.users)
   const uid = match.url.split('/')[2]
@@ -43,52 +47,30 @@ const User = ({ match }) => {
     },
   ];
 
+  const smallIconStyle = {
+    height: 18,
+    width: 18,
+    marginLeft: '1rem',
+    // color: theme.palette.primary.main
+  }
+
   return (
     <>
       <TopBar
         sticky={true}
         backButton={true}
-        title={
-          !loading ? (
-            `${user?.firstName} ${user?.lastName}`
-          ) : (
-            <Skeleton width={180} />
-          )
-        }
-        subtitle={
-          !loading ? (
-            user.serviceYear ? (
-              `${translation.serviceYear} ${user?.serviceYear}`
-            ) : (
-              ""
-            )
-          ) : (
-            <Skeleton width={100} />
-          )
-        }
+        title={!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
+        subtitle={!loading ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
         actionOnClick={() => setEditing(!editing)}
-        action={
-          checkPermissions(role) > checkPermissions(user?.role) && (
-            <IconButton>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>
-          )
-        }
-      >
-        {!loading ? (
-          <Avatar
-            style={{ cursor: "pointer" }}
-            onClick={user?.avatar ? () => setImageOpen(true) : null}
-            className="avatar__md"
-            src={user?.avatar}
-            alt={user?.firstName}
-          >
+        action={checkPermissions(role) > checkPermissions(user?.role) && <IconButton className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
+        {!loading ?
+          <Avatar style={{ cursor: "pointer" }} onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md" src={user?.avatar} alt={user?.firstName}>
             {user?.firstName?.charAt(0)}
-          </Avatar>
-        ) : (
-          <Skeleton variant="circle" className="avatar__md" />
-        )}
+          </Avatar> :
+          <Skeleton variant="circle" className="avatar__md" />}
       </TopBar>
       <PageContainer className="flex justify__between align__center flex__column">
-        {editing && checkPermissions(role) >= 3 && (
+        {editing && checkPermissions(role) >= 3 &&
           <PaperContainer style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Grid container spacing={1}>
               <Grid item xs={6}>
@@ -105,76 +87,47 @@ const User = ({ match }) => {
               </Grid>
             </Grid>
             <ToggleVolunteer user={user} />
-          </PaperContainer>
-        )}
-        {!editing && user?.lookingForJob && (
+          </PaperContainer>}
+        {!editing && user?.lookingForJob &&
           <CustomChip
             style={{ marginBottom: "1rem" }}
             color="primary"
             label={user.lookingForJob ? translation.iAmLookingForAJob : ""}
-          />
-        )}
-        {!editing && user?.volunteer && user?.region && (
+          />}
+        {!editing && user?.volunteer && user?.region &&
           <div className='mb-1'>
             <Typography className='mb-1' variant="body1">
               {`${translation.totalHoursInRegion} ${user?.region}`}
             </Typography>
-          <StatsList items={items} />
-          </div>)}
-        {!editing && (
-          <PaperContainer style={{ marginBottom: "1rem" }}>
-            <Typography variant="subtitle1">
-              {!editing && !loading ? (
-                translation.contactDetails
-              ) : (
-                <Skeleton height={18} width={70} />
-              )}
-            </Typography>
-            <Typography variant="body1">
-              {!loading ? user?.email : <Skeleton height={32} width={120} />}
-            </Typography>
-            <Typography variant="body1">
-              {!loading ? (
-                user?.phone ? (
-                  user?.phone
-                ) : (
-                  ""
-                )
-              ) : (
-                <Skeleton height={32} width={90} />
-              )}
-            </Typography>
-            {user?.preferredLocation && (
-              <Typography variant="body1">
-                {!loading ? (
-                  user?.preferredLocation
-                ) : (
-                  <Skeleton height={32} width={110} />
-                )}
-              </Typography>
-            )}
-          </PaperContainer>
-        )}
-        {!loading ? (
-          user?.lastPosition &&
-          !editing && (
+          {checkPermissions(role) >= 3 && <StatsList items={items} />}
+          </div>}
+        {!editing &&
+          <>
+            <Typography variant="subtitle1">{!editing && !loading ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
             <PaperContainer style={{ marginBottom: "1rem" }}>
-              <Typography variant="subtitle1">
-                {translation.lastPosition}
-              </Typography>
-              <Typography variant="body1">{user?.lastPosition}</Typography>
+              <Typography variant="body1">{!loading && user.email ? <span className='flex align__center'><MailIcon style={smallIconStyle} /> {user?.email}</span> : <Skeleton height={32} width={120} />}</Typography>
+              <Typography variant="body1">{!loading ? user?.phone ? <span className='flex align__center'><PhoneIcon style={smallIconStyle} /> {user?.phone}</span> : '' : <Skeleton height={32} width={90} />}</Typography>
+            {user?.preferredLocation && <Typography variant="body1">{!loading ? <span className='flex align__center'><LocationCityIcon style={smallIconStyle} /> {user?.preferredLocation}</span> : <Skeleton height={32} width={110} />}</Typography>}
             </PaperContainer>
-          )
-        ) : (
-          <Skeleton height={32} width={110} />
-        )}
-        {!editing &&!loading ? (
-          user?.skills &&
-          user.skills.length > 0 && (
+          </>
+        }
+        {!loading ?
+          user?.lastPosition &&
+          !editing &&
+            <>
+            <Typography variant="subtitle1">
+              {translation.lastPosition}
+            </Typography>
             <PaperContainer style={{ marginBottom: "1rem" }}>
-              <Typography variant="subtitle1">
-                {translation.skillsInterestedIn}
-              </Typography>
+              <Typography variant="body1"><span className='flex align__center'><WorkIcon style={smallIconStyle} />{user?.lastPosition}</span></Typography>
+            </PaperContainer> </>:
+            <Skeleton height={32} width={110} />}
+          {!editing &&!loading ? user?.skills && user.skills.length > 0 &&
+            <>
+            <Typography variant="subtitle1">
+              {translation.skillsInterestedIn}
+            </Typography>
+            <PaperContainer style={{ marginBottom: "1rem" }}>
               <Grid container spacing={1}>
                 {user?.skills?.map((skill, index) => (
                   <Grid item key={index}>
@@ -182,14 +135,11 @@ const User = ({ match }) => {
                   </Grid>
                 ))}
               </Grid>
-            </PaperContainer>
-          )
-        ) : (
+            </PaperContainer> </>:
           !editing && <ChipsSkeleton
             style={{ marginBottom: ".5rem", marginTop: ".5rem" }}
             count={4}
-          />
-        )}
+          />}
         <ImageLightbox
           open={imageOpen}
           onClose={() => setImageOpen(false)}

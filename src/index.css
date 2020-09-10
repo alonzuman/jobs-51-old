@@ -193,6 +193,14 @@ a:hover {
   width: 56px!important;
 }
 
+.m-5 {
+  margin: .5rem!important;
+}
+
+.m-1 {
+  margin: 1rem!important;
+}
+
 .m-0 {
   margin: 0!important;
 }

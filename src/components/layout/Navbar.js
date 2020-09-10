@@ -34,6 +34,8 @@ const Navbar = () => {
     zIndex: 9,
     backgroundColor: theme.palette.background.paper,
     borderTop: `1px solid ${theme.palette.border.main}`,
+    borderTopRightRadius: '1rem',
+    borderTopLeftRadius: '1rem'
   }
 
   if (checkPermissions(role) !== 0) {

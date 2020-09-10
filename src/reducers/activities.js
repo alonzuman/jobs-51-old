@@ -2,7 +2,7 @@ const initialState = {
   activities: [],
   types: [],
   filters: {},
-  view: '',
+  view: 'grid',
   loading: false
 }
 
