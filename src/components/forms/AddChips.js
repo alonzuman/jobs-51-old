@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFilter, removeFilter } from '../../actions/jobs';
 import CustomChip from '../cards/CustomChip';
+import { setFeedback } from '../../actions';
 
 const AddChips = ({ label, chips, setChips, collection }) => {
   const { direction } = useSelector(state => state.theme)
@@ -27,6 +28,19 @@ const AddChips = ({ label, chips, setChips, collection }) => {
     dispatch(removeFilter({ collection, value: chip }))
   }
 
+  const handleChipChange = e => {
+    if (chipToAdd.indexOf("/") > -1) {
+      dispatch(setFeedback({
+        type: 'error',
+        msg: 'forwardSlash'
+      }))
+      return setChipToAdd(chipToAdd.substring(0, chipToAdd.length - 1))
+    } else {
+      return setChipToAdd(e.target.value)
+    }
+  }
+
+
   const boxStyle = {
     display: 'flex',
     alignItems: 'center'
@@ -47,7 +61,7 @@ const AddChips = ({ label, chips, setChips, collection }) => {
   return (
     <div>
       <Box style={boxStyle}>
-        <TextField className='no-margin' value={chipToAdd} onChange={e => setChipToAdd(e.target.value)} label={label} variant='outlined' />
+        <TextField className='no-margin' value={chipToAdd} onChange={handleChipChange} label={label} variant='outlined' />
         <IconButton style={iconButtonStyle} onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>

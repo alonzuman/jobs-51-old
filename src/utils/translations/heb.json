@@ -170,7 +170,8 @@
   "table": "טבלה",
   "grid": "רשימה",
   "noDataToShow": "אין מידע להציג",
-  "privacyPolicy": "מדיניות פרטיות"
+  "privacyPolicy": "מדיניות פרטיות",
+  "forwardSlash": "שדה זה אינו יכול להכיל '/'"
 }
 
 

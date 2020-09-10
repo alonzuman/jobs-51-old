@@ -5,7 +5,7 @@ import { removeFeedback } from '../../actions/feedback'
 
 const Feedback = () => {
   const dispatch = useDispatch()
-  const { translation } = useSelector(state => state.theme)
+  const { translation, direction } = useSelector(state => state.theme)
   const { isOn, msg, type } = useSelector(state => state.feedback)
 
   const feedbackContainer = {
@@ -13,7 +13,8 @@ const Feedback = () => {
     bottom: '6.5rem',
     zIndex: 9999999999999,
     width: '100%',
-    padding: '1rem'
+    padding: '1rem',
+    direction
   }
 
   const feedbackStyle = {
