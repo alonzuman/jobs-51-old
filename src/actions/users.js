@@ -8,7 +8,6 @@ export const getUser = (uid) => async dispatch => {
   dispatch({
     type: 'USERS_LOADING'
   })
-  console.log('loading')
   try {
     const snapshot = await usersRef.doc(uid).get()
     dispatch({
@@ -110,9 +109,8 @@ export const getEmployees = () => async dispatch => {
 }
 
 export const getUserAndActivities = (uid) => async dispatch => {
-  dispatch({
-    type: 'USERS_LOADING'
-  })
+  dispatch({ type: 'ACTIVITY_LOADING' })
+  dispatch({ type: 'USERS_LOADING' })
   try {
     const userSnapshot = await usersRef.doc(uid).get()
     const activitySnapshot = await db.collection('activities').where('uid', '==', uid).get()

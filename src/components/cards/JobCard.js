@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, Chip, ListItem } from '@material-ui/core'
+import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, ListItem } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { setJob, saveJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
@@ -15,7 +15,7 @@ const JobCard = ({ job }) => {
   const { uid, authenticated, savedJobs } = useSelector(state => state.auth)
   const [saved, setSaved] = useState()
   const dispatch = useDispatch()
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
 
   const isSaved = () => savedJobs?.includes(job.id)
 
@@ -26,7 +26,7 @@ const JobCard = ({ job }) => {
 
   useEffect(() => {
     setSaved(isSaved())
-  }, [savedJobs])
+  }, [savedJobs, isSaved])
 
   const handleClick = () => {
     dispatch(openDialog({ type: 'EditJob', title: 'editJob' }))

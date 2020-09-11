@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../actions/users'
-import { Avatar, Box, Typography, Container, Grid, Chip, IconButton } from '@material-ui/core'
+import { Avatar, Typography, Grid, Chip, IconButton } from '@material-ui/core'
 import UserRoleActions from './admin/components/UserRoleActions'
 import TopBar from '../components/layout/TopBar'
 import { Skeleton } from '@material-ui/lab'
@@ -24,13 +24,13 @@ import WorkIcon from '@material-ui/icons/Work';
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
   const [editing, setEditing] = useState(false)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
   const { loading, user } = useSelector(state => state.users)
   const uid = match.url.split('/')[2]
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(getUser(uid)) }, [])
+  useEffect(() => { dispatch(getUser(uid)) }, [dispatch, uid])
 
   const items = [
     {

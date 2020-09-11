@@ -3,17 +3,8 @@ import { Box, Button, CircularProgress } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInWithProvider } from '../../actions'
 
-const signInWithStyle = {
-  marginBottom: '.5rem'
-}
-
 const boxStyle = {
   textAlign: 'center'
-}
-
-const buttonStyle = {
-  padding: '1rem',
-  marginBottom: '.5rem'
 }
 
 const buttonsContainerStyle = {

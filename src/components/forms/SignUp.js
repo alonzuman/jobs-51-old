@@ -67,7 +67,7 @@ const SignUp = () => {
       <Box style={boxStyle}>
         {uploading && <CircularProgressWithLabel value={progress} />}
         {!uploading && <FileUploader setProgress={setProgress} fileName={uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
-        {avatar.trim().length > 0 && <img style={thumbnailStyle} src={avatar} />}
+        {avatar.trim().length > 0 && <img style={thumbnailStyle} src={avatar} alt='User avatar'/>}
       </Box>
       <TextField type='email' required variant='outlined' label={translation.email} value={email} onChange={e => setEmail(e.target.value)} />
       <TextField type='password' required variant='outlined' label={translation.password} value={password} onChange={e => setPassword(e.target.value)} />

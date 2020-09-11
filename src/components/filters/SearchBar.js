@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Button, Box, Popover, Dialog, DialogContent, DialogTitle, IconButton } from '@material-ui/core'
+import { TextField, Button, Box, Dialog, DialogContent, DialogTitle, IconButton } from '@material-ui/core'
 import { setUserFilters } from '../../actions/users'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomChip from '../cards/CustomChip'

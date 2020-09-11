@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Typography, List, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import ActivityCard from '../cards/ActivityCard'
 import CardsSkeletons from '../skeletons/CardsSkeletons'
 import { getMyActivities, getActivities } from '../../actions'

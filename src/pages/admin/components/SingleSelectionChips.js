@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Chip, Dialog, Box, DialogTitle, IconButton, DialogContent, Grid, Button } from '@material-ui/core'
+import { Dialog, Box, DialogTitle, IconButton, DialogContent, Grid, Button } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import ChipsSkeleton from '../../../components/skeletons/ChipsSkeleton'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,7 +34,7 @@ const SingleSelectionChips = ({ existingFilter, action, selections, label, type 
   return (
     <>
       <CustomChip color={filter ? 'primary' : 'default'} onClick={() => setOpen(true)} label={label} />
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog style={{ minWidth: 206 }} open={open} onClose={() => setOpen(false)}>
         <Box style={boxStyle}>
           <DialogTitle>
             {label}

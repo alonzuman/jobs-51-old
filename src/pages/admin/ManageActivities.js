@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import { Box, Grid, Chip } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import MultiSelectionChips from './components/MultiSelectionChips'
 import { clearActivityFilters, changeView } from '../../actions'
 import ActivitiesList from '../../components/lists/ActivitiesList'
@@ -25,7 +25,7 @@ const ManageActivities = () => {
     if (!view) {
       dispatch(changeView('grid'))
     }
-  }, [])
+  }, [dispatch, view])
 
   const filtersContainerStyle = {
     padding: '.5rem 1rem',

@@ -1,12 +1,9 @@
 import React from 'react'
 import { Grid, Paper, Typography, ListItem } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import CardMarker from '../cards/CardMarker'
 
 const StatsList = ({ items }) => {
-  const { theme } = useSelector(state => state.theme)
-
   const statsPaperStyle = {
     width: '100%',
     height: 120,

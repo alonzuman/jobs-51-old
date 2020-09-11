@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, IconButton, Box, Grid, Chip } from '@material-ui/core'
+import { TextField, IconButton, Box, Grid } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFilter, removeFilter } from '../../actions/jobs';

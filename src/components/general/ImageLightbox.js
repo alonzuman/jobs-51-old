@@ -14,7 +14,7 @@ const ImageLightbox = ({ imgUrl, open, onClose }) => {
       <IconButton onClick={onClose} style={iconStyle}>
         <CloseIcon />
       </IconButton>
-      <img src={imgUrl} className='image__lightbox__image' />
+      <img src={imgUrl} className='image__lightbox__image' alt={'User avatar'} />
     </Dialog>
   )
 }

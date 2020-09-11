@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CustomChip from '../cards/CustomChip'
 import { useSelector, useDispatch } from 'react-redux'
-import { Dialog, DialogTitle, IconButton, Button, Grid, DialogContent } from '@material-ui/core'
+import { Dialog, DialogTitle, IconButton, Grid, DialogContent } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import { changeView } from '../../actions'
 

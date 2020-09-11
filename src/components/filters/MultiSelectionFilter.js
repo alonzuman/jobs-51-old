@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Button, Chip } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
 import ChipsSkeleton from '../skeletons/ChipsSkeleton'
@@ -8,7 +8,7 @@ import CustomChip from '../cards/CustomChip'
 const MultiSelectionFilter = ({ type }) => {
   const dispatch = useDispatch()
   const jobsState = useSelector(state => state.jobs)
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const [selections, setSelections] = useState({})
   const [filters, setFilters] = useState([])
 

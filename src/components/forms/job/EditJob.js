@@ -4,8 +4,7 @@ import { TextField, Button, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import AddChips from '../AddChips'
-import { addJob, editJob, removeJob, addFilter, removeFilter } from '../../../actions'
-import FormSkeleton from '../../skeletons/FormSkeleton'
+import { editJob, removeJob, addFilter, removeFilter } from '../../../actions'
 import ApprovalBox from '../../dialogs/ApprovalBox'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 
@@ -74,7 +73,7 @@ const AddJob = () => {
     <form style={{ direction }} onSubmit={handleJobSubmit}>
       {uploading && <CircularProgressWithLabel value={progress} />}
       {!uploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setUploading} setProgress={setProgress} />}
-      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} />}
+      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} alt='Company avatar' />}
         <TextField label={translation.companyName} variant='outlined' value={edittedJob['company']} name='company' onChange={handleJobChange} />
       <Grid container spacing={1}>
         <Grid item xs={6}>

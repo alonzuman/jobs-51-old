@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ChipsSkeleton from '../../../components/skeletons/ChipsSkeleton'
-import { Grid, Chip, Dialog, Button, DialogTitle, IconButton, Box, DialogContent } from '@material-ui/core'
+import { Grid, Dialog, Button, DialogTitle, IconButton, Box, DialogContent } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close'
 import CustomChip from '../../../components/cards/CustomChip'

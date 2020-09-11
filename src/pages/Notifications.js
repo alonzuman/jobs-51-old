@@ -3,7 +3,7 @@ import { Typography, Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 const Notifications = () => {
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
 
   const boxStyle = {
     padding: '1rem'

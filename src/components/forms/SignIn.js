@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { TextField, Button, Typography, CircularProgress, Box } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { signIn, closeDialogs, openDialog } from '../../actions'
-import FacebookIcon from '@material-ui/icons/Facebook';
 import SocialMediaSignIn from './SocialMediaSignIn';
 
 

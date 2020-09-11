@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs, openDialog } from '../actions'
 import JobCard from '../components/cards/JobCard'
 import CardsSkeletons from '../components/skeletons/CardsSkeletons'
-import { Grid, Typography, Paper, Box } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import FiltersBar from '../components/layout/FiltersBar'
 import TopBar from '../components/layout/TopBar'
 import AddIcon from '@material-ui/icons/Add'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
 import PageContainer from '../components/layout/PageContainer'
 import SecondaryBar from '../components/layout/SecondaryBar'
-import ToggleLookingForJob from '../components/forms/profile/ToggleLookingForJob'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)

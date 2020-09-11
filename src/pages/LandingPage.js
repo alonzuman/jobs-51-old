@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Typography, Box, Container, Paper } from '@material-ui/core'
+import { Button, Typography, Box, Paper } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { openDialog, setUser } from '../actions'

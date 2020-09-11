@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { FormControl, MenuItem, Select, StepButton, Button, CircularProgress } from '@material-ui/core';
+import { FormControl, MenuItem, Select, Button, CircularProgress } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { toggleRegion } from '../../../actions/users';
 

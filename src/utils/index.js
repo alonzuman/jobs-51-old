@@ -1,5 +1,4 @@
 import store from '../store';
-import { db } from '../firebase';
 const { theme } = store.getState().theme
 
 export const checkPermissions = (role) => {

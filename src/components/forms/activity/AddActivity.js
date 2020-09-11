@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, TextField, Grid, Chip, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
+import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 import { addActivity, getActivityTypes } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFeedback } from '../../../actions';
-import { calcHours } from '../../../utils';
 import { setUserRegion } from '../../../actions/auth';
 import CustomChip from '../../cards/CustomChip';
 

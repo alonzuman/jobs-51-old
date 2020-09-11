@@ -63,7 +63,7 @@ const AddJob = () => {
     <form style={{direction}} onSubmit={handleJobSubmit}>
       {isUploading && <CircularProgressWithLabel value={progress} />}
       {!isUploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />}
-      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} />}
+      {image.trim().length > 0 && <img style={thumbnailStyle} src={image} alt='Company avatar' />}
       <TextField required label={translation.companyName} variant='outlined' value={job['company']} name='company' onChange={handleJobChange} />
       <Grid container spacing={1}>
         <Grid item xs={6}>

@@ -11,7 +11,7 @@ const Employees = () => {
   const { loading } = useSelector(state => state.users)
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(getEmployees()) }, [])
+  useEffect(() => { dispatch(getEmployees()) }, [dispatch])
 
   return (
     <>

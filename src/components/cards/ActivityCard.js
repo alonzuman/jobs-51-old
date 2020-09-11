@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Chip, Box, Typography, Paper, IconButton, Grid, Avatar } from '@material-ui/core'
+import { ListItem, ListItemText, Box, Typography, Paper, IconButton, Grid, Avatar } from '@material-ui/core'
 import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';

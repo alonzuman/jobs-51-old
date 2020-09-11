@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import UserDetails from './profile/UserDetails'
 import PersonalDetails from './profile/PersonalDetails'
-import { Tabs, Tab, Container } from '@material-ui/core'
+import { Tabs, Tab } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Settings from './Settings'
 import TopBar from '../layout/TopBar'

@@ -11,7 +11,7 @@ const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth))
     return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
-  }, [window.innerWidth])
+  }, [])
 
   const containerStyle = {
     borderBottom: sticky ? `1px solid ${theme.palette.border.main}` : 'none'

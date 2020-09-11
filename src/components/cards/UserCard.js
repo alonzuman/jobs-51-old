@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Avatar, Paper, CardHeader, Chip, ListItem, Typography } from '@material-ui/core'
+import { Grid, Avatar, CardHeader, ListItem, Typography } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CardContainer from './CardContainer'

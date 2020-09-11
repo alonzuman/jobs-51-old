@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import TopBar from '../../components/layout/TopBar'
 import { useSelector, useDispatch } from 'react-redux'
-import PageContainer from '../../components/layout/PageContainer'
-import { CSVLink, CSVDownload } from 'react-csv'
-import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer, Grid, Typography } from '@material-ui/core'
-import SecondaryBar from '../../components/layout/SecondaryBar'
-import MultiSelectionChips from './components/MultiSelectionChips'
-import SingleSelectionChips from './components/SingleSelectionChips'
-import CustomChip from '../../components/cards/CustomChip'
-import { clearActivityFilters, getActivities } from '../../actions'
-
-const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
-const statuses = ['approved', 'pending', 'all']
+import { CSVLink } from 'react-csv'
+import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer, Typography } from '@material-ui/core'
+import { getActivities } from '../../actions'
 
 const ActivitiesTable = () => {
   const { translation } = useSelector(state => state.theme)
@@ -46,11 +37,8 @@ const ActivitiesTable = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch(getActivities())
-  }, [filters])
-
-  useEffect(() => { mapData() }, [activities])
+  useEffect(() => { dispatch(getActivities()) }, [filters, dispatch])
+  useEffect(() => { mapData() }, [activities, mapData])
 
   return (
     <>

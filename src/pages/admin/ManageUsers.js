@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TopBar from '../../components/layout/TopBar'
-import { Box, Grid, Chip } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import UsersList from '../../components/lists/UsersList'
 import SearchBar from '../../components/filters/SearchBar'
 import { clearUserFilters } from '../../actions/users'

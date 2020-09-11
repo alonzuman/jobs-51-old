@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Chip, Grid } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearGlobalFilters } from '../../actions/jobs'
 import CustomChip from '../cards/CustomChip'

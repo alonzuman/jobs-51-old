@@ -30,7 +30,7 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener('resize', () => setWidth(window.innerWidth))
     return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
-  }, [window.innerWidth])
+  }, [])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -66,7 +66,7 @@ const Navbar = () => {
   } else {
     return (
       <>
-        <Button onClick={handleMenuOpen} className='menu__button'><MenuIcon className='mr-25' /><Avatar className='avatar__xs' zIndex={9} src={avatar ? avatar : ''} /></Button>
+        <Button onClick={handleMenuOpen} className='menu__button'><MenuIcon className='mr-25' /><Avatar className='avatar__xs' src={avatar ? avatar : ''} /></Button>
         <Menu className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
           <NavLink to='/home'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.main}</Typography></MenuItem></NavLink>
           <NavLink to='/saved'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.saved}</Typography></MenuItem></NavLink>

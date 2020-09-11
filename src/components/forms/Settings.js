@@ -3,7 +3,6 @@ import { Button, Switch, Box, Typography, FormControl } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOut, setTheme } from '../../actions'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import { Redirect } from 'react-router-dom';
 import PaperContainer from '../layout/PaperContainer';
 
 const Settings = () => {

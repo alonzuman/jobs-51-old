@@ -396,6 +396,7 @@ a:hover {
 .MuiMenu-paper {
   border-radius: 1rem!important;
   padding-top: 1rem!important;
+  box-shadow: 0 0 10px #00000030!important;
 }
 
 .min__width--200 {

@@ -13,7 +13,7 @@ const UserActivities = ({ match }) => {
   const uid = match.url.split('/')[2]
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(getUserAndActivities(uid)) }, [])
+  useEffect(() => { dispatch(getUserAndActivities(uid)) }, [uid, dispatch])
 
   return (
     <>

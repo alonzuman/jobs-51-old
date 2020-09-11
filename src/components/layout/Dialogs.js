@@ -78,6 +78,7 @@ const Dialogs = () => {
       case 'LocationsFilter': return <SingleSelectionFilter type='locations' />
       case 'DatesFilter': return <SingleSelectionFilter type='dates' />
       case 'PersonalDetails': return <PersonalDetails />
+      default: return false
     }
   }
 
