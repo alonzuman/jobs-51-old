@@ -32,6 +32,8 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
   }, [])
 
+  useEffect(() => { setValue(history.location.pathname) }, [history.location.pathname])
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -68,11 +70,47 @@ const Navbar = () => {
       <>
         <Button onClick={handleMenuOpen} className='menu__button'><MenuIcon className='mr-25' /><Avatar className='avatar__xs' src={avatar ? avatar : ''} /></Button>
         <Menu className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-          <NavLink to='/home'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.main}</Typography></MenuItem></NavLink>
-          <NavLink to='/saved'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.saved}</Typography></MenuItem></NavLink>
-          {volunteer && <NavLink to='/activity'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.activity}</Typography></MenuItem></NavLink>}
-          <NavLink to='/profile'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.profile}</Typography></MenuItem></NavLink>
-          {checkPermissions(role) >= 3 && <NavLink to='/admin'><MenuItem className='min__width--200' onClick={handleMenuClose}><Typography variant='body1'>{translation.adminPage}</Typography></MenuItem></NavLink>}
+          <NavLink to='/home'>
+            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+              <Typography className='flex align__center justify__between full__width' variant='body1'>
+                {translation.main}
+                <AssignmentIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+              </Typography>
+            </MenuItem>
+          </NavLink>
+          <NavLink to='/saved'>
+            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+              <Typography className='flex align__center justify__between full__width' variant='body1'>
+                {translation.saved}
+                <FavoriteIcon style={{ color: value === '/saved' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+              </Typography>
+            </MenuItem>
+          </NavLink>
+          {volunteer && <NavLink to='/activity'>
+            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+              <Typography className='flex align__center justify__between full__width' variant='body1'>
+                {translation.activity}
+                <AssessmentIcon  style={{ color: value === '/activity' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+              </Typography>
+            </MenuItem>
+          </NavLink>}
+          <NavLink to='/profile'>
+            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+              <Typography className='flex align__center justify__between full__width' variant='body1'>
+                {translation.profile}
+                <AccountCircleIcon style={{ color: value === '/profile' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+              </Typography>
+            </MenuItem>
+          </NavLink>
+          {checkPermissions(role) >= 3 &&
+          <NavLink to='/admin'>
+            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+              <Typography className='flex align__center justify__between full__width' variant='body1'>
+                {translation.adminPage}
+                <SupervisorAccountIcon style={{ color: value === '/admin' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+              </Typography>
+            </MenuItem>
+          </NavLink>}
         </Menu>
       </>
     )
