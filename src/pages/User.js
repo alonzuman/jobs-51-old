@@ -51,7 +51,6 @@ const User = ({ match }) => {
     height: 18,
     width: 18,
     marginLeft: '1rem',
-    // color: theme.palette.primary.main
   }
 
   return (
@@ -59,10 +58,10 @@ const User = ({ match }) => {
       <TopBar
         sticky={true}
         backButton={true}
-        title={!loading ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
-        subtitle={!loading ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
+        title={(!loading && user.firstName) ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
+        subtitle={(!loading && user ) ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
         actionOnClick={() => setEditing(!editing)}
-        action={checkPermissions(role) > checkPermissions(user?.role) && <IconButton className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
+        action={checkPermissions(role) > checkPermissions(user?.role) && <IconButton style={{ height: 42, width: 42 }} className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
         {!loading ?
           <Avatar style={{ cursor: "pointer" }} onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md" src={user?.avatar} alt={user?.firstName}>
             {user?.firstName?.charAt(0)}
@@ -103,7 +102,7 @@ const User = ({ match }) => {
           </div>}
         {!editing &&
           <>
-            <Typography variant="subtitle1">{!editing && !loading ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
+            <Typography variant="subtitle1">{!editing && !loading && user.firstName ? translation.contactDetails : <Skeleton height={18} width={70} />}</Typography>
             <PaperContainer style={{ marginBottom: "1rem" }}>
               <Typography variant="body1">{!loading && user.email ? <span className='flex align__center'><MailIcon style={smallIconStyle} /> {user?.email}</span> : <Skeleton height={32} width={120} />}</Typography>
               <Typography variant="body1">{!loading ? user?.phone ? <span className='flex align__center'><PhoneIcon style={smallIconStyle} /> {user?.phone}</span> : '' : <Skeleton height={32} width={90} />}</Typography>

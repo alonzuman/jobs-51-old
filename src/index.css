@@ -193,6 +193,15 @@ a:hover {
   width: 56px!important;
 }
 
+.avatar__xs {
+  height: 32px!important;
+  width: 32px!important;
+}
+
+.mr-25 {
+  margin-right: .25rem!important;
+}
+
 .m-5 {
   margin: .5rem!important;
 }
@@ -306,6 +315,10 @@ a:hover {
   padding: .5rem!important;
 }
 
+.pt-1 {
+  padding-top: 1rem!important;
+}
+
 .p-1 {
   padding: 1rem!important
 }
@@ -374,4 +387,17 @@ a:hover {
 .MuiTableContainer-root {
   -ms-overflow-style: none!important;  /* IE and Edge */
   scrollbar-width: none!important;  /* Firefox */
+}
+
+.rtl {
+  direction: rtl!important;
+}
+
+.MuiMenu-paper {
+  border-radius: 1rem!important;
+  padding-top: 1rem!important;
+}
+
+.min__width--200 {
+  min-width: 200px!important;
 }

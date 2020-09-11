@@ -1,3 +1,15 @@
+.menu__button {
+  border-radius: 2rem!important;
+  position: fixed!important;
+  margin: 1rem!important;
+  z-index: 1101!important;
+}
+
+.desktop__menu {
+  z-index: 1102!important;
+  border-radius: 1rem!important;
+}
+
 @media (min-height: 723px) {
   .MuiBottomNavigationAction-root {
     padding-bottom: 32px!important;

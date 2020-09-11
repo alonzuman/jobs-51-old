@@ -57,7 +57,7 @@ const CardSkeleton = () => {
   }
 
   return (
-  <Grid item xs={12} md={6} lg={4}>
+  <Grid item xs={12} md={6} lg={6}>
     <CardContainer style={cardStyle}>
       <div style={flexHeaderStyle}>
         <Skeleton style={avatarStyle} variant='circle' />

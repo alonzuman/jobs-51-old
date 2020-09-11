@@ -6,9 +6,11 @@ import { openDialog, setUser } from '../actions'
 import ShaldagLogo from '../ShaldagLogo'
 import { app } from '../firebase'
 import PageContainer from '../components/layout/PageContainer'
+import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
+  const { loading } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
 
@@ -50,22 +52,27 @@ const LandingPage = () => {
     })
   })
 
-  if (currentUser) return <Redirect to='/home' />
-  return (
-    <PageContainer style={containerStyle}>
-      <Paper style={paperStyle}>
-        <ShaldagLogo />
-        <Box style={textBoxStyle} className='text-box'>
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
-          <br />
-          <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
-        </Box>
-        <Button style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
-    </Paper>
-    </PageContainer>
-  )
+  if (loading || !currentUser) {
+    return <CircularSpinnerWithContainer />
+  } else if (currentUser && !loading) {
+    return <Redirect to='/home' />
+  } else {
+    return (
+      <PageContainer style={containerStyle}>
+        <Paper style={paperStyle}>
+          <ShaldagLogo />
+          <Box style={textBoxStyle} className='text-box'>
+            <Typography style={textStyle} variant='body1'>{translation.landingPageText1}</Typography>
+            <br />
+            <Typography style={textStyle} variant='body1'>{translation.landingPageText2}</Typography>
+            <br />
+            <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
+          </Box>
+          <Button style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
+      </Paper>
+      </PageContainer>
+    )
+  }
 }
 
 export default LandingPage

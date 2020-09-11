@@ -8,6 +8,7 @@ export const getUser = (uid) => async dispatch => {
   dispatch({
     type: 'USERS_LOADING'
   })
+  console.log('loading')
   try {
     const snapshot = await usersRef.doc(uid).get()
     dispatch({

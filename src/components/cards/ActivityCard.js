@@ -62,7 +62,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
   const [day, month, number] = translateDate(activity.date)
   return (
     <>
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={12} md={6} lg={6}>
         <ListItem className="br-1" button>
           <CardContainer>
             <Paper style={paperStyle} elevation={0}>

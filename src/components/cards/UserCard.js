@@ -7,7 +7,7 @@ import CustomChip from './CustomChip'
 import { Skeleton } from '@material-ui/lab'
 import PaperContainer from '../layout/PaperContainer'
 
-const UserCard = ({ loading, user, containerStyle, label }) => {
+const UserCard = ({ xs = 12, md = 6, lg = 6, loading, user, containerStyle, label }) => {
   const { translation } = useSelector(state => state.theme)
   const paperStyle = {
     borderRadius: '1rem',
@@ -21,15 +21,15 @@ const UserCard = ({ loading, user, containerStyle, label }) => {
 
   if (!user || loading) {
     return (
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={xs} md={md} lg={lg}>
         <ListItem style={containerStyle} className='br-1' button>
           <PaperContainer style={paperStyle} elevation={0}>
             <CardContainer>
               <CardHeader
                 style={cardHeaderStyle}
-                avatar={<Skeleton className='mt-1' variant='circle' height={40} width={40} />}
-                title={<Skeleton className='mt-1' variant='rect' height={24} width={120} />}
-                subheader={<Skeleton className='mt-1' variant='rect' height={16} width={80} />}
+                avatar={<Skeleton variant='circle' height={40} width={40} />}
+                title={<Skeleton variant='rect' height={18} width={120} />}
+                subheader={<Skeleton className='mt-5' variant='rect' height={14} width={80} />}
               />
             </CardContainer>
           </PaperContainer>
@@ -38,7 +38,7 @@ const UserCard = ({ loading, user, containerStyle, label }) => {
     )
   } else {
     return (
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={xs} md={md} lg={lg}>
         <ListItem style={containerStyle} className="br-1" button>
           <Link className="full__width" to={`/users/${user?.uid}`}>
             <PaperContainer style={paperStyle} elevation={0}>

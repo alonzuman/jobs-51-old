@@ -49,6 +49,7 @@ function App() {
         <Router>
           <Dialogs />
           <Feedback />
+          {authenticated && <Navbar />}
           <Switch>
             <ProtectedRoute exact path='/home' component={Home} />
             <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
@@ -67,7 +68,6 @@ function App() {
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
             <Route exact path='/' component={LandingPage} />
           </Switch>
-          {authenticated && <Navbar />}
         </Router>
       </RtlProvider>
     </ThemeProvider>
