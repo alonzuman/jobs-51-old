@@ -68,7 +68,7 @@ const Navbar = () => {
           <BottomNavigationAction label={translation.main} component={Link} to='/home' value='/home' icon={value === '/home' ? <AssignmentIcon /> : <AssignmentOutlinedIcon/>} />
           <BottomNavigationAction label={translation.saved} component={Link} to='/saved' value='/saved' icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
           {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to='/activity' value='/activity' icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
-          <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
+          <BottomNavigationAction label={translation.profile} component={Link} to='/profile/user-details' value='/profile/user-details' icon={value === '/profile/user-details' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
           {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
         </BottomNavigation>
       )
@@ -107,11 +107,11 @@ const Navbar = () => {
               </Typography>
             </MenuItem>
           </NavLink>}
-          <NavLink to='/profile'>
+          <NavLink to='/profile/user-details'>
             <MenuItem className='min__width--200' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.profile}
-                <AccountCircleIcon style={{ color: value === '/profile' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
+                <AccountCircleIcon style={{ color: value === '/profile/user-details' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
               </Typography>
             </MenuItem>
           </NavLink>

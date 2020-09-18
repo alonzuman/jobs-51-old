@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signOut, setTheme } from '../../actions'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PaperContainer from '../layout/PaperContainer';
+import { Link } from 'react-router-dom';
 
 const Settings = () => {
   const { authenticated } = useSelector(state => state.auth)
@@ -20,6 +21,13 @@ const Settings = () => {
     dispatch(signOut())
   }
 
+  const privacyPolicyStyle = {
+    position: 'absolute',
+    bottom: '5.5rem',
+    left: '50%',
+    transform: 'translate(-50%, 0)'
+  }
+
   return (
     <PaperContainer>
       <Typography variant='body2'>{translation.displaySettings}</Typography>
@@ -31,6 +39,11 @@ const Settings = () => {
       <FormControl className='mb-0'>
         {authenticated && <Button className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>}
       </FormControl>
+      <Link style={privacyPolicyStyle} to='/privacy-policy'>
+        <Typography variant='body1'>
+          {translation.privacyPolicy}
+        </Typography>
+      </Link>
     </PaperContainer>
   )
 }

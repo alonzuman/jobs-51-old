@@ -59,7 +59,9 @@ function App() {
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />
             <ProtectedRoute exact path='/notifications' component={Notifications} />
-            <ProtectedRoute exact path='/profile' component={EditProfile} />
+            <ProtectedRoute exact path='/profile/settings' component={EditProfile} />
+            <ProtectedRoute exact path='/profile/user-details' component={EditProfile} />
+            <ProtectedRoute exact path='/profile/personal-details' component={EditProfile} />
             <ProtectedRoute exact path='/users' component={Employees} />
             <ProtectedRoute exact path='/users/:id/activities' component={UserActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />

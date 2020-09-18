@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserDetails from './profile/UserDetails'
 import PersonalDetails from './profile/PersonalDetails'
 import { Tabs, Tab } from '@material-ui/core'
@@ -7,11 +7,16 @@ import Settings from './Settings'
 import TopBar from '../layout/TopBar'
 import PageContainer from '../layout/PageContainer'
 import SecondaryBar from '../layout/SecondaryBar'
+import { useHistory } from 'react-router-dom'
 
-const EditProfile = () => {
-  const [value, setValue] = useState(0)
+const EditProfile = ({ match }) => {
+  const history = useHistory()
+  const { url } = match;
   const { translation, theme } = useSelector(state => state.theme)
-  const handleValueChange = (newValue) => setValue(newValue)
+
+  const handleValueChange = (value) => {
+    history.replace(value)
+  }
 
   const tabStyle = {
     color: theme.typography.subtitle1.color,
@@ -22,16 +27,16 @@ const EditProfile = () => {
     <>
       <TopBar title={translation.myProfile} />
       <SecondaryBar>
-        <Tabs style={tabStyle} className='max__width margin__center full__width' indicatorColor='primary' value={value}>
-          <Tab style={tabStyle} label={translation.userDetails} onClick={() => handleValueChange(0)} />
-          <Tab style={tabStyle} label={translation.personalDetails} onClick={() => handleValueChange(1)}  />
-          <Tab style={tabStyle} label={translation.settings} onClick={() => handleValueChange(2)}  />
+        <Tabs style={tabStyle} className='max__width margin__center full__width' indicatorColor='primary' value={url}>
+          <Tab style={tabStyle} label={translation.userDetails} value={'/profile/user-details'} onClick={() => handleValueChange('/profile/user-details')} />
+          <Tab style={tabStyle} label={translation.personalDetails} value={'/profile/personal-details'} onClick={() => handleValueChange('/profile/personal-details')}  />
+          <Tab style={tabStyle} label={translation.settings} value={'/profile/settings'} onClick={() => handleValueChange('/profile/settings')}  />
         </Tabs>
       </SecondaryBar>
       <PageContainer>
-        {value === 0 && <UserDetails />}
-        {value === 1 && <PersonalDetails />}
-        {value === 2 && <Settings />}
+        {url === '/profile/user-details' && <UserDetails />}
+        {url === '/profile/personal-details' && <PersonalDetails />}
+        {url === '/profile/settings' && <Settings />}
       </PageContainer>
     </>
   )
