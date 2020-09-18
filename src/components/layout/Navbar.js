@@ -23,7 +23,9 @@ const Navbar = () => {
   const [value, setValue] = useState(history.location.pathname);
   const [width, setWidth] = useState(window.innerWidth)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [hover, setHover] = useState(false)
 
+  const handleHover = () => setHover(!hover)
   const handleMenuClose = () => setAnchorEl(null)
   const handleMenuOpen = e => setAnchorEl(e.currentTarget)
 
@@ -54,7 +56,7 @@ const Navbar = () => {
   const menuButtonStyle = {
     borderRadius: '2rem',
     position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: hover ? theme.palette.background.dark : theme.palette.background.paper,
     margin: '.5rem',
     zIndex: 1101
   }
@@ -76,7 +78,7 @@ const Navbar = () => {
   } else {
     return (
       <>
-        <Button onClick={handleMenuOpen} style={menuButtonStyle}>
+        <Button onClick={handleMenuOpen} onMouseEnter={handleHover} onMouseLeave={handleHover} style={menuButtonStyle}>
           <MenuIcon className='mr-25' />
           <Avatar className='avatar__xs' src={avatar ? avatar : ''} />
         </Button>
