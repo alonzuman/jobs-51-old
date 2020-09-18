@@ -8,13 +8,11 @@
   z-index: 99!important;
 }
 
-@media (min-width: 768px) {
-  .MuiFab-root {
-    bottom: 1rem!important;
-  }
-}
-
-@media (min-height: 812px) {
+/* FOR IPHONE X */
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
   .MuiFab-root {
     bottom: 6.5rem!important;
   }
