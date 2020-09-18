@@ -14,39 +14,12 @@ const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
   const { theme } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
-  const paperStyle = {
-    width: '100%',
-    height: '100%',
-    borderRadius: '1rem',
-    display: 'flex'
-  }
-
   const dateStyle = {
     borderLeft: `1px solid ${theme.palette.border.main}`,
     textAlign: 'center',
     padding: '0 1rem',
     margin: '1rem 0',
     minWidth: 72
-  }
-
-  const detailsStyle = {
-    padding: '1rem 1rem 1rem 0',
-    width: '100%'
-  }
-
-  const actionBoxStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-
-  const userInfoStlye = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    padding: '1rem',
-    minWidth: 80
   }
 
   const iconStyle = {
@@ -63,16 +36,16 @@ const ActivityCard = ({ activity, showUser = true }) => {
   return (
     <>
       <Grid item xs={12} md={6} lg={6}>
-        <ListItem className="br-1" button>
+        <ListItem onClick={() => setOpen(!open)} className="br-1" button>
           <CardContainer>
-            <Paper style={paperStyle} elevation={0}>
+            <Paper className='full__width full__height flex p-1 br-1' elevation={0}>
               <Box style={dateStyle}>
                 <CardMarker color={activity.approved ? "#4caf50" : "#e15757"} />
                 <Typography variant="subtitle1">{month}</Typography>
                 <Typography variant="h2">{number}</Typography>
                 <Typography variant="body1">{day}</Typography>
               </Box>
-              <Box style={detailsStyle}>
+              <Box className='pt-1 pr-1 pb-1 full__width'>
                 <CustomChip
                   label={activity.type}
                   size="small"
@@ -85,22 +58,16 @@ const ActivityCard = ({ activity, showUser = true }) => {
                 />
               </Box>
               {showUser && (
-                <Link
-                  to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}
-                >
-                  <Box style={userInfoStlye}>
+                <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
+                  <Box className='flex align__center justify__center flex__column p-1 mw-80' style={{ minWidth: 80 }}>
                     <Avatar src={activity?.user?.avatar} />
-                    <Typography
-                      style={{ marginTop: '.25rem', textAlign: "center" }}
-                      variant="subtitle1"
-                    >
+                    <Typography style={{ marginTop: '.25rem', textAlign: "center" }} variant="subtitle1" >
                       {activity?.user?.firstName} {activity?.user?.lastName}
                     </Typography>
                   </Box>
-                </Link>
-              )}
+                </Link>)}
             </Paper>
-            <Box style={actionBoxStyle}>
+            <Box className='flex align__center justify__center'>
               <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
                 <KeyboardArrowDownIcon />
               </IconButton>

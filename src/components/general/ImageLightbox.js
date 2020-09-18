@@ -4,14 +4,9 @@ import CloseIcon from '@material-ui/icons/Close'
 import './ImageLightbox.css'
 
 const ImageLightbox = ({ imgUrl, open, onClose }) => {
-  const iconStyle = {
-    position: 'absolute',
-    margin: '.5rem'
-  }
-
   return (
     <Dialog open={open} onClose={onClose}>
-      <IconButton onClick={onClose} style={iconStyle}>
+      <IconButton className='m-5 absolute' onClick={onClose}>
         <CloseIcon />
       </IconButton>
       <img src={imgUrl} className='image__lightbox__image' alt={'User avatar'} />

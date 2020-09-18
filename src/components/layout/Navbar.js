@@ -51,6 +51,14 @@ const Navbar = () => {
     borderTopLeftRadius: '1rem'
   }
 
+  const menuButtonStyle = {
+    borderRadius: '2rem',
+    position: 'absolute',
+    backgroundColor: theme.palette.background.paper,
+    margin: '.5rem',
+    zIndex: 1101
+  }
+
   if (width <= 768) {
     if (checkPermissions(role) !== 0) {
       return (
@@ -68,7 +76,10 @@ const Navbar = () => {
   } else {
     return (
       <>
-        <Button onClick={handleMenuOpen} className='menu__button'><MenuIcon className='mr-25' /><Avatar className='avatar__xs' src={avatar ? avatar : ''} /></Button>
+        <Button onClick={handleMenuOpen} style={menuButtonStyle}>
+          <MenuIcon className='mr-25' />
+          <Avatar className='avatar__xs' src={avatar ? avatar : ''} />
+        </Button>
         <Menu className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
           <NavLink to='/home'>
             <MenuItem className='min__width--200' onClick={handleMenuClose}>

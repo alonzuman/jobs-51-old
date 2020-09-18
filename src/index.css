@@ -117,10 +117,6 @@ a:hover {
   top: .6rem;
 }
 
-.MuiFab-root {
-  box-shadow: 0 0 10px #00000005!important;
-}
-
 .MuiList-root {
   padding: 0!important;
 }
@@ -174,6 +170,10 @@ a:hover {
   display: flex!important;
 }
 
+.full__height {
+  height: 100%;
+}
+
 .full__width {
   width: 100%;
 }
@@ -196,6 +196,16 @@ a:hover {
 .avatar__xs {
   height: 32px!important;
   width: 32px!important;
+}
+
+.ms-25 {
+  margin-right: .25rem!important;
+  margin-left: .25rem!important;
+}
+
+.ms-5 {
+  margin-right: .5rem!important;
+  margin-left: .5rem!important;
 }
 
 .mr-25 {
@@ -320,7 +330,19 @@ a:hover {
 }
 
 .p-1 {
-  padding: 1rem!important
+  padding: 1rem!important;
+}
+
+.pb-1 {
+  padding-bottom: 1rem!important;
+}
+
+.pr-1 {
+  padding-right: 1rem!important;
+}
+
+.pl-1 {
+  padding-left: 1rem!important;
 }
 
 .mr-1 {
@@ -401,4 +423,16 @@ a:hover {
 
 .min__width--200 {
   min-width: 200px!important;
+}
+
+.absolute {
+  position: absolute!important;
+}
+
+.fixed {
+  position: fixed!important;
+}
+
+.sticky {
+  position: sticky!important;
 }
