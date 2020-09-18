@@ -50,9 +50,9 @@ const LandingPage = () => {
     app.auth().onAuthStateChanged(user => {
       if (user) return dispatch(setUser(user))
     })
-  })
+  }, [currentUser])
 
-  if (loading || !currentUser) {
+  if (loading) {
     return <CircularSpinnerWithContainer />
   } else if (currentUser && !loading) {
     return <Redirect to='/home' />
@@ -68,8 +68,8 @@ const LandingPage = () => {
             <br />
             <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
           </Box>
-          <Button style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
-      </Paper>
+          <Button disabled={loading} style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
+        </Paper>
       </PageContainer>
     )
   }
