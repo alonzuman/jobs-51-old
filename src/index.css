@@ -325,12 +325,20 @@ a:hover {
   padding: .5rem!important;
 }
 
+.pt-5 {
+  padding-top: .5rem!important;
+}
+
 .pt-1 {
   padding-top: 1rem!important;
 }
 
 .p-1 {
   padding: 1rem!important;
+}
+
+.pb-5 {
+  padding-bottom: 4px!important;
 }
 
 .pb-1 {

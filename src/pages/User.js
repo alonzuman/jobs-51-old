@@ -20,6 +20,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import WorkIcon from '@material-ui/icons/Work';
+import ToggleLookingForJob from '../components/forms/profile/ToggleLookingForJob'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -61,7 +62,7 @@ const User = ({ match }) => {
         title={(!loading && user.firstName) ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
         subtitle={(!loading && user ) ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
         actionOnClick={() => setEditing(!editing)}
-        action={checkPermissions(role) > checkPermissions(user?.role) && <IconButton style={{ height: 42, width: 42 }} className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
+        action={checkPermissions(role) >= checkPermissions(user?.role) && <IconButton style={{ height: 42, width: 42 }} className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
         {!loading ?
           <Avatar style={{ cursor: "pointer" }} onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md" src={user?.avatar} alt={user?.firstName}>
             {user?.firstName?.charAt(0)}
@@ -86,6 +87,7 @@ const User = ({ match }) => {
               </Grid>
             </Grid>
             <ToggleVolunteer user={user} />
+            <ToggleLookingForJob uid={user?.uid} lookingForJob={user?.lookingForJob} />
           </PaperContainer>}
         {!editing && user?.lookingForJob &&
           <CustomChip

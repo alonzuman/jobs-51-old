@@ -38,7 +38,7 @@ const ActivitiesTable = () => {
   }
 
   useEffect(() => { dispatch(getActivities()) }, [filters, dispatch])
-  useEffect(() => { mapData() }, [activities, mapData])
+  useEffect(() => { mapData() }, [activities])
 
   return (
     <>

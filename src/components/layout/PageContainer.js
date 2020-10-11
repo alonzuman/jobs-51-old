@@ -7,7 +7,7 @@ const PageContainer = ({ style, children }) => {
 
   const containerStyle = {
     backgroundColor: theme.palette.background.main,
-    maxWidth: 768,
+    maxWidth: 1028,
     ...style
   }
 

@@ -365,3 +365,24 @@ export const getJob = (id) => async dispatch => {
     }))
   }
 }
+
+export const deleteJob = id => async dispatch => {
+  dispatch({
+    type: 'JOB_LOADING'
+  })
+
+  console.log(id)
+
+  try {
+
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'JOB_ERROR'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'serverError'
+    }))
+  }
+}

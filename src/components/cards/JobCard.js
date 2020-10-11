@@ -10,9 +10,10 @@ import 'moment/locale/he'
 import CardContainer from './CardContainer';
 import { Link } from 'react-router-dom';
 import CustomChip from './CustomChip';
+import { checkPermissions } from '../../utils';
 
 const JobCard = ({ job }) => {
-  const { uid, authenticated, savedJobs } = useSelector(state => state.auth)
+  const { uid, authenticated, savedJobs, role } = useSelector(state => state.auth)
   const [saved, setSaved] = useState()
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
@@ -48,7 +49,16 @@ const JobCard = ({ job }) => {
   }
 
   const action = () => {
-    if (authenticated && job?.uid === uid) {
+    if (authenticated && checkPermissions(role) >= 3) {
+      return (
+        <>
+        <IconButton onClick={handleClick}><EditIcon /></IconButton>
+        <IconButton onClick={handleClickFavorite}>
+          {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
+        </IconButton>
+        </>
+      )
+    } else if (authenticated && job?.uid === uid) {
       return <IconButton onClick={handleClick}><EditIcon /></IconButton>
     } else {
       if (authenticated) {

@@ -206,3 +206,22 @@ export const toggleRegion = ({ uid, region }) => async dispatch => {
     );
   }
 }
+
+export const deleteUser = uid => async dispatch => {
+  dispatch({
+    type: 'USER_LOADING'
+  })
+
+  try {
+
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'USER_STOP_LOADING'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'serverError'
+    }))
+  }
+}

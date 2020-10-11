@@ -18,7 +18,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
     borderLeft: `1px solid ${theme.palette.border.main}`,
     textAlign: 'center',
     padding: '0 1rem',
-    margin: '1rem 0',
+    margin: '.5rem 0',
     minWidth: 72
   }
 
@@ -38,14 +38,14 @@ const ActivityCard = ({ activity, showUser = true }) => {
       <Grid item xs={12} md={6} lg={6}>
         <ListItem onClick={() => setOpen(!open)} className="br-1" button>
           <CardContainer>
-            <Paper className='full__width full__height flex p-1 br-1' elevation={0}>
+            <Paper className='full__width full__height flex pt-5 pb-5 br-1' elevation={0}>
               <Box style={dateStyle}>
                 <CardMarker color={activity.approved ? "#4caf50" : "#e15757"} />
                 <Typography variant="subtitle1">{month}</Typography>
                 <Typography variant="h2">{number}</Typography>
                 <Typography variant="body1">{day}</Typography>
               </Box>
-              <Box className='pt-1 pr-1 pb-1 full__width'>
+              <Box className='pt-1 pr-1 pb-5 full__width'>
                 <CustomChip
                   label={activity.type}
                   size="small"
@@ -68,7 +68,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
                 </Link>)}
             </Paper>
             <Box className='flex align__center justify__center'>
-              <IconButton style={iconStyle} onClick={() => setOpen(!open)}>
+              <IconButton className='mb-5' size='small' style={iconStyle} onClick={() => setOpen(!open)}>
                 <KeyboardArrowDownIcon />
               </IconButton>
             </Box>
