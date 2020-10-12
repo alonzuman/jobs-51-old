@@ -2,6 +2,8 @@ import { app, db } from '../firebase'
 import firebase from 'firebase'
 import { closeDialogs } from './dialogs'
 import { setFeedback } from './feedback'
+import store from '../store'
+import { checkTempToken } from '../utils'
 const usersRef = db.collection('users')
 
 export const setUser = (user) => async dispatch => {
@@ -28,9 +30,13 @@ export const setUser = (user) => async dispatch => {
 }
 
 export const signInWithProvider = (provider) => async dispatch => {
+  const { tempToken } = store.getState().auth
+  const region = checkTempToken(tempToken);
+
   dispatch({
     type: 'AUTH_LOADING'
   })
+
   try {
     const firebaseProvider = () => {
       switch (provider) {
@@ -59,7 +65,8 @@ export const signInWithProvider = (provider) => async dispatch => {
             approved: 0
           },
           role: user?.role ? user?.role : 'user',
-          dateCreated: Date.now()
+          dateCreated: Date.now(),
+          region
         }
         await usersRef.doc(uid).set(newUser, { merge: true })
         dispatch(closeDialogs())
@@ -134,6 +141,9 @@ export const signIn = ({ email, password }) => async dispatch =>{
 }
 
 export const signUp = (user) => async dispatch =>{
+  const { token } = store.getState().auth
+  const region = checkTempToken(token);
+
   dispatch({
     type: 'AUTH_LOADING'
   })
@@ -154,6 +164,7 @@ export const signUp = (user) => async dispatch =>{
       },
       lookingForJob: false,
       role: 'user',
+      region,
       dateCreated: new Date()
     }
     await usersRef.doc(uid).set(newUser, { merge: true })
@@ -285,5 +296,12 @@ export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => 
       msg: 'ServerError'
     }))
 
+  }
+}
+
+export const setTempToken = token => {
+  return {
+    type: 'SET_TEMP_TOKEN',
+    payload: token
   }
 }

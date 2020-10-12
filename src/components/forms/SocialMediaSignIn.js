@@ -17,7 +17,6 @@ const SocialMediaSignIn = () => {
   const dispatch = useDispatch()
 
   const handleGoogleSignIn = () => {
-
     dispatch(signInWithProvider('google'))
   }
 
@@ -31,8 +30,8 @@ const SocialMediaSignIn = () => {
       {loading && <CircularProgress />}
       {!loading &&
       <div style={buttonsContainerStyle}>
-        <Button style={{marginBottom: '.5rem'}} variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
-        <Button style={{ marginBottom: '.5rem' }} variant='outlined' className='button-style full-width' color='default' onClick={handleFacebookSignIn}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
+        <Button style={{marginBottom: '.5rem'}} variant='outlined' className='button-style full-width' color='default' onClick={handleFacebookSignIn}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
+        <Button style={{ marginBottom: '.5rem' }} variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
       </div>}
     </Box>
   )

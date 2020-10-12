@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, Button, Typography, CircularProgress, Box, FormGroup } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { signIn, closeDialogs, openDialog } from '../../actions'
+import { signIn, closeDialogs, openDialog, setTempToken } from '../../actions'
 import SocialMediaSignIn from './SocialMediaSignIn';
 
 
@@ -15,7 +15,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const [inputToken, setInputToken] = useState('')
   const [inputTokenError, setInputTokenError] = useState('')
-  const token = '5101'
+  const tokens = ['51010', '51011', '51012', '51013', '51014']
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -39,7 +39,8 @@ const SignIn = () => {
   }
 
   const handleTokenClick = () => {
-    if (inputToken === token) {
+    if (tokens.includes(inputToken)) {
+      dispatch(setTempToken(inputToken))
       setTokenApproved(true)
     } else {
       setInputTokenError(translation.inputTokenErrorMsg)

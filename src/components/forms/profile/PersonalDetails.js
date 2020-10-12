@@ -30,7 +30,7 @@ const PersonalDetails = () => {
   return (
     <PaperContainer>
       <form onSubmit={handleSubmit}>
-        {!serviceYear && <Typography variant='body1'>{translation.lookingForJobFillDetails}</Typography>}
+        {/* {!serviceYear && <Typography variant='body1'>{translation.lookingForJobFillDetails}</Typography>} */}
         <ToggleLookingForJob />
         <ToggleVolunteer user={authState} />
         <br />

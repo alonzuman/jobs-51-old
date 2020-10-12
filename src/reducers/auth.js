@@ -48,6 +48,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         savedJobs: [...state.savedJobs.filter(job => job !== payload.jobId)]
       }
+    case 'SET_TEMP_TOKEN':
+      return {
+        ...state,
+        tempToken: payload
+      }
     case 'NOT_SIGNED_IN':
       return initialState
     case 'SIGN_OUT':
