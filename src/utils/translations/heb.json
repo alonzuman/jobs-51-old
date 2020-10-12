@@ -128,7 +128,8 @@
   "joined": "שנת גיוס ליחידה",
   "search": "חיפוש",
   "saveChanges": "שמירת שינויים",
-  "noPermission": "בקשתך להצטרף בטיפול, אנא צור קשר עם..",
+  "accessToken": "קוד גישה",
+  "noPermission": "בקשתכם להצטרף בטיפול, אנא צרו קשר עם מנהל המחוז שלכם על מנת שיאשר את פרופיל המשתמש שלכם",
   "backToHome": "בחזרה לעמוד הראשי",
   "noPermissionsToThisPage": "אין לך גישה לעמוד זה",
   "actionSuccedded": "הפעולה בוצעה בהצלחה",
@@ -171,7 +172,9 @@
   "grid": "רשימה",
   "noDataToShow": "אין מידע להציג",
   "privacyPolicy": "מדיניות פרטיות",
-  "forwardSlash": "שדה זה אינו יכול להכיל '/'"
+  "forwardSlash": "שדה זה אינו יכול להכיל '/'",
+  "continue": "המשך",
+  "inputTokenErrorMsg": "הקוד שהזנתם שגוי, אנא נסו שנית"
 }
 
 

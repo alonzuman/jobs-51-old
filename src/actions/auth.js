@@ -58,7 +58,7 @@ export const signInWithProvider = (provider) => async dispatch => {
             pending: 0,
             approved: 0
           },
-          role: user?.role ? user?.role : 'pending',
+          role: user?.role ? user?.role : 'user',
           dateCreated: Date.now()
         }
         await usersRef.doc(uid).set(newUser, { merge: true })
@@ -153,7 +153,7 @@ export const signUp = (user) => async dispatch =>{
         approved: 0
       },
       lookingForJob: false,
-      role: 'pending',
+      role: 'user',
       dateCreated: new Date()
     }
     await usersRef.doc(uid).set(newUser, { merge: true })
