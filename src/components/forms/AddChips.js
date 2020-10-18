@@ -6,7 +6,7 @@ import { addFilter, removeFilter } from '../../actions/jobs';
 import CustomChip from '../cards/CustomChip';
 import { setFeedback } from '../../actions';
 
-const AddChips = ({ placeholder, label, chips, setChips, collection }) => {
+const AddChips = ({ error, helperText, placeholder, label, chips, setChips, collection }) => {
   const { direction } = useSelector(state => state.theme)
   const dispatch = useDispatch()
   const [chipToAdd, setChipToAdd] = useState('')
@@ -61,7 +61,7 @@ const AddChips = ({ placeholder, label, chips, setChips, collection }) => {
   return (
     <div>
       <Box style={boxStyle}>
-        <TextField placeholder={placeholder} className='no-margin' value={chipToAdd} onChange={handleChipChange} label={label} variant='outlined' />
+        <TextField error={error} helperText={helperText} placeholder={placeholder} className='no-margin' value={chipToAdd} onChange={handleChipChange} label={label} variant='outlined' />
         <IconButton style={iconButtonStyle} onClick={() => addChip(chipToAdd)} ><AddIcon /></IconButton>
       </Box>
       <Grid style={gridStyle} container spacing={1}>

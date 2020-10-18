@@ -179,7 +179,9 @@
   "serviceYearPlaceholder": "לדוגמא: 2013",
   "preferredLocationPlaceholder": "לדוגמא: ׳הרצליה׳",
   "lastPositionPlaceholder": "לדוגמא: ׳מנהל פרוייקטים׳",
-  "skillsPlaceholder": "לדוגמא: ניהול צוות׳"
+  "skillsPlaceholder": "לדוגמא: ניהול צוות׳",
+  "categoryError": "אנא בחרו לפחות קטגוריה אחת",
+  "industry": "תעשיה"
 }
 
 

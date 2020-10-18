@@ -444,3 +444,7 @@ a:hover {
 .sticky {
   position: sticky!important;
 }
+
+.custom__input-label {
+  margin-right: 12px;
+}
