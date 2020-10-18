@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser } from '../actions/users'
-import { Avatar, Typography, Grid, Chip, IconButton } from '@material-ui/core'
+import { deleteUser, getUser } from '../actions/users'
+import { Avatar, Typography, Grid, Chip, IconButton, Button } from '@material-ui/core'
 import UserRoleActions from './admin/components/UserRoleActions'
 import TopBar from '../components/layout/TopBar'
 import { Skeleton } from '@material-ui/lab'
@@ -21,9 +21,11 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import WorkIcon from '@material-ui/icons/Work';
 import ToggleLookingForJob from '../components/forms/profile/ToggleLookingForJob'
+import ApprovalBox from '../components/dialogs/ApprovalBox'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
+  const [deleting, setDeleting] = useState(false)
   const [editing, setEditing] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
@@ -141,6 +143,8 @@ const User = ({ match }) => {
             style={{ marginBottom: ".5rem", marginTop: ".5rem" }}
             count={4}
           />}
+          {editing && checkPermissions(role) >= 3 && <Button onClick={() => setDeleting(true)} color='secondary'>{translation.deleteUser}</Button>}
+          {editing && checkPermissions(role) >= 3 && <ApprovalBox open={deleting} setOpen={setDeleting} action={() => dispatch(deleteUser(uid))} text={translation.areYouSure} />}
         <ImageLightbox
           open={imageOpen}
           onClose={() => setImageOpen(false)}

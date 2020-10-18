@@ -112,6 +112,7 @@
   "approveActivity": "אישור פעילות",
   "unApproveActivity": "ביטול פעילות",
   "deleteActivity": "מחיקת פעילות",
+  "deleteUser": "מחיקת משתמש",
   "ActivityApproved": "פעילות אושרה",
   "ActivityUnApproved": "פעילות בוטלה",
   "ActivityRemoved": "פעילות נמחקה בהצלחה",
@@ -174,7 +175,11 @@
   "privacyPolicy": "מדיניות פרטיות",
   "forwardSlash": "שדה זה אינו יכול להכיל '/'",
   "continue": "המשך",
-  "inputTokenErrorMsg": "הקוד שהזנתם שגוי, אנא נסו שנית"
+  "inputTokenErrorMsg": "הקוד שהזנתם שגוי, אנא נסו שנית",
+  "serviceYearPlaceholder": "לדוגמא: 2013",
+  "preferredLocationPlaceholder": "לדוגמא: ׳הרצליה׳",
+  "lastPositionPlaceholder": "לדוגמא: ׳מנהל פרוייקטים׳",
+  "skillsPlaceholder": "לדוגמא: ניהול צוות׳"
 }
 
 
