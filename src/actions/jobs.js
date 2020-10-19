@@ -171,7 +171,6 @@ export const getJobs = query => async dispatch => {
     const locationQuery = ['location', '==', location]
     // const dateQuery = ['dateCreated', '>=', filters.dates]
     let snapshot;
-    console.log(skills, location)
     if (skills && location) {
       snapshot = await jobsRef.where(...categoriesQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
     } else if (location) {
