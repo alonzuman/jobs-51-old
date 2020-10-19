@@ -18,9 +18,17 @@ const Jobs = () => {
   const { jobs, loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
   const history = useHistory()
-  const query = qs.parse(history.location.search)
 
   useEffect(() => {
+    const { skills, location } = qs.parse(history.location.search)
+    let skillsQuery;
+    if (typeof skills === 'string') {
+      skillsQuery = [skills]
+    } else {
+      skillsQuery = skills
+    }
+
+    let query = { location, skills: skillsQuery }
     dispatch(getJobs(query))
   }, [dispatch, history.location.search])
 

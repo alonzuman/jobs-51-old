@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import qs from 'query-string'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -21,8 +21,17 @@ const JobsFilter = () => {
   const { location, skills } = qs.parse(history.location.search)
   const [isOpen, setIsOpen] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const [selectedLocation, setSelectedLocation] = useState(location ? location : '')
-  const [selectedSkills, setSelectedSkills] = useState(skills?.length > 0 ? [...skills] : [])
+  const [selectedLocation, setSelectedLocation] = useState('')
+  const [selectedSkills, setSelectedSkills] = useState([])
+
+  useEffect(() => {
+    if (typeof skills === 'string') {
+      setSelectedSkills([skills])
+    } else {
+      setSelectedSkills(skills || [])
+    }
+    setSelectedLocation(location || '')
+  }, [history.location.search])
 
   const updateQuery = () => {
     const query = {

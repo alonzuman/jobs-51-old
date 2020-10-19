@@ -170,18 +170,20 @@ export const getJobs = query => async dispatch => {
     const categoriesQuery = ['skills', 'array-contains-any', skills]
     const locationQuery = ['location', '==', location]
     // const dateQuery = ['dateCreated', '>=', filters.dates]
+
     let snapshot;
-    if (skills && location) {
+    if (skills?.length > 0 && location) {
       snapshot = await jobsRef.where(...categoriesQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
     } else if (location) {
       snapshot = await jobsRef.where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    } else if (skills) {
+    } else if (skills?.length > 0) {
       snapshot = await jobsRef.where(...categoriesQuery).orderBy('dateCreated', 'desc').get()
     } else {
       snapshot = await jobsRef.orderBy('dateCreated', 'desc').limit(10).get()
     }
     let jobs = []
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
+
     dispatch({
       type: 'SET_JOBS',
       payload: {

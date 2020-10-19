@@ -7,12 +7,10 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
   const { listedSkills } = useSelector(state => state?.constants)
 
   const handleClick = newValue => {
-    if (selectedSkills?.length > 0 && !selectedSkills?.includes(newValue)) {
-      setSelectedSkills([...selectedSkills, newValue])
-    } else if (selectedSkills?.length > 0 && selectedSkills?.includes(newValue)) {
+    if (selectedSkills?.includes(newValue)) {
       setSelectedSkills([...selectedSkills.filter(v => v !== newValue)])
     } else {
-      setSelectedSkills([newValue])
+      setSelectedSkills([...selectedSkills, newValue])
     }
   }
 
