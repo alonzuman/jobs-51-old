@@ -5,7 +5,6 @@ import store from '../store'
 import { closeDialogs } from './dialogs'
 const usersRef = db.collection('users')
 const activitiesRef = db.collection('activities')
-const activityTypesRef = db.collection('activity-types')
 
 export const addActivity = (activity) => async dispatch => {
   const { uid, activities } = store.getState().auth
@@ -64,27 +63,6 @@ export const getMyActivities = () => async dispatch => {
     dispatch({
       type: 'SET_ACTIVITIES',
       payload: { activities }
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
-export const getActivityTypes = () => async dispatch => {
-  dispatch({
-    type: 'ACTIVITY_LOADING'
-  })
-  try {
-    const snapshot = await activityTypesRef.get()
-    let types = []
-    snapshot.forEach(doc => types.push(doc.id))
-    dispatch({
-      type: 'SET_ACTIVITY_TYPES',
-      payload: { types }
     })
   } catch (error) {
     console.log(error)

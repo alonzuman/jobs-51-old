@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Paper, Typography, ListItem } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import CardMarker from '../cards/CardMarker'
 
 const StatsList = ({ items }) => {
@@ -19,13 +18,11 @@ const StatsList = ({ items }) => {
       {items.map((item, index) => (
         <Grid key={index} xs={6} md={6} lg={6} item>
           <ListItem className='br-1' button>
-            <Link className='full__width' to={item.link && item.link}>
-              <Paper style={statsPaperStyle} elevation={0}>
-                {item.marker && <CardMarker color={item.marker} />}
-                <Typography variant='h1'>{item.big}</Typography>
-                <Typography variant='body1'>{item.label}</Typography>
-              </Paper>
-            </Link>
+            <Paper style={statsPaperStyle} elevation={0}>
+              {item.marker && <CardMarker color={item.marker} />}
+              <Typography variant='h1'>{item.big}</Typography>
+              <Typography variant='body1'>{item.label}</Typography>
+            </Paper>
           </ListItem>
         </Grid>
       ))}

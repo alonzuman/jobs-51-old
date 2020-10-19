@@ -12,11 +12,11 @@ import CustomChip from '../../components/cards/CustomChip'
 import ToggleView from '../../components/layout/ToggleView'
 import ActivitiesTable from './ActivitiesTable'
 
-const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
 const statuses = ['approved', 'pending', 'all']
 
 const ManageActivities = () => {
   const { region } = useSelector(state => state.auth)
+  const { regions } = useSelector(state => state?.constants?.locations)
   const { filters, view } = useSelector(state => state.activities)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()

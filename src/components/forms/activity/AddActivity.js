@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
-import { addActivity, getActivityTypes } from '../../../actions/activities'
+import { addActivity } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFeedback } from '../../../actions';
 import { setUserRegion } from '../../../actions/auth';
 import CustomChip from '../../cards/CustomChip';
 
-const regions = ['תל אביב', 'חיפה', 'באר שבע', 'שרון', 'ירושלים']
-
 const AddActivity = () => {
   const { uid, phone, region, avatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  const { loading, types } = useSelector(state => state.activities)
+  const { loading } = useSelector(state => state.activities)
+  const { all } = useSelector(state => state.constants?.activityTypes)
+  const { regions } = useSelector(state => state?.constants?.locations)
   const [total, setTotal] = useState('')
   const [activity, setActivity] = useState({
     type: '',
@@ -29,10 +29,6 @@ const AddActivity = () => {
     uid
   })
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getActivityTypes())
-  }, [dispatch])
 
   const handleRegionChange = e => {
     dispatch(setUserRegion(e.target.value, uid))
@@ -77,8 +73,8 @@ const AddActivity = () => {
 
   return (
     <form className="mt-1" onSubmit={handleSubmit}>
-      {!types && <CircularProgress />}
-      {types && (
+      {!all && <CircularProgress />}
+      {all && (
         <>
           <FormControl variant="outlined">
             <InputLabel>{translation.region}</InputLabel>
@@ -105,7 +101,7 @@ const AddActivity = () => {
             {translation.type}
           </InputLabel>
           <Grid container spacing={1}>
-            {types?.map((type, index) => (
+            {all?.map((type, index) => (
               <Grid key={index} item>
                 <CustomChip
                   onClick={() => setActivity({ ...activity, type })}
@@ -164,8 +160,8 @@ const AddActivity = () => {
             {loading ? (
               <CircularProgress className="button-spinner" />
             ) : (
-              translation.addActivity
-            )}
+                translation.addActivity
+              )}
           </Button>
         </>
       )}

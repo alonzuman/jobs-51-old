@@ -4,11 +4,10 @@ import { FormControl, MenuItem, Select, Button, CircularProgress } from '@materi
 import { Skeleton } from '@material-ui/lab';
 import { toggleRegion } from '../../../actions/users';
 
-const regions = ["תל אביב", "חיפה", "באר שבע", "שרון", "ירושלים"];
-
 const ChangeRegion = () => {
   const [region, setRegion] = useState('')
   const [button, setButton] = useState(false)
+  const { regions } = useSelector(state => state?.constants?.locations)
   const { translation } = useSelector(state => state.theme)
   const { user, loading } = useSelector(state => state.users)
   const dispatch = useDispatch()

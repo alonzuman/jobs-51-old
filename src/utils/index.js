@@ -64,14 +64,3 @@ export const translateDate = (date) => {
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-export const checkTempToken = token => {
-  switch (token) {
-    case '51010': return 'תל אביב';
-    case '51011': return 'חיפה';
-    case '51012': return 'באר שבע';
-    case '51013': return 'שרון';
-    case '51014': return 'ירושלים';
-    default: return ''
-  }
-}

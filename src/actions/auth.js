@@ -3,7 +3,6 @@ import firebase from 'firebase'
 import { closeDialogs } from './dialogs'
 import { setFeedback } from './feedback'
 import store from '../store'
-import { checkTempToken } from '../utils'
 const usersRef = db.collection('users')
 
 export const setUser = (user) => async dispatch => {
@@ -31,7 +30,9 @@ export const setUser = (user) => async dispatch => {
 
 export const signInWithProvider = (provider) => async dispatch => {
   const { tempToken } = store.getState().auth
-  const region = checkTempToken(tempToken);
+  const { token } = store.getState().auth
+  const { tokens } = store.getState().constants
+  const region = tokens?.all[token]
 
   dispatch({
     type: 'AUTH_LOADING'
@@ -141,8 +142,9 @@ export const signIn = ({ email, password }) => async dispatch =>{
 }
 
 export const signUp = (user) => async dispatch =>{
-  const { token } = store.getState().auth
-  const region = checkTempToken(token);
+  const { tempToken } = store.getState().auth
+  const { tokens } = store.getState().constants
+  const region = tokens?.all[tempToken] || ''
 
   dispatch({
     type: 'AUTH_LOADING'
@@ -212,6 +214,12 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
   })
   try {
     await usersRef.doc(uid).set({...personalDetails}, { merge: true })
+
+    const { skills } = personalDetails
+    await skills.forEach(v => db.collection('constants').doc('skills').update({
+      all: firebase.firestore.FieldValue.arrayUnion(v)
+    }))
+
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...user, ...personalDetails }
@@ -277,8 +285,9 @@ export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => 
     type: 'USER_LOADING'
   })
   try {
-    const userRef = usersRef.doc(uid)
-    await userRef.update('lookingForJob', currentValue)
+    await usersRef.doc(uid).update({
+      lookingForJob: currentValue
+    })
     dispatch({
       type: 'SET_USER',
       payload: {

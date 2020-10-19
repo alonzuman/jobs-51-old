@@ -93,7 +93,7 @@ const JobCard = ({ job }) => {
               <Typography variant='body1'>{job?.description}</Typography>
               <Typography variant='subtitle1'>{translation.categories}</Typography>
               <Grid container spacing={1}>
-                {job?.categories?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
+                {job?.skills?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
               </Grid>
             </CardContent>
           </Link>

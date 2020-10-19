@@ -48,7 +48,7 @@
   "personalDetails": "פרטים אישיים",
   "myProfile": "הפרופיל שלי",
   "displaySettings": "הגדרות תצוגה",
-  "categories": "קטגוריות",
+  "categories": "תחומי עיסוק",
   "Welcome": "ברוכים הבאים",
   "ServerError": "אירעה שגיאה, אנא נסו שנית",
   "Success": "הפעולה בוצעה בהצלחה!",
@@ -124,7 +124,7 @@
     "volunteer": "מתנדב",
     "manager": "מנהל",
     "moderator": "מנהל מחוז",
-    "admin": "מנהל בכיר"
+    "admin": "מנהל"
   },
   "joined": "שנת גיוס ליחידה",
   "search": "חיפוש",
@@ -181,7 +181,8 @@
   "lastPositionPlaceholder": "לדוגמא: ׳מנהל פרוייקטים׳",
   "skillsPlaceholder": "לדוגמא: ניהול צוות׳",
   "categoryError": "אנא בחרו לפחות קטגוריה אחת",
-  "industry": "תעשיה"
+  "industry": "תעשיה",
+  "filterResults": "סינון תוצאות חיפוש"
 }
 
 

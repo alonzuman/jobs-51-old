@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { TextField, Button, CircularProgress, Grid, FormControl, Typography } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import AddChips from '../AddChips'
 import { addPersonalDetails } from '../../../actions'
 import ToggleLookingForJob from './ToggleLookingForJob'
 import PaperContainer from '../../layout/PaperContainer'
-import ToggleVolunteer from './ToggleVolunteer'
+import SkillsSelect from './SkillsSelect'
+import LocationSelect from './LocationSelect'
 
 const PersonalDetails = ({ customMsg }) => {
   const authState = useSelector(state => state.auth)
@@ -35,19 +35,36 @@ const PersonalDetails = ({ customMsg }) => {
             <Typography variant='body1'>{customMsg}</Typography>
             <br />
           </>}
-        <ToggleLookingForJob />
-        <ToggleVolunteer user={authState} />
+        <ToggleLookingForJob lookingForJob={authState.lookingForJob} uid={authState.uid} />
         <br />
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <TextField placeholder={translation.serviceYearPlaceholder} label={translation.serviceYear} variant='outlined' value={serviceYear} onChange={e => setServiceYear(e.target.value)} />
           </Grid>
           <Grid item xs={6}>
-            <TextField placeholder={translation.preferredLocationPlaceholder} label={translation.preferredLocation} variant='outlined' value={preferredLocation} onChange={e => setPreferredLocation(e.target.value)} />
+            <LocationSelect
+              location={preferredLocation}
+              setLocation={setPreferredLocation}
+            />
+            {/* <Autocomplete
+              options={cities}
+              filterOptions={filterOptions}
+              handleHomeEndKeys
+              autoHighlight
+              value={preferredLocation}
+              onChange={(e, value) => setPreferredLocation(value)}
+              noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
+              getOptionLabel={option => option}
+              renderInput={params => <TextField {...params} label={translation.location} variant="outlined" />}
+              renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
+              placeholder={translation.preferredLocationPlaceholder}
+              label={translation.preferredLocation}
+              variant='outlined'
+            /> */}
           </Grid>
         </Grid>
         <TextField placeholder={translation.lastPositionPlaceholder} label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
-        <AddChips placeholder={translation.skillsPlaceholder} collection='skills' label={translation.skills} chips={skills} setChips={setSkills} />
+        <SkillsSelect placeholder={translation.skillsPlaceholder} collection='skills' label={translation.skills} skills={skills} setSkills={setSkills}  />
         <FormControl className='mb-0'>
           <Button className='button-style' variant='contained' color='primary' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.update}</Button>
         </FormControl>

@@ -29,8 +29,8 @@ const Job = () => {
     <>
       <TopBar
         backButton={true}
-        title={loading ? <Skeleton height={32} width={240} /> : job.company}
-        subtitle={loading ? <Skeleton height={24} width={120} /> : job.location}
+        title={loading ? <Skeleton height={32} width={240} /> : job?.company}
+        subtitle={loading ? <Skeleton height={24} width={120} /> : job?.location}
       >
         {loading ?
           <Skeleton variant="circle" className="avatar__md" />:<Avatar className="avatar__md" src={job?.avatar} alt={job?.company}>
@@ -45,9 +45,9 @@ const Job = () => {
           variant="outlined"
           color="primary"
         />
-        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={64} /> : translation.description}</Typography>
+        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={64} /> : translation?.description}</Typography>
         <PaperContainer style={{ marginBottom: "1rem" }}>
-          <Typography variant='body1'>{loading ? <Skeleton height={32} width={220} /> : job.description}</Typography>
+          <Typography variant='body1'>{loading ? <Skeleton height={32} width={220} /> : job?.description}</Typography>
         </PaperContainer>
         <Typography variant="subtitle1">
           {loading ? <Skeleton height={24} width={48} /> : translation.categories}
@@ -62,7 +62,7 @@ const Job = () => {
             </Grid>}
         </PaperContainer>
         <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={100}/> : translation.contactPerson}</Typography>
-        <UserCard xs={12} md={12} lg={12} loading={loading} containerStyle={{ padding: 0 }} user={{ ...job.user, uid: job.uid }} />
+        <UserCard xs={12} md={12} lg={12} loading={loading} containerStyle={{ padding: 0 }} user={{ ...job?.user, uid: job?.uid }} />
       </PageContainer>
     </>
   );

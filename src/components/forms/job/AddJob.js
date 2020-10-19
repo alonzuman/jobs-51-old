@@ -3,12 +3,10 @@ import { v4 as uuidv4 } from 'uuid'
 import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
-import AddChips from '../AddChips'
-import { addJob, addFilter, setFeedback } from '../../../actions'
+import { addJob } from '../../../actions'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
-import { Autocomplete } from '@material-ui/lab'
-import { cities } from '../../../utils/constants/cities'
-import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import LocationSelect from '../profile/LocationSelect'
+import SkillsSelect from '../profile/SkillsSelect'
 
 
 const industries = [
@@ -17,7 +15,7 @@ const industries = [
 
 const AddJob = () => {
   const dispatch = useDispatch()
-  const [categoriesError, setCategoriesError] = useState('')
+  const [skillsError, setSkillsError] = useState('')
   const { uid, firstName, lastName, avatar, role, email, phone } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
@@ -26,7 +24,7 @@ const AddJob = () => {
   const [isUploading, setIsUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [image, setImage] = useState('')
-  const [categories, setCategories] = useState([])
+  const [skills, setSkills] = useState([])
   const [job, setJob] = useState({
     company: '',
     contactPerson: '',
@@ -42,12 +40,6 @@ const AddJob = () => {
     })
   }
 
-  const filterOptions = createFilterOptions({
-    matchFrom: 'start',
-    stringify: option => option,
-    limit: 30
-  });
-
   const handleJobSubmit = e => {
     e.preventDefault()
     const jobToAdd = {
@@ -55,7 +47,7 @@ const AddJob = () => {
       image,
       industry,
       location,
-      categories,
+      skills,
       uid,
       user: {
         firstName,
@@ -66,9 +58,8 @@ const AddJob = () => {
         avatar
       }
     }
-    dispatch(addFilter({ collection: 'locations', value: jobToAdd.location }))
-    if (categories.length === 0) {
-      setCategoriesError(translation.categoryError)
+    if (skills.length === 0) {
+      setSkillsError(translation.categoryError)
     } else {
       dispatch(addJob(jobToAdd))
     }
@@ -101,17 +92,9 @@ const AddJob = () => {
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs={6}>
-          <Autocomplete
-            options={cities}
-            filterOptions={filterOptions}
-            handleHomeEndKeys
-            autoHighlight
-            value={location}
-            onChange={(e, value) => setLocation(value)}
-            noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
-            getOptionLabel={option => option}
-            renderInput={params => <TextField {...params} label={translation.location} variant="outlined" />}
-            renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
+          <LocationSelect
+            location={location}
+            setLocation={setLocation}
           />
         </Grid>
         <Grid item xs={6}>
@@ -127,7 +110,7 @@ const AddJob = () => {
         </Grid>
       </Grid>
       <TextField required multiline rows={4} label={translation.description} variant='outlined' value={job['description']} name='description' onChange={handleJobChange} />
-      <AddChips error={Boolean(categoriesError)} helperText={categoriesError} collection='categories' chips={categories} setChips={setCategories} label={translation.categories} />
+      <SkillsSelect error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} />
       <Button disabled={isUploading} className='button-style' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
     </form>
   )
