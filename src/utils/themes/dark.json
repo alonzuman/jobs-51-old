@@ -24,6 +24,9 @@
       "main": "#303030"
     }
   },
+  "shape": {
+    "borderRadius": 4
+  },
   "typography": {
     "fontFamily": ["Rubik", "sans-serif"],
     "h1": {

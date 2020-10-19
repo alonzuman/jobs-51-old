@@ -1,4 +1,4 @@
-import { DialogTitle, IconButton, Typography } from '@material-ui/core';
+import { DialogTitle, IconButton } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close'

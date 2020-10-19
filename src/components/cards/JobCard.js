@@ -52,10 +52,10 @@ const JobCard = ({ job }) => {
     if (authenticated && checkPermissions(role) >= 3) {
       return (
         <>
-        <IconButton onClick={handleClick}><EditIcon /></IconButton>
-        <IconButton onClick={handleClickFavorite}>
-          {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
-        </IconButton>
+          <IconButton onClick={handleClick}><EditIcon /></IconButton>
+          <IconButton onClick={handleClickFavorite}>
+            {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
+          </IconButton>
         </>
       )
     } else if (authenticated && job?.uid === uid) {
@@ -63,9 +63,9 @@ const JobCard = ({ job }) => {
     } else {
       if (authenticated) {
         return (
-        <IconButton onClick={handleClickFavorite}>
-          {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
-        </IconButton>)
+          <IconButton onClick={handleClickFavorite}>
+            {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
+          </IconButton>)
       } else {
         return null
       }
@@ -79,25 +79,23 @@ const JobCard = ({ job }) => {
 
   return (
     <Grid item xs={12} md={6} lg={6}>
-      <ListItem className='br-1' button>
-        <CardContainer>
-          <CardHeader
-            avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-            title={job?.company}
-            subheader={job?.location}
-            action={action()}
-          />
-          <Link to={`/jobs/${job?.id}`}>
-            <CardContent>
-              <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary'/>
-              <Typography variant='subtitle1'>{translation.categories}</Typography>
-              <Grid container spacing={1}>
-                {job?.skills?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
-              </Grid>
-            </CardContent>
-          </Link>
-        </CardContainer>
-      </ListItem>
+      <CardContainer>
+        <CardHeader
+          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
+          title={job?.company}
+          subheader={job?.location}
+          action={action()}
+        />
+        <Link to={`/jobs/${job?.id}`}>
+          <CardContent>
+            <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary' />
+            <Typography variant='subtitle1'>{translation.categories}</Typography>
+            <Grid container spacing={1}>
+              {job?.skills?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
+            </Grid>
+          </CardContent>
+        </Link>
+      </CardContainer>
     </Grid>
   )
 }

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { TextField, Button, CircularProgress, Grid, FormControl, Typography } from '@material-ui/core'
+import { TextField, Button, CircularProgress, Grid, FormControl, Typography, Paper } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPersonalDetails } from '../../../actions'
 import ToggleLookingForJob from './ToggleLookingForJob'
-import PaperContainer from '../../layout/PaperContainer'
 import SkillsSelect from './SkillsSelect'
 import LocationSelect from './LocationSelect'
 
@@ -28,7 +27,7 @@ const PersonalDetails = ({ customMsg }) => {
   }
 
   return (
-    <PaperContainer>
+    <Paper className='ptb-5 ps-1'>
       <form onSubmit={handleSubmit}>
         {customMsg &&
           <>
@@ -46,21 +45,6 @@ const PersonalDetails = ({ customMsg }) => {
               location={preferredLocation}
               setLocation={setPreferredLocation}
             />
-            {/* <Autocomplete
-              options={cities}
-              filterOptions={filterOptions}
-              handleHomeEndKeys
-              autoHighlight
-              value={preferredLocation}
-              onChange={(e, value) => setPreferredLocation(value)}
-              noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
-              getOptionLabel={option => option}
-              renderInput={params => <TextField {...params} label={translation.location} variant="outlined" />}
-              renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
-              placeholder={translation.preferredLocationPlaceholder}
-              label={translation.preferredLocation}
-              variant='outlined'
-            /> */}
           </Grid>
         </Grid>
         <TextField placeholder={translation.lastPositionPlaceholder} label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
@@ -69,7 +53,7 @@ const PersonalDetails = ({ customMsg }) => {
           <Button className='button-style' variant='contained' color='primary' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.update}</Button>
         </FormControl>
       </form>
-    </PaperContainer>
+    </Paper>
   )
 }
 

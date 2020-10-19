@@ -20,14 +20,9 @@ const CardsSkeletons = ({ count }) => {
 
 const CardSkeleton = () => {
   const { direction } = useSelector(state => state.theme)
-
-  const cardStyle = {
-    direction
-  }
-
   const avatarStyle = {
-    height: 60,
-    width: 60,
+    height: 40,
+    width: 40,
     margin: '1rem'
   }
 
@@ -43,22 +38,13 @@ const CardSkeleton = () => {
   }
 
   const cardHeaderStyle2 = {
-    width: '8rem',
-    margin: '0 1rem 0 1rem',
+    width: '6rem',
     height: '1rem'
-  }
-
-  const cardBodyStyle = {
-    width: '100%'
-  }
-
-  const cardContentStyle = {
-    paddingBottom: '1rem'
   }
 
   return (
   <Grid item xs={12} md={6} lg={6}>
-    <CardContainer style={cardStyle}>
+    <CardContainer dir={direction}>
       <div style={flexHeaderStyle}>
         <Skeleton style={avatarStyle} variant='circle' />
         <div>
@@ -66,13 +52,11 @@ const CardSkeleton = () => {
           <Skeleton style={cardHeaderStyle2} variant='text' />
         </div>
       </div>
-      <CardContent style={cardContentStyle}>
-        <Skeleton style={cardBodyStyle} variant='text' />
-        <Skeleton style={cardBodyStyle} variant='text' />
-        <Skeleton style={cardBodyStyle} variant='text' />
+      <CardContent className='mb-1'>
+        <Skeleton width={'12rem'} variant='text' />
+        <Skeleton width={'8rem'} variant='text' />
         <br />
-        <Skeleton style={cardBodyStyle} variant='text' />
-        <Skeleton style={cardBodyStyle} variant='text' />
+        <Skeleton width={'10rem'} variant='text' />
       </CardContent>
     </CardContainer>
   </Grid>

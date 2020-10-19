@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Switch, Box, Typography, FormControl } from '@material-ui/core'
+import { Button, Switch, Box, Typography, FormControl, Paper } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOut, setTheme } from '../../actions'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import PaperContainer from '../layout/PaperContainer';
 import { Link } from 'react-router-dom';
 
 const Settings = () => {
@@ -29,7 +28,7 @@ const Settings = () => {
   }
 
   return (
-    <PaperContainer>
+    <Paper className='ps-1 ptb-5'>
       <Typography variant='body2'>{translation.displaySettings}</Typography>
       <Box style={{ display: 'flex', alignItems: 'center' }}>
         <Brightness4Icon style={{color: theme.typography.body1.color }}  />
@@ -44,7 +43,7 @@ const Settings = () => {
           {translation.privacyPolicy}
         </Typography>
       </Link>
-    </PaperContainer>
+    </Paper>
   )
 }
 

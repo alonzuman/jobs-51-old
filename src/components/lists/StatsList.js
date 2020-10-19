@@ -1,29 +1,15 @@
 import React from 'react'
-import { Grid, Paper, Typography, ListItem } from '@material-ui/core'
-import CardMarker from '../cards/CardMarker'
+import { Grid, Paper, Typography } from '@material-ui/core'
 
 const StatsList = ({ items }) => {
-  const statsPaperStyle = {
-    width: '100%',
-    height: 120,
-    display: 'flex',
-    borderRadius: '1rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  }
-
   return (
     <Grid className='cards__container' container spacing={2}>
       {items.map((item, index) => (
         <Grid key={index} xs={6} md={6} lg={6} item>
-          <ListItem className='br-1' button>
-            <Paper style={statsPaperStyle} elevation={0}>
-              {item.marker && <CardMarker color={item.marker} />}
-              <Typography variant='h1'>{item.big}</Typography>
-              <Typography variant='body1'>{item.label}</Typography>
-            </Paper>
-          </ListItem>
+          <Paper className='flex align__center justify__center flex__column pt-1 pb-1'>
+            <Typography variant='h1'>{item.big}</Typography>
+            <Typography variant='body1'>{item.label}</Typography>
+          </Paper>
         </Grid>
       ))}
     </Grid>

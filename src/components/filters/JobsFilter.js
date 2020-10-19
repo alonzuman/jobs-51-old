@@ -55,7 +55,7 @@ const JobsFilter = () => {
 
   return (
     <Container>
-      <Button className='full__width' color='primary' variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
+      <Button className='full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
       <Dialog dir='rtl' open={isOpen} onClose={handleClose}>
         <CustomDialogHeader title={'filterResults'} exitButton onClose={handleClose} />
         <DialogContent>

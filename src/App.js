@@ -32,6 +32,7 @@ import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
 import UserActivities from './pages/UserActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import ManageConstants from './pages/admin/ManageConstants'
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
             <Route exact path='/' component={LandingPage} />
           </Switch>

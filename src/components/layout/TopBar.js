@@ -3,6 +3,13 @@ import { AppBar, Typography, Paper } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import BackButton from './BackButton'
 import './TopBar.css'
+import styled from 'styled-components'
+
+const TopbarContainer = styled.div`
+  display: flex;
+  background-color: ${props => props.backgroundColor};
+  position: ${props => props.sticky ? `1px solid ${props.borderColor}` : 'none'};
+`
 
 const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton = false, sticky = false, action }) => {
   const { theme } = useSelector(state => state.theme)
@@ -13,30 +20,26 @@ const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton
     return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
   }, [])
 
-  const containerStyle = {
-    borderBottom: sticky ? `1px solid ${theme.palette.border.main}` : 'none'
-  }
-
-  const paperStyle = {
-    backgroundColor: theme.palette.background.light
-  }
-
   return (
-    <AppBar elevation={0} style={containerStyle} className={`topbar__container ${sticky ? "sticky" : "relative"}`}>
-      <Paper style={paperStyle} elevation={0} className="paper__background">
-        <div className={`flex align__center ${width > 768 ? '' : 'justify__between'}`}>
-          {backButton && <BackButton />}
-          <span onClick={actionOnClick}>{action}</span>
+    <TopbarContainer
+      sticky={sticky}
+      borderColor={theme?.palette?.border?.main}
+      backgroundColor={theme?.palette?.background?.light}
+      elevation={0}
+      className={`topbar__container ${sticky ? "sticky" : "relative"}`}
+    >
+      <div className={`flex align__center ${width > 768 ? '' : 'justify__between'}`}>
+        {backButton && <BackButton />}
+        <span onClick={actionOnClick}>{action}</span>
+      </div>
+      <div className={`margin__center max__width transparent top__row__container flex justify__between align__center full__width ${backButton ? "" : "mt-3"}`}>
+        <div>
+          <Typography variant="h1">{title}</Typography>
+          <Typography variant="subtitle1">{subtitle}</Typography>
         </div>
-        <div className={`margin__center max__width transparent top__row__container flex justify__between align__center full__width ${backButton ? "" : "mt-3"}`}>
-          <div>
-            <Typography variant="h1">{title}</Typography>
-            <Typography variant="subtitle1">{subtitle}</Typography>
-          </div>
-          {children}
-        </div>
-      </Paper>
-    </AppBar>
+        {children}
+      </div>
+    </TopbarContainer>
   );
 }
 

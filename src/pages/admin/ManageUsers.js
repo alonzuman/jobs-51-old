@@ -9,20 +9,21 @@ import PageContainer from '../../components/layout/PageContainer'
 import SecondaryBar from '../../components/layout/SecondaryBar'
 import SingleSelectionChips from './components/SingleSelectionChips'
 import CustomChip from '../../components/cards/CustomChip'
+import styled from 'styled-components'
 
 const statuses = ['pending', 'user', 'volunteer', 'manager', 'moderator', 'admin']
+
+const FiltersContainer = styled.div`
+  padding: 8px 16px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
 
 const ManageUsers = () => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const { filters } = useSelector(state => state.users)
-
-  const filtersContainerStyle = {
-    padding: '.5rem 1rem',
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'space-between'
-  }
 
   const clearStyle = {
     backgroundColor: 'transparent',
@@ -33,7 +34,7 @@ const ManageUsers = () => {
     <>
       <TopBar backButton={true} title={translation.manageUsers} />
       <SecondaryBar>
-        <Box style={filtersContainerStyle}>
+        <FiltersContainer>
           <Grid container spacing={1}>
             <Grid item><SearchBar /></Grid>
             <Grid item>
@@ -47,7 +48,7 @@ const ManageUsers = () => {
             </Grid>
           </Grid>
           <CustomChip style={clearStyle} onClick={() => dispatch(clearUserFilters())} label={translation.clear} />
-        </Box>
+        </FiltersContainer>
       </SecondaryBar>
       <PageContainer>
         <UsersList />

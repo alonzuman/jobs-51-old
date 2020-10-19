@@ -4,10 +4,9 @@ import { getJob } from '../actions'
 import { useRouteMatch } from 'react-router-dom'
 import { Skeleton } from '@material-ui/lab'
 import TopBar from '../components/layout/TopBar'
-import { Typography, Avatar, Grid } from '@material-ui/core'
+import { Typography, Avatar, Grid, Paper } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
-import PaperContainer from '../components/layout/PaperContainer'
 import CustomChip from '../components/cards/CustomChip'
 import moment from 'moment'
 import UserCard from '../components/cards/UserCard'
@@ -46,13 +45,13 @@ const Job = () => {
           color="primary"
         />
         <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={64} /> : translation?.description}</Typography>
-        <PaperContainer style={{ marginBottom: "1rem" }}>
+        <Paper style={{ marginBottom: "1rem" }}>
           <Typography variant='body1'>{loading ? <Skeleton height={32} width={220} /> : job?.description}</Typography>
-        </PaperContainer>
+        </Paper>
         <Typography variant="subtitle1">
           {loading ? <Skeleton height={24} width={48} /> : translation.categories}
         </Typography>
-        <PaperContainer style={{ marginBottom: "1rem" }}>
+        <Paper style={{ marginBottom: "1rem" }}>
           {loading ? <ChipsSkeleton count={3} />:<Grid container spacing={1}>
               {job?.categories?.map((x, i) => (
                 <Grid key={i} item>
@@ -60,7 +59,7 @@ const Job = () => {
                 </Grid>
               ))}
             </Grid>}
-        </PaperContainer>
+        </Paper>
         <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={100}/> : translation.contactPerson}</Typography>
         <UserCard xs={12} md={12} lg={12} loading={loading} containerStyle={{ padding: 0 }} user={{ ...job?.user, uid: job?.uid }} />
       </PageContainer>

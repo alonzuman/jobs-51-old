@@ -12,10 +12,6 @@ a:hover {
   text-decoration: none!important;
 }
 
-.MuiCardContent-root:last-child {
-  padding-bottom: 1rem!important;
-}
-
 .paper-background {
   border-radius: 0!important;
   width: 100%!important;
@@ -29,15 +25,6 @@ a:hover {
 
 .jobs-container {
   padding-top: 4rem!important;
-}
-
-.MuiContainer-root {
-  height: 100%!important;
-  padding: 1rem!important;
-}
-
-.MuiDialogContent-root {
-  padding: 0 16px 16px 16px!important;
 }
 
 .MuiFormControl-root {
@@ -63,33 +50,9 @@ a:hover {
   margin: 0!important;
 }
 
-.MuiAlert-root {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.MuiAlert-action {
-  padding: 0!important;
-  margin: 0!important;
-}
-
 .chip-button {
   cursor: pointer!important;
   transition: .3s border ease-in-out;
-}
-
-.MuiCard-root {
-  border-radius: 1rem!important;
-  box-shadow: none!important;
-}
-
-.MuiCardHeader-avatar {
-  margin: 0 0 0 1rem;
-  margin-right: 0!important;
 }
 
 .button-spinner {
@@ -115,18 +78,6 @@ a:hover {
   position: absolute;
   left: 1rem;
   top: .6rem;
-}
-
-.MuiList-root {
-  padding: 0!important;
-}
-
-.MuiListItem-root {
-  margin: 1rem 0!important;
-}
-
-.MuiListItem-root:first-of-type {
-  margin-top: 0!important;
 }
 
 .button-link {
@@ -272,6 +223,20 @@ a:hover {
   margin-top: .5rem;
 }
 
+.ptb-5 {
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.ps-1 {
+  padding-left: 16px!important;
+  padding-right: 16px!important;
+}
+
+.pb-0 {
+  padding-bottom: 0!important;
+}
+
 .pb-1 {
   padding-bottom: 1rem!important;
 }
@@ -393,11 +358,6 @@ a:hover {
   margin-right: .5rem!important;
 }
 
-.cards__container .MuiListItem-root {
-  padding: 0!important;
-  margin: 0!important;
-}
-
 .br-1 {
   border-radius: 1rem!important;
 }
@@ -423,12 +383,6 @@ a:hover {
   direction: rtl!important;
 }
 
-.MuiMenu-paper {
-  border-radius: 1rem!important;
-  padding-top: 1rem!important;
-  box-shadow: 0 0 10px #00000030!important;
-}
-
 .min__width--200 {
   min-width: 200px!important;
 }
@@ -447,4 +401,15 @@ a:hover {
 
 .custom__input-label {
   margin-right: 12px;
+}
+
+
+
+/* MUI  */
+.MuiPaper-root {
+  border-radius: 16px!important;
+}
+
+.MuiCardContent-root {
+  padding: 8px 16px!important;
 }

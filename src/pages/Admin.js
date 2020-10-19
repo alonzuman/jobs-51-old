@@ -2,10 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import TopBar from '../components/layout/TopBar'
 import PageContainer from '../components/layout/PageContainer'
-import StatsList from '../components/lists/StatsList'
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import DataUsageIcon from '@material-ui/icons/DataUsage';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Divider, MenuItem, MenuList } from '@material-ui/core'
+import { MenuItem, MenuList } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 const Admin = () => {
@@ -14,7 +14,7 @@ const Admin = () => {
   const items = [
     { label: translation.manageUsers, icon: <PeopleAltIcon />, link: '/admin/users' },
     { label: translation.manageActivities, icon: <AssignmentIcon />, link: '/admin/activities' },
-    // { label: translation.editContent, icon: <AssignmentIcon />, link: '/admin/activities' },
+    { label: translation.manageConstants, icon: <DataUsageIcon />, link: '/admin/constants' },
   ]
 
   const menuItemStyle = {
@@ -31,8 +31,8 @@ const Admin = () => {
       <PageContainer>
         <MenuList>
           {items.map((v, i) =>
-            <Link to={v.link}>
-              <MenuItem style={menuItemStyle} key={i}><span style={iconStyle}>{v.icon}</span>{v.label}</MenuItem>
+            <Link key={i} to={v.link}>
+              <MenuItem style={menuItemStyle}><span style={iconStyle}>{v.icon}</span>{v.label}</MenuItem>
             </Link>
           )}
         </MenuList>

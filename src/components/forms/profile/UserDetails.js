@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { editProfile } from '../../../actions'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { TextField, Button, Box, Grid, CircularProgress, Avatar, FormControl } from '@material-ui/core'
+import { TextField, Button, Box, Grid, CircularProgress, Avatar, FormControl, Paper } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 import CircularSpinnerWithContainer from '../../layout/CircularSpinnerWithContainer'
-import PaperContainer from '../../layout/PaperContainer'
 
 const UserDetails = () => {
   const authState = useSelector(state => state.auth)
@@ -58,7 +57,7 @@ const UserDetails = () => {
     return <CircularSpinnerWithContainer />
   } else {
     return (
-      <PaperContainer>
+      <Paper className='ptb-5 ps-1'>
         <form onSubmit={handleSubmit}>
           <Box style={boxStyle}>
             {uploading && <CircularProgressWithLabel value={progress} />}
@@ -79,7 +78,7 @@ const UserDetails = () => {
             <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner'/> : translation.update}</Button>
           </FormControl>
         </form>
-      </PaperContainer>
+      </Paper>
     )
   }
 }

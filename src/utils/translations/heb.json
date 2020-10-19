@@ -69,7 +69,6 @@
   "notifications": "התראות",
   "notificationsEmptyState": "אין התראות",
   "addActivity": "הזנת פעילות",
-  "admin": "ניהול",
   "adminEmptyState": "אין מידע להציג",
   "activityAdded": "פעילות נוספה בהצלחה!",
   "activitiesEmptyState": "לא נמצאו פעילויות",
@@ -154,7 +153,6 @@
   "noPersonalInfo": "מילוי פרטים אישיים",
   "usersLookingForJob": "חברים שמחפשים עבודה",
   "userStatus": "סטטוס משתמש",
-  "pending": "ממתין לאישור",
   "user": "חבר עמותה",
   "volunteer": "מתנדב",
   "manager": "מנהל",
@@ -184,7 +182,8 @@
   "categoryError": "אנא בחרו לפחות קטגוריה אחת",
   "industry": "תעשיה",
   "filterResults": "סינון תוצאות חיפוש",
-  "submit": "יישום"
+  "submit": "יישום",
+  "manageConstants": "ניהול נתונים"
 }
 
 

@@ -1,21 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Container } from '@material-ui/core'
+import styled from 'styled-components'
 
-const PageContainer = ({ style, children }) => {
-  const { theme } = useSelector(state => state.theme)
-
-  const containerStyle = {
-    backgroundColor: theme.palette.background.main,
-    maxWidth: 1028,
-    ...style
-  }
-
-  return (
-    <Container style={containerStyle}>
-      { children }
-    </Container>
-  )
-}
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 16px;
+  max-width: 768px;
+  margin: 0 auto;
+`
 
 export default PageContainer
