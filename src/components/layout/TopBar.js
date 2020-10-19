@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { AppBar, Typography, Paper } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import BackButton from './BackButton'
-import './TopBar.css'
 import styled from 'styled-components'
 
 const TopbarContainer = styled.div`
   display: flex;
   background-color: ${props => props.backgroundColor};
   position: ${props => props.sticky ? `1px solid ${props.borderColor}` : 'none'};
+  position: ${props => props.sticky ? 'sticky' : 'relative'};
+  flex-direction: column;
+`
+
+const ItemsContainer = styled.div`
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton = false, sticky = false, action }) => {
@@ -26,19 +35,18 @@ const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton
       borderColor={theme?.palette?.border?.main}
       backgroundColor={theme?.palette?.background?.light}
       elevation={0}
-      className={`topbar__container ${sticky ? "sticky" : "relative"}`}
     >
       <div className={`flex align__center ${width > 768 ? '' : 'justify__between'}`}>
         {backButton && <BackButton />}
         <span onClick={actionOnClick}>{action}</span>
       </div>
-      <div className={`margin__center max__width transparent top__row__container flex justify__between align__center full__width ${backButton ? "" : "mt-3"}`}>
+      <ItemsContainer>
         <div>
-          <Typography variant="h1">{title}</Typography>
+          <Typography className='p-0' variant="h1">{title}</Typography>
           <Typography variant="subtitle1">{subtitle}</Typography>
         </div>
         {children}
-      </div>
+      </ItemsContainer>
     </TopbarContainer>
   );
 }

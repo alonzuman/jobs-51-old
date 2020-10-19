@@ -15,16 +15,14 @@ const UserCard = ({ xs = 12, md = 6, lg = 6, loading, user, containerStyle, labe
   if (!user || loading) {
     return (
       <Grid item xs={xs} md={md} lg={lg}>
-        <Paper className='ps-1 ptb-5'>
-          <Card>
-            <CardHeader
-              style={cardHeaderStyle}
-              avatar={<Skeleton variant='circle' height={40} width={40} />}
-              title={<Skeleton variant='rect' height={18} width={120} />}
-              subheader={<Skeleton className='mt-5' variant='rect' height={14} width={80} />}
-            />
-          </Card>
-        </Paper>
+        <Card>
+          <CardHeader
+            style={cardHeaderStyle}
+            avatar={<Skeleton variant='circle' height={40} width={40} />}
+            title={<Skeleton variant='rect' height={18} width={120} />}
+            subheader={<Skeleton className='mt-5' variant='rect' height={14} width={80} />}
+          />
+        </Card>
       </Grid>
     )
   } else {
@@ -38,8 +36,7 @@ const UserCard = ({ xs = 12, md = 6, lg = 6, loading, user, containerStyle, labe
               avatar={
                 <Avatar src={user?.avatar} alt={user?.firstName}>
                   {user?.firstName?.charAt(0)}
-                </Avatar>
-              }
+                </Avatar>}
               title={`${user?.firstName} ${user?.lastName}`}
               subheader={user?.serviceYear ? `${translation.joined} ${user?.serviceYear}` : ""}
               action={

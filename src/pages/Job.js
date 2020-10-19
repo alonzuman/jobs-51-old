@@ -4,7 +4,7 @@ import { getJob } from '../actions'
 import { useRouteMatch } from 'react-router-dom'
 import { Skeleton } from '@material-ui/lab'
 import TopBar from '../components/layout/TopBar'
-import { Typography, Avatar, Grid, Paper } from '@material-ui/core'
+import { Typography, Avatar, Grid, Paper, Chip } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import ChipsSkeleton from '../components/skeletons/ChipsSkeleton'
 import CustomChip from '../components/cards/CustomChip'
@@ -37,30 +37,30 @@ const Job = () => {
           </Avatar>}
       </TopBar>
       <PageContainer>
-        <CustomChip
-          style={{marginBottom: '1rem'}}
+        <Chip
+          className='fit__content'
           label={loading ? <Skeleton width={80} height={18} /> : timeAgo()}
           size="small"
           variant="outlined"
           color="primary"
         />
-        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={64} /> : translation?.description}</Typography>
-        <Paper style={{ marginBottom: "1rem" }}>
+        <Typography className='mt-1' variant='subtitle1'>{loading ? <Skeleton height={24} width={64} /> : translation?.description}</Typography>
+        <Paper className='p-1'>
           <Typography variant='body1'>{loading ? <Skeleton height={32} width={220} /> : job?.description}</Typography>
         </Paper>
-        <Typography variant="subtitle1">
+        <Typography className='mt-1' variant="subtitle1">
           {loading ? <Skeleton height={24} width={48} /> : translation.categories}
         </Typography>
-        <Paper style={{ marginBottom: "1rem" }}>
+        <Paper className='p-1'>
           {loading ? <ChipsSkeleton count={3} />:<Grid container spacing={1}>
-              {job?.categories?.map((x, i) => (
+              {job?.skills?.map((x, i) => (
                 <Grid key={i} item>
                   <CustomChip label={x} />
                 </Grid>
               ))}
             </Grid>}
         </Paper>
-        <Typography variant='subtitle1'>{loading ? <Skeleton height={24} width={100}/> : translation.contactPerson}</Typography>
+        <Typography className='mt-1' variant='subtitle1'>{loading ? <Skeleton height={24} width={100}/> : translation.contactPerson}</Typography>
         <UserCard xs={12} md={12} lg={12} loading={loading} containerStyle={{ padding: 0 }} user={{ ...job?.user, uid: job?.uid }} />
       </PageContainer>
     </>

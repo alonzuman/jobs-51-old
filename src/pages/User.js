@@ -93,10 +93,12 @@ const User = ({ match }) => {
             <ToggleLookingForJob uid={user?.uid} lookingForJob={user?.lookingForJob} />
           </Paper>}
         {!editing && user?.lookingForJob &&
-          <CustomChip
-            style={{ marginBottom: "1rem" }}
-            color="primary"
-            label={user.lookingForJob ? translation.iAmLookingForAJob : ""}
+          <Chip
+            color='primary'
+            variant='outlined'
+            label={translation.iAmLookingForAJob}
+            className='fit__content mb-1'
+            size='small'
           />}
         {!editing && user?.volunteer && user?.region &&
           <div className='mb-1'>

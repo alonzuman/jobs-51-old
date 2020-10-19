@@ -84,7 +84,7 @@ const Navbar = () => {
         </Button>
         <Menu className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
           <NavLink to='/home'>
-            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+            <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.main}
                 <AssignmentIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
@@ -92,7 +92,7 @@ const Navbar = () => {
             </MenuItem>
           </NavLink>
           <NavLink to='/saved'>
-            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+            <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.saved}
                 <FavoriteIcon style={{ color: value === '/saved' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
@@ -100,7 +100,7 @@ const Navbar = () => {
             </MenuItem>
           </NavLink>
           {volunteer && <NavLink to='/activity'>
-            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+            <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.activity}
                 <AssessmentIcon  style={{ color: value === '/activity' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
@@ -108,7 +108,7 @@ const Navbar = () => {
             </MenuItem>
           </NavLink>}
           <NavLink to='/profile/user-details'>
-            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+            <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.profile}
                 <AccountCircleIcon style={{ color: value === '/profile/user-details' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />
@@ -117,7 +117,7 @@ const Navbar = () => {
           </NavLink>
           {checkPermissions(role) >= 3 &&
           <NavLink to='/admin'>
-            <MenuItem className='min__width--200' onClick={handleMenuClose}>
+            <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
               <Typography className='flex align__center justify__between full__width' variant='body1'>
                 {translation.adminPage}
                 <SupervisorAccountIcon style={{ color: value === '/admin' ? theme.palette.primary.main : theme.typography.subtitle1.color  }} />

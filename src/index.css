@@ -286,6 +286,14 @@ a:hover {
   min-width: fit-content!important;
 }
 
+.fit__content {
+  width: fit-content;
+}
+
+.p-0 {
+  padding: 0!important;
+}
+
 .p-5 {
   padding: .5rem!important;
 }
