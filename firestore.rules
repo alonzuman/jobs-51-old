@@ -23,7 +23,10 @@ service cloud.firestore {
     }
 
     match /constants/{constantId} {
-    	allow read
+    	allow read;
+      allow update: if request.auth != null;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null;
     }
   }
 }
