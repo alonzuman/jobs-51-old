@@ -160,39 +160,27 @@ export const setGlobalFilters = (filters) => async dispatch => {
   })
 }
 
-export const getJobs = () => async dispatch => {
-  const { filters } = store.getState().jobs
+export const getJobs = query => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    let snapshot
-    if (filters) {
-      const categoriesQuery = ['categories', 'array-contains-any', filters.categories]
-      const locationsQuery = ['location', '==', filters.locations]
-      const dateQuery = ['dateCreated', '>=', filters.dates]
+    const { skills, location } = query
 
-      if (filters.categories && filters.locations && filters.dateQuery) {
-        snapshot = await jobsRef.where(...categoriesQuery).where(...locationsQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.categories && filters.locations) {
-        snapshot = await jobsRef.where(...categoriesQuery).where(...locationsQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.categories && filters.dates) {
-        snapshot = await jobsRef.where(...categoriesQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.locations && filters.dates) {
-        snapshot = await jobsRef.where(...locationsQuery).where(...dateQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.locations) {
-        snapshot = await jobsRef.where(...locationsQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.categories) {
-        snapshot = await jobsRef.where(...categoriesQuery).orderBy('dateCreated', 'desc').get()
-      } else if (filters.dates) {
-        snapshot = await jobsRef.where(...dateQuery).orderBy('dateCreated', 'desc').get()
-      } else {
-        snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
-      }
+    const categoriesQuery = ['skills', 'array-contains-any', skills]
+    const locationQuery = ['location', '==', location]
+    // const dateQuery = ['dateCreated', '>=', filters.dates]
+    let snapshot;
+    console.log(skills, location)
+    if (skills && location) {
+      snapshot = await jobsRef.where(...categoriesQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
+    } else if (location) {
+      snapshot = await jobsRef.where(...locationQuery).orderBy('dateCreated', 'desc').get()
+    } else if (skills) {
+      snapshot = await jobsRef.where(...categoriesQuery).orderBy('dateCreated', 'desc').get()
     } else {
-      snapshot = await jobsRef.orderBy('dateCreated', 'desc').get()
+      snapshot = await jobsRef.orderBy('dateCreated', 'desc').limit(10).get()
     }
-
     let jobs = []
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
     dispatch({

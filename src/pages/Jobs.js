@@ -9,16 +9,20 @@ import AddIcon from '@material-ui/icons/Add'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
 import PageContainer from '../components/layout/PageContainer'
 import SecondaryBar from '../components/layout/SecondaryBar'
-import JobsFilter from '../components/filters/JobsFilter/JobsFilter'
+import JobsFilter from '../components/filters/JobsFilter'
+import { useHistory } from 'react-router-dom'
+import qs from 'query-string'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
-  const { jobs, loading, filters } = useSelector(state => state.jobs)
+  const { jobs, loading } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
+  const history = useHistory()
+  const query = qs.parse(history.location.search)
 
   useEffect(() => {
-    dispatch(getJobs())
-  }, [dispatch, filters])
+    dispatch(getJobs(query))
+  }, [dispatch, history.location.search])
 
   return (
     <>

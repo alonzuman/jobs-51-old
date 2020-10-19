@@ -3,6 +3,7 @@
   "companyName": "שם החברה",
   "type": "סוג",
   "location": "מיקום",
+  "locations": "עיר/יישוב",
   "contactPerson": "איש קשר",
   "description": "תיאור",
   "requirements": "קטגוריות",
@@ -182,7 +183,8 @@
   "skillsPlaceholder": "לדוגמא: ניהול צוות׳",
   "categoryError": "אנא בחרו לפחות קטגוריה אחת",
   "industry": "תעשיה",
-  "filterResults": "סינון תוצאות חיפוש"
+  "filterResults": "סינון תוצאות חיפוש",
+  "submit": "יישום"
 }
 
 

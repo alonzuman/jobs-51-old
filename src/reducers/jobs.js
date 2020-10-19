@@ -3,34 +3,13 @@ const initialState = {
   jobs: [],
   savedJobs: [],
   savedJobsLoading: false,
-  filters: {},
   loading: false,
-  filtersLoading: false
 }
 
 export const jobsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'JOB_FILTERS_LOADING':
-      return {
-        ...state,
-        filtersLoading: true
-      }
-    case 'CLEAR_FILTERS':
-      return {
-        ...state,
-        filters: {}
-      }
-    case 'SET_FILTERS':
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          ...payload.filters
-        },
-        loading: false
-      }
     case 'SAVED_JOBS_LOADING':
       return {
         ...state,
@@ -68,18 +47,6 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         jobs: [...state.jobs, payload.job],
         loading: false
-      }
-    case 'SET_JOB_TYPES':
-      return {
-        ...state,
-        jobTypes: payload.jobTypes,
-        filtersLoading: false
-      }
-    case 'SET_JOB_LOCATIONS':
-      return {
-        ...state,
-        jobLocations: payload.jobLocations,
-        filtersLoading: false
       }
     case 'JOB_FAIL':
       return {

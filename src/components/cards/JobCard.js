@@ -73,7 +73,8 @@ const JobCard = ({ job }) => {
   }
 
   const chipStyle = {
-    direction: 'ltr'
+    direction: 'ltr',
+    marginBottom: 4
   }
 
   return (
@@ -89,8 +90,6 @@ const JobCard = ({ job }) => {
           <Link to={`/jobs/${job?.id}`}>
             <CardContent>
               <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary'/>
-              <Typography variant='subtitle1'>{translation.description}</Typography>
-              <Typography variant='body1'>{job?.description}</Typography>
               <Typography variant='subtitle1'>{translation.categories}</Typography>
               <Grid container spacing={1}>
                 {job?.skills?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
