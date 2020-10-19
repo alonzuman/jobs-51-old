@@ -21,8 +21,8 @@ const JobsFilter = () => {
   const { location, skills } = qs.parse(history.location.search)
   const [isOpen, setIsOpen] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const [selectedLocation, setSelectedLocation] = useState(location || '')
-  const [selectedSkills, setSelectedSkills] = useState([...skills] || [])
+  const [selectedLocation, setSelectedLocation] = useState(location ? location : '')
+  const [selectedSkills, setSelectedSkills] = useState(skills?.length > 0 ? [...skills] : [])
 
   const updateQuery = () => {
     const query = {
