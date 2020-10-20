@@ -8,6 +8,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: baseline;
   justify-content: space-between;
+  margin-bottom: ${props => props.spaceBottom ? '16px' : ''};
+
+  @media (max-width: 768px) {
+    margin-top: ${props => props.spaceTop ? '64px' : ''};
+  }
 `
 
 const ItemsWrapper = styled.div`
@@ -16,9 +21,9 @@ const ItemsWrapper = styled.div`
   align-items: center;
 `
 
-const PageHeader = ({ title, backButton }) => {
+const PageHeader = ({ title, backButton, spaceBottom, spaceTop }) => {
   return (
-    <Container>
+    <Container spaceBottom={spaceBottom} spaceTop={spaceTop}>
       {backButton && <BackButton />}
       <ItemsWrapper>
         <Typography variant='h1'>{title}</Typography>

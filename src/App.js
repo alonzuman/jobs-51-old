@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // Components
 import Dialogs from './components/layout/Dialogs'
+import Navbar from './components/layout/Navbar/Navbar'
 
 // Pages
 import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
-import SavedJobs from './components/dialogs/SavedJobs'
-import Navbar from './components/layout/Navbar/Navbar'
+import SavedJobs from './pages/SavedJobs'
 import Activity from './pages/Activity'
 import Admin from './pages/Admin'
 import User from './pages/User'

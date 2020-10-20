@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { openDialog } from '../actions'
 import { Button, Typography } from '@material-ui/core'
 import PageContainer from '../components/layout/PageContainer'
 import { Link } from 'react-router-dom'
 import ShaldagLogo from '../ShaldagLogo'
+import AddJobDialog from '../v2/layout/AddJobDialog'
 
 const Home = () => {
-  const dispatch = useDispatch()
+  const [isAddingJob, setIsAddingJob] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
 
@@ -19,8 +20,11 @@ const Home = () => {
     minHeight: '70vh'
   }
 
+  const handleAddingJob = () => setIsAddingJob(true)
+
   return (
     <PageContainer style={containerStyle}>
+      <AddJobDialog open={isAddingJob} onClose={() => setIsAddingJob(false)} />
       <ShaldagLogo />
       <Typography className='mt-1' variant='h1'>{translation.homeText1}</Typography>
       <Typography style={{ maxWidth: 768 }} variant='body1'>{translation.landingPageText1}</Typography>
@@ -30,7 +34,7 @@ const Home = () => {
             {translation.lookingForAJob}
           </Button>
         </Link>
-        <Button className='button-style mr-5' onClick={() => dispatch(openDialog({ type: 'AddJob', title: 'addJob' }))} variant='outlined' color='primary'>
+        <Button className='button-style mr-5' onClick={handleAddingJob} variant='outlined' color='primary'>
           {translation.addJob}
         </Button>
       </div>

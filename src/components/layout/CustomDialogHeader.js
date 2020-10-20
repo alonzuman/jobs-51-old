@@ -13,11 +13,11 @@ const DialogHeader = styled.div`
 `
 
 const CustomDialogHeader = ({ title, exitButton, onClose }) => {
-  const { translation, theme } = useSelector(state => state.theme)
+  const { theme } = useSelector(state => state.theme)
 
   return (
     <DialogHeader border={theme?.palette?.border?.strong}>
-      <DialogTitle>{translation[title]}</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       {exitButton && <IconButton onClick={onClose}><CloseIcon /></IconButton>}
     </DialogHeader>
   )

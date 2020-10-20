@@ -5,6 +5,7 @@ import UsersList from '../components/lists/UsersList'
 import TopBar from '../components/layout/TopBar'
 import { Skeleton } from '@material-ui/lab'
 import PageContainer from '../components/layout/PageContainer'
+import PageHeader from '../v2/organisms/PageHeader'
 
 const Employees = () => {
   const { translation } = useSelector(state => state.theme)
@@ -14,15 +15,10 @@ const Employees = () => {
   useEffect(() => { dispatch(getEmployees()) }, [dispatch])
 
   return (
-    <>
-      <TopBar
-        backButton={true}
-        title={loading ? <Skeleton variant='rect' height={42} width={320} /> : translation.usersLookingForJob}
-      />
-      <PageContainer>
-        <UsersList />
-      </PageContainer>
-    </>
+    <PageContainer>
+      <PageHeader backButton spaceBottom title={translation.usersLookingForJob} />
+      <UsersList />
+    </PageContainer>
   )
 }
 

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSavedJobs } from '../../actions'
-import CardsSkeletons from '../skeletons/CardsSkeletons'
+import { getSavedJobs } from '../actions'
+import CardsSkeletons from '../components/skeletons/CardsSkeletons'
 import { Grid, Typography } from '@material-ui/core'
-import JobCard from '../cards/JobCard'
-import TopBar from '../layout/TopBar'
-import PageContainer from '../layout/PageContainer'
-import PageHeader from '../../v2/organisms/PageHeader'
+import JobCard from '../components/cards/JobCard'
+import PageContainer from '../components/layout/PageContainer'
+import PageHeader from '../v2/organisms/PageHeader'
 
 const SavedJobs = () => {
   const authState = useSelector(state => state.auth)
@@ -22,7 +21,7 @@ const SavedJobs = () => {
 
   return (
     <PageContainer>
-      <PageHeader title={translation.savedJobs} />
+      <PageHeader spaceTop spaceBottom title={translation.savedJobs} />
       {savedJobsLoading && <CardsSkeletons count={1} />}
       {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
       {!savedJobsLoading && savedJobs &&

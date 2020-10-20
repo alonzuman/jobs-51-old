@@ -321,6 +321,10 @@ a:hover {
   padding: 8px!important;
 }
 
+.pt-0 {
+  padding-top: 0px!important;
+}
+
 .pt-5 {
   padding-top: 8px!important;
 }

@@ -29,6 +29,7 @@ const InfoContainer = styled.div`
 
 const CardBody = styled.div`
   display: flex;
+  cursor: pointer;
 `
 
 const ActivityCard = ({ activity, showUser = true }) => {
@@ -76,7 +77,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
               </Link>)}
           </CardBody>
         </CardContent>
-        <CardActions className='flex align__center justify__center'>
+        <CardActions className='flex align__center justify__center pt-0'>
           <IconButtonContainer open={open}>
             <IconButton size='small' onClick={() => setOpen(!open)}>
               <KeyboardArrowDownIcon />

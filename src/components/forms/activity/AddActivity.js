@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
+import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
 import { addActivity } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFeedback } from '../../../actions';
 import { setUserRegion } from '../../../actions/auth';
 import CustomChip from '../../cards/CustomChip';
+import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer';
 
 const AddActivity = () => {
   const { uid, phone, region, avatar, firstName, lastName } = useSelector(state => state.auth)
@@ -71,11 +72,12 @@ const AddActivity = () => {
     }))
   }
 
-  return (
-    <form className="mt-1" onSubmit={handleSubmit}>
-      {!all && <CircularProgress />}
-      {all && (
-        <>
+  if (!all) {
+    return <CircularProgress />
+  } else {
+    return (
+      <form onSubmit={handleSubmit}>
+        <DialogContent>
           <FormControl variant="outlined">
             <InputLabel>{translation.region}</InputLabel>
             <Select
@@ -151,22 +153,20 @@ const AddActivity = () => {
               </FormControl>
             </Grid>
           </Grid>
-          <Button
-            className="button-style"
+        </DialogContent>
+        <DialogActionsContainer>
+        <Button
             color="primary"
             variant="contained"
             type="submit"
+            size='large'
           >
-            {loading ? (
-              <CircularProgress className="button-spinner" />
-            ) : (
-                translation.addActivity
-              )}
+            {loading ? <CircularProgress className="button-spinner" /> : translation.addActivity}
           </Button>
-        </>
-      )}
-    </form>
-  );
+        </DialogActionsContainer>
+      </form>
+    )
+  }
 }
 
 export default AddActivity

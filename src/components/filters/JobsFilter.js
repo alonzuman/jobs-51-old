@@ -11,6 +11,7 @@ import SkillsFilter from './SkillsFilter'
 import useWindowSize from '../../hooks/useWindowSize'
 import IndustryFilter from './IndustryFilter'
 import Slide from '@material-ui/core/Slide';
+import DialogActionsContainer from '../../v2/atoms/DialogActionsContainer'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,16 +27,7 @@ const Container = styled.div`
   top: 0;
   z-index: 99;
   background-color: ${props => props.background};
-`
-
-const DialogActionsContainer = styled.div`
-  position: sticky;
-  border-top: 1px solid ${props => props.border};
-  bottom: 0;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin-bottom: 8px;
 `
 
 const JobsFilter = () => {
@@ -80,7 +72,7 @@ const JobsFilter = () => {
     <Container background={theme?.palette?.background?.default}>
       <Button className='mobile_full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
       <Dialog TransitionComponent={Transition} fullScreen={windowWidth <= 768} dir='rtl' open={isOpen} onClose={handleClose}>
-        <CustomDialogHeader title={'filterResults'} exitButton onClose={handleClose} />
+        <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleClose} />
         <DialogContent>
           <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />
           <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />
