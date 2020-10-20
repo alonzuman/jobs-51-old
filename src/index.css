@@ -464,3 +464,7 @@ a:hover {
 .navbar__item-selected {
   color: var(--primary);
 }
+
+.MuiChip-label {
+  text-overflow: clip!important;
+}

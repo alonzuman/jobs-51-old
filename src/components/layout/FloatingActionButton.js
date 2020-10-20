@@ -2,6 +2,7 @@ import React from 'react'
 import './FloatingActionButton.css'
 import { Fab } from '@material-ui/core'
 
+// TODO change to styled componnet
 const FloatingActionButton = ({ action, children, color, title }) => {
   return (
     <Fab variant='extended' color={color} onClick={action}>

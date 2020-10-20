@@ -17,16 +17,31 @@ const Container = styled.div`
 
 const ItemsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
   align-items: center;
 `
 
-const PageHeader = ({ title, backButton, spaceBottom, spaceTop }) => {
+const TextContainer = styled.div`
+
+`
+
+const SecondaryContainer = styled.div`
+
+`
+
+const PageHeader = ({ title, subtitle, secondary, backButton, spaceBottom, spaceTop }) => {
   return (
     <Container spaceBottom={spaceBottom} spaceTop={spaceTop}>
       {backButton && <BackButton />}
       <ItemsWrapper>
-        <Typography variant='h1'>{title}</Typography>
+        <TextContainer>
+          <Typography className='pb-0' variant='h1'>{title}</Typography>
+          <Typography variant='subtitle1'>{subtitle}</Typography>
+        </TextContainer>
+        <SecondaryContainer>
+          {secondary}
+        </SecondaryContainer>
       </ItemsWrapper>
     </Container>
   )

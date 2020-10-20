@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Typography, Box, Paper } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,10 +7,12 @@ import ShaldagLogo from '../ShaldagLogo'
 import { app } from '../firebase'
 import PageContainer from '../components/layout/PageContainer'
 import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
+import AuthDialog from '../v2/layout/AuthDialog'
 
 const LandingPage = () => {
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.auth)
+  const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
 
@@ -52,6 +54,8 @@ const LandingPage = () => {
     })
   }, [currentUser])
 
+  const handleDialog = () => setIsOpen(!isOpen)
+
   if (loading) {
     return <CircularSpinnerWithContainer />
   } else if (currentUser && !loading) {
@@ -59,6 +63,7 @@ const LandingPage = () => {
   } else {
     return (
       <PageContainer style={containerStyle}>
+        <AuthDialog open={isOpen} onClose={handleDialog} />
         <Paper style={paperStyle}>
           <ShaldagLogo />
           <Box style={textBoxStyle} className='text-box'>
@@ -68,7 +73,16 @@ const LandingPage = () => {
             <br />
             <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
           </Box>
-          <Button disabled={loading} style={{ marginBottom: '.5rem', maxWidth: 300 }} className='button-style full-width' color='primary' variant='contained' onClick={() => dispatch(openDialog({ type: 'SignIn', title: 'signIn' }))}>{translation.enter}</Button>
+          <Button
+            disabled={loading}
+            style={{ marginBottom: '.5rem', maxWidth: 300 }}
+            className='button-style full-width'
+            color='primary'
+            variant='contained'
+            onClick={handleDialog}
+          >
+            {translation.enter}
+          </Button>
         </Paper>
       </PageContainer>
     )

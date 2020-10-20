@@ -2,30 +2,31 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Alert } from '@material-ui/lab'
 import { removeFeedback } from '../../actions/feedback'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  position: fixed;
+  bottom: 64px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 9999;
+  direction: rtl;
+`
 
 const Feedback = () => {
   const dispatch = useDispatch()
   const { translation, direction } = useSelector(state => state.theme)
   const { isOn, msg, type } = useSelector(state => state.feedback)
 
-  const feedbackContainer = {
-    position: 'fixed',
-    bottom: '6.5rem',
-    zIndex: 9999999999999,
-    width: '100%',
-    padding: '1rem',
-    direction
-  }
-
-  const feedbackStyle = {
-    maxWidth: 600
-  }
+  const handleClose = () => dispatch(removeFeedback())
 
   if (isOn) {
     return (
-      <div onClick={() => dispatch(removeFeedback())} style={feedbackContainer}>
-        {isOn && <Alert style={feedbackStyle} severity={type} onClose={() => dispatch(removeFeedback())}>{translation[msg]}</Alert>}
-      </div>
+      <Container onClick={handleClose}>
+        {isOn && <Alert severity={type} onClose={handleClose}>
+          {translation[msg]}
+        </Alert>}
+      </Container>
     )
   } else {
     return <div />

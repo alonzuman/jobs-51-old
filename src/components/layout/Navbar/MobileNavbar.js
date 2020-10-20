@@ -16,7 +16,7 @@ import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 
-
+// TODO change to styled components
 const MobileNavbar = ({ volunteer, role, handleChange, value }) => {
   const { theme, translation } = useSelector(state => state.theme)
 
@@ -29,8 +29,6 @@ const MobileNavbar = ({ volunteer, role, handleChange, value }) => {
     zIndex: 9,
     backgroundColor: theme.palette.background.paper,
     borderTop: `1px solid ${theme.palette.border.main}`,
-    borderTopRightRadius: '1rem',
-    borderTopLeftRadius: '1rem'
   }
 
   return (
