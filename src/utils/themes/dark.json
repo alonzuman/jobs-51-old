@@ -16,7 +16,7 @@
     "border": {
       "light": "#424242",
       "main": "#535353",
-      "dark": ""
+      "strong": "#535353"
     },
     "background": {
       "light": "#484848",

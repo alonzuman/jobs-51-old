@@ -1,4 +1,4 @@
-import { Chip, Grid, Typography } from '@material-ui/core'
+import { Chip, Divider, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -21,6 +21,7 @@ const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
 
   return (
     <Container>
+      <Typography variant='h3'>{translation.filterByLocation}</Typography>
       <Typography variant='subtitle1'>{translation.locations}</Typography>
       <Grid container spacing={1}>
         {Object.keys(listedLocations)?.map((v, i) => (
@@ -33,6 +34,7 @@ const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
           </Grid>
         ))}
       </Grid>
+      <Divider className='mt-2' />
     </Container>
   )
 }

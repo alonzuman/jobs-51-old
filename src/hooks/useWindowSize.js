@@ -1,27 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined
-  })
+  const { pathname } = useHistory().location
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth)
+    setWindowHeight(window.innerHeight)
+  }
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        window: window.innerWidth,
-        height: window.innerHeight
-      })
-    }
-
     window.addEventListener('resize', handleResize)
-
-    handleResize()
-
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [pathname])
 
-  return windowSize
+  return { windowWidth, windowHeight }
 }
 
-export default useWindowSize
+export default useWindowSize;

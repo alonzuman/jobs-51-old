@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem } from '@material-ui/core'
+import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem, Typography } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import { addJob } from '../../../actions'
@@ -8,17 +8,13 @@ import CircularProgressWithLabel from '../CircularProgressWithLabel'
 import LocationSelect from '../profile/LocationSelect'
 import SkillsSelect from '../profile/SkillsSelect'
 
-
-const industries = [
-  'תקשורת', 'הנדסה', 'הייטק'
-]
-
 const AddJob = () => {
   const dispatch = useDispatch()
   const [skillsError, setSkillsError] = useState('')
   const { uid, firstName, lastName, avatar, role, email, phone } = useSelector(state => state.auth)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
+  const industries = useSelector(state => state.constants?.industries.all)
   const [industry, setIndustry] = useState('')
   const [location, setLocation] = useState('')
   const [isUploading, setIsUploading] = useState(false)
@@ -77,15 +73,15 @@ const AddJob = () => {
       {isUploading && <CircularProgressWithLabel value={progress} />}
       {!isUploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />}
       {image.trim().length > 0 && <img style={thumbnailStyle} src={image} alt='Company avatar' />}
-      <Grid container spacing={1}>
+      <Grid container spacing={1} className='flex align__end'>
         <Grid item xs={6}>
           <TextField required label={translation.companyName} variant='outlined' value={job['company']} name='company' onChange={handleJobChange} />
         </Grid>
         <Grid item xs={6}>
+          <Typography variant='subtitle1'>{translation.industry}</Typography>
           <FormControl>
-            <InputLabel className='custom__input-label' id="demo-simple-select-helper-label">{translation.industry}</InputLabel>
-            <Select labelId="demo-simple-select-helper-label" variant='outlined' value={industry} onChange={e => setIndustry(e.target.value)}>
-              {industries.map((v, i) => <MenuItem value={v} key={i}>{v}</MenuItem>)}
+            <Select variant='outlined' value={industry} onChange={e => setIndustry(e.target.value)}>
+              {industries.map((v, i) => <MenuItem className='rtl text__right' value={v} key={i}>{v}</MenuItem>)}
             </Select>
           </FormControl>
         </Grid>

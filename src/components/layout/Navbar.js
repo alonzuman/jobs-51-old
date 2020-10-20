@@ -15,13 +15,14 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
 import { checkPermissions } from '../../utils'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const Navbar = () => {
   const { role, volunteer, avatar } = useSelector(state => state.auth)
   const { theme, translation } = useSelector(state => state.theme)
   const history = useHistory()
   const [value, setValue] = useState(history.location.pathname);
-  const [width, setWidth] = useState(window.innerWidth)
+  const { windowWidth: width } = useWindowSize()
   const [anchorEl, setAnchorEl] = useState(null)
   const [hover, setHover] = useState(false)
 
@@ -30,11 +31,8 @@ const Navbar = () => {
   const handleMenuOpen = e => setAnchorEl(e.currentTarget)
 
   useEffect(() => {
-    window.addEventListener('resize', () => setWidth(window.innerWidth))
-    return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
-  }, [])
-
-  useEffect(() => { setValue(history.location.pathname) }, [history.location.pathname])
+    setValue(history.location.pathname)
+  }, [history.location.pathname])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

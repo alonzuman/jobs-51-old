@@ -1,6 +1,11 @@
-import { Chip, Grid, Typography } from '@material-ui/core'
+import { Chip, Divider, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  margin-bottom: 8px;
+`
 
 const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
   const { translation } = useSelector(state => state.theme)
@@ -15,7 +20,8 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
   }
 
   return (
-    <>
+    <Container>
+      <Typography variant='h3'>{translation.filterBySkills}</Typography>
       <Typography variant='subtitle1'>{translation.skills}</Typography>
       <Grid container spacing={1}>
         {Object.keys(listedSkills)?.map((v, i) => (
@@ -24,7 +30,8 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
           </Grid>
         ))}
       </Grid>
-    </>
+      <Divider className='mt-2' />
+    </Container>
   )
 }
 

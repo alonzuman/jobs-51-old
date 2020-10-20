@@ -183,7 +183,12 @@
   "industry": "תעשיה",
   "filterResults": "סינון תוצאות חיפוש",
   "submit": "יישום",
-  "manageConstants": "ניהול נתונים"
+  "manageConstants": "ניהול נתונים",
+  "showResults": "הצג תוצאות",
+  "filterByLocation": "סינון לפי מיקום",
+  "filterBySkills": "סינון לפי תחומי עיסוק",
+  "filterByIndustry": "סינון לפי תעשיה",
+  "industryName": "שם התעשיה"
 }
 
 

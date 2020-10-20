@@ -17,3 +17,9 @@ and (-webkit-device-pixel-ratio : 3) {
     bottom: 6.5rem!important;
   }
 }
+
+@media (min-width: 768px) {
+  .MuiFab-root {
+    bottom: 2.5rem!important;
+  }
+}
