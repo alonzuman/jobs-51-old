@@ -16,7 +16,7 @@ const useWindowSize = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [pathname])
 
-  return { windowWidth, windowHeight }
+  return { windowWidth, windowHeight, pathname }
 }
 
 export default useWindowSize;

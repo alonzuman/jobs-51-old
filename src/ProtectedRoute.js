@@ -8,6 +8,11 @@ import { checkPermissions } from './utils'
 import NoPermissions from './NoPermissions'
 import NoPermissionPage from './NoPermissionPage'
 import { getConstants } from './actions/constants'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  direction: rtl;
+`
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
@@ -52,12 +57,12 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     return <NoPermissions />
   } else {
     return (
-      <div style={{ direction: 'rtl', paddingBottom: '7.5rem' }}>
+      <Container>
         {loading && <CircularSpinnerWithContainer />}
         {!loading && !checkRole() && <NoPermissionPage />}
         {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
         {!loading && !currentUser && <Redirect to='/' />}
-      </div>
+      </Container>
     )
   }
 }

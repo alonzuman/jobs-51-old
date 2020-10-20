@@ -7,7 +7,7 @@ import FileUploader from '../../general/FileUploader'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 import CircularSpinnerWithContainer from '../../layout/CircularSpinnerWithContainer'
 
-const UserDetails = () => {
+const LoginAndSecurity = () => {
   const authState = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const [loading, setLoading] = useState(true)
@@ -57,30 +57,28 @@ const UserDetails = () => {
     return <CircularSpinnerWithContainer />
   } else {
     return (
-      <Paper className='ptb-5 ps-1'>
-        <form onSubmit={handleSubmit}>
-          <Box style={boxStyle}>
-            {uploading && <CircularProgressWithLabel value={progress} />}
-            {!uploading && <FileUploader label={translation.updatePhoto} setProgress={setProgress} fileName={authState.avatar || uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
-            {(authState?.avatar?.length > 0 || avatar?.length > 0) && <Avatar style={avatarStyle} src={authState.avatar || avatar} alt={authState.firstName} />}
-          </Box>
-          <TextField disabled type='email' required variant='outlined' label={translation.email} value={email} onChange={e => setEmail(e.target.value)} />
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
-              <TextField required variant='outlined' label={translation.firstName} value={firstName} onChange={e => setFirstName(e.target.value)} />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField required variant='outlined' label={translation.lastName} value={lastName} onChange={e => setLastName(e.target.value)} />
-            </Grid>
+      <form onSubmit={handleSubmit}>
+        <Box style={boxStyle}>
+          {uploading && <CircularProgressWithLabel value={progress} />}
+          {!uploading && <FileUploader label={translation.updatePhoto} setProgress={setProgress} fileName={authState.avatar || uuidv4()} folder='avatars' setIsUploading={setUploading} setImageUrl={setAvatar} />}
+          {(authState?.avatar?.length > 0 || avatar?.length > 0) && <Avatar style={avatarStyle} src={authState.avatar || avatar} alt={authState.firstName} />}
+        </Box>
+        <TextField disabled type='email' required variant='outlined' label={translation.email} value={email} onChange={e => setEmail(e.target.value)} />
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <TextField required variant='outlined' label={translation.firstName} value={firstName} onChange={e => setFirstName(e.target.value)} />
           </Grid>
-          <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
-          <FormControl className='mb-0'>
-            <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner'/> : translation.update}</Button>
-          </FormControl>
-        </form>
-      </Paper>
+          <Grid item xs={6}>
+            <TextField required variant='outlined' label={translation.lastName} value={lastName} onChange={e => setLastName(e.target.value)} />
+          </Grid>
+        </Grid>
+        <TextField required variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
+        <FormControl className='mb-0'>
+          <Button className='button-style' variant='contained' color='primary' disabled={uploading} type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.update}</Button>
+        </FormControl>
+      </form>
     )
   }
 }
 
-export default UserDetails
+export default LoginAndSecurity

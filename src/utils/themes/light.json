@@ -50,6 +50,11 @@
       "fontSize": ".75rem",
       "color": "#9c9c9c"
     },
+    "subtitle2": {
+      "fontSize": ".6rem",
+      "fontWeight": 300,
+      "color": "#9c9c9c"
+    },
     "body1": {
       "fontSize": "1rem",
       "color": "black"

@@ -14,7 +14,7 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
   const handleClick = newValue => {
     if (selectedSkills?.includes(newValue)) {
       setSelectedSkills([...selectedSkills.filter(v => v !== newValue)])
-    } else {
+    } else if (selectedSkills?.length <= 9) {
       setSelectedSkills([...selectedSkills, newValue])
     }
   }
@@ -22,7 +22,7 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
   return (
     <Container>
       <Typography variant='h3'>{translation.filterBySkills}</Typography>
-      <Typography variant='subtitle1'>{translation.skills}</Typography>
+      <Typography variant='subtitle1'>{translation.filterBySkillsUpTo10}</Typography>
       <Grid container spacing={1}>
         {Object.keys(listedSkills)?.map((v, i) => (
           <Grid item key={i}>

@@ -8,6 +8,7 @@ import TopBar from '../components/layout/TopBar'
 import FloatingActionButton from '../components/layout/FloatingActionButton'
 import PageContainer from '../components/layout/PageContainer'
 import StatsList from '../components/lists/StatsList'
+import PageHeader from '../v2/organisms/PageHeader'
 
 const Activity = () => {
   const dispatch = useDispatch()
@@ -24,8 +25,8 @@ const Activity = () => {
       <FloatingActionButton color='primary' action={() => dispatch(openDialog({ type: 'AddActivity', title: 'addActivity' }))} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>
-      <TopBar title={translation.activity} />
       <PageContainer>
+        <PageHeader title={translation.activity} />
         <Typography variant='h3'>{translation.totalActivities}</Typography>
         <StatsList items={statsListItems} />
         <Typography variant='h3'>{translation.latestActivities}</Typography>

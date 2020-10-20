@@ -6,14 +6,12 @@ import AddJob from '../forms/job/AddJob'
 import EditJob from '../forms/job/EditJob'
 import SignIn from '../forms/SignIn'
 import SignUp from '../forms/SignUp'
-import EditProfile from '../forms/EditProfile'
 import Settings from '../forms/Settings'
 import SavedJobs from '../dialogs/SavedJobs'
 import AddActivity from '../forms/activity/AddActivity'
 import CloseIcon from '@material-ui/icons/Close'
 import SingleSelectionFilter from '../filters/SingleSelectionFilter'
 import MultiSelectionFilter from '../filters/MultiSelectionFilter'
-import PersonalDetails from '../forms/profile/PersonalDetails'
 
 const Dialogs = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -72,12 +70,10 @@ const Dialogs = () => {
       case 'AddActivity': return <AddActivity/>
       case 'AddJob': return <AddJob/>
       case 'EditJob': return <EditJob/>
-      case 'EditProfile': return <EditProfile />
       case 'SavedJobs': return <SavedJobs/>
       case 'CategoriesFilter': return <MultiSelectionFilter type='categories' />
       case 'LocationsFilter': return <SingleSelectionFilter type='locations' />
       case 'DatesFilter': return <SingleSelectionFilter type='dates' />
-      case 'PersonalDetails': return <PersonalDetails />
       default: return false
     }
   }

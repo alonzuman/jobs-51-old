@@ -28,7 +28,7 @@ const Settings = () => {
   }
 
   return (
-    <Paper className='ps-1 ptb-5'>
+    <>
       <Typography variant='body2'>{translation.displaySettings}</Typography>
       <Box style={{ display: 'flex', alignItems: 'center' }}>
         <Brightness4Icon style={{color: theme.typography.body1.color }}  />
@@ -43,7 +43,7 @@ const Settings = () => {
           {translation.privacyPolicy}
         </Typography>
       </Link>
-    </Paper>
+    </>
   )
 }
 

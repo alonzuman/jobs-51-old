@@ -21,7 +21,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: ${props => props.background};
 `
 
 const DialogActionsContainer = styled.div`
@@ -73,8 +77,8 @@ const JobsFilter = () => {
   const handleClose = () => setIsOpen(false)
 
   return (
-    <Container>
-      <Button className='full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
+    <Container background={theme?.palette?.background?.default}>
+      <Button className='mobile_full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
       <Dialog TransitionComponent={Transition} fullScreen={windowWidth <= 768} dir='rtl' open={isOpen} onClose={handleClose}>
         <CustomDialogHeader title={'filterResults'} exitButton onClose={handleClose} />
         <DialogContent>
@@ -83,8 +87,8 @@ const JobsFilter = () => {
           <IndustryFilter />
         </DialogContent>
         <DialogActionsContainer border={theme?.palette?.border?.strong}>
-          <Button color='default' onClick={clearFilters}>{translation.clear}</Button>
-          <Button color='primary' variant='contained' onClick={updateQuery}>{translation.showResults}</Button>
+          <Button size='large' color='default' onClick={clearFilters}>{translation.clear}</Button>
+          <Button size='large' color='primary' variant='contained' onClick={updateQuery}>{translation.showResults}</Button>
         </DialogActionsContainer>
       </Dialog>
     </Container>

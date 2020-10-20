@@ -10,9 +10,9 @@ const TopbarContainer = styled.div`
   position: ${props => props.sticky ? `1px solid ${props.borderColor}` : 'none'};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
   flex-direction: column;
-`
+  `
 
-const ItemsContainer = styled.div`
+  const ItemsContainer = styled.div`
   width: 100%;
   padding: 16px;
   display: flex;

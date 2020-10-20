@@ -6,6 +6,7 @@ import { Grid, Typography } from '@material-ui/core'
 import JobCard from '../cards/JobCard'
 import TopBar from '../layout/TopBar'
 import PageContainer from '../layout/PageContainer'
+import PageHeader from '../../v2/organisms/PageHeader'
 
 const SavedJobs = () => {
   const authState = useSelector(state => state.auth)
@@ -20,17 +21,15 @@ const SavedJobs = () => {
   }, [authState, dispatch])
 
   return (
-    <>
-      <TopBar title={translation.savedJobs} />
-      <PageContainer>
-        {savedJobsLoading && <CardsSkeletons count={1} />}
-        {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
-        {!savedJobsLoading && savedJobs &&
+    <PageContainer>
+      <PageHeader title={translation.savedJobs} />
+      {savedJobsLoading && <CardsSkeletons count={1} />}
+      {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
+      {!savedJobsLoading && savedJobs &&
         <Grid className='cards__container' container spacing={2}>
           {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
         </Grid>}
-      </PageContainer>
-    </>
+    </PageContainer>
   )
 }
 

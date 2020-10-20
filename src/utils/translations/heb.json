@@ -150,6 +150,7 @@
   "events": "אירועים",
   "homeText1": "ברוכים הבאים לאפליקציה של עמותת יוצאי שלדג",
   "soon": "בקרוב...",
+  "personalInfo": "פרטים אישיים",
   "noPersonalInfo": "מילוי פרטים אישיים",
   "usersLookingForJob": "חברים שמחפשים עבודה",
   "userStatus": "סטטוס משתמש",
@@ -188,7 +189,9 @@
   "filterByLocation": "סינון לפי מיקום",
   "filterBySkills": "סינון לפי תחומי עיסוק",
   "filterByIndustry": "סינון לפי תעשיה",
-  "industryName": "שם התעשיה"
+  "industryName": "שם התעשיה",
+  "filterBySkillsUpTo10": "יש לבחור עד 10 תחומי עיסוק לסנן לפיהם",
+  "loginAndSecurity": "פרטי התחברות"
 }
 
 

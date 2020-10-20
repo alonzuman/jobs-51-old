@@ -8,10 +8,8 @@ import Dialogs from './components/layout/Dialogs'
 import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
 import SavedJobs from './components/dialogs/SavedJobs'
-import Navbar from './components/layout/Navbar'
-import EditProfile from './components/forms/EditProfile'
+import Navbar from './components/layout/Navbar/Navbar'
 import Activity from './pages/Activity'
-import Notifications from './pages/Notifications'
 import Admin from './pages/Admin'
 import User from './pages/User'
 
@@ -27,12 +25,15 @@ import RtlProvider from './contexts/RtlContext'
 import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/Home'
-import Events from './pages/Events'
 import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
 import UserActivities from './pages/UserActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ManageConstants from './pages/admin/ManageConstants'
+import Profile from './pages/Profile'
+import Settings from './pages/Settings'
+import PersonalInfo from './pages/PersonalInfo'
+import LoginAndSecurity from './pages/LoginAndSecurity'
 
 
 function App() {
@@ -54,15 +55,20 @@ function App() {
           <Switch>
             <ProtectedRoute exact path='/home' component={Home} />
             <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
+
+            {/* Jobs */}
             <ProtectedRoute exact path='/jobs' component={Jobs} />
             <ProtectedRoute exact path='/jobs/:id' component={Job} />
-            <ProtectedRoute exact path='/events' component={Events} />
+
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />
-            <ProtectedRoute exact path='/notifications' component={Notifications} />
-            <ProtectedRoute exact path='/profile/settings' component={EditProfile} />
-            <ProtectedRoute exact path='/profile/user-details' component={EditProfile} />
-            <ProtectedRoute exact path='/profile/personal-details' component={EditProfile} />
+            {/* Profile */}
+            <ProtectedRoute exact path='/profile' component={Profile} />
+            <ProtectedRoute exact path='/profile/settings' component={Settings} />
+            <ProtectedRoute exact path='/profile/login-and-security' component={LoginAndSecurity} />
+            <ProtectedRoute exact path='/profile/personal-info' component={PersonalInfo} />
+
+            {/* Users */}
             <ProtectedRoute exact path='/users' component={Employees} />
             <ProtectedRoute exact path='/users/:id/activities' component={UserActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
