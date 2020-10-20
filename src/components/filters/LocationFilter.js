@@ -24,15 +24,19 @@ const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
       <Typography variant='h3'>{translation.filterByLocation}</Typography>
       <Typography variant='subtitle1'>{translation.locations}</Typography>
       <Grid container spacing={1}>
-        {Object.keys(listedLocations)?.map((v, i) => (
-          <Grid item key={i}>
-            <Chip
-              onClick={() => handleClick(v)}
-              label={v}
-              color={selectedLocation === v ? 'primary' : 'default'}
-            />
-          </Grid>
-        ))}
+        {Object.keys(listedLocations)?.map((v, i) => {
+          if (listedLocations[v] > 0) {
+            return (
+              <Grid item key={i}>
+                <Chip
+                  onClick={() => handleClick(v)}
+                  label={`${v} (${listedLocations[v]})`}
+                  color={selectedLocation === v ? 'primary' : 'default'}
+                />
+              </Grid>
+            )
+          }
+        })}
       </Grid>
       <Divider className='mt-2' />
     </Container>

@@ -24,11 +24,15 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
       <Typography variant='h3'>{translation.filterBySkills}</Typography>
       <Typography variant='subtitle1'>{translation.filterBySkillsUpTo10}</Typography>
       <Grid container spacing={1}>
-        {Object.keys(listedSkills)?.map((v, i) => (
-          <Grid item key={i}>
-            <Chip label={v} onClick={() => handleClick(v)} color={selectedSkills?.includes(v) ? 'primary' : 'default'} />
-          </Grid>
-        ))}
+        {Object.keys(listedSkills)?.map((v, i) => {
+          if (listedSkills[v] > 0) {
+            return (
+              <Grid item key={i}>
+                <Chip label={`${v} (${listedSkills[v]})`} onClick={() => handleClick(v)} color={selectedSkills?.includes(v) ? 'primary' : 'default'} />
+              </Grid>
+            )
+          }
+        })}
       </Grid>
       <Divider className='mt-2' />
     </Container>

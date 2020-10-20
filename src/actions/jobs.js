@@ -165,22 +165,48 @@ export const getJobs = query => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    const { skills, location } = query
+    const { skills, location, industry } = query
+    const skillsExists = skills?.length > 0
 
-    const categoriesQuery = ['skills', 'array-contains-any', skills]
-    const locationQuery = ['location', '==', location]
-    // const dateQuery = ['dateCreated', '>=', filters.dates]
+    let queryRef = jobsRef;
 
-    let snapshot;
-    if (skills?.length > 0 && location) {
-      snapshot = await jobsRef.where(...categoriesQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    } else if (location) {
-      snapshot = await jobsRef.where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    } else if (skills?.length > 0) {
-      snapshot = await jobsRef.where(...categoriesQuery).orderBy('dateCreated', 'desc').get()
-    } else {
-      snapshot = await jobsRef.orderBy('dateCreated', 'desc').limit(10).get()
+    if (skillsExists) {
+      queryRef = queryRef.where('skills', 'array-contains-any', skills)
     }
+
+    if (location) {
+      queryRef = queryRef.where('location', '==', location)
+    }
+
+    if (industry) {
+      queryRef = queryRef.where('industry', '==', industry)
+    }
+
+    const snapshot = await queryRef.get()
+
+    // const skillsQuery = ['skills', 'array-contains-any', skills]
+    // const locationQuery = ['location', '==', location]
+    // const industryQuery = ['industry', '==', industry]
+    // const dateQuery = ['dateCreated', '>=', filters.dates]
+    // let snapshot;
+    // if (skillsExists && location && industry) {
+    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).where(...industryQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (skillsExists && industry && !location) {
+    //   snapshot = await jobsRef.where(...skillsQuery).where(...industryQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (skillsExists && location && !industry) {
+    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (skillsExists && location) {
+    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (location) {
+    //   snapshot = await jobsRef.where(...locationQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (skillsExists) {
+    //   snapshot = await jobsRef.where(...skillsQuery).orderBy('dateCreated', 'desc').get()
+    // } else if (industry) {
+    //   snapshot = await jobsRef.where(...industryQuery).orderBy('dateCreated', 'desc').get()
+    // } else {
+    //   snapshot = await jobsRef.orderBy('dateCreated', 'desc').limit(10).get()
+    // }
+
     let jobs = []
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
 

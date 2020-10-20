@@ -189,6 +189,8 @@
   "filterByLocation": "סינון לפי מיקום",
   "filterBySkills": "סינון לפי תחומי עיסוק",
   "filterByIndustry": "סינון לפי תעשיה",
+  "filterByMinDate": "סינון לפי תאריך פרסום",
+  "filterByMinDateSubheader": "בחרו את מועד הפרסום הרצוי",
   "industryName": "שם התעשיה",
   "filterBySkillsUpTo10": "יש לבחור עד 10 תחומי עיסוק לסנן לפיהם",
   "loginAndSecurity": "פרטי התחברות"

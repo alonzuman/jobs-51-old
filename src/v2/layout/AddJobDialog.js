@@ -10,7 +10,7 @@ const AddJobDialog = ({ open, onClose }) => {
   return (
     <Dialog dir='rtl' open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.addJob} />
-      <AddJob />
+      <AddJob onClose={onClose} />
     </Dialog>
   )
 }

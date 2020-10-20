@@ -21,7 +21,7 @@ const Jobs = () => {
   const history = useHistory()
 
   useEffect(() => {
-    const { skills, location } = qs.parse(history.location.search)
+    const { skills, location, industry, date } = qs.parse(history.location.search)
     let skillsQuery;
     if (typeof skills === 'string') {
       skillsQuery = [skills]
@@ -29,7 +29,15 @@ const Jobs = () => {
       skillsQuery = skills
     }
 
-    let query = { location, skills: skillsQuery }
+    let industryQuery;
+
+    if (industry === 'הכל' || '') {
+      industryQuery = ''
+    } else {
+      industryQuery = industry
+    }
+
+    let query = { location, skills: skillsQuery, industry: industryQuery, date }
     dispatch(getJobs(query))
   }, [dispatch, history.location.search])
 

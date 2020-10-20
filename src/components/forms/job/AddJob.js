@@ -9,7 +9,7 @@ import LocationSelect from '../profile/LocationSelect'
 import SkillsSelect from '../profile/SkillsSelect'
 import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
 
-const AddJob = () => {
+const AddJob = ({ onClose }) => {
   const dispatch = useDispatch()
   const [skillsError, setSkillsError] = useState('')
   const { uid, firstName, lastName, avatar, role, email, phone } = useSelector(state => state.auth)
@@ -37,7 +37,7 @@ const AddJob = () => {
     })
   }
 
-  const handleJobSubmit = e => {
+  const handleJobSubmit = async e => {
     e.preventDefault()
     const jobToAdd = {
       ...job,
@@ -58,7 +58,10 @@ const AddJob = () => {
     if (skills.length === 0) {
       setSkillsError(translation.categoryError)
     } else {
-      dispatch(addJob(jobToAdd))
+      await dispatch(addJob(jobToAdd))
+      if (onClose) {
+        onClose()
+      }
     }
   }
 
