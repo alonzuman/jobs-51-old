@@ -22,12 +22,6 @@ const TopbarContainer = styled.div`
 
 const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton = false, sticky = false, action }) => {
   const { theme } = useSelector(state => state.theme)
-  const [width, setWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    window.addEventListener('resize', () => setWidth(window.innerWidth))
-    return () => window.removeEventListener('resize', () => setWidth(window.innerWidth))
-  }, [])
 
   return (
     <TopbarContainer
@@ -36,7 +30,7 @@ const TopBar = ({ actionOnClick, subtitle = '', title = '', children, backButton
       backgroundColor={theme?.palette?.background?.light}
       elevation={0}
     >
-      <div className={`flex align__center ${width > 768 ? '' : 'justify__between'}`}>
+      <div className='flex align__center justify__between'>
         {backButton && <BackButton />}
         <span onClick={actionOnClick}>{action}</span>
       </div>
