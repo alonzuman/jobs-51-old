@@ -23,6 +23,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import WorkIcon from '@material-ui/icons/Work';
+import PageHeader from '../v2/organisms/PageHeader'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -57,22 +58,22 @@ const User = ({ match }) => {
     marginLeft: '1rem',
   }
 
+  const handleEditing = () => setEditing(!editing)
+
   return (
     <>
-      <TopBar
-        sticky={true}
-        backButton={true}
-        title={(!loading && user.firstName) ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
-        subtitle={(!loading && user) ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
-        actionOnClick={() => setEditing(!editing)}
-        action={checkPermissions(role) >= checkPermissions(user?.role) && <IconButton style={{ height: 42, width: 42 }} className='m-5'>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}>
-        {!loading ?
-          <Avatar style={{ cursor: "pointer" }} onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md" src={user?.avatar} alt={user?.firstName}>
-            {user?.firstName?.charAt(0)}
-          </Avatar> :
-          <Skeleton variant="circle" className="avatar__md" />}
-      </TopBar>
       <PageContainer>
+        <PageHeader
+          backButton
+          action={checkPermissions(role) >= checkPermissions(user?.role) && <IconButton onClick={handleEditing}>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}
+          title={(!loading && user.firstName) ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
+          subtitle={(!loading && user) ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
+          secondary={!loading ?
+            <Avatar style={{ cursor: "pointer" }} onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md" src={user?.avatar} alt={user?.firstName}>
+              {user?.firstName?.charAt(0)}
+            </Avatar> :
+            <Skeleton variant="circle" className="avatar__md" />}
+        />
         {editing && checkPermissions(role) >= 3 &&
           <Paper className='p-1 mb-1'>
             <Grid container spacing={1}>

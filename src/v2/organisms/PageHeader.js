@@ -30,10 +30,20 @@ const SecondaryContainer = styled.div`
 
 `
 
-const PageHeader = ({ title, subtitle, secondary, backButton, spaceBottom, spaceTop }) => {
+const ActionsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
+
+const PageHeader = ({ title, action, subtitle, secondary, backButton, spaceBottom, spaceTop }) => {
   return (
     <Container spaceBottom={spaceBottom} spaceTop={spaceTop}>
-      {backButton && <BackButton />}
+      <ActionsWrapper>
+        {backButton && <BackButton />}
+        {action && action}
+      </ActionsWrapper>
       <ItemsWrapper>
         <TextContainer>
           <Typography className='pb-0' variant='h1'>{title}</Typography>
