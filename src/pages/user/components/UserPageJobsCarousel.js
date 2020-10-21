@@ -11,7 +11,7 @@ import useWindowSize from '../../../hooks/useWindowSize'
 const Container = styled.div`
   overflow: hidden;
   width: 100%;
-  margin-bottom: 72px;
+  margin-bottom: 96px;
 `
 
 const UserPageJobsCarousel = ({ user, loading, editing }) => {

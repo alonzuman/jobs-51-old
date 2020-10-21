@@ -18,7 +18,7 @@ const IndustryFilter = ({ selectedIndustry, setSelectedIndustry }) => {
 
   return (
     <Container>
-      <Typography variant='h3'>{translation.filterByIndustry}</Typography>
+      <Typography variant='h2'>{translation.filterByIndustry}</Typography>
       <Typography variant='subtitle1'>{translation.industryName}</Typography>
       <FormControl>
         <Select value={selectedIndustry} onChange={handleSelection} variant='outlined'>

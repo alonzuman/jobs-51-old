@@ -12,7 +12,7 @@ const DateFilter = ({ selectedMinDate, setSelectedMinDate }) => {
 
   return (
     <Container>
-      <Typography variant='h3'>{translation.filterByMinDate}</Typography>
+      <Typography variant='h2'>{translation.filterByMinDate}</Typography>
       <Typography variant='subtitle1'>{translation.filterByMinDateSubheader}</Typography>
     </Container>
   )

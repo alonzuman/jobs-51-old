@@ -21,7 +21,7 @@ const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
 
   return (
     <Container>
-      <Typography variant='h3'>{translation.filterByLocation}</Typography>
+      <Typography variant='h2'>{translation.filterByLocation}</Typography>
       <Typography variant='subtitle1'>{translation.locations}</Typography>
       <Grid container spacing={1}>
         {Object.keys(listedLocations)?.map((v, i) => {

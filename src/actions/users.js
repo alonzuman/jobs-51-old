@@ -10,9 +10,7 @@ export const getUser = (uid) => async dispatch => {
   })
   try {
     const userSnapshot = await usersRef.doc(uid).get()
-    // TODO return when index finished
-    // const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
-    const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).get()
+    const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
     jobsSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 

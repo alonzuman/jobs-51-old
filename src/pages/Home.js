@@ -30,7 +30,7 @@ const Home = () => {
       <Typography style={{ maxWidth: 768 }} variant='body1'>{translation.landingPageText1}</Typography>
       <div className='mt-2 flex full__width align__center justify__center'>
         <Link className='button-link' to='/jobs'>
-          <Button className='button-style ml-5' variant='outlined' color='primary'>
+          <Button className='button-style' variant='outlined' color='primary'>
             {translation.lookingForAJob}
           </Button>
         </Link>

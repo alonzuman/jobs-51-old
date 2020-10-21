@@ -30,7 +30,6 @@ import UserActivities from './pages/UserActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ManageConstants from './pages/admin/ManageConstants'
 import Profile from './pages/Profile'
-import Settings from './pages/Settings'
 import PersonalInfo from './pages/PersonalInfo'
 import LoginAndSecurity from './pages/LoginAndSecurity'
 
@@ -63,7 +62,6 @@ function App() {
             <ProtectedRoute exact path='/activity' component={Activity} />
             {/* Profile */}
             <ProtectedRoute exact path='/profile' component={Profile} />
-            <ProtectedRoute exact path='/profile/settings' component={Settings} />
             <ProtectedRoute exact path='/profile/login-and-security' component={LoginAndSecurity} />
             <ProtectedRoute exact path='/profile/personal-info' component={PersonalInfo} />
 

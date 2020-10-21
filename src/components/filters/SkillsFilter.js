@@ -21,7 +21,7 @@ const SkillsFilter = ({ selectedSkills, setSelectedSkills }) => {
 
   return (
     <Container>
-      <Typography variant='h3'>{translation.filterBySkills}</Typography>
+      <Typography variant='h2'>{translation.filterBySkills}</Typography>
       <Typography variant='subtitle1'>{translation.filterBySkillsUpTo10}</Typography>
       <Grid container spacing={1}>
         {Object.keys(listedSkills)?.map((v, i) => {

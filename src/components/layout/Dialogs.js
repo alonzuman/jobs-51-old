@@ -6,7 +6,6 @@ import AddJob from '../forms/job/AddJob'
 import EditJob from '../forms/job/EditJob'
 import SignIn from '../forms/SignIn'
 import SignUp from '../forms/SignUp'
-import Settings from '../forms/Settings'
 import AddActivity from '../forms/activity/AddActivity'
 import CloseIcon from '@material-ui/icons/Close'
 import SingleSelectionFilter from '../filters/SingleSelectionFilter'
@@ -64,7 +63,6 @@ const Dialogs = () => {
     switch (type) {
       case 'SignIn': return <SignIn/>
       case 'SignUp': return <SignUp/>
-      case 'Settings': return <Settings/>
       case 'AddActivity': return <AddActivity/>
       case 'AddJob': return <AddJob/>
       case 'EditJob': return <EditJob/>
