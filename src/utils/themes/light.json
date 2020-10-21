@@ -61,8 +61,8 @@
     },
     "body1": {
       "fontSize": "1rem",
-      "color": "#6c6c6c",
-      "fontWeight": 300
+      "color": "#313131",
+      "fontWeight": 400
     },
     "body2": {
       "fontSize": ".9rem"

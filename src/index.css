@@ -488,4 +488,6 @@ a:hover {
 
 .MuiMenuItem-root {
   min-height: 48px!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
 }

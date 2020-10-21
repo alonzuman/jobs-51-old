@@ -41,7 +41,7 @@ const Profile = () => {
     return (
       <PageContainer>
         <PageHeader
-          secondary={<Avatar src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar>}
+          secondary={<Link to={`/users/${uid}`}><Avatar src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar></Link>}
           spaceTop
           spaceBottom
           title={translation.profile}
