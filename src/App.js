@@ -73,6 +73,7 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
+            <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={User} />
             <Route exact path='/' component={LandingPage} />
           </Switch>
         </Router>

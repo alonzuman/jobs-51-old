@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { approveUser, getUser, unapproveUser, updateUser } from '../../actions/users'
+import { approveUser, deleteUser, getUser, unapproveUser, updateUser } from '../../actions/users'
 import ImageLightbox from '../../components/general/ImageLightbox'
 
 import UserPageJobInfo from './components/UserPageJobInfo'
@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import UserPageHeader from './components/UserPageHeader'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 import { useHistory } from 'react-router-dom'
-import UserPageApproveUpdate from './components/UserPageApproveUpdate'
+import UserPageActions from './components/UserPageActions'
 
 const Container = styled.div`
   padding: 16px 0;
@@ -21,6 +21,7 @@ const Container = styled.div`
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
+  const [isDeclining, setIsDeclining] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [editing, setEditing] = useState(false)
   const { translation } = useSelector(state => state.theme)
@@ -51,7 +52,12 @@ const User = ({ match }) => {
       hometown
     }
     await dispatch(updateUser(updatedUser))
-    setEditing(false)
+    await setEditing(false)
+  }
+
+  const handleDelete = async () => {
+    await dispatch(deleteUser(uid))
+    history.goBack()
   }
 
   useEffect(() => {
@@ -72,7 +78,9 @@ const User = ({ match }) => {
 
   const handleImageOpen = () => setImageOpen(!imageOpen)
   const handleApproveUser = () => dispatch(approveUser(uid))
+  const handleIsDeclining = () => setIsDeclining(!isDeclining)
   const handleIsDeleting = () => setIsDeleting(!isDeleting)
+  const handleEditing = () => setEditing(!editing)
   const handleUnapproveUser = async () => {
     await dispatch(unapproveUser(uid))
     history.goBack()
@@ -83,7 +91,7 @@ const User = ({ match }) => {
       <UserPageHeader
         handleImageOpen={handleImageOpen}
         editing={editing}
-        setEditing={setEditing}
+        handleEditing={handleEditing}
         loading={loading}
         user={user}
         handleSubmit={handleSubmit}
@@ -94,7 +102,7 @@ const User = ({ match }) => {
         isVolunteer={isVolunteer}
         setIsVolunteer={setIsVolunteer}
         handleApproveUser={handleApproveUser}
-        handleIsDeleting={handleIsDeleting}
+        handleIsDeclining={handleIsDeclining}
         loading={loading}
         user={user}
         editing={editing}
@@ -119,24 +127,35 @@ const User = ({ match }) => {
         user={user}
         loading={loading}
       />
-      <UserPageApproveUpdate
+      <UserPageActions
         editing={editing}
-        loading={isUpdating}
-        action={handleSubmit}
+        isUpdating={isUpdating}
+        isDeleting={isDeleting}
+        updateAction={handleSubmit}
+        deleteAction={handleIsDeleting}
       />
       <UserPageJobsCarousel
         editing={editing}
         user={user}
         loading={loading}
       />
-      <ImageLightbox open={imageOpen}
+      <ImageLightbox
+        open={imageOpen}
         onClose={handleImageOpen}
         imgUrl={user?.avatar}
       />
-      <ApprovalDialog open={isDeleting}
+      <ApprovalDialog
+        open={isDeleting}
         onClose={handleIsDeleting}
         text={translation.areYouSure}
-        action={handleUnapproveUser} />
+        action={handleDelete}
+      />
+      <ApprovalDialog
+        open={isDeclining}
+        onClose={handleIsDeclining}
+        text={translation.areYouSure}
+        action={handleUnapproveUser}
+      />
     </Container>
   );
 }

@@ -3,7 +3,8 @@ const initialState = {
   user: {},
   users: [],
   loading: false,
-  isUpdating: false
+  isUpdating: false,
+  isDeleting: false
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         isUpdating: true
       }
+    case 'USERS_DELETING':
+      return {
+        ...state,
+        isDeleting: true
+      }
     case 'USER_STOP_LOADING':
       return {
         ...state,
@@ -34,12 +40,21 @@ export const usersReducer = (state = initialState, action) => {
         },
         isUpdating: false
       }
+    case 'DELETE_USER':
+      return {
+        ...state,
+        user: {},
+        isDeleting: false
+      }
     case 'SET_USER_PAGE':
       return {
         ...state,
-        user: { ...payload },
+        user: {
+          ...payload
+        },
         loading: false,
-        isUpdating: false
+        isUpdating: false,
+        isDeleting: false
       }
     case 'TOGGLE_VOLUNTEER':
       return {

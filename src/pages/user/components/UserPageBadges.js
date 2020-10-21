@@ -5,37 +5,32 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import StarsIcon from '@material-ui/icons/Stars';
 import { checkPermissions } from '../../../utils'
-
-const Container = styled.div`
-  padding: 0 16px;
-`
-
-const InfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-
-  :last-of-type {
-    margin-bottom: 32px;
-  }
-`
+import UserPageSection from './UserPageSection'
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import InfoContainer from './InfoContainer'
 
 const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
 `
 
-const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDeleting, isLookingForJob, setIsLookingForJob, isVolunteer, setIsVolunteer }) => {
+const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDeclining, isLookingForJob, setIsLookingForJob, isVolunteer, setIsVolunteer }) => {
   const { translation } = useSelector(state => state.theme)
   const { volunteer, lookingForJob, activities } = user
   const isPending = checkPermissions(user?.role) === 0;
   const hasApprovedActivities = activities?.approved !== 0;
+  const hasPostedJobs = user?.jobs?.length !== 0;
 
   if (loading) {
-    return <Container><Skeleton height={16} width={48} /></Container>
+    return (
+      <UserPageSection>
+        <Skeleton height={16} width={48} />
+        <br />
+      </UserPageSection>
+    )
   } else if (editing) {
     return (
-      <Container>
+      <UserPageSection>
         <FormGroup row>
           <FormControlLabel
             control={<Checkbox color='primary' name='lookingForJob' onChange={e => setIsLookingForJob(!isLookingForJob)} checked={isLookingForJob} />}
@@ -49,11 +44,11 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDel
           />
         </FormGroup>
         <br />
-      </Container>
+      </UserPageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {
     return (
-      <Container>
+      <UserPageSection>
         <Grid className='mb-5' container spacing={1}>
           {isPending &&
             <Grid item>
@@ -70,14 +65,24 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDel
         </Grid>
         {hasApprovedActivities &&
           <InfoContainer>
-            <StarsIcon className='small__icon ml-5' /><Typography variant='body1'>{activities?.approved} {translation.approvedActivities}</Typography>
+            <StarsIcon className='small__icon ml-5' />
+            <Typography variant='body1'>
+              {activities?.approved} {translation.approvedActivities}
+            </Typography>
+          </InfoContainer>}
+        {hasPostedJobs &&
+          <InfoContainer>
+            <AssignmentIcon className='small__icon ml-5' />
+            <Typography variant='body1'>
+              {translation.posted} {user?.jobs?.length} {translation.jobOffer}
+            </Typography>
           </InfoContainer>}
         {isPending &&
         <ActionsContainer>
-          <Button onClick={handleIsDeleting} color='primary' variant='outlined'>{translation.decline}</Button>
+          <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
           <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
         </ActionsContainer>}
-      </Container>
+      </UserPageSection>
     )
   } else {
     return null

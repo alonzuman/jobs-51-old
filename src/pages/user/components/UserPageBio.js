@@ -2,41 +2,28 @@ import { Divider, TextField, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
 
 // Icons
 import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
-
-const Container = styled.div`
-  padding: 0 16px;
-`
-
-const InfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: ${props => props.noMargin ? '' : '16px'};
-
-  :last-of-type {
-    margin-bottom: 32px;
-  }
-`
+import InfoContainer from './InfoContainer'
+import UserPageSection from './UserPageSection'
 
 const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, setPhone, about, setAbout }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
     return (
-      <Container>
+      <UserPageSection>
         <Skeleton width={104} height={14} />
         <Skeleton width={104} height={18} />
-      </Container>
+      </UserPageSection>
     )
   } else if (editing) {
     return (
-      <Container>
+      <UserPageSection>
         <Divider />
         <br />
         <Typography className='mb-1' variant='h2'>{translation.aboutMe}</Typography>
@@ -49,11 +36,11 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
           <LocationCityIcon className='ml-1 mb-5 small__icon' />
           <LocationSelect size='small' location={hometown} setLocation={setHometown} className='mw-224' label={translation.hometown} />
         </InfoContainer>
-      </Container>
+      </UserPageSection>
     )
   } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
-      <Container>
+      <UserPageSection>
         <Divider />
         <br />
         <Typography variant='h2'>{translation.aboutMe}</Typography>
@@ -74,7 +61,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
             <LocationCityIcon className='ml-5 small__icon' />
             <Typography variant='body1'>{user?.hometown}</Typography>
           </InfoContainer>}
-      </Container>
+      </UserPageSection>
     )
   } else {
     return null
