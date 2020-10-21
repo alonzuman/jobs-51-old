@@ -47,7 +47,8 @@ const User = ({ match }) => {
       about,
       phone,
       lastPosition,
-      skills
+      skills,
+      hometown
     }
     await dispatch(updateUser(updatedUser))
     setEditing(false)
