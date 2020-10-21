@@ -9,10 +9,22 @@ export const getUser = (uid) => async dispatch => {
     type: 'USERS_LOADING'
   })
   try {
-    const snapshot = await usersRef.doc(uid).get()
+    const userSnapshot = await usersRef.doc(uid).get()
+    // TODO return when index finished
+    // const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).get()
+    let results = []
+    jobsSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+
+    const user = {
+      uid,
+      ...userSnapshot.data(),
+      jobs: results
+    }
+
     dispatch({
       type: 'SET_USER_PAGE',
-      payload: { ...snapshot.data() }
+      payload: user
     })
   } catch (error) {
     console.log(error)

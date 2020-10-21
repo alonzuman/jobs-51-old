@@ -37,9 +37,9 @@
     },
     "h2": {
       "fontSize": "1.3rem",
-      "fontWeight": 400,
+      "fontWeight": 500,
       "color": "#f7f7f7",
-      "padding": ".5rem 0"
+      "margin": "16px 0 8px 0"
     },
     "h3": {
       "fontSize": "1.1rem",
@@ -63,5 +63,9 @@
       "fontSize": ".9rem",
       "color": "#f7f7f7"
     }
-  }
+  },
+  "shadows": [
+    "none",
+    "rgba(0, 0, 0, 0.15) 0px 2px 8px !important"
+  ]
 }

@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Typography } from '@material-ui/core'
+import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -13,9 +13,10 @@ import PageHeader from '../v2/organisms/PageHeader'
 
 const Profile = () => {
   const { translation } = useSelector(state => state.theme)
+  const { uid } = useSelector(state => state.auth)
   return (
     <PageContainer>
-      <PageHeader spaceTop spaceBottom title={translation.profile} />
+      <PageHeader secondary={<Link to={`/users/${uid}`}><Button color='primary'>{translation.viewProfile}</Button></Link>} spaceTop spaceBottom title={translation.profile} />
       <Grid container spacing={2}>
         <Grid item xs={6} md={4} lg={4}>
           <Link to='/profile/login-and-security'>

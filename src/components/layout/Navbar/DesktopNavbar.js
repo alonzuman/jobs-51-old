@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import PopperMenu from './PopperMenu';
 
 const Container = styled.div`
-  position: sticky;
   top: 0;
   width: 100%;
   background-color: ${props => props.backgroundColor};

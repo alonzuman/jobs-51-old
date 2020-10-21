@@ -80,6 +80,7 @@
   "latestActivities": "פעילות אחרונה",
   "pending": "ממתין לאישור",
   "approved": "מאושר",
+  "approvedActivities": "שעות התנדבות כמלגאי/ת עמותה",
   "manageActivities": "ניהול פעילויות",
   "manageUsers": "ניהול משתמשים",
   "totalActivities": "סיכום שעות פעילות",
@@ -193,7 +194,12 @@
   "filterByMinDateSubheader": "בחרו את מועד הפרסום הרצוי",
   "industryName": "שם התעשיה",
   "filterBySkillsUpTo10": "יש לבחור עד 10 תחומי עיסוק לסנן לפיהם",
-  "loginAndSecurity": "פרטי התחברות"
+  "loginAndSecurity": "פרטי התחברות",
+  "aboutMe": "מידע עליי",
+  "viewProfile": "צפיה בפרופיל",
+  "activeVolunteer": "מלגאי/ת עמותה",
+  "jobsBy": "פרסומים של",
+  "workExperience": "נסיון תעסוקתי"
 }
 
 

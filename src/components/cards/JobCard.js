@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, ListItem } from '@material-ui/core'
+import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, ListItem, CardActions } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { setJob, saveJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
@@ -78,25 +78,29 @@ const JobCard = ({ job }) => {
   }
 
   return (
-    <Grid item xs={12} md={6} lg={6}>
-      <CardContainer>
-        <CardHeader
-          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-          title={job?.company}
-          subheader={job?.location}
-          action={action()}
-        />
-        <Link to={`/jobs/${job?.id}`}>
-          <CardContent>
-            <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary' />
-            <Typography variant='subtitle1'>{translation.categories}</Typography>
-            <Grid container spacing={1}>
-              {job?.skills?.map((req, index) => <Grid item key={index}><CustomChip label={req} /></Grid>)}
-            </Grid>
-          </CardContent>
-        </Link>
-      </CardContainer>
-    </Grid>
+    <CardContainer>
+      <CardHeader
+        avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
+        title={job?.company}
+        subheader={job?.location}
+        action={action()}
+      />
+      <Link to={`/jobs/${job?.id}`}>
+        <CardContent>
+          <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary' />
+        </CardContent>
+        <CardActions className='flex flex__column align__baseline'>
+          <Typography variant='subtitle1'>{translation.categories}</Typography>
+          <Grid className='m-0' container spacing={1}>
+            {job?.skills?.map((req, index) => {
+              if (index <= 2) return (
+                <Grid item key={index}><CustomChip label={req} /></Grid>
+              )
+            })}
+          </Grid>
+        </CardActions>
+      </Link>
+    </CardContainer>
   )
 }
 

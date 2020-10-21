@@ -52,9 +52,9 @@ const Jobs = () => {
       <PageHeader backButton title={translation.findJob} />
       <JobsFilter />
       {loading && <CardsSkeletons />}
-      <Grid className='cards__container' container spacing={2}>
+      <Grid className='cards__container mb-4' container spacing={2}>
         {(jobs?.length === 0 && !loading) && <Typography className='mt-1' color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
-        {!loading && jobs?.map((job, index) => <JobCard key={index} job={job} />)}
+        {!loading && jobs?.map((job, index) => <Grid xs={12} md={6} lg={6}><JobCard key={index} job={job} /></Grid>)}
       </Grid>
     </PageContainer>
   )

@@ -8,7 +8,7 @@ const AddJobDialog = ({ open, onClose }) => {
   const { translation } = useSelector(state => state.theme)
 
   return (
-    <Dialog dir='rtl' open={open} onClose={onClose}>
+    <Dialog fullWidth dir='rtl' open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.addJob} />
       <AddJob onClose={onClose} />
     </Dialog>

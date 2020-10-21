@@ -12,6 +12,7 @@ const PersonalInfo = ({ customMsg }) => {
   const [skills, setSkills] = useState(authState.skills || [])
   const [serviceYear, setServiceYear] = useState(authState.serviceYear || '')
   const [lastPosition, setLastPosition] = useState(authState.lastPosition || '')
+  const [about, setAbout] = useState(authState.about || '')
   const [preferredLocation, setPreferredLocation] = useState(authState.preferredLocation || '')
   const dispatch = useDispatch()
 
@@ -21,7 +22,8 @@ const PersonalInfo = ({ customMsg }) => {
       serviceYear,
       lastPosition,
       preferredLocation,
-      skills
+      skills,
+      about
     }
     dispatch(addPersonalDetails(authState, personalDetails, authState.uid))
   }
@@ -46,6 +48,7 @@ const PersonalInfo = ({ customMsg }) => {
           />
         </Grid>
       </Grid>
+      <TextField multiline rows={4} placeholder={translation.aboutMe} label={translation.aboutMe} variant='outlined' value={about} onChange={e => setAbout(e.target.value)} />
       <TextField placeholder={translation.lastPositionPlaceholder} label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
       <SkillsSelect placeholder={translation.skillsPlaceholder} collection='skills' label={translation.skills} skills={skills} setSkills={setSkills} />
       <FormControl className='mb-0'>

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import TopBar from '../components/layout/TopBar'
-import PageContainer from '../components/layout/PageContainer'
+import PageContainer from '../../components/layout/PageContainer'
+import PageHeader from '../../v2/organisms/PageHeader';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { MenuItem, MenuList } from '@material-ui/core'
+import { Divider, MenuItem, MenuList } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 const Admin = () => {
@@ -26,18 +26,17 @@ const Admin = () => {
   }
 
   return (
-    <>
-      <TopBar title={translation.adminPage} />
-      <PageContainer>
-        <MenuList>
-          {items.map((v, i) =>
-            <Link key={i} to={v.link}>
-              <MenuItem style={menuItemStyle}><span style={iconStyle}>{v.icon}</span>{v.label}</MenuItem>
-            </Link>
-          )}
-        </MenuList>
-      </PageContainer>
-    </>
+    <PageContainer>
+      <PageHeader spaceTop title={translation.adminPage} />
+      <MenuList>
+        {items.map((v, i) =>
+          <Link key={i} to={v.link}>
+            <MenuItem style={menuItemStyle}><span style={iconStyle}>{v.icon}</span>{v.label}</MenuItem>
+            <Divider />
+          </Link>
+        )}
+      </MenuList>
+    </PageContainer>
   )
 }
 

@@ -16,6 +16,7 @@
     "firebase": "^7.18.0",
     "jss-rtl": "^0.3.0",
     "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
     "query-string": "^6.13.6",
     "react": "^16.13.1",
     "react-csv": "^2.0.3",
@@ -26,6 +27,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.0",
+    "swiper": "^6.3.4",
     "uuid": "^8.3.0"
   },
   "scripts": {

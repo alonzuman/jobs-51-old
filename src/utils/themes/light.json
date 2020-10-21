@@ -27,6 +27,10 @@
   "shape": {
     "borderRadius": 4
   },
+  "shadows": [
+    "none",
+    "rgba(0, 0, 0, 0.15) 0px 2px 8px !important"
+  ],
   "typography": {
     "fontFamily": ["Rubik", "sans-serif"],
     "h1": {
@@ -37,9 +41,9 @@
     },
     "h2": {
       "fontSize": "1.3rem",
-      "fontWeight": 400,
+      "fontWeight": 500,
       "color": "#3B3439",
-      "padding": ".5rem 0"
+      "margin": "16px 0 8px 0"
     },
     "h3": {
       "fontSize": "1.1rem",

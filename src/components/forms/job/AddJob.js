@@ -16,7 +16,7 @@ const AddJob = ({ onClose }) => {
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
   const industries = useSelector(state => state.constants?.industries.all)
-  const [industry, setIndustry] = useState('')
+  const [industry, setIndustry] = useState(industries[0])
   const [location, setLocation] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [progress, setProgress] = useState(0)

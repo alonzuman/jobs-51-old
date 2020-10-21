@@ -26,7 +26,7 @@ const SavedJobs = () => {
       {!savedJobsLoading && savedJobs?.length === 0 && <Typography variant='body1'>{translation.couldntFindSavedJobs}</Typography>}
       {!savedJobsLoading && savedJobs &&
         <Grid className='cards__container' container spacing={2}>
-          {savedJobs.length > 0 && savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
+          {savedJobs.length > 0 && savedJobs.map((job, index) => <Grid xs={12} md={6} lg={6}><JobCard key={index} job={job} /></Grid>)}
         </Grid>}
     </PageContainer>
   )

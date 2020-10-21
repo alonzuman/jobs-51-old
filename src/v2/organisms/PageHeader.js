@@ -31,22 +31,23 @@ const SecondaryContainer = styled.div`
 `
 
 const ActionsWrapper = styled.div`
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 `
 
-const PageHeader = ({ title, action, subtitle, secondary, backButton, spaceBottom, spaceTop }) => {
+const PageHeader = ({ title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
   return (
-    <Container spaceBottom={spaceBottom} spaceTop={spaceTop}>
+    <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
       <ActionsWrapper>
         {backButton && <BackButton />}
         {action && action}
       </ActionsWrapper>
       <ItemsWrapper>
         <TextContainer>
-          <Typography className='pb-0' variant='h1'>{title}</Typography>
+          <Typography className='p-0' variant='h1'>{title}</Typography>
           <Typography variant='subtitle1'>{subtitle}</Typography>
         </TextContainer>
         <SecondaryContainer>

@@ -10,14 +10,13 @@ import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
 import SavedJobs from './pages/SavedJobs'
 import Activity from './pages/Activity'
-import Admin from './pages/Admin'
-import User from './pages/User'
+import Admin from './pages/admin/Admin'
+import User from './pages/user/User'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
 
-// Redux
 import { useSelector } from 'react-redux'
 import LandingPage from './pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'

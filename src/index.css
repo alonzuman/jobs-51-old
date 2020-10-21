@@ -106,6 +106,10 @@ a:hover {
 
 /* FLEXBOX LAYOUT */
 
+.align__baseline {
+  align-items: baseline!important;
+}
+
 .align__center {
   align-items: center!important;
 }
@@ -373,24 +377,28 @@ a:hover {
   margin-right: 8px!important;
 }
 
+.ml-5 {
+  margin-left: 8px!important;
+}
+
 .ml-1 {
-  margin-right: 16px!important;
+  margin-left: 16px!important;
 }
 
 .ml-2 {
-  margin-right: 2rem!important;
+  margin-left: 2rem!important;
 }
 
 .ml-3 {
-  margin-right: 48px!important;
+  margin-left: 48px!important;
 }
 
 .ml-4 {
-  margin-right: 64px!important;
+  margin-left: 64px!important;
 }
 
 .ml-5 {
-  margin-right: 8px!important;
+  margin-left: 8px!important;
 }
 
 .br-1 {
@@ -467,4 +475,13 @@ a:hover {
 
 .MuiChip-label {
   text-overflow: clip!important;
+}
+
+.small__icon {
+  height: 1rem!important;
+  width: 1rem!important
+}
+
+.swiper-container {
+  padding: 8px 16px!important;
 }
