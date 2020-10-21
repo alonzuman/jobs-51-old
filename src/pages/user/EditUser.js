@@ -83,7 +83,7 @@ const User = ({ match }) => {
   const handleIsDeleting = () => setIsDeleting(!isDeleting)
   const handleEditing = () => {
     history.push({
-      pathname: `/users/${uid}/edit`
+      pathname: `/users/${uid}`
     })
     setEditing(!editing)
   }
@@ -96,7 +96,7 @@ const User = ({ match }) => {
     <Container>
       <UserPageHeader
         handleImageOpen={handleImageOpen}
-        editing={false}
+        editing={true}
         handleEditing={handleEditing}
         loading={loading}
         user={user}
@@ -111,7 +111,7 @@ const User = ({ match }) => {
         handleIsDeclining={handleIsDeclining}
         loading={loading}
         user={user}
-        editing={false}
+        editing={true}
       />
       <UserPageBio
         about={about}
@@ -120,7 +120,7 @@ const User = ({ match }) => {
         setPhone={setPhone}
         hometown={hometown}
         setHometown={setHometown}
-        editing={false}
+        editing={true}
         user={user}
         loading={loading}
       />
@@ -129,26 +129,17 @@ const User = ({ match }) => {
         setSkills={setSkills}
         lastPosition={lastPosition}
         setLastPosition={setLastPosition}
-        editing={false}
+        editing={true}
         user={user}
         loading={loading}
       />
       <UserPageActions
-        editing={false}
+        editing={true}
+        loading={loading}
         isUpdating={isUpdating}
         isDeleting={isDeleting}
         updateAction={handleSubmit}
         deleteAction={handleIsDeleting}
-      />
-      <UserPageActivitiesCarousel
-        user={user}
-        loading={loading}
-        editing={editing}
-      />
-      <UserPageJobsCarousel
-        user={user}
-        loading={loading}
-        editing={false}
       />
       <ImageLightbox
         open={imageOpen}

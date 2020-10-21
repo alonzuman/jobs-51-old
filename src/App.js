@@ -26,13 +26,10 @@ import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/Home'
 import Feedback from './components/layout/Feedback'
 import Job from './pages/Job'
-import UserActivities from './pages/UserActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ManageConstants from './pages/admin/ManageConstants'
 import Profile from './pages/Profile'
-import PersonalInfo from './pages/PersonalInfo'
-import LoginAndSecurity from './pages/LoginAndSecurity'
-
+import EditUser from './pages/user/EditUser'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -62,18 +59,15 @@ function App() {
             <ProtectedRoute exact path='/activity' component={Activity} />
             {/* Profile */}
             <ProtectedRoute exact path='/profile' component={Profile} />
-            <ProtectedRoute exact path='/profile/login-and-security' component={LoginAndSecurity} />
-            <ProtectedRoute exact path='/profile/personal-info' component={PersonalInfo} />
 
             {/* Users */}
             <ProtectedRoute exact path='/users' component={Employees} />
-            <ProtectedRoute exact path='/users/:id/activities' component={UserActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
-            <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={User} />
+            <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
             <Route exact path='/' component={LandingPage} />
           </Switch>
         </Router>

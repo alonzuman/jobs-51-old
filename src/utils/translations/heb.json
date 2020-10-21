@@ -202,12 +202,16 @@
   "viewProfile": "צפיה בפרופיל",
   "activeVolunteer": "מלגאי/ת עמותה",
   "jobsBy": "פרסומים של",
+  "activitiesBy": "פעילויות התנדבות של",
+  "activitiesByExplanation": "פירוט שעות הפעילות אשר ביצע/ה כחלק מתכנית המלגאים של העמותה",
   "workExperience": "נסיון תעסוקתי",
   "pendingApproval": "ממתינ/ה לאישור מנהל",
   "decline": "סירוב",
   "approveAction": "אישור פעולה",
   "posted": "פירסמ/ה",
-  "jobOffer": "הצעות עבודה"
+  "jobOffer": "הצעות עבודה",
+  "jobTitle": "שם המשרה",
+  "jobTitlePlaceholder": "לדוגמא: ״מנהל תפעול״"
 }
 
 

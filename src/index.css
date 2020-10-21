@@ -231,8 +231,8 @@ a:hover {
   margin-bottom: 8px!important;
 }
 
-.mt-4p {
-  margin-top: 4px;
+.mt-25 {
+  margin-top: 4px!important;
 }
 
 .mt-1 {
@@ -252,7 +252,15 @@ a:hover {
 }
 
 .mt-5 {
-  margin-top: 8px;
+  margin-top: 8px!important;
+}
+
+.mb-25 {
+  margin-bottom: 4px !important;
+}
+
+.mt-25 {
+  margin-top: 4px!important;
 }
 
 .ptb-5 {
@@ -503,6 +511,18 @@ a:hover {
   min-height: 48px!important;
 }
 
+.w-96 {
+  width: 96px!important;
+}
+
+.w-264 {
+  width: 264px!important;
+}
+
 .mw-224 {
   min-width: 224px!important;
+}
+
+.lh-1 {
+  line-height: 1!important;
 }

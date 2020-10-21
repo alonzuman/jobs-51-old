@@ -17,7 +17,6 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   if (loading) {
     return (
       <UserPageSection>
-        <Skeleton width={104} height={14} />
         <Skeleton width={104} height={18} />
       </UserPageSection>
     )

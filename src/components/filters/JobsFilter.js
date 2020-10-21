@@ -10,14 +10,9 @@ import LocationFilter from './LocationFilter'
 import SkillsFilter from './SkillsFilter'
 import useWindowSize from '../../hooks/useWindowSize'
 import IndustryFilter from './IndustryFilter'
-import Slide from '@material-ui/core/Slide';
 import DialogActionsContainer from '../../v2/atoms/DialogActionsContainer'
 import DateFilter from './DateFilter'
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
+import Transition from '../../v2/atoms/Transition'
 
 const Container = styled.div`
   display: flex;

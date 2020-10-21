@@ -9,11 +9,13 @@ const Container = styled.div`
   margin-bottom: 96px;
 `
 
-const UserPageActions = ({ updateAction, deleteAction, editing, isUpdating, isDeleting }) => {
+const UserPageActions = ({ loading, updateAction, deleteAction, editing, isUpdating, isDeleting }) => {
   const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
 
-  if (editing) {
+  if (loading) {
+    return null
+  } else if (editing) {
     return (
       <Container>
         <Divider />

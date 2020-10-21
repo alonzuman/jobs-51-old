@@ -11,13 +11,18 @@ export const getUser = (uid) => async dispatch => {
   try {
     const userSnapshot = await usersRef.doc(uid).get()
     const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
-    let results = []
-    jobsSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    const activitiesSnapshot = await db.collection('activities').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
 
+    let jobs = []
+    let activities = []
+
+    jobsSnapshot.forEach(doc => jobs.push({ id: doc.id, ...doc.data() }))
+    activitiesSnapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
     const user = {
       uid,
       ...userSnapshot.data(),
-      jobs: results
+      jobs: jobs,
+      activities
     }
 
     dispatch({
@@ -77,26 +82,6 @@ export const clearUserFilters = () => async dispatch => {
   })
 }
 
-export const changeUserRole = (uid, role) => async dispatch => {
-  dispatch({
-    type: 'USERS_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).set({
-      role
-    }, { merge: true })
-    dispatch({
-      type: 'USER_STOP_LOADING'
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
 export const getEmployees = () => async dispatch => {
   dispatch({
     type: 'USERS_LOADING'
@@ -115,105 +100,6 @@ export const getEmployees = () => async dispatch => {
       type: 'error',
       msg: 'ServerError'
     }))
-  }
-}
-
-export const getUserAndActivities = (uid) => async dispatch => {
-  dispatch({ type: 'ACTIVITY_LOADING' })
-  dispatch({ type: 'USERS_LOADING' })
-  try {
-    const userSnapshot = await usersRef.doc(uid).get()
-    const activitySnapshot = await db.collection('activities').where('uid', '==', uid).get()
-    const user = { id: userSnapshot.id, ...userSnapshot.data() }
-    let activities = []
-    activitySnapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: "SET_ACTIVITIES",
-      payload: { activities },
-    });
-    dispatch({
-      type: 'SET_USER_PAGE',
-      payload: { ...user }
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch({
-      type: 'USER_STOP_LOADING'
-    })
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
-export const toggleVolunteer = ({ uid, currentValue }) => async dispatch => {
-  const authState = store.getState().auth
-  dispatch({
-    type: 'USER_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).update('volunteer', currentValue)
-    if (uid === authState.uid) {
-      dispatch({
-        type: 'UPDATED_PROFILE',
-        payload: {
-          volunteer: currentValue
-        }
-      })
-    } else {
-      dispatch({
-        type: 'TOGGLE_VOLUNTEER',
-        payload: { uid, currentValue }
-      })
-    }
-    dispatch(setFeedback({
-      type: 'success',
-      msg: 'Success'
-    }))
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: "USER_STOP_LOADING",
-    });
-    dispatch(
-      setFeedback({
-        type: "error",
-        msg: "ServerError",
-      })
-    );
-  }
-}
-
-export const toggleRegion = ({ uid, region }) => async dispatch => {
-  dispatch({
-    type: 'USER_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).update('region', region)
-    dispatch({
-      type: 'UPDATE_USER',
-      payload: {
-        region
-      }
-    })
-    dispatch(
-      setFeedback({
-        type: "success",
-        msg: "Success",
-      })
-    );
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: "USER_STOP_LOADING",
-    });
-    dispatch(
-      setFeedback({
-        type: "error",
-        msg: "ServerError",
-      })
-    );
   }
 }
 

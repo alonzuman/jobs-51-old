@@ -19,7 +19,7 @@ const UserPageHeader = ({ editing, loading, user, handleEditing, handleImageOpen
   if (loading) {
     return (
       <PageHeader
-        className='p-1'
+        className='p-1 mt-3'
         title={<Skeleton width={104} />}
         subtitle={<Skeleton width={48} />}
         secondary={<Skeleton variant='circle' height={56} width={56} />}

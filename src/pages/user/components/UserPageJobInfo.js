@@ -28,7 +28,7 @@ const UserPageJobInfo = ({ editing, loading, lastPosition, setLastPosition, skil
           <WorkIcon className='ml-1 small__icon mb-5' />
           <TextField className='fit__content mb-5' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
         </InfoContainer>
-        <InfoContainer className='mt-4p' noMargin>
+        <InfoContainer className='mt-25' noMargin>
           <GradeIcon className='ml-1 small__icon mb-5' />
           <SkillsSelect skills={skills} setSkills={setSkills} className='mw-224' size='small'/>
         </InfoContainer>

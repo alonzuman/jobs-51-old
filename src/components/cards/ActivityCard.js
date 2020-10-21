@@ -4,10 +4,8 @@ import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ActivityCardActions from './ActivityCardActions';
-import CardContainer from './CardContainer';
 import CustomChip from './CustomChip';
 import { Link } from 'react-router-dom';
-import CardMarker from './CardMarker';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
 
@@ -24,7 +22,8 @@ const DatesContainer = styled.div`
 `
 
 const InfoContainer = styled.div`
-  padding: 0px 16px;
+  padding-right: 16px;
+  flex: 2;
 `
 
 const CardBody = styled.div`
@@ -45,13 +44,12 @@ const ActivityCard = ({ activity, showUser = true }) => {
   const [day, month, number] = translateDate(activity.date)
   return (
     <Grid item xs={12} md={6} lg={6}>
-      <Card onClick={() => setOpen(!open)}>
-        <CardContent>
+      <Card variant='outlined' onClick={() => setOpen(!open)}>
+        <CardContent className='pb-5'>
           <CardBody>
             <DatesContainer borderColor={theme?.palette?.border?.main}>
-              {/* <CardMarker color={activity.approved ? "#4caf50" : "#e15757"} /> */}
               <Typography variant="subtitle1">{month}</Typography>
-              <Typography variant="h2">{number}</Typography>
+              <Typography className='mt-25 mb-25' variant="h2">{number}</Typography>
               <Typography variant="body1">{day}</Typography>
             </DatesContainer>
             <InfoContainer>

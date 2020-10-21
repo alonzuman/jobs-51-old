@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, ListItem, CardActions } from '@material-ui/core'
+import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, CardActions, Card, Chip } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { setJob, saveJob, unsaveJob, openDialog } from '../../actions'
 import EditIcon from '@material-ui/icons/Edit';
@@ -7,7 +7,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import moment from 'moment'
 import 'moment/locale/he'
-import CardContainer from './CardContainer';
 import { Link } from 'react-router-dom';
 import CustomChip from './CustomChip';
 import { checkPermissions } from '../../utils';
@@ -72,35 +71,28 @@ const JobCard = ({ job }) => {
     }
   }
 
-  const chipStyle = {
-    direction: 'ltr',
-    marginBottom: 4
-  }
+  const cardTitle = (
+    <>
+      <Typography className='lh-1' variant='subtitle1'>{job?.company}</Typography>
+      <Typography variant='body1'>{job?.jobTitle}</Typography>
+    </>
+  )
 
   return (
-    <CardContainer>
+    <Card variant='outlined'>
       <CardHeader
         avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-        title={job?.company}
+        // title={job?.company}
+        title={cardTitle}
         subheader={job?.location}
         action={action()}
       />
       <Link to={`/jobs/${job?.id}`}>
-        <CardContent>
-          <CustomChip style={chipStyle} label={timeAgo()} size='small' variant='outlined' color='primary' />
-        </CardContent>
-        <CardActions className='flex flex__column align__baseline'>
-          <Typography variant='subtitle1'>{translation.categories}</Typography>
-          <Grid className='m-0' container spacing={1}>
-            {job?.skills?.map((req, index) => {
-              if (index <= 2) return (
-                <Grid item key={index}><CustomChip label={req} /></Grid>
-              )
-            })}
-          </Grid>
+        <CardActions>
+          <Chip variant='outlined' size='small' label={timeAgo()} color='primary' />
         </CardActions>
       </Link>
-    </CardContainer>
+    </Card>
   )
 }
 
