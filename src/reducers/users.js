@@ -2,7 +2,8 @@ const initialState = {
   filters: {},
   user: {},
   users: [],
-  loading: false
+  loading: false,
+  isUpdating: false
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      }
+    case 'USERS_UPDATING':
+      return {
+        ...state,
+        isUpdating: true
       }
     case 'USER_STOP_LOADING':
       return {
@@ -25,13 +31,15 @@ export const usersReducer = (state = initialState, action) => {
         user: {
           ...state.user,
           ...payload
-        }
+        },
+        isUpdating: false
       }
     case 'SET_USER_PAGE':
       return {
         ...state,
         user: { ...payload },
-        loading: false
+        loading: false,
+        isUpdating: false
       }
     case 'TOGGLE_VOLUNTEER':
       return {

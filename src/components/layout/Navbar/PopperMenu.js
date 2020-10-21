@@ -22,7 +22,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose }) => {
   const { volunteer, role } = useSelector(state => state.auth)
 
   return (
-    <Menu className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
+    <Menu elevation={1} className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
       <NavLink to='/home'>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>

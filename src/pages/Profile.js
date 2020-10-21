@@ -41,11 +41,11 @@ const Profile = () => {
     return (
       <PageContainer>
         <PageHeader
-          secondary={<Link to={`/users/${uid}`}><Avatar src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar></Link>}
+          secondary={<Link to={`/users/${uid}`}><Avatar className='avatar__md' src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar></Link>}
           spaceTop
           spaceBottom
           title={translation.profile}
-          subtitle={<Link to={`/users/${uid}`}><Button className='p-0' color='primary'>{translation.viewProfile}</Button></Link>}
+          subtitle={<Link to={`/users/${uid}`}><Button className='p-0 pr-5 pl-5' color='primary'>{translation.viewProfile}</Button></Link>}
         />
         <MenuList>
           <Typography variant='subtitle1'>{translation.justProfile}</Typography>
@@ -69,7 +69,7 @@ const Profile = () => {
           </MenuItem>
           <Divider className='mt-1 mb-1' />
         </MenuList>
-        <Button className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>
+        <Button size='large' className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>
         <LinksContainer>
           <Link to='/privacy-policy'>
             <Button color='primary' className='p-0'>{translation.privacyPolicy}</Button>

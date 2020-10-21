@@ -11,6 +11,7 @@ const Container = styled.div`
   transform: translate(-50%, 0);
   z-index: 9999;
   direction: rtl;
+  min-width: 300px;
 `
 
 const Feedback = () => {
@@ -23,7 +24,8 @@ const Feedback = () => {
   if (isOn) {
     return (
       <Container onClick={handleClose}>
-        {isOn && <Alert severity={type} onClose={handleClose}>
+        {isOn &&
+        <Alert className='full__width' severity={type} onClose={handleClose}>
           {translation[msg]}
         </Alert>}
       </Container>

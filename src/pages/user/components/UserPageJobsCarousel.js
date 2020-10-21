@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import { Divider, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -29,9 +29,12 @@ const UserPageJobsCarousel = ({ user, loading, editing }) => {
 
   if (loading) {
     return <Container className='p-1'><Skeleton width={128} height={32} /></Container>
+  } else if (editing) {
+    return null
   } else if (jobs?.length !== 0) {
     return (
       <Container>
+        <Divider className='mr-1 ml-1' />
         <Typography className='mr-1' variant='h2'>{translation.jobsBy} {user?.firstName} ({user?.jobs?.length})</Typography>
         <Swiper spaceBetween={16} slidesPerView={slidesPerView()}>
           {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard job={v} /></SwiperSlide>)}

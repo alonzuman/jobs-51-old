@@ -241,3 +241,83 @@ export const deleteUser = uid => async dispatch => {
     }))
   }
 }
+
+export const approveUser = uid => async dispatch => {
+  dispatch({
+    type: 'USERS_LOADING'
+  })
+
+  try {
+    await usersRef.doc(uid).update({
+      role: 'user'
+    })
+    dispatch({
+      type: 'UPDATE_USER',
+      payload: {
+        role: 'user'
+      }
+    })
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'Success'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'USER_STOP_LOADING'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'serverError'
+    }))
+  }
+}
+
+export const unapproveUser = uid => async dispatch => {
+  dispatch({
+    type: 'USERS_LOADING'
+  })
+
+  try {
+    dispatch(deleteUser(uid))
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'USER_STOP_LOADING'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'serverError'
+    }))
+  }
+}
+
+export const updateUser = newUser => async dispatch => {
+  dispatch({
+    type: 'USERS_UPDATING'
+  })
+  try {
+    await usersRef.doc(newUser.uid).set({
+      ...newUser
+    }, { merge: true })
+    dispatch({
+      type: 'SET_USER_PAGE',
+      payload: {
+        ...newUser
+      }
+    })
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'userUpdatedSuccessfully'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'USER_STOP_LOADING'
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'serverError'
+    }))
+  }
+}

@@ -39,6 +39,7 @@
   "platformForMembersOnly": "הפלטפורמה תהיה מורשית לחברי עמותה בלבד.",
   "editProfile": "עריכת פרופיל",
   "update": "עדכון",
+  "userUpdatedSuccessfully": "פרופיל עודכן בהצלחה!",
   "updatePhoto": "עדכון תמונה",
   "preferredLocation": "איזור מועדף לעבודה",
   "skills": "תחום ותפקיד רצוי",
@@ -56,7 +57,8 @@
   "SignedOutSuccess": "התנתקת בהצלחה",
   "PasswordsDontMatch": "הססמאות לא תואמות, אנא נסו שנית",
   "cancel": "ביטול",
-  "areYouSure": "האם את/ה בטוח/ה?",
+  "areYouSure": "האם אתם בטוחים שברצונכם לבצע פעולה זו?",
+  "hometown": "עיר מגורים",
   "signInWithGoogle": "התחברות באמצעות גוגל",
   "signInWithFacebook": "התחברות באמצעות פייסבוק",
   "or": "או",
@@ -200,7 +202,10 @@
   "viewProfile": "צפיה בפרופיל",
   "activeVolunteer": "מלגאי/ת עמותה",
   "jobsBy": "פרסומים של",
-  "workExperience": "נסיון תעסוקתי"
+  "workExperience": "נסיון תעסוקתי",
+  "pendingApproval": "ממתינ/ה לאישור מנהל",
+  "decline": "סירוב",
+  "approveAction": "אישור פעולה"
 }
 
 

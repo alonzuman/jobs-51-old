@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser } from '../../actions/users'
-import { Avatar, IconButton } from '@material-ui/core'
-import { Skeleton } from '@material-ui/lab'
-import { checkPermissions } from '../../utils'
+import { approveUser, getUser, unapproveUser, updateUser } from '../../actions/users'
 import ImageLightbox from '../../components/general/ImageLightbox'
 
-// Icons
-import EditIcon from '@material-ui/icons/Edit';
-import DoneIcon from '@material-ui/icons/Done';
-
-import PageHeader from '../../v2/organisms/PageHeader'
 import UserPageJobInfo from './components/UserPageJobInfo'
 import UserPageBio from './components/UserPageBio'
 import UserPageBadges from './components/UserPageBadges'
 import UserPageJobsCarousel from './components/UserPageJobsCarousel'
 import styled from 'styled-components'
+import UserPageHeader from './components/UserPageHeader'
+import ApprovalDialog from '../../v2/layout/ApprovalDialog'
+import { useHistory } from 'react-router-dom'
+import UserPageApproveUpdate from './components/UserPageApproveUpdate'
 
 const Container = styled.div`
   padding: 16px 0;
@@ -25,13 +21,47 @@ const Container = styled.div`
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
-  const [deleting, setDeleting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const [editing, setEditing] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { role } = useSelector(state => state.auth)
-  const { loading, user } = useSelector(state => state.users)
-  const uid = match.url.split('/')[2]
+  const history = useHistory()
+  const { loading, user, isUpdating } = useSelector(state => state.users)
+  const uid = match.params.id
   const dispatch = useDispatch()
+
+  // User fields for update
+  const [isLookingForJob, setIsLookingForJob] = useState(null)
+  const [isVolunteer, setIsVolunteer] = useState(null)
+  const [phone, setPhone] = useState('')
+  const [about, setAbout] = useState('')
+  const [hometown, setHometown] = useState('')
+  const [lastPosition, setLastPosition] = useState('')
+  const [skills, setSkills] = useState([])
+
+  const handleSubmit = async () => {
+    const updatedUser = {
+      ...user,
+      uid,
+      lookingForJob: isLookingForJob,
+      volunteer: isVolunteer,
+      about,
+      phone,
+      lastPosition,
+      skills
+    }
+    await dispatch(updateUser(updatedUser))
+    setEditing(false)
+  }
+
+  useEffect(() => {
+    setIsLookingForJob(!!user?.lookingForJob)
+    setIsVolunteer(!!user?.volunteer)
+    setAbout(user?.about || '')
+    setPhone(user?.phone || '')
+    setHometown(user?.hometown || '')
+    setLastPosition(user?.lastPosition || '')
+    setSkills(user?.skills || [])
+  }, [user])
 
   useEffect(() => {
     if (user?.uid !== uid) {
@@ -39,32 +69,73 @@ const User = ({ match }) => {
     }
   }, [dispatch, uid])
 
-  const handleEditing = () => setEditing(!editing)
+  const handleImageOpen = () => setImageOpen(!imageOpen)
+  const handleApproveUser = () => dispatch(approveUser(uid))
+  const handleIsDeleting = () => setIsDeleting(!isDeleting)
+  const handleUnapproveUser = async () => {
+    await dispatch(unapproveUser(uid))
+    history.goBack()
+  }
 
   return (
     <Container>
-      <PageHeader
-        className='p-1'
-        backButton
-        spaceBottom
-        action={checkPermissions(role) >= checkPermissions(user?.role) && <IconButton onClick={handleEditing}>{editing ? <DoneIcon /> : <EditIcon />}</IconButton>}
-        title={(!loading && user.firstName) ? `${user?.firstName} ${user?.lastName}` : <Skeleton width={180} />}
-        subtitle={(!loading && user) ? user.serviceYear ? `${translation.serviceYear} ${user?.serviceYear}` : "" : <Skeleton width={100} />}
-        secondary={!loading ?
-          <Avatar onClick={user?.avatar ? () => setImageOpen(true) : null} className="avatar__md clickable" src={user?.avatar} alt={user?.firstName}>
-            {user?.firstName?.charAt(0)}
-          </Avatar> :
-          <Skeleton variant="circle" className="avatar__md" />}
+      <UserPageHeader
+        handleImageOpen={handleImageOpen}
+        editing={editing}
+        setEditing={setEditing}
+        loading={loading}
+        user={user}
+        handleSubmit={handleSubmit}
       />
-      <UserPageBadges loading={loading} user={user} editing={editing} />
-      <UserPageBio editing={editing} user={user} loading={loading} />
-      <UserPageJobInfo editing={editing} user={user} loading={loading} />
-      <UserPageJobsCarousel editing={editing} user={user} loading={loading} />
-      <ImageLightbox
-        open={imageOpen}
-        onClose={() => setImageOpen(false)}
+      <UserPageBadges
+        isLookingForJob={isLookingForJob}
+        setIsLookingForJob={setIsLookingForJob}
+        isVolunteer={isVolunteer}
+        setIsVolunteer={setIsVolunteer}
+        handleApproveUser={handleApproveUser}
+        handleIsDeleting={handleIsDeleting}
+        loading={loading}
+        user={user}
+        editing={editing}
+      />
+      <UserPageBio
+        about={about}
+        setAbout={setAbout}
+        phone={phone}
+        setPhone={setPhone}
+        hometown={hometown}
+        setHometown={setHometown}
+        editing={editing}
+        user={user}
+        loading={loading}
+      />
+      <UserPageJobInfo
+        skills={skills}
+        setSkills={setSkills}
+        lastPosition={lastPosition}
+        setLastPosition={setLastPosition}
+        editing={editing}
+        user={user}
+        loading={loading}
+      />
+      <UserPageApproveUpdate
+        editing={editing}
+        loading={isUpdating}
+        action={handleSubmit}
+      />
+      <UserPageJobsCarousel
+        editing={editing}
+        user={user}
+        loading={loading}
+      />
+      <ImageLightbox open={imageOpen}
+        onClose={handleImageOpen}
         imgUrl={user?.avatar}
       />
+      <ApprovalDialog open={isDeleting}
+        onClose={handleIsDeleting}
+        text={translation.areYouSure}
+        action={handleUnapproveUser} />
     </Container>
   );
 }

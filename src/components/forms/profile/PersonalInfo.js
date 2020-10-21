@@ -13,7 +13,7 @@ const PersonalInfo = ({ customMsg }) => {
   const [serviceYear, setServiceYear] = useState(authState.serviceYear || '')
   const [lastPosition, setLastPosition] = useState(authState.lastPosition || '')
   const [about, setAbout] = useState(authState.about || '')
-  const [preferredLocation, setPreferredLocation] = useState(authState.preferredLocation || '')
+  const [hometown, setHometown] = useState(authState.hometown || '')
   const dispatch = useDispatch()
 
   const handleSubmit = e => {
@@ -21,7 +21,7 @@ const PersonalInfo = ({ customMsg }) => {
     const personalDetails = {
       serviceYear,
       lastPosition,
-      preferredLocation,
+      hometown,
       skills,
       about
     }
@@ -43,8 +43,8 @@ const PersonalInfo = ({ customMsg }) => {
         </Grid>
         <Grid item xs={6}>
           <LocationSelect
-            location={preferredLocation}
-            setLocation={setPreferredLocation}
+            location={hometown}
+            setLocation={setHometown}
           />
         </Grid>
       </Grid>
