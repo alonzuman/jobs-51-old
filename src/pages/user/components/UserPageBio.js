@@ -51,7 +51,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
         </InfoContainer>
       </Container>
     )
-  } else if (user?.about) {
+  } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
       <Container>
         <Divider />

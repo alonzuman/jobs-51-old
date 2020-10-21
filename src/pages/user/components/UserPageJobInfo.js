@@ -36,14 +36,14 @@ const UserPageJobInfo = ({ editing, loading, lastPosition, setLastPosition, skil
         <Typography variant='h2'>{translation.workExperience}</Typography>
         <br />
         <InfoContainer>
-          <TextField className='fit__content' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
+          <TextField className='fit__content mb-5' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
         </InfoContainer>
         <InfoContainer>
-          <SkillsSelect skills={skills} setSkills={setSkills} />
+          <SkillsSelect skills={skills} setSkills={setSkills} className='mw-224' size='small'/>
         </InfoContainer>
       </Container>
     )
-  } else if (lastPosition || skills) {
+  } else if (lastPosition || skills?.length !== 0) {
     return (
       <Container>
         <Divider />
