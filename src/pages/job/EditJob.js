@@ -12,8 +12,8 @@ import JobPageHeader from './components/JobPageHeader'
 import JobPageJobsCarousel from './components/JobPageJobsCarousel'
 import JobPageUserDetails from './components/JobPageUserDetails'
 import { useHistory } from 'react-router-dom'
-import JobPageEditActions from './components/JobPageEditActions'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
+import JobActions from './components/JobActions'
 
 const EditJob = ({ match }) => {
   const dispatch = useDispatch()
@@ -56,8 +56,8 @@ const EditJob = ({ match }) => {
     }
   }, [])
 
-  const handleDelete = () => {
-    dispatch(deleteJob(job))
+  const handleDelete = async () => {
+    await dispatch(deleteJob(job))
     history.push({
       pathname: '/jobs'
     })
@@ -111,7 +111,7 @@ const EditJob = ({ match }) => {
         industry={industry}
         setIndustry={setIndustry}
       />
-      <JobPageEditActions
+      <JobActions
         editing
         loading={loading}
         isUpdating={isUpdating}
