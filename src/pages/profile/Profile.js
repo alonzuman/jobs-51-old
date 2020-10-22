@@ -2,13 +2,13 @@ import { Avatar, Button, CircularProgress, Divider, FormControl, MenuItem, MenuL
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import PageContainer from '../components/layout/PageContainer'
+import PageContainer from '../../components/layout/PageContainer'
 
 // Icons
 import LockIcon from '@material-ui/icons/Lock';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import PageHeader from '../v2/organisms/PageHeader'
-import { setTheme, signOut } from '../actions'
+import PageHeader from '../../v2/organisms/PageHeader'
+import { setTheme, signOut } from '../../actions'
 import styled from 'styled-components'
 
 const LinksContainer = styled.div`

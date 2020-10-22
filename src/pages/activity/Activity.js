@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Typography } from '@material-ui/core'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
-import ActivitiesList from '../components/lists/ActivitiesList'
-import FloatingActionButton from '../components/layout/FloatingActionButton'
-import PageContainer from '../components/layout/PageContainer'
-import StatsList from '../components/lists/StatsList'
-import PageHeader from '../v2/organisms/PageHeader'
-import AddActivityDialog from '../v2/layout/AddActivityDialog'
+import ActivitiesList from '../../components/lists/ActivitiesList'
+import FloatingActionButton from '../../components/layout/FloatingActionButton'
+import StatsList from '../../components/lists/StatsList'
+import PageHeader from '../../v2/organisms/PageHeader'
+import Container from '../../v2/atoms/Container'
+import AddActivityDialog from '../../v2/layout/AddActivityDialog'
 
 const Activity = () => {
   const [addingActivity, setAddingActivity] = useState(false)
@@ -22,7 +22,7 @@ const Activity = () => {
   const handleAddActivity = () => setAddingActivity(true)
 
   return (
-    <PageContainer>
+    <Container>
       <AddActivityDialog open={addingActivity} onClose={() => setAddingActivity(false)} />
       <FloatingActionButton color='primary' action={handleAddActivity} title={translation.addActivity}>
         <AddIcon />
@@ -32,7 +32,7 @@ const Activity = () => {
       <StatsList items={statsListItems} />
       <Typography variant='h3'>{translation.latestActivities}</Typography>
       <ActivitiesList type='personal' />
-    </PageContainer>
+    </Container>
   )
 }
 

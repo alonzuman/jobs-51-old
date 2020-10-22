@@ -10,10 +10,9 @@ import RtlProvider from './contexts/RtlContext'
 
 // Pages
 import Job from './pages/job/Job'
-import Jobs from './pages/Jobs'
+import Jobs from './pages/jobs/Jobs'
 import Employees from './pages/Employees'
 import SavedJobs from './pages/SavedJobs'
-import Activity from './pages/Activity'
 import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
 import ManageUsers from './pages/admin/ManageUsers'
@@ -21,7 +20,7 @@ import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
 import PrivacyPolicy from './pages/PrivacyPolicy'
-import Profile from './pages/Profile'
+import Profile from './pages/profile/Profile'
 import EditUser from './pages/user/EditUser'
 import LandingPage from './pages/LandingPage'
 import ManageConstants from './pages/admin/ManageConstants'
@@ -30,6 +29,7 @@ import ManageConstants from './pages/admin/ManageConstants'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
 import EditJob from './pages/job/EditJob'
+import Activity from './pages/activity/Activity'
 
 
 function App() {

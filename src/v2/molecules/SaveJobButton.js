@@ -14,9 +14,9 @@ const SaveJobButton = ({ job }) => {
 
   const handleFavorite = () => {
     if (isSaved) {
-      dispatch(unsaveJob(uid, job?.id))
+      dispatch(unsaveJob(uid, job?.id, job))
     } else {
-      dispatch(saveJob(uid, job?.id))
+      dispatch(saveJob(uid, job?.id, job))
     }
   }
 

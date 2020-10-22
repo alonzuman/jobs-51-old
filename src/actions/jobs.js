@@ -273,14 +273,15 @@ export const getJobTypes = () => async dispatch => {
   }
 }
 
-export const saveJob = (uid, jobId) => async dispatch => {
+export const saveJob = (uid, jobId, job) => async dispatch => {
   try {
     const snapshot = await db.collection('users').doc(uid).get()
     const oldUser = snapshot.data()
     const oldJobs = (oldUser.savedJobs && oldUser.savedJobs.length > 0) ? oldUser.savedJobs : []
     await db.collection('users').doc(uid).set({
       ...oldUser,
-      savedJobs: [...oldJobs, jobId]
+      savedJobs: [...oldJobs, jobId],
+      saved: firebase.firestore.FieldValue.arrayUnion(job)
     }, { merge: true })
     dispatch({
       type: 'SAVE_JOB',
@@ -299,14 +300,17 @@ export const saveJob = (uid, jobId) => async dispatch => {
   }
 }
 
-export const unsaveJob = (uid, jobId) => async dispatch => {
+export const unsaveJob = (uid, jobId, job) => async dispatch => {
   try {
     const snapshot = await db.collection('users').doc(uid).get()
     const user = {
       ...snapshot.data(),
       savedJobs: snapshot.data().savedJobs.filter(job => job !== jobId)
     }
-    await db.collection('users').doc(uid).set(user, { merge: true })
+    await db.collection('users').doc(uid).set({
+      ...user,
+      saved: firebase.firestore.FieldValue.arrayRemove(job)
+    }, { merge: true })
     if (store.getState().jobs.savedJobs) {
       dispatch({
         type: 'REMOVE_SAVED_JOB',

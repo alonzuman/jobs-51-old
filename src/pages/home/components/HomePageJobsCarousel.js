@@ -5,7 +5,9 @@ import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 import { db } from '../../../firebase'
 import JobsCarousel from '../../../v2/organisms/JobsCarousel'
 const SectionContainer = styled.div`
-
+  :last-of-type {
+    margin-bottom: 96px;
+  }
 `
 
 const HomePageJobsCarousel = ({ query, title, industry }) => {
