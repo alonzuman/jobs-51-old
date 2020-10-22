@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 import { db } from '../../../firebase'
+import PageSection from '../../../v2/atoms/PageSection'
 import JobsCarousel from '../../../v2/organisms/JobsCarousel'
 const SectionContainer = styled.div`
   :last-of-type {
@@ -30,7 +31,9 @@ const HomePageJobsCarousel = ({ query, title, industry }) => {
 
   if (isLoading) {
     return (
-      <CardsSkeletons count={1} />
+      <PageSection>
+        <CardsSkeletons count={1} />
+      </PageSection>
     )
   } else if (jobs?.length !== 0) {
     return (

@@ -10,7 +10,7 @@ const ActionsContainer = styled.div`
   position: fixed;
   bottom: 0;
   z-index: 99;
-  background-color: white;
+  background-color: ${props => props.backgroundColor};
   width: 100%;
   right: 0;
   left: 0;
@@ -28,7 +28,7 @@ const ActionsContainer = styled.div`
 `
 
 const JobPageActions = ({ handleUpdate, handleDeleting, isUpdating, isDeleting, loading, editing }) => {
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
   const { windowWidth } = useWindowSize()
 
   if (loading) {
@@ -39,14 +39,14 @@ const JobPageActions = ({ handleUpdate, handleDeleting, isUpdating, isDeleting, 
     )
   } else if (!editing) {
     return (
-      <ActionsContainer>
+      <ActionsContainer backgroundColor={theme?.palette?.background?.paper}>
         {windowWidth > 768 && <Divider className='mb-1' />}
         <Button className='mobile_full__width' color='primary' variant='contained' size='large'>{translation.contact}</Button>
       </ActionsContainer>
     )
   } else if (editing) {
     return (
-      <ActionsContainer>
+      <ActionsContainer backgroundColor={theme?.palette?.background?.paper}>
         {windowWidth > 768 && <Divider className='mb-1' />}
         <Button
           disabled={isDeleting || isUpdating}
