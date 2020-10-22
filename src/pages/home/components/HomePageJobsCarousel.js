@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 import { db } from '../../../firebase'
 import JobsCarousel from '../../../v2/organisms/JobsCarousel'
+const SectionContainer = styled.div`
 
-const HomePageJobsCarousel = ({ query, title }) => {
+`
+
+const HomePageJobsCarousel = ({ query, title, industry }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [jobs, setJobs] = useState([])
 
-  const SectionContainer = styled.div`
-
-  `
 
   const fetchJobs = async () => {
     setIsLoading(true)
@@ -34,7 +34,7 @@ const HomePageJobsCarousel = ({ query, title }) => {
     return (
       <SectionContainer>
         <Divider className='mb-1 mr-1 ml-1' />
-        <Typography className='mr-1 ml-1' variant='h2'>{title}</Typography>
+        <Typography className='mr-1 ml-1' variant='h2'>{title}{industry}</Typography>
         <JobsCarousel jobs={jobs} />
       </SectionContainer>
     )

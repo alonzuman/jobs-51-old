@@ -46,10 +46,10 @@ const Home = () => {
         </Button>
       </HomeSection>
       <HomeSection>
-        <HomePageJobsCarousel title={translation.highTechQuery} query={highTechQuery} />
+        <HomePageJobsCarousel industry={translation.highTech} title={translation.jobOffersInCategory} query={highTechQuery} />
       </HomeSection>
       <HomeSection>
-        <HomePageJobsCarousel title={translation.communicationsQuery} query={communicationsQuery} />
+        <HomePageJobsCarousel industry={translation.communications} title={translation.jobOffersInCategory} query={communicationsQuery} />
       </HomeSection>
     </Container>
   )

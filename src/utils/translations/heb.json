@@ -217,8 +217,9 @@
   "fieldsOfWork": "תחומי עיסוק",
   "whoPostedJob": "מפרסמ/ת המשרה",
   "similarJobs": "הצעות עבודה מאותה התעשיה",
-  "highTechQuery": "הצעות עבודה בתעשיית ההייטק",
-  "communicationsQuery": "הצעות עבודה בתעשיית התקשורת"
+  "highTech": "הייטק",
+  "communications": "תקשורת",
+  "jobOffersInCategory": "הצעות עבודה בתעשיית ה"
 }
 
 
