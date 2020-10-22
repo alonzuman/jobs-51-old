@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import PageSection from '../../../v2/atoms/PageSection'
 import { Link } from 'react-router-dom'
+import { Skeleton } from '@material-ui/lab'
 
 const ListItemContent = styled.div`
   display: flex;
@@ -22,15 +23,11 @@ const JobPageUserDetails = ({ loading, job, editing }) => {
   if (loading) {
     return (
       <PageSection>
-        loading
+        <Skeleton width={144} height={48} />
       </PageSection>
     )
   } else if (editing) {
-    return (
-      <PageSection>
-        editing
-      </PageSection>
-    )
+    return null
   } else {
     return (
       <PageSection>
@@ -38,10 +35,11 @@ const JobPageUserDetails = ({ loading, job, editing }) => {
         <br />
         <Typography variant='h2'>{translation.whoPostedJob}</Typography>
         <Link to={`/users/${job?.uid}`}>
-          <ListItem button>
+          <ListItem className='mb-2' button>
             <ListItemContent>
               <UserInfo>
                 <Typography variant='body1'>{job?.user?.firstName} {job?.user?.lastName}</Typography>
+                <Typography variant='subtitle1'>{job?.user?.hometown}</Typography>
               </UserInfo>
               <Avatar src={job?.user?.avatar} alt={job?.user?.firstName}>{job?.user?.firstName?.charAt(0)}</Avatar>
             </ListItemContent>

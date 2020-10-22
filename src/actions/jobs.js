@@ -61,6 +61,28 @@ export const addJob = (job) => async dispatch => {
   }
 }
 
+export const updateJob = (newJob) => async dispatch => {
+  dispatch({
+    type: 'JOB_UPDATING'
+  })
+  try {
+    await jobsRef.doc(newJob?.id).update({
+      ...newJob
+    })
+    dispatch({
+      type: 'SET_JOB',
+      payload: { newJob }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: 'ServerError',
+      type: 'error'
+    }))
+  }
+}
+
+// TODO delete
 export const editJob = (job, id) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
@@ -82,9 +104,10 @@ export const editJob = (job, id) => async dispatch => {
   }
 }
 
-export const removeJob = (id, job) => async dispatch => {
+export const deleteJob = (job) => async dispatch => {
+  const { id } = job
   dispatch({
-    type: 'JOB_LOADING'
+    type: 'JOB_DELETING'
   })
   try {
     await db.collection('constants').doc('listedLocations').update({
@@ -99,7 +122,7 @@ export const removeJob = (id, job) => async dispatch => {
 
     await jobsRef.doc(id).delete()
     dispatch({
-      type: 'REMOVE_JOB',
+      type: 'JOB_DELETED',
       payload: { id }
     })
     dispatch(closeDialogs())
@@ -225,13 +248,6 @@ export const getJobs = query => async dispatch => {
   }
 }
 
-export const setJob = (job) => async dispatch => {
-  dispatch({
-    type: 'SET_JOB',
-    payload: { job }
-  })
-}
-
 export const getJobTypes = () => async dispatch => {
   dispatch({
     type: 'JOB_FILTERS_LOADING'
@@ -310,12 +326,6 @@ export const unsaveJob = (uid, jobId) => async dispatch => {
   }
 }
 
-export const emptyJobs = () => async dispatch => {
-  dispatch({
-    type: 'EMPTY_JOBS'
-  })
-}
-
 export const getJobLocations = () => async dispatch => {
   dispatch({
     type: 'JOB_FILTERS_LOADING'
@@ -347,16 +357,44 @@ export const getJob = (id) => async dispatch => {
   })
   try {
     const jobSnapshot = await jobsRef.doc(id).get()
-    let job = { id: jobSnapshot.id, ...jobSnapshot.data() }
-    const { uid } = job
+    let job = {
+      id: jobSnapshot.id,
+      ...jobSnapshot.data()
+    }
+
+    const { uid, industry } = job
     const userSnapshot = await db.collection('users').doc(uid).get()
-    const user = { id: userSnapshot.id, ...userSnapshot.data() }
-    job = { ...job, user }
+    const user = {
+      id: userSnapshot.id,
+      ...userSnapshot.data()
+    }
+
+    const jobsSnapshot = await db.collection('jobs').where('industry', '==', industry).get()
+    let similarJobs = []
+    jobsSnapshot.forEach(doc => similarJobs.push({ id: doc.id, ...doc.data() }))
+
+    job = {
+      ...job,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatar: user.avatar,
+        email: user.email,
+        uid: user.uid,
+        role: user.role,
+        phone: user.phone,
+        hometown: user.hometown,
+        serviceYear: user.serviceYear
+      },
+      similarJobs
+    }
+
     dispatch({
       type: 'SET_JOB',
       payload: { job }
     })
   } catch (error) {
+    console.log(error)
     dispatch({
       type: 'JOB_ERROR'
     })

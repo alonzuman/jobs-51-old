@@ -119,6 +119,10 @@ a:hover {
   align-items: flex-end!important;
 }
 
+.justify__end {
+  justify-content: flex-end!important;
+}
+
 .justify__between {
   justify-content: space-between!important;
 }
@@ -217,7 +221,7 @@ a:hover {
 }
 
 .mb-2 {
-  margin-bottom: 2rem!important;
+  margin-bottom: 32px!important;
 }
 
 .mb-3 {
@@ -283,7 +287,7 @@ a:hover {
 }
 
 .pb-2 {
-  padding-bottom: 2rem!important;
+  padding-bottom: 32px!important;
 }
 
 .pb-3 {
@@ -384,7 +388,7 @@ a:hover {
 }
 
 .mr-2 {
-  margin-right: 2rem!important;
+  margin-right: 32px!important;
 }
 
 .mr-3 {
@@ -408,7 +412,7 @@ a:hover {
 }
 
 .ml-2 {
-  margin-left: 2rem!important;
+  margin-left: 32px!important;
 }
 
 .ml-3 {
@@ -518,6 +522,18 @@ a:hover {
 
 .w-264 {
   width: 264px!important;
+}
+
+.mxw-256 {
+  max-width: 256px!important;
+}
+
+.mxw-312 {
+  max-width: 312px!important;
+}
+
+.mxw-512 {
+  max-width: 512px!important;
 }
 
 .mw-224 {

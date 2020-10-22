@@ -21,7 +21,6 @@ const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
   const [isDeclining, setIsDeclining] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
-  const [editing, setEditing] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const { loading, user, isUpdating } = useSelector(state => state.users)
@@ -90,7 +89,7 @@ const User = ({ match }) => {
     <Container>
       <UserPageHeader
         handleImageOpen={handleImageOpen}
-        editing={true}
+        editing
         handleEditing={handleEditing}
         loading={loading}
         user={user}
@@ -105,7 +104,7 @@ const User = ({ match }) => {
         handleIsDeclining={handleIsDeclining}
         loading={loading}
         user={user}
-        editing={true}
+        editing
       />
       <UserPageBio
         about={about}
@@ -114,7 +113,7 @@ const User = ({ match }) => {
         setPhone={setPhone}
         hometown={hometown}
         setHometown={setHometown}
-        editing={true}
+        editing
         user={user}
         loading={loading}
       />
@@ -123,12 +122,12 @@ const User = ({ match }) => {
         setSkills={setSkills}
         lastPosition={lastPosition}
         setLastPosition={setLastPosition}
-        editing={true}
+        editing
         user={user}
         loading={loading}
       />
       <UserPageActions
-        editing={true}
+        editing
         loading={loading}
         isUpdating={isUpdating}
         isDeleting={isDeleting}

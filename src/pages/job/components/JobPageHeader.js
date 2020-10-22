@@ -4,7 +4,7 @@ import PageHeader from '../../../v2/organisms/PageHeader'
 import { Avatar } from '@material-ui/core'
 import JobPageHeaderActions from './JobPageHeaderActions'
 
-const JobPageHeader = ({ loading, job }) => {
+const JobPageHeader = ({ editing, editingTitle, loading, job, handleEditing, company, setCompany, title, titleLabel, setTitle, subtitle, subtitleLabel, setSubtitle, avatar, setAvatar, ...rest }) => {
   if (loading) {
     return (
       <PageHeader
@@ -17,12 +17,20 @@ const JobPageHeader = ({ loading, job }) => {
   } else {
     return (
       <PageHeader
-        backButton
+        backButton={!editing}
+        editing={editing}
+        editingTitle={editingTitle}
         className='p-1'
-        title={`${job?.jobTitle}, ${job?.company}`}
-        subtitle={job?.location}
-        secondary={<Avatar className='avatar__md clickable' src={job?.avatar}>{job?.company?.charAt(0)}</Avatar>}
-        action={<JobPageHeaderActions job={job} />}
+        subtitleType='location'
+        title={title}
+        titleLabel={titleLabel}
+        setTitle={setTitle}
+        subtitle={subtitle}
+        subtitleLabel={subtitleLabel}
+        setSubtitle={setSubtitle}
+        secondary={<Avatar className='avatar__md clickable' src={avatar}>{company?.charAt(0)}</Avatar>}
+        action={<JobPageHeaderActions editing={editing} job={job} handleEditing={handleEditing} />}
+        {...rest}
       />
     )
   }

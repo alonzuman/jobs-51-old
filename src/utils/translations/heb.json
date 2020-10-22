@@ -12,7 +12,6 @@
   "valueTooShort": "הערך שהזנת קצר מדי",
   "signIn": "התחברות",
   "editJob": "עריכת פרסום",
-  "removeJob": "מחיקת פרסום",
   "couldntFindJobs": "לא נמצאו פרסומים",
   "couldntFindSavedJobs": "לא נמצאו הצעות עבודה שנשמרו על ידך",
   "uploadPhoto": "העלאת תמונה",
@@ -114,6 +113,7 @@
   "approveActivity": "אישור פעילות",
   "unApproveActivity": "ביטול פעילות",
   "deleteActivity": "מחיקת פעילות",
+  "deleteJob": "מחיקת פרסום",
   "deleteUser": "מחיקת משתמש",
   "ActivityApproved": "פעילות אושרה",
   "ActivityUnApproved": "פעילות בוטלה",
@@ -214,7 +214,8 @@
   "jobSaved": "עבודה נשמרה!",
   "jobDescription": "תיאור משרה",
   "fieldsOfWork": "תחומי עיסוק",
-  "whoPostedJob": "מפרסמ/ת המשרה"
+  "whoPostedJob": "מפרסמ/ת המשרה",
+  "similarJobs": "הצעות עבודה מאותה התעשיה"
 }
 
 

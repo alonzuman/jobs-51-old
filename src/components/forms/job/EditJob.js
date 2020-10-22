@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { TextField, Button, Grid, CircularProgress } from '@material-ui/core'
 import FileUploader from '../../general/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
-import { editJob, removeJob } from '../../../actions'
+import { editJob, deleteJob } from '../../../actions'
 import ApprovalBox from '../../dialogs/ApprovalBox'
 import CircularProgressWithLabel from '../CircularProgressWithLabel'
 import SkillsSelect from '../profile/SkillsSelect'
@@ -96,9 +96,9 @@ const AddJob = () => {
       <TextField multiline rows={4} label={translation.description} variant='outlined' value={edittedJob['description']} name='description' onChange={handleJobChange} />
       <div>
         <Button disabled={uploading} className='button-style mb-5' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='button-spinner' /> : translation.post}</Button>
-        <Button onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.removeJob}</Button>
+        <Button onClick={() => setDeleting(true)} disabled={uploading} className='button-style' variant='outlined' color='primary' >{loading ? <CircularProgress className='button-spinner' /> : translation.deleteJob}</Button>
       </div>
-      {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(removeJob(job.id, job))} />}
+      {deleting && <ApprovalBox open={deleting} setOpen={setDeleting} text={translation.areYouSure} action={() => dispatch(deleteJob(job.id, job))} />}
     </form>
   )
 }

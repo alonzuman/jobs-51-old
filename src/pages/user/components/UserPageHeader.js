@@ -28,7 +28,7 @@ const UserPageHeader = ({ editing, loading, user, handleEditing, handleImageOpen
   } else {
     return (
       <PageHeader
-        backButton
+        backButton={!editing}
         imgUrl={user?.avatar}
         className='p-1'
         title={`${firstName} ${lastName}`}

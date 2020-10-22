@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Typography } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import BackButton from './BackButton'
+import BackButton from '../../v2/atoms/BackButton'
 import styled from 'styled-components'
 
 const TopbarContainer = styled.div`

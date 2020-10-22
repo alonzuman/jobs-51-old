@@ -29,6 +29,7 @@ import ManageConstants from './pages/admin/ManageConstants'
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
+import EditJob from './pages/job/EditJob'
 
 
 function App() {
@@ -54,20 +55,27 @@ function App() {
             {/* Jobs */}
             <ProtectedRoute exact path='/jobs' component={Jobs} />
             <ProtectedRoute exact path='/jobs/:jid' component={Job} />
+            <ProtectedRoute exact path='/jobs/:jid/edit' component={EditJob} />
 
+            {/* Saved */}
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
+
+            {/* Activity */}
             <ProtectedRoute exact path='/activity' component={Activity} />
+
             {/* Profile */}
             <ProtectedRoute exact path='/profile' component={Profile} />
 
             {/* Users */}
             <ProtectedRoute exact path='/users' component={Employees} />
+            <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
+            <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
+
+            {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
-            <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
-            <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
             <Route exact path='/' component={LandingPage} />
           </Switch>
         </Router>

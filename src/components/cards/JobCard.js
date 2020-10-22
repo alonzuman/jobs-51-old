@@ -13,13 +13,13 @@ const JobCard = ({ job, loading }) => {
 
   return (
     <Card variant='outlined'>
-      <CardHeader
-        avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-        title={`${job?.jobTitle}, ${job?.company}`}
-        subheader={job?.location}
-        action={<SaveJobButton loading={loading} job={job} />}
-      />
       <Link to={`/jobs/${job?.id}`}>
+        <CardHeader
+          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
+          title={`${job?.jobTitle}, ${job?.company}`}
+          subheader={job?.location}
+          action={<SaveJobButton loading={loading} job={job} />}
+        />
         <CardActions>
           <Chip variant='outlined' size='small' label={timeAgo()} color='primary' />
         </CardActions>

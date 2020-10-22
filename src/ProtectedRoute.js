@@ -34,10 +34,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
-        setLoading(false)
+        await setLoading(false)
       } else {
-        dispatch(signOut())
-        setLoading(false)
+        await dispatch(signOut())
+        await setLoading(false)
         return <Redirect to='/' />
       }
     })
