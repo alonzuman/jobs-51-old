@@ -270,6 +270,10 @@ export const saveJob = (uid, jobId) => async dispatch => {
       type: 'SAVE_JOB',
       payload: { jobId }
     })
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'jobSaved'
+    }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({

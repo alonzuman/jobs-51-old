@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { approveUser, deleteUser, getUser, unapproveUser, updateUser } from '../../actions/users'
 import ImageLightbox from '../../components/general/ImageLightbox'
-
 import UserPageJobInfo from './components/UserPageJobInfo'
 import UserPageBio from './components/UserPageBio'
 import UserPageBadges from './components/UserPageBadges'
-import UserPageJobsCarousel from './components/UserPageJobsCarousel'
 import styled from 'styled-components'
 import UserPageHeader from './components/UserPageHeader'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import UserPageActions from './components/UserPageActions'
-import UserPageActivitiesCarousel from './components/UserPageActivitiesCarousel'
 
 const Container = styled.div`
   padding: 16px 0;
@@ -53,7 +50,9 @@ const User = ({ match }) => {
       hometown
     }
     await dispatch(updateUser(updatedUser))
-    await setEditing(false)
+    await history.push({
+      pathname: `/users/${uid}`
+    })
   }
 
   const handleDelete = async () => {
@@ -81,12 +80,7 @@ const User = ({ match }) => {
   const handleApproveUser = () => dispatch(approveUser(uid))
   const handleIsDeclining = () => setIsDeclining(!isDeclining)
   const handleIsDeleting = () => setIsDeleting(!isDeleting)
-  const handleEditing = () => {
-    history.push({
-      pathname: `/users/${uid}`
-    })
-    setEditing(!editing)
-  }
+  const handleEditing = () => history.goBack()
   const handleUnapproveUser = async () => {
     await dispatch(unapproveUser(uid))
     history.goBack()

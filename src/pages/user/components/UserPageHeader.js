@@ -29,6 +29,7 @@ const UserPageHeader = ({ editing, loading, user, handleEditing, handleImageOpen
     return (
       <PageHeader
         backButton
+        imgUrl={user?.avatar}
         className='p-1'
         title={`${firstName} ${lastName}`}
         subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}

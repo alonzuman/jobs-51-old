@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import StarsIcon from '@material-ui/icons/Stars';
 import { checkPermissions } from '../../../utils'
-import UserPageSection from './UserPageSection'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InfoContainer from './InfoContainer'
+import PageSection from '../../../v2/atoms/PageSection'
 
 const ActionsContainer = styled.div`
   display: flex;
@@ -23,14 +23,14 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDec
 
   if (loading) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Skeleton height={16} width={48} />
         <br />
-      </UserPageSection>
+      </PageSection>
     )
   } else if (editing) {
     return (
-      <UserPageSection>
+      <PageSection>
         <FormGroup row>
           <FormControlLabel
             control={<Checkbox color='primary' name='lookingForJob' onChange={e => setIsLookingForJob(!isLookingForJob)} checked={isLookingForJob} />}
@@ -44,11 +44,11 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDec
           />
         </FormGroup>
         <br />
-      </UserPageSection>
+      </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Grid className='mb-5' container spacing={1}>
           {isPending &&
             <Grid item>
@@ -82,7 +82,7 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDec
           <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
           <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
         </ActionsContainer>}
-      </UserPageSection>
+      </PageSection>
     )
   } else {
     return null

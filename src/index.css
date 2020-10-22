@@ -1,5 +1,6 @@
 :root {
   --primary: #286cba;
+  --red: #b91917;
 }
 
 * {
@@ -525,4 +526,8 @@ a:hover {
 
 .lh-1 {
   line-height: 1!important;
+}
+
+.red {
+  color: var(--red)!important;
 }

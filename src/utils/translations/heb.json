@@ -6,7 +6,6 @@
   "locations": "עיר/יישוב",
   "contactPerson": "איש קשר",
   "description": "תיאור",
-  "requirements": "קטגוריות",
   "email": "כתובת דוא״ל",
   "phone": "מספר טלפון",
   "post": "פרסום",
@@ -211,7 +210,11 @@
   "posted": "פירסמ/ה",
   "jobOffer": "הצעות עבודה",
   "jobTitle": "שם המשרה",
-  "jobTitlePlaceholder": "לדוגמא: ״מנהל תפעול״"
+  "jobTitlePlaceholder": "לדוגמא: ״מנהל תפעול״",
+  "jobSaved": "עבודה נשמרה!",
+  "jobDescription": "תיאור משרה",
+  "fieldsOfWork": "תחומי עיסוק",
+  "whoPostedJob": "מפרסמ/ת המשרה"
 }
 
 

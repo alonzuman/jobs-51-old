@@ -1,91 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { CardHeader, IconButton, Grid, CardContent, Typography, Avatar, CardActions, Card, Chip } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
-import { setJob, saveJob, unsaveJob, openDialog } from '../../actions'
-import EditIcon from '@material-ui/icons/Edit';
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import React from 'react'
+import { CardHeader, Avatar, CardActions, Card, Chip } from '@material-ui/core'
 import moment from 'moment'
 import 'moment/locale/he'
 import { Link } from 'react-router-dom';
-import CustomChip from './CustomChip';
-import { checkPermissions } from '../../utils';
+import SaveJobButton from '../../v2/molecules/SaveJobButton'
 
-const JobCard = ({ job }) => {
-  const { uid, authenticated, savedJobs, role } = useSelector(state => state.auth)
-  const [saved, setSaved] = useState()
-  const dispatch = useDispatch()
-  const { translation } = useSelector(state => state.theme)
-
-  const isSaved = () => savedJobs?.includes(job.id)
-
+const JobCard = ({ job, loading }) => {
   const timeAgo = () => {
     moment.locale('he')
     return moment(job?.dateCreated).fromNow()
   }
 
-  useEffect(() => {
-    setSaved(isSaved())
-  }, [savedJobs, isSaved])
-
-  const handleClick = () => {
-    dispatch(openDialog({ type: 'EditJob', title: 'editJob' }))
-    dispatch(setJob(job))
-  }
-
-  const favoriteIconStyle = {
-    color: '#f02422'
-  }
-
-  const handleClickFavorite = () => {
-    if (saved) {
-      setSaved(false)
-      dispatch(unsaveJob(uid, job.id))
-    } else {
-      setSaved(true)
-      dispatch(saveJob(uid, job.id))
-    }
-  }
-
-  const action = () => {
-    if (authenticated && checkPermissions(role) >= 3) {
-      return (
-        <>
-          <IconButton onClick={handleClick}><EditIcon /></IconButton>
-          <IconButton onClick={handleClickFavorite}>
-            {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
-          </IconButton>
-        </>
-      )
-    } else if (authenticated && job?.uid === uid) {
-      return <IconButton onClick={handleClick}><EditIcon /></IconButton>
-    } else {
-      if (authenticated) {
-        return (
-          <IconButton onClick={handleClickFavorite}>
-            {saved ? <FavoriteIcon style={favoriteIconStyle} /> : <FavoriteBorderIcon />}
-          </IconButton>)
-      } else {
-        return null
-      }
-    }
-  }
-
-  const cardTitle = (
-    <>
-      <Typography className='lh-1' variant='subtitle1'>{job?.company}</Typography>
-      <Typography variant='body1'>{job?.jobTitle}</Typography>
-    </>
-  )
-
   return (
     <Card variant='outlined'>
       <CardHeader
         avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-        // title={job?.company}
-        title={cardTitle}
+        title={`${job?.jobTitle}, ${job?.company}`}
         subheader={job?.location}
-        action={action()}
+        action={<SaveJobButton loading={loading} job={job} />}
       />
       <Link to={`/jobs/${job?.id}`}>
         <CardActions>

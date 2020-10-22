@@ -1,35 +1,35 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // Components
 import Dialogs from './components/layout/Dialogs'
 import Navbar from './components/layout/Navbar/Navbar'
+import ProtectedRoute from './ProtectedRoute'
+import RtlProvider from './contexts/RtlContext'
 
 // Pages
+import Job from './pages/job/Job'
 import Jobs from './pages/Jobs'
 import Employees from './pages/Employees'
 import SavedJobs from './pages/SavedJobs'
 import Activity from './pages/Activity'
 import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
+import ManageUsers from './pages/admin/ManageUsers'
+import ManageActivities from './pages/admin/ManageActivities'
+import Home from './pages/Home'
+import Feedback from './components/layout/Feedback'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import Profile from './pages/Profile'
+import EditUser from './pages/user/EditUser'
+import LandingPage from './pages/LandingPage'
+import ManageConstants from './pages/admin/ManageConstants'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
 
-import { useSelector } from 'react-redux'
-import LandingPage from './pages/LandingPage'
-import ProtectedRoute from './ProtectedRoute'
-import RtlProvider from './contexts/RtlContext'
-import ManageUsers from './pages/admin/ManageUsers'
-import ManageActivities from './pages/admin/ManageActivities'
-import Home from './pages/Home'
-import Feedback from './components/layout/Feedback'
-import Job from './pages/Job'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import ManageConstants from './pages/admin/ManageConstants'
-import Profile from './pages/Profile'
-import EditUser from './pages/user/EditUser'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -53,7 +53,7 @@ function App() {
 
             {/* Jobs */}
             <ProtectedRoute exact path='/jobs' component={Jobs} />
-            <ProtectedRoute exact path='/jobs/:id' component={Job} />
+            <ProtectedRoute exact path='/jobs/:jid' component={Job} />
 
             <ProtectedRoute exact path='/saved' component={SavedJobs} />
             <ProtectedRoute exact path='/activity' component={Activity} />

@@ -54,7 +54,7 @@ const Jobs = () => {
       {loading && <CardsSkeletons />}
       <Grid className='mb-4' container spacing={2}>
         {(jobs?.length === 0 && !loading) && <Typography className='mt-1' color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
-        {!loading && jobs?.map((job, index) => <Grid item xs={12} md={6} lg={6}><JobCard key={index} job={job} /></Grid>)}
+        {!loading && jobs?.map((job, index) => <Grid key={index} item xs={12} md={6} lg={6}><JobCard loading={loading} job={job} /></Grid>)}
       </Grid>
     </PageContainer>
   )

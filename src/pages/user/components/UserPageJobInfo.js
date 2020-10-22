@@ -5,21 +5,22 @@ import { useSelector } from 'react-redux'
 import SkillsSelect from '../../../components/forms/profile/SkillsSelect'
 import WorkIcon from '@material-ui/icons/Work';
 import InfoContainer from './InfoContainer'
-import UserPageSection from './UserPageSection'
 import GradeIcon from '@material-ui/icons/Grade';
+import PageSection from '../../../v2/atoms/PageSection'
 
-const UserPageJobInfo = ({ editing, loading, lastPosition, setLastPosition, skills, setSkills }) => {
+const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition, skills, setSkills }) => {
   const { translation } = useSelector(state => state.theme)
+
 
   if (loading) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Skeleton width={104} height={18} />
-      </UserPageSection>
+      </PageSection>
     )
   } else if (editing) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Divider />
         <br />
         <Typography variant='h2'>{translation.workExperience}</Typography>
@@ -32,26 +33,26 @@ const UserPageJobInfo = ({ editing, loading, lastPosition, setLastPosition, skil
           <GradeIcon className='ml-1 small__icon mb-5' />
           <SkillsSelect skills={skills} setSkills={setSkills} className='mw-224' size='small'/>
         </InfoContainer>
-      </UserPageSection>
+      </PageSection>
     )
   } else if (lastPosition || skills?.length !== 0) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Divider />
         <br />
         <Typography variant='h2'>{translation.workExperience}</Typography>
         <Typography variant='subtitle1'>{translation.lastPosition}</Typography>
         <InfoContainer>
           <WorkIcon className='ml-5 small__icon' />
-          <Typography variant='body1'>{lastPosition}</Typography>
+          <Typography variant='body1'>{user?.lastPosition}</Typography>
         </InfoContainer>
-        {skills?.length !== 0 && <Typography className='mb-5' variant='subtitle1'>{translation.skillsInterestedIn}</Typography>}
+        {user?.skills?.length !== 0 && <Typography className='mb-5' variant='subtitle1'>{translation.skillsInterestedIn}</Typography>}
         <InfoContainer>
           <Grid container spacing={1}>
-            {skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
+            {user?.skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
           </Grid>
         </InfoContainer>
-      </UserPageSection>
+      </PageSection>
     )
   } else {
     return null

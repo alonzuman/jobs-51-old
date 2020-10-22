@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
-  const { isFetching, isFetched } = useSelector(state => state.constants)
+  const { isFetched } = useSelector(state => state.constants)
   const { role } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser

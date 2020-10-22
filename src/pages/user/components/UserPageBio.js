@@ -9,20 +9,20 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
 import InfoContainer from './InfoContainer'
-import UserPageSection from './UserPageSection'
+import PageSection from '../../../v2/atoms/PageSection';
 
 const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, setPhone, about, setAbout }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Skeleton width={104} height={18} />
-      </UserPageSection>
+      </PageSection>
     )
   } else if (editing) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Divider />
         <br />
         <Typography className='mb-1' variant='h2'>{translation.aboutMe}</Typography>
@@ -35,11 +35,11 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
           <LocationCityIcon className='ml-1 mb-5 small__icon' />
           <LocationSelect size='small' location={hometown} setLocation={setHometown} className='mw-224' label={translation.hometown} />
         </InfoContainer>
-      </UserPageSection>
+      </PageSection>
     )
   } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
-      <UserPageSection>
+      <PageSection>
         <Divider />
         <br />
         <Typography variant='h2'>{translation.aboutMe}</Typography>
@@ -60,7 +60,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
             <LocationCityIcon className='ml-5 small__icon' />
             <Typography variant='body1'>{user?.hometown}</Typography>
           </InfoContainer>}
-      </UserPageSection>
+      </PageSection>
     )
   } else {
     return null

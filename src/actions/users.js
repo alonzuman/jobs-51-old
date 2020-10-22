@@ -22,7 +22,7 @@ export const getUser = (uid) => async dispatch => {
       uid,
       ...userSnapshot.data(),
       jobs: jobs,
-      activities
+      activitiesList: activities
     }
 
     dispatch({

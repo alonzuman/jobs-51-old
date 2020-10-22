@@ -1,75 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { approveUser, deleteUser, getUser, unapproveUser, updateUser } from '../../actions/users'
-import ImageLightbox from '../../components/general/ImageLightbox'
-
+import { approveUser, getUser } from '../../actions/users'
 import UserPageJobInfo from './components/UserPageJobInfo'
 import UserPageBio from './components/UserPageBio'
 import UserPageBadges from './components/UserPageBadges'
 import UserPageJobsCarousel from './components/UserPageJobsCarousel'
-import styled from 'styled-components'
 import UserPageHeader from './components/UserPageHeader'
-import ApprovalDialog from '../../v2/layout/ApprovalDialog'
-import { Redirect, useHistory } from 'react-router-dom'
-import UserPageActions from './components/UserPageActions'
+import { useHistory } from 'react-router-dom'
 import UserPageActivitiesCarousel from './components/UserPageActivitiesCarousel'
-
-const Container = styled.div`
-  padding: 16px 0;
-  max-width: 768px;
-  margin: 0 auto;
-`
+import Container from '../../v2/atoms/Container'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
   const [isDeclining, setIsDeclining] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
   const [editing, setEditing] = useState(false)
-  const { translation } = useSelector(state => state.theme)
   const history = useHistory()
-  const { loading, user, isUpdating } = useSelector(state => state.users)
+  const { loading, user } = useSelector(state => state.users)
   const uid = match.params.id
   const dispatch = useDispatch()
-
-  // User fields for update
-  const [isLookingForJob, setIsLookingForJob] = useState(null)
-  const [isVolunteer, setIsVolunteer] = useState(null)
-  const [phone, setPhone] = useState('')
-  const [about, setAbout] = useState('')
-  const [hometown, setHometown] = useState('')
-  const [lastPosition, setLastPosition] = useState('')
-  const [skills, setSkills] = useState([])
-
-  const handleSubmit = async () => {
-    const updatedUser = {
-      ...user,
-      uid,
-      lookingForJob: isLookingForJob,
-      volunteer: isVolunteer,
-      about,
-      phone,
-      lastPosition,
-      skills,
-      hometown
-    }
-    await dispatch(updateUser(updatedUser))
-    await setEditing(false)
-  }
-
-  const handleDelete = async () => {
-    await dispatch(deleteUser(uid))
-    history.goBack()
-  }
-
-  useEffect(() => {
-    setIsLookingForJob(!!user?.lookingForJob)
-    setIsVolunteer(!!user?.volunteer)
-    setAbout(user?.about || '')
-    setPhone(user?.phone || '')
-    setHometown(user?.hometown || '')
-    setLastPosition(user?.lastPosition || '')
-    setSkills(user?.skills || [])
-  }, [user])
 
   useEffect(() => {
     if (user?.uid !== uid) {
@@ -80,16 +28,11 @@ const User = ({ match }) => {
   const handleImageOpen = () => setImageOpen(!imageOpen)
   const handleApproveUser = () => dispatch(approveUser(uid))
   const handleIsDeclining = () => setIsDeclining(!isDeclining)
-  const handleIsDeleting = () => setIsDeleting(!isDeleting)
   const handleEditing = () => {
     history.push({
       pathname: `/users/${uid}/edit`
     })
     setEditing(!editing)
-  }
-  const handleUnapproveUser = async () => {
-    await dispatch(unapproveUser(uid))
-    history.goBack()
   }
 
   return (
@@ -100,13 +43,8 @@ const User = ({ match }) => {
         handleEditing={handleEditing}
         loading={loading}
         user={user}
-        handleSubmit={handleSubmit}
       />
       <UserPageBadges
-        isLookingForJob={isLookingForJob}
-        setIsLookingForJob={setIsLookingForJob}
-        isVolunteer={isVolunteer}
-        setIsVolunteer={setIsVolunteer}
         handleApproveUser={handleApproveUser}
         handleIsDeclining={handleIsDeclining}
         loading={loading}
@@ -114,31 +52,14 @@ const User = ({ match }) => {
         editing={false}
       />
       <UserPageBio
-        about={about}
-        setAbout={setAbout}
-        phone={phone}
-        setPhone={setPhone}
-        hometown={hometown}
-        setHometown={setHometown}
         editing={false}
         user={user}
         loading={loading}
       />
       <UserPageJobInfo
-        skills={skills}
-        setSkills={setSkills}
-        lastPosition={lastPosition}
-        setLastPosition={setLastPosition}
         editing={false}
         user={user}
         loading={loading}
-      />
-      <UserPageActions
-        editing={false}
-        isUpdating={isUpdating}
-        isDeleting={isDeleting}
-        updateAction={handleSubmit}
-        deleteAction={handleIsDeleting}
       />
       <UserPageActivitiesCarousel
         user={user}
@@ -149,23 +70,6 @@ const User = ({ match }) => {
         user={user}
         loading={loading}
         editing={false}
-      />
-      <ImageLightbox
-        open={imageOpen}
-        onClose={handleImageOpen}
-        imgUrl={user?.avatar}
-      />
-      <ApprovalDialog
-        open={isDeleting}
-        onClose={handleIsDeleting}
-        text={translation.areYouSure}
-        action={handleDelete}
-      />
-      <ApprovalDialog
-        open={isDeclining}
-        onClose={handleIsDeclining}
-        text={translation.areYouSure}
-        action={handleUnapproveUser}
       />
     </Container>
   );

@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import ImageLightbox from '../../components/general/ImageLightbox'
 import BackButton from '../../components/layout/BackButton'
 
 const Container = styled.div`
@@ -38,9 +39,18 @@ const ActionsWrapper = styled.div`
   width: 100%;
 `
 
-const PageHeader = ({ title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
+const PageHeader = ({ imgUrl, title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
+  const [isImageOpen, setIsImageOpen] = useState(false)
+
+  const handleOpenImage = () => setIsImageOpen(!isImageOpen)
+
   return (
     <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+      <ImageLightbox
+        open={isImageOpen}
+        onClose={handleOpenImage}
+        imgUrl={imgUrl}
+      />
       <ActionsWrapper>
         {backButton && <BackButton />}
         {action && action}
@@ -50,7 +60,7 @@ const PageHeader = ({ title, action, subtitle, secondary, backButton, spaceBotto
           <Typography className='p-0' variant='h1'>{title}</Typography>
           <Typography variant='subtitle1'>{subtitle}</Typography>
         </TextContainer>
-        <SecondaryContainer>
+        <SecondaryContainer onClick={imgUrl && handleOpenImage}>
           {secondary}
         </SecondaryContainer>
       </ItemsWrapper>

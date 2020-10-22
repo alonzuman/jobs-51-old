@@ -43,7 +43,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
 
   const [day, month, number] = translateDate(activity.date)
   return (
-    <Grid item xs={12} md={6} lg={6}>
+    <>
       <Card variant='outlined' onClick={() => setOpen(!open)}>
         <CardContent className='pb-5'>
           <CardBody>
@@ -84,7 +84,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
         </CardActions>
       </Card>
       {open && <ActivityCardActions style={{ marginTop: '.5rem' }} activity={activity} />}
-    </Grid>
+    </>
   );
 }
 
