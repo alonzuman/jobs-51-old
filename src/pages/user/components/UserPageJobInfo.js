@@ -35,7 +35,7 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
         </InfoContainer>
       </PageSection>
     )
-  } else if (lastPosition || skills?.length !== 0) {
+  } else if (user?.lastPosition && user?.skills?.length !== 0) {
     return (
       <PageSection>
         <Divider />

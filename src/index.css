@@ -155,6 +155,10 @@ a:hover {
   flex-direction: column!important;
 }
 
+.flex__4 {
+  flex: 4!important;
+}
+
 .mobile_full__width {
   width: 100%!important;
 }

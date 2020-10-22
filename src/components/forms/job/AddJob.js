@@ -74,8 +74,8 @@ const AddJob = ({ onClose }) => {
   }
 
   return (
-    <form onSubmit={handleJobSubmit}>
-      <DialogContent>
+    <form className='flex flex__column full__height' onSubmit={handleJobSubmit}>
+      <DialogContent className='flex__4'>
         {isUploading && <CircularProgressWithLabel value={progress} />}
         {!isUploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />}
         {image.trim().length > 0 && <img style={thumbnailStyle} src={image} alt='Company avatar' />}

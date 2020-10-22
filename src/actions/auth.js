@@ -28,8 +28,31 @@ export const setUser = (user) => async dispatch => {
   }
 }
 
+export const checkIfUserLegit = ({ email, phone, firstName, lastName }) => async dispatch => {
+  dispatch({
+    type: 'AUTH_LOADING'
+  })
+
+  try {
+    const snapshot = await db.collection('constants').doc('members').collection('all').where('email', '==', email).get()
+    let results = []
+    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    if (results?.length !== 0) {
+      return {
+        ...results[0]
+      }
+    } else {
+      return false
+    }
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'AUTH_ERROR'
+    })
+  }
+}
+
 export const signInWithProvider = (provider) => async dispatch => {
-  const { tempToken } = store.getState().auth
   const { token } = store.getState().auth
   const { tokens } = store.getState().constants
   const region = tokens?.all[token]
@@ -50,9 +73,17 @@ export const signInWithProvider = (provider) => async dispatch => {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(async () => {
       const result = await firebase.auth().signInWithPopup(firebaseProvider())
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
+
+      const checkLegitRes = await dispatch(checkIfUserLegit({
+        email,
+        phone: phoneNumber,
+        firstName: displayName?.split(' ')[0],
+        lastName: displayName?.split(' ')[1],
+      }))
+
       const fetchedUser = await usersRef.doc(uid).get()
       const user = fetchedUser.data()
-      if (!user?.uid || !user) {
+      if ((!user?.uid || !user) && checkLegitRes) {
         const newUser = {
           uid,
           email,
@@ -60,6 +91,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           lastName: displayName?.split(' ')[1] || '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
+          volunteer: checkLegitRes?.volunteer || false,
           lookingForJob: false,
           activities: {
             pending: 0,
@@ -67,7 +99,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           },
           role: user?.role ? user?.role : 'user',
           dateCreated: Date.now(),
-          region
+          region: checkLegitRes?.resion || ''
         }
         await usersRef.doc(uid).set(newUser, { merge: true })
         dispatch(closeDialogs())
@@ -79,7 +111,7 @@ export const signInWithProvider = (provider) => async dispatch => {
           type: 'success',
           msg: 'Welcome'
         }))
-      } else {
+      } else if (user || user?.id) {
         dispatch(closeDialogs())
         dispatch({
           type: 'SIGNED_UP',
@@ -88,6 +120,11 @@ export const signInWithProvider = (provider) => async dispatch => {
         dispatch(setFeedback({
           type: 'success',
           msg: 'Welcome'
+        }))
+      } else {
+        return dispatch(setFeedback({
+          type: 'error',
+          msg: 'userNotListedInConst'
         }))
       }
     })
@@ -109,7 +146,7 @@ export const signInWithProvider = (provider) => async dispatch => {
   }
 }
 
-export const signIn = ({ email, password }) => async dispatch =>{
+export const signIn = ({ email, password }) => async dispatch => {
   dispatch({
     type: 'AUTH_LOADING'
   })
@@ -141,7 +178,7 @@ export const signIn = ({ email, password }) => async dispatch =>{
   }
 }
 
-export const signUp = (user) => async dispatch =>{
+export const signUp = (user) => async dispatch => {
   const { tempToken } = store.getState().auth
   const { tokens } = store.getState().constants
   const region = tokens?.all[tempToken] || ''
@@ -188,7 +225,7 @@ export const signUp = (user) => async dispatch =>{
   }
 }
 
-export const signOut = () => async dispatch =>{
+export const signOut = () => async dispatch => {
   try {
     app.auth().signOut()
     dispatch(closeDialogs())
@@ -213,7 +250,7 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
     type: 'AUTH_LOADING'
   })
   try {
-    await usersRef.doc(uid).set({...personalDetails}, { merge: true })
+    await usersRef.doc(uid).set({ ...personalDetails }, { merge: true })
 
     const { skills } = personalDetails
     await skills.forEach(v => db.collection('constants').doc('skills').update({

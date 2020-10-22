@@ -10,7 +10,6 @@ import PageSection from '../v2/atoms/PageSection'
 
 const SavedJobs = () => {
   const { loading, saved } = useSelector(state => state.auth)
-  const { savedJobsLoading } = useSelector(state => state.jobs)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 

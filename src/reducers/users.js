@@ -1,6 +1,9 @@
 const initialState = {
   filters: {},
-  user: {},
+  user: {
+    skills: [],
+    lastPosition: ''
+  },
   users: [],
   loading: false,
   isUpdating: false,

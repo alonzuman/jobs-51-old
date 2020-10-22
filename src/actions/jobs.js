@@ -285,7 +285,7 @@ export const saveJob = (uid, jobId, job) => async dispatch => {
     }, { merge: true })
     dispatch({
       type: 'SAVE_JOB',
-      payload: { jobId }
+      payload: { jobId, job }
     })
     dispatch(setFeedback({
       type: 'success',

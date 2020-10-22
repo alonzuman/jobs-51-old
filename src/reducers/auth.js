@@ -6,6 +6,8 @@ const initialState = {
   avatar: '',
   phone: '',
   savedJobs: [],
+  saved: [],
+  skills: [],
   lookingForJob: false,
   activities: {
     pending: 0,
@@ -41,12 +43,14 @@ export const authReducer = (state = initialState, action) => {
     case 'SAVE_JOB':
       return {
         ...state,
-        savedJobs: [...state.savedJobs, payload.jobId]
+        savedJobs: [...state.savedJobs, payload.jobId],
+        saved: [...state.saved, payload.job]
       }
     case 'UNSAVE_JOB':
       return {
         ...state,
-        savedJobs: [...state.savedJobs.filter(job => job !== payload.jobId)]
+        savedJobs: [...state.savedJobs.filter(job => job !== payload.jobId)],
+        saved: [...state.saved.filter(job => job.id !== payload.jobId)]
       }
     case 'SET_TEMP_TOKEN':
       return {

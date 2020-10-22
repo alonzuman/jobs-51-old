@@ -15,9 +15,6 @@ const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { translation, theme } = useSelector(state => state.theme)
-  const [inputToken, setInputToken] = useState('')
-  const [inputTokenError, setInputTokenError] = useState('')
-  const allTokens = useSelector(state => state?.constants?.tokens?.all)
 
   useEffect(() => {
     dispatch(getConstants())
@@ -44,66 +41,35 @@ const SignIn = () => {
     margin: '.5rem 0'
   }
 
-  const handleTokenClick = () => {
-    console.log(allTokens)
-    if (Object.keys(allTokens).includes(inputToken)) {
-      console.log(allTokens)
-      dispatch(setTempToken(inputToken))
-      setTokenApproved(true)
-    } else {
-      setInputTokenError(translation.inputTokenErrorMsg)
-    }
-  }
-
-  if (!tokenApproved) {
-    return (
-      <>
-        <DialogContent>
-          <TextField error={Boolean(inputTokenError)} helperText={inputTokenError} label={translation.accessToken} variant='outlined' value={inputToken} onChange={e => setInputToken(e.target.value)} />
-        </DialogContent>
-        <DialogActionsContainer>
-          <Button
-            size='large'
-            disabled={!inputToken}
-            className='full-width'
-            color='primary'
-            variant='contained'
-            onClick={handleTokenClick}
-          >{translation.continue}</Button>
-        </DialogActionsContainer>
-      </>
-    )
-  } else {
-    return (
-      <DialogContent className='pb-1'>
-        {socialMedia &&
-          <>
-            <SocialMediaSignIn />
-            <Box style={boxStyle}>
-              <Typography variant='body1'>{translation.or}</Typography>
-            </Box>
-            <Button disabled={authState.loading} variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
-          </>}
-        {!socialMedia &&
-          <form onSubmit={handleSubmit}>
-            <Button disabled={authState.loading} variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-users button-icon"></i></Button>
-            <br />
-            <br />
-            <Box style={boxStyle}>
-              <Typography variant='body1'>{translation.orWithEmail}</Typography>
-            </Box>
-            <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
-            <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
-            <Button disabled={authState.loading} className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
-            <br />
-            <br />
-            <br />
-            <br />
-            <Typography variant='body1'>{translation.notSignedUp}<span style={anchorStyle} onClick={handleClick}>{translation.signUp}</span></Typography>
-          </form>}
-        </DialogContent>
-    )
-  }
+  return (
+    <DialogContent className='pb-1'>
+      {socialMedia &&
+        <>
+          <SocialMediaSignIn />
+          <Box style={boxStyle}>
+            <Typography variant='body1'>{translation.or}</Typography>
+          </Box>
+          <Button disabled={authState.loading} variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(false)}>{translation.signInWithEmail}<i className="fas fa-envelope button-icon"></i></Button>
+        </>}
+      {!socialMedia &&
+        <form onSubmit={handleSubmit}>
+          <Button disabled={authState.loading} variant='outlined' className='button-style full-width' onClick={() => setSocialMedia(true)}>{translation.signInWithSocialMedia}<i className="fas fa-users button-icon"></i></Button>
+          <br />
+          <br />
+          <Box style={boxStyle}>
+            <Typography variant='body1'>{translation.orWithEmail}</Typography>
+          </Box>
+          <TextField required type='email' label={translation.email} variant='outlined' value={email} onChange={e => setEmail(e.target.value)} />
+          <TextField required type='password' label={translation.password} variant='outlined' value={password} onChange={e => setPassword(e.target.value)} />
+          <Button disabled={authState.loading} className='button-style' color='primary' variant='contained' type='submit'>{authState.loading ? <CircularProgress className='button-spinner' /> : translation.signIn}</Button>
+          <br />
+          <br />
+          <br />
+          <br />
+          <Typography variant='body1'>{translation.notSignedUp}<span style={anchorStyle} onClick={handleClick}>{translation.signUp}</span></Typography>
+        </form>}
+    </DialogContent>
+  )
 }
 
 export default SignIn
