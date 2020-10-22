@@ -16,15 +16,7 @@ const Container = styled.div`
 
 const JobPageJobsCarousel = ({ loading, jobs }) => {
   const { translation } = useSelector(state => state.theme)
-  const { windowWidth } = useWindowSize()
-
-  const slidesPerView = () => {
-    if (windowWidth <= 768) {
-      return 1.1
-    } else {
-      return 2
-    }
-  }
+  const { slidesPerView } = useWindowSize()
 
   if (loading) {
     return (
@@ -38,7 +30,7 @@ const JobPageJobsCarousel = ({ loading, jobs }) => {
         <Divider className='mr-1 ml-1' />
         <br />
         <Typography className='pr-1' variant='h2'>{translation.similarJobs}</Typography>
-        <Swiper spaceBetween={16} slidesPerView={slidesPerView()}>
+        <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
           {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard job={v} /></SwiperSlide>)}
         </Swiper>
       </Container>

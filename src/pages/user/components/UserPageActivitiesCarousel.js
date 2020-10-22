@@ -21,15 +21,7 @@ const Container = styled.div`
 const UserPageActivitiesCarousel = ({ user, loading }) => {
   const { translation } = useSelector(state => state.theme)
   const { activitiesList } = user
-  const { windowWidth } = useWindowSize()
-
-  const slidesPerView = () => {
-    if (windowWidth <= 768) {
-      return 1.1
-    } else {
-      return 2
-    }
-  }
+  const { slidesPerView } = useWindowSize()
 
   if (loading) {
     return (
@@ -44,7 +36,7 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
         <br />
         <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({user?.activities?.length})</Typography>
         <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
-        <Swiper spaceBetween={16} slidesPerView={slidesPerView()}>
+        <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
           {activitiesList?.map((v, i) => <SwiperSlide key={i}><ActivityCard showUser={false} activity={v} /></SwiperSlide>)}
         </Swiper>
       </Container>

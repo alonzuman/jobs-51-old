@@ -18,7 +18,7 @@ import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
 import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
-import Home from './pages/Home'
+import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Profile from './pages/Profile'
@@ -76,6 +76,7 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
+
             <Route exact path='/' component={LandingPage} />
           </Switch>
         </Router>
