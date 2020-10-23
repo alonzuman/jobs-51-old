@@ -44,49 +44,28 @@ const PageHeader = ({ subtitleType, editing = false, editingTitle, imgUrl, title
   const [isImageOpen, setIsImageOpen] = useState(false)
   const handleOpenImage = () => setIsImageOpen(!isImageOpen)
 
-  if (editing) {
-    return (
-      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
-        <ActionsWrapper>
-          {editingTitle && <Typography variant='h1'>{editingTitle}</Typography>}
-          {backButton && <BackButton />}
-          {action && action}
-        </ActionsWrapper>
-        <ItemsWrapper>
-          <TextContainer>
-            <TextField label={titleLabel} variant='outlined' value={title} onChange={e => setTitle(e.target.value)} />
-            {subtitleType === 'location' ?
-            <LocationSelect size='small' location={subtitle} setLocation={setSubtitle} />:
-            <TextField label={subtitleLabel} variant='outlined' size='small' value={subtitle} onChange={e => setSubtitle(e.target.value)} />}
-          </TextContainer>
-        </ItemsWrapper>
-      </Container>
-    )
-  } else {
-    return (
-      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
-        <ImageLightbox
-          open={isImageOpen}
-          onClose={handleOpenImage}
-          imgUrl={imgUrl}
-        />
-        <ActionsWrapper>
-          {backButton && <BackButton />}
-          {action && action}
-        </ActionsWrapper>
-        <ItemsWrapper>
-          <TextContainer>
-            {/* TODO add subheader */}
-            <Typography className='p-0' variant='h1'>{title}</Typography>
-            <Typography variant='subtitle1'>{subtitle}</Typography>
-          </TextContainer>
-          <SecondaryContainer onClick={imgUrl && handleOpenImage}>
-            {secondary}
-          </SecondaryContainer>
-        </ItemsWrapper>
-      </Container>
-    )
-  }
+  return (
+    <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+      <ImageLightbox
+        open={isImageOpen}
+        onClose={handleOpenImage}
+        imgUrl={imgUrl}
+      />
+      <ActionsWrapper>
+        {backButton && <BackButton />}
+        {action && action}
+      </ActionsWrapper>
+      <ItemsWrapper>
+        <TextContainer>
+          <Typography className='p-0' variant='h1'>{title}</Typography>
+          <Typography variant='subtitle1'>{subtitle}</Typography>
+        </TextContainer>
+        <SecondaryContainer onClick={imgUrl && handleOpenImage}>
+          {secondary}
+        </SecondaryContainer>
+      </ItemsWrapper>
+    </Container>
+  )
 }
 
 export default PageHeader

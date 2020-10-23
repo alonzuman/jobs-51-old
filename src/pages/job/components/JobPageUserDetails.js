@@ -31,8 +31,7 @@ const JobPageUserDetails = ({ loading, job, editing }) => {
   } else {
     return (
       <PageSection>
-        <Divider />
-        <br />
+        <Divider className='mb-1' />
         <Typography variant='h2'>{translation.whoPostedJob}</Typography>
         <Link to={`/users/${job?.uid}`}>
           <ListItem className='mb-2' button>

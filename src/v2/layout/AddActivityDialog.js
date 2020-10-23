@@ -10,7 +10,7 @@ const AddActivityDialog = ({ open, onClose }) => {
   return (
     <Dialog dir='rtl' open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.addActivity} />
-      <AddActivity />
+      <AddActivity onClose={onClose} />
     </Dialog>
   )
 }

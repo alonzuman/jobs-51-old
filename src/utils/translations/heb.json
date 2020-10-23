@@ -30,6 +30,7 @@
   "settings": "הגדרות",
   "postingAJob": "פרסום משרה",
   "editingProfile": "עריכת פרופיל",
+  "editingJob": "עריכת פרסום עבודה",
   "lookingForAJob": "חיפוש משרה",
   "savedJobs": "עבודות שמורות",
   "userNotListedInConst": "אנא צור עם מנהל המחוז שלך ע״מ שנוכל לאשר את חשבון המשתמש שלך",
@@ -220,7 +221,10 @@
   "similarJobs": "הצעות עבודה מאותה התעשיה",
   "highTech": "הייטק",
   "communications": "תקשורת",
-  "jobOffersInCategory": "הצעות עבודה בתעשיית ה"
+  "jobOffersInCategory": "הצעות עבודה בתעשיית ה",
+  "editUser": "עריכת פרופיל",
+  "editFirstName": "עריכת שם פרטי",
+  "editLastName": "עריכת שם משפחה"
 }
 
 

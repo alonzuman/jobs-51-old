@@ -19,6 +19,7 @@ const EditJob = ({ match }) => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const { loading, job, isUpdating, isDeleting } = useSelector(state => state.jobs)
+  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
   const isLoading = loading || !job
   const jid = match.params.jid
   const history = useHistory()
@@ -73,6 +74,15 @@ const EditJob = ({ match }) => {
       industry,
       location,
       avatar,
+      user: {
+        firstName: firstName || '',
+        lastName: lastName || '',
+        role: role || '',
+        email: email || '',
+        phone: phone || '',
+        avatar: userAvatar || '',
+        serviceYear: serviceYear || ''
+      }
     }
     await dispatch(updateJob(newJob))
     await history.goBack()
@@ -84,7 +94,7 @@ const EditJob = ({ match }) => {
     <Container>
       <JobPageHeader
         editing
-        editingTitle={translation.editJob}
+        editingTitle={translation.editingJob}
         handleEditing={handleEditing}
         editing loading={isLoading}
         job={job}

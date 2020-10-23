@@ -19,7 +19,7 @@ const JobPageHeaderActions = ({ editing, job, handleEditing }) => {
   if (uid === job?.uid || checkPermissions(role) >= 3) {
     return (
       <ActionsContainer>
-        <IconButton onClick={handleEditing}>
+        <IconButton size='small' onClick={handleEditing}>
           {editing ? <CloseIcon /> : <EditIcon />}
         </IconButton>
         <SaveJobButton job={job} />

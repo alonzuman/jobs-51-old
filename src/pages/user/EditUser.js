@@ -30,6 +30,9 @@ const User = ({ match }) => {
   // User fields for update
   const [isLookingForJob, setIsLookingForJob] = useState(null)
   const [isVolunteer, setIsVolunteer] = useState(null)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [avatar, setAvatar] = useState('')
   const [phone, setPhone] = useState('')
   const [about, setAbout] = useState('')
   const [hometown, setHometown] = useState('')
@@ -40,6 +43,8 @@ const User = ({ match }) => {
     const updatedUser = {
       ...user,
       uid,
+      firstName,
+      lastName,
       lookingForJob: isLookingForJob,
       volunteer: isVolunteer,
       about,
@@ -49,9 +54,7 @@ const User = ({ match }) => {
       hometown
     }
     await dispatch(updateUser(updatedUser))
-    await history.push({
-      pathname: `/users/${uid}`
-    })
+    await history.goBack()
   }
 
   const handleDelete = async () => {
@@ -60,6 +63,9 @@ const User = ({ match }) => {
   }
 
   useEffect(() => {
+    setFirstName(user?.firstName)
+    setLastName(user?.lastName)
+    setAvatar(user?.avatar)
     setIsLookingForJob(!!user?.lookingForJob)
     setIsVolunteer(!!user?.volunteer)
     setAbout(user?.about || '')
@@ -93,6 +99,12 @@ const User = ({ match }) => {
         handleEditing={handleEditing}
         loading={loading}
         user={user}
+        stateFirstName={firstName}
+        setFirstName={setFirstName}
+        stateLastName={lastName}
+        setLastName={setLastName}
+        stateAvatar={avatar}
+        setAvatar={setAvatar}
         handleSubmit={handleSubmit}
       />
       <UserPageBadges

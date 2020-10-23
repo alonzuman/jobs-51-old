@@ -47,7 +47,6 @@ export const addJob = (job) => async dispatch => {
       type: 'ADD_JOB',
       payload: { job: newJob }
     })
-    dispatch(closeDialogs())
     dispatch(setFeedback({
       msg: 'Success',
       type: 'success'

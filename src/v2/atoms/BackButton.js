@@ -8,7 +8,7 @@ const BackButton = () => {
   const handleClick = () => history.goBack()
 
   return (
-    <IconButton onClick={handleClick}>
+    <IconButton size='small' onClick={handleClick}>
       <KeyboardArrowRightIcon />
     </IconButton>
   )

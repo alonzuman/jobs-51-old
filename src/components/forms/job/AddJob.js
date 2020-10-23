@@ -10,11 +10,11 @@ import SkillsSelect from '../profile/SkillsSelect'
 import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
 
 const AddJob = ({ onClose }) => {
-  const { translation, direction } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
   const industries = useSelector(state => state.constants?.industries.all)
   const dispatch = useDispatch()
-  const { uid, firstName, lastName, avatar, role, email, phone } = useSelector(state => state.auth)
+  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
   const [skillsError, setSkillsError] = useState('')
   const [industry, setIndustry] = useState(industries[0])
   const [location, setLocation] = useState('')
@@ -48,12 +48,13 @@ const AddJob = ({ onClose }) => {
       skills,
       uid,
       user: {
-        firstName,
-        lastName,
-        role,
-        email,
-        phone,
-        avatar
+        firstName: firstName || '',
+        lastName: lastName || '',
+        role: role || '',
+        email: email || '',
+        phone: phone || '',
+        avatar: userAvatar || '',
+        serviceYear: serviceYear || ''
       }
     }
     if (skills.length === 0) {

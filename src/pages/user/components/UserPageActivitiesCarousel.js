@@ -34,7 +34,7 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
       <Container>
         <Divider className='mr-1 ml-1' />
         <br />
-        <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({user?.activities?.length})</Typography>
+        <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({activitiesList?.length})</Typography>
         <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
         <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
           {activitiesList?.map((v, i) => <SwiperSlide key={i}><ActivityCard showUser={false} activity={v} /></SwiperSlide>)}

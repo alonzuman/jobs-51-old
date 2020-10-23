@@ -29,7 +29,7 @@ const UserCard = ({ xs = 12, md = 6, lg = 6, loading, user, containerStyle, labe
     return (
       <Grid item xs={xs} md={md} lg={lg}>
         <Link className="full__width" to={`/users/${user?.uid}`}>
-          <Card>
+          <Card variant='outlined'>
             {label && <Typography style={{ margin: '1rem 1rem 0 0' }} variant="subtitle1">{label}</Typography>}
             <CardHeader
               style={cardHeaderStyle}

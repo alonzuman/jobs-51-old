@@ -10,6 +10,7 @@ import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWi
 import AuthDialog from '../v2/layout/AuthDialog'
 
 const LandingPage = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const { translation, direction } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.auth)
   const [isOpen, setIsOpen] = useState(false)
@@ -50,13 +51,18 @@ const LandingPage = () => {
 
   useEffect(() => {
     app.auth().onAuthStateChanged(user => {
-      if (user) return dispatch(setUser(user))
+      if (user) {
+        dispatch(setUser(user))
+        return setIsLoading(false)
+      } else {
+        return setIsLoading(false)
+      }
     })
   }, [currentUser])
 
   const handleDialog = () => setIsOpen(!isOpen)
 
-  if (loading) {
+  if (isLoading) {
     return <CircularSpinnerWithContainer />
   } else if (currentUser && !loading) {
     return <Redirect to='/home' />

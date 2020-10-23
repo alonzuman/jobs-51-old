@@ -43,7 +43,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
         <Divider />
         <br />
         <Typography variant='h2'>{translation.aboutMe}</Typography>
-        <Typography variant='body1'>{user?.about}</Typography>
+        <Typography className='text__wrap' variant='body1'>{user?.about}</Typography>
         <br />
         {user?.email &&
           <InfoContainer>

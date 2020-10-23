@@ -13,13 +13,12 @@ const UserPageActions = ({ loading, updateAction, deleteAction, editing, isUpdat
   const { translation } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
 
-  if (loading) {
+  if (loading || !editing) {
     return null
-  } else if (editing) {
+  } else {
     return (
       <Container>
-        <Divider />
-        <br />
+        <Divider className='mb-1' />
         <Button
           disabled={isDeleting || isUpdating}
           onClick={updateAction}
@@ -39,8 +38,6 @@ const UserPageActions = ({ loading, updateAction, deleteAction, editing, isUpdat
           </Button>}
       </Container>
     )
-  } else {
-    return null
   }
 }
 

@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSavedJobs } from '../actions'
-import CardsSkeletons from '../components/skeletons/CardsSkeletons'
-import { CircularProgress, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import JobCard from '../components/cards/JobCard'
 import PageHeader from '../v2/organisms/PageHeader'
 import Container from '../v2/atoms/Container'
@@ -11,13 +9,12 @@ import PageSection from '../v2/atoms/PageSection'
 const SavedJobs = () => {
   const { loading, saved } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  const dispatch = useDispatch()
 
   if (loading) {
     return null;
   } else if (!loading && saved?.length !== 0) {
     return (
-      <Container>
+      <Container className='p-1'>
         <PageSection>
           <PageHeader spaceTop title={translation.savedJobs} spaceBottom />
         </PageSection>

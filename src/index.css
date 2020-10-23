@@ -545,10 +545,18 @@ a:hover {
   min-width: 224px!important;
 }
 
+.lh-0 {
+  line-height: 0!important;
+}
+
 .lh-1 {
   line-height: 1!important;
 }
 
 .red {
   color: var(--red)!important;
+}
+
+.text__wrap {
+  white-space: pre-wrap!important;
 }

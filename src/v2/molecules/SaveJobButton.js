@@ -20,11 +20,15 @@ const SaveJobButton = ({ job }) => {
     }
   }
 
-  return (
-    <IconButton onClick={handleFavorite}>
-      {isSaved ? <FavoriteIcon className='red' /> : <FavoriteBorderIcon />}
-    </IconButton>
-  )
+  if (uid === job?.uid) {
+    return null
+  } else {
+    return (
+      <IconButton size='small' onClick={handleFavorite}>
+        {isSaved ? <FavoriteIcon className='red' /> : <FavoriteBorderIcon />}
+      </IconButton>
+    )
+  }
 }
 
 export default SaveJobButton

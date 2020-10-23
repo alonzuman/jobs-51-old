@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
 import { addActivity } from '../../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,8 +7,8 @@ import { setUserRegion } from '../../../actions/auth';
 import CustomChip from '../../cards/CustomChip';
 import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer';
 
-const AddActivity = () => {
-  const { uid, phone, region, avatar, firstName, lastName } = useSelector(state => state.auth)
+const AddActivity = ({ onClose }) => {
+  const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.activities)
   const { all } = useSelector(state => state.constants?.activityTypes)
@@ -23,7 +23,7 @@ const AddActivity = () => {
     user: {
       firstName: firstName ? firstName : '',
       lastName: lastName ? lastName : '',
-      avatar: avatar ? avatar : '',
+      avatar: userAvatar ? userAvatar : '',
       region: region ? region : '',
       phone: phone ? phone : ''
     },
@@ -46,7 +46,7 @@ const AddActivity = () => {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     const totalInt = parseFloat(total)
     if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number' || !totalInt) {
@@ -66,10 +66,12 @@ const AddActivity = () => {
         msg: 'hoursNoGood'
       }))
     }
-    dispatch(addActivity({
+    await dispatch(addActivity({
       ...activity,
       total: totalInt
     }))
+
+    await onClose()
   }
 
   if (!all) {

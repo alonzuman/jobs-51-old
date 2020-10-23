@@ -72,7 +72,7 @@ const Profile = () => {
         <Button size='large' className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>
         <LinksContainer>
           <Link to='/privacy-policy'>
-            <Button color='primary' className='p-0'>{translation.privacyPolicy}</Button>
+            <Button color='primary' className='pl-5 pr-5 p-0'>{translation.privacyPolicy}</Button>
           </Link>
         </LinksContainer>
       </PageContainer>

@@ -19,8 +19,7 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
   } else if (editing) {
     return (
       <PageSection>
-        <Divider />
-        <br />
+        <Divider className='mb-1' />
         <Typography variant='h2'>{translation.jobDescription}</Typography>
         <TextField className='mxw-512' size='small' variant='outlined' multiline rows={4} value={description} onChange={e => setDescription(e.target.value)} />
         <Typography className='mb-5' variant='subtitle1'>{translation.fieldsOfWork}</Typography>
@@ -39,7 +38,7 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
         <Divider />
         <br />
         <Typography variant='h2'>{translation.jobDescription}</Typography>
-        <Typography className='mb-1' variant='body1'>{job?.description}</Typography>
+        <Typography className='mb-1 text__wrap' variant='body1'>{job?.description}</Typography>
         {job?.skills?.length !== 0 &&
           <SubSection>
             <Typography className='mb-25' variant='subtitle1'>{translation.fieldsOfWork}</Typography>

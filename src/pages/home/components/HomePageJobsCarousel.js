@@ -1,4 +1,5 @@
 import { Divider, Typography } from '@material-ui/core'
+import { Skeleton } from '@material-ui/lab'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
@@ -32,7 +33,9 @@ const HomePageJobsCarousel = ({ query, title, industry }) => {
   if (isLoading) {
     return (
       <PageSection>
-        <CardsSkeletons count={1} />
+        <Divider className='mb-1 mr-1 ml-1' />
+        <Skeleton height={32} width={224} />
+        <CardsSkeletons count={2} />
       </PageSection>
     )
   } else if (jobs?.length !== 0) {

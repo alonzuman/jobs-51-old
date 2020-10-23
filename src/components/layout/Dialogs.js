@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Dialog, DialogTitle, DialogContent, IconButton, Box, Paper } from '@material-ui/core'
 import { closeDialogs } from '../../actions'
 import AddJob from '../forms/job/AddJob'
-import EditJob from '../forms/job/EditJob'
 import SignIn from '../forms/SignIn'
 import SignUp from '../forms/SignUp'
 import AddActivity from '../forms/activity/AddActivity'
@@ -63,7 +62,6 @@ const Dialogs = () => {
       case 'SignUp': return <SignUp/>
       case 'AddActivity': return <AddActivity/>
       case 'AddJob': return <AddJob/>
-      case 'EditJob': return <EditJob/>
       default: return false
     }
   }
