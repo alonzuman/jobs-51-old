@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 import { db } from '../../../firebase'
-import PageSection from '../../../v2/atoms/PageSection'
 import JobsCarousel from '../../../v2/organisms/JobsCarousel'
+
 const SectionContainer = styled.div`
   :last-of-type {
     margin-bottom: 96px;
@@ -32,11 +32,11 @@ const HomePageJobsCarousel = ({ query, title, industry }) => {
 
   if (isLoading) {
     return (
-      <PageSection>
+      <SectionContainer>
         <Divider className='mb-1 mr-1 ml-1' />
-        <Skeleton height={32} width={224} />
+        <Skeleton className='mr-1 ml-1' height={32} width={224} />
         <CardsSkeletons count={2} />
-      </PageSection>
+      </SectionContainer>
     )
   } else if (jobs?.length !== 0) {
     return (
