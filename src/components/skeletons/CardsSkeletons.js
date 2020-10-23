@@ -7,7 +7,7 @@ const CardsSkeletons = ({ count }) => {
 
   return (
     <Grid className='p-1' spacing={2} container >
-      {arr.map((x, i) => <Grid item xs={12} md={6} lg={6}><CardSkeleton key={i} /></Grid>)}
+      {arr.map((x, i) => <Grid key={i} item xs={12} md={6} lg={6}><CardSkeleton /></Grid>)}
     </Grid>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography } from '@material-ui/core'
-import TopBar from '../components/layout/TopBar'
 import PageContainer from '../components/layout/PageContainer'
 import PageHeader from '../v2/organisms/PageHeader'
 

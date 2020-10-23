@@ -80,6 +80,7 @@ const LandingPage = () => {
             <Typography style={textStyle} variant='body1'>{translation.platformForMembersOnly}</Typography>
           </Box>
           <Button
+          size='large'
             disabled={loading}
             style={{ marginBottom: '.5rem', maxWidth: 300 }}
             className='button-style full-width'
