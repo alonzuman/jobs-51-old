@@ -13,7 +13,6 @@ import Jobs from './pages/jobs/Jobs'
 import Employees from './pages/Employees'
 import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
-import ManageUsers from './pages/admin/ManageUsers'
 import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
@@ -73,7 +72,6 @@ function App() {
             {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
-            {/* <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} /> */}
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
 
