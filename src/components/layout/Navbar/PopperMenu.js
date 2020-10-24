@@ -16,6 +16,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 // import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
+import SearchIcon from '@material-ui/icons/Search';
 
 const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -27,7 +28,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.main}
-            <AssignmentIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+            <SearchIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>

@@ -3,6 +3,7 @@ import firebase from 'firebase'
 import { setFeedback } from './feedback'
 import store from '../store'
 const usersRef = db.collection('users')
+const listedMembersRef = db.collection('constants').doc('listedMembers')
 
 export const setUser = (user) => async dispatch => {
   const { uid } = user
@@ -32,6 +33,7 @@ export const checkIfUserLegit = ({ email, phone, firstName, lastName }) => async
     type: 'AUTH_LOADING'
   })
 
+  // TODO add to query firstName, lastName and phone for validation
   try {
     const snapshot = await db.collection('constants').doc('members').collection('all').where('email', '==', email).get()
     let results = []
@@ -96,11 +98,14 @@ export const signInWithProvider = (provider) => async dispatch => {
           dateCreated: Date.now(),
           region: checkLegitRes?.resion || ''
         }
+
         await usersRef.doc(uid).set(newUser, { merge: true })
+
         dispatch({
           type: 'SIGNED_UP',
           payload: { ...newUser }
         })
+
         dispatch(setFeedback({
           type: 'success',
           msg: 'Welcome'
@@ -235,58 +240,6 @@ export const signOut = () => async dispatch => {
   }
 }
 
-export const addPersonalDetails = (user, personalDetails, uid) => async dispatch => {
-  dispatch({
-    type: 'AUTH_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).set({ ...personalDetails }, { merge: true })
-
-    const { skills } = personalDetails
-    await skills.forEach(v => db.collection('constants').doc('skills').update({
-      all: firebase.firestore.FieldValue.arrayUnion(v)
-    }))
-
-    dispatch({
-      type: 'SET_USER',
-      payload: { uid, ...user, ...personalDetails }
-    })
-    dispatch(setFeedback({
-      type: 'success',
-      msg: 'Success'
-    }))
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
-export const editProfile = (user, uid) => async dispatch => {
-  dispatch({
-    type: 'AUTH_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).set(user, { merge: true })
-    dispatch({
-      type: 'SET_USER',
-      payload: { uid, ...user, avatar: user.avatar.length > 0 && user.avatar }
-    })
-    dispatch(setFeedback({
-      type: 'success',
-      msg: 'Success'
-    }))
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
 export const setUserRegion = (region, uid) => async dispatch => {
   dispatch({
     type: 'AUTH_LOADING'
@@ -303,40 +256,5 @@ export const setUserRegion = (region, uid) => async dispatch => {
       type: 'error',
       msg: 'ServerError'
     }))
-  }
-}
-
-export const toggleLookingForJob = ({ uid, currentValue }) => async dispatch => {
-  dispatch({
-    type: 'USER_LOADING'
-  })
-  try {
-    await usersRef.doc(uid).update({
-      lookingForJob: currentValue
-    })
-    dispatch({
-      type: 'SET_USER',
-      payload: {
-        lookingForJob: currentValue
-      }
-    })
-    dispatch(setFeedback({
-      type: 'success',
-      msg: 'actionSuccedded'
-    }))
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-
-  }
-}
-
-export const setTempToken = token => {
-  return {
-    type: 'SET_TEMP_TOKEN',
-    payload: token
   }
 }

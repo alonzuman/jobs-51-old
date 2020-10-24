@@ -42,7 +42,7 @@ const User = ({ match }) => {
   const [region, setRegion] = useState('')
 
   const handleSubmit = async () => {
-    const updatedUser = {
+    const newUser = {
       ...user,
       uid,
       firstName,
@@ -57,12 +57,12 @@ const User = ({ match }) => {
       serviceYear,
       region
     }
-    await dispatch(updateUser(updatedUser))
+    await dispatch(updateUser({ newUser, oldUser: user}))
     await history.goBack()
   }
 
   const handleDelete = async () => {
-    await dispatch(deleteUser(uid))
+    await dispatch(deleteUser({ uid, firstName: user?.firstName, lastName: user?.lastName }))
     history.goBack()
   }
 

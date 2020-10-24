@@ -1,4 +1,5 @@
 import store from "../store"
+import firebase from 'firebase'
 import { db } from "../firebase"
 import { capitalizeFirstLetter } from "../utils"
 import { setFeedback } from "./feedback"
@@ -103,7 +104,7 @@ export const getEmployees = () => async dispatch => {
   }
 }
 
-export const deleteUser = uid => async dispatch => {
+export const deleteUser = ({ uid, firstName, lastName }) => async dispatch => {
   dispatch({
     type: 'USER_LOADING'
   })
@@ -112,6 +113,7 @@ export const deleteUser = uid => async dispatch => {
     const snapshot = await db.collection('activities').where('uid', '==', uid).get()
     snapshot.forEach(async doc => await db.collection('activities').doc(doc.id).delete())
     await db.collection('users').doc(uid).delete()
+
     dispatch(setFeedback({
       type: 'success',
       msg: 'Success'
@@ -178,7 +180,7 @@ export const unapproveUser = uid => async dispatch => {
   }
 }
 
-export const updateUser = newUser => async dispatch => {
+export const updateUser = ({ newUser, oldUser }) => async dispatch => {
   dispatch({
     type: 'USERS_UPDATING'
   })

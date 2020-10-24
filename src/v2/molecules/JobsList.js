@@ -10,19 +10,22 @@ const JobsList = ({ jobs, loading }) => {
 
   if (loading) {
     return (
-      <PageSection>
+      <PageSection spaceBottom>
         <CardsSkeletons className='p-0' count={1} />
       </PageSection>
     )
-  } else {
+  } else if (jobs?.length !== 0) {
     return (
-      <PageSection>
-        {jobs?.length !== 0 &&
+      <PageSection spaceBottom>
         <Grid container spacing={2}>
           {jobs?.map((v, i) => <Grid item key={i} xs={12} md={6} lg={6}><JobCard job={v} /></Grid>)}
-        </Grid>}
-        {jobs?.length === 0 &&
-          <Typography className='mt-1' variant='body1'>{translation?.couldntFindJobs}</Typography>}
+        </Grid>
+      </PageSection>
+    )
+  } else if (!loading && jobs?.length === 0) {
+    return (
+      <PageSection spaceBottom>
+        <Typography className='mt-1' variant='body1'>{translation?.couldntFindJobs}</Typography>
       </PageSection>
     )
   }
