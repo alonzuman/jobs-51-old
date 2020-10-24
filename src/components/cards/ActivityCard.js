@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Box, Typography, Paper, IconButton, Grid, Avatar, CardActions, CardContent, Card } from '@material-ui/core'
+import { ListItem, ListItemText, Box, Typography, Paper, IconButton, Grid, Avatar, CardActions, CardContent, Card, Chip } from '@material-ui/core'
 import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -33,15 +33,20 @@ const CardBody = styled.div`
 
 const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
-  const { theme } = useSelector(state => state.theme)
+  const { approved, description } = activity
+  const [isApproved, setIsApproved] = useState(!!approved)
+  const { translation, theme } = useSelector(state => state.theme)
   const { role } = useSelector(state => state.auth)
+  const [day, month, number] = translateDate(activity.date)
 
   const chipStyle = {
-    color: activityTypeColor(activity.type),
-    border: `1px solid ${activityTypeColor(activity.type)}`
+    color: isApproved ? '#00965f' : '',
+    border: isApproved ? '1px solid #00965f' : ''
   }
 
-  const [day, month, number] = translateDate(activity.date)
+  const handleApproved = () => setIsApproved(!isApproved)
+  const handleActionsOpen = () => setOpen(!open)
+
   return (
     <>
       <Card variant='outlined' onClick={() => setOpen(!open)}>
@@ -53,22 +58,22 @@ const ActivityCard = ({ activity, showUser = true }) => {
               <Typography variant="body1">{day}</Typography>
             </DatesContainer>
             <InfoContainer>
-              <CustomChip
-                label={activity.type}
-                size="small"
-                variant="outlined"
+              <Chip
                 style={chipStyle}
+                size='small'
+                variant='outlined'
+                label={isApproved ? translation.approved : translation.pending}
               />
               <ListItemText
-                primary={activity.description}
-                secondary={<span className='flex align__center'><AccessTimeIcon style={{ height: '.75rem', width: '.75rem', marginLeft: '.25rem', marginBottom: '.1rem' }} />{activity.total}</span>}
+                primary={description}
+                secondary={<span className='flex align__center'><AccessTimeIcon className='extra_small__icon ml-25 mb-25'  />{activity.total}, {activity.type}</span>}
               />
             </InfoContainer>
             {showUser && (
               <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
-                <Box className='flex align__center justify__center flex__column p-1 mw-80' style={{ minWidth: 80 }}>
+                <Box className='flex align__center justify__center flex__column p-1 mnw-80'>
                   <Avatar src={activity?.user?.avatar} />
-                  <Typography style={{ marginTop: '.25rem', textAlign: "center" }} variant="subtitle1" >
+                  <Typography className='mt-25 text__center' variant="subtitle1" >
                     {activity?.user?.firstName} {activity?.user?.lastName}
                   </Typography>
                 </Box>
@@ -77,13 +82,13 @@ const ActivityCard = ({ activity, showUser = true }) => {
         </CardContent>
         <CardActions className='flex align__center justify__center pt-0'>
           <IconButtonContainer open={open}>
-            <IconButton size='small' onClick={() => setOpen(!open)}>
+            <IconButton size='small' onClick={handleActionsOpen}>
               <KeyboardArrowDownIcon />
             </IconButton>
           </IconButtonContainer>
         </CardActions>
       </Card>
-      {open && <ActivityCardActions style={{ marginTop: '.5rem' }} activity={activity} />}
+      {open && <ActivityCardActions handleApproved={handleApproved} className='mt-5' activity={activity} />}
     </>
   );
 }

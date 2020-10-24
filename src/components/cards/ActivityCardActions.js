@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Box } from '@material-ui/core'
 import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
-import ApprovalBox from '../dialogs/ApprovalBox'
+import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 
-const ActivityCardActions = ({ activity, style }) => {
+const ActivityCardActions = ({ activity, handleApproved }) => {
   const [approved, setApproved] = useState(activity.approved)
   const [disabled, setDisabled] = useState(false)
   const [approvalOpen, setApprovalOpen] = useState(false)
@@ -18,6 +18,7 @@ const ActivityCardActions = ({ activity, style }) => {
     await dispatch(approveActivity(activity))
     setApproved(true)
     setDisabled(false)
+    handleApproved()
   }
 
   const handleUnapprove = async () => {
@@ -25,6 +26,7 @@ const ActivityCardActions = ({ activity, style }) => {
     await dispatch(unApproveActivity(activity))
     setApproved(false)
     setDisabled(false)
+    handleApproved()
   }
 
   const handleDelete = async () => {
@@ -33,21 +35,23 @@ const ActivityCardActions = ({ activity, style }) => {
     setDisabled(false)
   }
 
-  const boxStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'space-between',
-    ...style
-  }
+  const handleApprovalOpen = () => setApprovalOpen(!approvalOpen)
+
+  const isAdmin = checkPermissions(role) >= 3;
 
   return (
-    <Box style={boxStyle}>
-      {checkPermissions(role) >= 3 && !approved &&
-      <Button className='button-style' disabled={disabled} onClick={handleApprove} color='primary'>{translation.approveActivity}</Button>}
-      {checkPermissions(role) >= 3 && approved &&
-      <Button className='button-style' disabled={disabled} onClick={handleUnapprove} color='default'>{translation.unApproveActivity}</Button>}
-      <Button className='button-style' disabled={disabled} onClick={() => setApprovalOpen(true)} color='default'>{translation.deleteActivity}</Button>
-      <ApprovalBox text={translation.areYouSure} open={approvalOpen} setOpen={setApprovalOpen} action={handleDelete} />
+    <Box className='flex align__center justify__center'>
+      {isAdmin && !approved &&
+        <Button className='button-style' disabled={disabled} onClick={handleApprove} color='primary'>{translation.approveActivity}</Button>}
+      {isAdmin && approved &&
+        <Button className='button-style' disabled={disabled} onClick={handleUnapprove} color='default'>{translation.unApproveActivity}</Button>}
+      <Button className='button-style' disabled={disabled} onClick={handleApprovalOpen} color='default'>{translation.deleteActivity}</Button>
+      <ApprovalDialog
+        open={approvalOpen}
+        onClose={handleApprovalOpen}
+        action={handleDelete}
+        text={translation.areYouSure}
+      />
     </Box>
   )
 }

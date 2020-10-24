@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   padding: 0 16px;
+  margin-bottom: ${props => props.spaceBottom ? '96px' : ''};
 `
 
-const PageSection = ({ children }) => {
+const PageSection = ({ children, spaceBottom }) => {
   return (
-    <Section>
+    <Section spaceBottom={spaceBottom}>
       {children}
     </Section>
   )

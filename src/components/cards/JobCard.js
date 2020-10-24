@@ -20,7 +20,7 @@ const JobCard = ({ job, loading }) => {
           subheader={`${job?.company}, ${job?.location}`}
           action={<SaveJobButton loading={loading} job={job} />}
         />
-        <CardActions>
+        <CardActions className='pt-0'>
           <Chip variant='outlined' size='small' label={timeAgo()} color='primary' />
         </CardActions>
       </Link>

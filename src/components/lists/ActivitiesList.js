@@ -19,7 +19,7 @@ const ActivitiesList = ({ type = 'personal' }) => {
   }, [filters, dispatch, type])
 
   if (loading) {
-    return <CardsSkeletons count={1} />
+    return <CardsSkeletons className='p-0' count={1} />
   } else if (!loading && activities.length === 0) {
     return <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>
   } else {

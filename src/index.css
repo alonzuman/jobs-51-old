@@ -407,6 +407,10 @@ a:hover {
   margin-right: 8px!important;
 }
 
+.ml-25 {
+  margin-left: 4px!important;
+}
+
 .ml-5 {
   margin-left: 8px!important;
 }
@@ -508,6 +512,11 @@ a:hover {
   text-overflow: clip!important;
 }
 
+.extra_small__icon {
+  height: .75rem!important;
+  width: .75rem!important;
+}
+
 .small__icon {
   height: 1rem!important;
   width: 1rem!important
@@ -529,6 +538,18 @@ a:hover {
   width: 264px!important;
 }
 
+.mnw-196 {
+  min-width: 196px!important;
+}
+
+.mxw-196 {
+  max-width: 196px!important;
+}
+
+.mxw-224 {
+  max-width: 224px!important;
+}
+
 .mxw-256 {
   max-width: 256px!important;
 }
@@ -539,6 +560,10 @@ a:hover {
 
 .mxw-512 {
   max-width: 512px!important;
+}
+
+.mnw-80 {
+  min-width: 80px!important;
 }
 
 .mw-224 {

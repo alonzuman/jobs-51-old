@@ -7,7 +7,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { saveJob, unsaveJob } from '../../actions';
 
-const SaveJobButton = ({ job }) => {
+const SaveJobButton = ({ className, job }) => {
   const dispatch = useDispatch()
   const { uid, savedJobs } = useSelector(state => state.auth)
   const isSaved = savedJobs?.includes(job?.id)
@@ -24,7 +24,7 @@ const SaveJobButton = ({ job }) => {
     return null
   } else {
     return (
-      <IconButton size='small' onClick={handleFavorite}>
+      <IconButton className={className} size='small' onClick={handleFavorite}>
         {isSaved ? <FavoriteIcon className='red' /> : <FavoriteBorderIcon />}
       </IconButton>
     )

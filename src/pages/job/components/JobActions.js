@@ -22,7 +22,7 @@ const ActionsContainer = styled.div`
 
   @media (min-width: 768px) {
     position: relative;
-    padding: 16px;
+    padding: 0 16px 16px 16px;
     background-color: transparent;
   }
 `

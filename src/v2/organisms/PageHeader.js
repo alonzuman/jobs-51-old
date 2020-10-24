@@ -40,7 +40,7 @@ const ActionsWrapper = styled.div`
   width: 100%;
 `
 
-const PageHeader = ({ subtitleType, editing = false, editingTitle, imgUrl, title, setTitle, titleLabel, action, subtitle, setSubtitle, subtitleLabel, secondary, backButton, spaceBottom, spaceTop, className }) => {
+const PageHeader = ({ imgUrl, title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
   const [isImageOpen, setIsImageOpen] = useState(false)
   const handleOpenImage = () => setIsImageOpen(!isImageOpen)
 
@@ -52,7 +52,7 @@ const PageHeader = ({ subtitleType, editing = false, editingTitle, imgUrl, title
         imgUrl={imgUrl}
       />
       <ActionsWrapper>
-        {backButton && <BackButton />}
+        {backButton && <BackButton className='mb-1' />}
         {action && action}
       </ActionsWrapper>
       <ItemsWrapper>

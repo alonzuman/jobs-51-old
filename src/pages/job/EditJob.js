@@ -94,18 +94,15 @@ const EditJob = ({ match }) => {
     <Container>
       <JobPageHeader
         editing
-        editingTitle={translation.editingJob}
         handleEditing={handleEditing}
         editing loading={isLoading}
         job={job}
         title={jobTitle}
         setTitle={setJobTitle}
-        titleLabel={translation.jobTitle}
         company={company}
         setCompany={setCompany}
         subtitle={location}
         setSubtitle={setLocation}
-        subtitleLabel={translation.location}
         avatar={avatar}
         setAvatar={setAvatar}
         />

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 
-const LocationSelect = ({ location, setLocation, label, ...rest }) => {
+const LocationSelect = ({ location, setLocation, label, helperText = '', ...rest }) => {
   const { translation } = useSelector(state => state.theme)
   const options = useSelector(state => state.constants?.locations?.all)
 
@@ -24,7 +24,7 @@ const LocationSelect = ({ location, setLocation, label, ...rest }) => {
       onChange={(e, value) => setLocation(value)}
       noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
       getOptionLabel={option => option}
-      renderInput={params => <TextField {...params} label={label || translation.location} variant="outlined" />}
+      renderInput={params => <TextField helperText={helperText} {...params} label={label || translation.location} variant="outlined" />}
       renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
       placeholder={translation.preferredLocationPlaceholder}
       label={translation.preferredLocation}

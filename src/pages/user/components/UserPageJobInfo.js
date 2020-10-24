@@ -7,9 +7,11 @@ import WorkIcon from '@material-ui/icons/Work';
 import InfoContainer from './InfoContainer'
 import GradeIcon from '@material-ui/icons/Grade';
 import PageSection from '../../../v2/atoms/PageSection'
+import useWindowSize from '../../../hooks/useWindowSize'
 
 const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition, skills, setSkills }) => {
   const { translation } = useSelector(state => state.theme)
+  const { windowWidth } = useWindowSize()
 
 
   if (loading) {
@@ -20,7 +22,7 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
     )
   } else if (editing) {
     return (
-      <PageSection>
+      <PageSection spaceBottom={windowWidth < 768}>
         <Divider />
         <br />
         <Typography variant='h2'>{translation.workExperience}</Typography>

@@ -38,8 +38,7 @@ const Job = ({ match }) => {
         loading={isLoading}
         job={job}
         title={job?.jobTitle}
-        company={job?.company}
-        subtitle={job?.location}
+        subtitle={`${job?.company}, ${job?.location}`}
       />
       {/* <JobPageBadges loading={isLoading} job={job} /> */}
       <JobPageDetails loading={isLoading} job={job} />

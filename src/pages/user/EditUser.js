@@ -38,6 +38,8 @@ const User = ({ match }) => {
   const [hometown, setHometown] = useState('')
   const [lastPosition, setLastPosition] = useState('')
   const [skills, setSkills] = useState([])
+  const [serviceYear, setServiceYear] = useState('')
+  const [region, setRegion] = useState('')
 
   const handleSubmit = async () => {
     const updatedUser = {
@@ -51,7 +53,9 @@ const User = ({ match }) => {
       phone,
       lastPosition,
       skills,
-      hometown
+      hometown,
+      serviceYear,
+      region
     }
     await dispatch(updateUser(updatedUser))
     await history.goBack()
@@ -73,6 +77,8 @@ const User = ({ match }) => {
     setHometown(user?.hometown || '')
     setLastPosition(user?.lastPosition || '')
     setSkills(user?.skills || [])
+    setServiceYear(user?.serviceYear || '')
+    setRegion(user?.region || '')
   }, [user])
 
   useEffect(() => {
@@ -105,6 +111,8 @@ const User = ({ match }) => {
         setLastName={setLastName}
         stateAvatar={avatar}
         setAvatar={setAvatar}
+        stateServiceYear={serviceYear}
+        setServiceYear={setServiceYear}
         handleSubmit={handleSubmit}
       />
       <UserPageBadges
@@ -114,6 +122,8 @@ const User = ({ match }) => {
         setIsVolunteer={setIsVolunteer}
         handleApproveUser={handleApproveUser}
         handleIsDeclining={handleIsDeclining}
+        stateRegion={region}
+        setRegion={setRegion}
         loading={loading}
         user={user}
         editing

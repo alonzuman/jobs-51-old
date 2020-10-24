@@ -8,18 +8,35 @@ import { checkPermissions } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection'
+import LocationSelect from '../../../components/forms/profile/LocationSelect'
 
 const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
 `
 
-const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDeclining, isLookingForJob, setIsLookingForJob, isVolunteer, setIsVolunteer }) => {
+const UserPageBadges = ({
+  loading,
+  editing,
+  user,
+  handleApproveUser,
+  handleIsDeclining,
+  isLookingForJob,
+  setIsLookingForJob,
+  isVolunteer,
+  setIsVolunteer,
+  stateRegion,
+  setRegion,
+}) => {
+  const { role } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { volunteer, lookingForJob, activities } = user
   const isPending = checkPermissions(user?.role) === 0;
   const hasApprovedActivities = activities?.approved !== 0;
   const hasPostedJobs = user?.jobs?.length !== 0;
+  const { regions } = useSelector(state => state.constants?.locations)
+
+  const isAdmin = checkPermissions(role) >= 3
 
   if (loading) {
     return (
@@ -37,13 +54,13 @@ const UserPageBadges = ({ loading, editing, user, handleApproveUser, handleIsDec
             label={translation.lookingForJob}
           />
         </FormGroup>
-        <FormGroup row>
+        <FormGroup row className='mb-5'>
           <FormControlLabel
             control={<Checkbox color='primary' name='lookingForJob' onChange={e => setIsVolunteer(!isVolunteer)} checked={isVolunteer} />}
             label={translation.volunteer}
           />
         </FormGroup>
-        <br />
+        {isVolunteer && <LocationSelect helperText={isAdmin ? translation.onlyAdminCanChange : ''} disabled={!isAdmin} label={translation.activityRegion} size='small' location={stateRegion} setLocation={setRegion} className='mxw-224 mb-1' options={regions} />}
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {

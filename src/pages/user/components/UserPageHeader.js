@@ -9,6 +9,7 @@ import styled from 'styled-components'
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import LocationSelect from '../../../components/forms/profile/LocationSelect';
 
 
 const Container = styled.div`
@@ -25,7 +26,7 @@ const Container = styled.div`
 `
 
 const ActionsWrapper = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,12 +35,12 @@ const ActionsWrapper = styled.div`
 
 const ItemsWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  align-items: center;
 `
 
-const TextContainer = styled.div`
+const FlexFields = styled.div`
   display: flex;
 `
 
@@ -49,6 +50,8 @@ const UserPageHeader = ({
   stateLastName,
   stateAvatar,
   setAvatar,
+  stateServiceYear,
+  setServiceYear,
   setLastName,
   setFirstName,
   loading,
@@ -79,10 +82,11 @@ const UserPageHeader = ({
           <IconButton size='small' onClick={handleEditing}>{<CloseIcon />}</IconButton>
         </ActionsWrapper>
         <ItemsWrapper>
-          <TextContainer>
-            <TextField size='small' className='ml-5' label={translation.editFirstName} variant='outlined' value={stateFirstName} onChange={e => setFirstName(e.target.value)} />
-            <TextField size='small' label={translation.editLastName} variant='outlined' value={stateLastName} onChange={e => setLastName(e.target.value)} />
-          </TextContainer>
+          <FlexFields>
+            <TextField className='mxw-196 ml-5' size='small' label={translation.editFirstName} variant='outlined' value={stateFirstName} onChange={e => setFirstName(e.target.value)} />
+            <TextField className='mxw-196' size='small' label={translation.editLastName} variant='outlined' value={stateLastName} onChange={e => setLastName(e.target.value)} />
+          </FlexFields>
+          <TextField className='mxw-256' size='small' label={translation.serviceYear} variant='outlined' value={stateServiceYear} onChange={e => setServiceYear(e.target.value)} />
         </ItemsWrapper>
       </Container>
     )
@@ -95,7 +99,7 @@ const UserPageHeader = ({
         title={`${firstName} ${lastName}`}
         subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}
         secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
-        action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
+        action={canEdit && <IconButton className='mb-1' size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
       />
     )
   }

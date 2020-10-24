@@ -2,11 +2,11 @@ import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import { Card, CardContent, CardHeader, Grid } from '@material-ui/core'
 
-const CardsSkeletons = ({ count }) => {
+const CardsSkeletons = ({ count, className = 'p-1' }) => {
   const arr = [...Array(count || 3)]
 
   return (
-    <Grid className='p-1' spacing={2} container >
+    <Grid className={className} spacing={2} container >
       {arr.map((x, i) => <Grid key={i} item xs={12} md={6} lg={6}><CardSkeleton /></Grid>)}
     </Grid>
   )
