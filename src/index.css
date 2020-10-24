@@ -351,6 +351,10 @@ a:hover {
   padding-top: 0px!important;
 }
 
+.pt-25 {
+  padding-top: 4px!important;
+}
+
 .pt-5 {
   padding-top: 8px!important;
 }
@@ -363,8 +367,12 @@ a:hover {
   padding: 16px!important;
 }
 
+.pb-25 {
+  padding-bottom: 4px!important
+}
+
 .pb-5 {
-  padding-bottom: 4px!important;
+  padding-bottom: 8px!important;
 }
 
 .pb-1 {
@@ -522,6 +530,11 @@ a:hover {
   width: 1rem!important
 }
 
+.medium__icon {
+  height: 1.3rem!important;
+  width: 1.3rem!important;
+}
+
 .swiper-container {
   padding: 8px 16px!important;
 }
@@ -584,4 +597,9 @@ a:hover {
 
 .text__wrap {
   white-space: pre-wrap!important;
+}
+
+.MuiAvatarGroup-avatar {
+  border-radius: 50%!important;
+  border-width: 1px!important;
 }

@@ -60,7 +60,7 @@ const UserPageBadges = ({
             label={translation.volunteer}
           />
         </FormGroup>
-        {isVolunteer && <LocationSelect helperText={isAdmin ? translation.onlyAdminCanChange : ''} disabled={!isAdmin} label={translation.activityRegion} size='small' location={stateRegion} setLocation={setRegion} className='mxw-224 mb-1' options={regions} />}
+        {isVolunteer && <LocationSelect helperText={(isAdmin || stateRegion === '') ? translation.onlyAdminCanChange : ''} disabled={!isAdmin} label={translation.activityRegion} size='small' location={stateRegion} setLocation={setRegion} className='mxw-224 mb-1' options={regions} />}
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {

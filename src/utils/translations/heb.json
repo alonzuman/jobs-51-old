@@ -79,6 +79,7 @@
   "startTime": "תאריך התחלה",
   "endTime": "תאריך סיום",
   "hoursNoGood": "אנא בחרו תאריך סיום נכון",
+  "hours": "שעות",
   "latestActivities": "פעילות אחרונה",
   "pending": "ממתין לאישור",
   "approved": "מאושר",
@@ -226,7 +227,11 @@
   "editFirstName": "עריכת שם פרטי",
   "editLastName": "עריכת שם משפחה",
   "activityRegion": "מחוז התנדבות",
-  "onlyAdminCanChange": "אנא צרו קשר עם מנהל מטעם העמותה אם ברצונכם לשנות שדה זה"
+  "onlyAdminCanChange": "אנא צרו קשר עם מנהל מטעם העמותה אם ברצונכם לשנות שדה זה",
+  "totalActivitiesInRegion": "סיכום שעות פעילות במחוז",
+  "managersOfRegion": "מנהלי מחוז",
+  "recentActivitiesInRegion": "פעילויות התנדבות אחרונות שביצעתי במחוז",
+  "general": "כללי"
 }
 
 

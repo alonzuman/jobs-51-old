@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import JobCard from '../components/cards/JobCard'
 import PageHeader from '../v2/organisms/PageHeader'
@@ -14,10 +14,8 @@ const SavedJobs = () => {
     return null;
   } else if (!loading && saved?.length !== 0) {
     return (
-      <Container className='p-1'>
-        <PageSection>
-          <PageHeader spaceTop title={translation.savedJobs} spaceBottom />
-        </PageSection>
+      <Container>
+        <PageHeader spaceTop title={translation.savedJobs} spaceBottom />
         <Grid container spacing={2}>
           {saved?.map((job, index) => <Grid item xs={12} md={6} lg={6}><JobCard key={index} job={job} /></Grid>)}
         </Grid>

@@ -3,6 +3,7 @@ const initialState = {
   types: [],
   filters: {},
   view: 'grid',
+  regionManagers: [],
   loading: false
 }
 
@@ -29,7 +30,7 @@ export const activitiesReducer = (state = initialState, action) => {
     case 'SET_ACTIVITIES':
       return {
         ...state,
-        activities: [...payload.activities],
+        ...payload,
         loading: false
       }
     case 'SET_ACTIVITY_TYPES':

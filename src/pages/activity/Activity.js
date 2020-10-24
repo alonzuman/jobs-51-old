@@ -1,26 +1,32 @@
-import React, { useState } from 'react'
-import { Typography } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { Avatar, Divider, Typography } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import ActivitiesList from '../../components/lists/ActivitiesList'
 import FloatingActionButton from '../../components/layout/FloatingActionButton'
-import StatsList from '../../components/lists/StatsList'
 import PageHeader from '../../v2/organisms/PageHeader'
 import Container from '../../v2/atoms/Container'
 import AddActivityDialog from '../../v2/layout/AddActivityDialog'
 import PageSection from '../../v2/atoms/PageSection'
+import ActivityPageRegionAdmins from './components/ActivityPageRegionAdmins'
+import ActivityPageStats from './components/ActivityPageStats'
+import { getUserActivities } from '../../actions'
+import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 
 const Activity = () => {
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { pending, approved } = useSelector(state => state.auth).activities
-
-  const statsListItems = [
-    { label: translation.approved, big: approved.toFixed(1), marker: "#4caf50" },
-    { label: translation.pending, big: pending.toFixed(1), marker: "#e15757" },
-  ];
-
+  const { region, uid } = useSelector(state => state.auth)
+  const { pending, approved } = useSelector(state => state.auth.activities)
+  const { activities, regionManagers, loading } = useSelector(state => state.activities)
   const handleAddActivity = () => setAddingActivity(true)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (region) {
+      dispatch(getUserActivities({ uid, region }))
+    }
+  }, [dispatch])
 
   return (
     <Container>
@@ -28,13 +34,10 @@ const Activity = () => {
         <AddIcon />
       </FloatingActionButton>
       <AddActivityDialog open={addingActivity} onClose={() => setAddingActivity(false)} />
-      <PageSection>
-        <PageHeader spaceTop title={translation.activity} />
-        <Typography variant='h3'>{translation.totalActivities}</Typography>
-        <StatsList items={statsListItems} />
-        <Typography variant='h3'>{translation.latestActivities}</Typography>
-        <ActivitiesList type='personal' />
-      </PageSection>
+      <PageHeader loading={loading} spaceTop title={translation.activity} />
+      <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
+      <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />
+      <ActivityPageActivitiesList loading={loading} activities={activities} region={region} />
     </Container>
   )
 }

@@ -20,7 +20,7 @@ const CardSkeleton = () => {
         title={<Skeleton width={64} height={24} />}
         subheader={<Skeleton width={104} height={18} />}
       />
-      <CardContent className='pt-0 pb-5'>
+      <CardContent className='pt-0 pb-25'>
         <Skeleton width={'12rem'} variant='text' />
         <Skeleton width={'8rem'} variant='text' />
       </CardContent>

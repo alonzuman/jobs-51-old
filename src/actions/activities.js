@@ -51,18 +51,29 @@ export const addActivity = (activity) => async dispatch => {
   }
 }
 
-export const getMyActivities = () => async dispatch => {
-  const { uid } = store.getState().auth
+export const getUserActivities = ({ uid, region }) => async dispatch => {
+  const { regionManagers } = store.getState().constants
+
   dispatch({
     type: 'ACTIVITY_LOADING'
   })
+
   try {
-    const snapshot = await activitiesRef.where('uid', '==', uid).orderBy('date', 'desc').get()
-    let activities = []
-    snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
+    const snapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    let results = []
+    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+
+    // Get region admins
+    const managersSnapshot = await usersRef.where('uid', 'in', regionManagers[region]).get()
+    let managerResults = []
+    managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
+
     dispatch({
       type: 'SET_ACTIVITIES',
-      payload: { activities }
+      payload: {
+        activities: results,
+        regionManagers: managerResults
+      }
     })
   } catch (error) {
     console.log(error)

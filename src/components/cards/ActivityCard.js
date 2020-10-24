@@ -50,7 +50,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
   return (
     <>
       <Card variant='outlined' onClick={() => setOpen(!open)}>
-        <CardContent className='pb-5'>
+        <CardContent className='pb-25'>
           <CardBody>
             <DatesContainer borderColor={theme?.palette?.border?.main}>
               <Typography variant="subtitle1">{month}</Typography>
@@ -66,7 +66,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
               />
               <ListItemText
                 primary={description}
-                secondary={<span className='flex align__center'><AccessTimeIcon className='extra_small__icon ml-25 mb-25'  />{activity.total}, {activity.type}</span>}
+                secondary={<span className='flex align__center'><AccessTimeIcon className='extra_small__icon ml-25 mb-25'  />{activity.total} {translation.hours}, {activity.type}</span>}
               />
             </InfoContainer>
             {showUser && (
