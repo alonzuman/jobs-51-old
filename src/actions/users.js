@@ -39,22 +39,27 @@ export const getUser = (uid) => async dispatch => {
   }
 }
 
-export const getUsers = () => async dispatch => {
+
+
+export const getUsers = query => async dispatch => {
   dispatch({
     type: 'USERS_LOADING'
   })
-  const { filters } = store.getState().users
   try {
-    let snapshot
-    if (filters.search && filters.status) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).where('role', '==', filters.status).orderBy('dateCreated', 'desc').get()
-    } else if (filters.status) {
-      snapshot = await usersRef.where('role', '==', filters.status).orderBy('dateCreated', 'desc').get()
-    } else if (filters.search) {
-      snapshot = await usersRef.where('firstName', '==', capitalizeFirstLetter(filters.search)).orderBy('dateCreated', 'desc').get()
-    } else {
-      snapshot = await usersRef.orderBy('dateCreated', 'desc').get()
+    const { firstName, lastName } = query
+
+    let queryRef = usersRef
+
+    if (firstName) {
+      queryRef = queryRef.where('firstName', '==', firstName)
     }
+
+    if (lastName) {
+      queryRef = queryRef.where('lastName', '==', lastName)
+    }
+
+    const snapshot = await queryRef.orderBy('dateCreated', 'desc').limit(10).get()
+
     let users = []
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
     dispatch({

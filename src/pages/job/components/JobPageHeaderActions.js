@@ -22,7 +22,7 @@ const JobPageHeaderActions = ({ editing, job, handleEditing }) => {
         <IconButton className='mb-1' size='small' onClick={handleEditing}>
           {editing ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        <SaveJobButton className='mb-1' job={job} />
+        <SaveJobButton className='mb-1 ml-1' job={job} />
       </ActionsContainer>
     )
   } else {

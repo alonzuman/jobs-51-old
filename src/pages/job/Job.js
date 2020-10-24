@@ -42,7 +42,7 @@ const Job = ({ match }) => {
       />
       {/* <JobPageBadges loading={isLoading} job={job} /> */}
       <JobPageDetails loading={isLoading} job={job} />
-      <JobActions editing={false} job={job} loading={isLoading} />
+      {/* <JobActions editing={false} job={job} loading={isLoading} /> */}
       <JobPageUserDetails loading={isLoading} job={job} />
       <JobPageJobsCarousel loading={isLoading} jobs={job?.similarJobs?.filter(v => v.id !== jid)} />
     </Container>

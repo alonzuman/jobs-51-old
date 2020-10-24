@@ -64,3 +64,7 @@ export const translateDate = (date) => {
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export const onlyUnique = (value, index, self) => {
+  return self.indexOf(value) === index;
+}

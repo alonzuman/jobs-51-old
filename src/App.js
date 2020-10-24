@@ -29,6 +29,7 @@ import { setTheme } from './actions'
 import EditJob from './pages/job/EditJob'
 import Activity from './pages/activity/Activity'
 import Saved from './pages/saved/Saved'
+import Users from './pages/admin/pages/users/Users'
 
 
 function App() {
@@ -71,7 +72,8 @@ function App() {
 
             {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
-            <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
+            {/* <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={ManageUsers} /> */}
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
 

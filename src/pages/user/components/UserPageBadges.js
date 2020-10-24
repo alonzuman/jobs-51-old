@@ -91,7 +91,7 @@ const UserPageBadges = ({
           <InfoContainer>
             <AssignmentIcon className='small__icon ml-5' />
             <Typography variant='body1'>
-              {translation.posted} {user?.jobs?.length} {translation.jobOffer}
+              {user?.jobs?.length} {translation.jobsPostedBy}  {user?.firstName}
             </Typography>
           </InfoContainer>}
         {isPending &&
