@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
-import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
+import { setGlobalFilters, getFilters } from '../../actions'
 import ChipsSkeleton from '../skeletons/ChipsSkeleton'
 import CustomChip from '../cards/CustomChip'
 
@@ -33,7 +33,6 @@ const MultiSelectionFilter = ({ type }) => {
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(setGlobalFilters({ [type]: filters }))
-    dispatch(closeDialogs())
   }
 
   return (

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 // Components
-import Dialogs from './components/layout/Dialogs'
 import Navbar from './components/layout/Navbar/Navbar'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
@@ -30,6 +29,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
 import EditJob from './pages/job/EditJob'
 import Activity from './pages/activity/Activity'
+import Saved from './pages/saved/Saved'
 
 
 function App() {
@@ -45,7 +45,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <RtlProvider>
         <Router>
-          <Dialogs />
           <Feedback />
           {authenticated && <Navbar />}
           <Switch>
@@ -58,7 +57,7 @@ function App() {
             <ProtectedRoute exact path='/jobs/:jid/edit' component={EditJob} />
 
             {/* Saved */}
-            <ProtectedRoute exact path='/saved' component={SavedJobs} />
+            <ProtectedRoute exact path='/saved' component={Saved} />
 
             {/* Activity */}
             <ProtectedRoute exact path='/activity' component={Activity} />

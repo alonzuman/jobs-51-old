@@ -6,9 +6,9 @@ const Section = styled.div`
   margin-bottom: ${props => props.spaceBottom ? '96px' : ''};
 `
 
-const PageSection = ({ children, spaceBottom }) => {
+const PageSection = ({ children, spaceBottom, ...rest }) => {
   return (
-    <Section spaceBottom={spaceBottom}>
+    <Section spaceBottom={spaceBottom} {...rest}>
       {children}
     </Section>
   )

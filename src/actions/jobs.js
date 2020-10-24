@@ -1,6 +1,5 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import { closeDialogs } from './dialogs'
 import store from '../store'
 import firebase from 'firebase'
 const jobsRef = db.collection('jobs')
@@ -88,7 +87,6 @@ export const editJob = (job, id) => async dispatch => {
   })
   try {
     await jobsRef.doc(id).set({ ...job })
-    dispatch(closeDialogs())
     dispatch(getJobs())
     dispatch(setFeedback({
       msg: 'Success',
@@ -124,7 +122,6 @@ export const deleteJob = (job) => async dispatch => {
       type: 'JOB_DELETED',
       payload: { id }
     })
-    dispatch(closeDialogs())
     dispatch(setFeedback({
       msg: 'Success',
       type: 'success'
@@ -135,37 +132,6 @@ export const deleteJob = (job) => async dispatch => {
       msg: 'ServerError',
       type: 'error'
     }))
-  }
-}
-
-export const getSavedJobs = ({ savedJobs }) => async dispatch => {
-  dispatch({
-    type: 'SAVED_JOBS_LOADING'
-  })
-  if (savedJobs.length > 0) {
-    try {
-      const snapshot = await jobsRef.where('id', 'in', savedJobs).get()
-      let jobs = []
-      snapshot.forEach(doc => jobs.push(doc.data()))
-      dispatch({
-        type: 'SET_SAVED_JOBS',
-        payload: { jobs }
-      })
-    } catch (error) {
-      console.log(error)
-      dispatch({
-        type: 'JOB_FAIL'
-      })
-      dispatch(setFeedback({
-        type: 'error',
-        msg: 'ServerError'
-      }))
-    }
-  } else {
-    dispatch({
-      type: 'SET_SAVED_JOBS',
-      payload: { jobs: [] }
-    })
   }
 }
 

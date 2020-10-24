@@ -2,7 +2,6 @@ import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
-import { closeDialogs } from './dialogs'
 const usersRef = db.collection('users')
 const activitiesRef = db.collection('activities')
 
@@ -24,7 +23,6 @@ export const addActivity = (activity) => async dispatch => {
     const increment = firebase.firestore.FieldValue.increment(total);
     const userRef = await usersRef.doc(uid)
     await userRef.update('activities.pending', increment)
-    dispatch(closeDialogs())
     dispatch({
       type: 'ADD_ACTIVITY',
       payload: { newActivity }

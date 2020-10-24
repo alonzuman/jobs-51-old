@@ -46,17 +46,7 @@ const FlexFields = styled.div`
 
 const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompany, title, setTitle, subtitle, setSubtitle, avatar, setAvatar, ...rest }) => {
   const { translation } = useSelector(state => state.theme)
-
-  if (loading) {
-    return (
-      <PageHeader
-        className='p-1 mt-3'
-        title={<Skeleton width={104} />}
-        subtitle={<Skeleton width={48} />}
-        secondary={<Skeleton variant='circle' height={56} width={56} />}
-      />
-    )
-  } else if (editing) {
+  if (editing) {
     return (
       <Container spaceBottom={true}>
         <ActionsWrapper>
@@ -78,6 +68,7 @@ const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompa
     return (
       <PageHeader
         backButton
+        loading={loading}
         className='p-1'
         subtitleType='location'
         title={title}

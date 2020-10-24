@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, Divider, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
-import ActivitiesList from '../../components/lists/ActivitiesList'
 import FloatingActionButton from '../../components/layout/FloatingActionButton'
-import PageHeader from '../../v2/organisms/PageHeader'
-import Container from '../../v2/atoms/Container'
 import AddActivityDialog from '../../v2/layout/AddActivityDialog'
-import PageSection from '../../v2/atoms/PageSection'
 import ActivityPageRegionAdmins from './components/ActivityPageRegionAdmins'
 import ActivityPageStats from './components/ActivityPageStats'
 import { getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
+import Container from '../../v2/atoms/Container'
+import ActivityPageHeader from './components/ActivityPageHeader'
 
 const Activity = () => {
   const [addingActivity, setAddingActivity] = useState(false)
@@ -28,13 +25,15 @@ const Activity = () => {
     }
   }, [dispatch])
 
+  const handleAddingActivity = () => setAddingActivity(!addingActivity)
+
   return (
     <Container>
       <FloatingActionButton color='primary' action={handleAddActivity} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>
-      <AddActivityDialog open={addingActivity} onClose={() => setAddingActivity(false)} />
-      <PageHeader loading={loading} spaceTop title={translation.activity} />
+      <AddActivityDialog open={addingActivity} onClose={handleAddingActivity} />
+      <ActivityPageHeader loading={loading} />
       <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
       <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />
       <ActivityPageActivitiesList loading={loading} activities={activities} region={region} />

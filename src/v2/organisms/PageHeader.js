@@ -1,7 +1,7 @@
-import { TextField, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+import { Skeleton } from '@material-ui/lab'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import LocationSelect from '../../components/forms/profile/LocationSelect'
 import ImageLightbox from '../../components/general/ImageLightbox'
 import BackButton from '../../v2/atoms/BackButton'
 
@@ -40,32 +40,40 @@ const ActionsWrapper = styled.div`
   width: 100%;
 `
 
-const PageHeader = ({ imgUrl, title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
+const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className }) => {
   const [isImageOpen, setIsImageOpen] = useState(false)
   const handleOpenImage = () => setIsImageOpen(!isImageOpen)
 
-  return (
-    <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
-      <ImageLightbox
-        open={isImageOpen}
-        onClose={handleOpenImage}
-        imgUrl={imgUrl}
-      />
-      <ActionsWrapper>
-        {backButton && <BackButton className='mb-1' />}
-        {action && action}
-      </ActionsWrapper>
-      <ItemsWrapper>
-        <TextContainer>
-          <Typography className='p-0' variant='h1'>{title}</Typography>
-          <Typography variant='subtitle1'>{subtitle}</Typography>
-        </TextContainer>
-        <SecondaryContainer onClick={imgUrl && handleOpenImage}>
-          {secondary}
-        </SecondaryContainer>
-      </ItemsWrapper>
-    </Container>
-  )
+  if (loading) {
+    return (
+      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+        <Skeleton width={128} height={32} />
+      </Container>
+    )
+  } else {
+    return (
+      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+        <ImageLightbox
+          open={isImageOpen}
+          onClose={handleOpenImage}
+          imgUrl={imgUrl}
+        />
+        <ActionsWrapper>
+          {backButton && <BackButton className='mb-1' />}
+          {action && action}
+        </ActionsWrapper>
+        <ItemsWrapper>
+          <TextContainer>
+            <Typography className='p-0' variant='h1'>{title}</Typography>
+            <Typography variant='subtitle1'>{subtitle}</Typography>
+          </TextContainer>
+          <SecondaryContainer onClick={imgUrl && handleOpenImage}>
+            {secondary}
+          </SecondaryContainer>
+        </ItemsWrapper>
+      </Container>
+    )
+  }
 }
 
 export default PageHeader

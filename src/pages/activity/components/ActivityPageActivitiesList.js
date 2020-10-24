@@ -4,27 +4,27 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import ActivitiesList from '../../../components/lists/ActivitiesList'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
-import Container from '../../../v2/atoms/Container'
+import PageSection from '../../../v2/atoms/PageSection'
 
 const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
     return (
-      <Container className='pr-0'>
+      <PageSection>
         <Skeleton height={24} width={96} />
         <Skeleton className='mb-1' height={16} width={124} />
         <CardsSkeletons className='p-0' count={1} />
-      </Container>
+      </PageSection>
     )
   } else {
     return (
-      <Container>
+      <PageSection>
         <Divider className='mb-1' />
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Typography className='mb-1' variant='subtitle1'>{translation.recentActivitiesInRegion} {region}</Typography>
         <ActivitiesList activities={activities} loading={loading} />
-      </Container>
+      </PageSection>
     )
   }
 }

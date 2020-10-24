@@ -1,6 +1,5 @@
 import { app, db } from '../firebase'
 import firebase from 'firebase'
-import { closeDialogs } from './dialogs'
 import { setFeedback } from './feedback'
 import store from '../store'
 const usersRef = db.collection('users')
@@ -53,10 +52,6 @@ export const checkIfUserLegit = ({ email, phone, firstName, lastName }) => async
 }
 
 export const signInWithProvider = (provider) => async dispatch => {
-  const { token } = store.getState().auth
-  const { tokens } = store.getState().constants
-  const region = tokens?.all[token]
-
   dispatch({
     type: 'AUTH_LOADING'
   })
@@ -102,7 +97,6 @@ export const signInWithProvider = (provider) => async dispatch => {
           region: checkLegitRes?.resion || ''
         }
         await usersRef.doc(uid).set(newUser, { merge: true })
-        dispatch(closeDialogs())
         dispatch({
           type: 'SIGNED_UP',
           payload: { ...newUser }
@@ -112,7 +106,6 @@ export const signInWithProvider = (provider) => async dispatch => {
           msg: 'Welcome'
         }))
       } else if (user || user?.id) {
-        dispatch(closeDialogs())
         dispatch({
           type: 'SIGNED_UP',
           payload: { ...user }
@@ -160,7 +153,6 @@ export const signIn = ({ email, password }) => async dispatch => {
       email,
       ...userInfo
     }
-    dispatch(closeDialogs())
     dispatch({
       type: 'SIGNED_IN',
       payload: { ...user }
@@ -207,7 +199,6 @@ export const signUp = (user) => async dispatch => {
       dateCreated: new Date()
     }
     await usersRef.doc(uid).set(newUser, { merge: true })
-    dispatch(closeDialogs())
     dispatch({
       type: 'SIGNED_UP',
       payload: { ...newUser }
@@ -228,7 +219,6 @@ export const signUp = (user) => async dispatch => {
 export const signOut = () => async dispatch => {
   try {
     app.auth().signOut()
-    dispatch(closeDialogs())
     dispatch({
       type: 'SIGN_OUT'
     })
@@ -265,7 +255,6 @@ export const addPersonalDetails = (user, personalDetails, uid) => async dispatch
       type: 'success',
       msg: 'Success'
     }))
-    dispatch(closeDialogs())
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({

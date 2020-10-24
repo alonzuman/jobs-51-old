@@ -1,13 +1,13 @@
 import React from 'react'
-import Container from '../../../v2/atoms/Container'
+import PageSection from '../../../v2/atoms/PageSection'
 import styled from 'styled-components'
-import { AvatarGroup, Skeleton } from '@material-ui/lab'
+import { Skeleton } from '@material-ui/lab'
+import { Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 // Icons
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import { Typography } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 
 const StatsList = styled.ul`
   padding: 0;
@@ -25,16 +25,16 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
 
   if (loading) {
     return (
-      <Container className='pt-0'>
+      <PageSection>
         <Skeleton className='mt-1' variant='text' height={32} width={64} />
         <Skeleton variant='text' className='mb-1' width={124} height={16} />
         <Skeleton variant='text' className='mb-1' width={80} height={24} />
         <Skeleton variant='text' className='mb-1' width={96} height={24} />
-      </Container>
+      </PageSection>
     )
   } else if (region) {
     return (
-      <Container className='pt-0'>
+      <PageSection>
         <Typography variant='h2'>{translation.general}</Typography>
         {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
         <StatsList>
@@ -47,7 +47,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
             <Typography variant='body1'>{translation.pending} {pending.toFixed(1)}</Typography>
           </StatItem>
         </StatsList>
-      </Container>
+      </PageSection>
     )
   } else {
     return null;

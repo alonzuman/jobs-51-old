@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { setGlobalFilters, closeDialogs, getFilters } from '../../actions'
+import { setGlobalFilters, getFilters } from '../../actions'
 import ChipsSkeleton from '../skeletons/ChipsSkeleton'
 import { dateFilters } from '../../utils'
 import CustomChip from '../cards/CustomChip'
@@ -29,7 +29,6 @@ const SingleSelectionFilter = ({ type }) => {
 
   const handleSubmit = () => {
     dispatch(setGlobalFilters({ [type]: filter}))
-    dispatch(closeDialogs())
   }
 
   return (
