@@ -17,7 +17,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 
-const PopperMenu = ({ value, anchorEl, handleMenuClose }) => {
+const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
   const { translation, theme } = useSelector(state => state.theme)
   const { volunteer, role } = useSelector(state => state.auth)
 
@@ -31,19 +31,19 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose }) => {
           </Typography>
         </MenuItem>
       </NavLink>
-      <NavLink to='/saved'>
+      <NavLink to={`/${uid}/saved`}>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.saved}
-            <FavoriteIcon style={{ color: value === '/saved' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+            <FavoriteIcon style={{ color: value === `/${uid}/saved` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>
-      {volunteer && <NavLink to='/activity'>
+      {volunteer && <NavLink to={`/${uid}/activity`}>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.activity}
-            <AssessmentIcon style={{ color: value === '/activity' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+            <AssessmentIcon style={{ color: value === `/${uid}/activity` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>}

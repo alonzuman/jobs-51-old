@@ -8,7 +8,7 @@ const SavedPageHeader = ({ loading }) => {
 
   return (
     <PageSection>
-      <PageHeader title={translation.savedJobs} loading={loading} />
+      <PageHeader title={translation.savedJobs} loading={loading} spaceTop spaceBottom />
     </PageSection>
   )
 }

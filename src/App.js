@@ -11,7 +11,6 @@ import RtlProvider from './contexts/RtlContext'
 import Job from './pages/job/Job'
 import Jobs from './pages/jobs/Jobs'
 import Employees from './pages/Employees'
-import SavedJobs from './pages/SavedJobs'
 import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
 import ManageUsers from './pages/admin/ManageUsers'
@@ -57,10 +56,10 @@ function App() {
             <ProtectedRoute exact path='/jobs/:jid/edit' component={EditJob} />
 
             {/* Saved */}
-            <ProtectedRoute exact path='/saved' component={Saved} />
+            <ProtectedRoute exact path='/:uid/saved' component={Saved} />
 
             {/* Activity */}
-            <ProtectedRoute exact path='/activity' component={Activity} />
+            <ProtectedRoute exact path='/:uid/activity' component={Activity} />
 
             {/* Profile */}
             <ProtectedRoute exact path='/profile' component={Profile} />

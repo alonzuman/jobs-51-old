@@ -1,5 +1,6 @@
 const initialState = {
   jobs: [],
+  currentUid: '',
   loading: false
 }
 

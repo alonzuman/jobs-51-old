@@ -1,6 +1,7 @@
 import { db } from "../firebase"
 import { setFeedback } from "./feedback"
 import firebase from 'firebase'
+import store from "../store"
 const savedRef = db.collection('saved')
 const userRef = db.collection('users')
 
@@ -11,13 +12,15 @@ export const getSavedJobs = uid => async dispatch => {
 
   try {
     const snapshot = await savedRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
-    let results = []
-    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    let jobs = []
+    snapshot.forEach(doc => jobs.push({ id: doc.id, ...doc.data() }))
 
-    console.log(results)
     dispatch({
       type: 'SET_SAVED',
-      payload: results
+      payload: {
+        jobs,
+        currentUid: uid
+      }
     })
   } catch (error) {
     console.log(error)
@@ -28,19 +31,42 @@ export const getSavedJobs = uid => async dispatch => {
   }
 }
 
-export const saveJob = (uid, jid) => async dispatch => {
+export const saveJob = (uid, jid, job) => async dispatch => {
+  const { savedJobs } = store.getState().auth
+
   try {
+    console.log(job)
+
     await userRef.doc(uid).update({
       savedJobs: firebase.firestore.FieldValue.arrayUnion(jid)
     })
-    await savedRef.add({
+
+    await savedRef.doc(`${uid}_${jid}`).set({
       uid,
-      jid,
-      dateCreated: Date.now()
+      id: jid,
+      dateCreated: Date.now(),
+      jobTitle: job?.jobTitle,
+      location: job?.location,
+      company: job?.company,
+      avatar: job?.avatar
     })
-    // TODO add savedid from user
-    // TODO add job to list
-    console.log('added', jid, 'to', uid)
+
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        savedJobs: [...savedJobs, jid]
+      }
+    })
+
+    dispatch({
+      type: 'ADD_SAVED',
+      payload: job
+    })
+
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'jobSavedSuccessfully'
+    }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
@@ -51,15 +77,29 @@ export const saveJob = (uid, jid) => async dispatch => {
 }
 
 export const unsaveJob = (uid, jid) => async dispatch => {
+  const { savedJobs } = store.getState().auth
+  const { jobs } = store.getState().saved
+
   try {
     await userRef.doc(uid).update({
       savedJobs: firebase.firestore.FieldValue.arrayRemove(jid)
     })
 
-    await savedRef.doc(jid).delete()
-    // TODO remove job from list
-    // TODO remove id from userlist
-    console.log('removed', jid, 'to', uid)
+    await savedRef.doc(`${uid}_${jid}`).delete()
+
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        savedJobs: savedJobs.filter(v => v !== jid)
+      }
+    })
+
+    dispatch({
+      type: 'SET_SAVED',
+      payload: {
+        jobs: [...jobs.filter(v => v.id !== jid)]
+      }
+    })
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({

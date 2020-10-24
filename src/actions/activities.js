@@ -49,7 +49,7 @@ export const addActivity = (activity) => async dispatch => {
   }
 }
 
-export const getUserActivities = ({ uid, region }) => async dispatch => {
+export const getUserActivities = ({ uid }) => async dispatch => {
   const { regionManagers } = store.getState().constants
 
   dispatch({
@@ -57,9 +57,17 @@ export const getUserActivities = ({ uid, region }) => async dispatch => {
   })
 
   try {
-    const snapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const userSnap = await usersRef.doc(uid).get()
+    const user = {
+      uid: userSnap.id,
+      ...userSnap.data()
+    }
+    const { region } = user;
+
+
+    const activitiesSnapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
-    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 
     // Get region admins
     const managersSnapshot = await usersRef.where('uid', 'in', regionManagers[region]).get()
@@ -70,7 +78,8 @@ export const getUserActivities = ({ uid, region }) => async dispatch => {
       type: 'SET_ACTIVITIES',
       payload: {
         activities: results,
-        regionManagers: managerResults
+        regionManagers: managerResults,
+        currentUid: uid
       }
     })
   } catch (error) {

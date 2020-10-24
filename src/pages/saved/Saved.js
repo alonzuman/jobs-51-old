@@ -5,13 +5,15 @@ import Container from '../../v2/atoms/Container'
 import JobsList from '../../v2/molecules/JobsList'
 import SavedPageHeader from './components/SavedPageHeader'
 
-const Saved = () => {
-  const { uid } = useSelector(state => state.auth)
-  const { loading, jobs } = useSelector(state => state.saved)
+const Saved = ({ match }) => {
+  const { uid } = match.params
+  const { loading, jobs, currentUid } = useSelector(state => state.saved)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getSavedJobs(uid))
+    if (uid !== currentUid) {
+      dispatch(getSavedJobs(uid))
+    }
   }, [])
 
   return (

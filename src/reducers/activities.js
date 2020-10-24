@@ -3,6 +3,8 @@ const initialState = {
   types: [],
   filters: {},
   view: 'grid',
+  currentUid: '',
+  regions: [],
   regionManagers: [],
   loading: false
 }

@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `
 
 const DesktopNavbar = ({ value }) => {
-  const { avatar } = useSelector(state => state.auth)
+  const { avatar, uid } = useSelector(state => state.auth)
   const [anchorEl, setAnchorEl] = useState(null)
   const [hover, setHover] = useState(false)
   const { theme } = useSelector(state => state.theme)
@@ -40,7 +40,7 @@ const DesktopNavbar = ({ value }) => {
           <MenuIcon className='mr-25' />
           <Avatar className='avatar__xs' src={avatar ? avatar : ''} />
         </Button>
-        <PopperMenu handleMenuClose={handleMenuClose} value={value} anchorEl={anchorEl} />
+        <PopperMenu uid={uid} handleMenuClose={handleMenuClose} value={value} anchorEl={anchorEl} />
       </Wrapper>
     </Container>
   )
