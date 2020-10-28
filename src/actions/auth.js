@@ -93,6 +93,12 @@ export const signInWithProvider = (provider) => async dispatch => {
       //   lastName: displayName?.split(' ')[1]
       // }))
 
+      const checkLegitRes = {
+        email: '',
+        firstName: '',
+        lastName: ''
+      }
+
       const fetchedUser = await Users.doc(uid).get()
       const user = fetchedUser.data()
 
