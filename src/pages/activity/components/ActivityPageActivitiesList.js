@@ -17,13 +17,19 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
         <CardsSkeletons className='p-0' count={1} />
       </PageSection>
     )
-  } else {
+  } else if (activities?.length !== 0) {
     return (
       <PageSection>
         <Divider className='mb-1' />
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Typography className='mb-1' variant='subtitle1'>{translation.recentActivitiesInRegion} {region}</Typography>
         <ActivitiesList activities={activities} loading={loading} />
+      </PageSection>
+    )
+  } else {
+    return (
+      <PageSection>
+        <Typography className='mt-1' variant='body1'>{translation.activitiesEmptyState}</Typography>
       </PageSection>
     )
   }

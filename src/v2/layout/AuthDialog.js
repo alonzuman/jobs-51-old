@@ -1,4 +1,4 @@
-import { Dialog, DialogContent } from '@material-ui/core'
+import { Dialog } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getConstants } from '../../actions/constants';
@@ -16,9 +16,7 @@ const AuthDialog = ({ open, onClose }) => {
   return (
     <Dialog dir='rtl' open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
-      <DialogContent>
-        <SocialMediaSignIn />
-      </DialogContent>
+      <SocialMediaSignIn />
     </Dialog>
   )
 }

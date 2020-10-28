@@ -35,8 +35,6 @@ export const saveJob = (uid, jid, job) => async dispatch => {
   const { savedJobs } = store.getState().auth
 
   try {
-    console.log(job)
-
     await userRef.doc(uid).update({
       savedJobs: firebase.firestore.FieldValue.arrayUnion(jid)
     })

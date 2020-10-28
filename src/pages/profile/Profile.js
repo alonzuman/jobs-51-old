@@ -49,15 +49,9 @@ const Profile = () => {
         />
         <MenuList>
           <Typography variant='subtitle1'>{translation.justProfile}</Typography>
-          {/* <Link to='/profile/login-and-security'>
-            <MenuItem className='flex justify__between full__width' button>
-              <Typography variant='body1'>{translation.loginAndSecurity}</Typography>
-              <LockIcon className='ml-1' />
-            </MenuItem>
-          </Link> */}
           <Link to={`/users/${uid}/edit`}>
             <MenuItem className='flex justify__between full__width' button>
-              <Typography variant='body1'>{translation.personalInfo}</Typography>
+              <Typography variant='body1'>{translation.editPersonalInfo}</Typography>
               <AssignmentIndIcon className='ml-1' />
             </MenuItem>
           </Link>

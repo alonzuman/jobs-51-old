@@ -1,9 +1,9 @@
-import { app, db } from '../firebase'
-import firebase from 'firebase'
-import { setFeedback } from './feedback'
-import store from '../store'
-const usersRef = db.collection('users')
-const listedMembersRef = db.collection('constants').doc('listedMembers')
+import { app, db } from '../firebase';
+import firebase from 'firebase';
+import { setFeedback } from './feedback';
+import store from '../store';
+const Users = db.collection('users');
+const Members = db.collection('constants').doc('members').collection('all');
 
 export const setUser = (user) => async dispatch => {
   const { uid } = user
@@ -11,7 +11,7 @@ export const setUser = (user) => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    const snapshot = await usersRef.doc(uid).get()
+    const snapshot = await Users.doc(uid).get()
     dispatch({
       type: 'SET_USER',
       payload: { uid, ...snapshot.data() }
@@ -28,22 +28,38 @@ export const setUser = (user) => async dispatch => {
   }
 }
 
-export const checkIfUserLegit = ({ email, phone, firstName, lastName }) => async dispatch => {
+export const checkIfUserLegit = ({ email, firstName, lastName }) => async dispatch => {
   dispatch({
     type: 'AUTH_LOADING'
   })
 
-  // TODO add to query firstName, lastName and phone for validation
   try {
-    const snapshot = await db.collection('constants').doc('members').collection('all').where('email', '==', email).get()
-    let results = []
-    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
-    if (results?.length !== 0) {
-      return {
-        ...results[0]
-      }
+    const hasName = firstName && lastName
+    const hasEmail = email;
+    if (!hasName && !hasEmail) return false;
+
+    const emailQuery = Members.where('email', '==', email);
+    const nameQuery = Members.where('firstName', '==', firstName).where('lastName', '==', lastName);
+
+    let results = [];
+
+    const emailQuerySnapshot = await emailQuery.get();
+    if (emailQuerySnapshot.size === 0) {
+      const nameQuerySnapshot = await nameQuery.get();
+      nameQuerySnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
     } else {
-      return false
+      emailQuerySnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    }
+
+    const verifiedUser = results[0];
+    console.log(verifiedUser)
+
+    if (!verifiedUser) return false;
+    if (verifiedUser) {
+      return {
+        ...verifiedUser,
+        isApproved: true
+      }
     }
   } catch (error) {
     console.log(error)
@@ -73,19 +89,20 @@ export const signInWithProvider = (provider) => async dispatch => {
 
       const checkLegitRes = await dispatch(checkIfUserLegit({
         email,
-        phone: phoneNumber,
         firstName: displayName?.split(' ')[0],
-        lastName: displayName?.split(' ')[1],
+        lastName: displayName?.split(' ')[1]
       }))
 
-      const fetchedUser = await usersRef.doc(uid).get()
+      const fetchedUser = await Users.doc(uid).get()
       const user = fetchedUser.data()
+
       if ((!user?.uid || !user) && checkLegitRes) {
         const newUser = {
           uid,
           email,
-          firstName: displayName?.split(' ')[0] || '',
-          lastName: displayName?.split(' ')[1] || '',
+          firstName: displayName?.split(' ')[0] || checkLegitRes?.firstName || '',
+          lastName: displayName?.split(' ')[1] || checkLegitRes?.lastName || '',
+          serviceYear: checkLegitRes?.serviceYear || '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
           volunteer: checkLegitRes?.volunteer || false,
@@ -96,10 +113,11 @@ export const signInWithProvider = (provider) => async dispatch => {
           },
           role: user?.role ? user?.role : 'user',
           dateCreated: Date.now(),
-          region: checkLegitRes?.resion || ''
+          region: checkLegitRes?.region || ''
         }
 
-        await usersRef.doc(uid).set(newUser, { merge: true })
+        console.log(newUser)
+        await Users.doc(uid).set(newUser, { merge: true })
 
         dispatch({
           type: 'SIGNED_UP',
@@ -151,7 +169,7 @@ export const signIn = ({ email, password }) => async dispatch => {
   try {
     const res = await app.auth().signInWithEmailAndPassword(email, password)
     const { uid } = res.user
-    const snapshot = await usersRef.doc(uid).get()
+    const snapshot = await Users.doc(uid).get()
     const { userInfo } = snapshot.data()
     const user = {
       uid,
@@ -203,7 +221,7 @@ export const signUp = (user) => async dispatch => {
       region,
       dateCreated: new Date()
     }
-    await usersRef.doc(uid).set(newUser, { merge: true })
+    await Users.doc(uid).set(newUser, { merge: true })
     dispatch({
       type: 'SIGNED_UP',
       payload: { ...newUser }
@@ -245,7 +263,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
     type: 'AUTH_LOADING'
   })
   try {
-    await usersRef.doc(uid).set({ region }, { merge: true })
+    await Users.doc(uid).set({ region }, { merge: true })
     dispatch({
       type: 'SET_USER',
       payload: { region }

@@ -27,7 +27,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
       <NavLink to='/home'>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
-            {translation.main}
+            {translation.findJobs}
             <SearchIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
@@ -35,7 +35,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
       <NavLink to={`/${uid}/saved`}>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
-            {translation.saved}
+            {translation.savedJobs}
             <FavoriteIcon style={{ color: value === `/${uid}/saved` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>

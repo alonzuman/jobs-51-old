@@ -40,11 +40,11 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
         <StatsList>
           <StatItem>
             <CheckCircleOutlineIcon className='medium__icon ml-5' />
-            <Typography variant='body1'>{translation.approved} {approved.toFixed(1)} {translation.hours}</Typography>
+            <Typography variant='body1'>{approved.toFixed(1)} {translation.volHours} {translation.areApproved}</Typography>
           </StatItem>
           <StatItem>
             <HighlightOffIcon className='medium__icon ml-5' />
-            <Typography variant='body1'>{translation.pending} {pending.toFixed(1)} {translation.hours}</Typography>
+            <Typography variant='body1'>{pending.toFixed(1)} {translation.volHours} {translation.pendingApprovalFe}</Typography>
           </StatItem>
         </StatsList>
       </PageSection>

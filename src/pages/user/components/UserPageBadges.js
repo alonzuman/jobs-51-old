@@ -35,8 +35,17 @@ const UserPageBadges = ({
   const hasApprovedActivities = activities?.approved !== 0;
   const hasPostedJobs = user?.jobs?.length !== 0;
   const { regions } = useSelector(state => state.constants?.locations)
-
   const isAdmin = checkPermissions(role) >= 3
+
+  const locationHelperText = () => {
+    if (isAdmin) {
+      return ''
+    } else if (!isAdmin && stateRegion === '') {
+      return translation.afterSetOnlyAdminCanChange
+    } else if (!isAdmin && stateRegion !== '') {
+      return translation.onlyAdminCanChange
+    }
+  }
 
   if (loading) {
     return (
@@ -57,10 +66,20 @@ const UserPageBadges = ({
         <FormGroup row className='mb-5'>
           <FormControlLabel
             control={<Checkbox color='primary' name='lookingForJob' onChange={e => setIsVolunteer(!isVolunteer)} checked={isVolunteer} />}
-            label={translation.volunteer}
+            label={translation.volunteerInUnitsProgram}
           />
         </FormGroup>
-        {isVolunteer && <LocationSelect helperText={(isAdmin || stateRegion === '') ? translation.onlyAdminCanChange : ''} disabled={!isAdmin} label={translation.activityRegion} size='small' location={stateRegion} setLocation={setRegion} className='mxw-224 mb-1' options={regions} />}
+        {isVolunteer &&
+          <LocationSelect
+            helperText={locationHelperText()}
+            disabled={!isAdmin && stateRegion}
+            label={translation.activityRegion}
+            size='small'
+            location={stateRegion}
+            setLocation={setRegion}
+            className='mxw-224 mb-1'
+            options={regions}
+          />}
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {
@@ -95,10 +114,10 @@ const UserPageBadges = ({
             </Typography>
           </InfoContainer>}
         {isPending &&
-        <ActionsContainer>
-          <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
-          <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
-        </ActionsContainer>}
+          <ActionsContainer>
+            <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
+            <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
+          </ActionsContainer>}
       </PageSection>
     )
   } else {

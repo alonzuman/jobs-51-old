@@ -63,16 +63,19 @@ export const getUserActivities = ({ uid }) => async dispatch => {
       ...userSnap.data()
     }
     const { region } = user;
-
+    console.log(uid)
 
     const activitiesSnapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
     activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 
     // Get region admins
-    const managersSnapshot = await usersRef.where('uid', 'in', regionManagers[region]).get()
+    let managersSnapshot;
     let managerResults = []
-    managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
+    if (region) {
+      managersSnapshot = await usersRef.where('uid', 'in', regionManagers[region]).get()
+      managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
+    }
 
     dispatch({
       type: 'SET_ACTIVITIES',

@@ -1,36 +1,20 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import store from '../store'
 import firebase from 'firebase'
-const jobsRef = db.collection('jobs')
-
-export const getFilters = (type) => async dispatch => {
-  try {
-    const filtersRef = await db.collection(type).get()
-    let filters = {}
-    filtersRef.forEach(doc => filters[doc.id] = doc.data().count)
-    return filters
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'Server error'
-    }))
-  }
-}
+const Jobs = db.collection('jobs')
 
 export const addJob = (job) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    const ref = jobsRef.doc()
+    const ref = Jobs.doc()
     const newJob = {
       ...job,
       id: ref.id,
       dateCreated: Date.now()
     }
-    await jobsRef.doc(ref.id).set(newJob)
+    await Jobs.doc(ref.id).set(newJob)
 
     await db.collection('constants').doc('listedLocations').update({
       [job.location]: firebase.firestore.FieldValue.increment(1)
@@ -64,7 +48,7 @@ export const updateJob = (newJob) => async dispatch => {
     type: 'JOB_UPDATING'
   })
   try {
-    await jobsRef.doc(newJob?.id).update({
+    await Jobs.doc(newJob?.id).update({
       ...newJob
     })
     dispatch({
@@ -86,7 +70,7 @@ export const editJob = (job, id) => async dispatch => {
     type: 'JOB_LOADING'
   })
   try {
-    await jobsRef.doc(id).set({ ...job })
+    await Jobs.doc(id).set({ ...job })
     dispatch(getJobs())
     dispatch(setFeedback({
       msg: 'Success',
@@ -117,7 +101,7 @@ export const deleteJob = (job) => async dispatch => {
       }, { merge: true })
     })
 
-    await jobsRef.doc(id).delete()
+    await Jobs.doc(id).delete()
     dispatch({
       type: 'JOB_DELETED',
       payload: { id }
@@ -135,19 +119,6 @@ export const deleteJob = (job) => async dispatch => {
   }
 }
 
-export const clearGlobalFilters = () => async dispatch => {
-  dispatch({
-    type: 'CLEAR_FILTERS'
-  })
-}
-
-export const setGlobalFilters = (filters) => async dispatch => {
-  dispatch({
-    type: 'SET_FILTERS',
-    payload: { filters }
-  })
-}
-
 export const getJobs = query => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
@@ -156,7 +127,7 @@ export const getJobs = query => async dispatch => {
     const { skills, location, industry } = query
     const skillsExists = skills?.length > 0
 
-    let queryRef = jobsRef;
+    let queryRef = Jobs;
 
     if (skillsExists) {
       queryRef = queryRef.where('skills', 'array-contains-any', skills)
@@ -171,29 +142,6 @@ export const getJobs = query => async dispatch => {
     }
 
     const snapshot = await queryRef.get()
-
-    // const skillsQuery = ['skills', 'array-contains-any', skills]
-    // const locationQuery = ['location', '==', location]
-    // const industryQuery = ['industry', '==', industry]
-    // const dateQuery = ['dateCreated', '>=', filters.dates]
-    // let snapshot;
-    // if (skillsExists && location && industry) {
-    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).where(...industryQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (skillsExists && industry && !location) {
-    //   snapshot = await jobsRef.where(...skillsQuery).where(...industryQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (skillsExists && location && !industry) {
-    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (skillsExists && location) {
-    //   snapshot = await jobsRef.where(...skillsQuery).where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (location) {
-    //   snapshot = await jobsRef.where(...locationQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (skillsExists) {
-    //   snapshot = await jobsRef.where(...skillsQuery).orderBy('dateCreated', 'desc').get()
-    // } else if (industry) {
-    //   snapshot = await jobsRef.where(...industryQuery).orderBy('dateCreated', 'desc').get()
-    // } else {
-    //   snapshot = await jobsRef.orderBy('dateCreated', 'desc').limit(10).get()
-    // }
 
     let jobs = []
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
@@ -213,62 +161,12 @@ export const getJobs = query => async dispatch => {
   }
 }
 
-export const getJobTypes = () => async dispatch => {
-  dispatch({
-    type: 'JOB_FILTERS_LOADING'
-  })
-  try {
-    const snapshot = await db.collection('jobTypes').get()
-    let jobTypes = []
-    snapshot.forEach(jobType => jobTypes.push(jobType.id))
-    dispatch({
-      type: 'SET_JOB_TYPES',
-      payload: {
-        jobTypes
-      }
-    })
-  } catch (error) {
-    dispatch({
-      type: 'JOB_ERROR'
-    })
-    dispatch(setFeedback({
-      msg: 'ServerError',
-      type: 'error'
-    }))
-  }
-}
-
-export const getJobLocations = () => async dispatch => {
-  dispatch({
-    type: 'JOB_FILTERS_LOADING'
-  })
-  try {
-    const snapshot = await db.collection('jobLocations').get()
-    let jobLocations = []
-    snapshot.forEach(jobLocation => jobLocations.push(jobLocation.id))
-    dispatch({
-      type: 'SET_JOB_LOCATIONS',
-      payload: {
-        jobLocations
-      }
-    })
-  } catch (error) {
-    dispatch({
-      type: 'JOB_ERROR'
-    })
-    dispatch(setFeedback({
-      msg: 'ServerError',
-      type: 'error'
-    }))
-  }
-}
-
 export const getJob = (id) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    const jobSnapshot = await jobsRef.doc(id).get()
+    const jobSnapshot = await Jobs.doc(id).get()
     let job = {
       id: jobSnapshot.id,
       ...jobSnapshot.data()

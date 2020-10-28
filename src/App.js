@@ -30,7 +30,6 @@ import Activity from './pages/activity/Activity'
 import Saved from './pages/saved/Saved'
 import Users from './pages/admin/pages/users/Users'
 
-
 function App() {
   const { authenticated } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)

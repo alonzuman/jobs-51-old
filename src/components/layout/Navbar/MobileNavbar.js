@@ -34,8 +34,8 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
-      <BottomNavigationAction label={translation.main} component={Link} to='/home' value='/home' icon={<SearchIcon />} style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
-      <BottomNavigationAction label={translation.saved} component={Link} to={`/${uid}/saved`} value={`/${uid}/saved`} icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
+      <BottomNavigationAction label={translation.findJobs} component={Link} to='/home' value='/home' icon={<SearchIcon />} style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+      <BottomNavigationAction label={translation.savedJobs} component={Link} to={`/${uid}/saved`} value={`/${uid}/saved`} icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
       {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to={`/${uid}/activity`} value={`/${uid}/activity`} icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
       <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
       {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}

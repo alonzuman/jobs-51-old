@@ -38,6 +38,8 @@
   "landingPageText2": "יצרנו עבורכם פלטפורמה מסודרת לפרסום משרות אותן תרצו לאייש בבוגרינו ויהיו מפורסמות באופן תדיר. כמו כן, מקום לפרסם את קו׳׳ח שלכם ותחומי העיסוק בהם אתם מחפשים עבודה. אנו נעמיד צוות שמטרתו לעשות את החיבורים בין מחפש המשרה למעסיק- נלווה ,נייעץ ונשתמש בכלים העומדים לרשותנו כדי למקסם את הרשת החברתית של העמותה לטובת תכנית זו.",
   "platformForMembersOnly": "הפלטפורמה תהיה מורשית לחברי עמותה בלבד.",
   "editProfile": "עריכת פרופיל",
+  "editPersonalInfo": "עריכת פרטים אישיים",
+  "volunteerInUnitsProgram": "אני מתנדב/ת בתכנית המלגאים של העמותה",
   "update": "עדכון",
   "userUpdatedSuccessfully": "פרופיל עודכן בהצלחה!",
   "updatePhoto": "עדכון תמונה",
@@ -143,7 +145,6 @@
   "actionSuccedded": "הפעולה בוצעה בהצלחה",
   "lookingForJob": "הצג אותי בתור מחפש עבודה",
   "jobs": "לוח עבודות",
-  "saved": "שמור",
   "profile": "הפרופיל שלי",
   "justProfile": "פרופיל",
   "startHour": "שעת התחלה",
@@ -153,6 +154,7 @@
   "skillsInterestedIn": "תחומי עיסוק",
   "contactDetails": "פרטי יצירת קשר",
   "IVolunteerIn": "אני מתנדב/ת במחוז",
+  "findJobs": "חיפוש עבודות",
   "main": "ראשי",
   "lookingForAnActivity": "אירועי עמותה",
   "events": "אירועים",
@@ -232,11 +234,15 @@
   "editLastName": "עריכת שם משפחה",
   "activityRegion": "מחוז התנדבות",
   "onlyAdminCanChange": "אנא צרו קשר עם מנהל מטעם העמותה אם ברצונכם לשנות שדה זה",
+  "afterSetOnlyAdminCanChange": "לאחר בחירת מחוז, רק מנהל יוכל לשנות את בחירתכם",
   "totalActivitiesInRegion": "סיכום שעות פעילות במחוז",
   "managersOfRegion": "מנהלי מחוז",
   "recentActivitiesInRegion": "פעילויות התנדבות אחרונות שביצעתי במחוז",
   "general": "כללי",
-  "jobSavedSuccessfully": "הפרסום נשמר בהצלחה!"
+  "jobSavedSuccessfully": "הפרסום נשמר בהצלחה!",
+  "volHours": "שעות התנדבות",
+  "areApproved": "מאושרות",
+  "pendingApprovalFe": "ממתינות לאישור"
 }
 
 
