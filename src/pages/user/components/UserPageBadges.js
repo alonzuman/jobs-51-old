@@ -76,7 +76,7 @@ const UserPageBadges = ({
         {checkPermissions(role) >= 3 &&
           <>
             <Typography variant='subtitle1'>{translation.role}</Typography>
-            <FormControl size='small' className='mb-1'>
+            <FormControl size='small' className='mb-1 mxw-196'>
               <Select variant='outlined' value={stateRole} onChange={e => setRole(e.target.value)}>
                 {roles?.map((v, i) => {
                   if (checkPermissions(role) < 4 && v !== 'admin') {
