@@ -58,7 +58,6 @@ export const getUsers = query => async dispatch => {
       queryRef = queryRef.where('volunteer', '==', true).where('region', '==', region)
     }
 
-    console.log(firstName, lastName, region)
     const snapshot = await queryRef.orderBy('dateCreated', 'desc').limit(10).get()
 
     let users = []

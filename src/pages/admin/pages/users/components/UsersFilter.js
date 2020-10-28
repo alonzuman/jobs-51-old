@@ -31,7 +31,7 @@ const BarContainer = styled.div`
   }
 `
 
-const UsersFilter = () => {
+const UsersFilter = ({ view, setView }) => {
   const { theme, translation } = useSelector(state => state.theme)
   const [isOpen, setIsOpen] = useState(false)
   const history = useHistory()
@@ -83,10 +83,18 @@ const UsersFilter = () => {
     setSelectedRegion('')
   }
 
+  const handleView = () => {
+    setView(view === 'list' ? 'table' : 'list')
+  }
+
   return (
     <Container background={theme?.palette?.background?.main}>
       <BarContainer>
-        <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
+        <div className='flex align__center'>
+          <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
+          {/* TODO ALON fix this to table */}
+          {/* {width > 768 && <Button className='mr-5' variant='outlined' onClick={handleView}>{translation.changeView}</Button>} */}
+        </div>
         <ChipsGrid chips={filters} />
       </BarContainer>
       <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../../../../v2/atoms/Container'
 import PageHeader from '../../../../v2/organisms/PageHeader'
 import UsersFilter from './components/UsersFilter'
@@ -10,6 +10,7 @@ import UsersList from '../../../../components/lists/UsersList'
 import PageSection from '../../../../v2/atoms/PageSection'
 
 const Users = () => {
+  const [view, setView] = useState('list')
   const { loading, users } = useSelector(state => state.users)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
@@ -27,10 +28,10 @@ const Users = () => {
         <PageHeader title={translation.usersPageTitle} backButton spaceBottom />
       </PageSection>
       <PageSection>
-        <UsersFilter />
+        <UsersFilter view={view} setView={setView} />
       </PageSection>
       <PageSection>
-        <UsersList loading={loading} users={users} />
+        {view === 'list' && <UsersList loading={loading} users={users} />}
       </PageSection>
     </Container>
   )
