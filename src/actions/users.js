@@ -1,7 +1,5 @@
 import store from "../store"
-import firebase from 'firebase'
 import { db } from "../firebase"
-import { capitalizeFirstLetter } from "../utils"
 import { setFeedback } from "./feedback"
 const usersRef = db.collection('users')
 
@@ -38,8 +36,6 @@ export const getUser = (uid) => async dispatch => {
     }))
   }
 }
-
-
 
 export const getUsers = query => async dispatch => {
   dispatch({
@@ -190,6 +186,7 @@ export const unapproveUser = uid => async dispatch => {
 }
 
 export const updateUser = ({ newUser }) => async dispatch => {
+  const { uid } = store.getState().auth
   dispatch({
     type: 'USERS_UPDATING'
   })
@@ -197,12 +194,23 @@ export const updateUser = ({ newUser }) => async dispatch => {
     await usersRef.doc(newUser.uid).set({
       ...newUser
     }, { merge: true })
+
+    if (uid === newUser.uid) {
+      dispatch({
+        type: 'UPDATED_PROFILE',
+        payload: {
+          ...newUser
+        }
+      })
+    }
+
     dispatch({
       type: 'SET_USER_PAGE',
       payload: {
         ...newUser
       }
     })
+
     dispatch(setFeedback({
       type: 'success',
       msg: 'userUpdatedSuccessfully'

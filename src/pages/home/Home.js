@@ -7,6 +7,7 @@ import HomePageJobsCarousel from './components/HomePageJobsCarousel'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
+import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
 
 const HomeSection = styled.div`
 
@@ -30,6 +31,7 @@ const Home = () => {
   return (
     <Container>
       <AddJobDialog open={isAddingJob} onClose={handleAddingJob} />
+      <AreYouVolunteerDialog />
       <HomeSection className='p-1'>
         <LogoContainer>
           <ShaldagLogo />

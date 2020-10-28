@@ -136,6 +136,10 @@
     "moderator": "מנהל מחוז",
     "admin": "מנהל בכיר"
   },
+  "areYouVolunteer": "האם את/ה מלגאי עמותה?",
+  "justAFewQuestion": "רק מספר שאלות!",
+  "yes": "כן",
+  "no": "לא",
   "joined": "שנת גיוס ליחידה",
   "search": "חיפוש",
   "saveChanges": "שמירת שינויים",

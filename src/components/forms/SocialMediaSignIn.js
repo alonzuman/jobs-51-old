@@ -17,16 +17,20 @@ const SocialMediaSignIn = () => {
   }
 
 
-  return (
-    <DialogContent className='mb-1 mt-1'>
-      {loading && <CircularProgress />}
-      {!loading &&
-        <div>
-          <Button variant='outlined' className='mb-5 button-style full-width' color='default' onClick={handleFacebookSignIn}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
-          <Button variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
-        </div>}
-    </DialogContent>
-  )
+  if (loading) {
+    return (
+      <DialogContent className='mb-1 mt-1 flex align__center justify__center mnh-144'>
+        <CircularProgress />
+      </DialogContent>
+    )
+  } else {
+    return (
+      <DialogContent className='mb-1 mt-1'>
+        <Button variant='outlined' className='mb-5 button-style full-width' color='default' onClick={handleFacebookSignIn}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
+        <Button variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
+      </DialogContent>
+    )
+  }
 }
 
 export default SocialMediaSignIn

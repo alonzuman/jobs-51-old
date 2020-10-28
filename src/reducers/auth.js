@@ -12,6 +12,7 @@ const initialState = {
     pending: 0,
     approved: 0,
   },
+  messagesSeen: [],
   loading: false
 }
 

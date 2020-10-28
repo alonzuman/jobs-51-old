@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getConstants } from '../../actions/constants';
 import SocialMediaSignIn from '../../components/forms/SocialMediaSignIn'
 import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../atoms/Transition';
 
 const AuthDialog = ({ open, onClose }) => {
   const { translation } = useSelector(state => state.theme)
+  const { windowWidth: width } = useWindowSize()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -14,7 +17,7 @@ const AuthDialog = ({ open, onClose }) => {
   }, [])
 
   return (
-    <Dialog dir='rtl' open={open} onClose={onClose}>
+    <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
       <SocialMediaSignIn />
     </Dialog>
