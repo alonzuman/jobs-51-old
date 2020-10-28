@@ -9,7 +9,7 @@ import { getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 import Container from '../../v2/atoms/Container'
 import ActivityPageHeader from './components/ActivityPageHeader'
-import EditRegionDialog from '../../v2/layout/AddRegionDialog'
+import AddRegionDialog from '../../v2/layout/AddRegionDialog'
 import { auth } from '../../firebase'
 
 const Activity = ({ match }) => {
@@ -40,7 +40,7 @@ const Activity = ({ match }) => {
 
   return (
     <Container>
-      <EditRegionDialog isOpen={editingProfile} onClose={handleEditingProfile} />
+      <AddRegionDialog isOpen={editingProfile} onClose={handleEditingProfile} />
       <FloatingActionButton color='primary' action={handleAddActivity} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>

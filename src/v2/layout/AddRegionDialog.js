@@ -9,7 +9,7 @@ import DialogActionsContainer from '../atoms/DialogActionsContainer'
 
 const AddRegionDialog = ({ isOpen, onClose }) => {
   const { translation } = useSelector(state => state.theme);
-  const { loading } = useSelector(state => state.users);
+  const { isUpdating } = useSelector(state => state.users);
   const { uid } = useSelector(state => state.auth);
   const { regions } = useSelector(state => state.constants?.locations);
   const [error, setError] = useState('')
@@ -48,7 +48,7 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
       </DialogContent>
       <DialogActionsContainer>
         <Button disabled={!region} onClick={handleSubmit} className='full__width' color='primary' variant='contained'>
-          {loading ? <CircularProgress className='button-spinner' /> : translation.approve}
+          {isUpdating ? <CircularProgress className='button-spinner' /> : translation.approve}
         </Button>
       </DialogActionsContainer>
     </Dialog>
