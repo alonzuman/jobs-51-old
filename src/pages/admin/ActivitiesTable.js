@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer, Typography } from '@material-ui/core'
-import { getActivities } from '../../actions'
+import { getActivitiesOld } from '../../actions'
 
 const ActivitiesTable = () => {
   const { translation } = useSelector(state => state.theme)
@@ -37,7 +37,7 @@ const ActivitiesTable = () => {
     }
   }
 
-  useEffect(() => { dispatch(getActivities()) }, [filters, dispatch])
+  useEffect(() => { dispatch(getActivitiesOld()) }, [filters, dispatch])
   useEffect(() => { mapData() }, [activities])
 
   return (

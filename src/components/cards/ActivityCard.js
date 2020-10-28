@@ -4,7 +4,6 @@ import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ActivityCardActions from './ActivityCardActions';
-import CustomChip from './CustomChip';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
@@ -31,13 +30,20 @@ const CardBody = styled.div`
   cursor: pointer;
 `
 
+const CardTextContainer = styled.span`
+  display: flex;
+  flex-direction: row;
+`
+
 const ActivityCard = ({ activity, showUser = true }) => {
   const [open, setOpen] = useState(false)
   const { approved, description } = activity
   const [isApproved, setIsApproved] = useState(!!approved)
   const { translation, theme } = useSelector(state => state.theme)
-  const { role } = useSelector(state => state.auth)
+  const { role, uid } = useSelector(state => state.auth)
   const [day, month, number] = translateDate(activity.date)
+  const isAdmin = checkPermissions(role) >= 3;
+  const isUser = uid === activity?.uid;
 
   const chipStyle = {
     color: isApproved ? '#00965f' : '',
@@ -66,12 +72,16 @@ const ActivityCard = ({ activity, showUser = true }) => {
               />
               <ListItemText
                 primary={description}
-                secondary={<span className='flex align__center'><AccessTimeIcon className='extra_small__icon ml-25 mb-25'  />{activity.total} {translation.hours}, {activity.type}</span>}
+                secondary={
+                  <CardTextContainer>
+                    <AccessTimeIcon className='extra_small__icon ml-25' />
+                    {activity.total} {translation.hours}, {activity.type}
+                  </CardTextContainer>}
               />
             </InfoContainer>
             {showUser && (
               <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
-                <Box className='flex align__center justify__center flex__column p-1 mnw-80'>
+                <Box className='flex align__center justify__center flex__column'>
                   <Avatar src={activity?.user?.avatar} />
                   <Typography className='mt-25 text__center' variant="subtitle1" >
                     {activity?.user?.firstName} {activity?.user?.lastName}
@@ -80,15 +90,15 @@ const ActivityCard = ({ activity, showUser = true }) => {
               </Link>)}
           </CardBody>
         </CardContent>
-        <CardActions className='flex align__center justify__center pt-0'>
+        {(isAdmin || isUser) && <CardActions className='flex align__center justify__center pt-0'>
           <IconButtonContainer open={open}>
             <IconButton size='small' onClick={handleActionsOpen}>
               <KeyboardArrowDownIcon />
             </IconButton>
           </IconButtonContainer>
-        </CardActions>
+        </CardActions>}
       </Card>
-      {open && <ActivityCardActions handleApproved={handleApproved} className='mt-5' activity={activity} />}
+      {open && (isAdmin || isUser) && <ActivityCardActions handleApproved={handleApproved} className='mt-5' activity={activity} />}
     </>
   );
 }

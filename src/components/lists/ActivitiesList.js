@@ -4,7 +4,7 @@ import { Typography, Grid } from '@material-ui/core'
 import ActivityCard from '../cards/ActivityCard'
 import CardsSkeletons from '../skeletons/CardsSkeletons'
 
-const ActivitiesList = ({ activities, loading, type = 'personal' }) => {
+const ActivitiesList = ({ activities, loading, showUser = false }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
@@ -16,7 +16,7 @@ const ActivitiesList = ({ activities, loading, type = 'personal' }) => {
       <Grid container spacing={2}>
         {activities?.map((activity, index) => (
           <Grid key={index} item xs={12} md={6} lg={6}>
-            <ActivityCard showUser={type !== 'personal'} activity={activity} />
+            <ActivityCard showUser={showUser} activity={activity} />
           </Grid>)
         )}
       </Grid>

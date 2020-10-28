@@ -3,7 +3,7 @@ import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
 const usersRef = db.collection('users')
-const activitiesRef = db.collection('activities')
+const Activities = db.collection('activities')
 
 export const addActivity = (activity) => async dispatch => {
   const { uid, activities } = store.getState().auth
@@ -11,7 +11,7 @@ export const addActivity = (activity) => async dispatch => {
     type: 'ACTIVITY_LOADING'
   })
   try {
-    const ref = activitiesRef.doc()
+    const ref = Activities.doc()
     const newActivity = {
       ...activity,
       id: ref.id,
@@ -19,7 +19,7 @@ export const addActivity = (activity) => async dispatch => {
       dateCreated: Date.now()
     }
     const { total } = activity
-    await activitiesRef.doc(ref.id).set(newActivity)
+    await Activities.doc(ref.id).set(newActivity)
     const increment = firebase.firestore.FieldValue.increment(total);
     const userRef = await usersRef.doc(uid)
     await userRef.update('activities.pending', increment)
@@ -64,7 +64,7 @@ export const getUserActivities = ({ uid }) => async dispatch => {
     }
     const { region } = user;
 
-    const activitiesSnapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const activitiesSnapshot = await Activities.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
     activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 
@@ -98,7 +98,7 @@ export const approveActivity = (activity) => async dispatch => {
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
-    await activitiesRef.doc(id).set({ approved: true }, { merge: true })
+    await Activities.doc(id).set({ approved: true }, { merge: true })
     const increment = firebase.firestore.FieldValue.increment(total);
     const decrement = firebase.firestore.FieldValue.increment(-total);
 
@@ -136,7 +136,7 @@ export const unApproveActivity = (activity) => async dispatch => {
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
-    await activitiesRef.doc(id).set({ approved: false }, { merge: true })
+    await Activities.doc(id).set({ approved: false }, { merge: true })
     const increment = firebase.firestore.FieldValue.increment(total);
     const decrement = firebase.firestore.FieldValue.increment(-total);
 
@@ -176,7 +176,7 @@ export const deleteActivity = (activity) => async dispatch => {
   try {
     const { activities } = store.getState().auth
     const { id, uid, total } = activity
-    await activitiesRef.doc(id).delete()
+    await Activities.doc(id).delete()
     const userRef = await usersRef.doc(uid)
     const decrement = firebase.firestore.FieldValue.increment(-total);
 
@@ -214,7 +214,46 @@ export const deleteActivity = (activity) => async dispatch => {
   }
 }
 
-export const getActivities = () => async dispatch => {
+export const getActivities = queryParams => async dispatch => {
+  dispatch({
+    type: 'ACTIVITY_LOADING'
+  });
+
+  try {
+    const { selectedRegion: region } = queryParams;
+    let query = Activities;
+
+
+    if (region) {
+      query = query.where('region', '==', region)
+    }
+
+    if (!region) {
+      query = query.limit(10);
+    }
+
+    const snapshot = await query.get();
+    let activities = [];
+    snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
+
+    dispatch({
+      type: 'SET_ACTIVITIES',
+      payload: { activities }
+    })
+
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'ServerError'
+    }))
+    dispatch({
+      type: 'ACTIVITY_FAIL'
+    })
+  }
+}
+
+export const getActivitiesOld = () => async dispatch => {
   dispatch({
     type: 'ACTIVITY_LOADING'
   })
@@ -224,13 +263,13 @@ export const getActivities = () => async dispatch => {
     let activities = []
     let snapshot
     if (filters.regions && filters.status && filters.status !== 'all') {
-      snapshot = await activitiesRef.where('region', 'in', filters.regions).where('approved', '==', filters.status === 'approved').orderBy('dateCreated', 'desc').get()
+      snapshot = await Activities.where('region', 'in', filters.regions).where('approved', '==', filters.status === 'approved').orderBy('dateCreated', 'desc').get()
     } else if (filters.regions) {
-      snapshot = await activitiesRef.where('region', 'in', filters.regions).orderBy('dateCreated', 'desc').get()
+      snapshot = await Activities.where('region', 'in', filters.regions).orderBy('dateCreated', 'desc').get()
     } else if (filters.status && filters.status !== 'all') {
-      snapshot = await activitiesRef.where('approved', '==', filters.status === 'approved').where('region', 'in', [region]).orderBy('dateCreated', 'desc').get()
+      snapshot = await Activities.where('approved', '==', filters.status === 'approved').where('region', 'in', [region]).orderBy('dateCreated', 'desc').get()
     } else {
-      snapshot = await activitiesRef.where('region', '==', region).orderBy('dateCreated', 'desc').get()
+      snapshot = await Activities.where('region', '==', region).orderBy('dateCreated', 'desc').get()
     }
     snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
     dispatch({

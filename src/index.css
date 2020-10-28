@@ -523,6 +523,7 @@ a:hover {
 .extra_small__icon {
   height: .75rem!important;
   width: .75rem!important;
+  margin-top: 2px;
 }
 
 .small__icon {

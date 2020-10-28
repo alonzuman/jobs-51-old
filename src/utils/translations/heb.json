@@ -236,6 +236,7 @@
   "activityRegion": "מחוז התנדבות",
   "onlyAdminCanChange": "אנא צרו קשר עם מנהל מטעם העמותה אם ברצונכם לשנות שדה זה",
   "afterSetOnlyAdminCanChange": "לאחר בחירת מחוז, רק מנהל יוכל לשנות את בחירתכם",
+  "pleaseFillField": "אנא מלאו שדה זה על מנת להמשיך",
   "totalActivitiesInRegion": "סיכום שעות פעילות במחוז",
   "managersOfRegion": "מנהלי מחוז",
   "recentActivitiesInRegion": "פעילויות התנדבות אחרונות שביצעתי במחוז",

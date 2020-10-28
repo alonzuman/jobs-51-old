@@ -63,6 +63,11 @@ export const activitiesReducer = (state = initialState, action) => {
         ...state,
         view: payload
       }
+    case 'ACTIVITY_FAIL':
+      return {
+        ...state,
+        loading: false
+      }
     case 'ACITIVITIES_STOP_LOADING':
       return {
         ...state,

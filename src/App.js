@@ -13,7 +13,6 @@ import Jobs from './pages/jobs/Jobs'
 import Employees from './pages/Employees'
 import Admin from './pages/admin/Admin'
 import User from './pages/user/User'
-import ManageActivities from './pages/admin/ManageActivities'
 import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -29,6 +28,7 @@ import EditJob from './pages/job/EditJob'
 import Activity from './pages/activity/Activity'
 import Saved from './pages/saved/Saved'
 import Users from './pages/admin/pages/users/Users'
+import Activities from './pages/admin/pages/activities/Activities'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -71,7 +71,7 @@ function App() {
             {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
-            <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={ManageActivities} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={Activities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
 
             <Route exact path='/' component={LandingPage} />

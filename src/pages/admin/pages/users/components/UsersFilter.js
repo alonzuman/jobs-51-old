@@ -32,7 +32,7 @@ const UsersFilter = () => {
   useEffect(() => {
     const { search } = history.location
     const parsedQuery = qs.parse(search)
-    setSelectedFullName(`${parsedQuery?.firstName} ${parsedQuery?.lastName}`)
+    setSelectedFullName(`${parsedQuery?.firstName || ''} ${parsedQuery?.lastName || ''}`)
   }, [history.location.search])
 
   const handleSubmit = e => {

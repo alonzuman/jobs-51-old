@@ -27,7 +27,7 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
       await dispatch(setUser({ uid }))
       await onClose()
     } else if (!region) {
-      setError('fill form')
+      setError(translation.pleaseFillField)
     }
   }
 
