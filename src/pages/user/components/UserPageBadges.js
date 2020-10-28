@@ -1,4 +1,4 @@
-import { Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid, Typography } from '@material-ui/core'
+import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -28,6 +28,8 @@ const UserPageBadges = ({
   setIsVolunteer,
   stateRegion,
   setRegion,
+  stateRole,
+  setRole
 }) => {
   const { role } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
@@ -37,6 +39,8 @@ const UserPageBadges = ({
   const hasPostedJobs = user?.jobs?.length !== 0;
   const { regions } = useSelector(state => state.constants?.locations)
   const isAdmin = checkPermissions(role) >= 3
+  const isAdminOrManagerOrModerator = checkPermissions(role) >= 2
+  const roles = ['user', 'manager', 'moderator', 'admin']
 
   const locationHelperText = () => {
     if (isAdmin) {
@@ -70,6 +74,24 @@ const UserPageBadges = ({
             label={translation.volunteerInUnitsProgram}
           />
         </FormGroup>
+        {checkPermissions(role) >= 3 &&
+          <>
+            <Typography variant='subtitle1'>{translation.role}</Typography>
+            <FormControl size='small' className='mb-1'>
+              <Select variant='outlined' value={stateRole} onChange={e => setRole(e.target.value)}>
+                {roles?.map((v, i) => {
+                  if (checkPermissions(role) < 4 && v !== 'admin') {
+                    return <MenuItem dir='rtl' key={i} value={v}>{translation.roles[v]}</MenuItem>
+                  } else if (checkPermissions(role) === 4 && v === 'admin') {
+                    return <MenuItem dir='rtl' key={i} value={v}>{translation.roles[v]}</MenuItem>
+                  } else {
+                    return <MenuItem dir='rtl' key={i} value={v}>{translation.roles[v]}</MenuItem>
+                  }
+                }
+                )}
+              </Select>
+            </FormControl>
+          </>}
         {isVolunteer &&
           <LocationSelect
             helperText={locationHelperText()}
@@ -98,6 +120,10 @@ const UserPageBadges = ({
           {volunteer &&
             <Grid item>
               <Chip color='primary' variant='outlined' label={translation.activeVolunteer} size='small' className='fit__content' />
+            </Grid>}
+          {isAdminOrManagerOrModerator &&
+            <Grid item>
+              <Chip color='primary' variant='outlined' label={translation.roles.manager} size='small' className='fit__content' />
             </Grid>}
         </Grid>
         {hasApprovedActivities &&

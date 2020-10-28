@@ -127,13 +127,14 @@
   "ActivityRemoved": "פעילות נמחקה בהצלחה",
   "status": "סטטוס",
   "usersEmptyState": "לא נמצאו תוצאות",
+  "role": "תפקיד",
   "roles": {
     "pending": "ממתין לאישור",
     "user": "חבר עמותה",
     "volunteer": "מתנדב",
     "manager": "מנהל",
     "moderator": "מנהל מחוז",
-    "admin": "מנהל"
+    "admin": "מנהל בכיר"
   },
   "joined": "שנת גיוס ליחידה",
   "search": "חיפוש",
@@ -246,7 +247,8 @@
   "areApproved": "מאושרות",
   "pendingApprovalFe": "ממתינות לאישור",
   "resultsInRegion": "תוצאות חיפוש במחוז",
-  "filterByRegion": "סינון לפי מחוז התנדבות"
+  "filterByRegion": "סינון לפי מחוז התנדבות",
+  "notReadyYet": "סורי העמוד עדיין לא מוכן"
 }
 
 

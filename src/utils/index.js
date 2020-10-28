@@ -1,6 +1,11 @@
 import store from '../store';
 const { theme } = store.getState().theme
 
+export const isAdmin = role => role === 'admin'
+export const isModerator = role => role === 'moderator'
+export const isManager = role => role === 'manager'
+export const isUser = role => role === 'user'
+
 export const checkPermissions = (role) => {
   switch (role) {
     case 'pending': return 0;

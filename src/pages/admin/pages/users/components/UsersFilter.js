@@ -26,7 +26,9 @@ const Container = styled.div`
 `
 
 const BarContainer = styled.div`
-
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const UsersFilter = () => {
@@ -43,17 +45,18 @@ const UsersFilter = () => {
   useEffect(() => {
     const { search } = history.location
     const parsedQuery = qs.parse(search)
-    setSelectedFullName(`${parsedQuery?.firstName || ''} ${parsedQuery?.lastName || ''}`)
+    const fullName = parsedQuery.firstName ? `${parsedQuery?.firstName} ${parsedQuery?.lastName}` : null;
+    setSelectedFullName(fullName)
     setSelectedRegion(parsedQuery.region)
     setFilters([
       ...Object.keys(parsedQuery)?.map(v => {
         if (v === 'firstName' || v === 'lastName') {
-          return `${parsedQuery.firstName} ${parsedQuery.lastName}`
+          return fullName
         } else {
           return parsedQuery[v]
         }
       })
-    ]?.filter(onlyUnique)?.filter(v => !!v))
+    ]?.filter(onlyUnique)?.filter(v => v))
   }, [history.location.search])
 
   const handleSubmit = e => {

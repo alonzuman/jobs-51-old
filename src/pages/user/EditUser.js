@@ -40,6 +40,7 @@ const User = ({ match }) => {
   const [skills, setSkills] = useState([])
   const [serviceYear, setServiceYear] = useState('')
   const [region, setRegion] = useState('')
+  const [role, setRole] = useState('')
 
   const handleSubmit = async () => {
     const newUser = {
@@ -55,8 +56,10 @@ const User = ({ match }) => {
       skills,
       hometown,
       serviceYear,
-      region
+      region,
+      role
     }
+
     await dispatch(updateUser({ newUser, oldUser: user}))
     await history.goBack()
   }
@@ -79,6 +82,7 @@ const User = ({ match }) => {
     setSkills(user?.skills || [])
     setServiceYear(user?.serviceYear || '')
     setRegion(user?.region || '')
+    setRole(user?.role || '')
   }, [user])
 
   useEffect(() => {
@@ -126,6 +130,8 @@ const User = ({ match }) => {
         setRegion={setRegion}
         loading={loading}
         user={user}
+        stateRole={role}
+        setRole={setRole}
         editing
       />
       <UserPageBio
