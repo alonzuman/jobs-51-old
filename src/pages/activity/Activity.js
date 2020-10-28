@@ -9,8 +9,11 @@ import { getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 import Container from '../../v2/atoms/Container'
 import ActivityPageHeader from './components/ActivityPageHeader'
+import EditRegionDialog from '../../v2/layout/AddRegionDialog'
+import { auth } from '../../firebase'
 
 const Activity = ({ match }) => {
+  const [editingProfile, setEditingProfile] = useState(false)
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { region } = useSelector(state => state.auth)
@@ -26,10 +29,18 @@ const Activity = ({ match }) => {
     }
   }, [dispatch, uid])
 
+  useEffect(() => {
+    if (!loading && !region && uid === auth.currentUser.uid) {
+      setEditingProfile(true)
+    }
+  }, [loading])
+
   const handleAddingActivity = () => setAddingActivity(!addingActivity)
+  const handleEditingProfile = () => setEditingProfile(!editingProfile)
 
   return (
     <Container>
+      <EditRegionDialog isOpen={editingProfile} onClose={handleEditingProfile} />
       <FloatingActionButton color='primary' action={handleAddActivity} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>

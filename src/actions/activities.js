@@ -63,7 +63,6 @@ export const getUserActivities = ({ uid }) => async dispatch => {
       ...userSnap.data()
     }
     const { region } = user;
-    console.log(uid)
 
     const activitiesSnapshot = await activitiesRef.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []

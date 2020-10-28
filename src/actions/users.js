@@ -185,7 +185,7 @@ export const unapproveUser = uid => async dispatch => {
   }
 }
 
-export const updateUser = ({ newUser, oldUser }) => async dispatch => {
+export const updateUser = ({ newUser }) => async dispatch => {
   dispatch({
     type: 'USERS_UPDATING'
   })

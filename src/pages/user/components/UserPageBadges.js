@@ -13,6 +13,7 @@ import LocationSelect from '../../../components/forms/profile/LocationSelect'
 const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 `
 
 const UserPageBadges = ({
@@ -113,7 +114,7 @@ const UserPageBadges = ({
               {user?.jobs?.length} {translation.jobsPostedBy}  {user?.firstName}
             </Typography>
           </InfoContainer>}
-        {isPending &&
+        {isPending && isAdmin &&
           <ActionsContainer>
             <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
             <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>

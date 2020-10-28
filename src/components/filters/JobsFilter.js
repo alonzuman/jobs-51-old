@@ -79,7 +79,8 @@ const JobsFilter = () => {
           <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />
           <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />
           <IndustryFilter selectedIndustry={selectedIndustry} setSelectedIndustry={setSelectedIndustry} />
-          <DateFilter selectedMinDate={selectedMinDate} setSelectedMinDate={setSelectedMinDate} />
+          {/* TODO ALON finish date filter */}
+          {/* <DateFilter selectedMinDate={selectedMinDate} setSelectedMinDate={setSelectedMinDate} /> */}
         </DialogContent>
         <DialogActionsContainer border={theme?.palette?.border?.strong}>
           <Button size='large' color='default' onClick={clearFilters}>{translation.clear}</Button>

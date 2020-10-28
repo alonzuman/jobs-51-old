@@ -29,6 +29,8 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   } else {
     return (
       <PageSection>
+        <Divider className='mb-1' />
+        <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Typography className='mt-1' variant='body1'>{translation.activitiesEmptyState}</Typography>
       </PageSection>
     )
