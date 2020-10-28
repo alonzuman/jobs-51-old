@@ -22,6 +22,7 @@ const DatesContainer = styled.div`
 
 const InfoContainer = styled.div`
   padding-right: 16px;
+  padding-left: 8px;
   flex: 2;
 `
 
@@ -57,7 +58,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
   return (
     <>
       <Card variant='outlined' onClick={() => setOpen(!open)}>
-        <CardContent className='pb-25'>
+        <CardContent className='pb-25 pl-5'>
           <CardBody>
             <DatesContainer borderColor={theme?.palette?.border?.main}>
               <Typography variant="subtitle1">{month}</Typography>
@@ -83,9 +84,12 @@ const ActivityCard = ({ activity, showUser = true }) => {
             {showUser && (
               <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
                 <Box className='flex align__center justify__center flex__column'>
-                  <Avatar src={activity?.user?.avatar} />
-                  <Typography className='mt-25 text__center' variant="subtitle1" >
-                    {activity?.user?.firstName} {activity?.user?.lastName}
+                  <Avatar style={{ height: 32, width: 32 }} src={activity?.user?.avatar}>{activity?.user?.firstName?.charAt(0)}</Avatar>
+                  <Typography className='lh-15 mt-25' variant="subtitle1" >
+                    {activity?.user?.firstName}
+                  </Typography>
+                  <Typography className='lh-15' variant="subtitle1" >
+                    {activity?.user?.lastName}
                   </Typography>
                 </Box>
               </Link>)}

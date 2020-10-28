@@ -17,12 +17,9 @@ const Admin = () => {
     { label: translation.manageConstants, icon: <DataUsageIcon />, link: '/admin/constants' },
   ]
 
-  const menuItemStyle = {
-    borderBottom: `1px solid ${theme?.palette?.border?.main}`
-  }
-
   const iconStyle = {
-    marginLeft: 8
+    marginLeft: 8,
+    lineHeight: 0
   }
 
   return (
@@ -31,7 +28,10 @@ const Admin = () => {
       <MenuList>
         {items.map((v, i) =>
           <Link key={i} to={v.link}>
-            <MenuItem style={menuItemStyle}><span style={iconStyle}>{v.icon}</span>{v.label}</MenuItem>
+            <MenuItem className='mb-5 mt-5'>
+              <span style={iconStyle}>{v.icon}</span>
+              {v.label}
+            </MenuItem>
             <Divider />
           </Link>
         )}
