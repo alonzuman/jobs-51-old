@@ -244,7 +244,9 @@
   "jobSavedSuccessfully": "הפרסום נשמר בהצלחה!",
   "volHours": "שעות התנדבות",
   "areApproved": "מאושרות",
-  "pendingApprovalFe": "ממתינות לאישור"
+  "pendingApprovalFe": "ממתינות לאישור",
+  "resultsInRegion": "תוצאות חיפוש במחוז",
+  "filterByRegion": "סינון לפי מחוז התנדבות"
 }
 
 

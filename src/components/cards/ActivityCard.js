@@ -32,6 +32,7 @@ const CardBody = styled.div`
 
 const CardTextContainer = styled.span`
   display: flex;
+  font-size: .75rem;
   flex-direction: row;
 `
 

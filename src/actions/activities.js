@@ -236,6 +236,7 @@ export const getActivities = queryParams => async dispatch => {
     let activities = [];
     snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
 
+    // TODO add pagination
     dispatch({
       type: 'SET_ACTIVITIES',
       payload: { activities }
@@ -250,38 +251,6 @@ export const getActivities = queryParams => async dispatch => {
     dispatch({
       type: 'ACTIVITY_FAIL'
     })
-  }
-}
-
-export const getActivitiesOld = () => async dispatch => {
-  dispatch({
-    type: 'ACTIVITY_LOADING'
-  })
-  try {
-    const { region } = store.getState().auth
-    const { filters } = store.getState().activities
-    let activities = []
-    let snapshot
-    if (filters.regions && filters.status && filters.status !== 'all') {
-      snapshot = await Activities.where('region', 'in', filters.regions).where('approved', '==', filters.status === 'approved').orderBy('dateCreated', 'desc').get()
-    } else if (filters.regions) {
-      snapshot = await Activities.where('region', 'in', filters.regions).orderBy('dateCreated', 'desc').get()
-    } else if (filters.status && filters.status !== 'all') {
-      snapshot = await Activities.where('approved', '==', filters.status === 'approved').where('region', 'in', [region]).orderBy('dateCreated', 'desc').get()
-    } else {
-      snapshot = await Activities.where('region', '==', region).orderBy('dateCreated', 'desc').get()
-    }
-    snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: 'SET_ACTIVITIES',
-      payload: { activities }
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
   }
 }
 

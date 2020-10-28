@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
-import { Button, Dialog, DialogContent } from '@material-ui/core';
+import { Button, Dialog, DialogContent, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import CustomDialogHeader from '../../../../../components/layout/CustomDialogHeader';
 import DialogActionsContainer from '../../../../../v2/atoms/DialogActionsContainer';
 import LocationSelect from '../../../../../components/forms/profile/LocationSelect';
 import styled from 'styled-components';
+import Transition from '../../../../../v2/atoms/Transition';
+import useWindowSize from '../../../../../hooks/useWindowSize';
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +26,7 @@ const ActivitiesFilter = () => {
   const { translation } = useSelector(state => state.theme);
   const { regions } = useSelector(state => state?.constants?.locations);
   const history = useHistory();
+  const { windowWidth: width } = useWindowSize()
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState([]);
 
@@ -57,9 +60,10 @@ const ActivitiesFilter = () => {
   return (
     <Container>
       <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
-      <Dialog dir='rtl' open={isOpen} onClose={handleOpen}>
+      <Dialog fullScreen={width <= 768} fullWidth TransitionComponent={Transition} dir='rtl' open={isOpen} onClose={handleOpen}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
         <DialogContent>
+          <Typography className='mb-1' variant='h2'>{translation.filterByRegion}</Typography>
           <LocationSelect
             className='mt-1'
             location={selectedRegion}

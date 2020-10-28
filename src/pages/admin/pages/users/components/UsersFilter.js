@@ -8,6 +8,10 @@ import NameFilter from './NameFilter'
 import qs from 'query-string'
 import { useHistory } from 'react-router-dom'
 import DialogActionsContainer from '../../../../../v2/atoms/DialogActionsContainer'
+import RegionFilter from './RegionFilter'
+import useWindowSize from '../../../../../hooks/useWindowSize'
+import ChipsGrid from '../../../../../v2/molecules/ChipsGrid'
+import { onlyUnique } from '../../../../../utils'
 
 const Container = styled.div`
   display: flex;
@@ -21,11 +25,18 @@ const Container = styled.div`
   margin-bottom: 8px;
 `
 
+const BarContainer = styled.div`
+
+`
+
 const UsersFilter = () => {
   const { theme, translation } = useSelector(state => state.theme)
   const [isOpen, setIsOpen] = useState(false)
   const history = useHistory()
+  const { windowWidth: width } = useWindowSize()
   const [selectedFullName, setSelectedFullName] = useState('')
+  const [selectedRegion, setSelectedRegion] = useState('')
+  const [filters, setFilters] = useState([])
 
   const handleOpen = () => setIsOpen(!isOpen)
 
@@ -33,15 +44,27 @@ const UsersFilter = () => {
     const { search } = history.location
     const parsedQuery = qs.parse(search)
     setSelectedFullName(`${parsedQuery?.firstName || ''} ${parsedQuery?.lastName || ''}`)
+    setSelectedRegion(parsedQuery.region)
+    setFilters([
+      ...Object.keys(parsedQuery)?.map(v => {
+        if (v === 'firstName' || v === 'lastName') {
+          return `${parsedQuery.firstName} ${parsedQuery.lastName}`
+        } else {
+          return parsedQuery[v]
+        }
+      })
+    ]?.filter(onlyUnique)?.filter(v => !!v))
   }, [history.location.search])
 
   const handleSubmit = e => {
     e.preventDefault()
     const query = {
       firstName: selectedFullName ? selectedFullName.split(' ')[0] : '',
-      lastName: selectedFullName ? selectedFullName.split(' ')[1] : ''
+      lastName: selectedFullName ? selectedFullName.split(' ')[1] : '',
+      region: selectedRegion
     }
 
+    setFilters([selectedFullName, selectedRegion])
     const stringifiedQuery = qs.stringify(query)
 
     history.push({
@@ -52,15 +75,22 @@ const UsersFilter = () => {
     handleOpen()
   }
 
-  const clearFilters = () => setSelectedFullName('')
+  const clearFilters = () => {
+    setSelectedFullName('')
+    setSelectedRegion('')
+  }
 
   return (
     <Container background={theme?.palette?.background?.main}>
-      <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
-      <Dialog dir='rtl' fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
+      <BarContainer>
+        <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
+        <ChipsGrid chips={filters} />
+      </BarContainer>
+      <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
         <DialogContent>
           <NameFilter selectedFullName={selectedFullName} setSelectedFullName={setSelectedFullName} />
+          <RegionFilter selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
         </DialogContent>
         <DialogActionsContainer>
           <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>
