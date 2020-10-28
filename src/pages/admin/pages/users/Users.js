@@ -25,7 +25,7 @@ const Users = () => {
   return (
     <Container>
       <PageSection>
-        <PageHeader title={translation.usersPageTitle} backButton spaceBottom />
+        <PageHeader title={translation.usersPageTitle} backButton spaceBottom backLink='/admin' />
       </PageSection>
       <PageSection>
         <UsersFilter view={view} setView={setView} />

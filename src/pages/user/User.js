@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { approveUser, getUser } from '../../actions/users'
+import { approveUser, getUser, updateUser } from '../../actions/users'
 import UserPageJobInfo from './components/UserPageJobInfo'
 import UserPageBio from './components/UserPageBio'
 import UserPageBadges from './components/UserPageBadges'
@@ -26,7 +26,15 @@ const User = ({ match }) => {
   }, [dispatch, uid])
 
   const handleImageOpen = () => setImageOpen(!imageOpen)
-  const handleApproveUser = () => dispatch(approveUser(uid))
+  const handleApproveUser = () => {
+    dispatch(updateUser({
+      newUser: {
+        uid: user.uid,
+        ...user,
+        role: 'user'
+      }
+    }))
+  }
   const handleIsDeclining = () => setIsDeclining(!isDeclining)
   const handleEditing = () => {
     history.push({

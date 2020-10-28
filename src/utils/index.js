@@ -6,6 +6,8 @@ export const isModerator = role => role === 'moderator'
 export const isManager = role => role === 'manager'
 export const isUser = role => role === 'user'
 
+export const roles = ['user', 'manager', 'moderator', 'admin']
+
 export const checkPermissions = (role) => {
   switch (role) {
     case 'pending': return 0;

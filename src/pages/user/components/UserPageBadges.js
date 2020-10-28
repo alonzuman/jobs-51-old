@@ -4,7 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import StarsIcon from '@material-ui/icons/Stars';
-import { checkPermissions } from '../../../utils'
+import { checkPermissions, roles } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection'
@@ -33,14 +33,13 @@ const UserPageBadges = ({
 }) => {
   const { role } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  const { volunteer, lookingForJob, activities } = user
+  const { volunteer, lookingForJob, activities, role: userRole  } = user
   const isPending = checkPermissions(user?.role) === 0;
   const hasApprovedActivities = activities?.approved !== 0;
   const hasPostedJobs = user?.jobs?.length !== 0;
   const { regions } = useSelector(state => state.constants?.locations)
   const isAdmin = checkPermissions(role) >= 3
-  const isAdminOrManagerOrModerator = checkPermissions(role) >= 2
-  const roles = ['user', 'manager', 'moderator', 'admin']
+  const isAdminOrManagerOrModerator = checkPermissions(userRole) >= 2
 
   const locationHelperText = () => {
     if (isAdmin) {

@@ -18,7 +18,7 @@ const CustomDialogHeader = ({ title, exitButton, onClose }) => {
   return (
     <DialogHeader border={theme?.palette?.border?.strong}>
       <DialogTitle>{title}</DialogTitle>
-      {exitButton && <IconButton onClick={onClose}><CloseIcon /></IconButton>}
+      {exitButton && <IconButton size='small' className='ml-5' onClick={onClose}><CloseIcon /></IconButton>}
     </DialogHeader>
   )
 }

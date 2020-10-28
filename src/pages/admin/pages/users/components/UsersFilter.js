@@ -11,7 +11,8 @@ import DialogActionsContainer from '../../../../../v2/atoms/DialogActionsContain
 import RegionFilter from './RegionFilter'
 import useWindowSize from '../../../../../hooks/useWindowSize'
 import ChipsGrid from '../../../../../v2/molecules/ChipsGrid'
-import { onlyUnique } from '../../../../../utils'
+import { onlyUnique, roles } from '../../../../../utils'
+import RoleFilter from './RoleFilter'
 
 const Container = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ const UsersFilter = ({ view, setView }) => {
   const { windowWidth: width } = useWindowSize()
   const [selectedFullName, setSelectedFullName] = useState('')
   const [selectedRegion, setSelectedRegion] = useState('')
+  const [selectedRole, setSelectedRole] = useState('')
   const [filters, setFilters] = useState([])
 
   const handleOpen = () => setIsOpen(!isOpen)
@@ -48,10 +50,13 @@ const UsersFilter = ({ view, setView }) => {
     const fullName = parsedQuery.firstName ? `${parsedQuery?.firstName} ${parsedQuery?.lastName}` : null;
     setSelectedFullName(fullName)
     setSelectedRegion(parsedQuery.region)
+    setSelectedRole(parsedQuery.role)
     setFilters([
       ...Object.keys(parsedQuery)?.map(v => {
         if (v === 'firstName' || v === 'lastName') {
           return fullName
+        } else if ([...roles, 'pending'].includes(parsedQuery[v])) {
+          return translation.roles[parsedQuery[v]]
         } else {
           return parsedQuery[v]
         }
@@ -64,7 +69,8 @@ const UsersFilter = ({ view, setView }) => {
     const query = {
       firstName: selectedFullName ? selectedFullName.split(' ')[0] : '',
       lastName: selectedFullName ? selectedFullName.split(' ')[1] : '',
-      region: selectedRegion
+      region: selectedRegion,
+      role: selectedRole
     }
 
     setFilters([selectedFullName, selectedRegion])
@@ -102,6 +108,7 @@ const UsersFilter = ({ view, setView }) => {
         <DialogContent>
           <NameFilter selectedFullName={selectedFullName} setSelectedFullName={setSelectedFullName} />
           <RegionFilter selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
+          <RoleFilter selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
         </DialogContent>
         <DialogActionsContainer>
           <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>

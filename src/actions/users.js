@@ -42,7 +42,7 @@ export const getUsers = query => async dispatch => {
     type: 'USERS_LOADING'
   })
   try {
-    const { firstName, lastName, region } = query
+    const { firstName, lastName, region, role } = query
 
     let queryRef = usersRef
 
@@ -56,6 +56,10 @@ export const getUsers = query => async dispatch => {
 
     if (region) {
       queryRef = queryRef.where('volunteer', '==', true).where('region', '==', region)
+    }
+
+    if (role) {
+      queryRef = queryRef.where('role', '==', role)
     }
 
     const snapshot = await queryRef.orderBy('dateCreated', 'desc').limit(10).get()

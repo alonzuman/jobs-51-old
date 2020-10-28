@@ -87,22 +87,16 @@ export const signInWithProvider = (provider) => async dispatch => {
       const result = await firebase.auth().signInWithPopup(firebaseProvider())
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
 
-      // const checkLegitRes = await dispatch(checkIfUserLegit({
-      //   email,
-      //   firstName: displayName?.split(' ')[0],
-      //   lastName: displayName?.split(' ')[1]
-      // }))
-
-      const checkLegitRes = {
-        email: '',
-        firstName: '',
-        lastName: ''
-      }
+      const checkLegitRes = await dispatch(checkIfUserLegit({
+        email,
+        firstName: displayName?.split(' ')[0],
+        lastName: displayName?.split(' ')[1]
+      }))
 
       const fetchedUser = await Users.doc(uid).get()
       const user = fetchedUser.data()
 
-      if ((!user?.uid || !user)) {
+      if (!user || checkLegitRes) {
         const newUser = {
           uid,
           email,
@@ -117,12 +111,11 @@ export const signInWithProvider = (provider) => async dispatch => {
             pending: 0,
             approved: 0
           },
-          role: user?.role ? user?.role : 'user',
+          role: user?.role ? user?.role : 'pending',
           dateCreated: Date.now(),
           region: checkLegitRes?.region || ''
         }
 
-        console.log(newUser)
         await Users.doc(uid).set(newUser, { merge: true })
 
         dispatch({
