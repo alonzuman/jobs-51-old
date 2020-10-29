@@ -2,7 +2,6 @@ const initialState = {
   job: {},
   jobs: [],
   savedJobs: [],
-  savedJobsLoading: false,
   loading: false,
   isUpdating: false,
   isDeleting: false
@@ -12,11 +11,7 @@ export const jobsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'SAVED_JOBS_LOADING':
-      return {
-        ...state,
-        savedJobsLoading: true
-      }
+    case 'JOBS_LOADING':
     case 'JOB_LOADING':
       return {
         ...state,
@@ -55,7 +50,7 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         savedJobs: [...payload.jobs],
-        savedJobsLoading: false
+        loading: false
       }
     case 'ADD_JOB':
       return {

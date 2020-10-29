@@ -9,14 +9,14 @@ import { saveJob, unsaveJob } from '../../actions';
 
 const SaveJobButton = ({ className, job }) => {
   const dispatch = useDispatch()
-  const { uid, savedJobs } = useSelector(state => state.auth)
-  const isSaved = savedJobs?.includes(job?.id)
+  const { uid } = useSelector(state => state.auth)
+  const isSaved = job?.savedIds?.includes(uid)
 
   const handleFavorite = () => {
     if (isSaved) {
-      dispatch(unsaveJob(uid, job?.id))
+      dispatch(unsaveJob(uid, job.id, job))
     } else {
-      dispatch(saveJob(uid, job?.id, job))
+      dispatch(saveJob(uid, job.id, job))
     }
   }
 

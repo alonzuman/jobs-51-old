@@ -3,18 +3,121 @@ import { setFeedback } from './feedback'
 import firebase from 'firebase'
 const Jobs = db.collection('jobs')
 
+export const getSavedJobs = (uid) => async dispatch => {
+  dispatch({
+    type: 'JOBS_LOADING'
+  })
+  try {
+    // const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).orderBy('dateCreated', 'desc').get()
+    const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).get()
+    let jobs = [];
+    jobsSnapshot.forEach(doc => jobs.push({ id: doc.id, ...doc.data() }));
+
+    dispatch({
+      type: 'SET_SAVED_JOBS',
+      payload: {
+        jobs,
+        currentUid: uid
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'SAVED_ERROR'
+    })
+    dispatch(setFeedback({
+      msg: 'ServerError',
+      type: 'error'
+    }))
+  }
+}
+
+export const saveJob = (uid, jid, job) => async dispatch => {
+  try {
+    await Jobs.doc(jid).update({
+      savedIds: firebase.firestore.FieldValue.arrayUnion(uid)
+    })
+
+    dispatch({
+      type: 'ADD_SAVED',
+      payload: job
+    })
+
+    dispatch({
+      type: 'SET_JOB',
+      payload: {
+        job: {
+          ...job,
+          savedIds: [...job?.savedIds, uid]
+        }
+      }
+    })
+
+    dispatch({
+      type: 'SET'
+    })
+
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'jobSavedSuccessfully'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: 'ServerError',
+      type: 'error'
+    }))
+  }
+}
+
+export const unsaveJob = (uid, jid, job) => async dispatch => {
+  try {
+    await Jobs.doc(jid).update({
+      savedIds: firebase.firestore.FieldValue.arrayRemove(uid)
+    })
+
+    dispatch({
+      type: 'REMOVE_SAVED',
+      payload: jid
+    })
+
+    dispatch({
+      type: 'SET_JOB',
+      payload: {
+        job: {
+          ...job,
+          savedIds: [...job?.savedIds?.filter(v => v !== uid)]
+        }
+      }
+    })
+
+    dispatch(setFeedback({
+      type: 'success',
+      msg: 'jobSavedSuccessfully'
+    }))
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: 'ServerError',
+      type: 'error'
+    }))
+  }
+}
+
 export const addJob = (job) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })
   try {
-    const ref = Jobs.doc()
+    const jobRef = Jobs.doc()
+
     const newJob = {
       ...job,
-      id: ref.id,
-      dateCreated: Date.now()
+      id: jobRef.id,
+      dateCreated: Date.now(),
+      savedIds: []
     }
-    await Jobs.doc(ref.id).set(newJob)
+    await Jobs.doc(jobRef.id).set(newJob)
 
     await db.collection('constants').doc('listedLocations').update({
       [job.location]: firebase.firestore.FieldValue.increment(1)

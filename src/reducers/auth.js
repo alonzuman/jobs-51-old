@@ -5,7 +5,6 @@ const initialState = {
   lastName: '',
   avatar: '',
   phone: '',
-  savedJobs: [],
   skills: [],
   lookingForJob: false,
   activities: {

@@ -14,7 +14,7 @@ const JobsList = ({ jobs, loading }) => {
         <CardsSkeletons className='p-0' count={1} />
       </PageSection>
     )
-  } else if (jobs?.length !== 0) {
+  } else if (!loading && jobs?.length !== 0) {
     return (
       <PageSection spaceBottom>
         <Grid container spacing={2}>
@@ -22,7 +22,7 @@ const JobsList = ({ jobs, loading }) => {
         </Grid>
       </PageSection>
     )
-  } else if (!loading && jobs?.length === 0) {
+  } else {
     return (
       <PageSection spaceBottom>
         <Typography className='mt-1' variant='body1'>{translation?.couldntFindJobs}</Typography>

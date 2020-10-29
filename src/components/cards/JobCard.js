@@ -18,7 +18,6 @@ const JobCard = ({ job, loading }) => {
           avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
           title={job?.jobTitle}
           subheader={`${job?.company}, ${job?.location}`}
-          action={<SaveJobButton loading={loading} job={job} />}
         />
         <CardActions className='pt-0'>
           <Chip variant='outlined' size='small' label={timeAgo()} color='primary' />

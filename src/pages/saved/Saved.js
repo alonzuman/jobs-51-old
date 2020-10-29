@@ -7,7 +7,7 @@ import SavedPageHeader from './components/SavedPageHeader'
 
 const Saved = ({ match }) => {
   const { uid } = match.params
-  const { loading, jobs, currentUid } = useSelector(state => state.saved)
+  const { loading, savedJobs, currentUid } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Saved = ({ match }) => {
   return (
     <Container>
       <SavedPageHeader loading={loading} />
-      <JobsList loading={loading} jobs={jobs} />
+      <JobsList loading={loading} jobs={savedJobs} />
     </Container>
   )
 }

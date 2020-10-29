@@ -52,7 +52,6 @@ export const checkIfUserLegit = ({ email, firstName, lastName }) => async dispat
     }
 
     const verifiedUser = results[0];
-    console.log(verifiedUser)
 
     if (!verifiedUser) return false;
     if (verifiedUser) {
@@ -96,7 +95,16 @@ export const signInWithProvider = (provider) => async dispatch => {
       const fetchedUser = await Users.doc(uid).get()
       const user = fetchedUser.data()
 
-      if (!user || checkLegitRes) {
+      if (fetchedUser.id) {
+        dispatch({
+          type: 'SIGNED_UP',
+          payload: { ...user }
+        })
+        dispatch(setFeedback({
+          type: 'success',
+          msg: 'Welcome'
+        }))
+      } else if (!fetchedUser.id || checkLegitRes) {
         const newUser = {
           uid,
           email,
@@ -123,15 +131,6 @@ export const signInWithProvider = (provider) => async dispatch => {
           payload: { ...newUser }
         })
 
-        dispatch(setFeedback({
-          type: 'success',
-          msg: 'Welcome'
-        }))
-      } else if (user || user?.id) {
-        dispatch({
-          type: 'SIGNED_UP',
-          payload: { ...user }
-        })
         dispatch(setFeedback({
           type: 'success',
           msg: 'Welcome'
