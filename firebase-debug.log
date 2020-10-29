@@ -745,3 +745,20 @@ Detailed stack trace: Error: Cannot find module 'faker'
     at Module.load (module.js:566:32)
     at tryModuleLoad (module.js:506:12)
     at Function.Module._load (module.js:498:3)
+[debug] [2020-10-29T14:50:57.950Z] ----------------------------------------------------------------------
+[debug] [2020-10-29T14:50:57.952Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] [2020-10-29T14:50:57.952Z] CLI Version:   8.4.3
+[debug] [2020-10-29T14:50:57.952Z] Platform:      darwin
+[debug] [2020-10-29T14:50:57.952Z] Node Version:  v12.18.0
+[debug] [2020-10-29T14:50:57.953Z] Time:          Thu Oct 29 2020 16:50:57 GMT+0200 (Israel Standard Time)
+[debug] [2020-10-29T14:50:57.953Z] ----------------------------------------------------------------------
+[debug] [2020-10-29T14:50:57.953Z] 
+[debug] [2020-10-29T14:50:57.961Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-10-29T14:50:57.962Z] > authorizing via signed-in user
+[debug] [2020-10-29T14:50:57.962Z] [iam] checking project jobs-51 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-10-29T14:50:57.965Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jobs-51:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2020-10-29T14:50:58.409Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 29 Oct 2020 14:50:58 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=134","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-10-29T14:50:58.412Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/jobs-51/serviceAccounts/jobs-51@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-10-29T14:50:58.836Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 29 Oct 2020 14:50:58 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
