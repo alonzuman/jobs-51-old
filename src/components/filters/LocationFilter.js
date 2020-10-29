@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
   const { translation } = useSelector(state => state.theme)
-  const { listedLocations } = useSelector(state => state?.constants)
+  const { listedJobLocations } = useSelector(state => state?.constants)
 
   const handleClick = newValue => {
     if (selectedLocation === newValue) {
@@ -24,13 +24,13 @@ const LocationFilter = ({ selectedLocation, setSelectedLocation }) => {
       <Typography variant='h2'>{translation.filterByLocation}</Typography>
       <Typography variant='subtitle1'>{translation.locations}</Typography>
       <Grid container spacing={1}>
-        {Object.keys(listedLocations)?.map((v, i) => {
-          if (listedLocations[v] > 0) {
+        {Object.keys(listedJobLocations)?.map((v, i) => {
+          if (listedJobLocations[v] > 0) {
             return (
               <Grid item key={i}>
                 <Chip
                   onClick={() => handleClick(v)}
-                  label={`${v} (${listedLocations[v]})`}
+                  label={`${v} (${listedJobLocations[v]})`}
                   color={selectedLocation === v ? 'primary' : 'default'}
                 />
               </Grid>

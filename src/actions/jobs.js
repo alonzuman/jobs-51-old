@@ -119,16 +119,6 @@ export const addJob = (job) => async dispatch => {
     }
     await Jobs.doc(jobRef.id).set(newJob)
 
-    await db.collection('constants').doc('listedLocations').update({
-      [job.location]: firebase.firestore.FieldValue.increment(1)
-    })
-
-    await job.skills.forEach(async v => {
-      await db.collection('constants').doc('listedSkills').update({
-        [v]: firebase.firestore.FieldValue.increment(1)
-      })
-    })
-
     dispatch({
       type: 'ADD_JOB',
       payload: { job: newJob }
@@ -167,42 +157,12 @@ export const updateJob = (newJob) => async dispatch => {
   }
 }
 
-export const editJob = (job, id) => async dispatch => {
-  dispatch({
-    type: 'JOB_LOADING'
-  })
-  try {
-    await Jobs.doc(id).set({ ...job })
-    dispatch(getJobs())
-    dispatch(setFeedback({
-      msg: 'Success',
-      type: 'success'
-    }))
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      msg: 'ServerError',
-      type: 'error'
-    }))
-  }
-}
-
 export const deleteJob = (job) => async dispatch => {
   const { id } = job
   dispatch({
     type: 'JOB_DELETING'
   })
   try {
-    await db.collection('constants').doc('listedLocations').update({
-      [job.location]: firebase.firestore.FieldValue.increment(-1)
-    })
-
-    await job.skills.forEach(async v => {
-      await db.collection('constants').doc('listedSkills').set({
-        [v]: firebase.firestore.FieldValue.increment(-1)
-      }, { merge: true })
-    })
-
     await Jobs.doc(id).delete()
     dispatch({
       type: 'JOB_DELETED',

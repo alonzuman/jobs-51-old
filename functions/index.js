@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-// const faker = require('faker');
+const faker = require('faker');
 admin.initializeApp()
 
 const Constants = admin.firestore().collection('constants');
@@ -10,100 +10,102 @@ const Saved = admin.firestore().collection('saved');
 const Jobs = admin.firestore().collection('jobs');
 
 // SEED
-// exports.onSeed = functions.firestore
-//   .document('seed/{seedId}')
-//   .onWrite(async (change, context) => {
-//     try {
+exports.onSeed = functions.firestore
+  .document('seed/{seedId}')
+  .onWrite(async (change, context) => {
+    try {
 
-//       // Seed users
-//       const user = {
-//         region: 'חיפה',
-//         firstName: faker.name.firstName(),
-//         lastName: faker.name.lastName(),
-//         avatar: faker.image.avatar(),
-//         email: faker.internet.email(),
-//         activities: {
-//           pending: 0,
-//           approved: 0
-//         }
-//       }
-//       const userRef = await Users.add(user)
-//       const uid = userRef.id;
+      // Seed users
+      const user = {
+        region: 'חיפה',
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        avatar: faker.image.avatar(),
+        email: faker.internet.email(),
+        activities: {
+          pending: 0,
+          approved: 0
+        }
+      }
+      const userRef = await Users.add(user)
+      const uid = userRef.id;
 
-//       // Seed constants
-//       await Constants.doc('listedMembers').set({
-//         all: admin.firestore.FieldValue.arrayUnion(`${user.firstName} ${user.lastName}`)
-//       })
+      // Seed constants
+      await Constants.doc('listedMembers').set({
+        all: admin.firestore.FieldValue.arrayUnion(`${user.firstName} ${user.lastName}`)
+      })
 
-//       // Seed jobs
-//       await Jobs.add({
-//         company: faker.company.companyName(),
-//         email: faker.internet.email(),
-//         jobTitle: faker.name.jobTitle(),
-//         location: faker.address.city(),
-//         phone: faker.phone.phoneNumber(),
-//         uid,
-//         user: {
-//           avatar: user.avatar,
-//           firstname: user.firstName,
-//           lastName: user.lastName,
-//           email: user.email,
-//         }
-//       })
+      // Seed jobs
+      await Jobs.add({
+        company: faker.company.companyName(),
+        email: faker.internet.email(),
+        jobTitle: faker.name.jobTitle(),
+        location: faker.address.city(),
+        phone: faker.phone.phoneNumber(),
+        uid,
+        skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
+        user: {
+          avatar: user.avatar,
+          firstname: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+        }
+      })
 
-//       await Jobs.add({
-//         company: faker.company.companyName(),
-//         email: faker.internet.email(),
-//         jobTitle: faker.name.jobTitle(),
-//         location: faker.address.city(),
-//         phone: faker.phone.phoneNumber(),
-//         uid,
-//         user: {
-//           avatar: user.avatar,
-//           firstname: user.firstName,
-//           lastName: user.lastName,
-//           email: user.email,
-//         }
-//       })
+      await Jobs.add({
+        company: faker.company.companyName(),
+        email: faker.internet.email(),
+        jobTitle: faker.name.jobTitle(),
+        location: faker.address.city(),
+        phone: faker.phone.phoneNumber(),
+        uid,
+        skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
+        user: {
+          avatar: user.avatar,
+          firstname: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+        }
+      })
 
-//       // Seed activities
-//       await Activities.add({
-//         region: 'חיפה',
-//         uid,
-//         user: {
-//           firstName: user.firstName,
-//           lastName: user.lastName,
-//           avatar: user.avatar,
-//           region: user.region
-//         },
-//         description: faker.lorem.sentence(),
-//         type: 'אירוע שיא',
-//         approved: false,
-//         total: faker.random.number({ min: 2, max: 12 })
-//       })
+      // Seed activities
+      await Activities.add({
+        region: 'חיפה',
+        uid,
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          avatar: user.avatar,
+          region: user.region
+        },
+        description: faker.lorem.sentence(),
+        type: 'אירוע שיא',
+        approved: false,
+        total: faker.random.number({ min: 2, max: 12 })
+      })
 
-//       await Activities.add({
-//         region: 'חיפה',
-//         uid,
-//         user: {
-//           firstName: user.firstName,
-//           lastName: user.lastName,
-//           avatar: user.avatar,
-//           region: user.region
-//         },
-//         description: faker.lorem.sentence(),
-//         type: 'אירוע שיא',
-//         approved: false,
-//         total: faker.random.number({ min: 2, max: 12 })
-//       })
+      await Activities.add({
+        region: 'חיפה',
+        uid,
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          avatar: user.avatar,
+          region: user.region
+        },
+        description: faker.lorem.sentence(),
+        type: 'אירוע שיא',
+        approved: false,
+        total: faker.random.number({ min: 2, max: 12 })
+      })
 
-//     } catch (error) {
-//       console.log('#########################')
-//       console.log('######### ERROR #########')
-//       console.log('#########################')
-//       console.log(error)
-//     }
-//   })
+    } catch (error) {
+      console.log('#########################')
+      console.log('######### ERROR #########')
+      console.log('#########################')
+      console.log(error)
+    }
+  })
 
 
 // USERS
@@ -271,6 +273,100 @@ exports.onDeleteActivity = functions.firestore
       await Users.doc(uid).set({
         activities
       }, { merge: true })
+    } catch (error) {
+      console.log('###############')
+      console.log('###############')
+      console.log('###############')
+      console.log(error)
+    }
+  })
+
+// JOBS
+exports.onCreateJob = functions.firestore
+  .document('jobs/{jobId}')
+  .onCreate(async (snapshot, context) => {
+    const { jobId } = context.params;
+    const { skills, location } = snapshot.data()
+    try {
+      const increment = admin.firestore.FieldValue.increment(1)
+
+      // Update job locations count
+      await Constants.doc('listedJobLocations').set({
+        [location]: increment
+      }, { merge: true })
+
+      // Update job skills count
+      await skills.forEach(async skill => {
+        await Constants.doc('listedJobSkills').update({
+          [skill]: increment
+        })
+      })
+    } catch (error) {
+      console.log('###############')
+      console.log('###############')
+      console.log('###############')
+      console.log(error)
+    }
+  })
+
+exports.onUpdateJob = functions.firestore
+  .document('jobs/{jobId}')
+  .onUpdate(async (change, context) => {
+    try {
+      if (change.after.exists) {
+        const { location: locationBefore, skills: skillsBefore } = change.before.data();
+        const { location: locationAfter, skills: skillsAfter } = change.after.data();
+
+        const increment = admin.firestore.FieldValue.increment(1);
+        const decrement = admin.firestore.FieldValue.increment(-1);
+
+        if (locationAfter !== locationBefore) {
+          await Constants.doc('listedJobLocations').set({
+            [locationBefore]: decrement,
+            [locationAfter]: increment
+          }, { merge: true })
+        }
+
+        if (skillsBefore !== skillsAfter) {
+          await skillsBefore.forEach(async skill => {
+            await Constants.doc('listedJobSkills').update({
+              [skill]: decrement
+            })
+          })
+
+          await skillsAfter.forEach(async skill => {
+            await Constants.doc('listedJobSkills').update({
+              [skill]: increment
+            })
+          })
+        }
+      }
+    } catch (error) {
+      console.log('###############')
+      console.log('###############')
+      console.log('###############')
+      console.log(error)
+    }
+  })
+
+exports.onDeleteJob = functions.firestore
+  .document('jobs/{jobId}')
+  .onDelete(async (snapshot, context) => {
+    const { location, skills } = snapshot.data()
+    try {
+      const decrement = admin.firestore.FieldValue.increment(-1)
+
+      // Update locations count
+      await Constants.doc('listedJobLocations').set({
+        [location]: decrement
+      }, { merge: true })
+
+      // Update skills count
+      await skills.forEach(async skill => {
+        await Constants.doc('listedJobSkills').update({
+          [skill]: decrement
+        })
+      })
     } catch (error) {
       console.log('###############')
       console.log('###############')
