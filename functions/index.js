@@ -10,102 +10,102 @@ const Saved = admin.firestore().collection('saved');
 const Jobs = admin.firestore().collection('jobs');
 
 // SEED
-exports.onSeed = functions.firestore
-  .document('seed/{seedId}')
-  .onWrite(async (change, context) => {
-    try {
+// exports.onSeed = functions.firestore
+//   .document('seed/{seedId}')
+//   .onWrite(async (change, context) => {
+//     try {
 
-      // Seed users
-      const user = {
-        region: 'חיפה',
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        avatar: faker.image.avatar(),
-        email: faker.internet.email(),
-        activities: {
-          pending: 0,
-          approved: 0
-        }
-      }
-      const userRef = await Users.add(user)
-      const uid = userRef.id;
+//       // Seed users
+//       const user = {
+//         region: 'חיפה',
+//         firstName: faker.name.firstName(),
+//         lastName: faker.name.lastName(),
+//         avatar: faker.image.avatar(),
+//         email: faker.internet.email(),
+//         activities: {
+//           pending: 0,
+//           approved: 0
+//         }
+//       }
+//       const userRef = await Users.add(user)
+//       const uid = userRef.id;
 
-      // Seed constants
-      await Constants.doc('listedMembers').set({
-        all: admin.firestore.FieldValue.arrayUnion(`${user.firstName} ${user.lastName}`)
-      })
+//       // Seed constants
+//       await Constants.doc('listedMembers').set({
+//         all: admin.firestore.FieldValue.arrayUnion(`${user.firstName} ${user.lastName}`)
+//       })
 
-      // Seed jobs
-      await Jobs.add({
-        company: faker.company.companyName(),
-        email: faker.internet.email(),
-        jobTitle: faker.name.jobTitle(),
-        location: faker.address.city(),
-        phone: faker.phone.phoneNumber(),
-        uid,
-        skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
-        user: {
-          avatar: user.avatar,
-          firstname: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-        }
-      })
+//       // Seed jobs
+//       await Jobs.add({
+//         company: faker.company.companyName(),
+//         email: faker.internet.email(),
+//         jobTitle: faker.name.jobTitle(),
+//         location: faker.address.city(),
+//         phone: faker.phone.phoneNumber(),
+//         uid,
+//         skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
+//         user: {
+//           avatar: user.avatar,
+//           firstname: user.firstName,
+//           lastName: user.lastName,
+//           email: user.email,
+//         }
+//       })
 
-      await Jobs.add({
-        company: faker.company.companyName(),
-        email: faker.internet.email(),
-        jobTitle: faker.name.jobTitle(),
-        location: faker.address.city(),
-        phone: faker.phone.phoneNumber(),
-        uid,
-        skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
-        user: {
-          avatar: user.avatar,
-          firstname: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-        }
-      })
+//       await Jobs.add({
+//         company: faker.company.companyName(),
+//         email: faker.internet.email(),
+//         jobTitle: faker.name.jobTitle(),
+//         location: faker.address.city(),
+//         phone: faker.phone.phoneNumber(),
+//         uid,
+//         skills: [faker.name.jobType(), faker.name.jobType(), faker.name.jobType()],
+//         user: {
+//           avatar: user.avatar,
+//           firstname: user.firstName,
+//           lastName: user.lastName,
+//           email: user.email,
+//         }
+//       })
 
-      // Seed activities
-      await Activities.add({
-        region: 'חיפה',
-        uid,
-        user: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          avatar: user.avatar,
-          region: user.region
-        },
-        description: faker.lorem.sentence(),
-        type: 'אירוע שיא',
-        approved: false,
-        total: faker.random.number({ min: 2, max: 12 })
-      })
+//       // Seed activities
+//       await Activities.add({
+//         region: 'חיפה',
+//         uid,
+//         user: {
+//           firstName: user.firstName,
+//           lastName: user.lastName,
+//           avatar: user.avatar,
+//           region: user.region
+//         },
+//         description: faker.lorem.sentence(),
+//         type: 'אירוע שיא',
+//         approved: false,
+//         total: faker.random.number({ min: 2, max: 12 })
+//       })
 
-      await Activities.add({
-        region: 'חיפה',
-        uid,
-        user: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          avatar: user.avatar,
-          region: user.region
-        },
-        description: faker.lorem.sentence(),
-        type: 'אירוע שיא',
-        approved: false,
-        total: faker.random.number({ min: 2, max: 12 })
-      })
+//       await Activities.add({
+//         region: 'חיפה',
+//         uid,
+//         user: {
+//           firstName: user.firstName,
+//           lastName: user.lastName,
+//           avatar: user.avatar,
+//           region: user.region
+//         },
+//         description: faker.lorem.sentence(),
+//         type: 'אירוע שיא',
+//         approved: false,
+//         total: faker.random.number({ min: 2, max: 12 })
+//       })
 
-    } catch (error) {
-      console.log('#########################')
-      console.log('######### ERROR #########')
-      console.log('#########################')
-      console.log(error)
-    }
-  })
+//     } catch (error) {
+//       console.log('#########################')
+//       console.log('######### ERROR #########')
+//       console.log('#########################')
+//       console.log(error)
+//     }
+//   })
 
 
 // USERS
