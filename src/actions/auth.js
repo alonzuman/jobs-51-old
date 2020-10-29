@@ -87,7 +87,6 @@ export const signInWithProvider = (provider) => async dispatch => {
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
 
       const fetchedUser = await Users.doc(uid).get()
-      console.log(fetchedUser.id, fetchedUser.data())
       const user = fetchedUser.data()
 
       if (fetchedUser.data()) {
