@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../../../actions/users'
 import UsersList from '../../../../components/lists/UsersList'
 import PageSection from '../../../../v2/atoms/PageSection'
+import UsersTable from './components/UsersTable'
 
 const Users = () => {
   const [view, setView] = useState('list')
@@ -22,16 +23,21 @@ const Users = () => {
     dispatch(getUsers(parsedQuery))
   }, [history.location.search])
 
+  const handleView = () => {
+    setView(view => view === 'list' ? 'table' : 'list')
+  }
+
   return (
     <Container>
       <PageSection>
         <PageHeader title={translation.usersPageTitle} backButton spaceBottom backLink='/admin' />
       </PageSection>
       <PageSection>
-        <UsersFilter view={view} setView={setView} />
+        <UsersFilter view={view} handleView={handleView} />
       </PageSection>
       <PageSection>
         {view === 'list' && <UsersList loading={loading} users={users} />}
+        {view === 'table' && <UsersTable loading={loading} users={users} />}
       </PageSection>
     </Container>
   )

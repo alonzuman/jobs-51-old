@@ -32,7 +32,7 @@ const BarContainer = styled.div`
   }
 `
 
-const UsersFilter = ({ view, setView }) => {
+const UsersFilter = ({ view, handleView }) => {
   const { theme, translation } = useSelector(state => state.theme)
   const [isOpen, setIsOpen] = useState(false)
   const history = useHistory()
@@ -57,6 +57,8 @@ const UsersFilter = ({ view, setView }) => {
           return fullName
         } else if ([...roles, 'pending'].includes(parsedQuery[v])) {
           return translation.roles[parsedQuery[v]]
+        } else if (v === 'view') {
+          return null
         } else {
           return parsedQuery[v]
         }
@@ -70,7 +72,8 @@ const UsersFilter = ({ view, setView }) => {
       firstName: selectedFullName ? selectedFullName.split(' ')[0] : '',
       lastName: selectedFullName ? selectedFullName.split(' ')[1] : '',
       region: selectedRegion,
-      role: selectedRole
+      role: selectedRole,
+      view
     }
 
     setFilters([selectedFullName, selectedRegion])
@@ -87,10 +90,8 @@ const UsersFilter = ({ view, setView }) => {
   const clearFilters = () => {
     setSelectedFullName('')
     setSelectedRegion('')
-  }
-
-  const handleView = () => {
-    setView(view === 'list' ? 'table' : 'list')
+    setSelectedRole('')
+    setSelectedRegion('')
   }
 
   return (
@@ -99,7 +100,7 @@ const UsersFilter = ({ view, setView }) => {
         <div className='flex align__center'>
           <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
           {/* TODO ALON fix this to table */}
-          {/* {width > 768 && <Button className='mr-5' variant='outlined' onClick={handleView}>{translation.changeView}</Button>} */}
+          {width > 768 && <Button className='mr-5' variant='outlined' onClick={handleView}>{translation.changeView}</Button>}
         </div>
         <ChipsGrid chips={filters} />
       </BarContainer>
