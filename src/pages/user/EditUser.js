@@ -28,8 +28,8 @@ const User = ({ match }) => {
   const dispatch = useDispatch()
 
   // User fields for update
-  const [isLookingForJob, setIsLookingForJob] = useState(null)
-  const [isVolunteer, setIsVolunteer] = useState(null)
+  const [isLookingForJob, setIsLookingForJob] = useState(false)
+  const [isVolunteer, setIsVolunteer] = useState(false)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [avatar, setAvatar] = useState('')
@@ -41,6 +41,8 @@ const User = ({ match }) => {
   const [serviceYear, setServiceYear] = useState('')
   const [region, setRegion] = useState('')
   const [role, setRole] = useState('')
+  const [stateApproved, setApproved] = useState(0)
+  const [statePending, setPending] = useState(0)
 
   const handleSubmit = async () => {
     const newUser = {
@@ -57,6 +59,10 @@ const User = ({ match }) => {
       hometown,
       serviceYear,
       region,
+      activities: {
+        approved: stateApproved,
+        pending: statePending
+      },
       role
     }
 
@@ -70,11 +76,11 @@ const User = ({ match }) => {
   }
 
   useEffect(() => {
-    setFirstName(user?.firstName)
-    setLastName(user?.lastName)
-    setAvatar(user?.avatar)
-    setIsLookingForJob(!!user?.lookingForJob)
-    setIsVolunteer(!!user?.volunteer)
+    setFirstName(user?.firstName || '')
+    setLastName(user?.lastName || '')
+    setAvatar(user?.avatar || '')
+    setIsLookingForJob(user?.lookingForJob || false)
+    setIsVolunteer(user?.volunteer || false)
     setAbout(user?.about || '')
     setPhone(user?.phone || '')
     setHometown(user?.hometown || '')
@@ -83,6 +89,8 @@ const User = ({ match }) => {
     setServiceYear(user?.serviceYear || '')
     setRegion(user?.region || '')
     setRole(user?.role || '')
+    setPending(user?.activites?.pending || 0)
+    setApproved(user?.activities?.approved || 0)
   }, [user])
 
   useEffect(() => {
@@ -132,6 +140,10 @@ const User = ({ match }) => {
         user={user}
         stateRole={role}
         setRole={setRole}
+        stateApproved={stateApproved}
+        setApproved={setApproved}
+        statePending={statePending}
+        setPending={setPending}
         editing
       />
       <UserPageBio

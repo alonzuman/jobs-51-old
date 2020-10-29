@@ -192,6 +192,8 @@
   "showAll": "הצג הכל",
   "userActivitiesTitle": "פעילויות ההתנדבות של",
   "noDataToShow": "אין מידע להציג",
+  "pendingHours": "שעות פעילות ממתינות לאישור",
+  "approvedHours": "שעות פעילות מאושרות",
   "privacyPolicy": "מדיניות פרטיות",
   "forwardSlash": "שדה זה אינו יכול להכיל '/'",
   "continue": "המשך",

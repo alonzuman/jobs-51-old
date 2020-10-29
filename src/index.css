@@ -155,6 +155,10 @@ a:hover {
   flex-direction: column!important;
 }
 
+.flex__row {
+  flex-direction: row!important;
+}
+
 .flex__4 {
   flex: 4!important;
 }
@@ -558,6 +562,10 @@ a:hover {
 
 .mnw-196 {
   min-width: 196px!important;
+}
+
+.mxw-104 {
+  max-width: 104px!important;
 }
 
 .mxw-196 {

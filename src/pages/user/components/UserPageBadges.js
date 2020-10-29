@@ -1,4 +1,4 @@
-import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core'
+import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -29,11 +29,15 @@ const UserPageBadges = ({
   stateRegion,
   setRegion,
   stateRole,
+  stateApproved,
+  setApproved,
+  statePending,
+  setPending,
   setRole
 }) => {
   const { role } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  const { volunteer, lookingForJob, activities, role: userRole  } = user
+  const { volunteer, lookingForJob, activities, role: userRole } = user
   const isPending = checkPermissions(user?.role) === 0;
   const hasApprovedActivities = activities?.approved !== 0;
   const hasPostedJobs = user?.jobs?.length !== 0;
@@ -102,6 +106,11 @@ const UserPageBadges = ({
             className='mxw-224 mb-1'
             options={regions}
           />}
+        {isVolunteer && checkPermissions(role) >= 3 &&
+          <div className='flex align__center flex__row'>
+            <TextField className='ml-5 mxw-196' size='small' variant='outlined' label={translation.approvedHours} type='number' value={stateApproved} onChange={e => setApproved(parseInt(e.target.value))} />
+            <TextField className='mxw-196' size='small' variant='outlined' label={translation.pendingHours} type='number' value={statePending} onChange={e => setPending(parseInt(e.target.value))} />
+          </div>}
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {
