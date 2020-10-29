@@ -77,7 +77,7 @@ const JobsFilter = () => {
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleClose} />
         <DialogContent className='full_width__dialog'>
           <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />
-          <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />
+          {/* <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} /> */}
           <IndustryFilter selectedIndustry={selectedIndustry} setSelectedIndustry={setSelectedIndustry} />
           {/* TODO ALON finish date filter */}
           {/* <DateFilter selectedMinDate={selectedMinDate} setSelectedMinDate={setSelectedMinDate} /> */}
