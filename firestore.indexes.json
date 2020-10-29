@@ -121,6 +121,34 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "savedIds",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "savedJobs",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "skills",
           "arrayConfig": "CONTAINS"
         },
