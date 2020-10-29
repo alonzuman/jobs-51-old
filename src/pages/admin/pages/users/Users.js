@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../../../actions/users'
 import UsersList from '../../../../components/lists/UsersList'
 import PageSection from '../../../../v2/atoms/PageSection'
-import UsersTable from './components/UsersTable'
+import Table from '../../../../v2/organisms/Table'
+import { Button, CircularProgress, Typography } from '@material-ui/core'
 
 const Users = () => {
   const [view, setView] = useState('list')
-  const { loading, users } = useSelector(state => state.users)
+  const [data, setData] = useState([])
+  const { loading, users, loadingMore, noMoreResults } = useSelector(state => state.users)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -27,6 +29,42 @@ const Users = () => {
     setView(view => view === 'list' ? 'table' : 'list')
   }
 
+
+  const mapData = () => {
+    if (users) {
+      let arrayHeaders = [
+        translation['firstName'],
+        translation['lastName'],
+        translation['region'],
+        translation['hometown'],
+        translation['approved'],
+        translation['pending'],
+      ]
+      let array = [arrayHeaders]
+      users.forEach(user => {
+        const { firstName, lastName, activities, region, hometown } = user;
+        array.push([
+          firstName,
+          lastName,
+          region,
+          hometown,
+          activities.approved,
+          activities.pending
+        ])
+      })
+      setData([...array])
+    }
+  }
+
+  useEffect(() => { mapData() }, [users])
+
+  const loadMoreUsers = () => {
+    const { search } = history.location
+    const parsedQuery = qs.parse(search)
+    const last = users[users?.length - 1]
+    dispatch(getUsers(parsedQuery, last))
+  }
+
   return (
     <Container>
       <PageSection>
@@ -37,7 +75,11 @@ const Users = () => {
       </PageSection>
       <PageSection>
         {view === 'list' && <UsersList loading={loading} users={users} />}
-        {view === 'table' && <UsersTable loading={loading} users={users} />}
+        {view === 'table' && <Table loading={loading} data={data} />}
+      </PageSection>
+      <PageSection className='flex align__center justify__center mt-1'>
+        {users?.length !== 0 && noMoreResults && <Typography variant='body1'>{translation.noMoreResults}</Typography>}
+        {!noMoreResults && <Button onClick={loadMoreUsers}>{loadingMore ? <CircularProgress color='primary' style={{ height: 24, width: 24 }} /> : translation.loadMore}</Button>}
       </PageSection>
     </Container>
   )

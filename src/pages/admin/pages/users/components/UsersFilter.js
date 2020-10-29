@@ -99,8 +99,7 @@ const UsersFilter = ({ view, handleView }) => {
       <BarContainer>
         <div className='flex align__center'>
           <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
-          {/* TODO ALON fix this to table */}
-          {width > 768 && <Button className='mr-5' variant='outlined' onClick={handleView}>{translation.changeView}</Button>}
+          <Button className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>{translation.changeView}</Button>
         </div>
         <ChipsGrid chips={filters} />
       </BarContainer>

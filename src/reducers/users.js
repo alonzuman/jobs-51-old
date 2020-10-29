@@ -5,7 +5,9 @@ const initialState = {
     lastPosition: ''
   },
   users: [],
+  noMoreResults: false,
   loading: false,
+  loadingMore: false,
   isUpdating: false,
   isDeleting: false
 }
@@ -14,6 +16,16 @@ export const usersReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case 'USERS_LOADING_MORE':
+      return {
+        ...state,
+        loadingMore: true
+      }
+    case 'SET_NO_MORE_RESULTS':
+      return {
+        ...state,
+        noMoreResults: payload
+      }
     case 'USERS_LOADING':
       return {
         ...state,
@@ -66,6 +78,13 @@ export const usersReducer = (state = initialState, action) => {
           ...state.user,
           volunteer: payload.currentValue
         }
+      }
+    case 'SET_MORE_USERS':
+      return {
+        ...state,
+        users: [...state.users, ...payload.users],
+        loading: false,
+        loadingMore: false
       }
     case 'SET_USERS':
       return {

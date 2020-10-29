@@ -37,12 +37,27 @@ export const getUser = (uid) => async dispatch => {
   }
 }
 
-export const getUsers = query => async dispatch => {
+export const getUsers = (query, last) => async dispatch => {
   dispatch({
-    type: 'USERS_LOADING'
+    type: 'SET_NO_MORE_RESULTS',
+    payload: false
   })
+  if (!last) {
+    dispatch({
+      type: 'USERS_LOADING'
+    })
+  } else {
+    dispatch({
+      type: 'USERS_LOADING_MORE'
+    })
+  }
   try {
     const { firstName, lastName, region, role } = query
+
+    let oldUsers;
+    if (last) {
+      oldUsers = store.getState().users.users
+    }
 
     let queryRef = usersRef
 
@@ -62,14 +77,33 @@ export const getUsers = query => async dispatch => {
       queryRef = queryRef.where('role', '==', role)
     }
 
-    const snapshot = await queryRef.orderBy('dateCreated', 'desc').limit(10).get()
+    queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10);
+
+    if (last) {
+      queryRef = queryRef.startAfter(last?.dateCreated)
+    }
+
+    const snapshot = await queryRef.get()
 
     let users = []
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: 'SET_USERS',
-      payload: { users }
-    })
+    if (users?.length === 0) {
+      dispatch({
+        type: 'SET_NO_MORE_RESULTS',
+        payload: true
+      })
+    }
+    if (last) {
+      dispatch({
+        type: 'SET_MORE_USERS',
+        payload: { users }
+      })
+    } else {
+      dispatch({
+        type: 'SET_USERS',
+        payload: { users }
+      })
+    }
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
