@@ -2,7 +2,7 @@ import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
-const usersRef = db.collection('users')
+const Users = db.collection('users')
 const Activities = db.collection('activities')
 
 export const addActivity = (activity) => async dispatch => {
@@ -21,7 +21,7 @@ export const addActivity = (activity) => async dispatch => {
     const { total } = activity
     await Activities.doc(ref.id).set(newActivity)
     const increment = firebase.firestore.FieldValue.increment(total);
-    const userRef = await usersRef.doc(uid)
+    const userRef = await Users.doc(uid)
     await userRef.update('activities.pending', increment)
     dispatch({
       type: 'ADD_ACTIVITY',
@@ -57,7 +57,7 @@ export const getUserActivities = ({ uid }) => async dispatch => {
   })
 
   try {
-    const userSnap = await usersRef.doc(uid).get()
+    const userSnap = await Users.doc(uid).get()
     const user = {
       uid: userSnap.id,
       ...userSnap.data()
@@ -72,7 +72,7 @@ export const getUserActivities = ({ uid }) => async dispatch => {
     let managersSnapshot;
     let managerResults = []
     if (region) {
-      managersSnapshot = await usersRef.where('uid', 'in', regionManagers[region]).get()
+      managersSnapshot = await Users.where('uid', 'in', regionManagers[region]).get()
       managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
     }
 
@@ -94,17 +94,10 @@ export const getUserActivities = ({ uid }) => async dispatch => {
 }
 
 export const approveActivity = (activity) => async dispatch => {
-  // TODO add condition that checks if its unapproved already
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
     await Activities.doc(id).set({ approved: true }, { merge: true })
-    const increment = firebase.firestore.FieldValue.increment(total);
-    const decrement = firebase.firestore.FieldValue.increment(-total);
-
-    const userRef = await usersRef.doc(uid)
-    await userRef.update('activities.pending', decrement)
-    await userRef.update('activities.approved', increment)
 
     if (authState.uid === uid) {
       dispatch({
@@ -137,12 +130,6 @@ export const unApproveActivity = (activity) => async dispatch => {
     const authState = store.getState().auth
     const { id, total, uid } = activity
     await Activities.doc(id).set({ approved: false }, { merge: true })
-    const increment = firebase.firestore.FieldValue.increment(total);
-    const decrement = firebase.firestore.FieldValue.increment(-total);
-
-    const userRef = await usersRef.doc(uid)
-    await userRef.update('activities.approved', decrement)
-    await userRef.update('activities.pending', increment)
 
     if (authState.uid === uid) {
       dispatch({
@@ -175,22 +162,15 @@ export const deleteActivity = (activity) => async dispatch => {
   })
   try {
     const { activities } = store.getState().auth
-    const { id, uid, total } = activity
+    const { id, total, approved } = activity
     await Activities.doc(id).delete()
-    const userRef = await usersRef.doc(uid)
-    const decrement = firebase.firestore.FieldValue.increment(-total);
 
-    if (activity.approved) {
-      await userRef.update('activities.approved', decrement)
-    } else {
-      await userRef.update('activities.pending', decrement)
-    }
     dispatch({
       type: 'SET_USER',
       payload: {
         activities: {
-          pending: activity.approved ? activities.pending : activities.pending - total,
-          approved: !activity.approved ? activities.approved : activities.approved - total,
+          pending: approved ? activities.pending : activities.pending - total,
+          approved: !approved ? activities.approved : activities.approved - total,
         }
       }
     })
@@ -252,17 +232,4 @@ export const getActivities = queryParams => async dispatch => {
       type: 'ACTIVITY_FAIL'
     })
   }
-}
-
-export const clearActivityFilters = () => async dispatch => {
-  dispatch({
-    type: 'CLEAR_ACTIVITY_FILTERS'
-  })
-}
-
-export const changeView = (type) => async dispatch => {
-  dispatch({
-    type: 'CHANGE_VIEW',
-    payload: type
-  })
 }

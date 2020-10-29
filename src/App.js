@@ -29,6 +29,7 @@ import Activity from './pages/activity/Activity'
 import Saved from './pages/saved/Saved'
 import Users from './pages/admin/pages/users/Users'
 import Activities from './pages/admin/pages/activities/Activities'
+import UserActivities from './pages/user/UserActivities'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -67,6 +68,7 @@ function App() {
             <ProtectedRoute exact path='/users' component={Employees} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
+            <ProtectedRoute exact requiredRole='user' path='/users/:id/activities' component={UserActivities} />
 
             {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />

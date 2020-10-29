@@ -128,6 +128,7 @@
   "status": "סטטוס",
   "usersEmptyState": "לא נמצאו תוצאות",
   "role": "תפקיד",
+  "allActivities": "כל שעות הפעילות של",
   "roles": {
     "pending": "ממתין לאישור",
     "user": "חבר עמותה",
@@ -188,6 +189,7 @@
   "all": "הכל",
   "table": "טבלה",
   "grid": "רשימה",
+  "showAll": "הצג הכל",
   "noDataToShow": "אין מידע להציג",
   "privacyPolicy": "מדיניות פרטיות",
   "forwardSlash": "שדה זה אינו יכול להכיל '/'",

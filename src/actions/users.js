@@ -79,19 +79,6 @@ export const getUsers = query => async dispatch => {
   }
 }
 
-export const setUserFilters = (filter) => async dispatch => {
-  dispatch({
-    type: 'SET_USERS_FILTER',
-    payload: { ...filter }
-  })
-}
-
-export const clearUserFilters = () => async dispatch => {
-  dispatch({
-    type: 'CLEAR_USERS_FILTERS'
-  })
-}
-
 export const getEmployees = () => async dispatch => {
   dispatch({
     type: 'USERS_LOADING'
@@ -113,16 +100,13 @@ export const getEmployees = () => async dispatch => {
   }
 }
 
-export const deleteUser = ({ uid, firstName, lastName }) => async dispatch => {
+export const deleteUser = (uid) => async dispatch => {
   dispatch({
     type: 'USER_LOADING'
   })
 
   try {
-    const snapshot = await db.collection('activities').where('uid', '==', uid).get()
-    snapshot.forEach(async doc => await db.collection('activities').doc(doc.id).delete())
     await db.collection('users').doc(uid).delete()
-
     dispatch(setFeedback({
       type: 'success',
       msg: 'Success'

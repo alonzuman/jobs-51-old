@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { ListItem, ListItemText, Box, Typography, Paper, IconButton, Grid, Avatar, CardActions, CardContent, Card, Chip } from '@material-ui/core'
-import { translateDate, activityTypeColor, checkPermissions } from '../../utils'
+import { ListItemText, Box, Typography, IconButton, Avatar, CardActions, CardContent, Card, Chip } from '@material-ui/core'
+import { translateDate, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ActivityCardActions from './ActivityCardActions';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
+import AvatarWithName from '../../v2/molecules/AvatarWithName';
 
 const IconButtonContainer = styled.div`
   transform: ${props => props.open ? 'rotate(-180deg)' : 'none'};
@@ -16,7 +17,7 @@ const IconButtonContainer = styled.div`
 const DatesContainer = styled.div`
   border-left: 1px solid ${props => props.borderColor};
   text-align: center;
-  padding-left: 16px;
+  padding-left: 8px;
   min-width: 72px;
 `
 
@@ -58,7 +59,7 @@ const ActivityCard = ({ activity, showUser = true }) => {
   return (
     <>
       <Card variant='outlined' onClick={() => setOpen(!open)}>
-        <CardContent className='pb-25 pl-5'>
+        <CardContent className='pb-25'>
           <CardBody>
             <DatesContainer borderColor={theme?.palette?.border?.main}>
               <Typography variant="subtitle1">{month}</Typography>
@@ -81,18 +82,13 @@ const ActivityCard = ({ activity, showUser = true }) => {
                   </CardTextContainer>}
               />
             </InfoContainer>
-            {showUser && (
-              <Link to={checkPermissions(role) >= 3 && `/users/${activity.uid}`}>
-                <Box className='flex align__center justify__center flex__column'>
-                  <Avatar style={{ height: 32, width: 32 }} src={activity?.user?.avatar}>{activity?.user?.firstName?.charAt(0)}</Avatar>
-                  <Typography className='lh-15 mt-25' variant="subtitle1" >
-                    {activity?.user?.firstName}
-                  </Typography>
-                  <Typography className='lh-15' variant="subtitle1" >
-                    {activity?.user?.lastName}
-                  </Typography>
-                </Box>
-              </Link>)}
+            {showUser &&
+              <AvatarWithName
+                uid={activity?.uid}
+                firstName={activity?.user?.firstName}
+                lastName={activity?.user?.lastName}
+                imgUrl={activity?.user?.avatar}
+              />}
           </CardBody>
         </CardContent>
         {(isAdmin || isUser) && <CardActions className='flex align__center justify__center pt-0'>

@@ -65,7 +65,7 @@ const User = ({ match }) => {
   }
 
   const handleDelete = async () => {
-    await dispatch(deleteUser({ uid, firstName: user?.firstName, lastName: user?.lastName }))
+    await dispatch(deleteUser(uid))
     history.goBack()
   }
 

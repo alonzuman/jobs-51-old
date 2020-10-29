@@ -1,7 +1,8 @@
-import { Divider, Typography } from '@material-ui/core'
+import { Button, Divider, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
@@ -18,6 +19,17 @@ const Container = styled.div`
   }
 `
 
+const SectionHeader = styled.div`
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  justify-content: space-between;
+`
+
+const SectionHeaderRight = styled.div``
+
+const SectionHeaderLeft = styled.div``
+
 const UserPageActivitiesCarousel = ({ user, loading }) => {
   const { translation } = useSelector(state => state.theme)
   const { activitiesList } = user
@@ -32,10 +44,18 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
   } else if (activitiesList?.length !== 0) {
     return (
       <Container>
-        <Divider className='mr-1 ml-1' />
-        <br />
-        <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({activitiesList?.length})</Typography>
-        <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
+        <Divider className='mr-1 mb-1 ml-1' />
+        <SectionHeader>
+          <SectionHeaderRight>
+            <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({activitiesList?.length})</Typography>
+            <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
+          </SectionHeaderRight>
+          <SectionHeaderLeft>
+            <Link to={`${user?.uid}/activities`}>
+              <Button className='pt-25 pb-25 pl-25 pr-25' color='primary'>{translation.showAll}</Button>
+            </Link>
+          </SectionHeaderLeft>
+        </SectionHeader>
         <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
           {activitiesList?.map((v, i) => <SwiperSlide key={i}><ActivityCard showUser={false} activity={v} /></SwiperSlide>)}
         </Swiper>
