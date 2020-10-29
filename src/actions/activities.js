@@ -1,6 +1,5 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import firebase from 'firebase'
 import store from '../store'
 const Users = db.collection('users')
 const Activities = db.collection('activities')
@@ -11,18 +10,15 @@ export const addActivity = (activity) => async dispatch => {
     type: 'ACTIVITY_LOADING'
   })
   try {
-    const ref = Activities.doc()
+    const activityRef = Activities.doc()
     const newActivity = {
       ...activity,
-      id: ref.id,
+      id: activityRef.id,
       uid,
       dateCreated: Date.now()
     }
     const { total } = activity
-    await Activities.doc(ref.id).set(newActivity)
-    const increment = firebase.firestore.FieldValue.increment(total);
-    const userRef = await Users.doc(uid)
-    await userRef.update('activities.pending', increment)
+    await Activities.doc(activityRef.id).set(newActivity)
     dispatch({
       type: 'ADD_ACTIVITY',
       payload: { newActivity }
@@ -49,8 +45,8 @@ export const addActivity = (activity) => async dispatch => {
   }
 }
 
-export const getUserActivities = ({ uid }) => async dispatch => {
-  const { regionManagers } = store.getState().constants
+export const getUserActivities = (uid) => async dispatch => {
+  // const { regionManagers } = store.getState().constants
 
   dispatch({
     type: 'ACTIVITY_LOADING'
@@ -62,25 +58,26 @@ export const getUserActivities = ({ uid }) => async dispatch => {
       uid: userSnap.id,
       ...userSnap.data()
     }
-    const { region } = user;
+    // TODO
+    // const { region } = user;
 
     const activitiesSnapshot = await Activities.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
     activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 
     // Get region admins
-    let managersSnapshot;
-    let managerResults = []
-    if (region) {
-      managersSnapshot = await Users.where('uid', 'in', regionManagers[region]).get()
-      managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
-    }
+    // let managersSnapshot;
+    // let managerResults = []
+    // if (region) {
+    //   managersSnapshot = await Users.where('uid', 'in', regionManagers[region]).get()
+    //   managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
+    // }
 
     dispatch({
       type: 'SET_ACTIVITIES',
       payload: {
         activities: results,
-        regionManagers: managerResults,
+        // regionManagers: managerResults,
         currentUid: uid
       }
     })

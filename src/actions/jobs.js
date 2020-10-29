@@ -64,7 +64,6 @@ export const updateJob = (newJob) => async dispatch => {
   }
 }
 
-// TODO delete
 export const editJob = (job, id) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
@@ -119,7 +118,7 @@ export const deleteJob = (job) => async dispatch => {
   }
 }
 
-export const getJobs = query => async dispatch => {
+export const getJobs = (query) => async dispatch => {
   dispatch({
     type: 'JOB_LOADING'
   })

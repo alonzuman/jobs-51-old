@@ -25,7 +25,7 @@ const Activity = ({ match }) => {
 
   useEffect(() => {
     if (uid !== currentUid) {
-      dispatch(getUserActivities({ uid }))
+      dispatch(getUserActivities(uid))
     }
   }, [dispatch, uid])
 

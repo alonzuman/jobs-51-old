@@ -111,8 +111,8 @@ const UsersFilter = ({ view, setView }) => {
           <RoleFilter selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
         </DialogContent>
         <DialogActionsContainer>
+          <Button onClick={clearFilters} >{translation.clear}</Button>
           <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>
-          <Button onClick={clearFilters} variant='outlined'>{translation.clear}</Button>
         </DialogActionsContainer>
       </Dialog>
     </Container>

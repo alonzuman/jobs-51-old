@@ -21,7 +21,7 @@ const StatItem = styled.li`
 `
 
 const ActivityPageStats = ({ loading, pending, approved, region }) => {
-  const { translation } = useSelector(state => state.theme)
+  const { translation, theme } = useSelector(state => state.theme)
 
   if (loading) {
     return (
@@ -39,7 +39,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
         {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
         <StatsList>
           <StatItem>
-            <CheckCircleOutlineIcon style={{ color: '00965f' }} className=' medium__icon ml-5' />
+            <CheckCircleOutlineIcon style={{ color: theme?.palette?.primary?.main }} className=' medium__icon ml-5' />
             <Typography variant='body1'>{approved.toFixed(1)} {translation.volHours} {translation.areApproved}</Typography>
           </StatItem>
           <StatItem>

@@ -72,8 +72,8 @@ const ActivitiesFilter = () => {
           />
         </DialogContent>
         <DialogActionsContainer>
-          <Button onClick={handleSubmit} color='primary' variant='contained'>{translation.apply}</Button>
           <Button disabled={!selectedRegion} onClick={clearFilters}>{translation.clear}</Button>
+          <Button onClick={handleSubmit} color='primary' variant='contained'>{translation.apply}</Button>
         </DialogActionsContainer>
       </Dialog>
     </Container>
