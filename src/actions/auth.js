@@ -86,16 +86,11 @@ export const signInWithProvider = (provider) => async dispatch => {
       const result = await firebase.auth().signInWithPopup(firebaseProvider())
       const { uid, displayName, email, photoURL, phoneNumber } = result.user
 
-      const checkLegitRes = await dispatch(checkIfUserLegit({
-        email,
-        firstName: displayName?.split(' ')[0],
-        lastName: displayName?.split(' ')[1]
-      }))
-
       const fetchedUser = await Users.doc(uid).get()
+      console.log(fetchedUser.id, fetchedUser.data())
       const user = fetchedUser.data()
 
-      if (fetchedUser.id) {
+      if (fetchedUser.data()) {
         dispatch({
           type: 'SIGNED_UP',
           payload: { ...user }
@@ -104,24 +99,24 @@ export const signInWithProvider = (provider) => async dispatch => {
           type: 'success',
           msg: 'Welcome'
         }))
-      } else if (!fetchedUser.id || checkLegitRes) {
+      } else if (!fetchedUser.data()) {
         const newUser = {
           uid,
           email,
-          firstName: displayName?.split(' ')[0] || checkLegitRes?.firstName || '',
-          lastName: displayName?.split(' ')[1] || checkLegitRes?.lastName || '',
-          serviceYear: checkLegitRes?.serviceYear || '',
+          firstName: displayName?.split(' ')[0] || '',
+          lastName: displayName?.split(' ')[1] || '',
+          serviceYear: '',
           avatar: photoURL || '',
           phone: phoneNumber || '',
-          volunteer: checkLegitRes?.volunteer || false,
+          volunteer: false,
           lookingForJob: false,
           activities: {
             pending: 0,
             approved: 0
           },
-          role: user?.role ? user?.role : 'pending',
+          role: 'pending',
           dateCreated: Date.now(),
-          region: checkLegitRes?.region || ''
+          region: ''
         }
 
         await Users.doc(uid).set(newUser, { merge: true })
@@ -131,13 +126,8 @@ export const signInWithProvider = (provider) => async dispatch => {
           payload: { ...newUser }
         })
 
-        dispatch(setFeedback({
-          type: 'success',
-          msg: 'Welcome'
-        }))
-      } else {
         return dispatch(setFeedback({
-          type: 'error',
+          type: 'success',
           msg: 'userNotListedInConst'
         }))
       }
