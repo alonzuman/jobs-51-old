@@ -11,7 +11,7 @@ import PageHeader from '../../v2/organisms/PageHeader'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import NotificationIcon from '../../v2/molecules/NotificationIcon'
 
 const LinksContainer = styled.div`
   width: 100%;
@@ -53,7 +53,7 @@ const Profile = () => {
           <Link to={`/${uid}/notifications`}>
             <ListItem button>
               <ListItemIcon>
-                <NotificationsNoneIcon />
+                <NotificationIcon disableRipple />
               </ListItemIcon>
               <ListItemText>
                 {translation.notifications}

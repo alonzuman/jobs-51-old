@@ -11,11 +11,8 @@ import Container from '../../v2/atoms/Container'
 import AddRegionDialog from '../../v2/layout/AddRegionDialog'
 import { auth } from '../../firebase'
 import PageHeader from '../../v2/organisms/PageHeader'
-import { IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-
-// Icons
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import NotificationIcon from '../../v2/molecules/NotificationIcon'
 
 const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
@@ -55,7 +52,7 @@ const Activity = ({ match }) => {
         loading={loading}
         title={translation.activity}
         titleClassName='mt-0'
-        secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationsNoneIcon /></IconButton></Link>}
+        secondary={<Link to={`/${uid}/notifications`}><NotificationIcon /></Link>}
       />
       <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
       <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />

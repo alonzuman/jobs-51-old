@@ -3,9 +3,8 @@ import { CardHeader, Avatar, CardActions, Card, Chip } from '@material-ui/core'
 import moment from 'moment'
 import 'moment/locale/he'
 import { Link } from 'react-router-dom';
-import SaveJobButton from '../../v2/molecules/SaveJobButton'
 
-const JobCard = ({ job, loading }) => {
+const JobCard = ({ job }) => {
   const timeAgo = () => {
     moment.locale('he')
     return moment(job?.dateCreated).fromNow()

@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import { Badge, BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { checkPermissions } from '../../../utils'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 // Icons
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import ActivityIcon from '../../../v2/molecules/ActivityIcon';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -27,10 +27,36 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
-      <BottomNavigationAction label={translation.findJobs} component={Link} to='/home' value='/home' icon={<SearchIcon />} />
-      {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to={`/${uid}/activity`} value={`/${uid}/activity`} icon={<AssessmentOutlinedIcon />} />}
-      <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={<AccountCircleOutlinedIcon />} />
-      {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={<SupervisorAccountOutlinedIcon />} />}
+      <BottomNavigationAction
+        label={translation.findJobs}
+        component={Link}
+        to='/home'
+        value='/home'
+        icon={<SearchIcon />}
+      />
+      {volunteer &&
+        <BottomNavigationAction
+          label={translation.activity}
+          component={Link}
+          to={`/${uid}/activity`}
+          value={`/${uid}/activity`}
+          icon={<ActivityIcon />}
+        />}
+      <BottomNavigationAction
+        label={translation.profile}
+        component={Link}
+        to='/profile'
+        value='/profile'
+        icon={<AccountCircleOutlinedIcon />}
+      />
+      {checkPermissions(role) >= 3 &&
+        <BottomNavigationAction
+          label={translation.adminPage}
+          component={Link}
+          to='/admin'
+          value='/admin'
+          icon={<SupervisorAccountOutlinedIcon />}
+        />}
     </BottomNavigation>
   )
 }

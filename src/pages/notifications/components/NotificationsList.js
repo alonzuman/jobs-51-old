@@ -1,6 +1,7 @@
 import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import NotificationCard from '../../../components/cards/NotificationCard'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 
 const NotificationsList = ({ loading, all }) => {
@@ -14,7 +15,7 @@ const NotificationsList = ({ loading, all }) => {
   } else if (!loading && all?.length !== 0) {
     return (
       <Grid>
-        {all?.map((v, i) => <Grid item key={i}>notification</Grid>)}
+        {all?.map((v, i) => <Grid item key={i}><NotificationCard notification={v} /></Grid>)}
       </Grid>
     )
   } else {

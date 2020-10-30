@@ -243,7 +243,7 @@ exports.onUpdateActivity = functions.firestore
   .onUpdate(async (change, context) => {
     const { activityId } = context.params;
     const { approved: approvedBefore } = change.before.data();
-    const { uid, approved: approvedAfter, total } = change.after.data();
+    const { date, uid, approved: approvedAfter, total, type, description } = change.after.data();
     try {
       const increment = admin.firestore.FieldValue.increment(total)
       const decrement = admin.firestore.FieldValue.increment(-total)
@@ -253,7 +253,14 @@ exports.onUpdateActivity = functions.firestore
           await Notifications.add({
             uid,
             activityId,
-            msg: 'activityApproved'
+            activity: {
+              description,
+              type,
+              date
+            },
+            type: 'activityApproved',
+            seen: false,
+            dateCreated: Date.now()
           })
         }
         return await Users.doc(uid).set({

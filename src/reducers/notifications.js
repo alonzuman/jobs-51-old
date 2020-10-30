@@ -1,5 +1,6 @@
 const initialState = {
   all: [],
+  unseen: [],
   loading: false
 }
 
@@ -20,13 +21,15 @@ export const notificationsReducer = (state = initialState, action) => {
     case SET_ALL:
       return {
         ...state,
-        ...payload,
+        all: [...payload],
+        unseen: [...payload?.filter(v => !v.seen)],
         loading: false
       }
     case MARK_SEEN:
       return {
         ...state,
-        all: [...state.all.filter(v => v.id === payload.id), payload]
+        unseen: [...state.unseen.filter(v => v.id !== payload.id)],
+        loading: false
       }
     case ERROR:
       return {

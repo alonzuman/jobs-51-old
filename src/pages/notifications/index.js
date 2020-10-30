@@ -15,7 +15,9 @@ const Notifications = ({ match }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getNotifications(uid))
+    if (all?.length === 0) {
+      dispatch(getNotifications(uid))
+    }
   }, [uid])
 
   return (

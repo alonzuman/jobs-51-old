@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { app } from './firebase'
-import { setUser, signOut } from './actions'
+import { getNotifications, setUser, signOut } from './actions'
 import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
 import { checkPermissions } from './utils'
 import NoPermissions from './NoPermissions'
@@ -18,6 +18,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loading, setLoading] = useState(true)
   const { isFetched } = useSelector(state => state.constants)
   const { role } = useSelector(state => state.auth)
+  const { all } = useSelector(state => state.notifications)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
   const { requiredRole } = rest
@@ -28,6 +29,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     }
   }, [isFetched])
 
+  useEffect(() => {
+    if (all?.length === 0 && currentUser) {
+      dispatch(getNotifications(currentUser.uid))
+    }
+  }, [currentUser])
 
   useEffect(() => {
     dispatch({ type: 'AUTH_LOADING' })
