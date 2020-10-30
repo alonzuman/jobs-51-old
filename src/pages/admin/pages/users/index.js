@@ -29,7 +29,6 @@ const Users = () => {
     setView(view => view === 'list' ? 'table' : 'list')
   }
 
-
   const mapData = () => {
     if (users) {
       let arrayHeaders = [
