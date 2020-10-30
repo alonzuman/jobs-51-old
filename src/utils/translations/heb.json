@@ -73,7 +73,7 @@
   "notifications": "התראות",
   "activityApproved": "פעילות אושרה",
   "theActivity": "הפעילות",
-  "inDate": "בתאריך",
+  "inDate": "מתאריך",
   "isApproved": "אושרה",
   "notificationsEmptyState": "אין התראות",
   "addActivity": "הזנת פעילות",
@@ -92,6 +92,9 @@
   "approvedActivities": "שעות התנדבות כמלגאי/ת עמותה",
   "manageActivities": "ניהול פעילויות",
   "manageUsers": "ניהול משתמשים",
+  "manageRegion": "ניהול מחוז",
+  "manageRegionUsers": "ניהול משתמשי מחוז",
+  "manageRegionActivities": "ניהול פעילויות מחוז",
   "totalActivities": "סיכום שעות פעילות",
   "weekDays": {
     "Sun": "ראשון",

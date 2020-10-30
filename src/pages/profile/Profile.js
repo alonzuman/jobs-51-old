@@ -50,6 +50,7 @@ const Profile = () => {
           subtitle={<Link to={`/users/${uid}`}><Button className='p-0 pr-5 pl-5' color='primary'>{translation.viewProfile}</Button></Link>}
         />
         <List>
+          <Typography variant='subtitle1'>{translation.general}</Typography>
           <Link to={`/${uid}/notifications`}>
             <ListItem button>
               <ListItemIcon>
@@ -70,6 +71,7 @@ const Profile = () => {
               </ListItemText>
             </ListItem>
           </Link>
+          <Divider className='mt-1 mb-1' />
           <Typography variant='subtitle1'>{translation.justProfile}</Typography>
           <Link to={`/users/${uid}/edit`}>
             <ListItem button>

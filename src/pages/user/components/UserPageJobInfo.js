@@ -56,12 +56,15 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
               {user?.lastPosition}
             </ListItemText>
           </ListItem>
-          {user?.skills?.length !== 0 && <Typography className='mb-5' variant='subtitle1'>{translation.skillsInterestedIn}</Typography>}
-          <ListItem>
-            <Grid container spacing={1}>
-              {user?.skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
-            </Grid>
-          </ListItem>
+          {user?.skills?.length !== 0 &&
+          <>
+            <Typography variant='subtitle1'>{translation.skillsInterestedIn}</Typography>
+            <ListItem>
+              <Grid container spacing={1}>
+                {user?.skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
+              </Grid>
+            </ListItem>
+          </>}
         </List>
       </PageSection>
     )

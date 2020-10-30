@@ -1,4 +1,4 @@
-import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, List, ListItem, ListItemIcon, ListItemText, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -120,25 +120,31 @@ const UserPageBadges = ({
               <Chip color='primary' variant='outlined' label={translation.roles.manager} size='small' className='fit__content' />
             </Grid>}
         </Grid>
-        {hasApprovedActivities &&
-          <InfoContainer>
-            <StarsIcon className='small__icon ml-5' />
-            <Typography variant='body1'>
-              {activities?.approved} {translation.approvedActivities}
-            </Typography>
-          </InfoContainer>}
-        {hasPostedJobs &&
-          <InfoContainer>
-            <AssignmentIcon className='small__icon ml-5' />
-            <Typography variant='body1'>
-              {user?.jobs?.length} {translation.jobsPostedBy}  {user?.firstName}
-            </Typography>
-          </InfoContainer>}
-        {isPending && isAdmin &&
-          <ActionsContainer>
-            <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
-            <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
-          </ActionsContainer>}
+        <List>
+          {hasApprovedActivities &&
+            <ListItem>
+              <ListItemIcon>
+                <StarsIcon className='small__icon' />
+              </ListItemIcon>
+              <ListItemText>
+                {activities?.approved} {translation.approvedActivities}
+              </ListItemText>
+            </ListItem>}
+          {hasPostedJobs &&
+            <ListItem>
+              <ListItemIcon>
+                <AssignmentIcon className='small__icon' />
+              </ListItemIcon>
+              <ListItemText>
+                {user?.jobs?.length} {translation.jobsPostedBy}  {user?.firstName}
+              </ListItemText>
+            </ListItem>}
+          {isPending && isAdmin &&
+            <ActionsContainer>
+              <Button onClick={handleIsDeclining} color='primary' variant='outlined'>{translation.decline}</Button>
+              <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
+            </ActionsContainer>}
+        </List>
       </PageSection>
     )
   } else {

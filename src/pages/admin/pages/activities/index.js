@@ -41,7 +41,7 @@ const Activities = () => {
       <PageSection>
         <PageHeader title={translation.manageActivities} backButton />
       </PageSection>
-      <PageSection>
+      <PageSection className='sticky t-0 z-9'>
         <ActivitiesFilter />
       </PageSection>
       <PageSection>

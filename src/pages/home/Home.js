@@ -10,13 +10,23 @@ import AddJobDialog from '../../v2/layout/AddJobDialog'
 import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
 
 const HomeSection = styled.div`
+  padding: 16px;
 
+  :first-of-type {
+    margin-top: 80px;
+  }
 `
 
 const LogoContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+`
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Home = () => {
@@ -32,20 +42,22 @@ const Home = () => {
     <Container>
       <AddJobDialog open={isAddingJob} onClose={handleAddingJob} />
       <AreYouVolunteerDialog />
-      <HomeSection className='p-1'>
+      <HomeSection>
         <LogoContainer>
           <ShaldagLogo />
         </LogoContainer>
         <Typography className='mt-1' variant='h1'>{translation.homeText1}</Typography>
         <Typography variant='body1'>{translation.landingPageText1}</Typography>
-        <Link className='button-link' to='/jobs'>
-          <Button className='mt-1' variant='contained' color='primary'>
-            {translation.lookingForAJob}
+        <ButtonsContainer>
+          <Link to='/jobs'>
+            <Button className='mt-1' variant='contained' color='primary'>
+              {translation.lookingForAJob}
+            </Button>
+          </Link>
+          <Button onClick={handleAddingJob} className='mt-1 mr-5' variant='outlined' color='primary'>
+            {translation.addJob}
           </Button>
-        </Link>
-        <Button onClick={handleAddingJob} className='mt-1 mr-5' variant='outlined' color='primary'>
-          {translation.addJob}
-        </Button>
+        </ButtonsContainer>
       </HomeSection>
       <HomeSection>
         <HomePageJobsCarousel industry={translation.highTech} title={translation.jobOffersInCategory} query={highTechQuery} />

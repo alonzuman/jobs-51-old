@@ -11,7 +11,7 @@ import RtlProvider from './contexts/RtlContext'
 import Job from './pages/job/Job'
 import Jobs from './pages/jobs/Jobs'
 import Employees from './pages/Employees'
-import Admin from './pages/admin/Admin'
+import Admin from './pages/Admin'
 import User from './pages/user/User'
 import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
@@ -19,7 +19,6 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import Profile from './pages/profile/Profile'
 import EditUser from './pages/user/EditUser'
 import LandingPage from './pages/LandingPage'
-import ManageConstants from './pages/admin/ManageConstants'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -27,10 +26,12 @@ import { setTheme } from './actions'
 import EditJob from './pages/job/EditJob'
 import Activity from './pages/activity/Activity'
 import Saved from './pages/saved/Saved'
-import Users from './pages/admin/pages/users/Users'
-import Activities from './pages/admin/pages/activities/Activities'
+import Users from './pages/Admin/pages/Users'
+import Activities from './pages/Admin/pages/Activities'
 import UserActivities from './pages/user/UserActivities'
 import Notifications from './pages/notifications'
+import RegionUsers from './pages/Admin/pages/RegionUsers'
+import RegionActivities from './pages/Admin/pages/RegionActivities'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -75,7 +76,8 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={Activities} />
-            <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/:region/users' component={RegionUsers} />
+            <ProtectedRoute exact requiredRole='manager' path='/admin/:region/activities' component={RegionActivities} />
 
             {/* Notifications */}
             <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />

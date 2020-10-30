@@ -70,7 +70,7 @@ const Users = () => {
       <PageSection>
         <PageHeader title={translation.usersPageTitle} backButton spaceBottom backLink='/admin' />
       </PageSection>
-      <PageSection>
+      <PageSection className='sticky t-0 z-9'>
         <UsersFilter view={view} handleView={handleView} />
       </PageSection>
       <PageSection>

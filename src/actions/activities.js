@@ -191,7 +191,7 @@ export const deleteActivity = (activity) => async dispatch => {
   }
 }
 
-export const getActivities = queryParams => async dispatch => {
+export const getActivities = (queryParams) => async dispatch => {
   dispatch({
     type: 'ACTIVITY_LOADING'
   });
