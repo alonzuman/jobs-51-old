@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSavedJobs } from '../../actions'
 import Container from '../../v2/atoms/Container'
+import PageSection from '../../v2/atoms/PageSection'
 import JobsList from '../../v2/molecules/JobsList'
 import PageHeader from '../../v2/organisms/PageHeader'
 
@@ -19,7 +20,9 @@ const Saved = ({ match }) => {
 
   return (
     <Container>
-      <PageHeader className='p-1' backButton title={translation.savedJobs} loading={loading} />
+      <PageSection>
+        <PageHeader backButton title={translation.savedJobs} loading={loading} />
+      </PageSection>
       <JobsList loading={loading} jobs={savedJobs} />
     </Container>
   )

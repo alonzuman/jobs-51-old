@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import ActivitiesList from '../../../components/lists/ActivitiesList'
 import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
 import PageSection from '../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
 const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   const { translation } = useSelector(state => state.theme)
@@ -21,8 +22,11 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
     return (
       <PageSection>
         <Divider className='mb-2 mt-1' />
-        <Typography variant='h2'>{translation.latestActivities}</Typography>
-        <Typography className='mb-1' variant='subtitle1'>{translation.recentActivitiesInRegion} {region}</Typography>
+        <PageSectionTitle
+          title={translation.latestActivities}
+          subtitle={`${translation.recentActivitiesInRegion} ${region}`}
+          className='mb-1'
+        />
         <ActivitiesList activities={activities} loading={loading} />
       </PageSection>
     )
@@ -30,8 +34,10 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
     return (
       <PageSection>
         <Divider className='mb-2 mt-1' />
-        <Typography variant='h2'>{translation.latestActivities}</Typography>
-        <Typography className='mt-1' variant='body1'>{translation.activitiesEmptyState}</Typography>
+        <PageSectionTitle
+          title={translation.latestActivities}
+          subtitle={translation.activitiesEmptyState}
+        />
       </PageSection>
     )
   }

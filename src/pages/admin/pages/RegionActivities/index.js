@@ -21,11 +21,13 @@ const RegionActivities = ({ match }) => {
 
   return (
     <Container>
-      <PageHeader
-        backButton
-        className='p-1'
-        title={<>{translation.manageRegionActivities} <span className='primary__color'>{region}</span></>}
-      />
+      <PageSection>
+        <PageHeader
+          className='mb-0'
+          backButton
+          title={<>{translation.manageRegionActivities} <span className='primary__color'>{region}</span></>}
+        />
+      </PageSection>
       <PageSection>
         <ActivitiesList showUser loading={loading} activities={activities} />
       </PageSection>

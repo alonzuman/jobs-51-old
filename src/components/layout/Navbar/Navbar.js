@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import './Navbar.css'
 
 import useWindowSize from '../../../hooks/useWindowSize'
 import MobileNavbar from './MobileNavbar'

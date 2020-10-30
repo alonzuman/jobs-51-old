@@ -4,6 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import SkillsSelect from '../../../components/forms/profile/SkillsSelect'
 import PageSection from '../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 import SubSection from '../../../v2/atoms/SubSection'
 
 const JobPageDetails = ({ loading, job, editing, description, setDescription, skills, setSkills, industry, setIndustry, error, helperText }) => {
@@ -20,7 +21,7 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
     return (
       <PageSection>
         <Divider className='mb-2' />
-        <Typography variant='h2'>{translation.jobDescription}</Typography>
+        <PageSectionTitle title={translation.jobDescription} />
         <TextField className='mxw-512' size='small' variant='outlined' multiline rows={4} value={description} onChange={e => setDescription(e.target.value)} />
         <Typography className='mb-5' variant='subtitle1'>{translation.fieldsOfWork}</Typography>
         <SkillsSelect className='mxw-312' size='small' skills={skills} setSkills={setSkills} helperText={helperText} error={error} />
@@ -35,9 +36,8 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
   } else {
     return (
       <PageSection>
-        <Divider />
-        <br />
-        <Typography variant='h2'>{translation.jobDescription}</Typography>
+        <Divider className='mb-1' />
+        <PageSectionTitle title={translation.jobDescription} />
         <Typography className='mb-1 text__wrap' variant='body1'>{job?.description}</Typography>
         {job?.skills?.length !== 0 &&
           <SubSection>

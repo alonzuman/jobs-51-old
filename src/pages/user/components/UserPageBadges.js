@@ -122,7 +122,7 @@ const UserPageBadges = ({
         </Grid>
         <List>
           {hasApprovedActivities &&
-            <ListItem>
+            <ListItem disableGutters>
               <ListItemIcon>
                 <StarsIcon className='small__icon' />
               </ListItemIcon>
@@ -131,7 +131,7 @@ const UserPageBadges = ({
               </ListItemText>
             </ListItem>}
           {hasPostedJobs &&
-            <ListItem>
+            <ListItem disableGutters>
               <ListItemIcon>
                 <AssignmentIcon className='small__icon' />
               </ListItemIcon>

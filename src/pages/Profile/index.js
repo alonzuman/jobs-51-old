@@ -9,7 +9,7 @@ import PageHeader from '../../v2/organisms/PageHeader'
 
 // Icons
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import NotificationIcon from '../../v2/molecules/NotificationIcon'
 
@@ -47,12 +47,12 @@ const Profile = () => {
           spaceTop
           spaceBottom
           title={translation.profile}
-          subtitle={<Link to={`/users/${uid}`}><Button className='p-0 pr-5 pl-5' color='primary'>{translation.viewProfile}</Button></Link>}
+          subtitle={<Link to={`/users/${uid}`}><Button className='p-0 mt-25' color='primary'>{translation.viewProfile}</Button></Link>}
         />
         <List>
           <Typography variant='subtitle1'>{translation.general}</Typography>
           <Link to={`/${uid}/notifications`}>
-            <ListItem button>
+            <ListItem disableGutters button>
               <ListItemIcon>
                 <NotificationIcon disableRipple />
               </ListItemIcon>
@@ -62,7 +62,7 @@ const Profile = () => {
             </ListItem>
           </Link>
           <Link to={`/${uid}/saved`}>
-            <ListItem button>
+            <ListItem disableGutters button>
               <ListItemIcon>
                 <FavoriteBorderOutlinedIcon />
               </ListItemIcon>
@@ -74,9 +74,9 @@ const Profile = () => {
           <Divider className='mt-1 mb-1' />
           <Typography variant='subtitle1'>{translation.justProfile}</Typography>
           <Link to={`/users/${uid}/edit`}>
-            <ListItem button>
+            <ListItem disableGutters button>
               <ListItemIcon>
-                <AssignmentIndIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText>
                 {translation.editPersonalInfo}
@@ -85,7 +85,7 @@ const Profile = () => {
           </Link>
           <Divider className='mt-1 mb-1' />
           <Typography variant='subtitle1'>{translation.settings}</Typography>
-          <ListItem button onClick={handleToggleTheme}>
+          <ListItem disableGutters button onClick={handleToggleTheme}>
             <ListItemIcon>
               <Brightness4Icon />
             </ListItemIcon>

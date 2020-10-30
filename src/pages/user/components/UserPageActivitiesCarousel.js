@@ -1,34 +1,14 @@
-import { Button, Divider, Typography } from '@material-ui/core'
+import { Button, Divider } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
 import ActivityCard from '../../../components/cards/ActivityCard'
 import useWindowSize from '../../../hooks/useWindowSize'
-
-const Container = styled.div`
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 16px;
-
-  :last-of-type: {
-    margin-bottom: 96px;
-  }
-`
-
-const SectionHeader = styled.div`
-  display: flex;
-  align-items: baseline;
-  width: 100%;
-  justify-content: space-between;
-`
-
-const SectionHeaderRight = styled.div``
-
-const SectionHeaderLeft = styled.div``
+import PageSection from '../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
 const UserPageActivitiesCarousel = ({ user, loading }) => {
   const { translation } = useSelector(state => state.theme)
@@ -37,29 +17,26 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
 
   if (loading) {
     return (
-      <Container className='p-1'>
+      <PageSection className='p-1'>
         <Skeleton width={128} height={32} />
-      </Container>
+      </PageSection>
     )
   } else if (activitiesList?.length !== 0) {
     return (
-      <Container>
-        <Divider className='mr-1 mb-1 ml-1' />
-        <SectionHeader>
-          <SectionHeaderRight>
-            <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName}</Typography>
-            <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
-          </SectionHeaderRight>
-          <SectionHeaderLeft>
+      <PageSection className='overflow__hidden full__width mb-1'>
+        <Divider className='mb-2 mt-1' />
+        <PageSectionTitle
+          title={`${translation.activitiesBy} ${user?.firstName}`}
+          subtitle={translation.activitiesByExplanation}
+          action={
             <Link to={`${user?.uid}/activities`}>
-              <Button className='pt-25 pb-25 pl-25 pr-25' color='primary'>{translation.all}</Button>
-            </Link>
-          </SectionHeaderLeft>
-        </SectionHeader>
+              <Button className='p-0' color='primary'>{translation.all}</Button>
+            </Link>}
+        />
         <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
           {activitiesList?.map((v, i) => <SwiperSlide key={i}><ActivityCard showUser={false} activity={v} /></SwiperSlide>)}
         </Swiper>
-      </Container>
+      </PageSection >
     )
   } else {
     return null

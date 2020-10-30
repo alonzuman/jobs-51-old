@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import PageSection from '../../../v2/atoms/PageSection'
 import { Link } from 'react-router-dom'
 import { Skeleton } from '@material-ui/lab'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
 const ListItemContent = styled.div`
   display: flex;
@@ -32,9 +33,9 @@ const JobPageUserDetails = ({ loading, job, editing }) => {
     return (
       <PageSection>
         <Divider className='mb-1' />
-        <Typography variant='h2'>{translation.whoPostedJob}</Typography>
+        <PageSectionTitle title={translation.whoPostedJob}/>
         <Link to={`/users/${job?.uid}`}>
-          <ListItem className='mb-2' button>
+          <ListItem disableGutters className='mb-2' button>
             <ListItemContent>
               <UserInfo>
                 <Typography variant='body1'>{job?.user?.firstName} {job?.user?.lastName}</Typography>

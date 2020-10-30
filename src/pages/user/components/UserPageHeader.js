@@ -9,21 +9,7 @@ import styled from 'styled-components'
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
-import LocationSelect from '../../../components/forms/profile/LocationSelect';
-
-
-const Container = styled.div`
-  display: flex;
-  padding: 16px 16px 0px 16px;
-  flex-direction: column;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: ${props => props.spaceBottom ? '16px' : ''};
-
-  @media (max-width: 768px) {
-    margin-top: ${props => props.spaceTop ? '64px' : ''};
-  }
-`
+import PageSection from '../../../v2/atoms/PageSection';
 
 const ActionsWrapper = styled.div`
   margin-bottom: 32px;
@@ -67,18 +53,19 @@ const UserPageHeader = ({
 
   if (loading) {
     return (
-      <PageHeader
-        className='p-1 mt-2'
-        title={<Skeleton width={104} />}
-        subtitle={<Skeleton width={48} />}
-        secondary={<Skeleton variant='circle' height={56} width={56} />}
-      />
+      <PageSection>
+        <PageHeader
+          title={<Skeleton width={104} />}
+          subtitle={<Skeleton width={48} />}
+          secondary={<Skeleton variant='circle' height={56} width={56} />}
+        />
+      </PageSection>
     )
   } else if (editing) {
     return (
-      <Container >
+      <PageSection>
         <ActionsWrapper>
-          <Typography className='p-0 lh-0' variant='h1'>{translation.editUser}</Typography>
+          <Typography className='p-0 lh-0' variant='h2'>{translation.editUser}</Typography>
           <IconButton size='small' onClick={handleEditing}>{<CloseIcon />}</IconButton>
         </ActionsWrapper>
         <ItemsWrapper>
@@ -88,19 +75,20 @@ const UserPageHeader = ({
           </FlexFields>
           <TextField className='mxw-256' size='small' label={translation.serviceYear} variant='outlined' value={stateServiceYear} onChange={e => setServiceYear(e.target.value)} />
         </ItemsWrapper>
-      </Container>
+      </PageSection>
     )
   } else {
     return (
-      <PageHeader
-        backButton={!editing}
-        imgUrl={user?.avatar}
-        className='p-1'
-        title={`${firstName} ${lastName}`}
-        subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}
-        secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
-        action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
-      />
+      <PageSection>
+        <PageHeader
+          backButton={!editing}
+          imgUrl={user?.avatar}
+          title={`${firstName} ${lastName}`}
+          subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}
+          secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
+          action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
+        />
+      </PageSection>
     )
   }
 }

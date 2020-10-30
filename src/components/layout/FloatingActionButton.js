@@ -1,5 +1,4 @@
 import React from 'react'
-import './FloatingActionButton.css'
 import { Fab } from '@material-ui/core'
 
 // TODO change to styled componnet

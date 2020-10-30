@@ -485,6 +485,10 @@ a:hover {
   scrollbar-width: none!important;  /* Firefox */
 }
 
+.overflow__hidden {
+  overflow: hidden!important;
+}
+
 .rtl {
   direction: rtl!important;
 }
@@ -558,7 +562,7 @@ a:hover {
 }
 
 .swiper-container {
-  padding: 8px 16px!important;
+  padding: 8px 0!important;
 }
 
 .MuiMenuItem-root {
@@ -640,4 +644,46 @@ a:hover {
 .MuiAvatarGroup-avatar {
   border-radius: 50%!important;
   border-width: 1px!important;
+}
+
+.desktop__menu {
+  z-index: 1102!important;
+  border-radius: 1rem!important;
+}
+
+/* IPHONE X ONLY */
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
+  .MuiBottomNavigationAction-root {
+    padding-bottom: 32px!important;
+    padding-top: 8px!important;
+  }
+}
+
+.MuiFab-root {
+  position: fixed!important;
+  bottom: 5.5rem!important;
+  margin: 0 auto!important;
+  left: 50%!important;
+  box-shadow: 0 0 10px #00000005!important;
+  transform: translate(-50%, 0)!important;
+  z-index: 99!important;
+}
+
+/* FOR IPHONE X */
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
+  .MuiFab-root {
+    bottom: 6.5rem!important;
+  }
+}
+
+@media (min-width: 768px) {
+  .MuiFab-root {
+    bottom: 2.5rem!important;
+  }
 }

@@ -7,12 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
 import JobCard from '../../../components/cards/JobCard'
 import useWindowSize from '../../../hooks/useWindowSize'
-
-const Container = styled.div`
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 96px;
-`
+import PageSection from '../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
 const UserPageJobsCarousel = ({ user, loading }) => {
   const { translation } = useSelector(state => state.theme)
@@ -31,14 +27,13 @@ const UserPageJobsCarousel = ({ user, loading }) => {
     return null
   } else if (jobs?.length !== 0) {
     return (
-      <Container>
-        <Divider className='mr-1 ml-1' />
-        <br />
-        <Typography className='mr-1' variant='h2'>{translation.jobsBy} {user?.firstName} ({user?.jobs?.length})</Typography>
+      <PageSection>
+        <Divider className='mb-2 mt-1' />
+        <PageSectionTitle title={`${translation.jobsBy} ${user?.firstName} (${user?.jobs?.length})`} />
         <Swiper spaceBetween={16} slidesPerView={slidesPerView()}>
           {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard job={v} /></SwiperSlide>)}
         </Swiper>
-      </Container>
+      </PageSection>
     )
   } else {
     return null

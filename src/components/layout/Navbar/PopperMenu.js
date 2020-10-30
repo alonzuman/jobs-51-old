@@ -2,20 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { checkPermissions } from '../../../utils'
-import KingfisherIcon from '../../../KingfisherIcon'
 import { Menu, MenuItem, Typography } from '@material-ui/core'
 
 // Icons
-import FavoriteIcon from '@material-ui/icons/Favorite'
-// import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-// import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-// import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-// import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 
 const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
@@ -29,14 +21,6 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.findJobs}
             <SearchIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
-          </Typography>
-        </MenuItem>
-      </NavLink>
-      <NavLink to={`/${uid}/saved`}>
-        <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
-          <Typography className='flex align__center justify__between full__width' variant='body1'>
-            {translation.savedJobs}
-            <FavoriteIcon style={{ color: value === `/${uid}/saved` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>

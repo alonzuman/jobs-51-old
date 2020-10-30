@@ -6,10 +6,11 @@ import JobPageHeaderActions from './JobPageHeaderActions'
 import styled from 'styled-components'
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
 import { useSelector } from 'react-redux'
+import PageSection from '../../../v2/atoms/PageSection'
 
 const Container = styled.div`
   display: flex;
-  padding: 16px 16px 0px 16px;
+  padding: 0 16px;
   flex-direction: column;
   align-items: baseline;
   justify-content: space-between;
@@ -50,7 +51,7 @@ const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompa
     return (
       <Container spaceBottom={true}>
         <ActionsWrapper>
-          <Typography className='p-0 lh-0' variant='h1'>{translation.editingJob}</Typography>
+          <Typography className='p-0 lh-0' variant='h2'>{translation.editingJob}</Typography>
           <JobPageHeaderActions editing job={job} handleEditing={handleEditing} />
         </ActionsWrapper>
         <ItemsWrapper>
@@ -66,17 +67,18 @@ const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompa
     )
   } else {
     return (
-      <PageHeader
-        backButton
-        loading={loading}
-        className='p-1'
-        subtitleType='location'
-        title={title}
-        subtitle={subtitle}
-        secondary={<Avatar className='avatar__md clickable' src={avatar}>{company?.charAt(0)}</Avatar>}
-        action={<JobPageHeaderActions editing={editing} job={job} handleEditing={handleEditing} />}
-        {...rest}
-      />
+      <PageSection>
+        <PageHeader
+          backButton
+          loading={loading}
+          subtitleType='location'
+          title={title}
+          subtitle={subtitle}
+          secondary={<Avatar className='avatar__md clickable' src={avatar}>{company?.charAt(0)}</Avatar>}
+          action={<JobPageHeaderActions editing={editing} job={job} handleEditing={handleEditing} />}
+          {...rest}
+        />
+      </PageSection>
     )
   }
 }

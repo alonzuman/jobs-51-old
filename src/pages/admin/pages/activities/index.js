@@ -10,6 +10,7 @@ import qs from 'query-string'
 import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
+import PageSectionTitle from '../../../../v2/atoms/PageSectionTitle'
 
 const Region = styled.span`
   color: ${props => props.color}
@@ -39,14 +40,15 @@ const Activities = () => {
   return (
     <Container>
       <PageSection>
-        <PageHeader title={translation.manageActivities} backButton />
+        <PageHeader className='mb-0' title={translation.manageActivities} backButton />
       </PageSection>
       <PageSection className='sticky t-0 z-9'>
         <ActivitiesFilter />
       </PageSection>
       <PageSection>
-        {region && <Typography className='mb-1' variant='h2'>{translation.resultsInRegion} <Region color={theme?.palette?.primary?.main}>{region}</Region></Typography>}
-        {!region && <Typography className='mb-1' variant='h2'>{translation.latestActivities}</Typography>}
+        <PageSectionTitle
+          title={region ? <>{translation.resultsInRegion} <Region color={theme?.palette?.primary?.main}>{region}</Region></> : translation.latestActivities}
+        />
       </PageSection>
       <PageSection>
         <ActivitiesList loading={loading} activities={activities} showUser />

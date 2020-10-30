@@ -28,11 +28,12 @@ const RegionUsers = ({ match }) => {
 
   return (
     <Container>
-      <PageHeader
-        className='p-1'
-        title={<>{translation.manageRegionUsers} <span className='primary__color'>{region}</span></>}
-        backButton
-      />
+      <PageSection>
+        <PageHeader
+          title={<>{translation.manageRegionUsers} <span className='primary__color'>{region}</span></>}
+          backButton
+        />
+      </PageSection>
       <PageSection>
         <UsersList loading={loading} users={users} />
       </PageSection>

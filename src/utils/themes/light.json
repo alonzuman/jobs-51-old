@@ -47,8 +47,9 @@
     },
     "h3": {
       "fontSize": "1.1rem",
-      "color": "#797979",
-      "margin": "1.5rem 0 .5rem 0"
+      "fontWeight": 500,
+      "color": "#3B3439",
+      "margin": "16px 0 8px 0"
     },
     "subtitle1": {
       "fontSize": ".75rem",

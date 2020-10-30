@@ -10,12 +10,7 @@ import UserPageHeader from './components/UserPageHeader'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 import { useHistory } from 'react-router-dom'
 import UserPageActions from './components/UserPageActions'
-
-const Container = styled.div`
-  padding: 16px 0;
-  max-width: 768px;
-  margin: 0 auto;
-`
+import Container from '../../v2/atoms/Container'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)

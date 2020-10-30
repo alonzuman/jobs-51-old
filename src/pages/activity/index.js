@@ -14,6 +14,7 @@ import PageHeader from '../../v2/organisms/PageHeader'
 import { Link } from 'react-router-dom'
 import NotificationIcon from '../../v2/molecules/NotificationIcon'
 import { IconButton } from '@material-ui/core'
+import PageSection from '../../v2/atoms/PageSection'
 
 const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
@@ -46,13 +47,14 @@ const Activity = ({ match }) => {
         <AddIcon />
       </FloatingActionButton>
       <AddActivityDialog open={addingActivity} onClose={handleAddingActivity} />
-      <PageHeader
-        className='p-1'
-        loading={authLoading}
-        title={translation.activity}
-        titleClassName='mt-0'
-        secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationIcon /></IconButton></Link>}
-      />
+      <PageSection>
+        <PageHeader
+          loading={authLoading}
+          title={translation.activity}
+          secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationIcon /></IconButton></Link>}
+          className='mb-1'
+        />
+      </PageSection>
       <ActivityPageStats loading={authLoading} pending={pending} approved={approved} region={region} />
       <ActivityPageRegionAdmins regionManagers={regionManagers} loading={activitiesLoading} region={region} />
       <ActivityPageActivitiesList loading={activitiesLoading} activities={activities} region={region} />

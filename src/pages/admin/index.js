@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import PageContainer from '../../components/layout/PageContainer'
 import PageHeader from '../../v2/organisms/PageHeader';
 import { Divider, ListItem, List, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -8,10 +7,11 @@ import { checkPermissions } from '../../utils';
 
 // Icons
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import DataUsageIcon from '@material-ui/icons/DataUsage';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import PageSection from '../../v2/atoms/PageSection';
+import Container from '../../v2/atoms/Container';
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme);
@@ -28,50 +28,54 @@ const Admin = () => {
   ]
 
   return (
-    <PageContainer>
-      <PageHeader spaceTop title={translation.adminPage} />
-      {region &&
-        <>
-          <Typography variant='subtitle1'>{translation.manageRegion}</Typography>
-          <List>
-            {regionSpecificPages?.map((v, i) => {
-              if (checkPermissions(role) >= v.minRole) {
-                return (
-                  <Link to={v.link} key={i}>
-                    <ListItem button>
-                      <ListItemIcon>
-                        {v.icon}
-                      </ListItemIcon>
-                      <ListItemText>
-                        {v.label} {region}
-                      </ListItemText>
-                    </ListItem>
-                  </Link>
-                )
-              }
-            })}
-          </List>
-        </>}
-      <Divider />
-      <Typography className='mt-2' variant='subtitle1'>{translation.general}</Typography>
-      <List>
-        {generalPages?.map((v, i) => {
-          if (checkPermissions(role) >= v.minRole)
-            return (
-              <Link key={i} to={v.link}>
-                <ListItem button>
-                  <ListItemIcon>
-                    {v.icon}
-                  </ListItemIcon>
-                  <ListItemText>
-                    {v.label}
-                  </ListItemText>
-                </ListItem>
-              </Link>
-            )
-        })}
-      </List>
-    </PageContainer>
+    <Container>
+      <PageSection>
+        <PageHeader title={translation.adminPage} className='mb-1' />
+      </PageSection>
+      <PageSection>
+        {region &&
+          <>
+            <Typography variant='subtitle1'>{translation.manageRegion}</Typography>
+            <List>
+              {regionSpecificPages?.map((v, i) => {
+                if (checkPermissions(role) >= v.minRole) {
+                  return (
+                    <Link to={v.link} key={i}>
+                      <ListItem disableGutters button>
+                        <ListItemIcon>
+                          {v.icon}
+                        </ListItemIcon>
+                        <ListItemText>
+                          {v.label} {region}
+                        </ListItemText>
+                      </ListItem>
+                    </Link>
+                  )
+                }
+              })}
+            </List>
+          </>}
+        <Divider />
+        <Typography className='mt-2' variant='subtitle1'>{translation.general}</Typography>
+        <List>
+          {generalPages?.map((v, i) => {
+            if (checkPermissions(role) >= v.minRole)
+              return (
+                <Link key={i} to={v.link}>
+                  <ListItem disableGutters button>
+                    <ListItemIcon>
+                      {v.icon}
+                    </ListItemIcon>
+                    <ListItemText>
+                      {v.label}
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+              )
+          })}
+        </List>
+      </PageSection>
+    </Container>
   )
 }
 

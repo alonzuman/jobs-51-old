@@ -22,12 +22,13 @@ const Notifications = ({ match }) => {
 
   return (
     <Container>
-      <PageHeader
-        loading={loading}
-        title={translation.notifications}
-        backButton
-        className='p-1'
-      />
+      <PageSection>
+        <PageHeader
+          loading={loading}
+          title={translation.notifications}
+          backButton
+        />
+      </PageSection>
       <PageSection>
         <NotificationsList loading={loading} all={all} />
       </PageSection>

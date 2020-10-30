@@ -1,7 +1,14 @@
 import React from 'react'
 import { Dialog, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import './ImageLightbox.css'
+import styled from 'styled-components'
+
+const Image = styled.img`
+  min-width: 220px!important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
 
 const ImageLightbox = ({ imgUrl, open, onClose }) => {
   return (
@@ -9,7 +16,7 @@ const ImageLightbox = ({ imgUrl, open, onClose }) => {
       <IconButton className='m-5 absolute' onClick={onClose}>
         <CloseIcon />
       </IconButton>
-      <img src={imgUrl} className='image__lightbox__image' alt={'User avatar'} />
+      <Image src={imgUrl} className='image__lightbox__image' alt={'User avatar'} />
     </Dialog>
   )
 }

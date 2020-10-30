@@ -10,6 +10,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
 import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection';
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle';
 
 const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, setPhone, about, setAbout }) => {
   const { translation } = useSelector(state => state.theme)
@@ -23,16 +24,16 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   } else if (editing) {
     return (
       <PageSection>
-        <Divider />
-        <Typography className='mb-1 mt-2' variant='h2'>{translation.aboutMe}</Typography>
+        <Divider className='mb-2' />
+        <PageSectionTitle title={translation.aboutMe} />
         <TextField className='mt-1' size='small' multiline rows={4} variant='outlined' label={translation.aboutMe} value={about} onChange={e => setAbout(e.target.value)} />
-        <ListItem>
+        <ListItem disableGutters>
           <ListItemIcon>
             <PhoneIcon className='ml-1 mb-5 small__icon' />
           </ListItemIcon>
           <TextField size='small' variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
         </ListItem>
-        <ListItem>
+        <ListItem disableGutters>
           <ListItemIcon>
             <LocationCityIcon className='ml-1 mb-5 small__icon' />
           </ListItemIcon>
@@ -43,12 +44,12 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
       <PageSection>
-        <Divider />
-        <Typography className='mt-2' variant='h2'>{translation.aboutMe}</Typography>
-        <Typography className='text__wrap mb-1' variant='body1'>{user?.about}</Typography>
+        <Divider className='mb-2' />
+        <PageSectionTitle title={translation.aboutMe} />
+        <Typography className='text__wrap' variant='body1'>{user?.about}</Typography>
         <List>
           {user?.email &&
-            <ListItem>
+            <ListItem disableGutters>
               <ListItemIcon>
                 <MailIcon className='small__icon' />
               </ListItemIcon>
@@ -57,7 +58,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
               </ListItemText>
             </ListItem>}
           {user?.phone &&
-            <ListItem>
+            <ListItem disableGutters>
               <ListItemIcon>
                 <PhoneIcon className='small__icon' />
               </ListItemIcon>
@@ -66,7 +67,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
               </ListItemText>
             </ListItem>}
           {user?.hometown &&
-            <ListItem>
+            <ListItem disableGutters>
               <ListItemIcon>
                 <LocationCityIcon className='small__icon' />
               </ListItemIcon>
