@@ -13,6 +13,7 @@ import { auth } from '../../firebase'
 import PageHeader from '../../v2/organisms/PageHeader'
 import { Link } from 'react-router-dom'
 import NotificationIcon from '../../v2/molecules/NotificationIcon'
+import { IconButton } from '@material-ui/core'
 
 const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
@@ -52,7 +53,7 @@ const Activity = ({ match }) => {
         loading={loading}
         title={translation.activity}
         titleClassName='mt-0'
-        secondary={<Link to={`/${uid}/notifications`}><NotificationIcon /></Link>}
+        secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationIcon /></IconButton></Link>}
       />
       <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
       <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />

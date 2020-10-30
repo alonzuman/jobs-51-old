@@ -1,5 +1,5 @@
 import { Card, CardHeader, Chip } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { markSeen } from '../../actions';
 import moment from 'moment'
@@ -8,7 +8,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
-  const { seen, msg, activity } = notification;
+  const { seen, type, activity } = notification;
   const [isSeen, setIsSeen] = useState(seen)
   const dispatch = useDispatch()
 
@@ -16,6 +16,17 @@ const NotificationCard = ({ notification }) => {
     moment.locale('he')
     return moment(notification?.dateCreated).fromNow()
   }
+
+  const autoApprove = () => {
+    setTimeout(async () => {
+      await dispatch(markSeen(notification))
+      await setIsSeen(true)
+    }, 5000);
+  }
+
+  useEffect(() => {
+    autoApprove()
+  }, [])
 
   const markAsSeen = async () => {
     if (!seen) {
@@ -30,7 +41,7 @@ const NotificationCard = ({ notification }) => {
   }
 
   const notificationBody = () => {
-    switch (msg) {
+    switch (type) {
       case 'activityApproved': return `${translation.theActivity} "${activity.type}" ${translation.inDate} ${activityDate()} ${translation.isApproved}`;
       default: return null
     }
