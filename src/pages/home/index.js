@@ -42,12 +42,12 @@ const Home = () => {
     <Container>
       <AddJobDialog open={isAddingJob} onClose={handleAddingJob} />
       <AreYouVolunteerDialog />
-      <HomeSection>
+      <HomeSection className='flex flex__column align__center justify__center'>
         <LogoContainer>
           <ShaldagLogo />
         </LogoContainer>
         <Typography className='mt-1' variant='h1'>{translation.homeText1}</Typography>
-        <Typography variant='body1'>{translation.landingPageText1}</Typography>
+        <Typography className='text__center' variant='body1'>{translation.landingPageText1}</Typography>
         <ButtonsContainer>
           <Link to='/jobs'>
             <Button className='mt-1' variant='contained' color='primary'>

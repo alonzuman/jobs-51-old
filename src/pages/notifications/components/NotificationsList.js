@@ -14,8 +14,8 @@ const NotificationsList = ({ loading, all }) => {
     )
   } else if (!loading && all?.length !== 0) {
     return (
-      <Grid>
-        {all?.map((v, i) => <Grid item key={i}><NotificationCard notification={v} /></Grid>)}
+      <Grid container spacing={2}>
+        {all?.map((v, i) => <Grid xs={12} md={12} lg={12} item key={i}><NotificationCard notification={v} /></Grid>)}
       </Grid>
     )
   } else {
