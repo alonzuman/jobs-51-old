@@ -113,27 +113,6 @@ export const getUsers = (query, last) => async dispatch => {
   }
 }
 
-export const getEmployees = () => async dispatch => {
-  dispatch({
-    type: 'USERS_LOADING'
-  })
-  try {
-    const snapshot = await usersRef.where('lookingForJob', '==', true).get()
-    let users = []
-    snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: 'SET_USERS',
-      payload: { users }
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: 'ServerError'
-    }))
-  }
-}
-
 export const deleteUser = (uid) => async dispatch => {
   dispatch({
     type: 'USER_LOADING'

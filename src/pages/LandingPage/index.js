@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Typography, Box, Paper } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { openDialog, setUser } from '../actions'
-import ShaldagLogo from '../ShaldagLogo'
-import { app } from '../firebase'
-import PageContainer from '../components/layout/PageContainer'
-import CircularSpinnerWithContainer from '../components/layout/CircularSpinnerWithContainer'
-import AuthDialog from '../v2/layout/AuthDialog'
+import { setUser } from '../../actions'
+import ShaldagLogo from '../../ShaldagLogo'
+import { app } from '../../firebase'
+import PageContainer from '../../components/layout/PageContainer'
+import AuthDialog from '../../v2/layout/AuthDialog'
+import CircularSpinnerWithContainer from '../../components/layout/CircularSpinnerWithContainer'
 
 const LandingPage = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -96,4 +96,4 @@ const LandingPage = () => {
   }
 }
 
-export default LandingPage
+export default LandingPage;

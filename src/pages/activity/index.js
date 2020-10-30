@@ -19,9 +19,9 @@ const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { region } = useSelector(state => state.auth)
+  const { region, loading: authLoading } = useSelector(state => state.auth)
   const { pending, approved } = useSelector(state => state.auth.activities)
-  const { activities, regionManagers, loading, currentUid } = useSelector(state => state.activities)
+  const { activities, regionManagers, loading: activitiesLoading } = useSelector(state => state.activities)
   const { uid } = match.params
   const handleAddActivity = () => setAddingActivity(true)
   const dispatch = useDispatch()
@@ -31,10 +31,10 @@ const Activity = ({ match }) => {
   }, [dispatch, uid])
 
   useEffect(() => {
-    if (!loading && !region && uid === auth.currentUser.uid) {
+    if (!activitiesLoading && !region && uid === auth.currentUser.uid) {
       setEditingProfile(true)
     }
-  }, [loading])
+  }, [activitiesLoading])
 
   const handleAddingActivity = () => setAddingActivity(!addingActivity)
   const handleEditingProfile = () => setEditingProfile(!editingProfile)
@@ -48,14 +48,14 @@ const Activity = ({ match }) => {
       <AddActivityDialog open={addingActivity} onClose={handleAddingActivity} />
       <PageHeader
         className='p-1'
-        loading={loading}
+        loading={authLoading}
         title={translation.activity}
         titleClassName='mt-0'
         secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationIcon /></IconButton></Link>}
       />
-      <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
-      <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />
-      <ActivityPageActivitiesList loading={loading} activities={activities} region={region} />
+      <ActivityPageStats loading={authLoading} pending={pending} approved={approved} region={region} />
+      <ActivityPageRegionAdmins regionManagers={regionManagers} loading={activitiesLoading} region={region} />
+      <ActivityPageActivitiesList loading={activitiesLoading} activities={activities} region={region} />
     </Container>
   )
 }

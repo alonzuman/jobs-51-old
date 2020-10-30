@@ -6,32 +6,31 @@ import { useSelector } from 'react-redux'
 import Navbar from './components/layout/Navbar/Navbar'
 import ProtectedRoute from './ProtectedRoute'
 import RtlProvider from './contexts/RtlContext'
-
-// Pages
-import Job from './pages/job/Job'
-import Jobs from './pages/jobs/Jobs'
-import Employees from './pages/Employees'
-import Admin from './pages/Admin'
-import User from './pages/user/User'
-import Home from './pages/home/Home'
 import Feedback from './components/layout/Feedback'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import Profile from './pages/profile/Profile'
-import EditUser from './pages/user/EditUser'
-import LandingPage from './pages/LandingPage'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme } from './actions'
-import EditJob from './pages/job/EditJob'
-import Activity from './pages/activity/Activity'
-import Saved from './pages/saved/Saved'
+
+// Pages
+import Job from './pages/Job'
+import EditJob from './pages/Job/EditJob'
+import Jobs from './pages/Jobs'
+import Admin from './pages/Admin'
+import User from './pages/User'
+import Home from './pages/Home'
+import Profile from './pages/Profile'
+import EditUser from './pages/User/EditUser'
+import Activity from './pages/Activity'
+import Saved from './pages/Saved'
 import Users from './pages/Admin/pages/Users'
 import Activities from './pages/Admin/pages/Activities'
-import UserActivities from './pages/user/UserActivities'
-import Notifications from './pages/notifications'
+import UserActivities from './pages/User/components/UserActivities'
+import Notifications from './pages/Notifications'
 import RegionUsers from './pages/Admin/pages/RegionUsers'
 import RegionActivities from './pages/Admin/pages/RegionActivities'
+import PrivacyPolicy from './pages/PrivacyPolicy/index'
+import LandingPage from './pages/LandingPage/index'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -67,7 +66,6 @@ function App() {
             <ProtectedRoute exact path='/profile' component={Profile} />
 
             {/* Users */}
-            <ProtectedRoute exact path='/users' component={Employees} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id/activities' component={UserActivities} />

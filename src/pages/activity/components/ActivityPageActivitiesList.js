@@ -20,7 +20,7 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   } else if (activities?.length !== 0) {
     return (
       <PageSection>
-        <Divider className='mb-1' />
+        <Divider className='mb-2 mt-1' />
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Typography className='mb-1' variant='subtitle1'>{translation.recentActivitiesInRegion} {region}</Typography>
         <ActivitiesList activities={activities} loading={loading} />
@@ -29,7 +29,7 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   } else {
     return (
       <PageSection>
-        <Divider className='mb-1' />
+        <Divider className='mb-2 mt-1' />
         <Typography variant='h2'>{translation.latestActivities}</Typography>
         <Typography className='mt-1' variant='body1'>{translation.activitiesEmptyState}</Typography>
       </PageSection>
