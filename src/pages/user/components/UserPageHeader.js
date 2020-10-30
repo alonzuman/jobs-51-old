@@ -68,7 +68,7 @@ const UserPageHeader = ({
   if (loading) {
     return (
       <PageHeader
-        className='p-1 mt-3'
+        className='p-1 mt-2'
         title={<Skeleton width={104} />}
         subtitle={<Skeleton width={48} />}
         secondary={<Skeleton variant='circle' height={56} width={56} />}
@@ -99,7 +99,7 @@ const UserPageHeader = ({
         title={`${firstName} ${lastName}`}
         subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}
         secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
-        action={canEdit && <IconButton className='mb-1' size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
+        action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
       />
     )
   }

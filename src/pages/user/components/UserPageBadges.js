@@ -9,6 +9,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection'
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
+import EditUserActivities from './EditUserActivities'
 
 const ActionsContainer = styled.div`
   display: flex;
@@ -45,21 +46,11 @@ const UserPageBadges = ({
   const isAdmin = checkPermissions(role) >= 3
   const isAdminOrManagerOrModerator = checkPermissions(userRole) >= 2
 
-  const locationHelperText = () => {
-    if (isAdmin) {
-      return ''
-    } else if (!isAdmin && stateRegion === '') {
-      return translation.afterSetOnlyAdminCanChange
-    } else if (!isAdmin && stateRegion !== '') {
-      return translation.onlyAdminCanChange
-    }
-  }
 
   if (loading) {
     return (
       <PageSection>
-        <Skeleton height={16} width={48} />
-        <br />
+        <Skeleton className='mb-1' height={16} width={48} />
       </PageSection>
     )
   } else if (editing) {
@@ -77,7 +68,7 @@ const UserPageBadges = ({
             label={translation.volunteerInUnitsProgram}
           />
         </FormGroup>
-        {checkPermissions(role) >= 3 &&
+        {isAdmin &&
           <>
             <Typography variant='subtitle1'>{translation.role}</Typography>
             <FormControl size='small' className='mb-1 mxw-196'>
@@ -95,22 +86,17 @@ const UserPageBadges = ({
               </Select>
             </FormControl>
           </>}
-        {isVolunteer &&
-          <LocationSelect
-            helperText={locationHelperText()}
-            disabled={!isAdmin && stateRegion}
-            label={translation.activityRegion}
-            size='small'
-            location={stateRegion}
-            setLocation={setRegion}
-            className='mxw-224 mb-1'
-            options={regions}
-          />}
-        {isVolunteer && checkPermissions(role) >= 3 &&
-          <div className='flex align__center flex__row'>
-            <TextField className='ml-5 mxw-196' size='small' variant='outlined' label={translation.approvedHours} type='number' value={stateApproved} onChange={e => setApproved(parseInt(e.target.value))} />
-            <TextField className='mxw-196' size='small' variant='outlined' label={translation.pendingHours} type='number' value={statePending} onChange={e => setPending(parseInt(e.target.value))} />
-          </div>}
+        <EditUserActivities
+          stateRegion={stateRegion}
+          setRegion={setRegion}
+          regions={regions}
+          stateApproved={stateApproved}
+          setApproved={setApproved}
+          statePending={statePending}
+          setPending={setPending}
+          isVolunteer={isVolunteer}
+          isAdmin={isAdmin}
+        />
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {

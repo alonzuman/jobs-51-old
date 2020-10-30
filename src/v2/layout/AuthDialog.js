@@ -1,4 +1,4 @@
-import { Dialog } from '@material-ui/core'
+import { Dialog, DialogContent } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getConstants } from '../../actions/constants';
@@ -17,9 +17,11 @@ const AuthDialog = ({ open, onClose }) => {
   }, [])
 
   return (
-    <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
+    <Dialog dir='rtl' fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
       <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
-      <SocialMediaSignIn />
+      <DialogContent className='mb-1 mt-1 flex align__center justify__center'>
+        <SocialMediaSignIn />
+      </DialogContent>
     </Dialog>
   )
 }

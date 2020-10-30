@@ -28,10 +28,10 @@ const UserActivities = ({ match }) => {
     return (
       <Container>
         <PageSection className='p-1 pb-0'>
-          <PageHeader title={<Skeleton height={32} width={104} />} spaceTop spaceBottom />
+          <PageHeader title={<Skeleton height={32} width={104} />} />
         </PageSection>
         <PageSection>
-          <CardsSkeletons count={1} />
+          <CardsSkeletons className='p-0' count={1} />
         </PageSection>
       </Container>
     )
@@ -39,7 +39,7 @@ const UserActivities = ({ match }) => {
     return (
       <Container>
         <PageSection className='p-1 pb-0'>
-          <PageHeader title={`${translation.userActivitiesTitle} ${user.firstName}`} backButton spaceTop spaceBottom />
+          <PageHeader titleVariant='h2' title={`${translation.userActivitiesTitle} ${user.firstName}`} backButton />
         </PageSection>
         <PageSection >
           <ActivitiesList activities={activities} loading={loading} />
@@ -50,7 +50,7 @@ const UserActivities = ({ match }) => {
     return (
       <Container>
         <PageSection className='p-1 pb-0'>
-          <PageHeader title={`${translation.userActivitiesTitle} ${user.firstName}`} backButton spaceTop spaceBottom />
+          <PageHeader titleVariant='h2' title={`${translation.userActivitiesTitle} ${user.firstName}`} backButton />
         </PageSection>
         <PageSection>
           <Typography variant='body1'>{translation.noDataToShow}</Typography>

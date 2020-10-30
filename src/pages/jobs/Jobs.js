@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getJobs } from '../../actions'
 import JobCard from '../../components/cards/JobCard'
 import CardsSkeletons from '../../components/skeletons/CardsSkeletons'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, IconButton, Typography } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import FloatingActionButton from '../../components/layout/FloatingActionButton'
 import PageContainer from '../../components/layout/PageContainer'
@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom'
 import qs from 'query-string'
 import PageHeader from '../../v2/organisms/PageHeader'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -49,7 +50,11 @@ const Jobs = () => {
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={handleAddJob}>
         <AddIcon />
       </FloatingActionButton>
-      <PageHeader backButton title={translation.findJob} />
+      <PageHeader
+        backButton
+        title={translation.findJob}
+        action={<IconButton size='small'><FavoriteBorderOutlinedIcon /></IconButton>}
+      />
       <JobsFilter />
       {loading && <CardsSkeletons className='p-0' />}
       <Grid className='mb-4' container spacing={2}>

@@ -3,7 +3,7 @@ import { IconButton } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { useHistory } from 'react-router-dom';
 
-const BackButton = ({ className, backLink = '' }) => {
+const BackButton = ({ backLink = '', ...rest }) => {
   const history = useHistory()
   const handleClick = () => {
     if (backLink) {
@@ -14,7 +14,7 @@ const BackButton = ({ className, backLink = '' }) => {
   }
 
   return (
-    <IconButton className={className} size='small' onClick={handleClick}>
+    <IconButton size='small' onClick={handleClick} {...rest}>
       <KeyboardArrowRightIcon />
     </IconButton>
   )

@@ -560,6 +560,10 @@ a:hover {
   min-height: 144px!important;
 }
 
+.mnw-80 {
+  min-width: 80px!important;
+}
+
 .mnw-196 {
   min-width: 196px!important;
 }

@@ -13,7 +13,7 @@ const Container = styled.div`
   margin-bottom: ${props => props.spaceBottom ? '16px' : ''};
 
   @media (max-width: 768px) {
-    margin-top: ${props => props.spaceTop ? '64px' : ''};
+    margin-top: ${props => props.spaceTop ? '48px' : '0'};
   }
 `
 
@@ -22,6 +22,8 @@ const ItemsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-top: 16px;
+  height: 58px;
 `
 
 const TextContainer = styled.div`
@@ -33,38 +35,38 @@ const SecondaryContainer = styled.div`
 `
 
 const ActionsWrapper = styled.div`
-  margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 32px;
 `
 
-const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backButton, spaceBottom, spaceTop, className, backLink }) => {
+const PageHeader = ({ loading, imgUrl, title, titleVariant = 'h1', action, subtitle, secondary, backButton, className, backLink }) => {
   const [isImageOpen, setIsImageOpen] = useState(false)
   const handleOpenImage = () => setIsImageOpen(!isImageOpen)
 
   if (loading) {
     return (
-      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+      <Container className={className} spaceTop spaceBottom>
         <Skeleton width={128} height={32} />
       </Container>
     )
   } else {
     return (
-      <Container className={className} spaceBottom={spaceBottom} spaceTop={spaceTop}>
+      <Container className={className} spaceTop={!backButton}>
         <ImageLightbox
           open={isImageOpen}
           onClose={handleOpenImage}
           imgUrl={imgUrl}
         />
-        <ActionsWrapper>
-          {backButton && <BackButton backLink={backLink} className='mb-1' />}
+        {(action || backButton) && <ActionsWrapper>
+          {backButton && <BackButton backLink={backLink} />}
           {action && action}
-        </ActionsWrapper>
+        </ActionsWrapper>}
         <ItemsWrapper>
           <TextContainer>
-            <Typography className='p-0' variant='h1'>{title}</Typography>
+            <Typography className='p-0' variant={titleVariant}>{title}</Typography>
             <Typography variant='subtitle1'>{subtitle}</Typography>
           </TextContainer>
           <SecondaryContainer onClick={imgUrl && handleOpenImage}>

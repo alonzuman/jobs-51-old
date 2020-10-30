@@ -47,12 +47,12 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
         <Divider className='mr-1 mb-1 ml-1' />
         <SectionHeader>
           <SectionHeaderRight>
-            <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName} ({activitiesList?.length})</Typography>
+            <Typography className='mr-1' variant='h2'>{translation.activitiesBy} {user?.firstName}</Typography>
             <Typography className='mr-1' variant='subtitle1'>{translation.activitiesByExplanation}</Typography>
           </SectionHeaderRight>
           <SectionHeaderLeft>
             <Link to={`${user?.uid}/activities`}>
-              <Button className='pt-25 pb-25 pl-25 pr-25' color='primary'>{translation.showAll}</Button>
+              <Button className='pt-25 pb-25 pl-25 pr-25' color='primary'>{translation.all}</Button>
             </Link>
           </SectionHeaderLeft>
         </SectionHeader>

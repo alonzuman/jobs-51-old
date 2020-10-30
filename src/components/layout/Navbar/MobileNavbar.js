@@ -9,8 +9,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';

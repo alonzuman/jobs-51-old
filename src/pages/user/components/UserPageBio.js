@@ -23,8 +23,8 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   } else if (editing) {
     return (
       <PageSection>
-        <Divider className='mb-1' />
-        <Typography className='mb-1' variant='h2'>{translation.aboutMe}</Typography>
+        <Divider />
+        <Typography className='mb-1 mt-2' variant='h2'>{translation.aboutMe}</Typography>
         <TextField size='small' multiline rows={4} variant='outlined' label={translation.aboutMe} value={about} onChange={e => setAbout(e.target.value)} />
         <InfoContainer noMargin className='fit__content'>
           <PhoneIcon className='ml-1 mb-5 small__icon' />
@@ -39,8 +39,8 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
       <PageSection>
-        <Divider className='mb-1' />
-        <Typography variant='h2'>{translation.aboutMe}</Typography>
+        <Divider />
+        <Typography className='mt-2' variant='h2'>{translation.aboutMe}</Typography>
         <Typography className='text__wrap mb-1' variant='body1'>{user?.about}</Typography>
         {user?.email &&
           <InfoContainer>
