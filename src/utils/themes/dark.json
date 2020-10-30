@@ -36,15 +36,16 @@
       "color": "white"
     },
     "h2": {
-      "fontSize": "1.2rem",
+      "fontSize": "1.3rem",
       "fontWeight": 500,
       "color": "#f7f7f7",
       "margin": "16px 0 8px 0"
     },
     "h3": {
       "fontSize": "1.1rem",
+      "fontWeight": 500,
       "color": "#f7f7f7",
-      "margin": "1.5rem 0 .5rem 0"
+      "margin": "16px 0 8px 0"
     },
     "subtitle1": {
       "fontSize": ".75rem",
