@@ -5,7 +5,7 @@ import PageHeader from '../../v2/organisms/PageHeader';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Divider, MenuItem, MenuList } from '@material-ui/core'
+import { Divider, ListItem, List, ListItemIcon, ListItemText } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { checkPermissions } from '../../utils';
 
@@ -19,28 +19,27 @@ const Admin = () => {
     { label: translation.manageConstants, icon: <DataUsageIcon />, link: '/admin/constants', minRole: 3 },
   ]
 
-  const iconStyle = {
-    marginLeft: 8,
-    lineHeight: 0
-  }
-
   return (
     <PageContainer>
       <PageHeader spaceTop title={translation.adminPage} />
-      <MenuList>
+      <List>
         {items.map((v, i) => {
           if (checkPermissions(role) >= v.minRole)
           return (
             <Link key={i} to={v.link}>
-              <MenuItem className='mb-5 mt-5'>
-                <span style={iconStyle}>{v.icon}</span>
-                {v.label}
-              </MenuItem>
+              <ListItem button>
+                <ListItemIcon>
+                  {v.icon}
+                </ListItemIcon>
+                <ListItemText>
+                  {v.label}
+                </ListItemText>
+              </ListItem>
               <Divider />
             </Link>
           )
         })}
-      </MenuList>
+      </List>
     </PageContainer>
   )
 }

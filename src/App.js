@@ -30,6 +30,7 @@ import Saved from './pages/saved/Saved'
 import Users from './pages/admin/pages/users/Users'
 import Activities from './pages/admin/pages/activities/Activities'
 import UserActivities from './pages/user/UserActivities'
+import Notifications from './pages/notifications'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -75,6 +76,9 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={Activities} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/constants' component={ManageConstants} />
+
+            {/* Notifications */}
+            <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />
 
             <Route exact path='/' component={LandingPage} />
           </Switch>

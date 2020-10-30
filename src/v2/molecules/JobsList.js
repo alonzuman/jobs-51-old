@@ -25,7 +25,7 @@ const JobsList = ({ jobs, loading }) => {
   } else {
     return (
       <PageSection spaceBottom>
-        <Typography className='mt-1' variant='body1'>{translation?.couldntFindJobs}</Typography>
+        <Typography className='p-0' variant='body1'>{translation?.couldntFindJobs}</Typography>
       </PageSection>
     )
   }

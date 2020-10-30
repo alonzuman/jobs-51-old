@@ -1,4 +1,4 @@
-import { Chip, Divider, Grid, TextField, Typography } from '@material-ui/core'
+import { Chip, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -24,36 +24,45 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
     return (
       <PageSection spaceBottom={windowWidth < 768}>
         <Divider />
-        <br />
-        <Typography variant='h2'>{translation.workExperience}</Typography>
-        <br />
-        <InfoContainer noMargin>
-          <WorkIcon className='ml-1 small__icon mb-5' />
-          <TextField className='fit__content mb-5' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
-        </InfoContainer>
-        <InfoContainer className='mt-25' noMargin>
-          <GradeIcon className='ml-1 small__icon mb-5' />
-          <SkillsSelect skills={skills} setSkills={setSkills} className='mw-224' size='small'/>
-        </InfoContainer>
+        <Typography className='mb-1 mt-1' variant='h2'>{translation.workExperience}</Typography>
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <WorkIcon className='small__icon' />
+            </ListItemIcon>
+            <TextField className='fit__content mb-5' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <GradeIcon className='small__icon' />
+            </ListItemIcon>
+            <SkillsSelect skills={skills} setSkills={setSkills} className='mw-224' size='small' />
+          </ListItem>
+        </List>
       </PageSection>
     )
   } else if (user?.lastPosition && user?.skills?.length !== 0) {
     return (
       <PageSection>
         <Divider />
-        <br />
-        <Typography variant='h2'>{translation.workExperience}</Typography>
+        <Typography className='mt-1' variant='h2'>{translation.workExperience}</Typography>
         <Typography variant='subtitle1'>{translation.lastPosition}</Typography>
-        <InfoContainer>
-          <WorkIcon className='ml-5 small__icon' />
-          <Typography variant='body1'>{user?.lastPosition}</Typography>
-        </InfoContainer>
-        {user?.skills?.length !== 0 && <Typography className='mb-5' variant='subtitle1'>{translation.skillsInterestedIn}</Typography>}
-        <InfoContainer>
-          <Grid container spacing={1}>
-            {user?.skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
-          </Grid>
-        </InfoContainer>
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <WorkIcon className='small__icon' />
+            </ListItemIcon>
+            <ListItemText>
+              {user?.lastPosition}
+            </ListItemText>
+          </ListItem>
+          {user?.skills?.length !== 0 && <Typography className='mb-5' variant='subtitle1'>{translation.skillsInterestedIn}</Typography>}
+          <ListItem>
+            <Grid container spacing={1}>
+              {user?.skills?.map((v, i) => <Grid item key={i}><Chip label={v} color='primary' variant='outlined' size='small' /></Grid>)}
+            </Grid>
+          </ListItem>
+        </List>
       </PageSection>
     )
   } else {

@@ -8,9 +8,14 @@ import ActivityPageStats from './components/ActivityPageStats'
 import { getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 import Container from '../../v2/atoms/Container'
-import ActivityPageHeader from './components/ActivityPageHeader'
 import AddRegionDialog from '../../v2/layout/AddRegionDialog'
 import { auth } from '../../firebase'
+import PageHeader from '../../v2/organisms/PageHeader'
+import { IconButton } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+
+// Icons
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
 const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
@@ -45,7 +50,13 @@ const Activity = ({ match }) => {
         <AddIcon />
       </FloatingActionButton>
       <AddActivityDialog open={addingActivity} onClose={handleAddingActivity} />
-      <ActivityPageHeader loading={loading} />
+      <PageHeader
+        className='p-1'
+        loading={loading}
+        title={translation.activity}
+        titleClassName='mt-0'
+        secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationsNoneIcon /></IconButton></Link>}
+      />
       <ActivityPageStats loading={loading} pending={pending} approved={approved} region={region} />
       <ActivityPageRegionAdmins regionManagers={regionManagers} loading={loading} region={region} />
       <ActivityPageActivitiesList loading={loading} activities={activities} region={region} />

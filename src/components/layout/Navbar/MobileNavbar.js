@@ -5,13 +5,8 @@ import { checkPermissions } from '../../../utils'
 import { Link } from 'react-router-dom'
 
 // Icons
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -32,11 +27,10 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
-      <BottomNavigationAction label={translation.findJobs} component={Link} to='/home' value='/home' icon={<SearchIcon />} style={{ color: value === '/home' ? theme.palette.primary.main : '' }} />
-      <BottomNavigationAction label={translation.savedJobs} component={Link} to={`/${uid}/saved`} value={`/${uid}/saved`} icon={value === '/saved' ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />} />
-      {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to={`/${uid}/activity`} value={`/${uid}/activity`} icon={value === '/activity' ? <AssessmentIcon /> : <AssessmentOutlinedIcon />} />}
-      <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={value === '/profile' ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />} />
-      {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={value === '/admin' ? <SupervisorAccountIcon /> : <SupervisorAccountOutlinedIcon />} />}
+      <BottomNavigationAction label={translation.findJobs} component={Link} to='/home' value='/home' icon={<SearchIcon />} />
+      {volunteer && <BottomNavigationAction label={translation.activity} component={Link} to={`/${uid}/activity`} value={`/${uid}/activity`} icon={<AssessmentOutlinedIcon />} />}
+      <BottomNavigationAction label={translation.profile} component={Link} to='/profile' value='/profile' icon={<AccountCircleOutlinedIcon />} />
+      {checkPermissions(role) >= 3 && <BottomNavigationAction label={translation.adminPage} component={Link} to='/admin' value='/admin' icon={<SupervisorAccountOutlinedIcon />} />}
     </BottomNavigation>
   )
 }

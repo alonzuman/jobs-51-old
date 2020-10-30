@@ -244,6 +244,10 @@ a:hover {
   margin-bottom: 8px!important;
 }
 
+.mt-0 {
+  margin-top: 0!important;
+}
+
 .mt-25 {
   margin-top: 4px!important;
 }

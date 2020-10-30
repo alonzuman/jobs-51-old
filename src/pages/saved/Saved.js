@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSavedJobs } from '../../actions'
 import Container from '../../v2/atoms/Container'
 import JobsList from '../../v2/molecules/JobsList'
-import SavedPageHeader from './components/SavedPageHeader'
+import PageHeader from '../../v2/organisms/PageHeader'
 
 const Saved = ({ match }) => {
+  const { translation } = useSelector(state => state.theme)
   const { uid } = match.params
   const { loading, savedJobs, currentUid } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const Saved = ({ match }) => {
 
   return (
     <Container>
-      <SavedPageHeader loading={loading} />
+      <PageHeader className='p-1' backButton title={translation.savedJobs} loading={loading} />
       <JobsList loading={loading} jobs={savedJobs} />
     </Container>
   )

@@ -8,6 +8,7 @@ const Users = admin.firestore().collection('users');
 const Activities = admin.firestore().collection('activities');
 const Saved = admin.firestore().collection('saved');
 const Jobs = admin.firestore().collection('jobs');
+const Notifications = admin.firestore().collection('notifications');
 
 // SEED
 // exports.onSeed = functions.firestore
@@ -240,6 +241,7 @@ exports.onCreateActivity = functions.firestore
 exports.onUpdateActivity = functions.firestore
   .document('activities/{activityId}')
   .onUpdate(async (change, context) => {
+    const { activityId } = context.params;
     const { approved: approvedBefore } = change.before.data();
     const { uid, approved: approvedAfter, total } = change.after.data();
     try {
@@ -247,6 +249,13 @@ exports.onUpdateActivity = functions.firestore
       const decrement = admin.firestore.FieldValue.increment(-total)
 
       if (approvedBefore !== approvedAfter && change.before.exists) {
+        if (approvedAfter) {
+          await Notifications.add({
+            uid,
+            activityId,
+            msg: 'activityApproved'
+          })
+        }
         return await Users.doc(uid).set({
           activities: {
             approved: approvedAfter ? increment : decrement,

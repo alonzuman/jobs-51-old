@@ -6,6 +6,7 @@ import { activitiesReducer } from './activities';
 import { usersReducer } from './users';
 import { feedbackReducer } from './feedback';
 import { constantsReducer } from './constants';
+import { notificationsReducer } from './notifications';
 
 export default combineReducers({
   feedback: feedbackReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   activities: activitiesReducer,
   users: usersReducer,
   constants: constantsReducer,
+  notifications: notificationsReducer
 });

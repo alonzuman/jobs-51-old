@@ -38,7 +38,7 @@ const EditUserActivities = ({
     return (
       <Container>
         <Divider />
-        <Typography className='mt-2 mb-1' variant='h2'>{translation.manageVolunteering}</Typography>
+        <Typography className='mt-2 mb-2' variant='h2'>{translation.manageVolunteering}</Typography>
         <LocationSelect
           helperText={locationHelperText()}
           disabled={!isAdmin && stateRegion}

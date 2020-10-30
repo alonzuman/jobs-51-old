@@ -35,7 +35,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
   } else if (region) {
     return (
       <PageSection>
-        <Typography variant='h2'>{translation.general}</Typography>
+        <Typography className='mt-0' variant='h2'>{translation.general}</Typography>
         {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
         <StatsList>
           <StatItem>
