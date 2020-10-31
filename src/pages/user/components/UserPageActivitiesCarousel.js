@@ -30,7 +30,7 @@ const UserPageActivitiesCarousel = ({ user, loading }) => {
           subtitle={translation.activitiesByExplanation}
           action={
             <Link className='p-0' to={`${user?.uid}/activities`}>
-              <Button className='pt-25 pb-25 pl-25 pr-25' color='primary'>{translation.all}</Button>
+              <Button className='p-0 mnw-40' color='primary'>{translation.all}</Button>
             </Link>}
         />
         <Swiper spaceBetween={16} slidesPerView={slidesPerView}>

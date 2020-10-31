@@ -31,7 +31,7 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
             <ListItemIcon>
               <WorkIcon className='small__icon' />
             </ListItemIcon>
-            <TextField className='fit__content mb-5' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
+            <TextField className='fit__content' size='small' label={translation.lastPosition} variant='outlined' value={lastPosition} onChange={e => setLastPosition(e.target.value)} />
           </ListItem>
           <ListItem disableGutters>
             <ListItemIcon>

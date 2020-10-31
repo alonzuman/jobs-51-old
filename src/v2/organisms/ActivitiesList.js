@@ -15,7 +15,7 @@ const ActivitiesList = ({ activities, loading, showUser = false }) => {
     return (
       <Grid container spacing={2}>
         {activities?.map((activity, index) => (
-          <Grid key={index} item xs={12} md={6} lg={6}>
+          <Grid key={index} item xs={12} md={12} lg={12}>
             <ActivityCard showUser={showUser} activity={activity} />
           </Grid>)
         )}

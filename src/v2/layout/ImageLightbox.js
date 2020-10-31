@@ -13,7 +13,7 @@ const Image = styled.img`
 const ImageLightbox = ({ imgUrl, open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <IconButton className='m-5 absolute' onClick={onClose}>
+      <IconButton size='small' className='m-1 absolute' onClick={onClose}>
         <CloseIcon />
       </IconButton>
       <Image src={imgUrl} className='image__lightbox__image' alt={'User avatar'} />

@@ -12,7 +12,7 @@ const JobsList = ({ jobs, loading }) => {
   } else if (!loading && jobs?.length !== 0) {
     return (
       <Grid container spacing={2}>
-        {jobs?.map((v, i) => <Grid item key={i} xs={12} md={6} lg={6}><JobCard job={v} /></Grid>)}
+        {jobs?.map((v, i) => <Grid item key={i} xs={12} md={12} lg={12}><JobCard job={v} /></Grid>)}
       </Grid>
     )
   } else {

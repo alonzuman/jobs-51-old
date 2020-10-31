@@ -6,7 +6,7 @@ const CardsSkeletons = ({ count, size }) => {
   const arr = [...Array(count || 3)]
   return (
     <Grid spacing={2} container >
-      {arr.map((x, i) => <Grid key={i} item xs={12} md={6} lg={6}><CardSkeleton size={size} /></Grid>)}
+      {arr.map((x, i) => <Grid key={i} item xs={12} md={12} lg={12}><CardSkeleton size={size} /></Grid>)}
     </Grid>
   )
 }
