@@ -69,7 +69,7 @@ const User = ({ match }) => {
 
   const handleDelete = async () => {
     await dispatch(deleteUser(uid))
-    history.goBack()
+    await history.goBack()
   }
 
   useEffect(() => {

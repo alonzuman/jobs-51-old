@@ -59,9 +59,7 @@ const EditJob = ({ match }) => {
 
   const handleDelete = async () => {
     await dispatch(deleteJob(job))
-    history.push({
-      pathname: '/jobs'
-    })
+    await history.goBack()
   }
 
   const handleUpdate = async () => {

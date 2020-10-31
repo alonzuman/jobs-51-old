@@ -10,10 +10,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: baseline;
   justify-content: space-between;
-
-  @media (max-width: 768px) {
-    margin-top: ${props => !props.backButton ? '32px' : '0'};
-  }
 `
 
 const ItemsWrapper = styled.div`

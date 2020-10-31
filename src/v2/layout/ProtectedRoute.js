@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-import { app } from './firebase'
-import { getNotifications, setUser, signOut } from './actions'
-import { checkPermissions } from './utils'
-import { getConstants } from './actions/constants'
+import { app } from '../../firebase'
+import { getNotifications, setUser, signOut } from '../../actions'
+import { checkPermissions } from '../../utils'
+import { getConstants } from '../../actions/constants'
 import styled from 'styled-components'
-import { LOADING } from './reducers/auth'
-import CircularSpinnerWithContainer from './v2/atoms/CircularSpinnerWithContainer'
+import { LOADING } from '../../reducers/auth'
+import CircularSpinnerWithContainer from '../atoms/CircularSpinnerWithContainer'
 
 // Pages
-import PendingApproval from './pages/PendingApproval'
-import NoAccessPage from './pages/403'
+import PendingApproval from '../../pages/PendingApproval'
+import NoAccessPage from '../../pages/403'
 
 const Container = styled.div`
   direction: rtl;

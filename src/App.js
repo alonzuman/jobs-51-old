@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 // Components
 import Navbar from './v2/layout/Navbar/Navbar'
-import ProtectedRoute from './ProtectedRoute'
+import ProtectedRoute from './v2/layout/ProtectedRoute'
 import DirectionProvider from './contexts/DirectionContext'
 import Feedback from './v2/atoms/Feedback'
 
@@ -49,8 +49,8 @@ function App() {
           <Feedback />
           {authenticated && <Navbar />}
           <Switch>
+            {/* Home */}
             <ProtectedRoute exact path='/home' component={Home} />
-            <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
 
             {/* Jobs */}
             <ProtectedRoute exact path='/jobs' component={Jobs} />
@@ -81,6 +81,10 @@ function App() {
             {/* Notifications */}
             <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />
 
+            {/* Static */}
+            <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
+
+            {/* Not Protected */}
             <Route exact path='/' component={LandingPage} />
             <Route path='/' component={PageDoesntExist} />
           </Switch>

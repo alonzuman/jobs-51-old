@@ -47,6 +47,7 @@ const FlexFields = styled.div`
 
 const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompany, title, setTitle, subtitle, setSubtitle, avatar, setAvatar, ...rest }) => {
   const { translation } = useSelector(state => state.theme)
+
   if (editing) {
     return (
       <Container spaceBottom={true}>

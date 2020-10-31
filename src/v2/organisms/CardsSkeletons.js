@@ -2,17 +2,16 @@ import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import { Card, CardContent, CardHeader, Grid } from '@material-ui/core'
 
-const CardsSkeletons = ({ count, className = 'p-1' }) => {
+const CardsSkeletons = ({ count, size }) => {
   const arr = [...Array(count || 3)]
-
   return (
-    <Grid className={className} spacing={2} container >
-      {arr.map((x, i) => <Grid key={i} item xs={12} md={6} lg={6}><CardSkeleton /></Grid>)}
+    <Grid spacing={2} container >
+      {arr.map((x, i) => <Grid key={i} item xs={12} md={6} lg={6}><CardSkeleton size={size} /></Grid>)}
     </Grid>
   )
 }
 
-const CardSkeleton = () => {
+const CardSkeleton = ({ size }) => {
   return (
     <Card variant='outlined' dir='rtl'>
       <CardHeader
@@ -22,7 +21,7 @@ const CardSkeleton = () => {
       />
       <CardContent className='pt-0 pb-25'>
         <Skeleton width={'12rem'} variant='text' />
-        <Skeleton width={'8rem'} variant='text' />
+        {size >= 2 && <Skeleton width={'8rem'} variant='text' />}
       </CardContent>
     </Card>
   )

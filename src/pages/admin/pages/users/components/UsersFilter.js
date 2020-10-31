@@ -13,6 +13,8 @@ import useWindowSize from '../../../../../hooks/useWindowSize'
 import ChipsGrid from '../../../../../v2/molecules/ChipsGrid'
 import { onlyUnique, roles } from '../../../../../utils'
 import RoleFilter from './RoleFilter'
+import ListIcon from '@material-ui/icons/List';
+import TableChartIcon from '@material-ui/icons/TableChart';
 
 const Container = styled.div`
   display: flex;
@@ -99,7 +101,11 @@ const UsersFilter = ({ view, handleView }) => {
       <BarContainer>
         <div className='flex align__center'>
           <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
-          <Button className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>{translation.changeView}</Button>
+          <Button className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>
+            {translation.changeView}
+            {view === 'list' && <ListIcon className='mr-5' />}
+            {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}
+          </Button>
         </div>
         <ChipsGrid chips={filters} />
       </BarContainer>

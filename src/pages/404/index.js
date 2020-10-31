@@ -13,7 +13,7 @@ const TextContainer = styled.div`
   flex-direction: column;
 `
 
-export default () => {
+const PageDoesntExists = () => {
   const { translation } = useSelector(state => state.theme);
 
   return (
@@ -27,3 +27,5 @@ export default () => {
     </Container>
   )
 }
+
+export default PageDoesntExists
