@@ -1,13 +1,14 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import store from '../store'
-const Users = db.collection('users')
+import { ADD_ONE, DELETE_ONE, ERROR, LOADING, LOADING_MANAGERS, SET_ALL, SET_MANAGERS } from '../reducers/activities'
 const Activities = db.collection('activities')
+const Users = db.collection('users')
 
 export const addActivity = (activity) => async dispatch => {
   const { uid, activities } = store.getState().auth
   dispatch({
-    type: 'ACTIVITY_LOADING'
+    type: LOADING
   })
   try {
     const activityRef = Activities.doc()
@@ -20,7 +21,7 @@ export const addActivity = (activity) => async dispatch => {
     const { total } = activity
     await Activities.doc(activityRef.id).set(newActivity)
     dispatch({
-      type: 'ADD_ACTIVITY',
+      type: ADD_ONE,
       payload: { newActivity }
     })
     dispatch({
@@ -46,38 +47,19 @@ export const addActivity = (activity) => async dispatch => {
 }
 
 export const getUserActivities = (uid) => async dispatch => {
-  // const { regionManagers } = store.getState().constants
-
   dispatch({
-    type: 'ACTIVITY_LOADING'
+    type: LOADING
   })
 
   try {
-    const userSnap = await Users.doc(uid).get()
-    const user = {
-      uid: userSnap.id,
-      ...userSnap.data()
-    }
-    // TODO
-    // const { region } = user;
-
     const activitiesSnapshot = await Activities.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
     let results = []
     activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
 
-    // Get region admins
-    // let managersSnapshot;
-    // let managerResults = []
-    // if (region) {
-    //   managersSnapshot = await Users.where('uid', 'in', regionManagers[region]).get()
-    //   managersSnapshot.forEach(doc => managerResults.push({ id: doc.id, ...doc.data() }))
-    // }
-
     dispatch({
-      type: 'SET_ACTIVITIES',
+      type: SET_ALL,
       payload: {
         activities: results,
-        // regionManagers: managerResults,
         currentUid: uid
       }
     })
@@ -155,7 +137,7 @@ export const unApproveActivity = (activity) => async dispatch => {
 
 export const deleteActivity = (activity) => async dispatch => {
   dispatch({
-    type: 'ACTIVITY_LOADING'
+    type: LOADING
   })
   try {
     const { activities } = store.getState().auth
@@ -172,7 +154,7 @@ export const deleteActivity = (activity) => async dispatch => {
       }
     })
     dispatch({
-      type: 'REMOVE_ACTIVITY',
+      type: DELETE_ONE,
       payload: id
     })
     dispatch(setFeedback({
@@ -180,7 +162,7 @@ export const deleteActivity = (activity) => async dispatch => {
       msg: 'ActivityRemoved'
     }))
     dispatch({
-      type: 'ACITIVITIES_STOP_LOADING'
+      type: ERROR
     })
   } catch (error) {
     console.log(error)
@@ -193,7 +175,7 @@ export const deleteActivity = (activity) => async dispatch => {
 
 export const getActivities = (queryParams) => async dispatch => {
   dispatch({
-    type: 'ACTIVITY_LOADING'
+    type: LOADING
   });
 
   try {
@@ -215,7 +197,7 @@ export const getActivities = (queryParams) => async dispatch => {
 
     // TODO add pagination
     dispatch({
-      type: 'SET_ACTIVITIES',
+      type: SET_ALL,
       payload: { activities }
     })
 
@@ -226,7 +208,31 @@ export const getActivities = (queryParams) => async dispatch => {
       msg: 'ServerError'
     }))
     dispatch({
-      type: 'ACTIVITY_FAIL'
+      type: ERROR
     })
+  }
+}
+
+export const getRegionManagers = (region) => async dispatch => {
+  dispatch({
+    type: LOADING_MANAGERS
+  })
+  try {
+    const managersSnapshot = await Users.where('region', '==', region).where('role', '==', 'moderator').get()
+    let regionManagers = [];
+    managersSnapshot.forEach(doc => regionManagers.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: SET_MANAGERS,
+      payload: regionManagers
+    })
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: 'ServerError'
+    }))
   }
 }

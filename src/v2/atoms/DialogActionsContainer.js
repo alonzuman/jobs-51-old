@@ -12,9 +12,9 @@ const Container = styled.div`
   justify-content: space-between;
 `
 
-const DialogActionsContainer = ({ children, border = true }) => {
+const DialogActionsContainer = ({ children, border = true, ...rest }) => {
   const { theme } = useSelector(state => state.theme)
-  return <Container border={border ? theme?.palette?.border?.strong : 'none'}>{children}</Container>
+  return <Container {...rest} border={border ? theme?.palette?.border?.strong : 'none'}>{children}</Container>
 }
 
 export default DialogActionsContainer

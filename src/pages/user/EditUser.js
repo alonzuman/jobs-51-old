@@ -11,6 +11,8 @@ import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 import { useHistory } from 'react-router-dom'
 import UserPageActions from './components/UserPageActions'
 import Container from '../../v2/atoms/Container'
+import EditUserActivities from './components/EditUserActivities'
+import { checkPermissions } from '../../utils'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -94,6 +96,8 @@ const User = ({ match }) => {
     }
   }, [dispatch, uid])
 
+  const isAdmin = checkPermissions(role) >= 3;
+
   const handleImageOpen = () => setImageOpen(!imageOpen)
   const handleApproveUser = () => dispatch(approveUser(uid))
   const handleIsDeclining = () => setIsDeclining(!isDeclining)
@@ -135,11 +139,17 @@ const User = ({ match }) => {
         user={user}
         stateRole={role}
         setRole={setRole}
+        editing
+        />
+      <EditUserActivities
+        stateRegion={region}
+        setRegion={setRegion}
         stateApproved={stateApproved}
         setApproved={setApproved}
         statePending={statePending}
         setPending={setPending}
-        editing
+        isVolunteer={isVolunteer}
+        isAdmin={isAdmin}
       />
       <UserPageBio
         about={about}

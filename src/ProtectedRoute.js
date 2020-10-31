@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { app } from './firebase'
 import { getNotifications, setUser, signOut } from './actions'
-import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
 import { checkPermissions } from './utils'
-import NoPermissions from './NoPermissions'
-import NoPermissionPage from './NoPermissionPage'
 import { getConstants } from './actions/constants'
 import styled from 'styled-components'
+import { LOADING } from './reducers/auth'
+import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
+
+// Pages
+import PendingApproval from './pages/PendingApproval'
+import NoAccessPage from './pages/403'
 
 const Container = styled.div`
   direction: rtl;
@@ -36,7 +39,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   }, [currentUser])
 
   useEffect(() => {
-    dispatch({ type: 'AUTH_LOADING' })
+    dispatch({
+      type: LOADING
+    })
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
@@ -59,13 +64,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     }
   }
 
-  if (!loading && checkPermissions(role)  === 0) {
-    return <NoPermissions />
+  if (!loading && checkPermissions(role) === 0) {
+    return <PendingApproval />
   } else {
     return (
       <Container>
         {loading && <CircularSpinnerWithContainer />}
-        {!loading && !checkRole() && <NoPermissionPage />}
+        {!loading && !checkRole() && <NoAccessPage />}
         {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
         {!loading && !currentUser && <Redirect to='/' />}
       </Container>

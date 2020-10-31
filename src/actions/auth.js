@@ -2,24 +2,28 @@ import { app, db } from '../firebase';
 import firebase from 'firebase';
 import { setFeedback } from './feedback';
 import store from '../store';
+import { ERROR, LOADING, SET_USER, SIGN_OUT } from '../reducers/auth';
 const Users = db.collection('users');
 const Members = db.collection('constants').doc('members').collection('all');
 
 export const setUser = (user) => async dispatch => {
   const { uid } = user
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
   try {
     const snapshot = await Users.doc(uid).get()
     dispatch({
-      type: 'SET_USER',
-      payload: { uid, ...snapshot.data() }
+      type: SET_USER,
+      payload: {
+        uid,
+        ...snapshot.data()
+      }
     })
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'SIGN_OUT'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',
@@ -30,7 +34,7 @@ export const setUser = (user) => async dispatch => {
 
 export const checkIfUserLegit = ({ email, firstName, lastName }) => async dispatch => {
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
 
   try {
@@ -63,14 +67,14 @@ export const checkIfUserLegit = ({ email, firstName, lastName }) => async dispat
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'AUTH_ERROR'
+      type: ERROR
     })
   }
 }
 
 export const signInWithProvider = (provider) => async dispatch => {
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
 
   try {
@@ -91,7 +95,7 @@ export const signInWithProvider = (provider) => async dispatch => {
 
       if (fetchedUser.data()) {
         dispatch({
-          type: 'SIGNED_UP',
+          type: SET_USER,
           payload: { ...user }
         })
         dispatch(setFeedback({
@@ -121,7 +125,7 @@ export const signInWithProvider = (provider) => async dispatch => {
         await Users.doc(uid).set(newUser, { merge: true })
 
         dispatch({
-          type: 'SIGNED_UP',
+          type: SET_USER,
           payload: { ...newUser }
         })
 
@@ -135,12 +139,13 @@ export const signInWithProvider = (provider) => async dispatch => {
     console.log(error)
     const msg = () => {
       switch (error.code) {
-        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail'
-        default: return 'Server error'
+        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail';
+        case 'auth/network-request-failed': return 'ServerError';
+        default: return 'ServerError'
       }
     }
     dispatch({
-      type: 'AUTH_FAIL'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',
@@ -149,9 +154,9 @@ export const signInWithProvider = (provider) => async dispatch => {
   }
 }
 
-export const signIn = ({ email, password }) => async dispatch => {
+export const signIn = (email, password) => async dispatch => {
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
   try {
     const res = await app.auth().signInWithEmailAndPassword(email, password)
@@ -164,8 +169,10 @@ export const signIn = ({ email, password }) => async dispatch => {
       ...userInfo
     }
     dispatch({
-      type: 'SIGNED_IN',
-      payload: { ...user }
+      type: SET_USER,
+      payload: {
+        ...user
+      }
     })
     dispatch(setFeedback({
       type: 'success',
@@ -173,44 +180,45 @@ export const signIn = ({ email, password }) => async dispatch => {
     }))
   } catch (error) {
     console.log(error)
+    const msg = () => {
+      switch (error.code) {
+        case 'auth/user-not-found': return 'userNotFoundTryAgain'
+        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail';
+        case 'auth/network-request-failed': return 'ServerError';
+        default: return 'ServerError'
+      }
+    }
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: msg()
     }))
   }
 }
 
-export const signUp = (user) => async dispatch => {
-  const { tempToken } = store.getState().auth
-  const { tokens } = store.getState().constants
-  const region = tokens?.all[tempToken] || ''
-
+export const signUp = (user, password) => async dispatch => {
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
-  const { email, password, firstName, lastName, avatar, phone } = user
   try {
-    const snapshot = await app.auth().createUserWithEmailAndPassword(email, password)
+    const snapshot = await app.auth().createUserWithEmailAndPassword(user.email, password)
     const { uid } = snapshot.user
     const newUser = {
       uid,
-      email,
-      firstName,
-      lastName,
-      avatar,
-      phone,
+      ...user,
       activities: {
         pending: 0,
         approved: 0
       },
       lookingForJob: false,
-      role: 'user',
-      region,
-      dateCreated: new Date()
+      role: 'pending',
+      dateCreated: new Date(),
     }
     await Users.doc(uid).set(newUser, { merge: true })
     dispatch({
-      type: 'SIGNED_UP',
+      type: SET_USER,
       payload: { ...newUser }
     })
     dispatch(setFeedback({
@@ -228,9 +236,9 @@ export const signUp = (user) => async dispatch => {
 
 export const signOut = () => async dispatch => {
   try {
-    app.auth().signOut()
+    await app.auth().signOut()
     dispatch({
-      type: 'SIGN_OUT'
+      type: SIGN_OUT
     })
     dispatch(setFeedback({
       type: 'success',
@@ -247,12 +255,12 @@ export const signOut = () => async dispatch => {
 
 export const setUserRegion = (region, uid) => async dispatch => {
   dispatch({
-    type: 'AUTH_LOADING'
+    type: LOADING
   })
   try {
     await Users.doc(uid).set({ region }, { merge: true })
     dispatch({
-      type: 'SET_USER',
+      type: SET_USER,
       payload: { region }
     })
   } catch (error) {

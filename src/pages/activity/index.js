@@ -5,7 +5,7 @@ import FloatingActionButton from '../../components/layout/FloatingActionButton'
 import AddActivityDialog from '../../v2/layout/AddActivityDialog'
 import ActivityPageRegionAdmins from './components/ActivityPageRegionAdmins'
 import ActivityPageStats from './components/ActivityPageStats'
-import { getUserActivities } from '../../actions'
+import { getRegionManagers, getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 import Container from '../../v2/atoms/Container'
 import AddRegionDialog from '../../v2/layout/AddRegionDialog'
@@ -29,6 +29,9 @@ const Activity = ({ match }) => {
 
   useEffect(() => {
     dispatch(getUserActivities(uid))
+    if (region) {
+      dispatch(getRegionManagers(region))
+    }
   }, [dispatch, uid])
 
   useEffect(() => {

@@ -15,33 +15,30 @@ const initialState = {
   loading: false
 }
 
+// Actions
+export const LOADING = 'AUTH/LOADING';
+export const SET_USER = 'AUTH/SET_USER';
+export const SIGN_OUT = 'AUTH/SIGN_OUT';
+export const ERROR = 'AUTH/ERROR';
+
 export const authReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'AUTH_LOADING':
+    case LOADING:
       return {
         ...state,
         loading: true
       }
-    case 'AUTH_FAIL':
-      return {
-        ...initialState,
-        loading: false
-      }
-    case 'UPDATED_PROFILE':
-    case 'SIGNED_UP':
-    case 'SIGNED_IN':
-    case 'SET_USER':
+    case SET_USER:
       return {
         ...state,
         ...payload,
         authenticated: true,
         loading: false
       }
-    case 'NOT_SIGNED_IN':
-      return initialState
-    case 'SIGN_OUT':
+    case SIGN_OUT:
+    case ERROR:
       return {
         ...initialState,
         authenticated: false,

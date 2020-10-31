@@ -27,13 +27,7 @@ const UserPageBadges = ({
   setIsLookingForJob,
   isVolunteer,
   setIsVolunteer,
-  stateRegion,
-  setRegion,
   stateRole,
-  stateApproved,
-  setApproved,
-  statePending,
-  setPending,
   setRole
 }) => {
   const { role } = useSelector(state => state.auth)
@@ -42,7 +36,6 @@ const UserPageBadges = ({
   const isPending = checkPermissions(user?.role) === 0;
   const hasApprovedActivities = activities?.approved !== 0;
   const hasPostedJobs = user?.jobs?.length !== 0;
-  const { regions } = useSelector(state => state.constants?.locations)
   const isAdmin = checkPermissions(role) >= 3
   const isAdminOrManagerOrModerator = checkPermissions(userRole) >= 2
 
@@ -86,17 +79,6 @@ const UserPageBadges = ({
               </Select>
             </FormControl>
           </>}
-        <EditUserActivities
-          stateRegion={stateRegion}
-          setRegion={setRegion}
-          regions={regions}
-          stateApproved={stateApproved}
-          setApproved={setApproved}
-          statePending={statePending}
-          setPending={setPending}
-          isVolunteer={isVolunteer}
-          isAdmin={isAdmin}
-        />
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {

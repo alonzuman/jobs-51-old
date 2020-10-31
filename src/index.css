@@ -164,6 +164,10 @@ a:hover {
   flex-direction: row!important;
 }
 
+.flex__1 {
+  flex: 1!important;
+}
+
 .flex__4 {
   flex: 4!important;
 }
@@ -281,6 +285,10 @@ a:hover {
   margin-top: 8px!important;
 }
 
+.mt-10 {
+  margin-top: 144px!important;
+}
+
 .mb-25 {
   margin-bottom: 4px !important;
 }
@@ -388,6 +396,10 @@ a:hover {
   padding: 16px!important;
 }
 
+.p-4 {
+  padding: 64px!important;
+}
+
 .pb-25 {
   padding-bottom: 4px!important
 }
@@ -406,6 +418,14 @@ a:hover {
 
 .pr-5 {
   padding-right: 8px!important;
+}
+
+.pr-0 {
+  padding-right: 0!important;
+}
+
+.pl-0 {
+  padding-left: 0!important;
 }
 
 .pl-5 {

@@ -1,13 +1,12 @@
 import { Button, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import ShaldagLogo from '../../ShaldagLogo'
 import Container from '../../v2/atoms/Container'
-import HomePageJobsCarousel from './components/HomePageJobsCarousel'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
 import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
+import ShaldagLogo from '../../assets/ShaldagLogo'
 
 const HomeSection = styled.div`
   padding: 16px;
@@ -33,9 +32,6 @@ const Home = () => {
   const { translation } = useSelector(state => state.theme)
   const [isAddingJob, setIsAddingJob] = useState(false)
 
-  const highTechQuery = ['industry', '==', 'הייטק']
-  const communicationsQuery = ['industry', '==', 'תקשורת']
-
   const handleAddingJob = () => setIsAddingJob(!isAddingJob)
 
   return (
@@ -46,7 +42,7 @@ const Home = () => {
         <LogoContainer>
           <ShaldagLogo />
         </LogoContainer>
-        <Typography className='mt-1' variant='h1'>{translation.homeText1}</Typography>
+        <Typography className='text__center mt-1' variant='h1'>{translation.homeText1}</Typography>
         <Typography className='text__center' variant='body1'>{translation.landingPageText1}</Typography>
         <ButtonsContainer>
           <Link to='/jobs'>
@@ -58,12 +54,6 @@ const Home = () => {
             {translation.addJob}
           </Button>
         </ButtonsContainer>
-      </HomeSection>
-      <HomeSection>
-        <HomePageJobsCarousel industry={translation.highTech} title={translation.jobOffersInCategory} query={highTechQuery} />
-      </HomeSection>
-      <HomeSection>
-        <HomePageJobsCarousel industry={translation.communications} title={translation.jobOffersInCategory} query={communicationsQuery} />
       </HomeSection>
     </Container>
   )

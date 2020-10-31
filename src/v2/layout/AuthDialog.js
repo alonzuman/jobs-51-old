@@ -1,29 +1,52 @@
-import { Dialog, DialogContent } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import { Button, CircularProgress, Dialog, DialogContent, Divider, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getConstants } from '../../actions/constants';
-import SocialMediaSignIn from '../../components/forms/SocialMediaSignIn'
+import EmailSignIn from '../../components/forms/auth/EmailSignIn';
+import EmailSignUp from '../../components/forms/auth/EmailSignUp';
+import SocialMediaSignIn from '../../components/forms/auth/SocialMediaSignIn'
 import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
-import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../atoms/Transition';
 
 const AuthDialog = ({ open, onClose }) => {
+  const [signingIn, setSigningIn] = useState(true)
   const { translation } = useSelector(state => state.theme)
-  const { windowWidth: width } = useWindowSize()
+  const { loading } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getConstants())
   }, [])
 
-  return (
-    <Dialog dir='rtl' fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
-      <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
-      <DialogContent className='mb-1 mt-1 flex align__center justify__center'>
-        <SocialMediaSignIn />
-      </DialogContent>
-    </Dialog>
-  )
+  const handleSigningIn = () => setSigningIn(!signingIn)
+
+  if (loading) {
+    return (
+      <Dialog dir='rtl' fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
+        <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
+        <DialogContent className='p-4 flex flex__column align__center justify__center'>
+          <CircularProgress />
+        </DialogContent>
+      </Dialog>
+    )
+  } else {
+    return (
+      <Dialog dir='rtl' fullWidth TransitionComponent={Transition} open={open} onClose={onClose}>
+        <CustomDialogHeader exitButton onClose={onClose} title={translation.signIn} />
+        <DialogContent className='mb-1 mt-1 flex flex__column align__center justify__center'>
+          <SocialMediaSignIn />
+          <div className='flex align__center mt-1 full__width'>
+            <Divider className='flex__1 full__width' />
+            <Typography className='mr-1 ml-1' variant='subtitle1'>{translation.or}</Typography>
+            <Divider className='flex__1 full__width' />
+          </div>
+          {signingIn && <EmailSignIn />}
+          {!signingIn && <EmailSignUp />}
+          <Button className='pr-25 pl-25 pt-25 pb-25 mt-1' onClick={handleSigningIn}>{signingIn ? translation.notSignedUp : translation.alreadySignedUp}</Button>
+        </DialogContent>
+      </Dialog>
+    )
+  }
 }
 
 export default AuthDialog

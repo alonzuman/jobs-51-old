@@ -12,41 +12,49 @@ const initialState = {
   isDeleting: false
 }
 
+// Actions
+export const LOADING = 'USERS/LOADING';
+export const LOADING_MORE = 'USERS/LOADING_MORE';
+export const NO_MORE_RESULTS = 'USERS/SET_NO_MORE_RESULTS';
+export const UPDATING = 'USERS/UPDATING';
+export const DELETING = 'USERS/DELETING';
+export const ERROR = 'USERS/ERROR';
+export const UPDATE_ONE = 'USERS/UPDATE_ONE';
+export const DELETE_ONE = 'USERS/DELETE_ONE';
+export const SET_ONE = 'USERS/SET_ONE';
+export const SET_ALL = 'USERS/SET_ALL';
+export const SET_MORE = 'USERS/SET_MORE';
+
 export const usersReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'USERS_LOADING_MORE':
-      return {
-        ...state,
-        loadingMore: true
-      }
-    case 'SET_NO_MORE_RESULTS':
-      return {
-        ...state,
-        noMoreResults: payload
-      }
-    case 'USERS_LOADING':
+    case LOADING:
       return {
         ...state,
         loading: true
       }
-    case 'USERS_UPDATING':
+    case LOADING_MORE:
+      return {
+        ...state,
+        loadingMore: true
+      }
+    case UPDATING:
       return {
         ...state,
         isUpdating: true
       }
-    case 'USERS_DELETING':
+    case DELETING:
       return {
         ...state,
         isDeleting: true
       }
-    case 'USER_STOP_LOADING':
+    case NO_MORE_RESULTS:
       return {
         ...state,
-        loading: false
+        noMoreResults: payload
       }
-    case 'UPDATE_USER':
+    case UPDATE_ONE:
       return {
         ...state,
         user: {
@@ -55,13 +63,13 @@ export const usersReducer = (state = initialState, action) => {
         },
         isUpdating: false
       }
-    case 'DELETE_USER':
+    case DELETE_ONE:
       return {
         ...state,
         user: {},
         isDeleting: false
       }
-    case 'SET_USER_PAGE':
+    case SET_ONE:
       return {
         ...state,
         user: {
@@ -71,37 +79,25 @@ export const usersReducer = (state = initialState, action) => {
         isUpdating: false,
         isDeleting: false
       }
-    case 'TOGGLE_VOLUNTEER':
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          volunteer: payload.currentValue
-        }
-      }
-    case 'SET_MORE_USERS':
+    case SET_MORE:
       return {
         ...state,
         users: [...state.users, ...payload.users],
         loading: false,
         loadingMore: false
       }
-    case 'SET_USERS':
+    case SET_ALL:
       return {
         ...state,
         users: [...payload.users],
         loading: false
       }
-    case 'SET_USERS_FILTER':
+    case ERROR:
       return {
         ...state,
-        filters: { ...state.filters, ...payload },
-        loading: false
-      }
-    case 'CLEAR_USERS_FILTERS':
-      return {
-        ...state,
-        filters: {},
+        isUpdating: false,
+        isDeleting: false,
+        loadingMore: false,
         loading: false
       }
     default: return state

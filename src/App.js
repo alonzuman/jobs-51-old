@@ -31,6 +31,7 @@ import RegionUsers from './pages/Admin/pages/RegionUsers'
 import RegionActivities from './pages/Admin/pages/RegionActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy/index'
 import LandingPage from './pages/LandingPage/index'
+import PageDoesntExist from './pages/404'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -81,6 +82,7 @@ function App() {
             <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />
 
             <Route exact path='/' component={LandingPage} />
+            <Route path='/' component={PageDoesntExist} />
           </Switch>
         </Router>
       </RtlProvider>

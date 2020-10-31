@@ -3,6 +3,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import LocationSelect from '../../../components/forms/profile/LocationSelect'
+import PageSection from '../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
 const Container = styled.div`
   margin-bottom: 32px;
@@ -13,13 +15,13 @@ const EditUserActivities = ({
   isAdmin,
   stateRegion,
   setRegion,
-  regions,
   stateApproved,
   setApproved,
   statePending,
   setPending,
 }) => {
   const { translation } = useSelector(state => state.theme)
+  const { regions } = useSelector(state => state.constants?.locations)
 
   const locationHelperText = () => {
     if (isAdmin) {
@@ -36,9 +38,9 @@ const EditUserActivities = ({
     return null
   } else {
     return (
-      <Container>
-        <Divider />
-        <Typography className='mt-2 mb-2' variant='h2'>{translation.manageVolunteering}</Typography>
+      <PageSection>
+        <Divider className='mb-2 mt-1' />
+        <PageSectionTitle title={translation.manageVolunteering} />
         <LocationSelect
           helperText={locationHelperText()}
           disabled={!isAdmin && stateRegion}
@@ -46,7 +48,7 @@ const EditUserActivities = ({
           size='small'
           location={stateRegion}
           setLocation={setRegion}
-          className='mxw-224'
+          className='mxw-224 mt-1'
           options={regions}
         />
         {isAdmin &&
@@ -57,7 +59,7 @@ const EditUserActivities = ({
               <TextField className='mxw-196' size='small' variant='outlined' label={translation.pending} type='number' value={statePending} onChange={e => setPending(parseInt(e.target.value))} />
             </div>
           </>}
-      </Container>
+      </PageSection>
     )
   }
 }

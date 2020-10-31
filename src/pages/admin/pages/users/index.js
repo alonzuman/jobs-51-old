@@ -78,7 +78,7 @@ const Users = () => {
       </PageSection>
       <PageSection className='flex align__center justify__center mt-1'>
         {users?.length !== 0 && noMoreResults && <Typography variant='body1'>{translation.noMoreResults}</Typography>}
-        {!noMoreResults && <Button onClick={loadMoreUsers}>{loadingMore ? <CircularProgress color='primary' style={{ height: 24, width: 24 }} /> : translation.loadMore}</Button>}
+        {!noMoreResults && users?.length >= 9 && <Button onClick={loadMoreUsers}>{loadingMore ? <CircularProgress color='primary' style={{ height: 24, width: 24 }} /> : translation.loadMore}</Button>}
       </PageSection>
     </Container>
   )

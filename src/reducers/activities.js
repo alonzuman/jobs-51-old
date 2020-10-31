@@ -1,76 +1,68 @@
 const initialState = {
   activities: [],
-  types: [],
-  filters: {},
-  view: 'grid',
   currentUid: '',
-  regions: [],
   regionManagers: [],
-  loading: false
+  loading: false,
+  loadingManagers: false,
 }
+
+// Actions
+export const LOADING = 'ACTIVITIES/LOADING';
+export const LOADING_MANAGERS = 'ACTIVITIES/LOADING_MANAGERS';
+export const ADD_ONE = 'ACTIVITIES/ADD_ONE';
+export const SET_ALL = 'ACTIVITIES/SET_ALL';
+export const SET_MANAGERS = 'ACTIVITIES/SET_MANAGERS';
+export const DELETE_ONE = 'ACTIVITIES/DELETE_ONE';
+export const CLEAR_ALL = 'ACTIVITIES/CLEAR_ALL';
+export const ERROR = 'ACTIVITIES/ERROR';
 
 export const activitiesReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case 'ACTIVITY_LOADING':
+    case LOADING:
       return {
         ...state,
         loading: true
       }
-    case 'ADD_ACTIVITY':
+    case LOADING_MANAGERS:
+      return {
+        ...state,
+        loadingManagers: true
+      }
+    case ADD_ONE:
       return {
         ...state,
         activities: [payload.newActivity, ...state.activities],
         loading: false
       }
-    case 'CLEAR_ACTIVITIES':
+    case CLEAR_ALL:
       return {
         ...state,
         activities: []
       }
-    case 'SET_ACTIVITIES':
+    case SET_ALL:
       return {
         ...state,
         ...payload,
         loading: false
       }
-    case 'SET_ACTIVITY_TYPES':
+    case SET_MANAGERS:
       return {
         ...state,
-        types: [...payload.types],
-        loading: false
+        regionManagers: payload,
+        loading: false,
+        loadingManagers: false
       }
-    case 'REMOVE_ACTIVITY':
+    case DELETE_ONE:
       return {
         ...state,
         activities: [...state.activities.filter(activity => activity.id !== payload)]
       }
-    case 'SET_ACTIVITY_FILTERS':
+    case ERROR:
       return {
         ...state,
-        filters: {...state.filters, ...payload },
-        loading: false
-      }
-    case 'CLEAR_ACTIVITY_FILTERS':
-      return {
-        ...state,
-        filters: {},
-        loading: false
-      }
-    case 'CHANGE_VIEW':
-      return {
-        ...state,
-        view: payload
-      }
-    case 'ACTIVITY_FAIL':
-      return {
-        ...state,
-        loading: false
-      }
-    case 'ACITIVITIES_STOP_LOADING':
-      return {
-        ...state,
+        loadingManagers: false,
         loading: false
       }
     default: return state

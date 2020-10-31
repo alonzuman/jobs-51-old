@@ -1,16 +1,19 @@
 import store from "../store"
 import { db } from "../firebase"
 import { setFeedback } from "./feedback"
-const usersRef = db.collection('users')
+import { ERROR, LOADING, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MORE, SET_ONE, UPDATE_ONE, UPDATING } from "../reducers/users"
+const Users = db.collection('users');
+const Jobs = db.collection('jobs');
+const Activities = db.collection('activities');
 
 export const getUser = (uid) => async dispatch => {
   dispatch({
-    type: 'USERS_LOADING'
+    type: LOADING
   })
   try {
-    const userSnapshot = await usersRef.doc(uid).get()
-    const jobsSnapshot = await db.collection('jobs').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
-    const activitiesSnapshot = await db.collection('activities').where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const userSnapshot = await Users.doc(uid).get()
+    const jobsSnapshot = await Jobs.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const activitiesSnapshot = await Activities.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
 
     let jobs = []
     let activities = []
@@ -25,7 +28,7 @@ export const getUser = (uid) => async dispatch => {
     }
 
     dispatch({
-      type: 'SET_USER_PAGE',
+      type: SET_ONE,
       payload: user
     })
   } catch (error) {
@@ -39,16 +42,16 @@ export const getUser = (uid) => async dispatch => {
 
 export const getUsers = (query, last) => async dispatch => {
   dispatch({
-    type: 'SET_NO_MORE_RESULTS',
+    type: NO_MORE_RESULTS,
     payload: false
   })
   if (!last) {
     dispatch({
-      type: 'USERS_LOADING'
+      type: LOADING
     })
   } else {
     dispatch({
-      type: 'USERS_LOADING_MORE'
+      type: LOADING_MORE
     })
   }
   try {
@@ -59,7 +62,7 @@ export const getUsers = (query, last) => async dispatch => {
       oldUsers = store.getState().users.users
     }
 
-    let queryRef = usersRef
+    let queryRef = Users
 
     if (firstName) {
       queryRef = queryRef.where('firstName', '==', firstName)
@@ -89,18 +92,18 @@ export const getUsers = (query, last) => async dispatch => {
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
     if (users?.length === 0) {
       dispatch({
-        type: 'SET_NO_MORE_RESULTS',
+        type: NO_MORE_RESULTS,
         payload: true
       })
     }
     if (last) {
       dispatch({
-        type: 'SET_MORE_USERS',
+        type: SET_MORE,
         payload: { users }
       })
     } else {
       dispatch({
-        type: 'SET_USERS',
+        type: SET_ALL,
         payload: { users }
       })
     }
@@ -115,7 +118,7 @@ export const getUsers = (query, last) => async dispatch => {
 
 export const deleteUser = (uid) => async dispatch => {
   dispatch({
-    type: 'USER_LOADING'
+    type: LOADING
   })
 
   try {
@@ -127,7 +130,7 @@ export const deleteUser = (uid) => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'USER_STOP_LOADING'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',
@@ -138,15 +141,15 @@ export const deleteUser = (uid) => async dispatch => {
 
 export const approveUser = uid => async dispatch => {
   dispatch({
-    type: 'USERS_LOADING'
+    type: LOADING
   })
 
   try {
-    await usersRef.doc(uid).update({
+    await Users.doc(uid).update({
       role: 'user'
     })
     dispatch({
-      type: 'UPDATE_USER',
+      type: UPDATE_ONE,
       payload: {
         role: 'user'
       }
@@ -158,7 +161,7 @@ export const approveUser = uid => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'USER_STOP_LOADING'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',
@@ -169,7 +172,7 @@ export const approveUser = uid => async dispatch => {
 
 export const unapproveUser = uid => async dispatch => {
   dispatch({
-    type: 'USERS_LOADING'
+    type: LOADING
   })
 
   try {
@@ -177,7 +180,7 @@ export const unapproveUser = uid => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'USER_STOP_LOADING'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',
@@ -189,16 +192,16 @@ export const unapproveUser = uid => async dispatch => {
 export const updateUser = ({ newUser }) => async dispatch => {
   const { uid } = store.getState().auth
   dispatch({
-    type: 'USERS_UPDATING'
+    type: UPDATING
   })
   try {
-    await usersRef.doc(newUser.uid).set({
+    await Users.doc(newUser.uid).set({
       ...newUser
     }, { merge: true })
 
     if (uid === newUser.uid) {
       dispatch({
-        type: 'UPDATED_PROFILE',
+        type: UPDATE_ONE,
         payload: {
           ...newUser
         }
@@ -206,7 +209,7 @@ export const updateUser = ({ newUser }) => async dispatch => {
     }
 
     dispatch({
-      type: 'SET_USER_PAGE',
+      type: SET_ONE,
       payload: {
         ...newUser
       }
@@ -219,7 +222,7 @@ export const updateUser = ({ newUser }) => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'USER_STOP_LOADING'
+      type: ERROR
     })
     dispatch(setFeedback({
       type: 'error',

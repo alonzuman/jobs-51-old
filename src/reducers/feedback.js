@@ -4,18 +4,22 @@ const initialState = {
   type: ''
 }
 
+// Actions
+export const SET_ONE = 'FEEDBACK/SET_ONE';
+export const DELETE_ONE = 'FEEDBACK/DELETE_ONE';
+
 export const feedbackReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'SET_FEEDBACK':
+    case SET_ONE:
       return {
         ...state,
         isOn: true,
         msg: payload.msg,
         type: payload.type
       }
-    case 'REMOVE_FEEDBACK':
+    case DELETE_ONE:
       return {
         ...state,
         isOn: false,
