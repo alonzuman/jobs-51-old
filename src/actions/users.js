@@ -191,7 +191,7 @@ export const unapproveUser = uid => async dispatch => {
   }
 }
 
-export const updateUser = ({ newUser }) => async dispatch => {
+export const updateUser = (newUser) => async dispatch => {
   const { uid } = store.getState().auth
   dispatch({
     type: UPDATING

@@ -18,13 +18,11 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
 
   const handleSubmit = async e => {
     if (region) {
-      await dispatch(updateUser({
-        newUser: {
-          uid,
-          region
-        }
-      }))
-      await dispatch(setUser(uid))
+      const newUser = {
+        uid,
+        region
+      }
+      await dispatch(updateUser(newUser))
       await onClose()
     } else if (!region) {
       setError(translation.pleaseFillField)

@@ -27,13 +27,12 @@ const User = ({ match }) => {
 
   const handleImageOpen = () => setImageOpen(!imageOpen)
   const handleApproveUser = () => {
-    dispatch(updateUser({
-      newUser: {
-        uid: user.uid,
-        ...user,
-        role: 'user'
-      }
-    }))
+    const newUser = {
+      uid: user.uid,
+      ...user,
+      role: 'user'
+    }
+    dispatch(updateUser(newUser))
   }
   const handleIsDeclining = () => setIsDeclining(!isDeclining)
   const handleEditing = () => {

@@ -63,7 +63,7 @@ const User = ({ match }) => {
       role
     }
 
-    await dispatch(updateUser({ newUser, oldUser: user}))
+    await dispatch(updateUser(newUser))
     await history.goBack()
   }
 

@@ -40,7 +40,7 @@ const AreYouVolunteerDialog = () => {
         volunteer: stateVolunteer,
         region: stateRegion
       }
-      await dispatch(updateUser({ newUser }))
+      await dispatch(updateUser(newUser))
       await handleClose()
     }
   }
