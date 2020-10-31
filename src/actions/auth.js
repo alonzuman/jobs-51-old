@@ -1,8 +1,9 @@
 import { app, db } from '../firebase';
 import firebase from 'firebase';
 import { setFeedback } from './feedback';
-import store from '../store';
+import store from '../store'
 import { ERROR, LOADING, SET_USER, SIGN_OUT } from '../reducers/auth';
+const { translation } = store.getState().theme
 const Users = db.collection('users');
 const Members = db.collection('constants').doc('members').collection('all');
 
@@ -100,7 +101,7 @@ export const signInWithProvider = (provider) => async dispatch => {
         })
         dispatch(setFeedback({
           type: 'success',
-          msg: 'Welcome'
+          msg: translation.welcome
         }))
       } else if (!fetchedUser.data()) {
         const newUser = {
@@ -131,7 +132,7 @@ export const signInWithProvider = (provider) => async dispatch => {
 
         return dispatch(setFeedback({
           type: 'success',
-          msg: 'userNotListedInConst'
+          msg: translation.userNotListedInConst
         }))
       }
     })
@@ -139,9 +140,9 @@ export const signInWithProvider = (provider) => async dispatch => {
     console.log(error)
     const msg = () => {
       switch (error.code) {
-        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail';
-        case 'auth/network-request-failed': return 'ServerError';
-        default: return 'ServerError'
+        case 'auth/account-exists-with-different-credential': return translation.accountAlreadyExistsWithEmail;
+        case 'auth/network-request-failed': return translation.serverError;
+        default: return translation.serverError
       }
     }
     dispatch({
@@ -176,16 +177,16 @@ export const signIn = (email, password) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'Welcome'
+      msg: translation.welcome
     }))
   } catch (error) {
     console.log(error)
     const msg = () => {
       switch (error.code) {
-        case 'auth/user-not-found': return 'userNotFoundTryAgain'
-        case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail';
-        case 'auth/network-request-failed': return 'ServerError';
-        default: return 'ServerError'
+        case 'auth/user-not-found': return translation.userNotFoundTryAgain
+        case 'auth/account-exists-with-different-credential': return translation.accountAlreadyExistsWithEmail
+        case 'auth/network-request-failed': return translation.serverError;
+        default: return translation.serverError
       }
     }
     dispatch({
@@ -223,13 +224,13 @@ export const signUp = (user, password) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'Welcome'
+      msg: translation.welcome
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -242,13 +243,13 @@ export const signOut = () => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'SignedOutSuccess'
+      msg: translation.signedOutSuccess
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -267,7 +268,7 @@ export const setUserRegion = (region, uid) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }

@@ -1,20 +1,22 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import firebase from 'firebase'
+import store from '../store'
+import { ADD_ONE, ADD_SAVED_ONE, DELETE_ONE, DELETE_SAVED_ONE, DELETING, ERROR, LOADING, SET_ALL, SET_ONE, SET_SAVED_JOBS, UPDATING } from '../reducers/jobs'
+const { translation } = store.getState().theme
 const Jobs = db.collection('jobs')
 
 export const getSavedJobs = (uid) => async dispatch => {
   dispatch({
-    type: 'JOBS_LOADING'
+    type: LOADING
   })
   try {
-    // const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).orderBy('dateCreated', 'desc').get()
-    const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).get()
+    const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).orderBy('dateCreated', 'desc').get()
     let jobs = [];
     jobsSnapshot.forEach(doc => jobs.push({ id: doc.id, ...doc.data() }));
 
     dispatch({
-      type: 'SET_SAVED_JOBS',
+      type: SET_SAVED_JOBS,
       payload: {
         jobs,
         currentUid: uid
@@ -23,11 +25,11 @@ export const getSavedJobs = (uid) => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'SAVED_ERROR'
+      type: ERROR
     })
     dispatch(setFeedback({
-      msg: 'ServerError',
-      type: 'error'
+      type: 'error',
+      msg: translation.serverError
     }))
   }
 }
@@ -39,32 +41,23 @@ export const saveJob = (uid, jid, job) => async dispatch => {
     })
 
     dispatch({
-      type: 'ADD_SAVED',
-      payload: job
+      type: ADD_SAVED_ONE,
+      payload: { ...job }
     })
 
     dispatch({
-      type: 'SET_JOB',
-      payload: {
-        job: {
-          ...job,
-          savedIds: [...job?.savedIds, uid]
-        }
-      }
-    })
-
-    dispatch({
-      type: 'SET'
+      type: SET_ONE,
+      payload: { ...job, savedIds: [...job.savedIds, uid] }
     })
 
     dispatch(setFeedback({
       type: 'success',
-      msg: 'jobSavedSuccessfully'
+      msg: translation.jobSavedSuccessfully
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
@@ -77,28 +70,23 @@ export const unsaveJob = (uid, jid, job) => async dispatch => {
     })
 
     dispatch({
-      type: 'REMOVE_SAVED',
+      type: DELETE_SAVED_ONE,
       payload: jid
     })
 
     dispatch({
-      type: 'SET_JOB',
-      payload: {
-        job: {
-          ...job,
-          savedIds: [...job?.savedIds?.filter(v => v !== uid)]
-        }
-      }
+      type: SET_ONE,
+      payload: { ...job, savedIds: [...job.savedIds.filter(v => v !== uid)] }
     })
 
     dispatch(setFeedback({
       type: 'success',
-      msg: 'jobSavedSuccessfully'
+      msg: translation.jobUnSavedSuccessfully
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
@@ -106,7 +94,7 @@ export const unsaveJob = (uid, jid, job) => async dispatch => {
 
 export const addJob = (job) => async dispatch => {
   dispatch({
-    type: 'JOB_LOADING'
+    type: LOADING
   })
   try {
     const jobRef = Jobs.doc()
@@ -120,17 +108,17 @@ export const addJob = (job) => async dispatch => {
     await Jobs.doc(jobRef.id).set(newJob)
 
     dispatch({
-      type: 'ADD_JOB',
+      type: ADD_ONE,
       payload: { job: newJob }
     })
     dispatch(setFeedback({
-      msg: 'Success',
+      msg: translation.success,
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
@@ -138,44 +126,43 @@ export const addJob = (job) => async dispatch => {
 
 export const updateJob = (newJob) => async dispatch => {
   dispatch({
-    type: 'JOB_UPDATING'
+    type: UPDATING
   })
   try {
     await Jobs.doc(newJob?.id).update({
       ...newJob
     })
     dispatch({
-      type: 'SET_JOB',
-      payload: { newJob }
+      type: SET_ONE,
+      payload: { ...newJob }
     })
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
 }
 
 export const deleteJob = (job) => async dispatch => {
-  const { id } = job
   dispatch({
-    type: 'JOB_DELETING'
+    type: DELETING
   })
   try {
-    await Jobs.doc(id).delete()
+    await Jobs.doc(job.id).delete()
     dispatch({
-      type: 'JOB_DELETED',
-      payload: { id }
+      type: DELETE_ONE,
+      payload: { id: job.id }
     })
     dispatch(setFeedback({
-      msg: 'Success',
+      msg: translation.success,
       type: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
@@ -183,7 +170,7 @@ export const deleteJob = (job) => async dispatch => {
 
 export const getJobs = (query) => async dispatch => {
   dispatch({
-    type: 'JOB_LOADING'
+    type: LOADING
   })
   try {
     const { skills, location, industry } = query
@@ -209,7 +196,7 @@ export const getJobs = (query) => async dispatch => {
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
 
     dispatch({
-      type: 'SET_JOBS',
+      type: SET_ALL,
       payload: {
         jobs
       }
@@ -217,7 +204,7 @@ export const getJobs = (query) => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }
@@ -225,7 +212,7 @@ export const getJobs = (query) => async dispatch => {
 
 export const getJob = (id) => async dispatch => {
   dispatch({
-    type: 'JOB_LOADING'
+    type: LOADING
   })
   try {
     const jobSnapshot = await Jobs.doc(id).get()
@@ -262,16 +249,16 @@ export const getJob = (id) => async dispatch => {
     }
 
     dispatch({
-      type: 'SET_JOB',
-      payload: { job }
+      type: SET_ONE,
+      payload: { ...job }
     })
   } catch (error) {
     console.log(error)
     dispatch({
-      type: 'JOB_ERROR'
+      type: ERROR
     })
     dispatch(setFeedback({
-      msg: 'ServerError',
+      msg: translation.serverError,
       type: 'error'
     }))
   }

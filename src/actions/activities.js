@@ -1,7 +1,9 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import store from '../store'
 import { ADD_ONE, DELETE_ONE, ERROR, LOADING, LOADING_MANAGERS, SET_ALL, SET_MANAGERS } from '../reducers/activities'
+import store from '../store'
+import { SET_USER } from '../reducers/auth'
+const { translation } = store.getState().theme
 const Activities = db.collection('activities')
 const Users = db.collection('users')
 
@@ -25,7 +27,7 @@ export const addActivity = (activity) => async dispatch => {
       payload: { newActivity }
     })
     dispatch({
-      type: 'SET_USER',
+      type: SET_USER,
       payload: {
         activities: {
           pending: activities.pending + total,
@@ -35,13 +37,13 @@ export const addActivity = (activity) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'activityAdded'
+      msg: translation.activityAdded
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -67,7 +69,7 @@ export const getUserActivities = (uid) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -80,7 +82,7 @@ export const approveActivity = (activity) => async dispatch => {
 
     if (authState.uid === uid) {
       dispatch({
-        type: 'SET_USER',
+        type: SET_USER,
         payload: {
           activities: {
             pending: authState.activities.pending - total,
@@ -92,19 +94,18 @@ export const approveActivity = (activity) => async dispatch => {
 
     dispatch(setFeedback({
       type: 'success',
-      msg: 'ActivityApproved'
+      msg: translation.activityApproved
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
 
 export const unApproveActivity = (activity) => async dispatch => {
-  // TODO add condition that checks if its unapproved already
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
@@ -112,7 +113,7 @@ export const unApproveActivity = (activity) => async dispatch => {
 
     if (authState.uid === uid) {
       dispatch({
-        type: 'SET_USER',
+        type: SET_USER,
         payload: {
           activities: {
             pending: authState.activities.pending + total,
@@ -124,13 +125,13 @@ export const unApproveActivity = (activity) => async dispatch => {
 
     dispatch(setFeedback({
       type: 'success',
-      msg: 'ActivityApproved'
+      msg: translation.activityApproved
     }))
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -145,7 +146,7 @@ export const deleteActivity = (activity) => async dispatch => {
     await Activities.doc(id).delete()
 
     dispatch({
-      type: 'SET_USER',
+      type: SET_USER,
       payload: {
         activities: {
           pending: approved ? activities.pending : activities.pending - total,
@@ -159,7 +160,7 @@ export const deleteActivity = (activity) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'ActivityRemoved'
+      msg: translation.activityRemoved
     }))
     dispatch({
       type: ERROR
@@ -168,7 +169,7 @@ export const deleteActivity = (activity) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -205,7 +206,7 @@ export const getActivities = (queryParams) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
     dispatch({
       type: ERROR
@@ -232,7 +233,7 @@ export const getRegionManagers = (region) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }

@@ -16,7 +16,6 @@ const Container = styled.div`
 
 const Feedback = () => {
   const dispatch = useDispatch()
-  const { translation, direction } = useSelector(state => state.theme)
   const { isOn, msg, type } = useSelector(state => state.feedback)
 
   const handleClose = () => dispatch(removeFeedback())
@@ -26,7 +25,7 @@ const Feedback = () => {
       <Container onClick={handleClose}>
         {isOn &&
         <Alert className='full__width' severity={type} onClose={handleClose}>
-          {translation[msg]}
+          {msg}
         </Alert>}
       </Container>
     )

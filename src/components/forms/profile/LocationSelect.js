@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 
-const LocationSelect = ({ location, setLocation, label, helperText = '', error = { error }, ...rest }) => {
+const LocationSelect = ({ location, setLocation, label, helperText = '', error = '', ...rest }) => {
   const { translation } = useSelector(state => state.theme)
   const options = useSelector(state => state.constants?.locations?.all)
 

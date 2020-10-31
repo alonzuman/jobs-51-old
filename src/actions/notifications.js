@@ -1,6 +1,8 @@
 import { db } from '../firebase'
 import { ERROR, LOADING, MARK_SEEN, SET_ALL } from '../reducers/notifications'
 import { setFeedback } from './feedback'
+import store from '../store'
+const { translation } = store.getState().theme
 const Notifications = db.collection('notifications');
 
 export const getNotifications = uid => async dispatch => {
@@ -23,7 +25,7 @@ export const getNotifications = uid => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -44,7 +46,7 @@ export const markSeen = (notification) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }

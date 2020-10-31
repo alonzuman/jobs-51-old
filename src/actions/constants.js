@@ -1,6 +1,8 @@
 import { db } from "../firebase";
 import { ERROR, LOADING, SET_ALL } from "../reducers/constants";
 import { setFeedback } from "./feedback";
+import store from '../store'
+const { translation } = store.getState().theme
 
 export const getConstants = () => async dispatch => {
   dispatch({
@@ -21,7 +23,7 @@ export const getConstants = () => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }

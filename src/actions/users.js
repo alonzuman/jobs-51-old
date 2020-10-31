@@ -1,7 +1,8 @@
-import store from "../store"
 import { db } from "../firebase"
 import { setFeedback } from "./feedback"
 import { ERROR, LOADING, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MORE, SET_ONE, UPDATE_ONE, UPDATING } from "../reducers/users"
+import store from '../store'
+const { translation } = store.getState().theme
 const Users = db.collection('users');
 const Jobs = db.collection('jobs');
 const Activities = db.collection('activities');
@@ -35,7 +36,7 @@ export const getUser = (uid) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -111,7 +112,7 @@ export const getUsers = (query, last) => async dispatch => {
     console.log(error)
     dispatch(setFeedback({
       type: 'error',
-      msg: 'ServerError'
+      msg: translation.serverError
     }))
   }
 }
@@ -125,7 +126,7 @@ export const deleteUser = (uid) => async dispatch => {
     await db.collection('users').doc(uid).delete()
     dispatch(setFeedback({
       type: 'success',
-      msg: 'Success'
+      msg: translation.success
     }))
   } catch (error) {
     console.log(error)
@@ -134,7 +135,7 @@ export const deleteUser = (uid) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'serverError'
+      msg: translation.serverError
     }))
   }
 }
@@ -156,7 +157,7 @@ export const approveUser = uid => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'success',
-      msg: 'Success'
+      msg: translation.success
     }))
   } catch (error) {
     console.log(error)
@@ -165,7 +166,7 @@ export const approveUser = uid => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'serverError'
+      msg: translation.serverError
     }))
   }
 }
@@ -184,7 +185,7 @@ export const unapproveUser = uid => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'serverError'
+      msg: translation.serverError
     }))
   }
 }
@@ -217,7 +218,7 @@ export const updateUser = ({ newUser }) => async dispatch => {
 
     dispatch(setFeedback({
       type: 'success',
-      msg: 'userUpdatedSuccessfully'
+      msg: translation.userUpdatedSuccessfully
     }))
   } catch (error) {
     console.log(error)
@@ -226,7 +227,7 @@ export const updateUser = ({ newUser }) => async dispatch => {
     })
     dispatch(setFeedback({
       type: 'error',
-      msg: 'serverError'
+      msg: translation.serverError
     }))
   }
 }

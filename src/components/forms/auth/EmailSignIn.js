@@ -2,7 +2,7 @@ import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../../actions'
-import { emailValidation } from '../../../utils'
+import { emailValidation, passwordValidation } from '../../../utils'
 import Container from '../../../v2/atoms/Container'
 import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
 
@@ -15,12 +15,16 @@ const EmailSignIn = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (emailValidation(email)) {
-      dispatch(signIn(email, password))
-    } else {
+    if (!emailValidation(email)) {
       setErrors({
         email: translation.emailNotValid
       })
+    } else if (password?.length <= 7) {
+      setErrors({
+        password: translation.passwordTooShort
+      })
+    } else {
+      dispatch(signIn(email, password))
     }
   }
 
@@ -42,6 +46,8 @@ const EmailSignIn = () => {
         value={password}
         label={translation.password}
         onChange={e => setPassword(e.target.value)}
+        error={Boolean(errors.password)}
+        helperText={errors.password}
       />
       <DialogActionsContainer className='pr-0 pl-0 pb-0'>
         <Button onClick={handleSubmit} variant='contained' size='large' color='primary' className='full__width'>

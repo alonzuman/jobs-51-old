@@ -7,74 +7,89 @@ const initialState = {
   isDeleting: false
 }
 
+// Actions
+export const LOADING = 'JOBS/LOADING';
+export const UPDATING = 'JOBS/UPDATING';
+export const DELETING = 'JOBS/DELETING';
+export const ERROR = 'JOBS/ERROR';
+export const SET_ONE = 'JOBS/SET_ONE'
+export const SET_ALL = 'JOBS/SET_ALL'
+export const SET_SAVED_JOBS = 'JOBS/SET_SAVED_JOBS';
+export const ADD_ONE = 'JOBS/ADD_ONE';
+export const ADD_SAVED_ONE = 'JOBS/ADD_SAVED_ONE';
+export const DELETE_SAVED_ONE = 'JOBS/DELETE_SAVED_ONE';
+export const DELETE_ONE = 'JOBS/DELETE_ONE';
+export const EMPTY_ALL = 'JOBS/EMPTY_ALL';
+
+
 export const jobsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'JOBS_LOADING':
-    case 'JOB_LOADING':
+    case LOADING:
       return {
         ...state,
         loading: true
       }
-    case 'JOB_UPDATING':
+    case UPDATING:
       return {
         ...state,
         isUpdating: true
       }
-    case 'JOB_DELETING':
+    case DELETING:
       return {
         ...state,
         isDeleting: true
       }
-    case 'JOB_ERROR':
+    case SET_ONE:
       return {
         ...state,
-        loading: false
-      }
-    case 'SET_JOB':
-      return {
-        ...state,
-        job: payload.job,
+        job: { ...payload },
         loading: false,
         isDeleting: false,
         isUpdating: false
       }
-    case 'SET_JOBS':
+    case SET_ALL:
       return {
         ...state,
         jobs: [...payload.jobs],
         loading: false
       }
-    case 'SET_SAVED_JOBS':
+    case SET_SAVED_JOBS:
       return {
         ...state,
         savedJobs: [...payload.jobs],
         loading: false
       }
-    case 'ADD_JOB':
+    case ADD_ONE:
       return {
         jobs: [...state.jobs, payload.job],
         loading: false
       }
-    case 'JOB_FAIL':
-      return {
-        ...state,
-        loading: false
-      }
-    case 'EMPTY_JOBS':
+    case EMPTY_ALL:
       return {
         ...initialState
       }
-    case 'JOB_DELETED':
+    case DELETE_ONE:
       return {
         jobs: [...state.jobs.filter(job => job.id !== payload.id)],
         loading: false
       }
-    case 'REMOVE_SAVED_JOB':
+    case ERROR:
       return {
         ...state,
-        savedJobs: [...state.savedJobs.filter(job => job.id !== payload.id)],
+        loading: false
+      }
+    case ADD_SAVED_ONE:
+      return {
+        ...state,
+        savedJobs: [...state.savedJobs, payload],
+        loading: false
+      }
+    case DELETE_SAVED_ONE:
+      return {
+        ...state,
+        savedJobs: [...state.savedJobs.filter(job => job.id !== payload)],
         loading: false
       }
     default: return state
