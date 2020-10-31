@@ -13,11 +13,13 @@ const initialState = {
   theme
 }
 
+export const SET_THEME = 'THEME/SET_THEME';
+
 export const themeReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'SET_THEME':
+    case SET_THEME:
       return {
         ...state,
         theme: {
