@@ -1,24 +1,12 @@
 import React from 'react'
 import PageSection from '../../../v2/atoms/PageSection'
-import styled from 'styled-components'
 import { Skeleton } from '@material-ui/lab'
-import { Typography } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 // Icons
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-
-const StatsList = styled.ul`
-  padding: 0;
-`
-
-const StatItem = styled.li`
-  list-style: none;
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
-`
 
 const ActivityPageStats = ({ loading, pending, approved, region }) => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -36,16 +24,24 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
     return (
       <PageSection>
         {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
-        <StatsList>
-          <StatItem>
-            <CheckCircleOutlineIcon style={{ color: theme?.palette?.primary?.main }} className=' medium__icon ml-5' />
-            <Typography variant='body1'>{approved.toFixed(1)} {translation.volHours} {translation.areApproved}</Typography>
-          </StatItem>
-          <StatItem>
-            <HighlightOffIcon style={{ color: '#9c9c9c' }} className='medium__icon ml-5' />
-            <Typography variant='body1'>{pending.toFixed(1)} {translation.volHours} {translation.pendingApprovalFe}</Typography>
-          </StatItem>
-        </StatsList>
+        <List>
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <CheckCircleOutlineIcon color='primary' className='medium__icon' />
+            </ListItemIcon>
+            <ListItemText>
+              {approved === 0 ? 0 : approved.toFixed(1)} {translation.volHours} {translation.areApproved}
+            </ListItemText>
+          </ListItem>
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <HighlightOffIcon className='medium__icon' />
+            </ListItemIcon>
+            <ListItemText>
+              {pending === 0 ? 0 : pending.toFixed(1)} {translation.volHours} {translation.pendingApprovalFe}
+            </ListItemText>
+          </ListItem>
+        </List>
       </PageSection>
     )
   } else {

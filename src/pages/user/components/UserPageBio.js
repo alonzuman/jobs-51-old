@@ -29,13 +29,13 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
         <TextField className='mt-1' size='small' multiline rows={4} variant='outlined' label={translation.aboutMe} value={about} onChange={e => setAbout(e.target.value)} />
         <ListItem disableGutters>
           <ListItemIcon>
-            <PhoneIcon className='ml-1 mb-5 small__icon' />
+            <PhoneIcon className='small__icon' />
           </ListItemIcon>
           <TextField size='small' variant='outlined' label={translation.phone} value={phone} onChange={e => setPhone(e.target.value)} />
         </ListItem>
         <ListItem disableGutters>
           <ListItemIcon>
-            <LocationCityIcon className='ml-1 mb-5 small__icon' />
+            <LocationCityIcon className='small__icon' />
           </ListItemIcon>
           <LocationSelect size='small' location={hometown} setLocation={setHometown} className='mw-224' label={translation.hometown} />
         </ListItem>

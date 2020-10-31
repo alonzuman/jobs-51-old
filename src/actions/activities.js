@@ -125,7 +125,7 @@ export const unApproveActivity = (activity) => async dispatch => {
 
     dispatch(setFeedback({
       type: 'success',
-      msg: translation.activityApproved
+      msg: translation.activityUnapproved
     }))
   } catch (error) {
     console.log(error)
