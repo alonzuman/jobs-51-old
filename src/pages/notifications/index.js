@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NotificationsList from './components/NotificationsList';
 import PageSection from '../../v2/atoms/PageSection';
 import { getNotifications } from '../../actions/notifications';
+import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
 
 const Notifications = ({ match }) => {
   const { uid } = match.params
@@ -20,6 +21,9 @@ const Notifications = ({ match }) => {
     }
   }, [uid])
 
+  const newNotifications = all?.filter (v => !v.seen)
+  const oldNotifications = all?.filter(v => v.seen)
+
   return (
     <Container>
       <PageSection>
@@ -30,7 +34,12 @@ const Notifications = ({ match }) => {
         />
       </PageSection>
       <PageSection>
-        <NotificationsList loading={loading} all={all} />
+        <PageSectionTitle subtitle={translation.newNotifications} />
+        <NotificationsList loading={loading} all={newNotifications} />
+      </PageSection>
+      <PageSection>
+        <PageSectionTitle subtitle={translation.oldNotifications} />
+        <NotificationsList loading={loading} all={oldNotifications} />
       </PageSection>
     </Container>
   )

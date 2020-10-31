@@ -50,6 +50,7 @@ const NotificationCard = ({ notification }) => {
   return (
     <Card className='clickable' onClick={markAsSeen} variant='outlined'>
       <CardHeader
+        className='pt-5 pb-5 pl-1 pr-1'
         title={<Chip size='small' label={timeAgo()} variant='outlined' color='primary' />}
         subheader={notificationBody()}
         action={isSeen ? '' : <FiberManualRecordIcon color='primary' />}
