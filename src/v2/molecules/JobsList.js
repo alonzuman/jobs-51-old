@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import JobCard from '../../components/cards/JobCard'
-import CardsSkeletons from '../../components/skeletons/CardsSkeletons'
+import JobCard from './JobCard'
+import CardsSkeletons from '../organisms/CardsSkeletons'
 import PageSection from '../atoms/PageSection'
 
 const JobsList = ({ jobs, loading }) => {

@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import NotificationCard from '../../../components/cards/NotificationCard'
-import CardsSkeletons from '../../../components/skeletons/CardsSkeletons'
+import NotificationCard from '../../../v2/molecules/NotificationCard'
+import CardsSkeletons from '../../../v2/organisms/CardsSkeletons'
 
 const NotificationsList = ({ loading, all }) => {
   const { translation } = useSelector(state => state.theme)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
-import FloatingActionButton from '../../components/layout/FloatingActionButton'
+import FloatingActionButton from '../../v2/atoms/FloatingActionButton'
 import AddActivityDialog from '../../v2/layout/AddActivityDialog'
 import ActivityPageRegionAdmins from './components/ActivityPageRegionAdmins'
 import ActivityPageStats from './components/ActivityPageStats'

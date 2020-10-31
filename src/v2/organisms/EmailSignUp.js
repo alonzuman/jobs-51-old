@@ -1,11 +1,11 @@
 import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp } from '../../../actions'
-import { emailValidation } from '../../../utils'
-import Container from '../../../v2/atoms/Container'
-import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
-import LocationSelect from '../profile/LocationSelect'
+import { signUp } from '../../actions'
+import { emailValidation } from '../../utils'
+import Container from '../atoms/Container'
+import DialogActionsContainer from '../atoms/DialogActionsContainer'
+import LocationSelect from '../molecules/LocationSelect'
 
 const EmailSignUp = () => {
   const [step, setStep] = useState(0);

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem, Typography, DialogContent } from '@material-ui/core'
-import FileUploader from '../../general/FileUploader'
+import FileUploader from '../atoms/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
-import { addJob } from '../../../actions'
-import CircularProgressWithLabel from '../CircularProgressWithLabel'
-import LocationSelect from '../profile/LocationSelect'
-import SkillsSelect from '../profile/SkillsSelect'
-import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
+import { addJob } from '../../actions'
+import LocationSelect from '../molecules/LocationSelect'
+import SkillsSelect from '../molecules/SkillsSelect'
+import DialogActionsContainer from '../atoms/DialogActionsContainer'
+import CircularProgressWithLabel from '../atoms/CircularProgressWithLabel'
 
 const AddJob = ({ onClose }) => {
   const { translation } = useSelector(state => state.theme)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { approveUser, deleteUser, getUser, unapproveUser, updateUser } from '../../actions/users'
-import ImageLightbox from '../../components/general/ImageLightbox'
+import ImageLightbox from '../../v2/layout/ImageLightbox'
 import UserPageJobInfo from './components/UserPageJobInfo'
 import UserPageBio from './components/UserPageBio'
 import UserPageBadges from './components/UserPageBadges'

@@ -6,7 +6,7 @@ import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
-const RtlProvider = (props) => {
+const DirectionProvider = (props) => {
   return (
     <StylesProvider jss={jss}>
       {props.children}
@@ -14,4 +14,4 @@ const RtlProvider = (props) => {
   );
 }
 
-export default RtlProvider
+export default DirectionProvider

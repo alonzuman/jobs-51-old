@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getJobs } from '../../actions'
-import JobCard from '../../components/cards/JobCard'
-import CardsSkeletons from '../../components/skeletons/CardsSkeletons'
+import JobCard from '../../v2/molecules/JobCard'
+import CardsSkeletons from '../../v2/organisms/CardsSkeletons'
 import { Grid, Typography } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import FloatingActionButton from '../../components/layout/FloatingActionButton'
-import PageContainer from '../../components/layout/PageContainer'
-import JobsFilter from '../../components/filters/JobsFilter'
+import FloatingActionButton from '../../v2/atoms/FloatingActionButton'
+import JobsFilter from '../../v2/organisms/JobsFilter'
 import { useHistory } from 'react-router-dom'
 import qs from 'query-string'
 import PageHeader from '../../v2/organisms/PageHeader'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
+import Container from '../../v2/atoms/Container'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
@@ -44,7 +44,7 @@ const Jobs = () => {
   const handleAddJob = () => setIsAddingJob(true)
 
   return (
-    <PageContainer>
+    <Container>
       <AddJobDialog open={isAddingJob} onClose={() => setIsAddingJob(false)} />
       <FloatingActionButton color='primary' variant='extended' title={translation.addJob} action={handleAddJob}>
         <AddIcon />
@@ -56,7 +56,7 @@ const Jobs = () => {
         {(jobs?.length === 0 && !loading) && <Typography className='mt-1' color='textPrimary' variant='body1'>{translation?.couldntFindJobs}</Typography>}
         {!loading && jobs?.map((job, index) => <Grid key={index} item xs={12} md={6} lg={6}><JobCard loading={loading} job={job} /></Grid>)}
       </Grid>
-    </PageContainer>
+    </Container>
   )
 }
 

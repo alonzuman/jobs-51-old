@@ -1,8 +1,8 @@
-import { Dialog, DialogContent } from '@material-ui/core'
+import { Dialog } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import AddActivity from '../../components/forms/activity/AddActivity'
-import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
+import AddActivity from '../organisms/AddActivity'
+import CustomDialogHeader from '../molecules/CustomDialogHeader'
 
 const AddActivityDialog = ({ open, onClose }) => {
   const { translation } = useSelector(state => state.theme)

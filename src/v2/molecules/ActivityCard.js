@@ -7,7 +7,7 @@ import ActivityCardActions from './ActivityCardActions';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
-import AvatarWithName from '../../v2/molecules/AvatarWithName';
+import AvatarWithName from './AvatarWithName';
 
 const IconButtonContainer = styled.div`
   transform: ${props => props.open ? 'rotate(-180deg)' : 'none'};

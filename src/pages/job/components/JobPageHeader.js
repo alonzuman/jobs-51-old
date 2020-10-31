@@ -4,7 +4,7 @@ import PageHeader from '../../../v2/organisms/PageHeader'
 import { Avatar, TextField, Typography } from '@material-ui/core'
 import JobPageHeaderActions from './JobPageHeaderActions'
 import styled from 'styled-components'
-import LocationSelect from '../../../components/forms/profile/LocationSelect'
+import LocationSelect from '../../../v2/molecules/LocationSelect'
 import { useSelector } from 'react-redux'
 import PageSection from '../../../v2/atoms/PageSection'
 

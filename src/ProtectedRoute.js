@@ -7,7 +7,7 @@ import { checkPermissions } from './utils'
 import { getConstants } from './actions/constants'
 import styled from 'styled-components'
 import { LOADING } from './reducers/auth'
-import CircularSpinnerWithContainer from './components/layout/CircularSpinnerWithContainer'
+import CircularSpinnerWithContainer from './v2/atoms/CircularSpinnerWithContainer'
 
 // Pages
 import PendingApproval from './pages/PendingApproval'

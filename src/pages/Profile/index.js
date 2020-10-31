@@ -2,7 +2,6 @@ import { Avatar, Button, CircularProgress, Divider, FormControl, ListItem, ListI
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import PageContainer from '../../components/layout/PageContainer'
 import styled from 'styled-components'
 import { setTheme, signOut } from '../../actions'
 import PageHeader from '../../v2/organisms/PageHeader'
@@ -12,6 +11,7 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import NotificationIcon from '../../v2/molecules/NotificationIcon'
+import Container from '../../v2/atoms/Container'
 
 const LinksContainer = styled.div`
   width: 100%;
@@ -41,7 +41,7 @@ const Profile = () => {
     return <CircularProgress />
   } else {
     return (
-      <PageContainer>
+      <Container>
         <PageHeader
           secondary={<Link to={`/users/${uid}`}><Avatar className='avatar__md' src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar></Link>}
           spaceTop
@@ -104,7 +104,7 @@ const Profile = () => {
             <Button color='primary' className='pl-5 pr-5 p-0'>{translation.privacyPolicy}</Button>
           </Link>
         </LinksContainer>
-      </PageContainer>
+      </Container>
     )
   }
 }

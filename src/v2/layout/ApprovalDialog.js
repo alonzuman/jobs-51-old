@@ -1,7 +1,7 @@
 import { Button, CircularProgress, Dialog, DialogContent, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
+import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import DialogActionsContainer from '../atoms/DialogActionsContainer'
 
 const ApprovalDialog = ({ open, onClose, text, action, loading }) => {

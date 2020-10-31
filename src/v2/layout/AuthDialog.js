@@ -2,11 +2,11 @@ import { Button, CircularProgress, Dialog, DialogContent, Divider, Typography } 
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getConstants } from '../../actions/constants';
-import EmailSignIn from '../../components/forms/auth/EmailSignIn';
-import EmailSignUp from '../../components/forms/auth/EmailSignUp';
-import SocialMediaSignIn from '../../components/forms/auth/SocialMediaSignIn'
-import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
+import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import Transition from '../atoms/Transition';
+import EmailSignIn from '../organisms/EmailSignIn';
+import EmailSignUp from '../organisms/EmailSignUp';
+import SocialMediaSignIn from '../organisms/SocialMediaSignIn';
 
 const AuthDialog = ({ open, onClose }) => {
   const [signingIn, setSigningIn] = useState(true)

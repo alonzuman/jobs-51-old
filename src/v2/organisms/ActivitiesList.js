@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Typography, Grid } from '@material-ui/core'
-import ActivityCard from '../cards/ActivityCard'
-import CardsSkeletons from '../skeletons/CardsSkeletons'
+import ActivityCard from '../molecules/ActivityCard'
+import CardsSkeletons from './CardsSkeletons'
 
 const ActivitiesList = ({ activities, loading, showUser = false }) => {
   const { translation } = useSelector(state => state.theme)

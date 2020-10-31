@@ -2,8 +2,8 @@ import { Button, Checkbox, CircularProgress, Dialog, DialogContent, FormControlL
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../actions/users';
-import LocationSelect from '../../components/forms/profile/LocationSelect';
-import CustomDialogHeader from '../../components/layout/CustomDialogHeader';
+import LocationSelect from '../molecules/LocationSelect';
+import CustomDialogHeader from '../molecules/CustomDialogHeader';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 
 const AreYouVolunteerDialog = () => {

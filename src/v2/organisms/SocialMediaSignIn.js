@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, CircularProgress } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInWithProvider } from '../../../actions'
-import Container from '../../../v2/atoms/Container'
+import { signInWithProvider } from '../../actions'
+import Container from '../atoms/Container'
 
 const SocialMediaSignIn = () => {
   const { translation } = useSelector(state => state.theme)

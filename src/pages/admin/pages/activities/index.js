@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getActivities } from '../../../../actions'
-import ActivitiesList from '../../../../components/lists/ActivitiesList'
+import ActivitiesList from '../../../../v2/organisms/ActivitiesList'
 import Container from '../../../../v2/atoms/Container'
 import PageSection from '../../../../v2/atoms/PageSection'
 import PageHeader from '../../../../v2/organisms/PageHeader'

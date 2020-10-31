@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Avatar, CardHeader, Card, Typography, Paper } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import CustomChip from './CustomChip'
+import CustomChip from '../atoms/CustomChip'
 import { Skeleton } from '@material-ui/lab'
 
 const UserCard = ({ xs = 12, md = 6, lg = 6, loading, user, containerStyle, label }) => {

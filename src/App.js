@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 // Components
-import Navbar from './components/layout/Navbar/Navbar'
+import Navbar from './v2/layout/Navbar/Navbar'
 import ProtectedRoute from './ProtectedRoute'
-import RtlProvider from './contexts/RtlContext'
-import Feedback from './components/layout/Feedback'
+import DirectionProvider from './contexts/DirectionContext'
+import Feedback from './v2/atoms/Feedback'
 
 // Mui
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RtlProvider>
+      <DirectionProvider>
         <Router>
           <Feedback />
           {authenticated && <Navbar />}
@@ -85,7 +85,7 @@ function App() {
             <Route path='/' component={PageDoesntExist} />
           </Switch>
         </Router>
-      </RtlProvider>
+      </DirectionProvider>
     </ThemeProvider>
   )
 }

@@ -1,8 +1,8 @@
 import { Dialog, DialogContent } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import AddJob from '../../components/forms/job/AddJob'
-import CustomDialogHeader from '../../components/layout/CustomDialogHeader'
+import AddJob from '../organisms/AddJob'
+import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import useWindowSize from '../../hooks/useWindowSize'
 
 const AddJobDialog = ({ open, onClose }) => {

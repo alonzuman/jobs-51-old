@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 // Icons
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import ActivityIcon from '../../../v2/molecules/ActivityIcon';
+import ActivityIcon from '../../molecules/ActivityIcon';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 

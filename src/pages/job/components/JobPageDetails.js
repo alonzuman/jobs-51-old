@@ -2,7 +2,7 @@ import { Chip, Divider, FormControl, Grid, MenuItem, Select, TextField, Typograp
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SkillsSelect from '../../../components/forms/profile/SkillsSelect'
+import SkillsSelect from '../../../v2/molecules/SkillsSelect'
 import PageSection from '../../../v2/atoms/PageSection'
 import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 import SubSection from '../../../v2/atoms/SubSection'

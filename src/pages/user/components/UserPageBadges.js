@@ -8,8 +8,6 @@ import { checkPermissions, roles } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection'
-import LocationSelect from '../../../components/forms/profile/LocationSelect'
-import EditUserActivities from './EditUserActivities'
 
 const ActionsContainer = styled.div`
   display: flex;

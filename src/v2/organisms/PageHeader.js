@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ImageLightbox from '../../components/general/ImageLightbox'
+import ImageLightbox from '../layout/ImageLightbox'
 import BackButton from '../../v2/atoms/BackButton'
 
 const Container = styled.div`

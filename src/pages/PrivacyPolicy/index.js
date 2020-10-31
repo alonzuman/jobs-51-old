@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography } from '@material-ui/core'
-import PageContainer from '../../components/layout/PageContainer'
 import PageHeader from '../../v2/organisms/PageHeader'
+import Container from '../../v2/atoms/Container'
 
 const PrivacyPolicy = () => {
   const { translation } = useSelector(state => state.theme)
 
   return (
-    <PageContainer>
+    <Container>
       <PageHeader
         spaceBottom
         spaceTop
@@ -242,7 +242,7 @@ const PrivacyPolicy = () => {
           <br />
           היישום רשאית לשנות את מדיניות הפרטיות מעת לעת. כל שינויים עתידיים במדיניות הפרטיות יפורסמו בדף זה, ואם תראה היישום לנכון, יימסרו לך בהודעה (לרוב באמצעות דוא”ל). לפיכך, עליך לבדוק כל שינויים במדיניות הפרטיות לפני שתמסור ל-היישום מידע אישי. תאריך הגרסה העדכנית יופיע בעמוד
         </Typography>
-    </PageContainer>
+    </Container>
   )
 }
 

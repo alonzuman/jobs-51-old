@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
-import UserCard from '../cards/UserCard'
-import CardsSkeletons from '../skeletons/CardsSkeletons'
+import UserCard from '../molecules/UserCard'
+import CardsSkeletons from './CardsSkeletons'
 
 const UsersList = ({ loading, users }) => {
   const { translation } = useSelector(state => state.theme)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import JobCard from '../../components/cards/JobCard'
+import JobCard from '../molecules/JobCard'
 import useWindowSize from '../../hooks/useWindowSize'
 
 const JobsCarousel = ({ jobs }) => {

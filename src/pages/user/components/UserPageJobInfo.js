@@ -2,7 +2,7 @@ import { Chip, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, TextFi
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SkillsSelect from '../../../components/forms/profile/SkillsSelect'
+import SkillsSelect from '../../../v2/molecules/SkillsSelect'
 import WorkIcon from '@material-ui/icons/Work';
 import InfoContainer from './InfoContainer'
 import GradeIcon from '@material-ui/icons/Grade';

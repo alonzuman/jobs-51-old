@@ -3,16 +3,16 @@ import qs from 'query-string'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Button, Dialog, DialogActions, DialogContent } from '@material-ui/core'
-import CustomDialogHeader from '../layout/CustomDialogHeader'
+import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import TuneIcon from '@material-ui/icons/Tune';
 import styled from 'styled-components'
 import LocationFilter from './LocationFilter'
 import SkillsFilter from './SkillsFilter'
 import useWindowSize from '../../hooks/useWindowSize'
 import IndustryFilter from './IndustryFilter'
-import DialogActionsContainer from '../../v2/atoms/DialogActionsContainer'
+import DialogActionsContainer from '../atoms/DialogActionsContainer'
 import DateFilter from './DateFilter'
-import Transition from '../../v2/atoms/Transition'
+import Transition from '../atoms/Transition'
 
 const Container = styled.div`
   display: flex;

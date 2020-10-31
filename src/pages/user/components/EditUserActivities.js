@@ -2,7 +2,7 @@ import { Divider, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import LocationSelect from '../../../components/forms/profile/LocationSelect'
+import LocationSelect from '../../../v2/molecules/LocationSelect'
 import PageSection from '../../../v2/atoms/PageSection'
 import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 

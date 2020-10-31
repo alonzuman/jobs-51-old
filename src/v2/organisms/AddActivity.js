@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
-import { addActivity } from '../../../actions/activities'
+import { addActivity } from '../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFeedback } from '../../../actions';
-import { setUserRegion } from '../../../actions/auth';
-import CustomChip from '../../cards/CustomChip';
-import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer';
+import { setFeedback } from '../../actions';
+import { setUserRegion } from '../../actions/auth';
+import DialogActionsContainer from '../atoms/DialogActionsContainer';
+import CustomChip from '../atoms/CustomChip';
 
 const AddActivity = ({ onClose }) => {
   const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)

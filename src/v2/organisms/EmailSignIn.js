@@ -1,10 +1,10 @@
 import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signIn } from '../../../actions'
-import { emailValidation, passwordValidation } from '../../../utils'
-import Container from '../../../v2/atoms/Container'
-import DialogActionsContainer from '../../../v2/atoms/DialogActionsContainer'
+import { signIn } from '../../actions'
+import { emailValidation } from '../../utils'
+import Container from '../atoms/Container'
+import DialogActionsContainer from '../atoms/DialogActionsContainer'
 
 const EmailSignIn = () => {
   const [errors, setErrors] = useState({})
