@@ -1,4 +1,4 @@
-import { Button, FormGroup, TextField } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../../actions'
@@ -25,7 +25,7 @@ const EmailSignIn = () => {
   }
 
   return (
-    <Container className='pb-0'>
+    <Container className='m-0 full__width pb-0 pr-0 pl-0'>
       <TextField
         size='small'
         variant='outlined'
