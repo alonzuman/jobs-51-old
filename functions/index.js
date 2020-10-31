@@ -209,6 +209,9 @@ exports.onDeleteUser = functions.firestore
       activitiesSnapshot.forEach(async doc => {
         await Activities.doc(doc.id).delete()
       })
+
+      // Delete user auth
+      await admin.auth().deleteUser(uid)
     } catch (error) {
       console.log('##################')
       console.log('##################')
@@ -313,9 +316,9 @@ exports.onCreateJob = functions.firestore
 
       // Update job skills count
       await skills.forEach(async skill => {
-        await Constants.doc('listedJobSkills').update({
+        await Constants.doc('listedJobSkills').set({
           [skill]: increment
-        })
+        }, { merge: true })
       })
     } catch (error) {
       console.log('###############')
