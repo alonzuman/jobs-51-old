@@ -24,7 +24,7 @@ const LocationSelect = ({ location, setLocation, label, helperText = '', error =
       onChange={(e, value) => setLocation(value)}
       noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
       getOptionLabel={option => option}
-      renderInput={params => <TextField helperText={helperText} error={error} {...params} label={label || translation.location} variant="outlined" />}
+      renderInput={params => <TextField helperText={helperText} error={Boolean(error)} {...params} label={label || translation.location} variant="outlined" />}
       renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
       placeholder={translation.preferredLocationPlaceholder}
       label={translation.preferredLocation}

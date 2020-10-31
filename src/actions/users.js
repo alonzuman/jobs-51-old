@@ -2,6 +2,7 @@ import { db } from "../firebase"
 import { setFeedback } from "./feedback"
 import { ERROR, LOADING, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MORE, SET_ONE, UPDATE_ONE, UPDATING } from "../reducers/users"
 import store from '../store'
+import { SET_USER } from "../reducers/auth"
 const { translation } = store.getState().theme
 const Users = db.collection('users');
 const Jobs = db.collection('jobs');
@@ -202,7 +203,7 @@ export const updateUser = ({ newUser }) => async dispatch => {
 
     if (uid === newUser.uid) {
       dispatch({
-        type: UPDATE_ONE,
+        type: SET_USER,
         payload: {
           ...newUser
         }
