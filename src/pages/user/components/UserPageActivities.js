@@ -21,7 +21,6 @@ const UserPageActivities = ({ user, loading, editing }) => {
   } else {
     return (
       <>
-        <Divider className='mb-2' />
         <PageSection>
           <PageSectionTitle
             title={`${translation.activitiesBy} ${user?.firstName}`}

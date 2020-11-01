@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import StarsIcon from '@material-ui/icons/Stars';
 import { checkPermissions, roles } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection'
 
 const ActionsContainer = styled.div`
@@ -77,6 +76,7 @@ const UserPageBadges = ({
               </Select>
             </FormControl>
           </>}
+        <Divider className='mt-1' />
       </PageSection>
     )
   } else if (volunteer || lookingForJob || isPending) {
@@ -93,13 +93,13 @@ const UserPageBadges = ({
             </Grid>}
           {volunteer &&
             <Grid item>
-            <Chip
-              color='primary'
-              variant='outlined'
-              label={translation.activeVolunteer}
-              size='small'
-              className='fit__content'
-            />
+              <Chip
+                color='primary'
+                variant='outlined'
+                label={translation.activeVolunteer}
+                size='small'
+                className='fit__content'
+              />
             </Grid>}
           {isAdminOrManagerOrModerator &&
             <Grid item>
@@ -131,6 +131,7 @@ const UserPageBadges = ({
               <Button onClick={handleApproveUser} className='mr-5' color='primary' variant='contained'>{translation.approve}</Button>
             </ActionsContainer>}
         </List>
+        <Divider className='mt-1' />
       </PageSection>
     )
   } else {

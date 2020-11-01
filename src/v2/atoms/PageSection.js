@@ -1,20 +1,31 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 const Section = styled.div`
   padding: ${props => props.disableGutters ? '' : '0 16px'};
   margin-bottom: ${props => props.spaceBottom ? '96px' : ''};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
+  background-color: ${props => props.background};
   top: ${props => props.sticky ? 0 : ''};
+  z-index: ${props => props.sticky ? 9 : 1};
 
   :not(last-of-type) {
     margin-bottom: 8px;
   }
 `
 
-const PageSection = ({ children, disableGutters, spaceBottom, ...rest }) => {
+const PageSection = ({ children, disableGutters, spaceBottom, sticky, ...rest }) => {
+  const { theme } = useSelector(state => state.theme)
+
   return (
-    <Section disableGutters={disableGutters} spaceBottom={spaceBottom} {...rest}>
+    <Section
+      disableGutters={disableGutters}
+      spaceBottom={spaceBottom}
+      sticky={sticky}
+      background={theme?.palette?.background?.main}
+      {...rest}
+    >
       {children}
     </Section>
   )

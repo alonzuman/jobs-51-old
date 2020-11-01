@@ -9,7 +9,7 @@ const Container = styled.div`
 `
 
 const RightSection = styled.div`
-
+  margin-top: 16px;
 `
 
 const LeftSection = styled.div`

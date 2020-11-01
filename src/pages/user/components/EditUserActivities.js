@@ -39,7 +39,6 @@ const EditUserActivities = ({
   } else {
     return (
       <PageSection>
-        <Divider className='mb-2 mt-1' />
         <PageSectionTitle title={translation.manageVolunteering} />
         <LocationSelect
           helperText={locationHelperText()}
@@ -59,6 +58,7 @@ const EditUserActivities = ({
               <TextField className='mxw-196' size='small' variant='outlined' label={translation.pending} type='number' value={statePending} onChange={e => setPending(parseInt(e.target.value))} />
             </div>
           </>}
+        <Divider className='mt-1' />
       </PageSection>
     )
   }

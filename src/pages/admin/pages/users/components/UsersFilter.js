@@ -16,6 +16,7 @@ import RoleFilter from './RoleFilter'
 import ListIcon from '@material-ui/icons/List';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import TopBar from '../../../../../v2/layout/TopBar'
+import PageSection from '../../../../../v2/atoms/PageSection'
 
 // const Container = styled.div`
 //   display: flex;
@@ -102,7 +103,7 @@ const UsersFilter = ({ view, handleView }) => {
 
   return (
     <>
-      <TopBar sticky>
+      <TopBar sticky bottomSpacing={false}>
         <Button size='large' onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
         <Button size='large' className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>
           {translation.changeView}
@@ -122,7 +123,9 @@ const UsersFilter = ({ view, handleView }) => {
           </DialogActionsContainer>
         </Dialog>
       </TopBar>
-      <ChipsGrid chips={filters} />
+      <PageSection>
+        <ChipsGrid chips={filters} />
+      </PageSection>
     </>
   )
 }

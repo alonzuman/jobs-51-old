@@ -24,7 +24,6 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
   } else if (editing) {
     return (
       <PageSection>
-        <Divider className='mb-2' />
         <PageSectionTitle title={translation.aboutMe} />
         <TextField className='mt-1' size='small' multiline rows={4} variant='outlined' label={translation.aboutMe} value={about} onChange={e => setAbout(e.target.value)} />
         <ListItem disableGutters>
@@ -39,12 +38,12 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
           </ListItemIcon>
           <LocationSelect size='small' location={hometown} setLocation={setHometown} className='mw-224' label={translation.hometown} />
         </ListItem>
+        <Divider className='mt-1' />
       </PageSection>
     )
   } else if (user?.about || user?.hometown || user?.phone || user?.email) {
     return (
       <PageSection>
-        <Divider className='mb-2' />
         <PageSectionTitle title={translation.aboutMe} />
         <Typography className='text__wrap' variant='body1'>{user?.about}</Typography>
         <List>
@@ -76,6 +75,7 @@ const UserPageBio = ({ editing, loading, user, hometown, setHometown, phone, set
               </ListItemText>
             </ListItem>}
         </List>
+        <Divider className='mt-1' />
       </PageSection>
     )
   } else {

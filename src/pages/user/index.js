@@ -9,6 +9,8 @@ import UserPageHeader from './components/UserPageHeader'
 import { useHistory } from 'react-router-dom'
 import Container from '../../v2/atoms/Container'
 import UserPageActivities from './components/UserPageActivities'
+import PageSection from '../../v2/atoms/PageSection'
+import { Divider } from '@material-ui/core'
 
 
 const User = ({ match }) => {
@@ -46,20 +48,22 @@ const User = ({ match }) => {
 
   return (
     <Container>
-      <UserPageHeader
-        handleImageOpen={handleImageOpen}
-        editing={false}
-        handleEditing={handleEditing}
-        loading={loading}
-        user={user}
-      />
-      <UserPageBadges
-        handleApproveUser={handleApproveUser}
-        handleIsDeclining={handleIsDeclining}
-        loading={loading}
-        user={user}
-        editing={false}
-      />
+      <PageSection disableGutters sticky>
+        <UserPageHeader
+          handleImageOpen={handleImageOpen}
+          editing={false}
+          handleEditing={handleEditing}
+          loading={loading}
+          user={user}
+        />
+        <UserPageBadges
+          handleApproveUser={handleApproveUser}
+          handleIsDeclining={handleIsDeclining}
+          loading={loading}
+          user={user}
+          editing={false}
+        />
+      </PageSection>
       <UserPageBio
         editing={false}
         user={user}

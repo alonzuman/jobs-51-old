@@ -11,18 +11,18 @@ const Container = styled.div`
   top: 0;
   z-index: 99;
   background-color: ${props => props.background};
-  margin-bottom: 8px;
+  margin-bottom: ${props => props.bottomSpacing ? '8px' : ''};
 
   @media (max-width: 768px) {
     width: 100%;
   }
 `
 
-const TopBar = ({ sticky, disableGutters = false, children, ...rest }) => {
+const TopBar = ({ sticky, bottomSpacing = true, disableGutters = false, children, ...rest }) => {
   const { theme } = useSelector(state => state.theme)
 
   return (
-    <Container disableGutters={disableGutters} sticky={sticky} background={theme?.palette?.background?.main} {...rest}>
+    <Container bottomSpacing={bottomSpacing} disableGutters={disableGutters} sticky={sticky} background={theme?.palette?.background?.main} {...rest}>
       {children}
     </Container>
   )

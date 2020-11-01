@@ -24,7 +24,6 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
   } else if (editing) {
     return (
       <PageSection spaceBottom={windowWidth < 768}>
-        <Divider className='mb-2 mt-1' />
         <PageSectionTitle title={translation.workExperience} />
         <List>
           <ListItem disableGutters>
@@ -45,7 +44,6 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
   } else if (user?.lastPosition && user?.skills?.length !== 0) {
     return (
       <PageSection>
-        <Divider className='mb-2 mt-1' />
         <PageSectionTitle title={translation.workExperience} />
         <List>
           {user?.lastPosition &&
@@ -70,6 +68,7 @@ const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition
               </ListItem>
             </>}
         </List>
+        <Divider className='mt-1' />
       </PageSection>
     )
   } else {
