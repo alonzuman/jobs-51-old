@@ -93,7 +93,13 @@ const UserPageBadges = ({
             </Grid>}
           {volunteer &&
             <Grid item>
-              <Chip color='primary' variant='outlined' label={translation.activeVolunteer} size='small' className='fit__content' />
+            <Chip
+              color='primary'
+              variant='outlined'
+              label={`${translation.volunteer} ${user?.region ? `${translation.inRegion} ${user?.region}` : ''}`}
+              size='small'
+              className='fit__content'
+            />
             </Grid>}
           {isAdminOrManagerOrModerator &&
             <Grid item>

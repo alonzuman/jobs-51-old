@@ -9,10 +9,6 @@ const Container = styled.div`
   align-items: center;
 `
 
-const DisplayName = styled.span`
-  font-size: .6rem;
-`
-
 const AvatarWithName = ({ uid, firstName, lastName, imgUrl }) => {
   return (
     <Link to={`/users/${uid}`}>
@@ -20,10 +16,11 @@ const AvatarWithName = ({ uid, firstName, lastName, imgUrl }) => {
         <Avatar src={imgUrl} className='avatar__xs'>
           {firstName?.charAt(0)}
         </Avatar>
-        <Typography variant='subtitle1'>
-          <DisplayName>
-            {firstName} {lastName}
-          </DisplayName>
+        <Typography style={{ fontSize: '.6rem' }} variant='subtitle1'>
+          {firstName}
+        </Typography>
+        <Typography style={{ fontSize: '.6rem' }} variant='subtitle1'>
+          {lastName}
         </Typography>
       </Container>
     </Link>

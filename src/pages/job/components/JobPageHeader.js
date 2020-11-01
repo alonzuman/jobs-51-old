@@ -1,5 +1,4 @@
 import React from 'react'
-import { Skeleton } from '@material-ui/lab'
 import PageHeader from '../../../v2/organisms/PageHeader'
 import { Avatar, TextField, Typography } from '@material-ui/core'
 import JobPageHeaderActions from './JobPageHeaderActions'

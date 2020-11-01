@@ -1,29 +1,35 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
-import { Card, CardContent, CardHeader, Grid } from '@material-ui/core'
+import { Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
 
 const CardsSkeletons = ({ count, size }) => {
   const arr = [...Array(count || 3)]
   return (
-    <Grid spacing={2} container >
-      {arr.map((x, i) => <Grid key={i} item xs={12} md={12} lg={12}><CardSkeleton size={size} /></Grid>)}
-    </Grid>
+    <List>
+      {arr.map((x, i) => <List key={i}><CardSkeleton size={size} /></List>)}
+    </List>
   )
 }
 
-const CardSkeleton = ({ size }) => {
+const CardSkeleton = ({ size = 'small' }) => {
   return (
-    <Card variant='outlined' dir='rtl'>
-      <CardHeader
-        avatar={<Skeleton height={40} width={40} variant='circle' />}
-        title={<Skeleton width={64} height={24} />}
-        subheader={<Skeleton width={104} height={18} />}
-      />
-      <CardContent className='pt-0 pb-25'>
-        <Skeleton width={'12rem'} variant='text' />
-        {size >= 2 && <Skeleton width={'8rem'} variant='text' />}
-      </CardContent>
-    </Card>
+    <>
+      <ListItem alignItems='flex-start' button dir='rtl'>
+        <ListItemAvatar>
+          <Skeleton height={40} width={40} variant='circle' />
+        </ListItemAvatar>
+        <ListItemText
+          primary={<Skeleton width={64} height={24} />}
+          secondary={
+            <>
+              <Skeleton width={104} height={18} />
+              {size === 'big' && <Skeleton width={104} height={18} />}
+            </>
+          }
+        />
+      </ListItem>
+      <Divider />
+    </>
   )
 }
 
