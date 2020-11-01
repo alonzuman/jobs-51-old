@@ -20,7 +20,7 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
     bottom: 0,
     width: '100%',
     height: 'fit-content',
-    zIndex: 9,
+    zIndex: 9999,
     backgroundColor: theme.palette.background.paper,
     borderTop: `1px solid ${theme.palette.border.main}`,
   }

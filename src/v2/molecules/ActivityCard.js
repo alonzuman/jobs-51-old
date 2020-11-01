@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
 
-const ListItemBody = styled.div`
+const ListItemBody = styled.span`
   display: flex;
   flex-direction: column;
 `
@@ -57,7 +57,7 @@ const ActivityCard = ({ activity }) => {
           <Chip
             size='small'
             variant='outlined'
-            color={isApproved ? 'primary' : ''}
+            color={isApproved ? 'primary' : 'default'}
             label={isApproved ? translation.approved : translation.pending}
           />
         </ListItemSecondaryAction>

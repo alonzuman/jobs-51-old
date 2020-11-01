@@ -65,10 +65,8 @@ const RegionActivities = ({ match }) => {
           title={<>{translation.manageRegionActivities} <span className='primary__color'>{region}</span></>}
         />
       </PageSection>
-      <PageSection>
-        <RegionActivitiesFilter view={view} handleView={handleView} />
-      </PageSection>
-      <PageSection>
+      <RegionActivitiesFilter view={view} handleView={handleView} />
+      <PageSection disableGutters>
         {view === 'list' && <ActivitiesList showUser loading={loading} activities={activities} />}
         {view === 'table' && <Table loading={loading} data={data} />}
       </PageSection>

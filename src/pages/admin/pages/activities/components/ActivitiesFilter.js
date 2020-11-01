@@ -9,21 +9,10 @@ import LocationSelect from '../../../../../v2/molecules/LocationSelect';
 import styled from 'styled-components';
 import Transition from '../../../../../v2/atoms/Transition';
 import useWindowSize from '../../../../../hooks/useWindowSize';
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  background-color: ${props => props.background};
-  margin-bottom: 8px;
-`
+import TopBar from '../../../../../v2/layout/TopBar';
 
 const ActivitiesFilter = () => {
-  const { translation } = useSelector(state => state.theme);
+  const { translation, theme } = useSelector(state => state.theme);
   const { regions } = useSelector(state => state?.constants?.locations);
   const history = useHistory();
   const { windowWidth: width } = useWindowSize()
@@ -58,7 +47,7 @@ const ActivitiesFilter = () => {
   }
 
   return (
-    <Container>
+    <TopBar sticky>
       <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
       <Dialog fullScreen={width <= 768} fullWidth TransitionComponent={Transition} dir='rtl' open={isOpen} onClose={handleOpen}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
@@ -76,7 +65,7 @@ const ActivitiesFilter = () => {
           <Button onClick={handleSubmit} color='primary' variant='contained'>{translation.apply}</Button>
         </DialogActionsContainer>
       </Dialog>
-    </Container>
+    </TopBar>
   )
 }
 

@@ -72,10 +72,8 @@ const RegionUsers = ({ match }) => {
           backButton
         />
       </PageSection>
-      <PageSection>
         <RegionUsersFilter view={view} handleView={handleView} />
-      </PageSection>
-      <PageSection>
+      <PageSection disableGutters>
         {view === 'list' && <UsersList loading={loading} users={users} />}
         {view === 'table' && <Table loading={loading} data={data} />}
       </PageSection>

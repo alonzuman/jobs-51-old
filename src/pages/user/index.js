@@ -7,8 +7,9 @@ import UserPageBadges from './components/UserPageBadges'
 import UserPageJobsCarousel from './components/UserPageJobsCarousel'
 import UserPageHeader from './components/UserPageHeader'
 import { useHistory } from 'react-router-dom'
-import UserPageActivitiesCarousel from './components/UserPageActivitiesCarousel'
 import Container from '../../v2/atoms/Container'
+import UserPageActivities from './components/UserPageActivities'
+
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -16,6 +17,7 @@ const User = ({ match }) => {
   const [editing, setEditing] = useState(false)
   const history = useHistory()
   const { loading, user } = useSelector(state => state.users)
+  const { theme } = useSelector(state => state.theme)
   const uid = match.params.id
   const dispatch = useDispatch()
 
@@ -68,15 +70,15 @@ const User = ({ match }) => {
         user={user}
         loading={loading}
       />
-      <UserPageActivitiesCarousel
-        user={user}
-        loading={loading}
-        editing={editing}
-      />
       <UserPageJobsCarousel
         user={user}
         loading={loading}
         editing={false}
+      />
+      <UserPageActivities
+        user={user}
+        loading={loading}
+        editing={editing}
       />
     </Container>
   );

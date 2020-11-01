@@ -42,15 +42,13 @@ const Activities = () => {
       <PageSection>
         <PageHeader className='mb-0' title={translation.manageActivities} backButton />
       </PageSection>
-      <PageSection className='sticky t-0 z-9'>
-        <ActivitiesFilter />
-      </PageSection>
+      <ActivitiesFilter />
       <PageSection>
         <PageSectionTitle
           title={region ? <>{translation.resultsInRegion} <Region color={theme?.palette?.primary?.main}>{region}</Region></> : translation.latestActivities}
         />
       </PageSection>
-      <PageSection>
+      <PageSection disableGutters>
         <ActivitiesList loading={loading} activities={activities} showUser />
       </PageSection>
     </Container>

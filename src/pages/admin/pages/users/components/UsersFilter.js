@@ -15,24 +15,28 @@ import { onlyUnique, roles } from '../../../../../utils'
 import RoleFilter from './RoleFilter'
 import ListIcon from '@material-ui/icons/List';
 import TableChartIcon from '@material-ui/icons/TableChart';
+import TopBar from '../../../../../v2/layout/TopBar'
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  background-color: ${props => props.background};
-  margin-bottom: 8px;
-`
+// const Container = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 8px 0;
+//   position: sticky;
+//   top: 0;
+//   z-index: 99;
+//   background-color: ${props => props.background};
+//   margin-bottom: 8px;
+// `
 
-const BarContainer = styled.div`
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`
+// const BarContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+
+//   @media (max-width: 768px) {
+//     width: 100%;
+//   }
+// `
 
 const UsersFilter = ({ view, handleView }) => {
   const { theme, translation } = useSelector(state => state.theme)
@@ -97,18 +101,15 @@ const UsersFilter = ({ view, handleView }) => {
   }
 
   return (
-    <Container background={theme?.palette?.background?.main}>
-      <BarContainer>
-        <div className='flex align__center'>
-          <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
-          <Button className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>
-            {translation.changeView}
-            {view === 'list' && <ListIcon className='mr-5' />}
-            {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}
-          </Button>
-        </div>
-        <ChipsGrid chips={filters} />
-      </BarContainer>
+    <TopBar sticky>
+      <Button onClick={handleOpen} variant='outlined' className='mnw-fc'>{translation.filterResults}</Button>
+      <Button className='mr-5 mnw-fc' variant='outlined' onClick={handleView}>
+        {translation.changeView}
+        {view === 'list' && <ListIcon className='mr-5' />}
+        {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}
+      </Button>
+      {/* TODO ALON fix the filters */}
+      {/* <ChipsGrid chips={filters} /> */}
       <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
         <DialogContent>
@@ -121,7 +122,7 @@ const UsersFilter = ({ view, handleView }) => {
           <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>
         </DialogActionsContainer>
       </Dialog>
-    </Container>
+    </TopBar>
   )
 }
 

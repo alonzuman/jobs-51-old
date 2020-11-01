@@ -1,5 +1,5 @@
 import store from '../store';
-const { theme } = store.getState().theme
+const { theme, translation } = store.getState().theme
 
 export const isAdmin = role => role === 'admin'
 export const isModerator = role => role === 'moderator'
@@ -83,4 +83,16 @@ export const emailValidation = (email) => {
 
 export const passwordValidation = (password) => {
   return false;
+}
+
+export const userSecondayText = user => {
+  if (user?.region) {
+    return `${translation.volunteer} ${user?.region ? `${translation.inRegion} ${user?.region}` : ''}`
+  } else if (user?.serviceYear) {
+    return `${translation.joined} ${user?.serviceYear}`
+  } else if (user?.email) {
+    return user?.email
+  } else {
+    return ''
+  }
 }

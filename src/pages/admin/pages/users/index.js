@@ -67,12 +67,10 @@ const Users = () => {
   return (
     <Container>
       <PageSection>
-        <PageHeader  title={translation.usersPageTitle} backButton backLink='/admin' className='mb-0' />
+        <PageHeader title={translation.usersPageTitle} backButton backLink='/admin' className='mb-0' />
       </PageSection>
-      <PageSection className='sticky t-0 z-9'>
-        <UsersFilter view={view} handleView={handleView} />
-      </PageSection>
-      <PageSection>
+      <UsersFilter view={view} handleView={handleView} />
+      <PageSection disableGutters>
         {view === 'list' && <UsersList loading={loading} users={users} />}
         {view === 'table' && <Table loading={loading} data={data} />}
       </PageSection>

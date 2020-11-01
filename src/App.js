@@ -25,7 +25,6 @@ import Activity from './pages/Activity'
 import Saved from './pages/Saved'
 import Users from './pages/Admin/pages/Users'
 import Activities from './pages/Admin/pages/Activities'
-import UserActivities from './pages/User/components/UserActivities'
 import Notifications from './pages/Notifications'
 import RegionUsers from './pages/Admin/pages/RegionUsers'
 import RegionActivities from './pages/Admin/pages/RegionActivities'
@@ -69,7 +68,6 @@ function App() {
             {/* Users */}
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
             <ProtectedRoute exact requiredRole='user' path='/users/:id/edit' component={EditUser} />
-            <ProtectedRoute exact requiredRole='user' path='/users/:id/activities' component={UserActivities} />
 
             {/* Admin */}
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />

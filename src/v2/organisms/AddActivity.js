@@ -52,18 +52,18 @@ const AddActivity = ({ onClose }) => {
     if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number' || !totalInt) {
       return dispatch(setFeedback({
         type: 'error',
-        msg: 'invalidInput'
+        msg: translation.invalidInput
       }))
     }
     if (activity['type'].trim().length === 0) {
       return dispatch(setFeedback({
         type: 'error',
-        msg: 'fillActivityType'
+        msg: translation.fillActivityType
       }))
     } else if (activity['startHour'] > activity['endHour']) {
       return dispatch(setFeedback({
         type: 'error',
-        msg: 'hoursNoGood'
+        msg: translation.hoursNoGood
       }))
     }
     await dispatch(addActivity({

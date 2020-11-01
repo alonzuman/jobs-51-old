@@ -1,7 +1,7 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import PageHeader from '../../../v2/organisms/PageHeader'
-import { checkPermissions } from '../../../utils';
+import { checkPermissions, userSecondayText } from '../../../utils';
 import { useSelector } from 'react-redux';
 import { Avatar, IconButton, TextField, Typography } from '@material-ui/core';
 import styled from 'styled-components'
@@ -84,7 +84,7 @@ const UserPageHeader = ({
           backButton={!editing}
           imgUrl={user?.avatar}
           title={`${firstName} ${lastName}`}
-          subtitle={serviceYear ? `${translation.serviceYear} ${serviceYear}` : ''}
+          subtitle={userSecondayText(user)}
           secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
           action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
         />
