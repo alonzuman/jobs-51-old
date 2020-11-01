@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, List, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import NotificationCard from '../../../v2/molecules/NotificationCard'
@@ -9,14 +9,12 @@ const NotificationsList = ({ loading, all }) => {
 
 
   if (loading) {
-    return (
-      <CardsSkeletons count={1} className='p-0' />
-    )
+    return <CardsSkeletons count={1} size='small' />
   } else if (!loading && all?.length !== 0) {
     return (
-      <Grid container spacing={2}>
-        {all?.map((v, i) => <Grid xs={12} md={12} lg={12} item key={i}><NotificationCard notification={v} /></Grid>)}
-      </Grid>
+      <List>
+        {all?.map((v, i) => <NotificationCard notification={v} key={i} />)}
+      </List>
     )
   } else {
     return <Typography variant='body1'>{translation.noDataToShow}</Typography>

@@ -1,4 +1,4 @@
-import { Card, CardHeader, Chip } from '@material-ui/core'
+import { Avatar, Chip, Divider, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { markSeen } from '../../actions';
@@ -48,14 +48,21 @@ const NotificationCard = ({ notification }) => {
   }
 
   return (
-    <Card className='clickable' onClick={markAsSeen} variant='outlined'>
-      <CardHeader
-        className='pt-5 pb-5 pl-1 pr-1'
-        title={<Chip size='small' label={timeAgo()} variant='outlined' color='primary' />}
-        subheader={notificationBody()}
-        action={isSeen ? '' : <FiberManualRecordIcon color='primary' />}
-      />
-    </Card>
+    <>
+      <ListItem button onClick={markAsSeen}>
+        <ListItemAvatar>
+          <Avatar />
+        </ListItemAvatar>
+        <ListItemText
+          primary={<Chip className='mb-25' size='small' label={timeAgo()} variant='outlined' color='primary' />}
+          secondary={notificationBody()}
+        />
+        <ListItemSecondaryAction>
+          {isSeen ? '' : <FiberManualRecordIcon color='primary' />}
+        </ListItemSecondaryAction>
+      </ListItem>
+      <Divider />
+    </>
   )
 }
 
