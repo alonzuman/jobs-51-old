@@ -10,14 +10,14 @@ const ActivityPageRegionAdmins = ({ regionManagers, loading, region }) => {
 
   if (loading) {
     return (
-      <PageSection className='mb-2'>
+      <PageSection className='mb-1'>
         <Skeleton variant='text' height={16} width={104} className='mb-25' />
         <Skeleton variant='circle' height={36} width={36} />
       </PageSection>
     )
   } else if (regionManagers?.length !== 0) {
     return (
-      <PageSection className='mb-2'>
+      <PageSection className='mb-1'>
         <Typography variant='subtitle1'>{translation.managersOfRegion} {region}</Typography>
         <AvatarGroup max={4} className='pt-25 pb-25'>
           {regionManagers?.map((v, i) => <Link key={i} to={`/users/${v?.uid}`}><Avatar src={v?.avatar} /></Link>)}

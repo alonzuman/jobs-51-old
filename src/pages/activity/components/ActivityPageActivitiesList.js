@@ -21,7 +21,7 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   } else if (activities?.length !== 0) {
     return (
       <PageSection>
-        <Divider className='mb-2 mt-1' />
+        <Divider className='mb-1' />
         <PageSectionTitle
           title={translation.latestActivities}
           subtitle={`${translation.recentActivitiesInRegion} ${region}`}
@@ -33,7 +33,7 @@ const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   } else {
     return (
       <PageSection>
-        <Divider className='mb-2 mt-1' />
+        <Divider className='mb-1' />
         <PageSectionTitle
           title={translation.latestActivities}
           subtitle={translation.activitiesEmptyState}
