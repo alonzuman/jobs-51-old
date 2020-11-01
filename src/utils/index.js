@@ -87,12 +87,20 @@ export const passwordValidation = (password) => {
 
 export const userSecondayText = user => {
   if (user?.region) {
-    return `${translation.volunteer} ${user?.region ? `${translation.inRegion} ${user?.region}` : ''}`
+    return `${translation.activeVolunteer} ${user?.region ? `${translation.inRegion} ${user?.region}` : ''}`
   } else if (user?.serviceYear) {
     return `${translation.joined} ${user?.serviceYear}`
   } else if (user?.email) {
     return user?.email
   } else {
     return ''
+  }
+}
+
+export const roundNumber = number => {
+  if (number % 1 !== 0) {
+    return number.toFixed(1)
+  } else {
+    return Math.round(number)
   }
 }

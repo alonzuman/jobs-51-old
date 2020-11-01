@@ -5,25 +5,15 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { setTheme, signOut } from '../../actions'
 import PageHeader from '../../v2/organisms/PageHeader'
+import PageSection from '../../v2/atoms/PageSection'
+import NotificationIcon from '../../v2/molecules/NotificationIcon'
+import Container from '../../v2/atoms/Container'
 
 // Icons
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import NotificationIcon from '../../v2/molecules/NotificationIcon'
-import Container from '../../v2/atoms/Container'
-import PageSection from '../../v2/atoms/PageSection'
-
-const LinksContainer = styled.div`
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  bottom: 96px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+import InfoIcon from '@material-ui/icons/Info';
 
 const Profile = () => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -101,13 +91,19 @@ const Profile = () => {
               </ListItemSecondaryAction>
             </ListItem>
             <Divider className='mt-1 mb-1' />
+            <Typography variant='subtitle1'>{translation.info}</Typography>
+            <Link to='/privacy-policy'>
+              <ListItem button disableGutters>
+                <ListItemIcon>
+                  <InfoIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  {translation.privacyPolicy}
+                </ListItemText>
+              </ListItem>
+            </Link>
           </List>
           <Button size='large' className='button-style' color='primary' variant='outlined' onClick={handleSignOut}>{translation.signOut}</Button>
-          <LinksContainer>
-            <Link to='/privacy-policy'>
-              <Button color='primary' className='pl-5 pr-5 p-0'>{translation.privacyPolicy}</Button>
-            </Link>
-          </LinksContainer>
         </PageSection>
       </Container>
     )

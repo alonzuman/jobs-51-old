@@ -6,7 +6,6 @@ const Section = styled.div`
   margin-bottom: ${props => props.spaceBottom ? '96px' : ''};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
   top: ${props => props.sticky ? 0 : ''};
-  z-index: 9;
 
   :not(last-of-type) {
     margin-bottom: 8px;

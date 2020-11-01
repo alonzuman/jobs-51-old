@@ -101,28 +101,29 @@ const UsersFilter = ({ view, handleView }) => {
   }
 
   return (
-    <TopBar sticky>
-      <Button onClick={handleOpen} variant='outlined' className='mnw-fc'>{translation.filterResults}</Button>
-      <Button className='mr-5 mnw-fc' variant='outlined' onClick={handleView}>
-        {translation.changeView}
-        {view === 'list' && <ListIcon className='mr-5' />}
-        {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}
-      </Button>
-      {/* TODO ALON fix the filters */}
-      {/* <ChipsGrid chips={filters} /> */}
-      <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
-        <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
-        <DialogContent>
-          <NameFilter selectedFullName={selectedFullName} setSelectedFullName={setSelectedFullName} />
-          <RegionFilter selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
-          <RoleFilter selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
-        </DialogContent>
-        <DialogActionsContainer>
-          <Button onClick={clearFilters} >{translation.clear}</Button>
-          <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>
-        </DialogActionsContainer>
-      </Dialog>
-    </TopBar>
+    <>
+      <TopBar sticky>
+        <Button size='large' onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
+        <Button size='large' className='mr-5 mobile_full__width' variant='outlined' onClick={handleView}>
+          {translation.changeView}
+          {view === 'list' && <ListIcon className='mr-5' />}
+          {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}
+        </Button>
+        <Dialog dir='rtl' fullScreen={width <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
+          <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
+          <DialogContent>
+            <NameFilter selectedFullName={selectedFullName} setSelectedFullName={setSelectedFullName} />
+            <RegionFilter selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
+            <RoleFilter selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
+          </DialogContent>
+          <DialogActionsContainer>
+            <Button onClick={clearFilters} >{translation.clear}</Button>
+            <Button onClick={e => handleSubmit(e)} color='primary' variant='contained'>{translation.apply}</Button>
+          </DialogActionsContainer>
+        </Dialog>
+      </TopBar>
+      <ChipsGrid chips={filters} />
+    </>
   )
 }
 

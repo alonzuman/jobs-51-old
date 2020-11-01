@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 // Icons
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { roundNumber } from '../../../utils';
 
 const ActivityPageStats = ({ loading, pending, approved, region }) => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -30,7 +31,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
               <CheckCircleOutlineIcon color='primary' className='medium__icon' />
             </ListItemIcon>
             <ListItemText>
-              {approved === 0 ? 0 : approved.toFixed(1)} {translation.volHours} {translation.areApproved}
+              {roundNumber(approved)} {translation.volHours} {translation.areApproved}
             </ListItemText>
           </ListItem>
           <ListItem disableGutters>
@@ -38,7 +39,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
               <HighlightOffIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText>
-              {pending === 0 ? 0 : pending.toFixed(1)} {translation.volHours} {translation.pendingApprovalFe}
+              {roundNumber(pending)} {translation.volHours} {translation.pendingApprovalFe}
             </ListItemText>
           </ListItem>
         </List>

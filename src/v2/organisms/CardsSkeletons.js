@@ -23,7 +23,7 @@ const CardSkeleton = ({ size = 'small' }) => {
           secondary={
             <>
               <Skeleton width={104} height={18} />
-              {size === 'big' && <Skeleton width={104} height={18} />}
+              {size === 'large' && <Skeleton width={104} height={18} />}
             </>
           }
         />

@@ -7,13 +7,14 @@ import PageSection from '../../../../v2/atoms/PageSection'
 import PageHeader from '../../../../v2/organisms/PageHeader'
 import Table from '../../../../v2/organisms/Table'
 import RegionActivitiesFilter from './RegionActivitiesFilter'
+import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
 
 const RegionActivities = ({ match }) => {
   const [view, setView] = useState('list')
   const [data, setData] = useState([])
   const { region } = match.params;
   const { translation } = useSelector(state => state.theme)
-  const { loading, activities } = useSelector(state => state.activities)
+  const { loading, activities, loadingMore, noMoreResults } = useSelector(state => state.activities)
   const query = {
     selectedRegion: region
   }
@@ -65,11 +66,19 @@ const RegionActivities = ({ match }) => {
           title={<>{translation.manageRegionActivities} <span className='primary__color'>{region}</span></>}
         />
       </PageSection>
-      <RegionActivitiesFilter view={view} handleView={handleView} />
-      <PageSection disableGutters>
+      <RegionActivitiesFilter region={region} view={view} handleView={handleView} />
+      <PageSection>
         {view === 'list' && <ActivitiesList showUser loading={loading} activities={activities} />}
         {view === 'table' && <Table loading={loading} data={data} />}
       </PageSection>
+      <LoadMoreButton
+        loading={loadingMore}
+        list={activities}
+        last={activities[activities?.length - 1]}
+        query={query}
+        noMoreResults={noMoreResults}
+        action={getActivities}
+      />
     </Container>
   )
 }

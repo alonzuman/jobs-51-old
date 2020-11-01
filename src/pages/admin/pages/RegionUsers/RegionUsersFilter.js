@@ -10,7 +10,7 @@ const RegionUsersFilter = ({ view, handleView }) => {
 
   return (
     <TopBar sticky>
-      <Button size='big' variant='outlined' className='mobile_full__width mnw-fc' onClick={handleView}>
+      <Button size='large' variant='outlined' className='mobile_full__width mnw-fc' onClick={handleView}>
         {translation.changeView}
         {view === 'list' && <ListIcon className='mr-5' />}
         {view === 'table' && <TableChartIcon className='mr-5 small__icon' />}

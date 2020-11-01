@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: ${props => props.disableGutters ? '' : '8px 16px'};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
   top: 0;

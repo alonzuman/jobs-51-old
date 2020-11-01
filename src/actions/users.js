@@ -59,11 +59,6 @@ export const getUsers = (query, last) => async dispatch => {
   try {
     const { firstName, lastName, region, role } = query
 
-    let oldUsers;
-    if (last) {
-      oldUsers = store.getState().users.users
-    }
-
     let queryRef = Users
 
     if (firstName) {
@@ -92,12 +87,14 @@ export const getUsers = (query, last) => async dispatch => {
 
     let users = []
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
+
     if (users?.length === 0) {
       dispatch({
         type: NO_MORE_RESULTS,
         payload: true
       })
     }
+
     if (last) {
       dispatch({
         type: SET_MORE,

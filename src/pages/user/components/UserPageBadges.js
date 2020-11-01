@@ -96,7 +96,7 @@ const UserPageBadges = ({
             <Chip
               color='primary'
               variant='outlined'
-              label={`${translation.volunteer} ${user?.region ? `${translation.inRegion} ${user?.region}` : ''}`}
+              label={translation.activeVolunteer}
               size='small'
               className='fit__content'
             />
@@ -106,7 +106,7 @@ const UserPageBadges = ({
               <Chip color='primary' variant='outlined' label={translation.roles.manager} size='small' className='fit__content' />
             </Grid>}
         </Grid>
-        <List>
+        <List className='p-0'>
           {hasApprovedActivities &&
             <ListItem disableGutters>
               <ListItemIcon>

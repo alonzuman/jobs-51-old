@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button, Divider } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import PageSection from '../../../v2/atoms/PageSection'
@@ -21,13 +21,14 @@ const UserPageActivities = ({ user, loading, editing }) => {
   } else {
     return (
       <>
+        <Divider className='mb-2' />
         <PageSection>
           <PageSectionTitle
             title={`${translation.activitiesBy} ${user?.firstName}`}
             subtitle={translation.activitiesByExplanation}
           />
         </PageSection>
-        <PageSection disableGutters>
+        <PageSection>
           <ActivitiesList loading={loading} activities={user?.activitiesList} />
         </PageSection>
       </>

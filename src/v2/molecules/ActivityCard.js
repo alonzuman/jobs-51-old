@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { ListItemText, Typography, Avatar, Chip, ListItemAvatar, ListItem, ListItemSecondaryAction, Divider } from '@material-ui/core'
 import { translateDate, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
@@ -6,11 +6,6 @@ import ActivityCardActions from './ActivityCardActions';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
-
-const ListItemBody = styled.span`
-  display: flex;
-  flex-direction: column;
-`
 
 const TimeContainer = styled.div`
   display: flex;
@@ -40,17 +35,16 @@ const ActivityCard = ({ activity }) => {
         <ListItemText
           primary={`${translation.day} ${day}, ${number} ${translation.in}${month}`}
           secondary={
-            <ListItemBody>
-              <TimeContainer>
+            <Fragment>
+              <Typography component='span' variant='subtitle1'>
                 <AccessTimeIcon className='extra_small__icon mt-25 ml-25' />
-                <Typography variant='subtitle1'>
-                  {total} {translation.hours}, {type}
-                </Typography>
-              </TimeContainer>
-              <Typography variant='subtitle1'>
+                {total} {translation.hours}, {type}
+              </Typography>
+              <br />
+              <Typography component='span' variant='subtitle1'>
                 {description}
               </Typography>
-            </ListItemBody>
+            </Fragment>
           }
         />
         <ListItemSecondaryAction style={{ top: 24 }}>

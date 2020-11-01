@@ -48,7 +48,7 @@ const ActivitiesFilter = () => {
 
   return (
     <TopBar sticky>
-      <Button onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
+      <Button size='large' onClick={handleOpen} variant='outlined' className='mobile_full__width'>{translation.filterResults}</Button>
       <Dialog fullScreen={width <= 768} fullWidth TransitionComponent={Transition} dir='rtl' open={isOpen} onClose={handleOpen}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
         <DialogContent>

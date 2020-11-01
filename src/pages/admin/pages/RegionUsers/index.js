@@ -8,6 +8,7 @@ import PageSection from '../../../../v2/atoms/PageSection'
 import PageHeader from '../../../../v2/organisms/PageHeader'
 import RegionUsersFilter from './RegionUsersFilter'
 import Table from '../../../../v2/organisms/Table'
+import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
 
 const RegionUsers = ({ match }) => {
   const [view, setView] = useState('list');
@@ -30,11 +31,6 @@ const RegionUsers = ({ match }) => {
       mapData()
     }
   }, [users])
-
-  const loadMoreUsers = () => {
-    const last = users[users?.length - 1];
-    dispatch(getUsers(query, last))
-  }
 
   const handleView = () => setView(view => view === 'list' ? 'table' : 'list')
 
@@ -72,15 +68,19 @@ const RegionUsers = ({ match }) => {
           backButton
         />
       </PageSection>
-        <RegionUsersFilter view={view} handleView={handleView} />
-      <PageSection disableGutters>
+      <RegionUsersFilter view={view} handleView={handleView} />
+      <PageSection>
         {view === 'list' && <UsersList loading={loading} users={users} />}
         {view === 'table' && <Table loading={loading} data={data} />}
       </PageSection>
-      <PageSection className='flex align__center justify__center mt-1'>
-        {users?.length !== 0 && noMoreResults && <Typography variant='body1'>{translation.noMoreResults}</Typography>}
-        {users?.length >= 10 && !noMoreResults && <Button onClick={loadMoreUsers}>{loadingMore ? <CircularProgress color='primary' style={{ height: 24, width: 24 }} /> : translation.loadMore}</Button>}
-      </PageSection>
+      <LoadMoreButton
+        query={query}
+        loading={loadingMore}
+        noMoreResults={noMoreResults}
+        list={users}
+        last={users[users?.length - 1]}
+        action={getUsers}
+      />
     </Container>
   )
 }

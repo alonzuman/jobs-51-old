@@ -1,16 +1,19 @@
 const initialState = {
   activities: [],
-  currentUid: '',
   regionManagers: [],
   loading: false,
   loadingManagers: false,
+  noMoreResults: false,
 }
 
 // Actions
 export const LOADING = 'ACTIVITIES/LOADING';
+export const LOADING_MORE = 'ACTIVITIES/LOADING_MORE';
 export const LOADING_MANAGERS = 'ACTIVITIES/LOADING_MANAGERS';
+export const NO_MORE_RESULTS = 'ACTIVITIES/NO_MORE_RESULTS';
 export const ADD_ONE = 'ACTIVITIES/ADD_ONE';
 export const SET_ALL = 'ACTIVITIES/SET_ALL';
+export const SET_MORE = 'ACTIVITIES/SET_MORE';
 export const SET_MANAGERS = 'ACTIVITIES/SET_MANAGERS';
 export const DELETE_ONE = 'ACTIVITIES/DELETE_ONE';
 export const CLEAR_ALL = 'ACTIVITIES/CLEAR_ALL';
@@ -24,6 +27,11 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      }
+    case LOADING_MORE:
+      return {
+        ...state,
+        loadingMore: true
       }
     case LOADING_MANAGERS:
       return {
@@ -41,11 +49,24 @@ export const activitiesReducer = (state = initialState, action) => {
         ...state,
         activities: []
       }
+    case NO_MORE_RESULTS:
+      return {
+        ...state,
+        noMoreResults: payload
+      }
     case SET_ALL:
       return {
         ...state,
         ...payload,
-        loading: false
+        loading: false,
+        loadingMore: false
+      }
+    case SET_MORE:
+      return {
+        ...state,
+        activities: [...state.activities, ...payload.activities],
+        loading: false,
+        loadingMore: false,
       }
     case SET_MANAGERS:
       return {
@@ -63,7 +84,8 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         loadingManagers: false,
-        loading: false
+        loading: false,
+        loadingMore: false
       }
     default: return state
   }

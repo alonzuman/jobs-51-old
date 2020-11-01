@@ -1,6 +1,6 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import { ADD_ONE, DELETE_ONE, ERROR, LOADING, LOADING_MANAGERS, SET_ALL, SET_MANAGERS } from '../reducers/activities'
+import { ADD_ONE, DELETE_ONE, ERROR, LOADING, LOADING_MANAGERS, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MANAGERS, SET_MORE } from '../reducers/activities'
 import store from '../store'
 import { SET_USER } from '../reducers/auth'
 const { translation } = store.getState().theme
@@ -174,34 +174,64 @@ export const deleteActivity = (activity) => async dispatch => {
   }
 }
 
-export const getActivities = (queryParams) => async dispatch => {
+export const getActivities = (query, last) => async dispatch => {
   dispatch({
-    type: LOADING
-  });
+    type: NO_MORE_RESULTS,
+    payload: false
+  })
+  if (!last) {
+    dispatch({
+      type: LOADING
+    });
+  } else {
+    dispatch({
+      type: LOADING_MORE
+    })
+  }
 
   try {
-    const { selectedRegion: region } = queryParams;
-    let query = Activities;
+    const { selectedRegion: region, approved } = query;
 
+    let queryRef = Activities;
 
     if (region) {
-      query = query.where('region', '==', region)
+      queryRef = queryRef.where('region', '==', region)
     }
 
-    if (!region) {
-      query = query.limit(10);
+    if (approved === 'approved') {
+      queryRef = queryRef.where('approved', '==', true)
+    } else if (approved === 'pending') {
+      queryRef = queryRef.where('approved', '==', false)
     }
 
-    const snapshot = await query.get();
+    queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10);
+
+    if (last) {
+      queryRef = queryRef.startAfter(last?.dateCreated)
+    }
+
+    const snapshot = await queryRef.get();
+
     let activities = [];
     snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
 
-    // TODO add pagination
-    dispatch({
-      type: SET_ALL,
-      payload: { activities }
-    })
+    if (activities?.length === 0) {
+      dispatch({
+        type: NO_MORE_RESULTS
+      })
+    }
 
+    if (last) {
+      dispatch({
+        type: SET_MORE,
+        payload: { activities }
+      })
+    } else {
+      dispatch({
+        type: SET_ALL,
+        payload: { activities }
+      })
+    }
   } catch (error) {
     console.log(error)
     dispatch(setFeedback({

@@ -8,10 +8,8 @@ const ActivitiesList = ({ activities, loading, showUser = false }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
-    return <CardsSkeletons size='big' count={1} />
-  } else if (!loading && activities?.length === 0) {
-    return <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>
-  } else {
+    return <CardsSkeletons size='large' count={1} />
+  } else if (!loading && activities?.length !== 0) {
     return (
       <List>
         {activities?.map((activity, index) => (
@@ -19,6 +17,8 @@ const ActivitiesList = ({ activities, loading, showUser = false }) => {
         )}
       </List>
     )
+  } else {
+    return <Typography variant='body1'>{translation.activitiesEmptyState}</Typography>
   }
 }
 
