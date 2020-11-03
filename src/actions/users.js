@@ -98,12 +98,12 @@ export const getUsers = (query, last) => async dispatch => {
     if (last) {
       dispatch({
         type: SET_MORE,
-        payload: { users }
+        payload: { users, filters: query }
       })
     } else {
       dispatch({
         type: SET_ALL,
-        payload: { users }
+        payload: { users, filters: query }
       })
     }
   } catch (error) {

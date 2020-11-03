@@ -6,6 +6,7 @@ import { setFeedback } from '../../actions';
 import { setUserRegion } from '../../actions/auth';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 import CustomChip from '../atoms/CustomChip';
+import { formatDate } from '../../utils';
 
 const AddActivity = ({ onClose }) => {
   const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
@@ -18,7 +19,7 @@ const AddActivity = ({ onClose }) => {
     type: '',
     description: '',
     region: region ? region : '',
-    date: '2020-08-10',
+    date: formatDate(Date.now()),
     approved: false,
     user: {
       firstName: firstName ? firstName : '',
@@ -80,7 +81,7 @@ const AddActivity = ({ onClose }) => {
     return (
       <form onSubmit={handleSubmit}>
         <DialogContent>
-          <FormControl variant="outlined">
+          <FormControl size='small' variant="outlined">
             <InputLabel>{translation.region}</InputLabel>
             <Select
               disabled={region ? true : false}
@@ -118,9 +119,12 @@ const AddActivity = ({ onClose }) => {
           <br />
           <FormControl>
             <TextField
+              size='small'
               required
               label={translation.description}
               variant="outlined"
+              multiline
+              rows={3}
               name="description"
               value={activity["description"]}
               onChange={handleChange}
@@ -130,6 +134,7 @@ const AddActivity = ({ onClose }) => {
             <Grid item xs={6}>
               <FormControl>
                 <TextField
+                  size='small'
                   step='any'
                   min='1'
                   max='24'
@@ -143,6 +148,7 @@ const AddActivity = ({ onClose }) => {
             <Grid item xs={6}>
               <FormControl>
                 <TextField
+                  size='small'
                   InputLabelProps={{ shrink: true }}
                   type="date"
                   required
@@ -157,7 +163,7 @@ const AddActivity = ({ onClose }) => {
           </Grid>
         </DialogContent>
         <DialogActionsContainer>
-        <Button
+          <Button
             color="primary"
             variant="contained"
             type="submit"

@@ -10,21 +10,22 @@ import UsersList from '../../../../v2/organisms/UsersList'
 import PageSection from '../../../../v2/atoms/PageSection'
 import Table from '../../../../v2/organisms/Table'
 import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
+import { shallowEqual } from '../../../../utils'
 
 const Users = () => {
   const [view, setView] = useState('list')
   const [data, setData] = useState([])
-  const { loading, users, loadingMore, noMoreResults } = useSelector(state => state.users)
+  const { filters, loading, users, loadingMore, noMoreResults } = useSelector(state => state.users)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const dispatch = useDispatch()
   const { search } = history.location
-  const parsedQuery = qs.parse(search)
+  const query = qs.parse(search)
 
   useEffect(() => {
-    const { search } = history.location
-    const parsedQuery = qs.parse(search)
-    dispatch(getUsers(parsedQuery))
+    if (!shallowEqual(query, filters)) {
+      dispatch(getUsers(query))
+    }
   }, [history.location.search])
 
   const handleView = () => {
@@ -71,7 +72,7 @@ const Users = () => {
       </PageSection>
       <LoadMoreButton
         loading={loadingMore}
-        query={parsedQuery}
+        query={query}
         list={users}
         last={users[users?.length - 1]}
         action={getUsers}

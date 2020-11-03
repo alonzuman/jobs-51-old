@@ -1,6 +1,6 @@
 import { Button, CircularProgress, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../../../actions/users'
 import UsersList from '../../../../v2/organisms/UsersList'
 import Container from '../../../../v2/atoms/Container'
@@ -15,7 +15,7 @@ const RegionUsers = ({ match }) => {
   const [data, setData] = useState([])
   const { region } = match.params;
   const { translation } = useSelector(state => state.theme)
-  const { users, loading, noMoreResults, loadingMore } = useSelector(state => state.users)
+  const { filters, users, loading, noMoreResults, loadingMore } = useSelector(state => state.users)
   const query = {
     region,
     role: 'user'
@@ -23,7 +23,9 @@ const RegionUsers = ({ match }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getUsers(query))
+    if (!shallowEqual(query, filters)) {
+      dispatch(getUsers(query))
+    }
   }, [region])
 
   useEffect(() => {

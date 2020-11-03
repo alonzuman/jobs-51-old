@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, List, Typography } from '@material-ui/core'
+import { List, Typography } from '@material-ui/core'
 import UserCard from '../molecules/UserCard'
 import CardsSkeletons from './CardsSkeletons'
 

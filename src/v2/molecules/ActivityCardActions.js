@@ -9,13 +9,19 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
   const [approved, setApproved] = useState(activity.approved)
   const [disabled, setDisabled] = useState(false)
   const [approvalOpen, setApprovalOpen] = useState(false)
-  const { role } = useSelector(state => state.auth)
+  const { role, avatar, firstName, lastName, uid } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
+  const admin = {
+    avatar,
+    firstName,
+    lastName,
+    uid
+  }
 
   const handleApprove = async () => {
     setDisabled(true)
-    await dispatch(approveActivity(activity))
+    await dispatch(approveActivity(activity, admin))
     setApproved(true)
     setDisabled(false)
     handleApproved()
@@ -23,7 +29,7 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
 
   const handleUnapprove = async () => {
     setDisabled(true)
-    await dispatch(unApproveActivity(activity))
+    await dispatch(unApproveActivity(activity, admin))
     setApproved(false)
     setDisabled(false)
     handleApproved()

@@ -74,11 +74,16 @@ export const getUserActivities = (uid) => async dispatch => {
   }
 }
 
-export const approveActivity = (activity) => async dispatch => {
+export const approveActivity = (activity, admin) => async dispatch => {
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
-    await Activities.doc(id).set({ approved: true }, { merge: true })
+    await Activities.doc(id).set({
+      approved: true,
+      approvedBy: {
+        ...admin
+      }
+    }, { merge: true })
 
     if (authState.uid === uid) {
       dispatch({
@@ -105,11 +110,16 @@ export const approveActivity = (activity) => async dispatch => {
   }
 }
 
-export const unApproveActivity = (activity) => async dispatch => {
+export const unApproveActivity = (activity, admin) => async dispatch => {
   try {
     const authState = store.getState().auth
     const { id, total, uid } = activity
-    await Activities.doc(id).set({ approved: false }, { merge: true })
+    await Activities.doc(id).set({
+      approved: false,
+      approvedBy: {
+        ...admin
+      }
+    }, { merge: true })
 
     if (authState.uid === uid) {
       dispatch({

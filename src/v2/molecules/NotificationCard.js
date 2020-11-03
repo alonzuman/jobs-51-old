@@ -8,7 +8,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
-  const { seen, type, activity } = notification;
+  const { seen, type, activity, notificationBy } = notification;
   const [isSeen, setIsSeen] = useState(seen)
   const dispatch = useDispatch()
 
@@ -42,7 +42,7 @@ const NotificationCard = ({ notification }) => {
 
   const notificationBody = () => {
     switch (type) {
-      case 'activityApproved': return `${translation.theActivity} "${activity.type}" ${translation.inDate} ${activityDate()} ${translation.isApproved}`;
+      case 'activityApproved': return `${translation.theActivity} "${activity.type}" ${translation.inDate} ${activityDate()} ${translation.isApproved} ${notificationBy?.firstName ? translation.by : ''} ${notificationBy?.firstName || ''} ${notificationBy?.lastName || ''} `;
       default: return null
     }
   }
@@ -51,7 +51,7 @@ const NotificationCard = ({ notification }) => {
     <>
       <ListItem button onClick={markAsSeen}>
         <ListItemAvatar>
-          <Avatar />
+          <Avatar src={notificationBy?.avatar}>{notificationBy?.firstName?.charAt(0)}</Avatar>
         </ListItemAvatar>
         <ListItemText
           primary={<Chip className='mb-25' size='small' label={timeAgo()} variant='outlined' color='primary' />}

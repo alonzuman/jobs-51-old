@@ -246,7 +246,7 @@ exports.onUpdateActivity = functions.firestore
   .onUpdate(async (change, context) => {
     const { activityId } = context.params;
     const { approved: approvedBefore } = change.before.data();
-    const { date, uid, approved: approvedAfter, total, type, description } = change.after.data();
+    const { date, uid, approved: approvedAfter, total, type, description, approvedBy } = change.after.data();
     try {
       const increment = admin.firestore.FieldValue.increment(total)
       const decrement = admin.firestore.FieldValue.increment(-total)
@@ -260,6 +260,9 @@ exports.onUpdateActivity = functions.firestore
               description,
               type,
               date
+            },
+            notificationBy: {
+              ...approvedBy
             },
             type: 'activityApproved',
             seen: false,

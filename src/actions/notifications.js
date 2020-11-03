@@ -11,7 +11,7 @@ export const getNotifications = uid => async dispatch => {
   })
 
   try {
-    const snapshot = await Notifications.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
+    const snapshot = await Notifications.where('uid', '==', uid).orderBy('dateCreated', 'desc').limit(10).get()
     let notifications = [];
     snapshot.forEach(doc => notifications.push({ id: doc.id, ...doc.data() }))
     dispatch({

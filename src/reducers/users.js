@@ -5,6 +5,7 @@ const initialState = {
     lastPosition: ''
   },
   users: [],
+  filters: {},
   noMoreResults: false,
   loading: false,
   loadingMore: false,
@@ -83,6 +84,7 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...state.users, ...payload.users],
+        filters: { ...payload.filters },
         loading: false,
         loadingMore: false
       }
@@ -90,6 +92,7 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...payload.users],
+        filters: { ...payload.filters },
         loading: false
       }
     case ERROR:
