@@ -25,6 +25,8 @@ const Users = () => {
   useEffect(() => {
     if (!shallowEqual(query, filters)) {
       dispatch(getUsers(query))
+    } else if (users?.length === 0) {
+      dispatch(getUsers(query))
     }
   }, [history.location.search])
 

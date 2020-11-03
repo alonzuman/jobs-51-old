@@ -135,3 +135,7 @@ export const formatDate = (date) => {
 
   return [year, month, day].join('-');
 }
+
+export const isObjectEmpty = object => {
+  return Object.keys(object).length === 0 && object.constructor === Object
+}
