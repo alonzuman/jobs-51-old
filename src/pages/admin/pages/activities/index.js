@@ -27,7 +27,6 @@ const Activities = () => {
   const parsedQuery = qs.parse(search)
 
   useEffect(() => {
-
     const { selectedRegion } = parsedQuery;
 
     if (selectedRegion) {

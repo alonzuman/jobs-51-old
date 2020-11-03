@@ -8,7 +8,7 @@ const UsersList = ({ loading, users }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
-    return <CardsSkeletons count={1} size='small' className='p-0' />
+    return <CardsSkeletons disableGutters count={1} size='small' className='p-0' />
   } else if (!loading && users.length !== 0) {
     return (
       <List>

@@ -2,19 +2,19 @@ import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import { Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
 
-const CardsSkeletons = ({ count, size }) => {
+const CardsSkeletons = ({ count, size, disableGutters }) => {
   const arr = [...Array(count || 3)]
   return (
     <List>
-      {arr.map((x, i) => <List key={i}><CardSkeleton size={size} /></List>)}
+      {arr.map((x, i) => <CardSkeleton key={i} size={size} disableGutters />)}
     </List>
   )
 }
 
-const CardSkeleton = ({ size = 'small' }) => {
+const CardSkeleton = ({ size = 'small', disableGutters = false }) => {
   return (
     <>
-      <ListItem alignItems='flex-start' button dir='rtl'>
+      <ListItem disableGutters={disableGutters} alignItems='flex-start' button dir='rtl'>
         <ListItemAvatar>
           <Skeleton height={40} width={40} variant='circle' />
         </ListItemAvatar>

@@ -8,7 +8,7 @@ const ActivitiesList = ({ activities, loading, showUser = false }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (loading) {
-    return <CardsSkeletons size='large' count={1} />
+    return <CardsSkeletons size='large' count={1} disableGutters />
   } else if (!loading && activities?.length !== 0) {
     return (
       <List>

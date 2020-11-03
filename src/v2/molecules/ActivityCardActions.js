@@ -4,6 +4,15 @@ import { Button, Box } from '@material-ui/core'
 import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
+import styled from 'styled-components'
+
+const ActivityCardActionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`
 
 const ActivityCardActions = ({ activity, handleApproved }) => {
   const [approved, setApproved] = useState(activity.approved)
@@ -46,7 +55,7 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
   const isAdmin = checkPermissions(role) >= 3;
 
   return (
-    <Box className='flex align__center justify__center'>
+    <ActivityCardActionsContainer>
       {isAdmin && !approved &&
         <Button className='button-style' disabled={disabled} onClick={handleApprove} color='primary'>{translation.approveActivity}</Button>}
       {isAdmin && approved &&
@@ -58,7 +67,7 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
         action={handleDelete}
         text={translation.areYouSure}
       />
-    </Box>
+    </ActivityCardActionsContainer>
   )
 }
 
