@@ -9,7 +9,7 @@ const NotificationsList = ({ loading, all }) => {
 
 
   if (loading) {
-    return <CardsSkeletons count={1} size='small' />
+    return <CardsSkeletons disableGutters count={1} size='small' />
   } else if (!loading && all?.length !== 0) {
     return (
       <List>

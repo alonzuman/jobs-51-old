@@ -5,6 +5,14 @@ import { markSeen } from '../../actions';
 import moment from 'moment'
 import 'moment/locale/he'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import styled from 'styled-components';
+
+const ListItemPrimaryText = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
 
 const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
@@ -40,26 +48,30 @@ const NotificationCard = ({ notification }) => {
     return `${splitDate[2]}/${splitDate[1]}`
   }
 
-  const notificationBody = () => {
+  const listItemSecondaryText = () => {
     switch (type) {
       case 'activityApproved': return `${translation.theActivity} "${activity.type}" ${translation.inDate} ${activityDate()} ${translation.isApproved} ${notificationBy?.firstName ? translation.by : ''} ${notificationBy?.firstName || ''} ${notificationBy?.lastName || ''} `;
       default: return null
     }
   }
 
+  const listItemPrimaryText = (
+    <ListItemPrimaryText>
+      <Chip className='mb-25' size='small' label={timeAgo()} variant='outlined' color='primary' />
+      {!isSeen ? '' : <FiberManualRecordIcon color='primary' />}
+    </ListItemPrimaryText>
+  )
+
   return (
     <>
-      <ListItem button onClick={markAsSeen}>
+      <ListItem alignItems='flex-start' disableGutters button onClick={markAsSeen}>
         <ListItemAvatar>
           <Avatar src={notificationBy?.avatar}>{notificationBy?.firstName?.charAt(0)}</Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={<Chip className='mb-25' size='small' label={timeAgo()} variant='outlined' color='primary' />}
-          secondary={notificationBody()}
+          primary={listItemPrimaryText}
+          secondary={listItemSecondaryText()}
         />
-        <ListItemSecondaryAction>
-          {isSeen ? '' : <FiberManualRecordIcon color='primary' />}
-        </ListItemSecondaryAction>
       </ListItem>
       <Divider />
     </>
