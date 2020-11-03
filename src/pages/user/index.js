@@ -9,6 +9,12 @@ import UserPageHeader from './components/UserPageHeader'
 import { useHistory } from 'react-router-dom'
 import Container from '../../v2/atoms/Container'
 import UserPageActivities from './components/UserPageActivities'
+import PageHeaderActionsBar from '../../v2/organisms/PageHeaderActionsBar'
+import { checkPermissions } from '../../utils'
+import { IconButton } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
+import useScrollPosition from '../../hooks/useScrollPosition'
 
 
 const User = ({ match }) => {
@@ -16,8 +22,10 @@ const User = ({ match }) => {
   const [isDeclining, setIsDeclining] = useState(false)
   const [editing, setEditing] = useState(false)
   const history = useHistory()
+  const { role } = useSelector(state => state.auth)
   const { loading, user } = useSelector(state => state.users)
   const { theme } = useSelector(state => state.theme)
+  const { isScrolling } = useScrollPosition()
   const uid = match.params.id
   const dispatch = useDispatch()
 
@@ -44,8 +52,26 @@ const User = ({ match }) => {
     setEditing(!editing)
   }
 
+  const canEdit = (checkPermissions(role) >= checkPermissions(user?.role) && checkPermissions(user?.role) !== 0)
+
+
+  const iconButtonStyle = {
+    backgroundColor: isScrolling ? theme?.palette?.background?.light : theme?.palette?.background?.main,
+    boxShadow: isScrolling ? '0px 4px 10px #00000015' : '',
+    transition: 'box-shadow .25s ease-in-out, background-color .25s ease-in-out'
+  }
+
+  const secondaryActions = (
+    canEdit && <IconButton style={iconButtonStyle} size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>
+  )
+
   return (
     <Container>
+      <PageHeaderActionsBar
+        backButton
+        isScrolling={isScrolling}
+        secondaryActions={secondaryActions}
+      />
       <UserPageHeader
         handleImageOpen={handleImageOpen}
         editing={false}

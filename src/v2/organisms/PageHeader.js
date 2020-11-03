@@ -49,26 +49,29 @@ const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backB
     )
   } else {
     return (
-      <Container backButton={backButton} {...rest}>
-        <ImageLightbox
-          open={isImageOpen}
-          onClose={handleOpenImage}
-          imgUrl={imgUrl}
-        />
-        {(action || backButton) && <ActionsWrapper>
-          {backButton && <BackButton backLink={backLink} />}
-          {action && action}
-        </ActionsWrapper>}
-        <ItemsWrapper>
-          <TextContainer>
-            <Typography className='p-0 m-0' variant='h2'>{title}</Typography>
-            <Typography variant='subtitle1'>{subtitle}</Typography>
-          </TextContainer>
-          <SecondaryContainer onClick={imgUrl && handleOpenImage}>
-            {secondary}
-          </SecondaryContainer>
-        </ItemsWrapper>
-      </Container>
+      <>
+        {(action || backButton) &&
+          <ActionsWrapper>
+            {backButton && <BackButton backLink={backLink} />}
+            {action && action}
+          </ActionsWrapper>}
+        <Container backButton={backButton} {...rest}>
+          <ImageLightbox
+            open={isImageOpen}
+            onClose={handleOpenImage}
+            imgUrl={imgUrl}
+          />
+          <ItemsWrapper>
+            <TextContainer>
+              <Typography className='p-0 m-0' variant='h2'>{title}</Typography>
+              <Typography variant='subtitle1'>{subtitle}</Typography>
+            </TextContainer>
+            <SecondaryContainer onClick={imgUrl && handleOpenImage}>
+              {secondary}
+            </SecondaryContainer>
+          </ItemsWrapper>
+        </Container>
+      </>
     )
   }
 }

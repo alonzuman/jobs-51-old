@@ -1,13 +1,12 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import PageHeader from '../../../v2/organisms/PageHeader'
-import { checkPermissions, userSecondayText } from '../../../utils';
+import { userSecondayText } from '../../../utils';
 import { useSelector } from 'react-redux';
 import { Avatar, IconButton, TextField, Typography } from '@material-ui/core';
 import styled from 'styled-components'
 
 // Icons
-import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import PageSection from '../../../v2/atoms/PageSection';
 
@@ -17,6 +16,7 @@ const ActionsWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 8px;
 `
 
 const ItemsWrapper = styled.div`
@@ -46,10 +46,7 @@ const UserPageHeader = ({
   handleImageOpen
 }) => {
   const { translation } = useSelector(state => state.theme)
-  const { role } = useSelector(state => state.auth)
   const { avatar, firstName, lastName, serviceYear } = user
-
-  const canEdit = (checkPermissions(role) >= checkPermissions(user?.role) && checkPermissions(user?.role) !== 0)
 
   if (loading) {
     return (
@@ -81,12 +78,10 @@ const UserPageHeader = ({
     return (
       <PageSection>
         <PageHeader
-          backButton={!editing}
           imgUrl={user?.avatar}
           title={`${firstName} ${lastName}`}
           subtitle={userSecondayText(user)}
           secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
-          action={canEdit && <IconButton size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>}
         />
       </PageSection>
     )
