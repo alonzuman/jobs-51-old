@@ -42,7 +42,7 @@ const RegionActivities = ({ match }) => {
           region,
           type,
           description,
-          approved ? translation.no : translation.yes,
+          approved ? translation.yes : translation.no,
         ])
       })
       setData([...array])
