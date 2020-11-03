@@ -5,11 +5,6 @@ import { useSelector } from 'react-redux'
 import ActivityCardActions from './ActivityCardActions';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import styled from 'styled-components';
-
-const TimeContainer = styled.div`
-  display: flex;
-`
 
 const ActivityCard = ({ activity }) => {
   const [open, setOpen] = useState(false)

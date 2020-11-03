@@ -57,15 +57,17 @@ export const dateFilters = () => {
 }
 
 export const translateDate = (date) => {
-  const { weekDays, months } = store.getState().theme.translation
+  const { weekDays, months, monthNumbers } = store.getState().theme.translation
 
   const fullDate = new Date(date).toString().split(' ')
 
   const day = weekDays[fullDate[0]]
   const month = months[fullDate[1]]
   const number = fullDate[2]
+  const year = fullDate[3]
+  const monthNumber = monthNumbers[fullDate[1]]
 
-  return [day, month, number]
+  return [day, month, number, year, monthNumber]
 }
 
 export const capitalizeFirstLetter = (string) => {

@@ -8,6 +8,7 @@ import PageHeader from '../../../../v2/organisms/PageHeader'
 import Table from '../../../../v2/organisms/Table'
 import RegionActivitiesFilter from './RegionActivitiesFilter'
 import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
+import { translateDate } from '../../../../utils'
 
 const RegionActivities = ({ match }) => {
   const [view, setView] = useState('list')
@@ -28,18 +29,21 @@ const RegionActivities = ({ match }) => {
         translation['firstName'],
         translation['lastName'],
         translation['region'],
+        translation['date'],
         translation['type'],
         translation['description'],
         translation['approved'],
       ]
       let array = [arrayHeaders]
       activities.forEach(activity => {
-        const { user, description, type, region, approved } = activity;
+        const { user, description, type, region, approved, date } = activity;
         const { firstName, lastName } = user;
+        const [day, month, number, year, monthNumber] = translateDate(activity.date)
         array.push([
           firstName,
           lastName,
           region,
+          `${number}/${monthNumber}/${year}`,
           type,
           description,
           approved ? translation.yes : translation.no,
