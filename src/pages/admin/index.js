@@ -13,6 +13,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PageSection from '../../v2/atoms/PageSection';
 import Container from '../../v2/atoms/Container';
+import AdminStats from './pages/Users/components/AdminStats';
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme);
@@ -29,10 +30,15 @@ const Admin = () => {
     { label: translation.generalManagement, icon: <SettingsIcon />, link: '/admin/general-management', minRole: 3 },
   ]
 
+
+
   return (
     <Container>
       <PageSection>
         <PageHeader title={translation.adminPage} className='mb-1' />
+      </PageSection>
+      <PageSection>
+        <AdminStats />
       </PageSection>
       <PageSection>
         {region &&

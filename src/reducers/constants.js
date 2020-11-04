@@ -6,6 +6,7 @@ const initialState = {
   isDeleting: false,
   isDeleted: false,
 
+  stats: {},
   listedMembers: [],
   locations: [],
   regions: []
@@ -31,6 +32,7 @@ export const constantsReducer = (state = initialState, action) => {
     case FETCHING:
       return {
         ...state,
+        isFetched: false,
         isFetching: true,
       }
     case UPDATING:
@@ -69,7 +71,8 @@ export const constantsReducer = (state = initialState, action) => {
       return {
         ...state,
         ...payload,
-        isFetching: false
+        isFetching: false,
+        isFetched: true
       }
     case ADD_ACTIVITY_TYPE:
       return {

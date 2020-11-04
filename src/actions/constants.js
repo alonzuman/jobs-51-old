@@ -127,6 +127,30 @@ export const getLocations = () => async dispatch => {
   }
 }
 
+// TODO ALON get stats
+export const getStats = () => async dispatch => {
+  dispatch({
+    type: FETCHING
+  })
+  try {
+    const statsSnapshot = await Constants.doc('stats').get()
+    const stats = statsSnapshot.data()
+    dispatch({
+      type: SET_DATA,
+      payload: { stats }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+  }
+}
+
 // TODO ALON get activity types
 
 // TODO ALON get skills

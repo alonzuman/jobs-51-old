@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const { region } = require('firebase-functions');
 // const faker = require('faker');
 admin.initializeApp()
 
@@ -115,6 +116,11 @@ exports.onCreateUser = functions.firestore
   .onCreate(async (snapshot, context) => {
     const fullName = `${snapshot.data().firstName} ${snapshot.data().lastName}`
     try {
+      // Update pending users count
+      await Constants.doc('stats').update({
+        pendingUsersCount: admin.firestore.FieldValue.increment(1)
+      })
+
       await Constants.doc('listedMembers').update({
         all: admin.firestore.FieldValue.arrayUnion(fullName)
       })
@@ -132,8 +138,8 @@ exports.onUpdateUser = functions.firestore
     const uid = context.params.uid;
     try {
       if (change.before.exists && change.after.exists) {
-        const { firstName: firstNameBefore, lastName: lastNameBefore } = change.before.data();
-        const { firstName: firstNameAfter, lastName: lastNameAfter, avatar: avatarAfter } = change.after.data();
+        const { firstName: firstNameBefore, lastName: lastNameBefore, role: roleBefore, region: regionBefore } = change.before.data();
+        const { firstName: firstNameAfter, lastName: lastNameAfter, avatar: avatarAfter, role: roleAfter, region: regionAfter } = change.after.data();
 
         const fullNameBefore = `${firstNameBefore} ${lastNameBefore}`;
         const fullNameAfter = `${firstNameAfter} ${lastNameAfter}`;
@@ -171,6 +177,63 @@ exports.onUpdateUser = functions.firestore
             }, { merge: true })
           })
         }
+
+        // TODO set stats
+        const increment = admin.firestore.FieldValue.increment(1)
+        const decrement = admin.firestore.FieldValue.increment(-1)
+
+        // Update if role changed change approvedusers count + by role + decrement
+        let updatedStats = {}
+
+        // Update general users count
+        if (roleBefore === 'pending' && roleAfter !== 'pending') {
+          updatedStats = {
+            ...updatedStats,
+            pendingUsersCount: decrement,
+            approvedUsersCount: increment,
+            approvedUsersByRegion: {
+              [regionAfter]: increment
+            }
+          }
+        } else if (roleAfter === 'pending' && roleBefore !== 'pending') {
+          updatedStats = {
+            ...updatedStats,
+            pendingUsersCount: increment,
+            approvedUsersCount: decrement,
+            approvedUsersByRegion: {
+              [regionAfter]: decrement
+            }
+          }
+        }
+
+        // Update region specific users count
+        if (regionBefore && !regionAfter) {
+          updatedStats = {
+            ...updatedStats,
+            approvedUsersByRegion: {
+              [regionBefore]: decrement,
+            }
+          }
+        } else if (!regionBefore && regionAfter) {
+          updatedStats = {
+            ...updatedStats,
+            approvedUsersByRegion: {
+              [regionAfter]: increment,
+            }
+          }
+        } else if (regionBefore && regionBefore !== regionAfter) {
+          updatedStats = {
+            ...updatedStats,
+            approvedUsersByRegion: {
+              [regionAfter]: increment,
+              [regionBefore]: decrement
+            }
+          }
+        }
+
+        await Constants.doc('stats').set({
+          ...updatedStats
+        }, { merge: true })
       }
     } catch (error) {
       console.log('################')
@@ -246,7 +309,7 @@ exports.onUpdateActivity = functions.firestore
   .onUpdate(async (change, context) => {
     const { activityId } = context.params;
     const { approved: approvedBefore } = change.before.data();
-    const { date, uid, approved: approvedAfter, total, type, description, approvedBy } = change.after.data();
+    const { date, uid, approved: approvedAfter, total, type, description, approvedBy, region } = change.after.data();
     try {
       const increment = admin.firestore.FieldValue.increment(total)
       const decrement = admin.firestore.FieldValue.increment(-total)
@@ -269,6 +332,14 @@ exports.onUpdateActivity = functions.firestore
             dateCreated: Date.now()
           })
         }
+
+        await Constants.doc('stats').set({
+          approvedActivityHoursCount: approvedAfter ? increment : decrement,
+          approvedActivityHoursByRegionCount: {
+            [region]: approvedAfter ? increment : decrement
+          }
+        }, { merge: true })
+
         return await Users.doc(uid).set({
           activities: {
             approved: approvedAfter ? increment : decrement,
@@ -287,9 +358,19 @@ exports.onUpdateActivity = functions.firestore
 exports.onDeleteActivity = functions.firestore
   .document('activities/{activityId}')
   .onDelete(async (snapshot, context) => {
-    const { uid, total, approved } = snapshot.data()
+    const { uid, total, approved, region } = snapshot.data()
     try {
       const decrement = admin.firestore.FieldValue.increment(-total);
+
+      // Reduce hours from stats doc
+      if (approved) {
+        await Constants.doc('stats').set({
+          approvedActivityHoursByRegionCount: {
+            [region]: decrement
+          }
+        }, { merge: true })
+      }
+
       const activities = approved ? { approved: decrement } : { pending: decrement }
 
       await Users.doc(uid).set({
