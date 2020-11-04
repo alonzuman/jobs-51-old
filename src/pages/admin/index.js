@@ -37,9 +37,7 @@ const Admin = () => {
       <PageSection>
         <PageHeader title={translation.adminPage} className='mb-1' />
       </PageSection>
-      <PageSection>
-        {/* <AdminStats /> */}
-      </PageSection>
+      <AdminStats />
       <PageSection>
         {region &&
           <>
