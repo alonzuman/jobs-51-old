@@ -1,7 +1,7 @@
 import heb from '../utils/translations/heb.json'
 import { createMuiTheme } from '@material-ui/core/styles'
-import light from '../utils/themes/light.json'
-import dark from '../utils/themes/dark.json'
+import light from '../utils/themes/light'
+import dark from '../utils/themes/dark'
 
 const localTheme = localStorage.getItem('theme')
 const theme = createMuiTheme(localTheme === 'dark' ? dark : light);
