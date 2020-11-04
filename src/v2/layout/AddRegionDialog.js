@@ -11,7 +11,7 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
   const { translation } = useSelector(state => state.theme);
   const { isUpdating } = useSelector(state => state.users);
   const { uid } = useSelector(state => state.auth);
-  const { regions } = useSelector(state => state.constants?.locations);
+  const { regions } = useSelector(state => state.constants);
   const [error, setError] = useState('')
   const [region, setRegion] = useState('');
   const dispatch = useDispatch()

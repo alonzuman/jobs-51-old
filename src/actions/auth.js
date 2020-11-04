@@ -253,22 +253,3 @@ export const signOut = () => async dispatch => {
     }))
   }
 }
-
-export const setUserRegion = (region, uid) => async dispatch => {
-  dispatch({
-    type: LOADING
-  })
-  try {
-    await Users.doc(uid).set({ region }, { merge: true })
-    dispatch({
-      type: SET_USER,
-      payload: { region }
-    })
-  } catch (error) {
-    console.log(error)
-    dispatch(setFeedback({
-      type: 'error',
-      msg: translation.serverError
-    }))
-  }
-}

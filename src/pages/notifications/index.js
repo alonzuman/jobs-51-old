@@ -8,6 +8,7 @@ import NotificationsList from './components/NotificationsList';
 import PageSection from '../../v2/atoms/PageSection';
 import { getNotifications } from '../../actions/notifications';
 import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
+import PageHeaderActionsBar from '../../v2/organisms/PageHeaderActionsBar';
 
 const Notifications = ({ match }) => {
   const { uid } = match.params
@@ -26,11 +27,11 @@ const Notifications = ({ match }) => {
 
   return (
     <Container>
+      <PageHeaderActionsBar backButton />
       <PageSection>
         <PageHeader
           loading={loading}
           title={translation.notifications}
-          backButton
         />
       </PageSection>
       <PageSection>

@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
 import { addActivity } from '../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFeedback } from '../../actions';
-import { setUserRegion } from '../../actions/auth';
+import { getLocations, setFeedback, updateUser } from '../../actions';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 import CustomChip from '../atoms/CustomChip';
 import { formatDate } from '../../utils';
+import LocationSelect from '../molecules/LocationSelect';
 
 const AddActivity = ({ onClose }) => {
   const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.activities)
   const { all } = useSelector(state => state.constants?.activityTypes)
-  const { regions } = useSelector(state => state?.constants?.locations)
+  const { regions, isFetching } = useSelector(state => state?.constants)
+  const [errors, setErrors] = useState({})
   const [total, setTotal] = useState('')
+  const [stateRegion, setRegion] = useState('')
   const [activity, setActivity] = useState({
     type: '',
     description: '',
@@ -32,13 +34,17 @@ const AddActivity = ({ onClose }) => {
   })
   const dispatch = useDispatch()
 
-  const handleRegionChange = e => {
-    dispatch(setUserRegion(e.target.value, uid))
-    setActivity({
-      ...activity,
-      region: e.target.value
-    })
-  }
+  useEffect(() => {
+    if (region) {
+      setRegion(region)
+    }
+  }, [region])
+
+  useEffect(() => {
+    if (regions?.length === 0) {
+      dispatch(getLocations())
+    }
+  }, [regions])
 
   const handleChange = e => {
     setActivity({
@@ -81,37 +87,21 @@ const AddActivity = ({ onClose }) => {
     return (
       <form onSubmit={handleSubmit}>
         <DialogContent>
-          <FormControl size='small' variant="outlined">
-            <InputLabel>{translation.region}</InputLabel>
-            <Select
-              disabled={region ? true : false}
-              value={activity["region"]}
-              name="region"
-              onChange={handleRegionChange}
-              label={region ? region : translation.selectRegion}
-            >
-              {regions.map((region, index) => (
-                <MenuItem key={index} value={region}>
-                  {region}
-                </MenuItem>
-              ))}
-            </Select>
-            {region && (
-              <Typography variant="subtitle1">
-                {translation.changeRegionContact}
-              </Typography>
-            )}
-          </FormControl>
-          <InputLabel style={{ marginBottom: ".5rem" }}>
-            {translation.type}
-          </InputLabel>
+          <LocationSelect
+            location={stateRegion}
+            setLocation={setRegion}
+            loading={isFetching}
+            size='small'
+            disabled={!!stateRegion}
+          />
+          <Typography variant='subtitle1'>{translation.type}</Typography>
           <Grid container spacing={1}>
             {all?.map((type, index) => (
               <Grid key={index} item>
                 <CustomChip
                   onClick={() => setActivity({ ...activity, type })}
                   label={type}
-                  color={activity["type"] === type ? "primary" : "default"}
+                  color={activity['type'] === type ? 'primary' : 'default'}
                 />
               </Grid>
             ))}
@@ -122,11 +112,12 @@ const AddActivity = ({ onClose }) => {
               size='small'
               required
               label={translation.description}
-              variant="outlined"
+              placeholder={translation.activityDescriptionPlaceholder}
+              variant='outlined'
               multiline
               rows={3}
-              name="description"
-              value={activity["description"]}
+              name='description'
+              value={activity['description']}
               onChange={handleChange}
             />
           </FormControl>
@@ -138,9 +129,10 @@ const AddActivity = ({ onClose }) => {
                   step='any'
                   min='1'
                   max='24'
+                  type='number'
                   value={total}
                   label={translation.totalHours}
-                  variant="outlined"
+                  variant='outlined'
                   onChange={e => setTotal(e.target.value)}
                 />
               </FormControl>
@@ -150,12 +142,12 @@ const AddActivity = ({ onClose }) => {
                 <TextField
                   size='small'
                   InputLabelProps={{ shrink: true }}
-                  type="date"
+                  type='date'
                   required
                   label={translation.date}
-                  variant="outlined"
-                  name="date"
-                  value={activity["date"]}
+                  variant='outlined'
+                  name='date'
+                  value={activity['date']}
                   onChange={handleChange}
                 />
               </FormControl>
@@ -164,12 +156,12 @@ const AddActivity = ({ onClose }) => {
         </DialogContent>
         <DialogActionsContainer>
           <Button
-            color="primary"
-            variant="contained"
-            type="submit"
+            color='primary'
+            variant='contained'
+            type='submit'
             size='large'
           >
-            {loading ? <CircularProgress className="button-spinner" /> : translation.addActivity}
+            {loading ? <CircularProgress className='button-spinner' /> : translation.addActivity}
           </Button>
         </DialogActionsContainer>
       </form>

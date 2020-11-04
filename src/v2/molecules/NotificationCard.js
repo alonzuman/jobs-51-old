@@ -58,7 +58,7 @@ const NotificationCard = ({ notification }) => {
   const listItemPrimaryText = (
     <ListItemPrimaryText>
       <Chip className='mb-25' size='small' label={timeAgo()} variant='outlined' color='primary' />
-      {!isSeen ? '' : <FiberManualRecordIcon color='primary' />}
+      {isSeen ? '' : <FiberManualRecordIcon color='primary' />}
     </ListItemPrimaryText>
   )
 
