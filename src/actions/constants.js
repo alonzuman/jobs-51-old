@@ -16,7 +16,12 @@ export const getConstants = () => async dispatch => {
     snapshot.forEach(doc => results[doc.id] = doc.data())
     dispatch({
       type: SET_ALL,
-      payload: results
+      payload: {
+        ...results,
+        listedMembers: results.listedMembers.all,
+        locations: results.locations.all,
+        regions: results.locations.regions
+      }
     })
   } catch (error) {
     console.log(error);

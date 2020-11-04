@@ -5,9 +5,7 @@
 // const Constants = db.collection('constants')
 
 // export const seedStats = async () => {
-//   const usersSnap = await Users.get()
-//   console.log(usersSnap.size)
-//   // return seed()
+//   await seed()
 // }
 
 // export const seed = async () => {
@@ -21,14 +19,14 @@
 //   let volunteersCount = volunteersSnap.size
 //   let volunteersByRegionCount = {}
 
-//   volunteersSnap.forEach(doc => {
+//   await volunteersSnap.forEach(doc => {
 //     const { region } = doc.data();
 
 //     const oldVal = volunteersByRegionCount[region] || 0;
 
 //     volunteersByRegionCount = {
 //       ...volunteersByRegionCount,
-//       [region]: oldVal + 1
+//       [region || 'ללא']: oldVal + 1
 //     }
 //   })
 
@@ -38,7 +36,7 @@
 //   let approvedActivityHoursCount = 0;
 //   let approvedActivityHoursByRegionCount = {};
 
-//   approvedActivitiesSnap.forEach(doc => {
+//   await approvedActivitiesSnap.forEach(doc => {
 //     const { total, region } = doc.data()
 
 //     const oldVal = approvedActivityHoursByRegionCount[region] || 0;
@@ -51,7 +49,7 @@
 //     }
 //   })
 
-//   let stats = {
+//   const stats = {
 //     pendingUsersCount,
 //     volunteersCount,
 //     approvedActivityHoursCount,
@@ -59,8 +57,8 @@
 //     approvedActivityHoursByRegionCount,
 //   }
 
-//   const statsRef = Constants.doc('stats');
-//   await statsRef.set({
+//   console.log(stats)
+//   await Constants.doc('stats').set({
 //     ...stats
 //   }, { merge: true })
 // }

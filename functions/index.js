@@ -144,7 +144,7 @@ exports.onUpdateUser = functions.firestore
         const fullNameBefore = `${firstNameBefore} ${lastNameBefore}`;
         const fullNameAfter = `${firstNameAfter} ${lastNameAfter}`;
 
-        if (fullNameAfter !== fullNameBefore) {
+        if ((fullNameAfter !== fullNameBefore) || (!regionBefore && regionBefore !== regionAfter)) {
           // Update users on listedMembers list
           await Constants.doc('listedMembers').update({
             all: admin.firestore.FieldValue.arrayRemove(fullNameBefore)
@@ -157,10 +157,11 @@ exports.onUpdateUser = functions.firestore
           const activitiesSnapshot = await Activities.where('uid', '==', uid).get();
           activitiesSnapshot.forEach(async doc => {
             await Activities.doc(doc.id).set({
+              region: regionAfter,
               user: {
                 firstName: firstNameAfter,
                 lastName: lastNameAfter,
-                avatar: avatarAfter
+                avatar: avatarAfter,
               }
             }, { merge: true })
           })

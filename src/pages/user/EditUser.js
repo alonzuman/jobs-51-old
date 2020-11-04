@@ -40,6 +40,7 @@ const User = ({ match }) => {
   const [role, setRole] = useState('')
   const [stateApproved, setApproved] = useState(0)
   const [statePending, setPending] = useState(0)
+  const { role: currentUserRole } = useSelector(state => state.auth)
 
   const handleSubmit = async () => {
     const newUser = {
@@ -86,7 +87,7 @@ const User = ({ match }) => {
     setServiceYear(user?.serviceYear || '')
     setRegion(user?.region || '')
     setRole(user?.role || '')
-    setPending(user?.activites?.pending || 0)
+    setPending(user?.activities?.pending || 0)
     setApproved(user?.activities?.approved || 0)
   }, [user])
 
@@ -96,7 +97,7 @@ const User = ({ match }) => {
     }
   }, [dispatch, uid])
 
-  const isAdmin = checkPermissions(role) >= 3;
+  const isAdmin = checkPermissions(currentUserRole) >= 3;
 
   const handleImageOpen = () => setImageOpen(!imageOpen)
   const handleApproveUser = () => dispatch(approveUser(uid))

@@ -20,7 +20,8 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
     if (region) {
       const newUser = {
         uid,
-        region
+        region,
+        volunteer: true
       }
       await dispatch(updateUser(newUser))
       await onClose()

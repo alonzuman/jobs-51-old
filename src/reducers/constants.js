@@ -51,12 +51,6 @@ export const constantsReducer = (state = initialState, action) => {
         ...payload,
         isFetching: false,
         isFetched: true,
-
-        // All fields
-        listedMembers: [],
-        locations: [],
-        regions: []
-
       }
     case UPDATE_ALL:
       return {

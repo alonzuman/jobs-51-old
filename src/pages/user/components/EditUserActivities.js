@@ -38,7 +38,7 @@ const EditUserActivities = ({
         <PageSectionTitle title={translation.manageVolunteering} />
         <LocationSelect
           helperText={locationHelperText()}
-          disabled={!isAdmin && stateRegion}
+          disabled={!isAdmin && stateRegion?.length !== 0}
           label={translation.activityRegion}
           size='small'
           location={stateRegion}
