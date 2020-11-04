@@ -13,14 +13,15 @@ import { auth } from '../../firebase'
 import PageHeader from '../../v2/organisms/PageHeader'
 import { Link } from 'react-router-dom'
 import NotificationIcon from '../../v2/molecules/NotificationIcon'
-import { IconButton } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import PageSection from '../../v2/atoms/PageSection'
+import ActivityPageRegion from './components/ActivityPageRegion'
 
 const Activity = ({ match }) => {
   const [editingProfile, setEditingProfile] = useState(false)
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { region, loading: authLoading } = useSelector(state => state.auth)
+  const { region, loading: authLoading, firstName, avatar } = useSelector(state => state.auth)
   const { pending, approved } = useSelector(state => state.auth.activities)
   const { activities, regionManagers, loading: activitiesLoading, currentUid } = useSelector(state => state.activities)
   const { uid } = match.params
@@ -56,12 +57,12 @@ const Activity = ({ match }) => {
         <PageHeader
           loading={authLoading}
           title={translation.activity}
-          secondary={<Link to={`/${uid}/notifications`}><IconButton size='small'><NotificationIcon /></IconButton></Link>}
+          secondary={<Avatar className='avatar__md' src={avatar}>{firstName?.charAt(0)}</Avatar>}
           className='mb-1'
         />
       </PageSection>
       <ActivityPageStats loading={authLoading} pending={pending} approved={approved} region={region} />
-      <ActivityPageRegionAdmins regionManagers={regionManagers} loading={activitiesLoading} region={region} />
+      <ActivityPageRegion loading={activitiesLoading} region={region} regionManagers={regionManagers} />
       <ActivityPageActivitiesList loading={activitiesLoading} activities={activities} region={region} />
     </Container>
   )

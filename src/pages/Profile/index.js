@@ -44,28 +44,6 @@ const Profile = () => {
         </PageSection>
         <PageSection>
           <List>
-            <Typography variant='subtitle1'>{translation.general}</Typography>
-            <Link to={`/${uid}/notifications`}>
-              <ListItem disableGutters button>
-                <ListItemIcon>
-                  <NotificationIcon disableRipple />
-                </ListItemIcon>
-                <ListItemText>
-                  {translation.notifications}
-                </ListItemText>
-              </ListItem>
-            </Link>
-            <Link to={`/${uid}/saved`}>
-              <ListItem disableGutters button>
-                <ListItemIcon>
-                  <FavoriteBorderOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  {translation.savedJobs}
-                </ListItemText>
-              </ListItem>
-            </Link>
-            <Divider className='mt-1 mb-1' />
             <Typography variant='subtitle1'>{translation.justProfile}</Typography>
             <Link to={`/users/${uid}/edit`}>
               <ListItem disableGutters button>

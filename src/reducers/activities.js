@@ -1,9 +1,14 @@
 const initialState = {
   activities: [],
   regionManagers: [],
+  region: {},
+
   loading: false,
   loadingManagers: false,
   noMoreResults: false,
+
+  isFetchingRegion: false,
+  isFetchedRegion: false,
 }
 
 // Actions
@@ -18,6 +23,10 @@ export const SET_MANAGERS = 'ACTIVITIES/SET_MANAGERS';
 export const DELETE_ONE = 'ACTIVITIES/DELETE_ONE';
 export const CLEAR_ALL = 'ACTIVITIES/CLEAR_ALL';
 export const ERROR = 'ACTIVITIES/ERROR';
+
+// New ones
+export const FETCHING_REGION = 'ACTIVITIES/FETCHING_REGION';
+export const SET_REGION = 'ACTIVITIES/SET_REGION';
 
 export const activitiesReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -37,6 +46,12 @@ export const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         loadingManagers: true
+      }
+
+    case FETCHING_REGION:
+      return {
+        ...state,
+        isFetchingRegion: true
       }
     case ADD_ONE:
       return {
@@ -75,6 +90,13 @@ export const activitiesReducer = (state = initialState, action) => {
         loading: false,
         loadingManagers: false
       }
+    case SET_REGION:
+      return {
+        ...state,
+        ...payload,
+        isFetchingRegion: false,
+        isFetchedRegion: true
+      }
     case DELETE_ONE:
       return {
         ...state,
@@ -83,6 +105,8 @@ export const activitiesReducer = (state = initialState, action) => {
     case ERROR:
       return {
         ...state,
+        isFetchingRegion: false,
+        isFetchedRegion: false,
         loadingManagers: false,
         loading: false,
         loadingMore: false

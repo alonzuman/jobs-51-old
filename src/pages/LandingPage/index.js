@@ -33,7 +33,7 @@ const LandingPage = () => {
   if (isLoading) {
     return <CircularSpinnerWithContainer />
   } else if (currentUser && !loading) {
-    return <Redirect to='/home' />
+    return <Redirect to={`/${currentUser?.uid}/activity`} />
   } else {
     return (
       <Container className='rtl mt-3 flex flex__column align__center justify__center'>

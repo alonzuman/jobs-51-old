@@ -16,14 +16,14 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
 
   return (
     <Menu elevation={1} className='desktop__menu rtl pt-1' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-      <NavLink to='/home'>
+      {/* <NavLink to='/home'>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.findJobs}
             <SearchIcon style={{ color: value === '/home' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
-      </NavLink>
+      </NavLink> */}
       {volunteer && <NavLink to={`/${uid}/activity`}>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>

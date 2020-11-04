@@ -1,6 +1,6 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import { ADD_ONE, DELETE_ONE, ERROR, LOADING, LOADING_MANAGERS, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MANAGERS, SET_MORE } from '../reducers/activities'
+import { ADD_ONE, DELETE_ONE, ERROR, FETCHING_REGION, LOADING, LOADING_MANAGERS, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MANAGERS, SET_MORE, SET_REGION } from '../reducers/activities'
 import store from '../store'
 import { SET_USER } from '../reducers/auth'
 const { translation } = store.getState().theme
@@ -275,5 +275,30 @@ export const getRegionManagers = (region) => async dispatch => {
       type: 'error',
       msg: translation.serverError
     }))
+  }
+}
+
+export const getRegion = (regionName) => async dispatch => {
+  dispatch({
+    type: FETCHING_REGION
+  })
+  try {
+    console.log(regionName)
+
+    const region = {};
+
+    dispatch({
+      type: SET_REGION,
+      payload: { region }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+    dispatch({
+      type: ERROR
+    })
   }
 }

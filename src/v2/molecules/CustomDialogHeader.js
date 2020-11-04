@@ -10,6 +10,7 @@ const DialogHeader = styled.div`
   justify-content: space-between;
   padding: 0 8px;
   border-bottom: 1px solid ${props => props.border};
+  min-height: 65px;
 `
 
 const CustomDialogHeader = ({ title, exitButton, onClose }) => {

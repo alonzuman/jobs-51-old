@@ -10,7 +10,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { roundNumber } from '../../../utils';
 
 const ActivityPageStats = ({ loading, pending, approved, region }) => {
-  const { translation, theme } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
 
   if (loading) {
     return (

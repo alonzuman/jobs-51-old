@@ -27,13 +27,13 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
-      <BottomNavigationAction
+      {/* <BottomNavigationAction
         label={translation.findJobs}
         component={Link}
         to='/home'
         value='/home'
         icon={<SearchIcon />}
-      />
+      /> */}
       {volunteer &&
         <BottomNavigationAction
           label={translation.activity}

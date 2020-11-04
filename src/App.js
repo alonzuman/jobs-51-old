@@ -32,6 +32,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy/index'
 import LandingPage from './pages/LandingPage/index'
 import PageDoesntExist from './pages/404'
 import GeneralManagement from './pages/Admin/pages/GeneralManagement'
+import Region from './pages/Region'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -65,6 +66,9 @@ function App() {
 
             {/* Profile */}
             <ProtectedRoute exact path='/profile' component={Profile} />
+
+            {/* Regions */}
+            <ProtectedRoute exact path='/regions/:region' component={Region} />
 
             {/* Users */}
             <ProtectedRoute exact requiredRole='user' path='/users/:id' component={User} />
