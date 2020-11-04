@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "jobs-51"
+    "default": "jobs-51",
+    "dev": "jobs-51-dev"
   }
 }

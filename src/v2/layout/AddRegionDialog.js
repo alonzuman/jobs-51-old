@@ -31,7 +31,7 @@ const AddRegionDialog = ({ isOpen, onClose }) => {
   }
 
   return (
-    <Dialog dir='rtl' open={isOpen} onClose={onClose}>
+    <Dialog dir='rtl' open={isOpen}>
       <CustomDialogHeader title={translation.pleaseSetYourRegion} />
       <DialogContent>
         <LocationSelect
