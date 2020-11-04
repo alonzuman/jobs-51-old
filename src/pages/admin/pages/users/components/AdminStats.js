@@ -7,16 +7,20 @@ import PageSection from '../../../../../v2/atoms/PageSection';
 import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle';
 
 // Icons
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 
 const AdminStats = () => {
   const { translation } = useSelector(state => state.theme);
   const { region } = useSelector(state => state.auth)
   const { isFetching, isFetched, stats } = useSelector(state => state.constants)
+  const { volunteersByRegionCount, approvedActivityHoursCount, approvedActivityHoursByRegionCount, pendingUsersCount, volunteersCount } = stats;
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getStats())
+    if (!stats) {
+      dispatch(getStats())
+    }
   }, [])
 
   if (isFetching && !isFetched) {
@@ -36,37 +40,38 @@ const AdminStats = () => {
         <List>
           <ListItem disableGutters>
             <ListItemIcon>
-              <CheckCircleOutlineIcon color='primary' className='medium__icon' />
+              <AccessTimeIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${stats.approvedActivityHoursByRegionCount[region]} ${translation.approvedActivitiesGeneral}`}
+              primary={`${approvedActivityHoursByRegionCount[region]} ${translation.approvedActivitiesGeneral}`}
             />
           </ListItem>
           <ListItem disableGutters>
             <ListItemIcon>
-              <CheckCircleOutlineIcon color='primary' className='medium__icon' />
+              <AccessibilityNewIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${stats.approvedUsersByRegion[region]} ${translation.volunteers}`}
+              primary={`${volunteersByRegionCount[region]} ${translation.volunteers}`}
             />
           </ListItem>
         </List>
+
         <Typography variant='subtitle1'>{translation.general}</Typography>
         <List>
           <ListItem disableGutters>
             <ListItemIcon>
-              <CheckCircleOutlineIcon color='primary' className='medium__icon' />
+              <AccessTimeIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${stats.approvedActivityHoursCount} ${translation.approvedActivitiesGeneral}`}
+              primary={`${approvedActivityHoursCount} ${translation.approvedActivitiesGeneral}`}
             />
           </ListItem>
           <ListItem disableGutters>
             <ListItemIcon>
-              <CheckCircleOutlineIcon color='primary' className='medium__icon' />
+              <AccessibilityNewIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${stats.approvedUsersCount} ${translation.volunteers}`}
+              primary={`${stats.volunteersCount} ${translation.volunteers}`}
             />
           </ListItem>
         </List>

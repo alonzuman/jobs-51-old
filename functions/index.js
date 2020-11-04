@@ -138,8 +138,8 @@ exports.onUpdateUser = functions.firestore
     const uid = context.params.uid;
     try {
       if (change.before.exists && change.after.exists) {
-        const { firstName: firstNameBefore, lastName: lastNameBefore, role: roleBefore, region: regionBefore } = change.before.data();
-        const { firstName: firstNameAfter, lastName: lastNameAfter, avatar: avatarAfter, role: roleAfter, region: regionAfter } = change.after.data();
+        const { firstName: firstNameBefore, lastName: lastNameBefore, role: roleBefore, region: regionBefore, volunteer: volunteerBefore } = change.before.data();
+        const { firstName: firstNameAfter, lastName: lastNameAfter, avatar: avatarAfter, role: roleAfter, region: regionAfter, volunteer: volunteerAfter } = change.after.data();
 
         const fullNameBefore = `${firstNameBefore} ${lastNameBefore}`;
         const fullNameAfter = `${firstNameAfter} ${lastNameAfter}`;
@@ -186,21 +186,19 @@ exports.onUpdateUser = functions.firestore
         let updatedStats = {}
 
         // Update general users count
-        if (roleBefore === 'pending' && roleAfter !== 'pending') {
+        if (!volunteerBefore && volunteerAfter) {
           updatedStats = {
             ...updatedStats,
-            pendingUsersCount: decrement,
-            approvedUsersCount: increment,
-            approvedUsersByRegion: {
+            volunteersCount: increment,
+            volunteersByRegionCount: {
               [regionAfter]: increment
             }
           }
-        } else if (roleAfter === 'pending' && roleBefore !== 'pending') {
+        } else if (volunteerBefore && !volunteerAfter) {
           updatedStats = {
             ...updatedStats,
-            pendingUsersCount: increment,
-            approvedUsersCount: decrement,
-            approvedUsersByRegion: {
+            volunteersCount: decrement,
+            volunteersByRegionCount: {
               [regionAfter]: decrement
             }
           }
@@ -210,21 +208,21 @@ exports.onUpdateUser = functions.firestore
         if (regionBefore && !regionAfter) {
           updatedStats = {
             ...updatedStats,
-            approvedUsersByRegion: {
+            volunteersByRegionCount: {
               [regionBefore]: decrement,
             }
           }
         } else if (!regionBefore && regionAfter) {
           updatedStats = {
             ...updatedStats,
-            approvedUsersByRegion: {
+            volunteersByRegionCount: {
               [regionAfter]: increment,
             }
           }
         } else if (regionBefore && regionBefore !== regionAfter) {
           updatedStats = {
             ...updatedStats,
-            approvedUsersByRegion: {
+            volunteersByRegionCount: {
               [regionAfter]: increment,
               [regionBefore]: decrement
             }
