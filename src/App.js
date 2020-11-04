@@ -31,6 +31,7 @@ import RegionActivities from './pages/Admin/pages/RegionActivities'
 import PrivacyPolicy from './pages/PrivacyPolicy/index'
 import LandingPage from './pages/LandingPage/index'
 import PageDoesntExist from './pages/404'
+import GeneralManagement from './pages/Admin/pages/GeneralManagement'
 
 function App() {
   const { authenticated } = useSelector(state => state.auth)
@@ -73,6 +74,7 @@ function App() {
             <ProtectedRoute exact requiredRole='manager' path='/admin' component={Admin} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={Activities} />
+            <ProtectedRoute exact requiredRole='admin' path='/admin/general-management' component={GeneralManagement} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/:region/users' component={RegionUsers} />
             <ProtectedRoute exact requiredRole='manager' path='/admin/:region/activities' component={RegionActivities} />
 

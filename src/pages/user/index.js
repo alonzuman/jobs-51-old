@@ -58,11 +58,13 @@ const User = ({ match }) => {
   const iconButtonStyle = {
     backgroundColor: isScrolling ? theme?.palette?.background?.light : theme?.palette?.background?.main,
     boxShadow: isScrolling ? '0px 4px 10px #00000015' : '',
-    transition: 'box-shadow .25s ease-in-out, background-color .25s ease-in-out'
+    transition: 'box-shadow .25s ease-in-out, background-color .25s ease-in-out',
+    height: 32,
+    width: 32
   }
 
   const secondaryActions = (
-    canEdit && <IconButton style={iconButtonStyle} size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon />}</IconButton>
+    canEdit && <IconButton style={iconButtonStyle} size='small' onClick={handleEditing}>{editing ? <CloseIcon /> : <EditIcon fontSize='inherit' />}</IconButton>
   )
 
   return (

@@ -6,10 +6,6 @@ import LocationSelect from '../../../v2/molecules/LocationSelect'
 import PageSection from '../../../v2/atoms/PageSection'
 import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 
-const Container = styled.div`
-  margin-bottom: 32px;
-`
-
 const EditUserActivities = ({
   isVolunteer,
   isAdmin,
@@ -21,7 +17,7 @@ const EditUserActivities = ({
   setPending,
 }) => {
   const { translation } = useSelector(state => state.theme)
-  const { regions } = useSelector(state => state.constants?.locations)
+  const { regions } = useSelector(state => state.constants)
 
   const locationHelperText = () => {
     if (isAdmin) {

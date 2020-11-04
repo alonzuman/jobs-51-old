@@ -234,12 +234,12 @@ export const getActivities = (query, last) => async dispatch => {
     if (last) {
       dispatch({
         type: SET_MORE,
-        payload: { activities }
+        payload: { activities, currentUid: 'none' }
       })
     } else {
       dispatch({
         type: SET_ALL,
-        payload: { activities }
+        payload: { activities, currentUid: 'none' }
       })
     }
   } catch (error) {

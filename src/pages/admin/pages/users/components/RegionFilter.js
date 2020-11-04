@@ -10,12 +10,12 @@ const Container = styled.div`
 
 const RegionFilter = ({ selectedRegion, setSelectedRegion, ...rest }) => {
   const { translation } = useSelector(state => state.theme);
-  const { regions } = useSelector(state => state?.constants?.locations)
+  const { isFetching, regions } = useSelector(state => state?.constants);
 
   return (
     <Container>
       <Typography className='mb-1' variant='h2'>{translation.filterByRegion}</Typography>
-      <LocationSelect location={selectedRegion} setLocation={setSelectedRegion} options={regions} />
+      <LocationSelect loading={isFetching} size='small' location={selectedRegion} setLocation={setSelectedRegion} options={regions} />
     </Container>
   )
 }

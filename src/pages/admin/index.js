@@ -10,6 +10,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import SettingsIcon from '@material-ui/icons/Settings';
 import PageSection from '../../v2/atoms/PageSection';
 import Container from '../../v2/atoms/Container';
 
@@ -25,6 +26,7 @@ const Admin = () => {
   const generalPages = [
     { label: translation.manageUsers, icon: <PeopleAltIcon />, link: '/admin/users', minRole: 2 },
     { label: translation.manageActivities, icon: <AssignmentIcon />, link: '/admin/activities', minRole: 2 },
+    { label: translation.generalManagement, icon: <SettingsIcon />, link: '/admin/general-management', minRole: 3 },
   ]
 
   return (

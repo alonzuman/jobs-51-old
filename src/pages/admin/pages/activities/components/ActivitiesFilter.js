@@ -13,7 +13,7 @@ import TopBar from '../../../../../v2/layout/TopBar';
 
 const ActivitiesFilter = () => {
   const { translation, theme } = useSelector(state => state.theme);
-  const { regions } = useSelector(state => state?.constants?.locations);
+  const { regions } = useSelector(state => state?.constants);
   const history = useHistory();
   const { windowWidth: width } = useWindowSize()
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +58,9 @@ const ActivitiesFilter = () => {
             location={selectedRegion}
             setLocation={setSelectedRegion}
             options={regions}
+            label={translation.region}
+            placeholder={translation.telAviv}
+            size='small'
           />
         </DialogContent>
         <DialogActionsContainer>

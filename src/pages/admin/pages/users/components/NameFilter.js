@@ -1,8 +1,9 @@
 import { TextField, Typography } from '@material-ui/core'
 import { Autocomplete, createFilterOptions } from '@material-ui/lab'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { getListedMembers } from '../../../../../actions/constants'
 import { onlyUnique } from '../../../../../utils'
 
 const Container = styled.div`
@@ -10,8 +11,13 @@ const Container = styled.div`
 `
 
 const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
-  const options = useSelector(state => state?.constants?.listedMembers?.all)
+  const { listedMembers, isFetching } = useSelector(state => state.constants)
   const { translation } = useSelector(state => state.theme)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getListedMembers())
+  }, [])
 
   const filterOptions = createFilterOptions({
     matchFrom: 'start',
@@ -23,7 +29,9 @@ const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
     <Container>
       <Typography className='mb-1' variant='h2'>{translation.filterByFullName}</Typography>
       <Autocomplete
-        options={options.filter(onlyUnique)}
+        size='small'
+        loading={isFetching}
+        options={listedMembers?.filter(onlyUnique)}
         filterOptions={filterOptions}
         handleHomeEndKeys
         autoHighlight

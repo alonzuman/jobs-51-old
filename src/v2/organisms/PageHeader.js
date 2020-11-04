@@ -35,6 +35,7 @@ const ActionsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 32px;
+  margin-top: 16px;
 `
 
 const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backButton, backLink, ...rest }) => {

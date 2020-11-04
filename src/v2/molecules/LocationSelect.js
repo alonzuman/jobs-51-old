@@ -1,12 +1,18 @@
 import { Autocomplete } from '@material-ui/lab'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
+import { getLocations } from '../../actions/constants';
 
-const LocationSelect = ({ location, setLocation, label, helperText = '', error = '', ...rest }) => {
+const LocationSelect = ({ location, setLocation, label, helperText = '', error = '', placeholder, ...rest }) => {
   const { translation } = useSelector(state => state.theme)
-  const options = useSelector(state => state.constants?.locations?.all)
+  const { isFetching, locations } = useSelector(state => state.constants)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getLocations())
+  }, [])
 
   const filterOptions = createFilterOptions({
     matchFrom: 'start',
@@ -16,18 +22,17 @@ const LocationSelect = ({ location, setLocation, label, helperText = '', error =
 
   return (
     <Autocomplete
-      options={options}
+      options={locations}
       filterOptions={filterOptions}
       handleHomeEndKeys
+      loading={isFetching}
       autoHighlight
       value={location}
       onChange={(e, value) => setLocation(value)}
       noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
       getOptionLabel={option => option}
-      renderInput={params => <TextField helperText={helperText} error={Boolean(error)} {...params} label={label || translation.location} variant="outlined" />}
+      renderInput={params => <TextField helperText={helperText} error={Boolean(error)} {...params} placeholder={placeholder || translation.telAviv} label={label || translation.location} variant="outlined" />}
       renderOption={v => <div style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} dir='rtl'>{v}</div>}
-      placeholder={translation.preferredLocationPlaceholder}
-      label={translation.preferredLocation}
       variant='outlined'
       {...rest}
     />

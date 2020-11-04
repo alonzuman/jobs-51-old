@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const Container = styled.div`
   justify-content: flex-start;
   padding: ${props => props.disableGutters ? '' : '8px 16px'};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
-  top: 0;
+  top: ${props => props.top}px;
   z-index: 99;
   background-color: ${props => props.background};
   margin-bottom: ${props => props.bottomSpacing ? '8px' : ''};
@@ -20,9 +21,10 @@ const Container = styled.div`
 
 const TopBar = ({ sticky, bottomSpacing = true, disableGutters = false, children, ...rest }) => {
   const { theme } = useSelector(state => state.theme)
+  const { windowWidth: width } = useWindowSize()
 
   return (
-    <Container bottomSpacing={bottomSpacing} disableGutters={disableGutters} sticky={sticky} background={theme?.palette?.background?.main} {...rest}>
+    <Container bottomSpacing={bottomSpacing} disableGutters={disableGutters} top={sticky ? width > 768 ? 60 : 0 : ''} sticky={sticky} background={theme?.palette?.background?.main} {...rest}>
       {children}
     </Container>
   )

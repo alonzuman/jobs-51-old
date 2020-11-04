@@ -18,27 +18,6 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import TopBar from '../../../../../v2/layout/TopBar'
 import PageSection from '../../../../../v2/atoms/PageSection'
 
-// const Container = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 8px 0;
-//   position: sticky;
-//   top: 0;
-//   z-index: 99;
-//   background-color: ${props => props.background};
-//   margin-bottom: 8px;
-// `
-
-// const BarContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-
-//   @media (max-width: 768px) {
-//     width: 100%;
-//   }
-// `
-
 const UsersFilter = ({ view, handleView }) => {
   const { theme, translation } = useSelector(state => state.theme)
   const [isOpen, setIsOpen] = useState(false)

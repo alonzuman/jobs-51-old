@@ -22,13 +22,15 @@ const Activity = ({ match }) => {
   const { translation } = useSelector(state => state.theme)
   const { region, loading: authLoading } = useSelector(state => state.auth)
   const { pending, approved } = useSelector(state => state.auth.activities)
-  const { activities, regionManagers, loading: activitiesLoading } = useSelector(state => state.activities)
+  const { activities, regionManagers, loading: activitiesLoading, currentUid } = useSelector(state => state.activities)
   const { uid } = match.params
   const handleAddActivity = () => setAddingActivity(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getUserActivities(uid))
+    if (currentUid !== uid) {
+      dispatch(getUserActivities(uid))
+    }
     if (region) {
       dispatch(getRegionManagers(region))
     }
