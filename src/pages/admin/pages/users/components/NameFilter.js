@@ -11,13 +11,15 @@ const Container = styled.div`
 `
 
 const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
-  const { listedMembers, isFetching } = useSelector(state => state.constants)
+  const { listedMembers, isFetching, isFetched } = useSelector(state => state.constants)
   const { all } = listedMembers;
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getListedMembers())
+    if (!isFetched) {
+      dispatch(getListedMembers())
+    }
   }, [])
 
   const filterOptions = createFilterOptions({

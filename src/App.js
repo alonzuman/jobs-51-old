@@ -9,14 +9,12 @@ import DirectionProvider from './contexts/DirectionContext'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme, verifyUser } from './actions'
 
-// Pages
-
 import Container from './v2/atoms/Container'
 import { CircularProgress } from '@material-ui/core'
 import ProtectedRouter from './ProtectedRouter'
 
 function App() {
-  const { isFetching, isFetched, isAuthenticated } = useSelector(state => state.auth)
+  const { isFetching, isFetched } = useSelector(state => state.auth)
   const { theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 

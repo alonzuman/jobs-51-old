@@ -14,7 +14,7 @@ import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
 const Users = () => {
   const [view, setView] = useState('list')
   const [data, setData] = useState([])
-  const { all, isFetching, isFetched, isFetchingMore, isFetchedMore, isLastResult } = useSelector(state => state.users.users)
+  const { all, isFetching, isFetched, isFetchingMore, isLastResult } = useSelector(state => state.users.users)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -22,10 +22,16 @@ const Users = () => {
   const query = qs.parse(search)
 
   useEffect(() => {
-    if (!isFetched) {
+    if (!isFetched && !isFetching) {
       dispatch(getUsers(query))
     }
-  }, [history.location])
+  }, [])
+
+  useEffect(() => {
+    if (!isFetching) {
+      dispatch(getUsers(query))
+    }
+  }, [search])
 
   const handleView = () => {
     setView(view => view === 'list' ? 'table' : 'list')
