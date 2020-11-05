@@ -10,13 +10,12 @@ export const verifyUser = () => async dispatch => {
   dispatch({
     type: FETCHING
   })
-  console.log('heere')
   try {
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
       } else {
-        await dispatch(signOut({ withMsg: false }))
+        await dispatch(signOut(false))
       }
     })
   } catch (error) {
@@ -25,10 +24,6 @@ export const verifyUser = () => async dispatch => {
 }
 
 export const setUser = (user) => async dispatch => {
-  dispatch({
-    type: FETCHING
-  })
-  console.log('here')
   try {
     const snapshot = await Users.doc(user.uid).get()
     dispatch({
@@ -212,14 +207,14 @@ export const signUp = (user, password) => async dispatch => {
   }
 }
 
-export const signOut = ({ withMsg = true }) => async dispatch => {
+export const signOut = (showMsg = false) => async dispatch => {
   try {
     await app.auth().signOut()
     dispatch({
       type: SIGN_OUT
     })
     {
-      withMsg &&
+      showMsg &&
       dispatch(setFeedback({
         type: 'success',
         msg: translation.signedOutSuccess

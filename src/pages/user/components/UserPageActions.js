@@ -27,12 +27,13 @@ const Container = styled.div`
   }
 `
 
-const UserPageActions = ({ loading, updateAction, deleteAction, editing, isUpdating, isDeleting }) => {
+const UserPageActions = ({ updateAction, deleteAction, editing }) => {
   const { translation, theme } = useSelector(state => state.theme)
+  const { isFetching, isUpdating, isDeleting } = useSelector(state => state?.users?.user);
   const { role } = useSelector(state => state.auth)
   const { windowWidth } = useWindowSize()
 
-  if (loading || !editing) {
+  if (isFetching || !editing) {
     return null
   } else {
     return (

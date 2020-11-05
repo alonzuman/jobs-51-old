@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const RegionFilter = ({ selectedRegion, setSelectedRegion, ...rest }) => {
   const { translation } = useSelector(state => state.theme);
-  const { isFetching, regions } = useSelector(state => state?.constants);
+  const { isFetching, regions } = useSelector(state => state?.constants?.locations);
 
   return (
     <Container>

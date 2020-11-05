@@ -12,6 +12,7 @@ const Container = styled.div`
 
 const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
   const { listedMembers, isFetching } = useSelector(state => state.constants)
+  const { all } = listedMembers;
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -31,7 +32,7 @@ const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
       <Autocomplete
         size='small'
         loading={isFetching}
-        options={listedMembers?.filter(onlyUnique)}
+        options={all?.filter(onlyUnique)}
         filterOptions={filterOptions}
         handleHomeEndKeys
         autoHighlight

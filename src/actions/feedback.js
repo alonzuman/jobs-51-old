@@ -11,11 +11,9 @@ export const setFeedback = ({ msg, type }) => async dispatch => {
     }
   })
   setTimeout(() => {
-    if (currentMsg) {
-      dispatch({
-        type: DELETE_ONE
-      })
-    }
+    dispatch({
+      type: DELETE_ONE
+    })
   }, 3000);
 }
 

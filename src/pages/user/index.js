@@ -23,7 +23,8 @@ const User = ({ match }) => {
   const [editing, setEditing] = useState(false)
   const history = useHistory()
   const { role } = useSelector(state => state.auth)
-  const { loading, user } = useSelector(state => state.users)
+  const { user } = useSelector(state => state.users)
+  const { isFetched, isFetching } = user;
   const { theme } = useSelector(state => state.theme)
   const { isScrolling } = useScrollPosition()
   const uid = match.params.id
@@ -78,34 +79,34 @@ const User = ({ match }) => {
         handleImageOpen={handleImageOpen}
         editing={false}
         handleEditing={handleEditing}
-        loading={loading}
+        loading={isFetching}
         user={user}
       />
       <UserPageBadges
         handleApproveUser={handleApproveUser}
         handleIsDeclining={handleIsDeclining}
-        loading={loading}
+        loading={isFetching}
         user={user}
         editing={false}
       />
       <UserPageBio
         editing={false}
         user={user}
-        loading={loading}
+        loading={isFetching}
       />
       <UserPageJobInfo
         editing={false}
         user={user}
-        loading={loading}
+        loading={isFetching}
       />
       <UserPageJobsCarousel
         user={user}
-        loading={loading}
+        loading={isFetching}
         editing={false}
       />
       <UserPageActivities
         user={user}
-        loading={loading}
+        loading={isFetching}
         editing={editing}
       />
     </Container>

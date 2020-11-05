@@ -1,6 +1,6 @@
 import { IconButton, List, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Container from '../../../../v2/atoms/Container'
 import PageSection from '../../../../v2/atoms/PageSection'
 import PageHeader from '../../../../v2/organisms/PageHeader'
@@ -11,6 +11,7 @@ import AddActivityType from './components/AddActivityType'
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import { getActivityTypes } from '../../../../actions/constants'
 
 const SubtitleContainer = styled.div`
   display: flex;
@@ -21,9 +22,15 @@ const SubtitleContainer = styled.div`
 
 const GeneralManagement = () => {
   const { translation } = useSelector(state => state.theme)
-  const { isUpdating, isDeleting, activityTypes } = useSelector(state => state.constants)
-  const { all } = activityTypes
+  const { isFetched, isUpdating, isDeleting, all } = useSelector(state => state.constants.activityTypes)
   const [isEditing, setIsEditing] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!isFetched) {
+      dispatch(getActivityTypes())
+    }
+  }, [])
 
   const handleIsEditing = () => setIsEditing(!isEditing)
 

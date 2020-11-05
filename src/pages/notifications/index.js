@@ -1,25 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PageHeader from '../../v2/organisms/PageHeader'
 
 // Icons
 import Container from '../../v2/atoms/Container';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NotificationsList from './components/NotificationsList';
 import PageSection from '../../v2/atoms/PageSection';
-import { getNotifications } from '../../actions/notifications';
 import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
 
 const Notifications = ({ match }) => {
-  const { uid } = match.params
   const { translation } = useSelector(state => state.theme)
-  const { all, isFetching, isFetched } = useSelector(state => state.notifications)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (!isFetched) {
-      dispatch(getNotifications(uid))
-    }
-  }, [uid])
+  const { all, isFetching } = useSelector(state => state.notifications)
 
   const newNotifications = all?.filter (v => !v.seen)
   const oldNotifications = all?.filter(v => v.seen)

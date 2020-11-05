@@ -1,8 +1,8 @@
 import { db } from "../firebase"
 import { setFeedback } from "./feedback"
-import { ERROR, LOADING, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MORE, SET_ONE, UPDATE_ONE, UPDATING } from "../reducers/users"
 import store from '../store'
-import { SET_USER } from "../reducers/auth"
+import { UPDATE_MY_USER } from "../reducers/auth"
+import { DELETING_USER, SET_USER, ERROR, FETCHING_MORE_USERS, FETCHING_USER, FETCHING_USERS, SET_MORE_USERS, SET_USERS, UPDATING_USER } from "../reducers/users"
 const { translation } = store.getState().theme
 const Users = db.collection('users');
 const Jobs = db.collection('jobs');
@@ -10,7 +10,7 @@ const Activities = db.collection('activities');
 
 export const getUser = (uid) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: FETCHING_USER
   })
   try {
     const userSnapshot = await Users.doc(uid).get()
@@ -30,11 +30,14 @@ export const getUser = (uid) => async dispatch => {
     }
 
     dispatch({
-      type: SET_ONE,
-      payload: user
+      type: SET_USER,
+      payload: { ...user }
     })
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       type: 'error',
       msg: translation.serverError
@@ -43,17 +46,13 @@ export const getUser = (uid) => async dispatch => {
 }
 
 export const getUsers = (query, last) => async dispatch => {
-  dispatch({
-    type: NO_MORE_RESULTS,
-    payload: false
-  })
   if (!last) {
     dispatch({
-      type: LOADING
+      type: FETCHING_USERS
     })
   } else {
     dispatch({
-      type: LOADING_MORE
+      type: FETCHING_MORE_USERS
     })
   }
   try {
@@ -88,26 +87,25 @@ export const getUsers = (query, last) => async dispatch => {
     let users = []
     snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
 
-    if (users?.length === 0) {
-      dispatch({
-        type: NO_MORE_RESULTS,
-        payload: true
-      })
-    }
-
     if (last) {
       dispatch({
-        type: SET_MORE,
-        payload: { users, filters: query }
+        type: SET_MORE_USERS,
+        payload: {
+          users,
+          isLastResult: users?.length === 0
+        }
       })
     } else {
       dispatch({
-        type: SET_ALL,
-        payload: { users, filters: query }
+        type: SET_USERS,
+        payload: users
       })
     }
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       type: 'error',
       msg: translation.serverError
@@ -117,11 +115,11 @@ export const getUsers = (query, last) => async dispatch => {
 
 export const deleteUser = (uid) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: DELETING_USER
   })
 
   try {
-    await db.collection('users').doc(uid).delete()
+    await Users.doc(uid).delete()
     dispatch(setFeedback({
       type: 'success',
       msg: translation.success
@@ -140,7 +138,7 @@ export const deleteUser = (uid) => async dispatch => {
 
 export const approveUser = uid => async dispatch => {
   dispatch({
-    type: LOADING
+    type: UPDATING_USER
   })
 
   try {
@@ -148,7 +146,7 @@ export const approveUser = uid => async dispatch => {
       role: 'user'
     })
     dispatch({
-      type: UPDATE_ONE,
+      type: SET_USER,
       payload: {
         role: 'user'
       }
@@ -171,11 +169,10 @@ export const approveUser = uid => async dispatch => {
 
 export const unapproveUser = uid => async dispatch => {
   dispatch({
-    type: LOADING
+    type: DELETING_USER
   })
-
   try {
-    dispatch(deleteUser(uid))
+    await dispatch(deleteUser(uid))
   } catch (error) {
     console.log(error)
     dispatch({
@@ -191,7 +188,7 @@ export const unapproveUser = uid => async dispatch => {
 export const updateUser = (newUser) => async dispatch => {
   const { uid } = store.getState().auth
   dispatch({
-    type: UPDATING
+    type: UPDATING_USER
   })
   try {
     await Users.doc(newUser.uid).set({
@@ -200,7 +197,7 @@ export const updateUser = (newUser) => async dispatch => {
 
     if (uid === newUser.uid) {
       dispatch({
-        type: SET_USER,
+        type: UPDATE_MY_USER,
         payload: {
           ...newUser
         }
@@ -208,7 +205,7 @@ export const updateUser = (newUser) => async dispatch => {
     }
 
     dispatch({
-      type: SET_ONE,
+      type: SET_USER,
       payload: {
         ...newUser
       }

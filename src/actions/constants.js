@@ -6,36 +6,6 @@ import { ADDED_ACTIVITY_TYPE, DELETED_ACTIVITY_TYPE, ERROR, FETCHING_ACTIVITY_TY
 const { translation } = store.getState().theme
 const Constants = db.collection('constants')
 
-// export const getConstants = () => async dispatch => {
-//   dispatch({
-//     type: FETCHING
-//   })
-//   try {
-//     const snapshot = await Constants.get()
-//     let results = {}
-//     snapshot.forEach(doc => results[doc.id] = doc.data())
-//     dispatch({
-//       type: SET_ALL,
-//       payload: {
-//         ...results,
-//         listedMembers: results.listedMembers.all,
-//         locations: results.locations.all,
-//         regions: results.locations.regions,
-//         activityTypes: results.activityTypes.all
-//       }
-//     })
-//   } catch (error) {
-//     console.log(error);
-//     dispatch({
-//       type: ERROR
-//     })
-//     dispatch(setFeedback({
-//       type: 'error',
-//       msg: translation.serverError
-//     }))
-//   }
-// }
-
 export const deleteActivityType = activity => async dispatch => {
   dispatch({
     type: UPDATING_ACTIVITY_TYPES
@@ -94,7 +64,9 @@ export const getListedMembers = () => async dispatch => {
     const { all } = membersSnapshot.data()
     dispatch({
       type: SET_LISTED_MEMBERS,
-      payload: { listedMembers: all }
+      payload: {
+        all
+      }
     })
   } catch (error) {
     console.log(error)
@@ -120,10 +92,8 @@ export const getLocations = () => async dispatch => {
     dispatch({
       type: SET_LOCATIONS,
       payload: {
-        locations: {
-          all,
-          regions
-        }
+        all,
+        regions
       }
     })
   } catch (error) {
@@ -144,10 +114,12 @@ export const getStats = () => async dispatch => {
   })
   try {
     const statsSnapshot = await Constants.doc('stats').get()
-    const stats = statsSnapshot.data()
+    const all = statsSnapshot.data()
     dispatch({
       type: SET_STATS,
-      payload: { stats }
+      payload: {
+        all
+      }
     })
   } catch (error) {
     console.log(error)
@@ -162,7 +134,6 @@ export const getStats = () => async dispatch => {
 }
 
 export const getActivityTypes = () => async dispatch => {
-  console.log('here')
   dispatch({
     type: FETCHING_ACTIVITY_TYPES
   })

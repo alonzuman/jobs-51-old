@@ -8,7 +8,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import LocationSelect from '../../../v2/molecules/LocationSelect'
-import InfoContainer from './InfoContainer'
 import PageSection from '../../../v2/atoms/PageSection';
 import PageSectionTitle from '../../../v2/atoms/PageSectionTitle';
 

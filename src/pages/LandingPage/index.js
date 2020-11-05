@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Typography, Box, Paper } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Button, Typography, Box } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { setUser, verifyUser } from '../../actions'
-import { app } from '../../firebase'
+import { useSelector } from 'react-redux'
 import AuthDialog from '../../v2/layout/AuthDialog'
-import CircularSpinnerWithContainer from '../../v2/atoms/CircularSpinnerWithContainer'
 import ShaldagLogo from '../../assets/ShaldagLogo'
 import Container from '../../v2/atoms/Container'
 
 const LandingPage = () => {
   const { translation } = useSelector(state => state.theme)
-  const { isFetching, isFetched, uid, isAuthenticated } = useSelector(state => state.auth)
+  const { isFetching, uid, isAuthenticated } = useSelector(state => state.auth)
   const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (!isFetched && !isFetching) {
-      dispatch(verifyUser())
-    }
-  }, [])
 
   const handleDialog = () => setIsOpen(!isOpen)
 
-  if (isFetching) {
-    return <CircularSpinnerWithContainer />
-  } else if (isFetched && !isFetching && isAuthenticated) {
+  if (isAuthenticated) {
     return <Redirect to={`/${uid}/activity`} />
   } else {
     return (

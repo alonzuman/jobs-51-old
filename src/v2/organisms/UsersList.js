@@ -9,7 +9,7 @@ const UsersList = ({ loading, users }) => {
 
   if (loading) {
     return <CardsSkeletons disableGutters count={1} size='small' className='p-0' />
-  } else if (!loading && users.length !== 0) {
+  } else if (!loading && users?.length !== 0) {
     return (
       <List>
         {users?.map((user, index) => <UserCard key={index} user={user} />)}

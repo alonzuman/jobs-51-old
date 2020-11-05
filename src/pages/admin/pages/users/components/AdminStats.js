@@ -13,12 +13,12 @@ import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 const AdminStats = () => {
   const { translation } = useSelector(state => state.theme);
   const { region } = useSelector(state => state.auth)
-  const { isFetching, isFetched, stats } = useSelector(state => state.constants)
-  const { volunteersByRegionCount, approvedActivityHoursCount, approvedActivityHoursByRegionCount, pendingUsersCount, volunteersCount } = stats;
+  const { isFetching, isFetched, all } = useSelector(state => state.constants.stats)
+  const { volunteersByRegionCount, approvedActivityHoursCount, approvedActivityHoursByRegionCount, pendingUsersCount, volunteersCount } = all;
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!stats) {
+    if (!isFetched) {
       dispatch(getStats())
     }
   }, [])
@@ -32,7 +32,7 @@ const AdminStats = () => {
     )
   } else if (!isFetching && isFetched) {
     return (
-      <PageSection>
+      <PageSection disableGutters>
         <PageSectionTitle
           title={translation.generalStats}
         />
@@ -71,7 +71,7 @@ const AdminStats = () => {
               <AccessibilityNewIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${stats.volunteersCount} ${translation.volunteers}`}
+              primary={`${volunteersCount} ${translation.volunteers}`}
             />
           </ListItem>
         </List>

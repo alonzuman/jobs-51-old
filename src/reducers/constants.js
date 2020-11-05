@@ -92,7 +92,7 @@ export const constantsReducer = (state = initialState, action) => {
         ...state,
         stats: {
           ...state.stats,
-          ...payload.stats,
+          ...payload,
           isFetching: false,
           isFetched: true
         }
@@ -102,7 +102,7 @@ export const constantsReducer = (state = initialState, action) => {
         ...state,
         listedMembers: {
           ...state.listedMembers,
-          ...payload.listedMembers,
+          ...payload,
           isFetching: false,
           isFetched: true
         }
@@ -112,7 +112,7 @@ export const constantsReducer = (state = initialState, action) => {
         ...state,
         locations: {
           ...state.locations,
-          ...payload.locations,
+          ...payload,
           isFetching: false,
           isFetched: true
         }

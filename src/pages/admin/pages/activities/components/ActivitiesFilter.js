@@ -12,8 +12,8 @@ import useWindowSize from '../../../../../hooks/useWindowSize';
 import TopBar from '../../../../../v2/layout/TopBar';
 
 const ActivitiesFilter = () => {
-  const { translation, theme } = useSelector(state => state.theme);
-  const { regions } = useSelector(state => state?.constants);
+  const { translation } = useSelector(state => state.theme);
+  const { regions, isFetching } = useSelector(state => state?.constants.locations);
   const history = useHistory();
   const { windowWidth: width } = useWindowSize()
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +55,7 @@ const ActivitiesFilter = () => {
           <Typography className='mb-1' variant='h2'>{translation.filterByRegion}</Typography>
           <LocationSelect
             className='mt-1'
+            loading={isFetching}
             location={selectedRegion}
             setLocation={setSelectedRegion}
             options={regions}

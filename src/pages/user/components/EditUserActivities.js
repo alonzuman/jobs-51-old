@@ -17,7 +17,7 @@ const EditUserActivities = ({
   setPending,
 }) => {
   const { translation } = useSelector(state => state.theme)
-  const { regions } = useSelector(state => state.constants)
+  const { regions } = useSelector(state => state.constants.locations)
 
   const locationHelperText = () => {
     if (isAdmin) {

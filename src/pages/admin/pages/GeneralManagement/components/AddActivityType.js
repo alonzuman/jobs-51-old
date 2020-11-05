@@ -5,7 +5,7 @@ import { addActivityType } from '../../../../../actions/constants'
 
 const AddActivityType = () => {
   const { translation } = useSelector(state => state.theme)
-  const { isUpdating, isDeleting } = useSelector(state => state.constants)
+  const { isUpdating, isDeleting } = useSelector(state => state.constants.activityTypes)
   const [errors, setErrors] = useState({})
   const [activityTypeToAdd, setActivityTypeToAdd] = useState('')
 

@@ -19,7 +19,7 @@ import TopBar from '../../../../../v2/layout/TopBar'
 import PageSection from '../../../../../v2/atoms/PageSection'
 
 const UsersFilter = ({ view, handleView }) => {
-  const { theme, translation } = useSelector(state => state.theme)
+  const { translation } = useSelector(state => state.theme)
   const [isOpen, setIsOpen] = useState(false)
   const history = useHistory()
   const { windowWidth: width } = useWindowSize()

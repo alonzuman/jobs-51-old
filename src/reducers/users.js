@@ -1,107 +1,128 @@
 const initialState = {
   filters: {},
   user: {
-    skills: [],
-    lastPosition: ''
+    isFetched: false,
+    isFetching: false,
+    isUpdating: false,
+    isDeleting: false,
   },
-  users: [],
-  filters: {},
-  noMoreResults: false,
-  loading: false,
-  loadingMore: false,
-  isUpdating: false,
-  isDeleting: false
+  users: {
+    all: [],
+    isFetched: false,
+    isFetching: false,
+    isFetchingMore: false,
+    isFetchedMore: false,
+    isLastResult: false,
+  },
 }
 
 // Actions
-export const LOADING = 'USERS/LOADING';
-export const LOADING_MORE = 'USERS/LOADING_MORE';
-export const NO_MORE_RESULTS = 'USERS/SET_NO_MORE_RESULTS';
-export const UPDATING = 'USERS/UPDATING';
-export const DELETING = 'USERS/DELETING';
+export const FETCHING_USERS = 'USERS/FETCHING_USERS';
+export const FETCHING_MORE_USERS = 'USERS/FETCHING_MORE_USERS';
+export const FETCHING_USER = 'USERS/FETCHING_USER';
+export const UPDATING_USER = 'USERS/UPDATING_USER';
+export const DELETING_USER = 'USERS/DELETING_USER';
+
+export const SET_USERS = 'USERS/SET_USERS';
+export const SET_MORE_USERS = 'USERS/SET_MORE_USERS';
+export const SET_USER = 'USERS/SET_USER';
+
 export const ERROR = 'USERS/ERROR';
-export const UPDATE_ONE = 'USERS/UPDATE_ONE';
-export const DELETE_ONE = 'USERS/DELETE_ONE';
-export const SET_ONE = 'USERS/SET_ONE';
-export const SET_ALL = 'USERS/SET_ALL';
-export const SET_MORE = 'USERS/SET_MORE';
 
 export const usersReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case LOADING:
+    case FETCHING_USERS:
       return {
         ...state,
-        loading: true
+        users: {
+          ...state.users,
+          isFetched: false,
+          isFetching: true,
+        }
       }
-    case LOADING_MORE:
+    case FETCHING_MORE_USERS:
       return {
         ...state,
-        loadingMore: true
+        users: {
+          ...state.users,
+          isFetchedMore: false,
+          isFetchingMore: true,
+        }
       }
-    case UPDATING:
-      return {
-        ...state,
-        isUpdating: true
-      }
-    case DELETING:
-      return {
-        ...state,
-        isDeleting: true
-      }
-    case NO_MORE_RESULTS:
-      return {
-        ...state,
-        noMoreResults: payload
-      }
-    case UPDATE_ONE:
+    case FETCHING_USER:
       return {
         ...state,
         user: {
           ...state.user,
-          ...payload
-        },
-        isUpdating: false
+          isFetched: false,
+          isFetching: true,
+        }
       }
-    case DELETE_ONE:
-      return {
-        ...state,
-        user: {},
-        isDeleting: false
-      }
-    case SET_ONE:
+
+    case UPDATING_USER:
       return {
         ...state,
         user: {
-          ...payload
-        },
-        loading: false,
-        isUpdating: false,
-        isDeleting: false
+          ...state.user,
+          isUpdated: false,
+          isUpdating: true,
+        }
       }
-    case SET_MORE:
+    case DELETING_USER:
       return {
         ...state,
-        users: [...state.users, ...payload.users],
-        filters: { ...payload.filters },
-        loading: false,
-        loadingMore: false
+        user: {
+          ...state.user,
+          isDeleted: false,
+          isDeleting: true,
+        }
       }
-    case SET_ALL:
+
+    case SET_USERS:
       return {
         ...state,
-        users: [...payload.users],
-        filters: { ...payload.filters },
-        loading: false
+        users: {
+          all: [...payload],
+          isFetching: false,
+          isFetched: true
+        }
+      }
+
+    case SET_MORE_USERS:
+      return {
+        ...state,
+        users: {
+          all: [...state.users, ...payload],
+          isFetching: false,
+          isFetchedMore: true,
+        }
+      }
+    case SET_USER:
+      return {
+        ...state,
+        user: {
+          ...payload,
+          isUpdating: false,
+          isUpdated: false,
+          isDeleted: false,
+          isDeleting: false,
+          isFetching: false,
+          isFetched: true
+        }
       }
     case ERROR:
       return {
         ...state,
-        isUpdating: false,
-        isDeleting: false,
-        loadingMore: false,
-        loading: false
+        user: {
+          isFetching: false,
+          isFetched: false,
+        },
+        users: {
+          isFetching: false,
+          isFetched: false,
+        }
       }
     default: return state
   }

@@ -20,6 +20,7 @@ const initialState = {
 export const FETCHING = 'AUTH/FETCHING';
 export const FETCHED = 'AUTH/FETCHED';
 export const SET_USER = 'AUTH/SET_USER';
+export const UPDATE_MY_USER = 'AUTH/UPDATE_MY_USER'
 export const SIGN_OUT = 'AUTH/SIGN_OUT';
 export const ERROR = 'AUTH/ERROR';
 
@@ -33,6 +34,7 @@ export const authReducer = (state = initialState, action) => {
         isFetched: false,
         isFetching: true
       }
+    case UPDATE_MY_USER:
     case SET_USER:
       return {
         ...state,
@@ -46,7 +48,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...initialState,
         isFetching: false,
-        isFetched: false,
+        isFetched: true,
       }
     default: return state
   }

@@ -15,7 +15,8 @@ import { shallowEqual } from '../../../../utils'
 const Users = () => {
   const [view, setView] = useState('list')
   const [data, setData] = useState([])
-  const { filters, loading, users, loadingMore, noMoreResults } = useSelector(state => state.users)
+  const { users, filters } = useSelector(state => state.users)
+  const { all, isFetching, isFetched, isFetchingMore, isFetchedMore, isLastResult } = users;
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ const Users = () => {
   useEffect(() => {
     if (!shallowEqual(query, filters)) {
       dispatch(getUsers(query))
-    } else if (users?.length === 0) {
+    } else if (all?.length === 0) {
       dispatch(getUsers(query))
     }
   }, [history.location.search])
@@ -35,7 +36,7 @@ const Users = () => {
   }
 
   const mapData = () => {
-    if (users) {
+    if (all) {
       let arrayHeaders = [
         translation['firstName'],
         translation['lastName'],
@@ -45,7 +46,7 @@ const Users = () => {
         translation['pending'],
       ]
       let array = [arrayHeaders]
-      users.forEach(user => {
+      all.forEach(user => {
         const { firstName, lastName, activities, region, hometown } = user;
         array.push([
           firstName,
@@ -60,7 +61,7 @@ const Users = () => {
     }
   }
 
-  useEffect(() => { mapData() }, [users])
+  useEffect(() => { mapData() }, [all])
 
   return (
     <Container>
@@ -69,16 +70,16 @@ const Users = () => {
       </PageSection>
       <UsersFilter view={view} handleView={handleView} />
       <PageSection>
-        {view === 'list' && <UsersList loading={loading} users={users} />}
-        {view === 'table' && <Table loading={loading} data={data} />}
+        {view === 'list' && <UsersList loading={isFetching} users={all} />}
+        {view === 'table' && <Table loading={isFetching} data={data} />}
       </PageSection>
       <LoadMoreButton
-        loading={loadingMore}
+        loading={isFetchingMore}
         query={query}
         list={users}
         last={users[users?.length - 1]}
         action={getUsers}
-        noMoreResults={noMoreResults}
+        noMoreResults={isLastResult}
       />
     </Container>
   )

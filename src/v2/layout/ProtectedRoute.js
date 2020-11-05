@@ -16,24 +16,17 @@ const Container = styled.div`
 `
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { isFetching, isFetched, role, uid, isAuthenticated } = useSelector(state => state.auth)
-  const { isFetched: notificationsFetched } = useSelector(state => state.notifications)
+  const { role, uid, isAuthenticated } = useSelector(state => state.auth)
+  const { isFetched } = useSelector(state => state.notifications)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
   const { requiredRole } = rest
 
   useEffect(() => {
-    if (!notificationsFetched && isAuthenticated) {
+    if (!isFetched && isAuthenticated) {
       dispatch(getNotifications(uid))
     }
   }, [isAuthenticated])
-
-  useEffect(() => {
-    if (!isAuthenticated && !isFetched) {
-      dispatch(verifyUser)
-    }
-  }, [dispatch])
-
 
   const checkRole = () => {
     if (requiredRole && currentUser) {
@@ -45,17 +38,14 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     }
   }
 
-  if (isFetching) {
-    return (
-      <Container className='flex align__center justify__center'>
-        <CircularSpinnerWithContainer />
-      </Container>
-    )
-  } else if (isFetched && checkPermissions(role) === 0) {
+  if (!isAuthenticated) {
+    return <Redirect to='/' />
+  }
+  if (checkPermissions(role) === 0) {
     return <PendingApproval />
-  } else if (isAuthenticated && !checkRole()) {
+  } else if (!checkRole()) {
     return <NoAccessPage />
-  } else if (isAuthenticated && checkRole()) {
+  } else if (checkRole()) {
     return (
       <Container>
         <Route {...rest} render={props => <Component {...props} />} />
