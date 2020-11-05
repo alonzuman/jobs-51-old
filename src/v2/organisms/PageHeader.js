@@ -40,7 +40,11 @@ const ActionsWrapper = styled.div`
 
 const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backButton, backLink, ...rest }) => {
   const [isImageOpen, setIsImageOpen] = useState(false)
-  const handleOpenImage = () => setIsImageOpen(!isImageOpen)
+  const handleOpenImage = () => {
+    if (imgUrl) {
+      setIsImageOpen(!isImageOpen)
+    }
+  }
 
   if (loading) {
     return (
@@ -67,7 +71,7 @@ const PageHeader = ({ loading, imgUrl, title, action, subtitle, secondary, backB
               <Typography className='p-0 m-0' variant='h2'>{title}</Typography>
               <Typography variant='subtitle1'>{subtitle}</Typography>
             </TextContainer>
-            <SecondaryContainer onClick={imgUrl && handleOpenImage}>
+            <SecondaryContainer onClick={handleOpenImage}>
               {secondary}
             </SecondaryContainer>
           </ItemsWrapper>

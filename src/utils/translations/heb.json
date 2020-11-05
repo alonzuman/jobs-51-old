@@ -169,7 +169,7 @@
   "deleteUser": "מחיקת משתמש",
   "ActivityApproved": "פעילות אושרה",
   "ActivityUnApproved": "פעילות בוטלה",
-  "ActivityRemoved": "פעילות נמחקה בהצלחה",
+  "activityRemoved": "פעילות נמחקה בהצלחה",
   "status": "סטטוס",
   "usersEmptyState": "לא נמצאו תוצאות",
   "role": "תפקיד",

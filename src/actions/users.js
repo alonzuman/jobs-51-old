@@ -56,24 +56,22 @@ export const getUsers = (query, last) => async dispatch => {
     })
   }
   try {
-    const { firstName, lastName, region, role } = query
-
     let queryRef = Users
 
-    if (firstName) {
-      queryRef = queryRef.where('firstName', '==', firstName)
+    if (query?.firstName) {
+      queryRef = queryRef.where('firstName', '==', query?.firstName)
     }
 
-    if (lastName) {
-      queryRef = queryRef.where('lastName', '==', lastName)
+    if (query?.lastName) {
+      queryRef = queryRef.where('lastName', '==', query?.lastName)
     }
 
-    if (region) {
-      queryRef = queryRef.where('volunteer', '==', true).where('region', '==', region)
+    if (query?.region) {
+      queryRef = queryRef.where('volunteer', '==', true).where('region', '==', query?.region)
     }
 
-    if (role) {
-      queryRef = queryRef.where('role', '==', role)
+    if (query?.role) {
+      queryRef = queryRef.where('role', '==', query?.role)
     }
 
     queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10);
@@ -84,21 +82,24 @@ export const getUsers = (query, last) => async dispatch => {
 
     const snapshot = await queryRef.get()
 
-    let users = []
-    snapshot.forEach(doc => users.push({ id: doc.id, ...doc.data() }))
+    let all = []
+    snapshot.forEach(doc => all.push({ id: doc.id, ...doc.data() }))
 
     if (last) {
       dispatch({
         type: SET_MORE_USERS,
         payload: {
-          users,
-          isLastResult: users?.length === 0
+          all,
+          isLastResult: all?.length === 0
         }
       })
     } else {
       dispatch({
         type: SET_USERS,
-        payload: users
+        payload: {
+          all,
+          isLastResult: false
+        }
       })
     }
   } catch (error) {

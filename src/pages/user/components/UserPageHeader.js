@@ -46,7 +46,7 @@ const UserPageHeader = ({
   handleImageOpen
 }) => {
   const { translation } = useSelector(state => state.theme)
-  const { avatar, firstName, lastName, serviceYear } = user
+  const { avatar, firstName, lastName } = user
 
   if (loading) {
     return (
@@ -81,7 +81,7 @@ const UserPageHeader = ({
           imgUrl={user?.avatar}
           title={`${firstName} ${lastName}`}
           subtitle={userSecondayText(user)}
-          secondary={<Avatar onClick={handleImageOpen} className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
+          secondary={<Avatar className='avatar__md clickable' src={avatar}>{firstName?.charAt(0)}</Avatar>}
         />
       </PageSection>
     )

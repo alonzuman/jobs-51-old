@@ -10,13 +10,11 @@ import UsersList from '../../../../v2/organisms/UsersList'
 import PageSection from '../../../../v2/atoms/PageSection'
 import Table from '../../../../v2/organisms/Table'
 import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
-import { shallowEqual } from '../../../../utils'
 
 const Users = () => {
   const [view, setView] = useState('list')
   const [data, setData] = useState([])
-  const { users, filters } = useSelector(state => state.users)
-  const { all, isFetching, isFetched, isFetchingMore, isFetchedMore, isLastResult } = users;
+  const { all, isFetching, isFetched, isFetchingMore, isFetchedMore, isLastResult } = useSelector(state => state.users.users)
   const { translation } = useSelector(state => state.theme)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -24,12 +22,10 @@ const Users = () => {
   const query = qs.parse(search)
 
   useEffect(() => {
-    if (!shallowEqual(query, filters)) {
-      dispatch(getUsers(query))
-    } else if (all?.length === 0) {
+    if (!isFetched) {
       dispatch(getUsers(query))
     }
-  }, [history.location.search])
+  }, [history.location])
 
   const handleView = () => {
     setView(view => view === 'list' ? 'table' : 'list')
@@ -76,10 +72,10 @@ const Users = () => {
       <LoadMoreButton
         loading={isFetchingMore}
         query={query}
-        list={users}
-        last={users[users?.length - 1]}
+        list={all}
+        last={all[all?.length - 1] || {}}
         action={getUsers}
-        noMoreResults={isLastResult}
+        isLastResult={isLastResult}
       />
     </Container>
   )

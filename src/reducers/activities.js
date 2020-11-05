@@ -1,51 +1,118 @@
 const initialState = {
-  activities: [],
   regionManagers: [],
   region: {},
 
-  loading: false,
-  loadingManagers: false,
-  noMoreResults: false,
+  activities: {
+    all: [],
+    isFetching: false,
+    isFetched: false,
+    isFetchingMore: false,
+    isFetchedMore: false,
+    isUpdating: false,
+    isUpdated: false
+  },
 
-  isFetchingRegion: false,
-  isFetchedRegion: false,
+  regions: {
+    isFetching: false,
+    isFetched: false,
+  },
 }
 
 // Actions
-export const LOADING = 'ACTIVITIES/LOADING';
-export const LOADING_MORE = 'ACTIVITIES/LOADING_MORE';
-export const LOADING_MANAGERS = 'ACTIVITIES/LOADING_MANAGERS';
-export const NO_MORE_RESULTS = 'ACTIVITIES/NO_MORE_RESULTS';
-export const ADD_ONE = 'ACTIVITIES/ADD_ONE';
-export const SET_ALL = 'ACTIVITIES/SET_ALL';
-export const SET_MORE = 'ACTIVITIES/SET_MORE';
 export const SET_MANAGERS = 'ACTIVITIES/SET_MANAGERS';
-export const DELETE_ONE = 'ACTIVITIES/DELETE_ONE';
-export const CLEAR_ALL = 'ACTIVITIES/CLEAR_ALL';
-export const ERROR = 'ACTIVITIES/ERROR';
 
 // New ones
+export const FETCHING_ACTIVITIES = 'ACTIVITIES/FETCHING_ACTIVITIES';
+export const FETCHING_MORE_ACTIVITIES = 'ACTIVITIES/FETCHING_MORE_ACTIVITIES';
+export const SET_ACTIVITIES = 'ACTIVITIES/SET_ACTIVITIES';
+export const SET_MORE_ACTIVITIES = 'ACTIVITIES/SET_MORE_ACTIVITIES';
+
+export const UPDATING = 'ACTIVITIES/UPDATING';
+export const ADD_ACTIVITY = 'ACTIVITIES/ADD_ACTIVITY';
+export const DELETE_ACTIVITY = 'ACTIVITIES/DELETE_ACTIVITY';
+
 export const FETCHING_REGION = 'ACTIVITIES/FETCHING_REGION';
 export const SET_REGION = 'ACTIVITIES/SET_REGION';
+export const ERROR = 'ACTIVITIES/ERROR';
 
 export const activitiesReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case LOADING:
+    case FETCHING_ACTIVITIES:
       return {
         ...state,
-        loading: true
+        activities: {
+          ...state.activities,
+          isFetched: false,
+          isFetching: true,
+        }
       }
-    case LOADING_MORE:
+
+    case FETCHING_MORE_ACTIVITIES:
       return {
         ...state,
-        loadingMore: true
+        activities: {
+          ...state.activities,
+          isFetched: true,
+          isFetching: false,
+          isFetchingMore: true,
+          isFetchedMore: false
+        }
       }
-    case LOADING_MANAGERS:
+
+    case SET_ACTIVITIES:
       return {
         ...state,
-        loadingManagers: true
+        activities: {
+          ...state.activities,
+          ...payload,
+          isFetched: true,
+          isFetching: false,
+        }
+      }
+
+    case SET_MORE_ACTIVITIES:
+      return {
+        ...state,
+        activities: {
+          all: [...state.activities.all, ...payload.all],
+          isLastResult: payload.isLastResult,
+          isFetching: false,
+          isFetched: true,
+          isFetchingMore: false,
+          isFetchedMore: true
+        }
+      }
+
+    case UPDATING:
+      return {
+        ...state,
+        activities: {
+          ...state.activities,
+          isUpdating: true
+        }
+      }
+
+    case ADD_ACTIVITY:
+      return {
+        ...state,
+        activities: {
+          all: [payload, ...state.activities.all],
+          isUpdating: false,
+          isUpdated: true
+        }
+      }
+
+    case DELETE_ACTIVITY:
+      return {
+        ...state,
+        activities: {
+          ...state.activities,
+          all: [...state.activities.all.filter(v => v.id !== payload)],
+          isUpdating: false,
+          isUpdated: true
+        }
       }
 
     case FETCHING_REGION:
@@ -53,36 +120,7 @@ export const activitiesReducer = (state = initialState, action) => {
         ...state,
         isFetchingRegion: true
       }
-    case ADD_ONE:
-      return {
-        ...state,
-        activities: [payload.newActivity, ...state.activities],
-        loading: false
-      }
-    case CLEAR_ALL:
-      return {
-        ...state,
-        activities: []
-      }
-    case NO_MORE_RESULTS:
-      return {
-        ...state,
-        noMoreResults: payload
-      }
-    case SET_ALL:
-      return {
-        ...state,
-        ...payload,
-        loading: false,
-        loadingMore: false
-      }
-    case SET_MORE:
-      return {
-        ...state,
-        activities: [...state.activities, ...payload.activities],
-        loading: false,
-        loadingMore: false,
-      }
+
     case SET_MANAGERS:
       return {
         ...state,
@@ -97,19 +135,15 @@ export const activitiesReducer = (state = initialState, action) => {
         isFetchingRegion: false,
         isFetchedRegion: true
       }
-    case DELETE_ONE:
-      return {
-        ...state,
-        activities: [...state.activities.filter(activity => activity.id !== payload)]
-      }
     case ERROR:
       return {
         ...state,
-        isFetchingRegion: false,
-        isFetchedRegion: false,
-        loadingManagers: false,
-        loading: false,
-        loadingMore: false
+        activities: {
+          isUpdating: false,
+          isUpdated: false,
+          isFetched: false,
+          isFetching: false,
+        }
       }
     default: return state
   }

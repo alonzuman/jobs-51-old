@@ -11,10 +11,10 @@ import LocationSelect from '../molecules/LocationSelect';
 const AddActivity = ({ onClose }) => {
   const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  // const { regions, isFetching, isFetched, activityTypes } = useSelector(state => state?.constants)
   const { locations, activityTypes } = useSelector(state => state.constants)
   const { isFetched: locationsFetched, isFetching: locationsFetching, regions } = locations;
   const { isFetched: activityTypesFetched, isFetching: activityTypesFetching } = activityTypes;
+  const { isUpdating, isUpdated } = useSelector(state => state.activities.activities)
   const [errors, setErrors] = useState({})
   const [total, setTotal] = useState('')
   const [stateRegion, setRegion] = useState('')
@@ -173,7 +173,7 @@ const AddActivity = ({ onClose }) => {
             type='submit'
             size='large'
           >
-            {loading ? <CircularProgress className='button-spinner' /> : translation.addActivity}
+            {isUpdating ? <CircularProgress className='button-spinner' /> : translation.addActivity}
           </Button>
         </DialogActionsContainer>
       </form>

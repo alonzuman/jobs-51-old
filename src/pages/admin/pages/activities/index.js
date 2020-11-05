@@ -19,7 +19,7 @@ const Region = styled.span`
 
 const Activities = () => {
   const { translation, theme } = useSelector(state => state.theme);
-  const { loading, activities, loadingMore, noMoreResults } = useSelector(state => state.activities);
+  const { isFetching, isFetched, isFetchingMore, isFetchedMore, all, isLastResult, currentUid } = useSelector(state => state.activities.activities);
   const [region, setRegion] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
@@ -34,7 +34,10 @@ const Activities = () => {
     } else {
       setRegion('')
     }
-    dispatch(getActivities(parsedQuery))
+
+    if (!isFetched || currentUid) {
+      dispatch(getActivities(parsedQuery))
+    }
   }, [history.location.search])
 
   return (
@@ -49,14 +52,14 @@ const Activities = () => {
         />
       </PageSection>
       <PageSection>
-        <ActivitiesList loading={loading} activities={activities} showUser />
+        <ActivitiesList loading={isFetching} activities={all} showUser />
       </PageSection>
       <LoadMoreButton
-        loading={loadingMore}
-        list={activities}
-        last={activities[activities?.length - 1]}
+        loading={isFetchingMore}
+        list={all}
+        last={all[all?.length - 1]}
         query={parsedQuery}
-        noMoreResults={noMoreResults}
+        isLastResult={isLastResult}
         action={getActivities}
       />
     </Container>

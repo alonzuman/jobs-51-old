@@ -1,5 +1,4 @@
 const initialState = {
-  filters: {},
   user: {
     isFetched: false,
     isFetching: false,
@@ -47,6 +46,8 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         users: {
           ...state.users,
+          isFetched: true,
+          isFetching: false,
           isFetchedMore: false,
           isFetchingMore: true,
         }
@@ -84,7 +85,7 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: {
-          all: [...payload],
+          ...payload,
           isFetching: false,
           isFetched: true
         }
@@ -94,8 +95,11 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: {
-          all: [...state.users, ...payload],
+          all: [...state.users.all, ...payload.all],
+          isLastResult: payload.isLastResult,
           isFetching: false,
+          isFetched: true,
+          isFetchingMore: false,
           isFetchedMore: true,
         }
       }

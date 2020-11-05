@@ -75,7 +75,7 @@ const ActivityCard = ({ activity }) => {
           secondary={listItemSecondaryText}
         />
       </ListItem>
-      {open && (isAdmin || isUser) && <ActivityCardActions handleApproved={handleApproved} className='mt-5' activity={activity} />}
+      {open && (isAdmin || isUser) && <ActivityCardActions closeActions={handleActionsOpen} handleApproved={handleApproved} className='mt-5' activity={activity} />}
       <Divider />
     </>
   );

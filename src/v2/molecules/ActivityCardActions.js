@@ -14,12 +14,13 @@ const ActivityCardActionsContainer = styled.div`
   margin-bottom: 8px;
 `
 
-const ActivityCardActions = ({ activity, handleApproved }) => {
+const ActivityCardActions = ({ closeActions, activity, handleApproved }) => {
   const [approved, setApproved] = useState(activity.approved)
   const [disabled, setDisabled] = useState(false)
   const [approvalOpen, setApprovalOpen] = useState(false)
   const { role, avatar, firstName, lastName, uid } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
+  const { isUpdating } = useSelector(state => state.activities.activities)
   const dispatch = useDispatch()
   const admin = {
     avatar,
@@ -48,6 +49,8 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
     setDisabled(true)
     await dispatch(deleteActivity(activity))
     setDisabled(false)
+    handleApprovalOpen()
+    closeActions()
   }
 
   const handleApprovalOpen = () => setApprovalOpen(!approvalOpen)
@@ -63,6 +66,7 @@ const ActivityCardActions = ({ activity, handleApproved }) => {
       <Button className='button-style' disabled={disabled} onClick={handleApprovalOpen} color='default'>{translation.deleteActivity}</Button>
       <ApprovalDialog
         open={approvalOpen}
+        loading={isUpdating}
         onClose={handleApprovalOpen}
         action={handleDelete}
         text={translation.areYouSure}

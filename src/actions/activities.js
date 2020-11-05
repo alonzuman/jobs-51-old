@@ -1,6 +1,6 @@
 import { db } from '../firebase'
 import { setFeedback } from './feedback'
-import { ADD_ONE, DELETE_ONE, ERROR, FETCHING_REGION, LOADING, LOADING_MANAGERS, LOADING_MORE, NO_MORE_RESULTS, SET_ALL, SET_MANAGERS, SET_MORE, SET_REGION } from '../reducers/activities'
+import { ADD_ACTIVITY, DELETE_ACTIVITY, ERROR, FETCHING_ACTIVITIES, FETCHING_MORE_ACTIVITIES, FETCHING_REGION, SET_ACTIVITIES, SET_MORE_ACTIVITIES, SET_REGION, UPDATING } from '../reducers/activities'
 import store from '../store'
 import { SET_USER } from '../reducers/auth'
 const { translation } = store.getState().theme
@@ -10,7 +10,7 @@ const Users = db.collection('users')
 export const addActivity = (activity) => async dispatch => {
   const { uid, activities } = store.getState().auth
   dispatch({
-    type: LOADING
+    type: UPDATING
   })
   try {
     const activityRef = Activities.doc()
@@ -23,8 +23,10 @@ export const addActivity = (activity) => async dispatch => {
     const { total } = activity
     await Activities.doc(activityRef.id).set(newActivity)
     dispatch({
-      type: ADD_ONE,
-      payload: { newActivity }
+      type: ADD_ACTIVITY,
+      payload: {
+        ...newActivity
+      }
     })
     dispatch({
       type: SET_USER,
@@ -50,23 +52,26 @@ export const addActivity = (activity) => async dispatch => {
 
 export const getUserActivities = (uid) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: FETCHING_ACTIVITIES
   })
 
   try {
     const activitiesSnapshot = await Activities.where('uid', '==', uid).orderBy('dateCreated', 'desc').get()
-    let results = []
-    activitiesSnapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    let all = []
+    activitiesSnapshot.forEach(doc => all.push({ id: doc.id, ...doc.data() }))
 
     dispatch({
-      type: SET_ALL,
+      type: SET_ACTIVITIES,
       payload: {
-        activities: results,
+        all,
         currentUid: uid
       }
     })
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       type: 'error',
       msg: translation.serverError
@@ -148,7 +153,7 @@ export const unApproveActivity = (activity, admin) => async dispatch => {
 
 export const deleteActivity = (activity) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: UPDATING
   })
   try {
     const { activities } = store.getState().auth
@@ -165,18 +170,18 @@ export const deleteActivity = (activity) => async dispatch => {
       }
     })
     dispatch({
-      type: DELETE_ONE,
+      type: DELETE_ACTIVITY,
       payload: id
     })
     dispatch(setFeedback({
       type: 'success',
       msg: translation.activityRemoved
     }))
+  } catch (error) {
+    console.log(error)
     dispatch({
       type: ERROR
     })
-  } catch (error) {
-    console.log(error)
     dispatch(setFeedback({
       type: 'error',
       msg: translation.serverError
@@ -185,17 +190,13 @@ export const deleteActivity = (activity) => async dispatch => {
 }
 
 export const getActivities = (query, last) => async dispatch => {
-  dispatch({
-    type: NO_MORE_RESULTS,
-    payload: false
-  })
-  if (!last) {
+  if (last) {
     dispatch({
-      type: LOADING
+      type: FETCHING_MORE_ACTIVITIES
     });
   } else {
     dispatch({
-      type: LOADING_MORE
+      type: FETCHING_ACTIVITIES
     })
   }
 
@@ -222,24 +223,27 @@ export const getActivities = (query, last) => async dispatch => {
 
     const snapshot = await queryRef.get();
 
-    let activities = [];
-    snapshot.forEach(doc => activities.push({ id: doc.id, ...doc.data() }))
-
-    if (activities?.length === 0) {
-      dispatch({
-        type: NO_MORE_RESULTS
-      })
-    }
+    let all = [];
+    snapshot.forEach(doc => all.push({ id: doc.id, ...doc.data() }))
 
     if (last) {
+      console.log(all)
       dispatch({
-        type: SET_MORE,
-        payload: { activities, currentUid: 'none' }
+        type: SET_MORE_ACTIVITIES,
+        payload: {
+          all,
+          isLastResult: all?.length === 0,
+          currentUid: ''
+        }
       })
     } else {
       dispatch({
-        type: SET_ALL,
-        payload: { activities, currentUid: 'none' }
+        type: SET_ACTIVITIES,
+        payload: {
+          all,
+          isLastResult: all?.length === 0,
+          currentUid: ''
+        }
       })
     }
   } catch (error) {
@@ -251,30 +255,6 @@ export const getActivities = (query, last) => async dispatch => {
     dispatch({
       type: ERROR
     })
-  }
-}
-
-export const getRegionManagers = (region) => async dispatch => {
-  dispatch({
-    type: LOADING_MANAGERS
-  })
-  try {
-    const managersSnapshot = await Users.where('region', '==', region).where('role', '==', 'moderator').get()
-    let regionManagers = [];
-    managersSnapshot.forEach(doc => regionManagers.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: SET_MANAGERS,
-      payload: regionManagers
-    })
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ERROR
-    })
-    dispatch(setFeedback({
-      type: 'error',
-      msg: translation.serverError
-    }))
   }
 }
 
