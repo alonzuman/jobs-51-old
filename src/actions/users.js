@@ -56,15 +56,15 @@ export const getUsers = (query, last) => async dispatch => {
       type: FETCHING_MORE_USERS
     })
   }
+
   try {
+
     let queryRef = Users
 
-    if (query?.firstName) {
-      queryRef = queryRef.where('firstName', '==', query?.firstName)
-    }
-
-    if (query?.lastName) {
-      queryRef = queryRef.where('lastName', '==', query?.lastName)
+    if (query.fullName) {
+      const firstName = query.fullName.split(' ')[0]
+      const lastName = query.fullName.split(' ').splice(1).join(' ')
+      queryRef = queryRef.where('firstName', '==', firstName).where('lastName', '==', lastName)
     }
 
     if (query?.region) {

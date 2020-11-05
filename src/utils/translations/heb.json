@@ -116,8 +116,10 @@
   "totalActivities": "סיכום שעות פעילות",
   "generalManagement": "ניהול כללי",
   "manageActivityTypes": "ניהול סוגי התנדבויות",
+  "activityType": "סוג פעילות",
+  "username": "שם מלגאי/ת",
   "addActivityType": "הוספת סוג פעילות",
-  "activityTypeToAdd": "סוג פעילות אשר ברצונכם להוסיף",
+  "activityTypeToAdd": "שם סוג הפעילות שברצונכם להוסיף",
   "activityTypeToAddPlaceholder": "לדוגמא: ״חלוקת מזון״",
   "fieldRequired": "שדה זה הוא שדה חובה",
   "weekDays": {

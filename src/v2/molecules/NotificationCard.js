@@ -66,7 +66,7 @@ const NotificationCard = ({ notification }) => {
 
   return (
     <>
-      <ListItem alignItems='flex-start' disableGutters button onClick={markAsSeen}>
+      <ListItem alignItems='flex-start' button onClick={markAsSeen}>
         <ListItemAvatar>
           <Avatar src={notificationBy?.avatar}>{notificationBy?.firstName?.charAt(0)}</Avatar>
         </ListItemAvatar>

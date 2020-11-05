@@ -6,7 +6,7 @@ const Section = styled.div`
   padding: ${props => props.disableGutters ? '' : '0 16px'};
   margin-bottom: ${props => props.spaceBottom ? '96px' : ''};
   position: ${props => props.sticky ? 'sticky' : 'relative'};
-  background-color: ${props => props.background};
+  background-color: ${props => props.transparent ? '' : props.background};
   top: ${props => props.sticky ? 0 : ''};
   z-index: ${props => props.sticky ? 9 : 1};
 
@@ -15,7 +15,7 @@ const Section = styled.div`
   }
 `
 
-const PageSection = ({ children, disableGutters, spaceBottom, sticky, ...rest }) => {
+const PageSection = ({ children, disableGutters, spaceBottom, sticky, transparent, ...rest }) => {
   const { theme } = useSelector(state => state.theme)
 
   return (
@@ -23,6 +23,7 @@ const PageSection = ({ children, disableGutters, spaceBottom, sticky, ...rest })
       disableGutters={disableGutters}
       spaceBottom={spaceBottom}
       sticky={sticky}
+      transparent={transparent}
       background={theme?.palette?.background?.main}
       {...rest}
     >

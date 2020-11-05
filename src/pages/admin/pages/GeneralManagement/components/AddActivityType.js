@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TextField } from '@material-ui/core'
+import { Button, CircularProgress, FormGroup, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActivityType } from '../../../../../actions/constants'
@@ -30,7 +30,9 @@ const AddActivityType = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField helperText={errors.activityTypeToAdd} error={Boolean(errors.activityTypeToAdd)} placeholder={translation.activityTypeToAddPlaceholder} label={translation.activityTypeToAdd} value={activityTypeToAdd} onChange={handleChange} variant='outlined' size='small' />
+      <FormGroup>
+        <TextField className='mxw-256' helperText={errors.activityTypeToAdd} error={Boolean(errors.activityTypeToAdd)} placeholder={translation.activityTypeToAddPlaceholder} label={translation.activityTypeToAdd} value={activityTypeToAdd} onChange={handleChange} variant='outlined' size='small' />
+      </FormGroup>
       <Button type='submit' color='primary' disabled={isDeleting || isUpdating} size='large' variant='contained' >{isUpdating ? <CircularProgress className='button-spinner' /> : translation.addActivityType}</Button>
     </form>
   )

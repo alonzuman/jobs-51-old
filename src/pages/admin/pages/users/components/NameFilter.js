@@ -1,18 +1,22 @@
 import { TextField, Typography } from '@material-ui/core'
 import { Autocomplete, createFilterOptions } from '@material-ui/lab'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getListedMembers } from '../../../../../actions/constants'
 import { onlyUnique } from '../../../../../utils'
+import PageSection from '../../../../../v2/atoms/PageSection'
+import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
+import { UsersFilterContext } from './UsersFilterContext'
 
 const Container = styled.div`
   margin-bottom: 8px;
 `
 
-const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
+const NameFilter = () => {
   const { listedMembers, isFetching, isFetched } = useSelector(state => state.constants)
   const { all } = listedMembers;
+  const { queryParams, handleQueryParamsChange } = useContext(UsersFilterContext)
   const { translation } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
@@ -29,8 +33,8 @@ const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
   });
 
   return (
-    <Container>
-      <Typography className='mb-1' variant='h2'>{translation.filterByFullName}</Typography>
+    <PageSection transparent disableGutters>
+      <PageSectionTitle title={translation.filterByFullName} />
       <Autocomplete
         size='small'
         loading={isFetching}
@@ -38,8 +42,8 @@ const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
         filterOptions={filterOptions}
         handleHomeEndKeys
         autoHighlight
-        value={selectedFullName}
-        onChange={(e, value) => setSelectedFullName(value)}
+        value={queryParams.fullName}
+        onChange={(e, value) => handleQueryParamsChange('fullName', value)}
         noOptionsText={<span style={{ direction: 'rtl', textAlign: 'right', width: '100%' }}>No Results</span>}
         getOptionLabel={option => option}
         renderInput={params => <TextField label={translation.userFullName} {...params} variant='outlined' />}
@@ -47,9 +51,8 @@ const NameFilter = ({ selectedFullName, setSelectedFullName, ...rest }) => {
         placeholder={translation.preferredLocationPlaceholder}
         label={translation.preferredLocation}
         variant='outlined'
-        {...rest}
       />
-    </Container>
+    </PageSection>
   )
 }
 

@@ -14,14 +14,15 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import PageSection from '../../v2/atoms/PageSection';
 import Container from '../../v2/atoms/Container';
 import AdminStats from './pages/Users/components/AdminStats';
+import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme);
-  const { role, region } = useSelector(state => state.auth);
+  const { role } = useSelector(state => state.auth);
 
   const generalPages = [
-    { label: translation.manageUsers, icon: <PeopleAltIcon />, link: '/admin/users', minRole: 2 },
-    { label: translation.manageActivities, icon: <AssignmentIcon />, link: '/admin/activities', minRole: 2 },
+    { label: translation.manageUsers, icon: <PeopleAltIcon />, link: '/admin/users?view=list', minRole: 2 },
+    { label: translation.manageActivities, icon: <AssignmentIcon />, link: '/admin/activities?view=list', minRole: 2 },
     { label: translation.generalManagement, icon: <SettingsIcon />, link: '/admin/general-management', minRole: 3 },
   ]
 
@@ -34,7 +35,7 @@ const Admin = () => {
         <AdminStats />
       </PageSection>
       <PageSection>
-        <Typography className='mt-2' variant='subtitle1'>{translation.general}</Typography>
+        <PageSectionTitle title={translation.general} />
         <List>
           {generalPages?.map((v, i) => {
             if (checkPermissions(role) >= v.minRole)

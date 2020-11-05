@@ -24,7 +24,7 @@ const UserCard = ({ user }) => {
 
   return (
     <Link className="full__width" to={`/users/${user?.uid}`}>
-      <ListItem button disableGutters>
+      <ListItem button>
         <ListItemAvatar>
           <Avatar alt={`${user?.firstName}`} src={user?.avatar}>{user?.firstName.charAt(0)}</Avatar>
         </ListItemAvatar>

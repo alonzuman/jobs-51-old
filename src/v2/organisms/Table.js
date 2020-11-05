@@ -16,7 +16,7 @@ const UsersTable = ({ data, loading }) => {
   } else if (!loading && data?.length !== 0) {
     return (
       <>
-        <CSVLink data={data}><Button variant='outlined' color='primary'>{translation.download}</Button></CSVLink>
+        <CSVLink data={data}><Button size='large' variant='outlined' color='primary'>{translation.download}</Button></CSVLink>
         <TableContainer>
           <Table>
             <TableHead>

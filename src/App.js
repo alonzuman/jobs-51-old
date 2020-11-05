@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Components
-
 import DirectionProvider from './contexts/DirectionContext'
 
 // Mui
@@ -29,9 +28,11 @@ function App() {
 
   if (isFetching || !isFetched) {
     return (
-      <Container className='flex align__center justify__center mnh-256'>
-        <CircularProgress />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container className='flex align__center justify__center mnh-256'>
+          <CircularProgress />
+        </Container>
+      </ThemeProvider>
     )
   } else {
     return (

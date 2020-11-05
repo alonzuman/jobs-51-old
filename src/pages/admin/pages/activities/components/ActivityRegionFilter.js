@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getLocations } from '../../../../../actions'
 import PageSection from '../../../../../v2/atoms/PageSection'
 import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
-import { UsersFilterContext } from './UsersFilterContext'
+import { ActivitiesFilterContext } from './ActivitiesFilterContext'
 
-const RegionFilter = () => {
-  const { translation } = useSelector(state => state.theme);
-  const { isFetching, isFetched, regions } = useSelector(state => state?.constants?.locations);
-  const { queryParams, handleQueryParamsChange } = useContext(UsersFilterContext)
+const ActivityRegionFilter = () => {
+  const { isFetching, isFetched, regions } = useSelector(state => state.constants.locations)
+  const { translation } = useSelector(state => state.theme)
+  const { queryParams, handleQueryParamsChange } = useContext(ActivitiesFilterContext)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const RegionFilter = () => {
   if (isFetching) {
     return (
       <PageSection transparent disableGutters>
-        <Skeleton height={32} width={64} />
-        <Skeleton height={16} width={104} />
+        <Skeleton height={16} width={64} />
+        <Skeleton height={32} width={104} />
       </PageSection>
     )
   } else {
@@ -36,8 +36,8 @@ const RegionFilter = () => {
               <Grid item key={i}>
                 <Chip
                   onClick={() => handleQueryParamsChange('region', region)}
-                  label={region}
                   color={queryParams.region === region ? 'primary' : 'default'}
+                  label={region}
                 />
               </Grid>
             )
@@ -48,4 +48,4 @@ const RegionFilter = () => {
   }
 }
 
-export default RegionFilter
+export default ActivityRegionFilter

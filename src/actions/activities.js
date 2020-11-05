@@ -3,6 +3,7 @@ import { setFeedback } from './feedback'
 import { ADD_ACTIVITY, DELETE_ACTIVITY, ERROR, FETCHING_ACTIVITIES, FETCHING_MORE_ACTIVITIES, FETCHING_REGION, SET_ACTIVITIES, SET_MORE_ACTIVITIES, SET_REGION, UPDATING } from '../reducers/activities'
 import store from '../store'
 import { SET_USER } from '../reducers/auth'
+import qs from 'query-string'
 const { translation } = store.getState().theme
 const Activities = db.collection('activities')
 const Users = db.collection('users')
@@ -201,18 +202,20 @@ export const getActivities = (query, last) => async dispatch => {
   }
 
   try {
-    const { selectedRegion: region, approved } = query;
-
+    const { region, status, type } = query;
     let queryRef = Activities;
 
     if (region) {
       queryRef = queryRef.where('region', '==', region)
     }
 
-    if (approved === 'approved') {
-      queryRef = queryRef.where('approved', '==', true)
-    } else if (approved === 'pending') {
-      queryRef = queryRef.where('approved', '==', false)
+    if (status === 'approved' || status === 'pending') {
+      const value = status === 'approved' ? true : false
+      queryRef = queryRef.where('approved', '==', value)
+    }
+
+    if (type) {
+      queryRef = queryRef.where('type', '==', type)
     }
 
     queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10);
@@ -227,12 +230,12 @@ export const getActivities = (query, last) => async dispatch => {
     snapshot.forEach(doc => all.push({ id: doc.id, ...doc.data() }))
 
     if (last) {
-      console.log(all)
       dispatch({
         type: SET_MORE_ACTIVITIES,
         payload: {
           all,
           isLastResult: all?.length === 0,
+          oldQuery: qs.stringify(query),
           currentUid: ''
         }
       })
@@ -242,6 +245,7 @@ export const getActivities = (query, last) => async dispatch => {
         payload: {
           all,
           isLastResult: all?.length === 0,
+          oldQuery: qs.stringify(query),
           currentUid: ''
         }
       })

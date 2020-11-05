@@ -8,60 +8,46 @@ import PageHeader from '../../../../v2/organisms/PageHeader'
 import ActivitiesFilter from './components/ActivitiesFilter'
 import qs from 'query-string'
 import { useHistory } from 'react-router-dom'
-import { Typography } from '@material-ui/core'
-import styled from 'styled-components'
-import PageSectionTitle from '../../../../v2/atoms/PageSectionTitle'
 import LoadMoreButton from '../../../../v2/atoms/LoadMoreButton'
-
-const Region = styled.span`
-  color: ${props => props.color}
-`
+import ActivitiesFilterProvider from './components/ActivitiesFilterContext'
 
 const Activities = () => {
-  const { translation, theme } = useSelector(state => state.theme);
-  const { isFetching, isFetched, isFetchingMore, isFetchedMore, all, isLastResult, currentUid } = useSelector(state => state.activities.activities);
-  const [region, setRegion] = useState('')
+  const { translation } = useSelector(state => state.theme);
+  const { isFetching, isFetched, isFetchingMore, all, isLastResult, currentUid, oldQuery } = useSelector(state => state.activities.activities);
   const dispatch = useDispatch()
   const history = useHistory()
   const { search } = history?.location
-  const parsedQuery = qs.parse(search)
+  const query = qs.parse(search)
+  const { view } = query
 
   useEffect(() => {
-    const { selectedRegion } = parsedQuery;
-
-    if (selectedRegion) {
-      setRegion(selectedRegion)
-    } else {
-      setRegion('')
-    }
-
+    const newQuery = search.substring(1)
     if (!isFetched || currentUid) {
-      dispatch(getActivities(parsedQuery))
+      dispatch(getActivities(query))
+    } else if (newQuery !== oldQuery) {
+      dispatch(getActivities(query))
     }
-  }, [history.location.search])
+  }, [search])
 
   return (
     <Container>
       <PageSection>
-        <PageHeader className='mb-0' title={translation.manageActivities} backButton />
+        <PageHeader className='mb-0' title={translation.manageActivities} backButton backLink='/admin' />
       </PageSection>
-      <ActivitiesFilter />
+      <ActivitiesFilterProvider>
+        <ActivitiesFilter />
+      </ActivitiesFilterProvider>
       <PageSection>
-        <PageSectionTitle
-          title={region ? <>{translation.resultsInRegion} <Region color={theme?.palette?.primary?.main}>{region}</Region></> : translation.latestActivities}
-        />
+        <ActivitiesList view={view} loading={isFetching} activities={all} showUser />
       </PageSection>
-      <PageSection>
-        <ActivitiesList loading={isFetching} activities={all} showUser />
-      </PageSection>
-      <LoadMoreButton
-        loading={isFetchingMore}
-        list={all}
-        last={all[all?.length - 1]}
-        query={parsedQuery}
-        isLastResult={isLastResult}
-        action={getActivities}
-      />
+      {isFetched && all?.length !== 0 &&
+        <LoadMoreButton
+          loading={isFetchingMore}
+          list={all}
+          query={query}
+          isLastResult={isLastResult}
+          action={getActivities}
+        />}
     </Container>
   )
 }

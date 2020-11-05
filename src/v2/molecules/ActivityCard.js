@@ -64,7 +64,7 @@ const ActivityCard = ({ activity }) => {
 
   return (
     <>
-      <ListItem disableGutters alignItems='flex-start' button onClick={handleActionsOpen}>
+      <ListItem alignItems='flex-start' button onClick={handleActionsOpen}>
         <Link to={`/users/${activity?.uid}`}>
           <ListItemAvatar>
             <Avatar src={user?.avatar}>{user?.firstName.charAt(0)}</Avatar>
