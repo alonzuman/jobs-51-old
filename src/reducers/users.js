@@ -7,6 +7,7 @@ const initialState = {
   },
   users: {
     all: [],
+    query: '',
     isFetched: false,
     isFetching: false,
     isFetchingMore: false,
@@ -97,6 +98,7 @@ export const usersReducer = (state = initialState, action) => {
         users: {
           all: [...state.users.all, ...payload.all],
           isLastResult: payload.isLastResult,
+          query: payload.query,
           isFetching: false,
           isFetched: true,
           isFetchingMore: false,

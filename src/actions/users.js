@@ -3,6 +3,7 @@ import { setFeedback } from "./feedback"
 import store from '../store'
 import { UPDATE_MY_USER } from "../reducers/auth"
 import { DELETING_USER, SET_USER, ERROR, FETCHING_MORE_USERS, FETCHING_USER, FETCHING_USERS, SET_MORE_USERS, SET_USERS, UPDATING_USER } from "../reducers/users"
+import qs from 'query-string'
 const { translation } = store.getState().theme
 const Users = db.collection('users');
 const Jobs = db.collection('jobs');
@@ -90,7 +91,8 @@ export const getUsers = (query, last) => async dispatch => {
         type: SET_MORE_USERS,
         payload: {
           all,
-          isLastResult: all?.length === 0
+          isLastResult: all?.length === 0,
+          query: qs.stringify(query)
         }
       })
     } else {
@@ -98,7 +100,8 @@ export const getUsers = (query, last) => async dispatch => {
         type: SET_USERS,
         payload: {
           all,
-          isLastResult: false
+          isLastResult: false,
+          query: qs.stringify(query)
         }
       })
     }
