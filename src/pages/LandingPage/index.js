@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Typography, Box, Paper } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser } from '../../actions'
+import { setUser, verifyUser } from '../../actions'
 import { app } from '../../firebase'
 import AuthDialog from '../../v2/layout/AuthDialog'
 import CircularSpinnerWithContainer from '../../v2/atoms/CircularSpinnerWithContainer'
@@ -10,30 +10,23 @@ import ShaldagLogo from '../../assets/ShaldagLogo'
 import Container from '../../v2/atoms/Container'
 
 const LandingPage = () => {
-  const [isLoading, setIsLoading] = useState(true)
   const { translation } = useSelector(state => state.theme)
-  const { loading } = useSelector(state => state.auth)
+  const { isFetching, isFetched, uid, isAuthenticated } = useSelector(state => state.auth)
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const currentUser = app.auth().currentUser
 
   useEffect(() => {
-    app.auth().onAuthStateChanged(async user => {
-      if (user) {
-        await dispatch(setUser(user))
-        return setIsLoading(false)
-      } else {
-        return setIsLoading(false)
-      }
-    })
-  }, [currentUser])
+    if (!isFetched && !isFetching) {
+      dispatch(verifyUser())
+    }
+  }, [])
 
   const handleDialog = () => setIsOpen(!isOpen)
 
-  if (isLoading) {
+  if (isFetching) {
     return <CircularSpinnerWithContainer />
-  } else if (currentUser && !loading) {
-    return <Redirect to={`/${currentUser?.uid}/activity`} />
+  } else if (isFetched && !isFetching && isAuthenticated) {
+    return <Redirect to={`/${uid}/activity`} />
   } else {
     return (
       <Container className='rtl mt-3 flex flex__column align__center justify__center'>
@@ -46,7 +39,7 @@ const LandingPage = () => {
         </Box>
         <Button
           size='large'
-          disabled={loading}
+          disabled={isFetching}
           className='w-264'
           color='primary'
           variant='contained'

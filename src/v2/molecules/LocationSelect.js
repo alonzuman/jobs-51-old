@@ -7,11 +7,14 @@ import { getLocations } from '../../actions/constants';
 
 const LocationSelect = ({ location, setLocation, label, helperText = '', error = '', placeholder, ...rest }) => {
   const { translation } = useSelector(state => state.theme)
-  const { isFetching, locations } = useSelector(state => state.constants)
+  const { locations } = useSelector(state => state.constants)
+  const { isFetched, isFetching } = locations;
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getLocations())
+    if (!isFetched) {
+      dispatch(getLocations())
+    }
   }, [])
 
   const filterOptions = createFilterOptions({

@@ -14,13 +14,14 @@ const TextContainer = styled.div`
 `
 
 const PageDoesntExists = () => {
+  const { uid } = useSelector(state => state.auth);
   const { translation } = useSelector(state => state.theme);
 
   return (
     <Container className='flex flex__column align__center justify__center'>
       <TextContainer>
         <Typography variant='h1'>{translation.pageDoesntExists}</Typography>
-        <Link to='/home'>
+        <Link to={`/${uid}/activity`}>
           <Button>{translation.backToHome}</Button>
         </Link>
       </TextContainer>

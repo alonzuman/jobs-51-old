@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { app } from '../../firebase'
-import { getNotifications, setUser, signOut } from '../../actions'
+import { getNotifications, setUser, signOut, verifyUser } from '../../actions'
 import { checkPermissions } from '../../utils'
-import { getConstants } from '../../actions/constants'
 import styled from 'styled-components'
-import { LOADING } from '../../reducers/auth'
 import CircularSpinnerWithContainer from '../atoms/CircularSpinnerWithContainer'
 
 // Pages
@@ -18,45 +16,28 @@ const Container = styled.div`
 `
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [loading, setLoading] = useState(true)
-  const { isFetched } = useSelector(state => state.constants)
-  const { role } = useSelector(state => state.auth)
-  const { all } = useSelector(state => state.notifications)
+  const { isFetching, isFetched, role, uid, isAuthenticated } = useSelector(state => state.auth)
+  const { isFetched: notificationsFetched } = useSelector(state => state.notifications)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
   const { requiredRole } = rest
 
   useEffect(() => {
-    if (!isFetched) {
-      dispatch(getConstants())
+    if (!notificationsFetched && isAuthenticated) {
+      dispatch(getNotifications(uid))
     }
-  }, [isFetched])
+  }, [isAuthenticated])
 
   useEffect(() => {
-    if (all?.length === 0 && currentUser) {
-      dispatch(getNotifications(currentUser.uid))
+    if (!isAuthenticated && !isFetched) {
+      dispatch(verifyUser)
     }
-  }, [currentUser])
-
-  useEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    app.auth().onAuthStateChanged(async user => {
-      if (user) {
-        await dispatch(setUser(user))
-        await setLoading(false)
-      } else {
-        await dispatch(signOut())
-        await setLoading(false)
-        return <Redirect to='/' />
-      }
-    })
   }, [dispatch])
+
 
   const checkRole = () => {
     if (requiredRole && currentUser) {
-      const requirement =  checkPermissions(requiredRole)
+      const requirement = checkPermissions(requiredRole)
       const currentUserRole = checkPermissions(role)
       return (currentUserRole >= requirement)
     } else {
@@ -64,17 +45,24 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     }
   }
 
-  if (!loading && checkPermissions(role) === 0) {
-    return <PendingApproval />
-  } else {
+  if (isFetching) {
     return (
-      <Container>
-        {loading && <CircularSpinnerWithContainer />}
-        {!loading && !checkRole() && <NoAccessPage />}
-        {!loading && currentUser && checkRole() && <Route {...rest} render={props => <Component {...props} />} />}
-        {!loading && !currentUser && <Redirect to='/' />}
+      <Container className='flex align__center justify__center'>
+        <CircularSpinnerWithContainer />
       </Container>
     )
+  } else if (isFetched && checkPermissions(role) === 0) {
+    return <PendingApproval />
+  } else if (isAuthenticated && !checkRole()) {
+    return <NoAccessPage />
+  } else if (isAuthenticated && checkRole()) {
+    return (
+      <Container>
+        <Route {...rest} render={props => <Component {...props} />} />
+      </Container>
+    )
+  } else {
+    return <Redirect to='/' />
   }
 }
 

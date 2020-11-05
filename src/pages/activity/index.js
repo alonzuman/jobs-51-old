@@ -16,9 +16,9 @@ import NotificationIcon from '../../v2/molecules/NotificationIcon'
 import { Avatar, IconButton } from '@material-ui/core'
 import PageSection from '../../v2/atoms/PageSection'
 import ActivityPageRegion from './components/ActivityPageRegion'
+import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
 
 const Activity = ({ match }) => {
-  const [editingProfile, setEditingProfile] = useState(false)
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { region, loading: authLoading, firstName, avatar } = useSelector(state => state.auth)
@@ -37,18 +37,11 @@ const Activity = ({ match }) => {
     }
   }, [dispatch, uid])
 
-  useEffect(() => {
-    if (!activitiesLoading && !region && uid === auth.currentUser.uid) {
-      setEditingProfile(true)
-    }
-  }, [activitiesLoading])
-
   const handleAddingActivity = () => setAddingActivity(!addingActivity)
-  const handleEditingProfile = () => setEditingProfile(!editingProfile)
 
   return (
     <Container>
-      <AddRegionDialog isOpen={editingProfile} onClose={handleEditingProfile} />
+      <AreYouVolunteerDialog />
       <FloatingActionButton color='primary' action={handleAddActivity} title={translation.addActivity}>
         <AddIcon />
       </FloatingActionButton>

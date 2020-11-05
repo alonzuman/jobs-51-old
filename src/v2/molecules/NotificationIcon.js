@@ -3,17 +3,17 @@ import React from 'react'
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { useSelector } from 'react-redux';
 
-const NotificationIcon = () => {
-  const { unseen, loading } = useSelector(state => state.notifications)
+const NotificationIcon = ({ ...rest }) => {
+  const { unseen, isFetching } = useSelector(state => state.notifications)
 
-  if (loading) {
+  if (isFetching) {
     return (
-      <NotificationsNoneIcon />
+      <NotificationsNoneIcon {...rest}/>
     )
   } else {
     return (
       <Badge badgeContent={unseen?.length} color='error'>
-        <NotificationsNoneIcon />
+        <NotificationsNoneIcon {...rest} />
       </Badge>
     )
   }

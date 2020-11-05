@@ -48,7 +48,7 @@ function App() {
       <DirectionProvider>
         <Router>
           <Feedback />
-          {authenticated && <Navbar />}
+          <Navbar />
           <Switch>
             {/* Home */}
             <ProtectedRoute exact path='/home' component={Home} />

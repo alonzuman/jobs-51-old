@@ -1,6 +1,8 @@
 import { DELETE_ONE, SET_ONE } from "../reducers/feedback";
+import store from "../store";
 
 export const setFeedback = ({ msg, type }) => async dispatch => {
+  const { msg: currentMsg } = store.getState().feedback
   dispatch({
     type: SET_ONE,
     payload: {
@@ -9,7 +11,11 @@ export const setFeedback = ({ msg, type }) => async dispatch => {
     }
   })
   setTimeout(() => {
-    dispatch({ type: DELETE_ONE })
+    if (currentMsg) {
+      dispatch({
+        type: DELETE_ONE
+      })
+    }
   }, 3000);
 }
 

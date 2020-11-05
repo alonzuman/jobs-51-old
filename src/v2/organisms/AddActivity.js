@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
 import { addActivity } from '../../actions/activities'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLocations, setFeedback, updateUser } from '../../actions';
+import { getActivityTypes, getLocations, setFeedback, updateUser } from '../../actions';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 import CustomChip from '../atoms/CustomChip';
 import { formatDate } from '../../utils';
@@ -11,9 +11,10 @@ import LocationSelect from '../molecules/LocationSelect';
 const AddActivity = ({ onClose }) => {
   const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
-  const { loading } = useSelector(state => state.activities)
-  const { all } = useSelector(state => state.constants?.activityTypes)
-  const { regions, isFetching } = useSelector(state => state?.constants)
+  // const { regions, isFetching, isFetched, activityTypes } = useSelector(state => state?.constants)
+  const { locations, activityTypes } = useSelector(state => state.constants)
+  const { isFetched: locationsFetched, isFetching: locationsFetching, regions } = locations;
+  const { isFetched: activityTypesFetched, isFetching: activityTypesFetching } = activityTypes;
   const [errors, setErrors] = useState({})
   const [total, setTotal] = useState('')
   const [stateRegion, setRegion] = useState('')
@@ -33,6 +34,7 @@ const AddActivity = ({ onClose }) => {
     uid
   })
   const dispatch = useDispatch()
+  const loading = locationsFetching || activityTypesFetching
 
   useEffect(() => {
     if (region) {
@@ -41,10 +43,16 @@ const AddActivity = ({ onClose }) => {
   }, [region])
 
   useEffect(() => {
-    if (regions?.length === 0) {
+    if (!locationsFetched) {
       dispatch(getLocations())
     }
-  }, [regions])
+  }, [])
+
+  useEffect(() => {
+    if (!activityTypesFetched) {
+      dispatch(getActivityTypes())
+    }
+  }, [])
 
   const handleChange = e => {
     setActivity({
@@ -81,22 +89,27 @@ const AddActivity = ({ onClose }) => {
     await onClose()
   }
 
-  if (!all) {
-    return <CircularProgress />
+  if (loading) {
+    return (
+      <DialogContent className='flex align__center justify__center mnw-256 mnh-256'>
+        <CircularProgress />
+      </DialogContent>
+    )
   } else {
     return (
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <LocationSelect
+            options={regions}
             location={stateRegion}
             setLocation={setRegion}
-            loading={isFetching}
+            loading={loading}
             size='small'
             disabled={!!stateRegion}
           />
           <Typography variant='subtitle1'>{translation.type}</Typography>
-          <Grid container spacing={1}>
-            {all?.map((type, index) => (
+          <Grid className='mb-1' container spacing={1}>
+            {activityTypes?.all?.map((type, index) => (
               <Grid key={index} item>
                 <CustomChip
                   onClick={() => setActivity({ ...activity, type })}
@@ -106,7 +119,6 @@ const AddActivity = ({ onClose }) => {
               </Grid>
             ))}
           </Grid>
-          <br />
           <FormControl>
             <TextField
               size='small'

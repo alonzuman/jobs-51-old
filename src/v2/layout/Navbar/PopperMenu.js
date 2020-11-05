@@ -9,6 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SearchIcon from '@material-ui/icons/Search';
+import NotificationIcon from '../../molecules/NotificationIcon'
 
 const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
   const { translation, theme } = useSelector(state => state.theme)
@@ -32,6 +33,14 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
           </Typography>
         </MenuItem>
       </NavLink>}
+      <NavLink to={`/${uid}/notifications`}>
+        <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
+          <Typography className='flex align__center justify__between full__width' variant='body1'>
+            {translation.notifications}
+            <NotificationIcon style={{ color: value === `/${uid}/notifications` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+          </Typography>
+        </MenuItem>
+      </NavLink>
       <NavLink to='/profile'>
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>

@@ -18,8 +18,14 @@ const SocialMediaSignIn = () => {
 
   return (
     <Container className='full__width pb-0 m-0 pt-0'>
-      <Button size='large' variant='outlined' className='mb-5 button-style full-width' color='default' onClick={handleFacebookSignIn}>{translation.signInWithFacebook}<i className="fab fa-facebook-f button-icon"></i></Button>
-      <Button size='large' variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>{translation.signInWithGoogle}<i className="fab fa-google button-icon"></i></Button>
+      <Button size='large' variant='outlined' className='mb-5 button-style full-width' color='default' onClick={handleFacebookSignIn}>
+        {translation.signInWithFacebook}
+        <i className="fab mt-25 fa-facebook-f button-icon"></i>
+      </Button>
+      <Button size='large' variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>
+        {translation.signInWithGoogle}
+        <i className="fab mt-25 fa-google button-icon"></i>
+      </Button>
     </Container>
   )
 }

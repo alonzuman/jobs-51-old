@@ -8,16 +8,15 @@ import NotificationsList from './components/NotificationsList';
 import PageSection from '../../v2/atoms/PageSection';
 import { getNotifications } from '../../actions/notifications';
 import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
-import PageHeaderActionsBar from '../../v2/organisms/PageHeaderActionsBar';
 
 const Notifications = ({ match }) => {
   const { uid } = match.params
   const { translation } = useSelector(state => state.theme)
-  const { all, loading } = useSelector(state => state.notifications)
+  const { all, isFetching, isFetched } = useSelector(state => state.notifications)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (all?.length === 0) {
+    if (!isFetched) {
       dispatch(getNotifications(uid))
     }
   }, [uid])
@@ -25,25 +24,33 @@ const Notifications = ({ match }) => {
   const newNotifications = all?.filter (v => !v.seen)
   const oldNotifications = all?.filter(v => v.seen)
 
-  return (
-    <Container>
-      <PageHeaderActionsBar backButton />
-      <PageSection>
-        <PageHeader
-          loading={loading}
-          title={translation.notifications}
-        />
-      </PageSection>
-      <PageSection>
-        <PageSectionTitle subtitle={translation.newNotifications} />
-        <NotificationsList loading={loading} all={newNotifications} />
-      </PageSection>
-      <PageSection>
-        <PageSectionTitle subtitle={translation.oldNotifications} />
-        <NotificationsList loading={loading} all={oldNotifications} />
-      </PageSection>
-    </Container>
-  )
+  if (isFetching) {
+    return (
+      <Container>
+        <PageSection>
+          <PageHeader loading/>
+        </PageSection>
+      </Container>
+    )
+  } else {
+    return (
+      <Container>
+        <PageSection>
+          <PageHeader
+            title={translation.notifications}
+          />
+        </PageSection>
+        <PageSection>
+          <PageSectionTitle subtitle={translation.newNotifications} />
+          <NotificationsList loading={isFetching} all={newNotifications} />
+        </PageSection>
+        <PageSection>
+          <PageSectionTitle subtitle={translation.oldNotifications} />
+          <NotificationsList loading={isFetching} all={oldNotifications} />
+        </PageSection>
+      </Container>
+    )
+  }
 }
 
 export default Notifications

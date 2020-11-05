@@ -1,50 +1,51 @@
 import { db } from "../firebase";
-import { ADD_ACTIVITY_TYPE, DELETE_ACTIVITY_TYPE, DELETING, ERROR, FETCHING, SET_ALL, SET_DATA, UPDATING } from "../reducers/constants";
 import { setFeedback } from "./feedback";
 import firebase from 'firebase'
 import store from '../store'
+import { ADDED_ACTIVITY_TYPE, DELETED_ACTIVITY_TYPE, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_STATS, UPDATING_ACTIVITY_TYPES } from "../reducers/constants";
 const { translation } = store.getState().theme
 const Constants = db.collection('constants')
 
-export const getConstants = () => async dispatch => {
-  dispatch({
-    type: FETCHING
-  })
-  try {
-    const snapshot = await Constants.get()
-    let results = {}
-    snapshot.forEach(doc => results[doc.id] = doc.data())
-    dispatch({
-      type: SET_ALL,
-      payload: {
-        ...results,
-        listedMembers: results.listedMembers.all,
-        locations: results.locations.all,
-        regions: results.locations.regions
-      }
-    })
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ERROR
-    })
-    dispatch(setFeedback({
-      type: 'error',
-      msg: translation.serverError
-    }))
-  }
-}
+// export const getConstants = () => async dispatch => {
+//   dispatch({
+//     type: FETCHING
+//   })
+//   try {
+//     const snapshot = await Constants.get()
+//     let results = {}
+//     snapshot.forEach(doc => results[doc.id] = doc.data())
+//     dispatch({
+//       type: SET_ALL,
+//       payload: {
+//         ...results,
+//         listedMembers: results.listedMembers.all,
+//         locations: results.locations.all,
+//         regions: results.locations.regions,
+//         activityTypes: results.activityTypes.all
+//       }
+//     })
+//   } catch (error) {
+//     console.log(error);
+//     dispatch({
+//       type: ERROR
+//     })
+//     dispatch(setFeedback({
+//       type: 'error',
+//       msg: translation.serverError
+//     }))
+//   }
+// }
 
 export const deleteActivityType = activity => async dispatch => {
   dispatch({
-    type: DELETING
+    type: UPDATING_ACTIVITY_TYPES
   })
   try {
     await Constants.doc('activityTypes').update({
       all: firebase.firestore.FieldValue.arrayRemove(activity)
     })
     dispatch({
-      type: DELETE_ACTIVITY_TYPE,
+      type: DELETED_ACTIVITY_TYPE,
       payload: activity
     })
   } catch (error) {
@@ -61,14 +62,14 @@ export const deleteActivityType = activity => async dispatch => {
 
 export const addActivityType = newActivity => async dispatch => {
   dispatch({
-    type: UPDATING
+    type: UPDATING_ACTIVITY_TYPES
   })
   try {
     await Constants.doc('activityTypes').update({
       all: firebase.firestore.FieldValue.arrayUnion(newActivity)
     })
     dispatch({
-      type: ADD_ACTIVITY_TYPE,
+      type: ADDED_ACTIVITY_TYPE,
       payload: newActivity
     })
   } catch (error) {
@@ -85,14 +86,14 @@ export const addActivityType = newActivity => async dispatch => {
 
 export const getListedMembers = () => async dispatch => {
   dispatch({
-    type: FETCHING
+    type: FETCHING_LISTED_MEMBERS
   })
 
   try {
     const membersSnapshot = await Constants.doc('listedMembers').get()
     const { all } = membersSnapshot.data()
     dispatch({
-      type: SET_DATA,
+      type: SET_LISTED_MEMBERS,
       payload: { listedMembers: all }
     })
   } catch (error) {
@@ -109,7 +110,7 @@ export const getListedMembers = () => async dispatch => {
 
 export const getLocations = () => async dispatch => {
   dispatch({
-    type: FETCHING
+    type: FETCHING_LOCATIONS
   })
 
   try {
@@ -117,8 +118,13 @@ export const getLocations = () => async dispatch => {
     const { regions, all } = locations.data();
 
     dispatch({
-      type: SET_DATA,
-      payload: { regions, locations: all }
+      type: SET_LOCATIONS,
+      payload: {
+        locations: {
+          all,
+          regions
+        }
+      }
     })
   } catch (error) {
     console.log(error)
@@ -132,16 +138,15 @@ export const getLocations = () => async dispatch => {
   }
 }
 
-// TODO ALON get stats
 export const getStats = () => async dispatch => {
   dispatch({
-    type: FETCHING
+    type: FETCHING_STATS
   })
   try {
     const statsSnapshot = await Constants.doc('stats').get()
     const stats = statsSnapshot.data()
     dispatch({
-      type: SET_DATA,
+      type: SET_STATS,
       payload: { stats }
     })
   } catch (error) {
@@ -156,14 +161,26 @@ export const getStats = () => async dispatch => {
   }
 }
 
-// TODO ALON get activity types
-
-// TODO ALON get skills
-
-// TODO ALON get industries
-
-// TODO ALON get listedJobLoactions
-
-// TODO ALON get listedJobSkills
-
-// TODO ALON fix the region Managers section over threre
+export const getActivityTypes = () => async dispatch => {
+  console.log('here')
+  dispatch({
+    type: FETCHING_ACTIVITY_TYPES
+  })
+  try {
+    const activityTypesSnapshot = await Constants.doc('activityTypes').get()
+    const activityTypes = activityTypesSnapshot.data()
+    dispatch({
+      type: SET_ACTIVITY_TYPES,
+      payload: { activityTypes }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+  }
+}

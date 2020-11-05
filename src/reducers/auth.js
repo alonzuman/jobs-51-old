@@ -1,5 +1,5 @@
 const initialState = {
-  authenticated: false,
+  isAuthenticated: false,
   email: '',
   firstName: '',
   lastName: '',
@@ -12,11 +12,13 @@ const initialState = {
     approved: 0,
   },
   messagesSeen: [],
-  loading: false
+  isFetching: false,
+  isFetched: false,
 }
 
 // Actions
-export const LOADING = 'AUTH/LOADING';
+export const FETCHING = 'AUTH/FETCHING';
+export const FETCHED = 'AUTH/FETCHED';
 export const SET_USER = 'AUTH/SET_USER';
 export const SIGN_OUT = 'AUTH/SIGN_OUT';
 export const ERROR = 'AUTH/ERROR';
@@ -25,24 +27,26 @@ export const authReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case LOADING:
+    case FETCHING:
       return {
         ...state,
-        loading: true
+        isFetched: false,
+        isFetching: true
       }
     case SET_USER:
       return {
         ...state,
         ...payload,
-        authenticated: true,
-        loading: false
+        isAuthenticated: true,
+        isFetching: false,
+        isFetched: true
       }
     case SIGN_OUT:
     case ERROR:
       return {
         ...initialState,
-        authenticated: false,
-        loading: false
+        isFetching: false,
+        isFetched: false,
       }
     default: return state
   }

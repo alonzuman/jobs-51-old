@@ -1,96 +1,188 @@
 const initialState = {
-  isFetching: false,
-  isFetched: false,
-  isUpdating: false,
-  isUpdated: false,
-  isDeleting: false,
-  isDeleted: false,
+  stats: {
+    isFetching: false,
+    isFetched: false,
+    all: {}
+  },
 
-  stats: {},
-  listedMembers: [],
-  locations: [],
-  regions: []
+  listedMembers: {
+    isFetching: false,
+    isFetched: false,
+    all: []
+  },
+
+  locations: {
+    isFetching: false,
+    isFetched: false,
+    all: [],
+    regions: [],
+  },
+
+  activityTypes: {
+    isFetching: false,
+    isFetched: false,
+    isUpdating: false,
+    isUpdated: false,
+    all: []
+  }
 }
 
 // Actions
-export const FETCHING = 'CONSTANTS/FETCHING';
-export const UPDATING = 'CONSTANTS/UPDATING';
-export const DELETING = 'CONSTANTS/DELETING';
-export const SET_ALL = 'CONSTANTS/SET_ALL';
-export const UPDATE_ALL = 'CONSTANTS/UPDATE_ALL';
+// Stats
+export const FETCHING_STATS = 'CONSTANTS/FETCHING_STATS';
+export const FETCHING_LISTED_MEMBERS = 'CONSTANTS/FETCHING_LISTED_MEMBERS';
+export const FETCHING_LOCATIONS = 'CONSTANTS/FETCHING_LOCATIONS';
+export const FETCHING_ACTIVITY_TYPES = 'CONSTANTS/FETCHING_ACTIVITY_TYPES';
 
-// New methods
-export const SET_DATA = 'CONSTANTS/SET_DATA';
-export const ADD_ACTIVITY_TYPE = 'CONSTANTS/ADD_ACTIVITY_TYPE';
-export const DELETE_ACTIVITY_TYPE = 'CONSTANTS/DELETE_ACTIVITY_TYPE';
+export const SET_STATS = 'CONSTANTS/SET_STATS';
+export const SET_LISTED_MEMBERS = 'CONSTANTS/SET_LISTED_MEMBERS';
+export const SET_LOCATIONS = 'CONSTANTS/SET_LOCATIONS';
+export const SET_ACTIVITY_TYPES = 'CONSTANTS/SET_ACTIVITY_TYPES';
+
+export const UPDATING_ACTIVITY_TYPES = 'CONSTANTS/UPDATING_ACTIVITY_TYPES';
+
+export const ADDED_ACTIVITY_TYPE = 'CONSTANTS/ADDED_ACTIVITY_TYPE';
+export const DELETED_ACTIVITY_TYPE = 'CONSTANTS/DELETED_ACTIVITY_TYPE';
+
 export const ERROR = 'CONSTANTS/ERROR'
 
 export const constantsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCHING:
+    case FETCHING_STATS:
       return {
         ...state,
-        isFetched: false,
-        isFetching: true,
+        stats: {
+          ...state.stats,
+          isFetched: false,
+          isFetching: true
+        }
       }
-    case UPDATING:
+    case FETCHING_LISTED_MEMBERS:
       return {
         ...state,
-        isUpdating: true
+        listedMembers: {
+          ...state.listedMembers,
+          isFetched: false,
+          isFetching: true
+        }
       }
-    case DELETING:
+    case FETCHING_LOCATIONS:
       return {
         ...state,
-        isDeleting: true
+        locations: {
+          ...state.locations,
+          isFetched: false,
+          isFetching: true
+        }
       }
-    case SET_ALL:
+    case FETCHING_ACTIVITY_TYPES:
       return {
         ...state,
-        ...payload,
-        isFetching: false,
-        isFetched: true,
-      }
-    case UPDATE_ALL:
-      return {
-        ...state,
-        ...payload,
-        isUpdating: false,
-        isUpdated: true
+        activityTypes: {
+          ...state.activityTypes,
+          isFetched: false,
+          isFetching: true
+        }
       }
 
-    // New methods, change to SET_ALL
-    case SET_DATA:
+    case SET_STATS:
       return {
         ...state,
-        ...payload,
-        isFetching: false,
-        isFetched: true
+        stats: {
+          ...state.stats,
+          ...payload.stats,
+          isFetching: false,
+          isFetched: true
+        }
       }
-    case ADD_ACTIVITY_TYPE:
+    case SET_LISTED_MEMBERS:
+      return {
+        ...state,
+        listedMembers: {
+          ...state.listedMembers,
+          ...payload.listedMembers,
+          isFetching: false,
+          isFetched: true
+        }
+      }
+    case SET_LOCATIONS:
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          ...payload.locations,
+          isFetching: false,
+          isFetched: true
+        }
+      }
+    case SET_ACTIVITY_TYPES:
       return {
         ...state,
         activityTypes: {
-          all: [...state.activityTypes.all, payload]
-        },
-        isUpdating: false,
+          ...state.activityTypes,
+          ...payload.activityTypes,
+          isFetching: false,
+          isFetched: true
+        }
       }
-    case DELETE_ACTIVITY_TYPE:
+
+    case UPDATING_ACTIVITY_TYPES:
       return {
         ...state,
         activityTypes: {
-          all: [...state.activityTypes.all.filter(v => v !== payload)]
+          ...state.activityTypes,
+          isUpdated: false,
+          isUpdating: true
+        }
+      }
+
+    case ADDED_ACTIVITY_TYPE:
+      return {
+        ...state,
+        activityTypes: {
+          ...state.activityTypes,
+          all: [...state.activityTypes.all, payload],
+          isUpdating: false,
+          isUpdated: true
         },
-        isDeleting: false,
+      }
+    case DELETED_ACTIVITY_TYPE:
+      return {
+        ...state,
+        activityTypes: {
+          ...state.activityTypes,
+          all: [...state.activityTypes.all.filter(v => v !== payload)],
+          isUpdating: false,
+          isUpdated: true
+        },
       }
     case ERROR:
       return {
         ...state,
-        isFetching: false,
-        isFetched: false,
-        isUpdating: false,
-        isDeleting: false,
+        stats: {
+          ...state.stats,
+          isFetching: false,
+          isFetched: false,
+        },
+        listedMembers: {
+          ...state.listedMembers,
+          isFetching: false,
+          isFetched: false
+        },
+        locations: {
+          ...state.locations,
+          isFetching: false,
+          isFetched: false
+        },
+        activityTypes: {
+          ...state.activityTypes,
+          isFetching: false,
+          isFetched: false,
+          isUpdating: false,
+          isUpdated: false,
+        }
       }
     default: return state;
   }

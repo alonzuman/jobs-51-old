@@ -1,10 +1,12 @@
 const initialState = {
   all: [],
   unseen: [],
-  loading: false
+  seen: [],
+  isFetching: false,
+  isFetched: false
 }
 
-export const LOADING = 'NOTIFICATIONS/LOADING';
+export const FETCHING = 'NOTIFICATIONS/FETCHING';
 export const SET_ALL = 'NOTIFICATIONS/SET_ALL';
 export const MARK_SEEN = 'NOTIFICATIONS/MARK_SEEN';
 export const ERROR = 'NOTIFICATIONS/ERROR';
@@ -13,28 +15,33 @@ export const notificationsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case LOADING:
+    case FETCHING: {
       return {
         ...state,
-        loading: true
+        isFetched: false,
+        isFetching: true
       }
+    }
     case SET_ALL:
       return {
         ...state,
         all: [...payload],
+        seen: [...payload?.filter(v => v.seen)],
         unseen: [...payload?.filter(v => !v.seen)],
-        loading: false
+        isFetching: false,
+        isFetched: true
       }
     case MARK_SEEN:
       return {
         ...state,
+        seen: [...state.seen, payload],
         unseen: [...state.unseen.filter(v => v.id !== payload.id)],
-        loading: false
       }
     case ERROR:
       return {
         ...state,
-        loading: false
+        isFetching: false,
+        isFetched: false
       }
     default: return state;
   }

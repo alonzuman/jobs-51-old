@@ -1,18 +1,31 @@
+import React, { useState, useEffect } from 'react'
 import { Badge, BottomNavigation, BottomNavigationAction } from '@material-ui/core'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { checkPermissions } from '../../../utils'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 // Icons
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import ActivityIcon from '../../molecules/ActivityIcon';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
+import NotificationIcon from '../../molecules/NotificationIcon'
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 
 // TODO change to styled components
-const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
+const MobileNavbar = () => {
+  const history = useHistory()
+  const { volunteer, role, uid } = useSelector(state => state.auth)
   const { theme, translation } = useSelector(state => state.theme)
+  const [value, setValue] = useState(history.location.pathname);
+
+
+  useEffect(() => {
+    setValue(history.location.pathname)
+  }, [history.location.pathname])
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const navbarStyle = {
     top: 'auto',
@@ -40,8 +53,15 @@ const MobileNavbar = ({ volunteer, role, handleChange, value, uid }) => {
           component={Link}
           to={`/${uid}/activity`}
           value={`/${uid}/activity`}
-          icon={<ActivityIcon />}
+          icon={<AssessmentOutlinedIcon />}
         />}
+      <BottomNavigationAction
+        label={translation.notifications}
+        component={Link}
+        to={`/${uid}/notifications`}
+        value={`/${uid}/notifications`}
+        icon={<NotificationIcon />}
+      />
       <BottomNavigationAction
         label={translation.profile}
         component={Link}

@@ -5,29 +5,34 @@ import { updateUser } from '../../actions/users';
 import LocationSelect from '../molecules/LocationSelect';
 import CustomDialogHeader from '../molecules/CustomDialogHeader';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
+import { getLocations } from '../../actions';
 
 const AreYouVolunteerDialog = () => {
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({})
-  const [stateVolunteer, setVolunteer] = useState(false);
+  const [stateVolunteer, setVolunteer] = useState(true);
   const [stateRegion, setRegion] = useState('')
   const { translation } = useSelector(state => state.theme)
-  const { messagesSeen, uid, region, volunteer } = useSelector(state => state.auth);
+  const { isAuthenticated, messagesSeen, uid, region, volunteer } = useSelector(state => state.auth);
   const { isUpdating } = useSelector(state => state.users)
-  const { regions } = useSelector(state => state.constants.locations);
+  const { isFetching, isFetched, regions } = useSelector(state => state.constants?.locations);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (messagesSeen) {
-      setOpen(!messagesSeen.includes('volunteer'))
+    if (isAuthenticated) {
+      if (!region || !messagesSeen?.includes('volunteer')) {
+        setOpen(true)
+      }
       setVolunteer(volunteer || false)
       setRegion(region || '')
     }
   }, [messagesSeen, region])
 
+  useEffect(() => { dispatch(getLocations()) }, [])
+
   const handleSubmit = async () => {
-    if (volunteer && !stateRegion) {
-      setErrors({
+    if (stateVolunteer && !stateRegion) {
+      return setErrors({
         ...errors,
         region: translation.pleaseFillField
       })
@@ -50,22 +55,25 @@ const AreYouVolunteerDialog = () => {
   }
 
   return (
-    <Dialog dir='rtl' open={open} onClose={handleClose}>
-      <CustomDialogHeader title={translation.areYouVolunteer} onClose={handleClose} />
+    <Dialog fullWidth dir='rtl' open={open}>
+      <CustomDialogHeader title={translation.smallQuestion} />
       <DialogContent>
-        <Typography className='mb-1' variant='body1'>{translation.justAFewQuestion}</Typography>
-        <Typography variant='body1'>{translation.areYouVolunteer}</Typography>
-        <FormGroup row className='mb-5'>
-          <FormControlLabel
-            control={<Checkbox color='primary' name='lookingForJob' onChange={e => setVolunteer(true)} checked={stateVolunteer} />}
-            label={translation.yes}
-          />
-          <FormControlLabel
-            control={<Checkbox color='primary' name='lookingForJob' onChange={e => setVolunteer(false)} checked={!stateVolunteer} />}
-            label={translation.no}
-          />
-        </FormGroup>
-        {stateVolunteer && <LocationSelect error={Boolean(errors.region)} helperText={errors.region} size='small' label={translation.region} location={stateRegion} setLocation={setRegion} options={regions} />}
+        {isFetching && <CircularProgress />}
+        {isFetched &&
+          <>
+            <Typography variant='body1'>{translation.areYouVolunteer}</Typography>
+            <FormGroup row className='mb-5'>
+              <FormControlLabel
+                control={<Checkbox color='primary' name='lookingForJob' onChange={e => setVolunteer(true)} checked={stateVolunteer} />}
+                label={translation.yes}
+              />
+              <FormControlLabel
+                control={<Checkbox color='primary' name='lookingForJob' onChange={e => setVolunteer(false)} checked={!stateVolunteer} />}
+                label={translation.no}
+              />
+            </FormGroup>
+            {stateVolunteer && <LocationSelect loading={isFetching} error={Boolean(errors.region)} helperText={errors.region} size='small' label={translation.region} location={stateRegion} setLocation={setRegion} options={regions} />}
+          </>}
       </DialogContent>
       <DialogActionsContainer>
         <Button disabled={isUpdating} variant='contained' color='primary' onClick={handleSubmit}>{isUpdating ? <CircularProgress className='button-spinner' /> : translation.approve}</Button>

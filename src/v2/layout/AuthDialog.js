@@ -1,7 +1,6 @@
 import { Button, CircularProgress, Dialog, DialogContent, Divider, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getConstants } from '../../actions/constants';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import Transition from '../atoms/Transition';
 import EmailSignIn from '../organisms/EmailSignIn';
@@ -12,11 +11,6 @@ const AuthDialog = ({ open, onClose }) => {
   const [signingIn, setSigningIn] = useState(true)
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getConstants())
-  }, [])
 
   const handleSigningIn = () => setSigningIn(!signingIn)
 

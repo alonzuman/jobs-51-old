@@ -601,6 +601,10 @@ a:hover {
   min-height: 144px!important;
 }
 
+.mnh-256 {
+  min-height: 256px!important;
+}
+
 .mnw-40 {
   min-width: 40px!important;
 }
@@ -611,6 +615,10 @@ a:hover {
 
 .mnw-196 {
   min-width: 196px!important;
+}
+
+.mnw-256 {
+  min-width: 256px!important
 }
 
 .mxw-104 {

@@ -5,7 +5,6 @@ import Container from '../../v2/atoms/Container'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
-import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
 import ShaldagLogo from '../../assets/ShaldagLogo'
 
 const HomeSection = styled.div`
@@ -37,7 +36,6 @@ const Home = () => {
   return (
     <Container>
       <AddJobDialog open={isAddingJob} onClose={handleAddingJob} />
-      <AreYouVolunteerDialog />
       <HomeSection className='flex flex__column align__center justify__center'>
         <LogoContainer>
           <ShaldagLogo />

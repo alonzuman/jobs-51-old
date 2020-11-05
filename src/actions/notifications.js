@@ -1,5 +1,5 @@
 import { db } from '../firebase'
-import { ERROR, LOADING, MARK_SEEN, SET_ALL } from '../reducers/notifications'
+import { ERROR, FETCHING, MARK_SEEN, SET_ALL } from '../reducers/notifications'
 import { setFeedback } from './feedback'
 import store from '../store'
 const { translation } = store.getState().theme
@@ -7,7 +7,7 @@ const Notifications = db.collection('notifications');
 
 export const getNotifications = uid => async dispatch => {
   dispatch({
-    type: LOADING
+    type: FETCHING
   })
 
   try {

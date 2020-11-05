@@ -33,7 +33,9 @@ const NotificationCard = ({ notification }) => {
   }
 
   useEffect(() => {
-    autoApprove()
+    if (!seen) {
+      autoApprove()
+    }
   }, [])
 
   const markAsSeen = async () => {
