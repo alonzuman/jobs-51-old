@@ -318,7 +318,14 @@
   "pendingApprovalFe": "ממתינות לאישור",
   "resultsInRegion": "תוצאות חיפוש במחוז",
   "filterByRegion": "סינון לפי מחוז התנדבות",
-  "notReadyYet": "סורי העמוד עדיין לא מוכן"
+  "notReadyYet": "סורי העמוד עדיין לא מוכן",
+  "formErrors": {
+    "descriptionError": "שדה זה הוא שדה חובה",
+    "hoursError": "שדה זה הוא שדה חובה",
+    "dateError": "שדה זה הוא שדה חובה",
+    "typeError": "שדה זה הוא שדה חובה",
+    "regionError": "שדה זה הוא שדה חובה"
+  }
 }
 
 

@@ -1,46 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { Button, TextField, Grid, Typography, CircularProgress, FormControl, InputLabel, MenuItem, Select, DialogContent } from '@material-ui/core'
-import { addActivity } from '../../actions/activities'
+import React, { useContext, useEffect } from 'react'
+import { Button, TextField, Grid, Typography, CircularProgress, FormControl, DialogContent, FormHelperText } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { getActivityTypes, getLocations, setFeedback, updateUser } from '../../actions';
+import { getActivityTypes, getLocations } from '../../actions';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 import CustomChip from '../atoms/CustomChip';
-import { formatDate } from '../../utils';
 import LocationSelect from '../molecules/LocationSelect';
+import { AddActivityContext } from '../../contexts/AddActivityContext';
 
 const AddActivity = ({ onClose }) => {
-  const { uid, phone, region, avatar: userAvatar, firstName, lastName } = useSelector(state => state.auth)
   const { translation } = useSelector(state => state.theme)
   const { locations, activityTypes } = useSelector(state => state.constants)
   const { isFetched: locationsFetched, isFetching: locationsFetching, regions } = locations;
   const { isFetched: activityTypesFetched, isFetching: activityTypesFetching } = activityTypes;
   const { isUpdating, isUpdated } = useSelector(state => state.activities.activities)
-  const [errors, setErrors] = useState({})
-  const [total, setTotal] = useState('')
-  const [stateRegion, setRegion] = useState('')
-  const [activity, setActivity] = useState({
-    type: '',
-    description: '',
-    region: region ? region : '',
-    date: formatDate(Date.now()),
-    approved: false,
-    user: {
-      firstName: firstName ? firstName : '',
-      lastName: lastName ? lastName : '',
-      avatar: userAvatar ? userAvatar : '',
-      region: region ? region : '',
-      phone: phone ? phone : ''
-    },
-    uid
-  })
+  const { activity, errors, handleActivityChange, handleSubmit } = useContext(AddActivityContext)
   const dispatch = useDispatch()
   const loading = locationsFetching || activityTypesFetching
-
-  useEffect(() => {
-    if (region) {
-      setRegion(region)
-    }
-  }, [region])
 
   useEffect(() => {
     if (!locationsFetched) {
@@ -54,40 +29,11 @@ const AddActivity = ({ onClose }) => {
     }
   }, [])
 
-  const handleChange = e => {
-    setActivity({
-      ...activity,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = async e => {
-    e.preventDefault()
-    const totalInt = parseFloat(total)
-    if (totalInt < 1 || totalInt > 24 || typeof totalInt !== 'number' || !totalInt) {
-      return dispatch(setFeedback({
-        type: 'error',
-        msg: translation.invalidInput
-      }))
+  useEffect(() => {
+    if (isUpdated) {
+      onClose()
     }
-    if (activity['type'].trim().length === 0) {
-      return dispatch(setFeedback({
-        type: 'error',
-        msg: translation.fillActivityType
-      }))
-    } else if (activity['startHour'] > activity['endHour']) {
-      return dispatch(setFeedback({
-        type: 'error',
-        msg: translation.hoursNoGood
-      }))
-    }
-    await dispatch(addActivity({
-      ...activity,
-      total: totalInt
-    }))
-
-    await onClose()
-  }
+  }, [isUpdated])
 
   if (loading) {
     return (
@@ -101,36 +47,40 @@ const AddActivity = ({ onClose }) => {
         <DialogContent>
           <LocationSelect
             options={regions}
-            location={stateRegion}
-            setLocation={setRegion}
+            location={activity.region}
+            setLocation={value => handleActivityChange('region', value)}
             loading={loading}
             size='small'
-            disabled={!!stateRegion}
+            disabled={!!activity.region}
           />
-          <Typography variant='subtitle1'>{translation.type}</Typography>
-          <Grid className='mb-1' container spacing={1}>
-            {activityTypes?.all?.map((type, index) => (
-              <Grid key={index} item>
-                <CustomChip
-                  onClick={() => setActivity({ ...activity, type })}
-                  label={type}
-                  color={activity['type'] === type ? 'primary' : 'default'}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <FormControl>
+            <Typography variant='subtitle1'>{translation.type}</Typography>
+            <Grid container spacing={1}>
+              {activityTypes?.all?.map((type, index) => (
+                <Grid key={index} item>
+                  <CustomChip
+                    onClick={() => handleActivityChange('type', type)}
+                    label={type}
+                    color={activity['type'] === type ? 'primary' : 'default'}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+            <FormHelperText error={Boolean(errors.type)}>{errors.type}</FormHelperText>
+          </FormControl>
           <FormControl>
             <TextField
               size='small'
-              required
               label={translation.description}
               placeholder={translation.activityDescriptionPlaceholder}
               variant='outlined'
               multiline
+              helperText={errors.description}
+              error={Boolean(errors.description)}
               rows={3}
               name='description'
-              value={activity['description']}
-              onChange={handleChange}
+              value={activity.description}
+              onChange={e => handleActivityChange('description', e.target.value)}
             />
           </FormControl>
           <Grid container spacing={1}>
@@ -141,11 +91,13 @@ const AddActivity = ({ onClose }) => {
                   step='any'
                   min='1'
                   max='24'
+                  helperText={errors.total}
+                  error={Boolean(errors.total)}
                   type='number'
-                  value={total}
+                  value={activity.total}
                   label={translation.totalHours}
                   variant='outlined'
-                  onChange={e => setTotal(e.target.value)}
+                  onChange={e => handleActivityChange('total', e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -155,12 +107,10 @@ const AddActivity = ({ onClose }) => {
                   size='small'
                   InputLabelProps={{ shrink: true }}
                   type='date'
-                  required
                   label={translation.date}
                   variant='outlined'
-                  name='date'
-                  value={activity['date']}
-                  onChange={handleChange}
+                  value={activity.date}
+                  onChange={e => handleActivityChange('date', e.target.value)}
                 />
               </FormControl>
             </Grid>
