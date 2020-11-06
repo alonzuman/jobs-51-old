@@ -116,9 +116,11 @@
   "totalActivities": "סיכום שעות פעילות",
   "generalManagement": "ניהול כללי",
   "manageActivityTypes": "ניהול סוגי התנדבויות",
+  "manageRegions": "ניהול מחוזות",
   "activityType": "סוג פעילות",
   "username": "שם מלגאי/ת",
   "addActivityType": "הוספת סוג פעילות",
+  "addRegion": "הוספת מחוז",
   "activityTypeToAdd": "שם סוג הפעילות שברצונכם להוסיף",
   "activityTypeToAddPlaceholder": "לדוגמא: ״חלוקת מזון״",
   "fieldRequired": "שדה זה הוא שדה חובה",
@@ -325,6 +327,9 @@
     "dateError": "שדה זה הוא שדה חובה",
     "typeError": "שדה זה הוא שדה חובה",
     "regionError": "שדה זה הוא שדה חובה"
+  },
+  "placeholders": {
+    "addRegion": "לדוגמא: ״אילת והערבה״"
   }
 }
 

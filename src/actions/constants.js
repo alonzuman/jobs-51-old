@@ -2,9 +2,58 @@ import { db } from "../firebase";
 import { setFeedback } from "./feedback";
 import firebase from 'firebase'
 import store from '../store'
-import { ADDED_ACTIVITY_TYPE, DELETED_ACTIVITY_TYPE, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_STATS, UPDATING_ACTIVITY_TYPES } from "../reducers/constants";
+import { ADDED_ACTIVITY_TYPE, ADDED_REGION, DELETED_ACTIVITY_TYPE, DELETED_REGION, DELETING_REGION, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_STATS, UPDATING_ACTIVITY_TYPES, UPDATING_LOCATIONS } from "../reducers/constants";
 const { translation } = store.getState().theme
 const Constants = db.collection('constants')
+
+export const deleteRegion = region => async dispatch => {
+  dispatch({
+    type: DELETING_REGION
+  })
+  try {
+    // TODO ALON send to back
+    await Constants.doc('locations').set({
+      regions: firebase.firestore.FieldValue.arrayRemove(region)
+    }, { merge: true })
+    dispatch({
+      type: DELETED_REGION,
+      payload: region
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+  }
+}
+
+export const addRegion = region => async dispatch => {
+  dispatch({
+    type: UPDATING_LOCATIONS
+  })
+  try {
+    await Constants.doc('locations').set({
+      regions: firebase.firestore.FieldValue.arrayUnion(region)
+    }, { merge: true })
+    dispatch({
+      type: ADDED_REGION,
+      payload: region
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+  }
+}
 
 export const deleteActivityType = activity => async dispatch => {
   dispatch({

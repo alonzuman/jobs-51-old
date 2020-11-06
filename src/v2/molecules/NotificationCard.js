@@ -6,6 +6,7 @@ import moment from 'moment'
 import 'moment/locale/he'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ListItemPrimaryText = styled.span`
   display: flex;
@@ -16,6 +17,7 @@ const ListItemPrimaryText = styled.span`
 
 const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
+  const { uid } = useSelector(state => state.auth)
   const { seen, type, activity, notificationBy } = notification;
   const [isSeen, setIsSeen] = useState(seen)
   const dispatch = useDispatch()
@@ -68,7 +70,9 @@ const NotificationCard = ({ notification }) => {
     <>
       <ListItem alignItems='flex-start' button onClick={markAsSeen}>
         <ListItemAvatar>
-          <Avatar src={notificationBy?.avatar}>{notificationBy?.firstName?.charAt(0)}</Avatar>
+          <Link to={notificationBy?.uid ? `/users/${notificationBy?.uid}` : `/${uid}/notifications`}>
+            <Avatar src={notificationBy?.avatar}>{notificationBy?.firstName?.charAt(0)}</Avatar>
+          </Link>
         </ListItemAvatar>
         <ListItemText
           primary={listItemPrimaryText}

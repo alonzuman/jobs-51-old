@@ -14,6 +14,10 @@ const initialState = {
   locations: {
     isFetching: false,
     isFetched: false,
+    isUpdating: false,
+    isUpdated: false,
+    isDeleting: false,
+    isDeleted: false,
     all: [],
     regions: [],
   },
@@ -28,7 +32,6 @@ const initialState = {
 }
 
 // Actions
-// Stats
 export const FETCHING_STATS = 'CONSTANTS/FETCHING_STATS';
 export const FETCHING_LISTED_MEMBERS = 'CONSTANTS/FETCHING_LISTED_MEMBERS';
 export const FETCHING_LOCATIONS = 'CONSTANTS/FETCHING_LOCATIONS';
@@ -40,9 +43,14 @@ export const SET_LOCATIONS = 'CONSTANTS/SET_LOCATIONS';
 export const SET_ACTIVITY_TYPES = 'CONSTANTS/SET_ACTIVITY_TYPES';
 
 export const UPDATING_ACTIVITY_TYPES = 'CONSTANTS/UPDATING_ACTIVITY_TYPES';
+export const UPDATING_LOCATIONS = 'CONSTANTS/UPDATING_LOCATIONS';
 
-export const ADDED_ACTIVITY_TYPE = 'CONSTANTS/ADDED_ACTIVITY_TYPE';
+export const DELETING_REGION = 'CONSTANTS/DELETING_REGION';
+export const DELETED_REGION = 'CONSTANTS/DELETED_REGION';
 export const DELETED_ACTIVITY_TYPE = 'CONSTANTS/DELETED_ACTIVITY_TYPE';
+
+export const ADDED_REGION = 'CONSTANTS/ADDED_REGION';
+export const ADDED_ACTIVITY_TYPE = 'CONSTANTS/ADDED_ACTIVITY_TYPE';
 
 export const ERROR = 'CONSTANTS/ERROR'
 
@@ -114,7 +122,11 @@ export const constantsReducer = (state = initialState, action) => {
           ...state.locations,
           ...payload,
           isFetching: false,
-          isFetched: true
+          isFetched: true,
+          isUpdating: false,
+          isUpdated: false,
+          isDeleting: false,
+          isDeleted: false,
         }
       }
     case SET_ACTIVITY_TYPES:
@@ -124,7 +136,7 @@ export const constantsReducer = (state = initialState, action) => {
           ...state.activityTypes,
           ...payload.activityTypes,
           isFetching: false,
-          isFetched: true
+          isFetched: true,
         }
       }
 
@@ -135,6 +147,45 @@ export const constantsReducer = (state = initialState, action) => {
           ...state.activityTypes,
           isUpdated: false,
           isUpdating: true
+        }
+      }
+    case UPDATING_LOCATIONS:
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          isUpdating: true,
+          isUpdated: false
+        }
+      }
+
+    case DELETING_REGION:
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          isDeleting: true
+        }
+      }
+    case DELETED_REGION:
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          regions: [...state.locations.regions.filter(v => v !== payload)],
+          isDeleting: false,
+          isDeleted: false,
+        }
+      }
+
+    case ADDED_REGION:
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          regions: [...state.locations.regions, payload],
+          isUpdating: false,
+          isUpdated: true
         }
       }
 

@@ -12,13 +12,9 @@ import AddActivityType from './components/AddActivityType'
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import { getActivityTypes } from '../../../../actions/constants'
-
-const SubtitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`
+import EditRegions from './components/EditRegions'
+import EditRegionsProvider from './components/EditRegionsContext'
+import PageSectionTitle from '../../../../v2/atoms/PageSectionTitle'
 
 const GeneralManagement = () => {
   const { translation } = useSelector(state => state.theme)
@@ -43,18 +39,23 @@ const GeneralManagement = () => {
         />
       </PageSection>
       <PageSection>
-        <SubtitleContainer>
-          <Typography variant='subtitle1'>{translation.manageActivityTypes}</Typography>
-          <IconButton onClick={handleIsEditing} size='small'>
+        <PageSectionTitle
+        title={translation.manageActivityTypes}
+          action={<IconButton onClick={handleIsEditing} size='small'>
             {isEditing ? <CloseIcon fontSize='inherit' /> : <EditIcon fontSize='inherit' />}
-          </IconButton>
-        </SubtitleContainer>
+          </IconButton>}
+        />
         <List>
           {all?.map((activity, i) => (
             <ActivityTypeCard isEditing={isEditing} isDeleting={isDeleting} isUpdating={isUpdating} activity={activity} key={i}  />
           ))}
         </List>
         {isEditing && <AddActivityType />}
+        <PageSection disableGutters divider>
+          <EditRegionsProvider>
+            <EditRegions />
+          </EditRegionsProvider>
+        </PageSection>
       </PageSection>
     </Container>
   )

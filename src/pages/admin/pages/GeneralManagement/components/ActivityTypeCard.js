@@ -1,4 +1,4 @@
-import { IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
+import { IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ApprovalDialog from '../../../../../v2/layout/ApprovalDialog';
@@ -30,11 +30,11 @@ const ActivityTypeCard = ({ activity, isDeleting, isUpdating, isEditing }) => {
       />
       <ListItemText primary={activity} />
       {isEditing &&
-        <ListItemSecondaryAction>
+        <ListItemIcon>
           <IconButton disabled={isUpdating} onClick={handleIsDeletingActivityType} size='small'>
             <DeleteOutlineIcon />
           </IconButton>
-        </ListItemSecondaryAction>}
+        </ListItemIcon>}
     </ListItem>
   )
 }
