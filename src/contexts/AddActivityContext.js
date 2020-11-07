@@ -14,7 +14,7 @@ const AddActivityProvider = ({ children }) => {
     region,
     date: formatDate(Date.now()),
     approved: false,
-    total: 0,
+    total: '',
     user: {
       firstName,
       lastName,
@@ -56,7 +56,7 @@ const AddActivityProvider = ({ children }) => {
     }
 
     // Validate total hours field
-      if (isNaN(total) || total < 1 || total > 24 || !total) {
+    if (isNaN(total) || total < 1 || total > 24 || !total) {
       return setErrors({
         ...errors,
         total: translation.formErrors.hoursError
@@ -75,14 +75,14 @@ const AddActivityProvider = ({ children }) => {
     clearErrors()
     // Validate if type is number
     if (key === 'total') {
-        if (isNaN(value) || value < 1 || value > 24) {
-        return setErrors({
-          [key]: translation.formErrors.numberValidationError
-        })
-      } else {
+      if (!isNaN(value) || value < 1 || value > 24 || value === '') {
         setActivity({
           ...activity,
           [key]: value,
+        })
+      } else {
+        return setErrors({
+          [key]: translation.formErrors.numberValidationError
         })
       }
     } else {

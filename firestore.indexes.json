@@ -9,7 +9,61 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "activities",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "approved",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "region",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "activities",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "approved",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "region",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "activities",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "approved",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "type",
           "order": "ASCENDING"
         },
         {
