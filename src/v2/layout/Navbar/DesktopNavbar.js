@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import MenuIcon from '@material-ui/icons/Menu';
 import { useSelector } from 'react-redux';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Badge, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import PopperMenu from './PopperMenu';
+import DesktopNavbarMenu from './DesktopNavbarMenu';
 
 const Container = styled.div`
   top: 0;
   position: sticky;
   width: 100%;
   z-index: 9;
+  direction: ltr;
   background-color: ${props => props.backgroundColor};
 `
 
@@ -23,6 +24,7 @@ const DesktopNavbar = ({ value }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [hover, setHover] = useState(false)
   const { theme } = useSelector(state => state.theme)
+  const { unseen } = useSelector(state => state.notifications);
 
   const handleHover = () => setHover(!hover)
   const handleMenuClose = () => setAnchorEl(null)
@@ -35,14 +37,21 @@ const DesktopNavbar = ({ value }) => {
     zIndex: 1101
   }
 
+  const badgeAnchorOrigin = {
+    horizontal: 'left',
+    vertical: 'top'
+  }
+
   return (
     <Container backgroundColor={theme?.palette?.background?.paper}>
       <Wrapper>
         <Button onClick={handleMenuOpen} onMouseEnter={handleHover} onMouseLeave={handleHover} style={menuButtonStyle}>
           <MenuIcon className='mr-25' />
-          <Avatar className='avatar__xs' src={avatar ? avatar : ''} />
+          <Badge anchorOrigin={badgeAnchorOrigin} badgeContent={unseen?.length} color='error'>
+            <Avatar className='avatar__xs' src={avatar ? avatar : ''} />
+          </Badge>
         </Button>
-        <PopperMenu uid={uid} handleMenuClose={handleMenuClose} value={value} anchorEl={anchorEl} />
+        <DesktopNavbarMenu uid={uid} handleMenuClose={handleMenuClose} value={value} anchorEl={anchorEl} />
       </Wrapper>
     </Container>
   )

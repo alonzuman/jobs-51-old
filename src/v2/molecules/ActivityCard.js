@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { ListItemText, Typography, Avatar, Chip, ListItemAvatar, ListItem, Divider } from '@material-ui/core'
 import { translateDate, checkPermissions } from '../../utils'
 import { useSelector } from 'react-redux'
@@ -21,12 +21,16 @@ const ListItemSecondaryText = styled.span`
 const ActivityCard = ({ activity }) => {
   const [open, setOpen] = useState(false)
   const { approved, description, total, user, type } = activity
-  const [isApproved, setIsApproved] = useState(!!approved)
+  const [isApproved, setIsApproved] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { role, uid } = useSelector(state => state.auth)
   const [day, month, number, monthNumber] = translateDate(activity.date)
   const isAdmin = checkPermissions(role) >= 3;
   const isUser = uid === activity?.uid;
+
+  useEffect(() => {
+    setIsApproved(approved)
+  }, [approved])
 
   const handleApproved = () => setIsApproved(!isApproved)
   const handleActionsOpen = () => setOpen(!open)

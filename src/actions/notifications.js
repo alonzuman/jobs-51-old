@@ -11,12 +11,13 @@ export const getNotifications = uid => async dispatch => {
   })
 
   try {
-    const snapshot = await Notifications.where('uid', '==', uid).orderBy('dateCreated', 'desc').limit(5).get()
-    let notifications = [];
-    snapshot.forEach(doc => notifications.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: SET_ALL,
-      payload: notifications
+    await Notifications.where('uid', '==', uid).orderBy('dateCreated', 'desc').limit(5).onSnapshot(snapshot => {
+      let notifications = [];
+      snapshot.forEach(doc => notifications.push({ id: doc.id, ...doc.data() }))
+      dispatch({
+        type: SET_ALL,
+        payload: notifications
+      })
     })
   } catch (error) {
     console.log(error)

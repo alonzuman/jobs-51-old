@@ -19,8 +19,12 @@ const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
   const { uid } = useSelector(state => state.auth)
   const { seen, type, activity, notificationBy } = notification;
-  const [isSeen, setIsSeen] = useState(seen)
+  const [isSeen, setIsSeen] = useState(false)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setIsSeen(seen)
+  }, [seen])
 
   const timeAgo = () => {
     moment.locale('he')

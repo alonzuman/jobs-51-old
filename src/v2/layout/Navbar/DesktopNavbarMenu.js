@@ -8,7 +8,7 @@ import { Menu, MenuItem, Typography } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import NotificationIcon from '../../molecules/NotificationIcon'
 
 const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
