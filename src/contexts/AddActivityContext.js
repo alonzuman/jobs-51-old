@@ -5,7 +5,7 @@ import { formatDate } from '../utils';
 
 export const AddActivityContext = createContext({})
 
-const AddActivityProvider = ({ children }) => {
+const AddActivityProvider = ({ children, onClose }) => {
   const { translation } = useSelector(state => state.theme)
   const { uid, firstName, lastName, avatar, region, phone } = useSelector(state => state.auth)
   const [activity, setActivity] = useState({
@@ -69,6 +69,7 @@ const AddActivityProvider = ({ children }) => {
     }
 
     await dispatch(addActivity(fixedActivity))
+    onClose()
   }
 
   const handleActivityChange = (key, value) => {

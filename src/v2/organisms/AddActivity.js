@@ -7,12 +7,12 @@ import CustomChip from '../atoms/CustomChip';
 import LocationSelect from '../molecules/LocationSelect';
 import { AddActivityContext } from '../../contexts/AddActivityContext';
 
-const AddActivity = ({ onClose }) => {
+const AddActivity = () => {
   const { translation } = useSelector(state => state.theme)
   const { locations, activityTypes } = useSelector(state => state.constants)
   const { isFetched: locationsFetched, isFetching: locationsFetching, regions } = locations;
   const { isFetched: activityTypesFetched, isFetching: activityTypesFetching } = activityTypes;
-  const { isUpdating, isUpdated } = useSelector(state => state.activities.activities)
+  const { isUpdating } = useSelector(state => state.activities.activities)
   const { activity, errors, handleActivityChange, handleSubmit } = useContext(AddActivityContext)
   const dispatch = useDispatch()
   const loading = locationsFetching || activityTypesFetching
@@ -28,12 +28,6 @@ const AddActivity = ({ onClose }) => {
       dispatch(getActivityTypes())
     }
   }, [])
-
-  // useEffect(() => {
-  //   if (isUpdated) {
-  //     onClose()
-  //   }
-  // }, [isUpdated])
 
   if (loading) {
     return (
