@@ -29,11 +29,11 @@ const AddActivity = ({ onClose }) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (isUpdated) {
-      onClose()
-    }
-  }, [isUpdated])
+  // useEffect(() => {
+  //   if (isUpdated) {
+  //     onClose()
+  //   }
+  // }, [isUpdated])
 
   if (loading) {
     return (
@@ -88,12 +88,8 @@ const AddActivity = ({ onClose }) => {
               <FormControl>
                 <TextField
                   size='small'
-                  step='any'
-                  min='1'
-                  max='24'
                   helperText={errors.total}
                   error={Boolean(errors.total)}
-                  type='number'
                   value={activity.total}
                   label={translation.totalHours}
                   variant='outlined'

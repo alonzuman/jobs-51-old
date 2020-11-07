@@ -35,7 +35,7 @@ const AddActivityProvider = ({ children }) => {
     if (!region || region?.length === 0) {
       return setErrors({
         ...errors,
-        type: translation.formErrors.regionError
+        region: translation.formErrors.regionError
       })
     }
 
@@ -56,25 +56,35 @@ const AddActivityProvider = ({ children }) => {
     }
 
     // Validate total hours field
-    if (total < 1 || total > 24 || typeof total !== 'number' || !total) {
+      if (isNaN(total) || total < 1 || total > 24 || !total) {
       return setErrors({
         ...errors,
         total: translation.formErrors.hoursError
       })
     }
 
-    await dispatch(addActivity({
+    let fixedActivity = {
       ...activity,
-    }))
+      total: parseFloat(activity.total)
+    }
+
+    await dispatch(addActivity(fixedActivity))
   }
 
   const handleActivityChange = (key, value) => {
     clearErrors()
+    // Validate if type is number
     if (key === 'total') {
-      setActivity({
-        ...activity,
-        [key]: parseFloat(value),
-      })
+        if (isNaN(value) || value < 1 || value > 24) {
+        return setErrors({
+          [key]: translation.formErrors.numberValidationError
+        })
+      } else {
+        setActivity({
+          ...activity,
+          [key]: value,
+        })
+      }
     } else {
       setActivity({
         ...activity,

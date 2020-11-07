@@ -326,7 +326,8 @@
     "hoursError": "שדה זה הוא שדה חובה",
     "dateError": "שדה זה הוא שדה חובה",
     "typeError": "שדה זה הוא שדה חובה",
-    "regionError": "שדה זה הוא שדה חובה"
+    "regionError": "שדה זה הוא שדה חובה",
+    "numberValidationError": "שדה זה חייב להיות מספר"
   },
   "placeholders": {
     "addRegion": "לדוגמא: ״אילת והערבה״"
