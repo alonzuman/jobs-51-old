@@ -3,7 +3,7 @@ import { Button, Typography, Box } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthDialog from '../../v2/layout/AuthDialog'
-import ShaldagLogo from '../../assets/ShaldagLogo'
+import ShaldagLogo from '../../assets/art/ShaldagLogo'
 import Container from '../../v2/atoms/Container'
 
 const LandingPage = () => {

@@ -5,7 +5,7 @@ import Container from '../../v2/atoms/Container'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AddJobDialog from '../../v2/layout/AddJobDialog'
-import ShaldagLogo from '../../assets/ShaldagLogo'
+import ShaldagLogo from '../../assets/art/ShaldagLogo'
 
 const HomeSection = styled.div`
   padding: 16px;

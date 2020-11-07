@@ -1,7 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const { region } = require('firebase-functions');
-// const faker = require('faker');
+const faker = require('faker');
 admin.initializeApp()
 
 const Constants = admin.firestore().collection('constants');
@@ -11,31 +10,93 @@ const Saved = admin.firestore().collection('saved');
 const Jobs = admin.firestore().collection('jobs');
 const Notifications = admin.firestore().collection('notifications');
 
-// SEED
+// Seed data
+// const uid = 'Zex7fCIlrDRKFEeRvq0n';
+// const user = {
+//   region: 'חיפה',
+//   firstName: faker.name.firstName(),
+//   lastName: faker.name.lastName(),
+//   avatar: faker.image.avatar(),
+//   email: faker.internet.email(),
+//   activities: {
+//     pending: 0,
+//     approved: 0
+//   }
+// }
+
+// // SEED
+// exports.onSeedActivities = functions.firestore
+//   .document('seed-activities/{aid}')
+//   .onWrite(async (change, context) => {
+//     const activity = {
+//       region: 'חיפה',
+//       uid,
+//       user: {
+//         firstName: user.firstName,
+//         lastName: user.lastName,
+//         avatar: user.avatar,
+//         region: user.region
+//       },
+//       description: faker.lorem.sentence(),
+//       type: 'אירוע שיא',
+//       date: '23-11-2020',
+//       approved: false,
+//       total: faker.random.number({ min: 2, max: 12 })
+//     }
+//     const seedActivities = [Activities.add(activity), Activities.add(activity)]
+//     Promise.all(seedActivities)
+//   })
+
 // exports.onSeed = functions.firestore
 //   .document('seed/{seedId}')
 //   .onWrite(async (change, context) => {
 //     try {
+//       // Create constants
+//       await Constants.doc('activityTypes').set({
+//         all: []
+//       })
+
+//       await Constants.doc('industries').set({
+//         all: []
+//       })
+
+//       await Constants.doc('listedJobLocations').set({
+
+//       })
+
+//       await Constants.doc('listedJobSkills').set({
+
+//       })
+
+//       await Constants.doc('listedMembers').set({
+//         all: []
+//       })
+
+//       await Constants.doc('locations').set({
+//         all: [],
+//         regions: []
+//       })
+
+//       await Constants.doc('stats').set({
+//         approvedActivityHoursByRegionCount: {
+
+//         },
+//         approvedActivityHoursCount: {
+
+//         },
+//         pendingUsersCount: {
+
+//         },
+//         volunteersByRegionCount: {
+
+//         },
+//         volunteersCount: {
+
+//         }
+//       })
 
 //       // Seed users
-//       const user = {
-//         region: 'חיפה',
-//         firstName: faker.name.firstName(),
-//         lastName: faker.name.lastName(),
-//         avatar: faker.image.avatar(),
-//         email: faker.internet.email(),
-//         activities: {
-//           pending: 0,
-//           approved: 0
-//         }
-//       }
-//       const userRef = await Users.add(user)
-//       const uid = userRef.id;
-
-//       // Seed constants
-//       await Constants.doc('listedMembers').set({
-//         all: admin.firestore.FieldValue.arrayUnion(`${user.firstName} ${user.lastName}`)
-//       })
+//       await Users.doc(uid).set(user)
 
 //       // Seed jobs
 //       await Jobs.add({
@@ -71,7 +132,7 @@ const Notifications = admin.firestore().collection('notifications');
 //       })
 
 //       // Seed activities
-//       await Activities.add({
+//       const activity = {
 //         region: 'חיפה',
 //         uid,
 //         user: {
@@ -82,24 +143,43 @@ const Notifications = admin.firestore().collection('notifications');
 //         },
 //         description: faker.lorem.sentence(),
 //         type: 'אירוע שיא',
+//         date: '23-11-2020',
 //         approved: false,
 //         total: faker.random.number({ min: 2, max: 12 })
-//       })
+//       }
+//       const seedActivities = [Activities.add(activity), Activities.add(activity)]
+//       Promise.all(seedActivities)
+//       // await Activities.add({
+//       //   region: 'חיפה',
+//       //   uid,
+//       //   user: {
+//       //     firstName: user.firstName,
+//       //     lastName: user.lastName,
+//       //     avatar: user.avatar,
+//       //     region: user.region
+//       //   },
+//       //   description: faker.lorem.sentence(),
+//       //   type: 'אירוע שיא',
+//       //   date: '23-11-2020',
+//       //   approved: false,
+//       //   total: faker.random.number({ min: 2, max: 12 })
+//       // })
 
-//       await Activities.add({
-//         region: 'חיפה',
-//         uid,
-//         user: {
-//           firstName: user.firstName,
-//           lastName: user.lastName,
-//           avatar: user.avatar,
-//           region: user.region
-//         },
-//         description: faker.lorem.sentence(),
-//         type: 'אירוע שיא',
-//         approved: false,
-//         total: faker.random.number({ min: 2, max: 12 })
-//       })
+//       // await Activities.add({
+//       //   region: 'חיפה',
+//       //   uid,
+//       //   date: '23-11-2020',
+//       //   user: {
+//       //     firstName: user.firstName,
+//       //     lastName: user.lastName,
+//       //     avatar: user.avatar,
+//       //     region: user.region
+//       //   },
+//       //   description: faker.lorem.sentence(),
+//       //   type: 'אירוע שיא',
+//       //   approved: false,
+//       //   total: faker.random.number({ min: 2, max: 12 })
+//       // })
 
 //     } catch (error) {
 //       console.log('#########################')
@@ -230,7 +310,7 @@ exports.onUpdateUser = functions.firestore
           }
         }
 
-        await Constants.doc('stats').set({
+        return await Constants.doc('stats').set({
           ...updatedStats
         }, { merge: true })
       }
@@ -273,7 +353,7 @@ exports.onDeleteUser = functions.firestore
       })
 
       // Delete user auth
-      await admin.auth().deleteUser(uid)
+      return await admin.auth().deleteUser(uid)
     } catch (error) {
       console.log('##################')
       console.log('##################')
@@ -291,9 +371,9 @@ exports.onCreateActivity = functions.firestore
     const increment = admin.firestore.FieldValue.increment(total);
     try {
       if (approved) {
-        await userRef.update('activities.approved', increment)
+        return await userRef.update('activities.approved', increment)
       } else {
-        await userRef.update('activities.pending', increment)
+        return await userRef.update('activities.pending', increment)
       }
     } catch (error) {
       console.log('#############')
