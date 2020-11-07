@@ -5,9 +5,9 @@ import { checkPermissions } from '../../../utils'
 import { Menu, MenuItem, Typography } from '@material-ui/core'
 
 // Icons
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 // import SearchIcon from '@material-ui/icons/Search';
 import NotificationIcon from '../../molecules/NotificationIcon'
 
@@ -29,7 +29,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.activity}
-            <AssessmentIcon style={{ color: value === `/${uid}/activity` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+            <AssessmentOutlinedIcon style={{ color: value === `/${uid}/activity` ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>}
@@ -45,7 +45,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
         <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
           <Typography className='flex align__center justify__between full__width' variant='body1'>
             {translation.profile}
-            <AccountCircleIcon style={{ color: value === '/profile' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+            <AccountCircleOutlinedIcon style={{ color: value === '/profile' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
           </Typography>
         </MenuItem>
       </NavLink>
@@ -54,7 +54,7 @@ const PopperMenu = ({ value, anchorEl, handleMenuClose, uid }) => {
           <MenuItem className='min__width--200 mb-5' onClick={handleMenuClose}>
             <Typography className='flex align__center justify__between full__width' variant='body1'>
               {translation.adminPage}
-              <SupervisorAccountIcon style={{ color: value === '/admin' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
+              <SupervisorAccountOutlinedIcon style={{ color: value === '/admin' ? theme.palette.primary.main : theme.typography.subtitle1.color }} />
             </Typography>
           </MenuItem>
         </NavLink>}
