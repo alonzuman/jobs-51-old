@@ -30,16 +30,17 @@ const ActivitiesProgress = ({ approved, pending }) => {
       translation.remaining,
     ],
     datasets: [{
-      data: [pending, approved, remainder],
+      borderWidth: 0,
+      data: [approved, pending, remainder],
       backgroundColor: [
         theme.palette.primary.main,
-        theme.palette.primary.light,
-        theme.palette.background.default
+        theme.palette.background.dark,
+        theme.palette.background.light
       ],
       hoverBackgroundColor: [
         theme.palette.primary.main,
-        theme.palette.primary.light,
-        theme.palette.background.default
+        theme.palette.background.dark,
+        theme.palette.background.light
       ]
     }]
   };
@@ -68,7 +69,7 @@ const ActivitiesProgress = ({ approved, pending }) => {
           {translation.approvedHours}
         </Typography>
       </DoughnutLabel>
-      <Doughnut options={options} data={data} />
+      <Doughnut borderColor='#000' options={options} data={data} />
     </DoughnutContainer>
   )
 }

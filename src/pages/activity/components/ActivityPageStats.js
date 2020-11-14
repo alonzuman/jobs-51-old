@@ -26,7 +26,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
     )
   } else if (region) {
     return (
-      <PageSection flex={windowWidth > 768} justifyContent='space-between'>
+      <PageSection className='mb-2' flex={windowWidth > 768} justifyContent='space-between'>
         <PageSection transparent disableGutters>
           {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
           <List>

@@ -20,8 +20,8 @@ const dark = {
     },
     background: {
       light: "#484848",
-      paper: "#484848",
-      main: "#303030"
+      main: "#303030",
+      dark: "#484848",
     }
   },
   shape: {

@@ -57,7 +57,7 @@ const AdminStats = () => {
           </ListItem>
         </List>
 
-        <Typography variant='subtitle1'>{translation.general}</Typography>
+        <Typography variant='subtitle1'>{translation.allRegions}</Typography>
         <List>
           <ListItem disableGutters>
             <ListItemIcon>
