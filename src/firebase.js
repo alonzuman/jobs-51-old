@@ -4,7 +4,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/analytics'
 
-const { hostname } = window.location
+// const { hostname } = window.location
 
 const prod = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -30,7 +30,6 @@ const prod = {
 
 // export const app = firebase.initializeApp(hostname === 'jobs-51.web.app' ? prod : dev)
 export const app = firebase.initializeApp(prod);
-
 export const storage = app.storage()
 export const db = app.firestore()
 export const analytics = app.analytics()
