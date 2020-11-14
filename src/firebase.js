@@ -17,18 +17,19 @@ const prod = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
 
-const dev = {
-  apiKey: "AIzaSyCzlucLzYhifdRQyBAXhEStCx_dO23HjgM",
-  authDomain: "jobs-51-dev.firebaseapp.com",
-  databaseURL: "https://jobs-51-dev.firebaseio.com",
-  projectId: "jobs-51-dev",
-  storageBucket: "jobs-51-dev.appspot.com",
-  messagingSenderId: "848181112595",
-  appId: "1:848181112595:web:9809ace2ee6408149734e6",
-  measurementId: "G-7FBWEKEJNH"
-};
+// const dev = {
+//   apiKey: "AIzaSyCzlucLzYhifdRQyBAXhEStCx_dO23HjgM",
+//   authDomain: "jobs-51-dev.firebaseapp.com",
+//   databaseURL: "https://jobs-51-dev.firebaseio.com",
+//   projectId: "jobs-51-dev",
+//   storageBucket: "jobs-51-dev.appspot.com",
+//   messagingSenderId: "848181112595",
+//   appId: "1:848181112595:web:9809ace2ee6408149734e6",
+//   measurementId: "G-7FBWEKEJNH"
+// };
 
-export const app = firebase.initializeApp(hostname === 'jobs-51.web.app' ? prod : dev)
+// export const app = firebase.initializeApp(hostname === 'jobs-51.web.app' ? prod : dev)
+export const app = firebase.initializeApp(prod);
 
 export const storage = app.storage()
 export const db = app.firestore()
