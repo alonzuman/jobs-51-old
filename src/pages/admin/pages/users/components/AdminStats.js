@@ -52,7 +52,7 @@ const AdminStats = () => {
               <AccessibilityNewIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${roundNumber(volunteersByRegionCount[region])} ${translation.volunteers}`}
+              primary={`${volunteersByRegionCount[region]} ${translation.volunteers}`}
             />
           </ListItem>
         </List>
@@ -64,7 +64,7 @@ const AdminStats = () => {
               <AccessTimeIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${approvedActivityHoursCount} ${translation.approvedActivitiesGeneral}`}
+              primary={`${roundNumber(approvedActivityHoursCount)} ${translation.approvedActivitiesGeneral}`}
             />
           </ListItem>
           <ListItem disableGutters>

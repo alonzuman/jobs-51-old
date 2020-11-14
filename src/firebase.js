@@ -28,7 +28,8 @@ const dev = {
   measurementId: "G-7FBWEKEJNH"
 };
 
-export const app = firebase.initializeApp(hostname === 'jobs-51.web.app' ? prod : dev)
+export const app = firebase.initializeApp(prod)
+// export const app = firebase.initializeApp(hostname === 'jobs-51.web.app' ? prod : dev)
 
 export const storage = app.storage()
 export const db = app.firestore()
