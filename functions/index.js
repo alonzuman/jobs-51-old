@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const faker = require('faker');
+// const faker = require('faker');
 admin.initializeApp()
 
 const Constants = admin.firestore().collection('constants');

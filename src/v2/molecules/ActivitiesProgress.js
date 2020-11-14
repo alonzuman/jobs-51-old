@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ const DoughnutContainer = styled.div`
   position: relative;
 `
 
-const DoughnutLabel = styled.h2`
+const DoughnutLabel = styled.div`
   text-align: center;
   position: absolute;
   left: 50%;
@@ -20,23 +21,25 @@ const DoughnutLabel = styled.h2`
 
 const ActivitiesProgress = ({ approved, pending }) => {
   const { theme, translation } = useSelector(state => state.theme);
-
-  console.log(approved, pending)
+  const remainder = 100 - (approved + pending);
 
   const data = {
     labels: [
       translation.approved,
       translation.pending,
+      translation.remaining,
     ],
     datasets: [{
-      data: [300, 50, 100],
+      data: [pending, approved, remainder],
       backgroundColor: [
         theme.palette.primary.main,
         theme.palette.primary.light,
+        theme.palette.background.default
       ],
       hoverBackgroundColor: [
         theme.palette.primary.main,
         theme.palette.primary.light,
+        theme.palette.background.default
       ]
     }]
   };
@@ -57,7 +60,14 @@ const ActivitiesProgress = ({ approved, pending }) => {
 
   return (
     <DoughnutContainer>
-      <DoughnutLabel>{roundNumber(approved)} {translation.approvedHours}</DoughnutLabel>
+      <DoughnutLabel>
+        <Typography variant='h1'>
+          {roundNumber(approved)}
+        </Typography>
+        <Typography variant='subtitle1'>
+          {translation.approvedHours}
+        </Typography>
+      </DoughnutLabel>
       <Doughnut options={options} data={data} />
     </DoughnutContainer>
   )

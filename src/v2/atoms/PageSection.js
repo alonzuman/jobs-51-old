@@ -9,6 +9,8 @@ const Section = styled.div`
   background-color: ${props => props.transparent ? '' : props.background};
   top: ${props => props.sticky ? 0 : ''};
   z-index: ${props => props.sticky ? 9 : 1};
+  display: ${props => props.flex ? 'flex' : ''};
+  justify-content: ${props => props.justifyContent ? props.justifyContent : ''};
 
   :not(last-of-type) {
     margin-bottom: 8px;
