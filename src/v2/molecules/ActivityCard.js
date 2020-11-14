@@ -24,7 +24,7 @@ const ActivityCard = ({ activity }) => {
   const [isApproved, setIsApproved] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { role, uid } = useSelector(state => state.auth)
-  const [day, month, number, monthNumber] = translateDate(activity.date)
+  const { day, month, number, year, monthNumber } = translateDate(activity.date)
   const isAdmin = checkPermissions(role) >= 3;
   const isUser = uid === activity?.uid;
 
@@ -40,7 +40,7 @@ const ActivityCard = ({ activity }) => {
       <span>
         {`${user?.firstName} ${user?.lastName} · `}
         <Typography component='span' variant='subtitle1'>
-          {`${number}/${monthNumber}`}
+          {`${number}/${monthNumber}/${year}`}
         </Typography>
       </span>
       <Chip

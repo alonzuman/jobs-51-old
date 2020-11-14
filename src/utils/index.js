@@ -67,7 +67,7 @@ export const translateDate = (date) => {
   const year = fullDate[3]
   const monthNumber = monthNumbers[fullDate[1]]
 
-  return [day, month, number, year, monthNumber]
+  return { day, month, number, year, monthNumber }
 }
 
 export const capitalizeFirstLetter = (string) => {
