@@ -9,6 +9,7 @@ import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle';
 // Icons
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
+import { roundNumber } from '../../../../../utils';
 
 const AdminStats = () => {
   const { translation } = useSelector(state => state.theme);
@@ -43,7 +44,7 @@ const AdminStats = () => {
               <AccessTimeIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${approvedActivityHoursByRegionCount[region]} ${translation.approvedActivitiesGeneral}`}
+              primary={`${roundNumber(approvedActivityHoursByRegionCount[region])} ${translation.approvedActivitiesGeneral}`}
             />
           </ListItem>
           <ListItem disableGutters>
@@ -51,7 +52,7 @@ const AdminStats = () => {
               <AccessibilityNewIcon className='medium__icon' />
             </ListItemIcon>
             <ListItemText
-              primary={`${volunteersByRegionCount[region]} ${translation.volunteers}`}
+              primary={`${roundNumber(volunteersByRegionCount[region])} ${translation.volunteers}`}
             />
           </ListItem>
         </List>
