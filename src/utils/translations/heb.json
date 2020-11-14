@@ -267,6 +267,7 @@
   "submit": "יישום",
   "manageConstants": "ניהול נתונים",
   "showResults": "הצג תוצאות",
+  "filterByDateJoined": "סינון לפי תאריך הצטרפות",
   "filterByLocation": "סינון לפי מיקום",
   "filterBySkills": "סינון לפי תחומי עיסוק",
   "filterByIndustry": "סינון לפי תעשיה",
@@ -331,6 +332,11 @@
   },
   "placeholders": {
     "addRegion": "לדוגמא: ״אילת והערבה״"
+  },
+  "times": {
+    "pastDay": "ביממה האחרונה",
+    "pastWeek": "בשבוע האחרון",
+    "pastMonth": "בחודש האחרון"
   }
 }
 

@@ -17,12 +17,7 @@ const UsersFilterProvider = ({ children }) => {
     })
   }
 
-  const clearFilters = () => setQueryParams({
-    ...queryParams,
-    fullName: '',
-    region: '',
-    role: '',
-  })
+  const clearFilters = () => setQueryParams({})
 
   const value = {
     queryParams,

@@ -11,6 +11,7 @@ import PageHeader from '../../v2/organisms/PageHeader'
 import { Avatar } from '@material-ui/core'
 import PageSection from '../../v2/atoms/PageSection'
 import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
+import AvatarProgress from '../../v2/molecules/ActivitiesProgress'
 
 const Activity = ({ match }) => {
   const [addingActivity, setAddingActivity] = useState(false)
@@ -45,6 +46,7 @@ const Activity = ({ match }) => {
           className='mb-1'
         />
       </PageSection>
+      <AvatarProgress approved={approved} pending={pending} />
       <ActivityPageStats loading={authLoading} pending={pending} approved={approved} region={region} />
       <ActivityPageActivitiesList loading={isFetching} activities={all} region={region} />
     </Container>

@@ -58,7 +58,6 @@ export const getUsers = (query, last) => async dispatch => {
   }
 
   try {
-
     let queryRef = Users
 
     if (query.fullName) {
@@ -73,6 +72,10 @@ export const getUsers = (query, last) => async dispatch => {
 
     if (query?.role) {
       queryRef = queryRef.where('role', '==', query?.role)
+    }
+
+    if (query?.dateCreated) {
+      queryRef = queryRef.where('dateCreated', '>', parseInt(query?.dateCreated))
     }
 
     queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10);

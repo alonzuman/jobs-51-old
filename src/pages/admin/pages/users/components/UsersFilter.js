@@ -12,6 +12,7 @@ import useWindowSize from '../../../../../hooks/useWindowSize'
 import RoleFilter from './RoleFilter'
 import TopBar from '../../../../../v2/layout/TopBar'
 import { UsersFilterContext } from './UsersFilterContext'
+import DateJoinedFilter from './DateJoinedFilter'
 
 const UsersFilter = () => {
   const { translation } = useSelector(state => state.theme)
@@ -63,6 +64,7 @@ const UsersFilter = () => {
             <NameFilter />
             <RegionFilter />
             <RoleFilter />
+            <DateJoinedFilter />
           </DialogContent>
           <DialogActionsContainer>
             <Button onClick={clearFilters} >{translation.clear}</Button>
