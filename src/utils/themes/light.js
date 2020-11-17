@@ -3,7 +3,7 @@ const light = {
   palette: {
     type: "light",
     primary: {
-      light: "#1566a0",
+      light: "#449cd2",
       main: "#1566a0",
       dark: "#1566a0"
     },

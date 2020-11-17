@@ -22,9 +22,7 @@ const Activities = () => {
 
   useEffect(() => {
     const newQuery = search.substring(1)
-    if (!isFetched || currentUid) {
-      dispatch(getActivities(query))
-    } else if (newQuery !== oldQuery) {
+    if (!isFetched || currentUid || (newQuery !== oldQuery)) {
       dispatch(getActivities(query))
     }
   }, [search])

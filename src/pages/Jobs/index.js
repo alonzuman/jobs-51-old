@@ -15,19 +15,18 @@ import Container from '../../v2/atoms/Container'
 import PageSection from '../../v2/atoms/PageSection'
 import JobsList from '../../v2/molecules/JobsList'
 import JobsFilterProvider from '../../contexts/JobsFilterContext'
+import LoadMoreButton from '../../v2/atoms/LoadMoreButton'
 
 const Jobs = () => {
   const { translation } = useSelector(state => state.theme)
-  const { jobs, isFetching, isFetched, oldQuery } = useSelector(state => state.jobs)
+  const { jobs, isFetching, isFetched, isFetchingMore, isFetchedMore, oldQuery } = useSelector(state => state.jobs)
   const [isAddingJob, setIsAddingJob] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
+  const parsedQuery = qs.parse(history.location.search)
 
   useEffect(() => {
-    const parsedQuery = qs.parse(history.location.search)
-    if (isFetching && isFetched) {
-      dispatch(getJobs(parsedQuery))
-    } else if (parsedQuery !== oldQuery && !isFetching) {
+    if ((isFetching && isFetched) || (parsedQuery !== oldQuery && !isFetching)) {
       dispatch(getJobs(parsedQuery))
     }
   }, [dispatch, history.location.search])
@@ -49,6 +48,12 @@ const Jobs = () => {
         </PageSection>
         <PageSection>
           <JobsList loading={isFetching} jobs={jobs} />
+          <LoadMoreButton
+            loading={isFetchingMore}
+            action={getJobs}
+            list={jobs}
+            query={parsedQuery}
+          />
         </PageSection>
       </Container>
     </JobsFilterProvider>

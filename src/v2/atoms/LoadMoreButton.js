@@ -14,7 +14,7 @@ const LoadMoreButton = ({ loading, list, action, query, isLastResult }) => {
 
   if (list?.length >= 10 && !isLastResult) {
     return (
-      <PageSection className='flex align__center justify__center'>
+      <PageSection className='flex align__center justify__center mb-4'>
         <Button size='large' onClick={handleClick}>{loading ? <CircularProgress color='primary' className='button-spinner primary__color' /> : translation.loadMore}</Button>
       </PageSection>
     )

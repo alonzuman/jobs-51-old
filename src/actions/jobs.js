@@ -2,7 +2,7 @@ import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
-import { ADDING_JOB, ADD_ONE, ADD_SAVED_ONE, DELETE_ONE, DELETE_SAVED_ONE, DELETING, ERROR, FETCHING_JOBS, LOADING, SET_ALL, SET_ONE, SET_SAVED_JOBS, UPDATING } from '../reducers/jobs'
+import { ADDING_JOB, ADD_ONE, ADD_SAVED_ONE, DELETE_ONE, DELETE_SAVED_ONE, DELETING, ERROR, FETCHING_JOBS, FETCHING_MORE_JOBS, LOADING, SET_ALL, SET_MORE_JOBS, SET_ONE, SET_SAVED_JOBS, UPDATING } from '../reducers/jobs'
 const { translation } = store.getState().theme
 const Jobs = db.collection('jobs')
 
@@ -171,13 +171,16 @@ export const deleteJob = (job) => async dispatch => {
   }
 }
 
-export const getJobs = (query) => async dispatch => {
-  dispatch({
-    type: LOADING
-  })
-  dispatch({
-    type: FETCHING_JOBS
-  })
+export const getJobs = (query, last) => async dispatch => {
+  if (last) {
+    dispatch({
+      type: FETCHING_MORE_JOBS
+    })
+  } else {
+    dispatch({
+      type: FETCHING_JOBS
+    })
+  }
   try {
     const { skills, location, industry, dateCreated } = query
     const skillsExists = skills?.length > 0
@@ -200,18 +203,34 @@ export const getJobs = (query) => async dispatch => {
       queryRef = queryRef.where('dateCreated', '>', parseInt(dateCreated))
     }
 
+    queryRef = queryRef.orderBy('dateCreated', 'desc').limit(10)
+
+    if (last) {
+      queryRef = queryRef.startAfter(last?.dateCreated)
+    }
+
     const snapshot = await queryRef.get()
 
     let jobs = []
     snapshot.forEach(doc => jobs.push({ ...doc.data(), id: doc.id }))
 
-    dispatch({
-      type: SET_ALL,
-      payload: {
-        jobs,
-        query
-      }
-    })
+    if (last) {
+      dispatch({
+        type: SET_MORE_JOBS,
+        payload: {
+          moreJobs: jobs,
+          query
+        }
+      })
+    } else {
+      dispatch({
+        type: SET_ALL,
+        payload: {
+          jobs,
+          query
+        }
+      })
+    }
   } catch (error) {
     console.log(error)
     dispatch({

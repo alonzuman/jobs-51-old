@@ -1,14 +1,14 @@
 import { Grid, List, Typography } from '@material-ui/core'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import JobCard from './JobCard'
 import CardsSkeletons from '../organisms/CardsSkeletons'
+import useTheme from '../../hooks/useTheme'
 
 const JobsList = ({ jobs, loading }) => {
-  const { translation } = useSelector(state => state.theme)
+  const { translation } = useTheme()
 
   if (loading) {
-    return <CardsSkeletons count={1} />
+    return <CardsSkeletons disableGutters count={1} />
   } else if (!loading && jobs?.length !== 0) {
     return (
       <List>

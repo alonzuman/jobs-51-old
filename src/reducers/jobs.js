@@ -6,6 +6,8 @@ const initialState = {
   loading: false,
   isFetching: false,
   isFetched: false,
+  isFetchingMore: false,
+  isFetchedMore: false,
   isAdding: false,
   isAdded: false,
   isUpdating: false,
@@ -17,13 +19,17 @@ const initialState = {
 // Actions
 export const LOADING = 'JOBS/LOADING';
 export const FETCHING_JOBS = 'JOBS/FETCHING_JOBS'
+export const FETCHING_MORE_JOBS = 'JOBS/FETCHING_MORE_JOBS'
 export const ADDING_JOB = 'JOBS/ADDING_JOB'
 export const UPDATING = 'JOBS/UPDATING';
 export const DELETING = 'JOBS/DELETING';
 export const ERROR = 'JOBS/ERROR';
+
 export const SET_ONE = 'JOBS/SET_ONE'
 export const SET_ALL = 'JOBS/SET_ALL'
+export const SET_MORE_JOBS = 'JOBS/SET_MORE_JOBS';
 export const SET_SAVED_JOBS = 'JOBS/SET_SAVED_JOBS';
+
 export const ADD_ONE = 'JOBS/ADD_ONE';
 export const ADD_SAVED_ONE = 'JOBS/ADD_SAVED_ONE';
 export const DELETE_SAVED_ONE = 'JOBS/DELETE_SAVED_ONE';
@@ -35,6 +41,12 @@ export const jobsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case FETCHING_MORE_JOBS:
+      return {
+        ...state,
+        isFetchingMore: true,
+        isFetchedMore: false
+      }
     case FETCHING_JOBS:
       return {
         ...state,
@@ -77,7 +89,19 @@ export const jobsReducer = (state = initialState, action) => {
         jobs: [...payload.jobs],
         loading: false,
         isFetching: false,
-        isFetched: true
+        isFetched: true,
+        isFetchingMore: false,
+        isFetchedMore: true
+      }
+    case SET_MORE_JOBS:
+      return {
+        ...state,
+        query: payload.query,
+        jobs: [...state.jobs, ...payload.moreJobs],
+        isFetching: false,
+        isFetched: true,
+        isFetchingMore: false,
+        isFetchedMore: true
       }
     case SET_SAVED_JOBS:
       return {
