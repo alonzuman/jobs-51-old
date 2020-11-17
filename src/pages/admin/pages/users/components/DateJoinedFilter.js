@@ -28,7 +28,7 @@ const DateJoinedFilter = () => {
       <PageSectionTitle title={translation.filterByDateJoined} />
       <Grid spacing={1} container>
         {Object.keys(options).map(date => (
-          <Grid item>
+          <Grid key={date} item>
             <Chip
               label={translation.times[date]}
               onClick={() => handleQueryParamsChange('dateCreated', options[date])}

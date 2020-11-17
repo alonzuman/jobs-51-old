@@ -56,7 +56,7 @@ const AddActivityProvider = ({ children, onClose }) => {
     }
 
     // Validate total hours field
-    if (isNaN(total) || total < 1 || total > 24 || !total) {
+    if (isNaN(total) || total < .5 || total > 24 || !total) {
       return setErrors({
         ...errors,
         total: translation.formErrors.hoursError
@@ -76,7 +76,7 @@ const AddActivityProvider = ({ children, onClose }) => {
     clearErrors()
     // Validate if type is number
     if (key === 'total') {
-      if (!isNaN(value) || value < 1 || value > 24 || value === '') {
+      if (!isNaN(value) || value === '.' || value < .5 || value > 24 || value === '') {
         setActivity({
           ...activity,
           [key]: value,
