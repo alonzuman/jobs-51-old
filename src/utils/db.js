@@ -4,123 +4,116 @@ const Users = db.collection('users')
 const Activities = db.collection('activities')
 const Constants = db.collection('constants')
 
-export const getStats = async () => {
+export const fixStats = async () => {
   let stats = {
     approvedActivityHoursByRegionCount: {},
     pendingActivityHoursByRegionCount: {},
+    volunteersByRegionCount: {},
     approvedActivityHoursCount: 0,
     pendingActivityHoursCount: 0,
-    volunteersByRegionCount: 0,
     pendingUsersCount: 0,
     volunteersCount: 0
   };
 
+  let unmarkedActivities = [];
+  let unmarkedUsers = [];
+
+  // try {
+  //   const allUsers = await Users.limit(5).get()
+  //   // const allUsers = await Users.get()
+  //   const allActivities = await Activities.limit(5).get()
+  //   // const allActivities = await Activities.get()
+
+  //   // Fix stats activities count
+  //   allActivities.forEach(doc => {
+  //     const { approved, total, region } = doc.data();
+
+  //     if (region === '') {
+  //       unmarkedActivities.push({
+  //         id: doc.id,
+  //         ...doc.data()
+  //       })
+  //     } else if (approved && region) {
+  //       stats = {
+  //         ...stats,
+  //         approvedActivityHoursCount: stats.approvedActivityHoursCount + total,
+  //         approvedActivityHoursByRegionCount: {
+  //           ...stats.approvedActivityHoursByRegionCount,
+  //           [region]: (stats.approvedActivityHoursByRegionCount[region] || 0) + total
+  //         }
+  //       }
+  //     } else {
+  //       stats = {
+  //         ...stats,
+  //         pendingActivityHoursCount: stats.pendingActivityHoursCount + total,
+  //         pendingActivityHoursByRegionCount: {
+  //           ...stats.pendingActivityHoursByRegionCount,
+  //           [region]: (stats.pendingActivityHoursByRegionCount[region] || 0) + total
+  //         }
+  //       }
+  //     }
+  //   })
+
+  //   // Fix stats users count
+  //   allUsers.forEach(doc => {
+  //     const { role, volunteer, region } = doc.data();
+
+  //     if (region && role !== 0 && volunteer) {
+  //       stats = {
+  //         ...stats,
+  //         volunteersCount: stats.volunteersCount + 1,
+  //         volunteersByRegionCount: {
+  //           ...stats.volunteersByRegionCount,
+  //           [region]: (stats.volunteersByRegionCount[region] || 0) + 1
+  //         }
+  //       }
+  //     } else if (role === 0) {
+  //       stats = {
+  //         ...stats,
+  //         pendingUsersCount: stats.pendingUsersCount + 1,
+  //       }
+  //     } else {
+  //       unmarkedUsers.push({
+  //         id: doc.id,
+  //         ...doc.data()
+  //       })
+  //     }
+  //   })
+
+  //   await Constants.doc('stats').set({
+  //     ...stats
+  //   }, { merge: true })
+
+  //   await Constants.doc('problematicDocs').set({
+  //     unmarkedUsers,
+  //     unmarkedActivities
+  //   }, { merge: true })
+
+  //   console.log('unmarkedUsers: ', unmarkedUsers)
+  //   console.log('unmarkedActivities: ', unmarkedActivities)
+  //   console.log(stats)
+  // } catch (error) {
+  //   console.log(error);
+  // }
+}
+
+export const fixUserActivityHoursCount = async () => {
+  let activitiesWithNoRegion = []
+
   try {
-    const volunteersSnap = await Users.where('volunteer', '==', true).get();
-    const pendingUsers = await Users.where('role', '==', 'pending').get();
-    const approvedActivitiesSnap = await Activities.where('approved', '==', true).get();
-    const pendingActivitiesSnap = await Activities.where('approved', '==', false).get();
-
-    volunteersSnap.forEach(doc => {
-      const { region } = doc.data();
-      if (region) {
-        return stats = {
-          volunteersByRegionCount: {
-            ...stats.volunteersByRegionCount,
-            [region]: (stats.volunteersByRegionCount[region] || 0) + 1
-          }
-        }
+    const allUsers = await Users.limit(5).get();
+    allUsers.forEach(async doc => {
+      const { uid, user, region, total } = doc.data()
+      if (!region) {
+        activitiesWithNoRegion.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      } else {
+        console.log(doc.data())
       }
     })
-
-    approvedActivitiesSnap.forEach(doc => {
-      const { total, region } = doc.data();
-      return stats = {
-        ...stats,
-        approvedActivityHoursByRegionCount: {
-          ...stats.approvedActivityHoursByRegionCount,
-          [region]: (stats.approvedActivityHoursByRegionCount[region] ? stats.approvedActivityHoursByRegionCount[region] : 0) + total,
-        },
-        approvedActivityHoursCount: (stats.approvedActivityHoursCount || 0) + total
-      }
-    })
-
-    pendingActivitiesSnap.forEach(doc => {
-      const { total, region } = doc.data();
-      return stats = {
-        ...stats,
-        pendingActivityHoursByRegionCount: {
-          ...stats.pendingActivityHoursByRegionCount,
-          [region]: (stats.pendingActivityHoursByRegionCount[region] || 0) + total
-        },
-        pendingActivityHoursCount: stats.pendingActivityHoursCount + total
-      }
-    })
-
-    stats = {
-      ...stats,
-      volunteersCount: volunteersSnap.size,
-      pendingUsersCount: pendingUsers.size
-    }
-
-    console.log(stats)
-
   } catch (error) {
     console.log(error)
   }
 }
-
-// export const seed = async () => {
-//   // Map all pending users
-//   const pendingUsersSnap = await Users.where('role', '==', 'pending').get()
-//   const pendingUsersCount = pendingUsersSnap.size
-
-
-//   // Map all volunteers by regions and general
-//   const volunteersSnap = await Users.where('volunteer', '==', true).get()
-//   let volunteersCount = volunteersSnap.size
-//   let volunteersByRegionCount = {}
-
-//   await volunteersSnap.forEach(doc => {
-//     const { region } = doc.data();
-
-//     const oldVal = volunteersByRegionCount[region] || 0;
-
-//     volunteersByRegionCount = {
-//       ...volunteersByRegionCount,
-//       [region || 'ללא']: oldVal + 1
-//     }
-//   })
-
-
-//   // Map all the approved activities hours
-//   const approvedActivitiesSnap = await Activities.where('approved', '==', true).get()
-//   let approvedActivityHoursCount = 0;
-//   let approvedActivityHoursByRegionCount = {};
-
-//   await approvedActivitiesSnap.forEach(doc => {
-//     const { total, region } = doc.data()
-
-//     const oldVal = approvedActivityHoursByRegionCount[region] || 0;
-//     const newVal = total;
-
-//     approvedActivityHoursCount += total;
-//     approvedActivityHoursByRegionCount = {
-//       ...approvedActivityHoursByRegionCount,
-//       [region]: oldVal + newVal
-//     }
-//   })
-
-//   const stats = {
-//     pendingUsersCount,
-//     volunteersCount,
-//     approvedActivityHoursCount,
-//     volunteersByRegionCount,
-//     approvedActivityHoursByRegionCount,
-//   }
-
-//   console.log(stats)
-//   await Constants.doc('stats').set({
-//     ...stats
-//   }, { merge: true })
-// }

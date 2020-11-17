@@ -25,6 +25,7 @@ import Region from './pages/Region'
 import Feedback from './v2/atoms/Feedback'
 import Navbar from './v2/layout/Navbar/Navbar'
 import ProtectedRoute from './v2/layout/ProtectedRoute'
+import Analytics from './pages/Analytics/Analytics';
 
 const ProtectedRouter = () => {
   return (
@@ -61,6 +62,7 @@ const ProtectedRouter = () => {
         <ProtectedRoute exact requiredRole='manager' path='/admin/users' component={Users} />
         <ProtectedRoute exact requiredRole='manager' path='/admin/activities' component={Activities} />
         <ProtectedRoute exact requiredRole='admin' path='/admin/general-management' component={GeneralManagement} />
+        <ProtectedRoute exact requiredRole='admin' path='/admin/analytics' component={Analytics} />
 
         {/* Notifications */}
         <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />
