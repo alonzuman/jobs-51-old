@@ -4,23 +4,24 @@ import PageHeader from '../../v2/organisms/PageHeader';
 import { Divider, ListItem, List, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { checkPermissions } from '../../utils';
-
-// Icons
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import SettingsIcon from '@material-ui/icons/Settings';
 import PageSection from '../../v2/atoms/PageSection';
 import Container from '../../v2/atoms/Container';
 import AdminStats from './pages/Users/components/AdminStats';
 import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
+
+// Icons
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import RegionStats from './pages/Users/components/RegionStats';
 
 const Admin = () => {
   const { translation } = useSelector(state => state.theme);
   const { role } = useSelector(state => state.auth);
 
   const generalPages = [
+    { label: translation.allStats, icon: <ShowChartIcon />, link: '/admin/analytics', minRole: 2 },
     { label: translation.manageUsers, icon: <PeopleAltIcon />, link: '/admin/users?view=list', minRole: 2 },
     { label: translation.manageActivities, icon: <AssignmentIcon />, link: '/admin/activities?view=list', minRole: 2 },
     { label: translation.generalManagement, icon: <SettingsIcon />, link: '/admin/general-management', minRole: 3 },
@@ -31,9 +32,9 @@ const Admin = () => {
       <PageSection>
         <PageHeader title={translation.adminPage} className='mb-1' />
       </PageSection>
-      <PageSection>
-        <AdminStats />
-      </PageSection>
+      {/* <PageSection>
+        <RegionStats />
+      </PageSection> */}
       <PageSection>
         <PageSectionTitle title={translation.general} />
         <List>

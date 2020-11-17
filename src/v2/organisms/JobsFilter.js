@@ -72,13 +72,13 @@ const JobsFilter = () => {
 
   return (
     <Container background={theme?.palette?.background?.main}>
-      <Button className='mobile_full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button>
+      {/* <Button className='mobile_full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button> */}
       <Dialog fullWidth TransitionComponent={Transition} fullScreen={windowWidth <= 768} dir='rtl' open={isOpen} onClose={handleClose}>
         <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleClose} />
         <DialogContent className='full_width__dialog'>
-          <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />
+          {/* <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} /> */}
           {/* <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} /> */}
-          <IndustryFilter selectedIndustry={selectedIndustry} setSelectedIndustry={setSelectedIndustry} />
+          {/* <IndustryFilter selectedIndustry={selectedIndustry} setSelectedIndustry={setSelectedIndustry} /> */}
           {/* TODO ALON finish date filter */}
           {/* <DateFilter selectedMinDate={selectedMinDate} setSelectedMinDate={setSelectedMinDate} /> */}
         </DialogContent>

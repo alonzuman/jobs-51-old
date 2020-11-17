@@ -1,13 +1,23 @@
 import { Button } from '@material-ui/core'
 import React from 'react'
-import { fixStats, fixUserActivityHoursCount } from '../../utils/db'
+import useTheme from '../../hooks/useTheme'
+import Container from '../../v2/atoms/Container'
+import PageSection from '../../v2/atoms/PageSection'
+import PageHeader from '../../v2/organisms/PageHeader'
+import AdminStats from '../Admin/pages/Users/components/AdminStats'
 
 const Analytics = () => {
+  const { translation } = useTheme();
+
   return (
-    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-      {/* <Button onClick={fixStats}>Fix Stats</Button> */}
-      <Button onClick={fixUserActivityHoursCount}>Fix Activities Count</Button>
-    </div>
+    <Container>
+      <PageSection>
+        <PageHeader backButton title={translation.generalStats} />
+      </PageSection>
+      <PageSection>
+        <AdminStats />
+      </PageSection>
+    </Container>
   )
 }
 

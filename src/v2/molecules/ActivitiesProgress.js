@@ -3,7 +3,6 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { roundNumber } from '../../utils';
 
 const DoughnutContainer = styled.div`
   height: fit-content;
@@ -11,15 +10,11 @@ const DoughnutContainer = styled.div`
   position: relative;
 `
 
-const DoughnutLabel = styled.div`
-  text-align: center;
+const AvatarContainer = styled.div`
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 `
 
-const ActivitiesProgress = ({ approved, pending }) => {
+const ActivitiesProgress = ({ approved, pending, children }) => {
   const { theme, translation } = useSelector(state => state.theme);
   const remainder = 100 - (approved + pending);
 
@@ -49,6 +44,9 @@ const ActivitiesProgress = ({ approved, pending }) => {
     responsive: true,
     cutoutPercentage: 90,
     legend: false,
+    tooltips: {
+      enabled: false
+    },
     layout: {
       padding: {
         left: 0,
@@ -61,15 +59,10 @@ const ActivitiesProgress = ({ approved, pending }) => {
 
   return (
     <DoughnutContainer>
-      <DoughnutLabel>
-        <Typography variant='h1'>
-          {roundNumber(approved)}
-        </Typography>
-        <Typography variant='subtitle1'>
-          {translation.approvedHours}
-        </Typography>
-      </DoughnutLabel>
-      <Doughnut borderColor='#000' options={options} data={data} />
+      <Doughnut height={64} width={64} borderColor='#000' options={options} data={data} />
+      <AvatarContainer>
+        {children}
+      </AvatarContainer>
     </DoughnutContainer>
   )
 }
