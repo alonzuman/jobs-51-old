@@ -6,7 +6,7 @@ import PageSection from '../../../../../v2/atoms/PageSection';
 import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle';
 import { Bar } from 'react-chartjs-2';
 import { Skeleton } from '@material-ui/lab';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Divider, Typography } from '@material-ui/core';
 import { numberWithCommas } from '../../../../../utils';
 
 const GeneralStats = () => {
@@ -64,7 +64,7 @@ const GeneralStats = () => {
     },
     tooltips: {
       enabled: false
-    },
+    }
   }
 
   if (isFetching) {
@@ -80,7 +80,7 @@ const GeneralStats = () => {
       <PageSection disableGutters>
         <PageSection spaceBottom disableGutters>
           <PageSectionTitle title={translation.totalActivityHours} />
-          <Box display='flex' alignItems='center' justifyContent='space-around'>
+          <Box className='mt-1' display='flex' alignItems='center' justifyContent='space-around'>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
               <Typography variant='h1'>{numberWithCommas(approvedActivityHoursCount)}</Typography>
               <Typography variant='subtitle1'>{translation.approvedHours}</Typography>
@@ -91,10 +91,15 @@ const GeneralStats = () => {
             </Box>
           </Box>
         </PageSection>
-        <PageSectionTitle title={translation.approvedHours} />
-        <Bar data={data1} options={options} />
-        <PageSectionTitle title={translation.pendingHours} />
-        <Bar data={data2} options={options} />
+        <Divider className='mt-2 mb-1' />
+        <PageSection disableGutters spaceBottom transparent>
+          <PageSectionTitle title={translation.approvedHours} />
+          <Bar data={data1} options={options} />
+        </PageSection>
+        <PageSection disableGutters spaceBottom transparent>
+          <PageSectionTitle title={translation.pendingHours} />
+          <Bar data={data2} options={options} />
+        </PageSection>
       </PageSection>
     )
   } else {
