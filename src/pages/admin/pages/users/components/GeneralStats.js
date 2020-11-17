@@ -22,21 +22,12 @@ const GeneralStats = () => {
       pendingActivityHoursCount
     }
   } = useStats();
-  let regionsArray = [];
-  let approvedHoursArray = [];
-  let pendingHoursArray = [];
-
-  if (isFetched) {
-    regionsArray = Object.keys(approvedActivityHoursByRegionCount)
-    approvedHoursArray = Object.values(approvedActivityHoursByRegionCount);
-    pendingHoursArray = Object.values(pendingActivityHoursByRegionCount);
-  }
 
   const data1 = {
-    labels: regionsArray,
+    labels: isFetched ? Object.keys(approvedActivityHoursByRegionCount) : [],
     datasets: [
       {
-        data: [...approvedHoursArray],
+        data: isFetched ? Object.values(approvedActivityHoursByRegionCount) : [],
         backgroundColor: [
           theme.palette.primary.dark,
           theme.palette.primary.dark,
@@ -49,11 +40,12 @@ const GeneralStats = () => {
     ],
   }
 
+
   const data2 = {
-    labels: regionsArray,
+    labels: isFetched ? Object.keys(pendingActivityHoursByRegionCount) : [],
     datasets: [
       {
-        data: [...pendingHoursArray],
+        data: isFetched ? Object.values(pendingActivityHoursByRegionCount) : [],
         backgroundColor: [
           theme.palette.border.dark,
           theme.palette.border.dark,
