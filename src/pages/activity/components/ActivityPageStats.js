@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { roundNumber } from '../../../utils';
-import ActivitiesProgress from '../../../v2/molecules/ActivitiesProgress';
 import useWindowSize from '../../../hooks/useWindowSize';
 
 const ActivityPageStats = ({ loading, pending, approved, region }) => {
@@ -26,7 +25,7 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
     )
   } else if (region) {
     return (
-      <PageSection className='mb-2' flex={windowWidth > 768} justifyContent='space-between'>
+      <PageSection className='mb-1' flex={windowWidth > 768} justifyContent='space-between'>
         <PageSection transparent disableGutters>
           {region && <Typography variant='subtitle1'>{translation.totalActivitiesInRegion} {region}</Typography>}
           <List>
@@ -47,9 +46,6 @@ const ActivityPageStats = ({ loading, pending, approved, region }) => {
               </ListItemText>
             </ListItem>
           </List>
-        </PageSection>
-        <PageSection flex justifyContent='center' transparent disableGutters>
-          <ActivitiesProgress approved={approved} pending={pending} />
         </PageSection>
       </PageSection>
     )

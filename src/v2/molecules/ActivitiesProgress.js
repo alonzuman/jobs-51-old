@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
@@ -12,6 +11,8 @@ const DoughnutContainer = styled.div`
 
 const AvatarContainer = styled.div`
   position: absolute;
+  top: 4px;
+  right: 4px;
 `
 
 const ActivitiesProgress = ({ approved, pending, children }) => {

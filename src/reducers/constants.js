@@ -28,7 +28,25 @@ const initialState = {
     isUpdating: false,
     isUpdated: false,
     all: []
-  }
+  },
+
+  jobIndustries: {
+    isFetching: false,
+    isFetched: false,
+    all: []
+  },
+
+  listedJobLocations: {
+    isFetching: false,
+    isFetched: false,
+    all: {}
+  },
+
+  listedJobSkills: {
+    isFetching: false,
+    isFetched: false,
+    all: {}
+  },
 }
 
 // Actions
@@ -36,11 +54,17 @@ export const FETCHING_STATS = 'CONSTANTS/FETCHING_STATS';
 export const FETCHING_LISTED_MEMBERS = 'CONSTANTS/FETCHING_LISTED_MEMBERS';
 export const FETCHING_LOCATIONS = 'CONSTANTS/FETCHING_LOCATIONS';
 export const FETCHING_ACTIVITY_TYPES = 'CONSTANTS/FETCHING_ACTIVITY_TYPES';
+export const FETCHING_JOB_INDUSTRIES = 'CONSTANTS/FETCHING_JOB_INDUSTRIES';
+export const FETCHING_LISTED_JOB_LOCATIONS = 'CONSTANTS/FETCHING_LISTED_JOB_LOCATIONS';
+export const FETCHING_LISTED_JOB_SKILLS = 'CONSTANTS/FETCHING_LISTED_JOB_SKILLS';
 
 export const SET_STATS = 'CONSTANTS/SET_STATS';
 export const SET_LISTED_MEMBERS = 'CONSTANTS/SET_LISTED_MEMBERS';
 export const SET_LOCATIONS = 'CONSTANTS/SET_LOCATIONS';
 export const SET_ACTIVITY_TYPES = 'CONSTANTS/SET_ACTIVITY_TYPES';
+export const SET_JOB_INDUSTRIES = 'CONSTANTS/SET_JOB_INDUSTRIES';
+export const SET_LISTED_JOB_LOCATIONS = 'CONSTANTS/SET_LISTED_JOB_LOCATIONS';
+export const SET_LISTED_JOB_SKILLS = 'CONSTANTS/SET_LISTED_JOB_SKILLS';
 
 export const UPDATING_ACTIVITY_TYPES = 'CONSTANTS/UPDATING_ACTIVITY_TYPES';
 export const UPDATING_LOCATIONS = 'CONSTANTS/UPDATING_LOCATIONS';
@@ -94,6 +118,33 @@ export const constantsReducer = (state = initialState, action) => {
           isFetching: true
         }
       }
+    case FETCHING_JOB_INDUSTRIES:
+      return {
+        ...state,
+        jobIndustries: {
+          ...state.jobIndustries,
+          isFetched: false,
+          isFetching: true
+        }
+      }
+    case FETCHING_LISTED_JOB_LOCATIONS:
+      return {
+        ...state,
+        listedJobLocations: {
+          ...state.listedJobLocations,
+          isFetched: false,
+          isFetching: true
+        }
+      }
+    case FETCHING_LISTED_JOB_SKILLS:
+      return {
+        ...state,
+        listedJobSkills: {
+          ...state.listedJobSkills,
+          isFetched: false,
+          isFetching: true
+        }
+      }
 
     case SET_STATS:
       return {
@@ -137,6 +188,36 @@ export const constantsReducer = (state = initialState, action) => {
           ...payload.activityTypes,
           isFetching: false,
           isFetched: true,
+        }
+      }
+    case SET_JOB_INDUSTRIES:
+      return {
+        ...state,
+        jobIndustries: {
+          ...state.jobIndustries,
+          all: [...payload],
+          isFetching: false,
+          isFetched: true
+        }
+      }
+    case SET_LISTED_JOB_LOCATIONS:
+      return {
+        ...state,
+        listedJobLocations: {
+          ...state.listedJobLocations,
+          all: { ...payload },
+          isFetching: false,
+          isFetched: true
+        }
+      }
+    case SET_LISTED_JOB_SKILLS:
+      return {
+        ...state,
+        listedJobSkills: {
+          ...state.listedJobSkills,
+          all: { ...payload },
+          isFetching: false,
+          isFetched: true
         }
       }
 

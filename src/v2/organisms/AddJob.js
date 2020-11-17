@@ -8,11 +8,12 @@ import LocationSelect from '../molecules/LocationSelect'
 import SkillsSelect from '../molecules/SkillsSelect'
 import DialogActionsContainer from '../atoms/DialogActionsContainer'
 import CircularProgressWithLabel from '../atoms/CircularProgressWithLabel'
+import useJobsConstants from '../../hooks/useJobsConstants'
 
 const AddJob = ({ onClose }) => {
   const { translation } = useSelector(state => state.theme)
   const { loading } = useSelector(state => state.jobs)
-  const industries = useSelector(state => state.constants?.industries.all)
+  const { industries } = useJobsConstants();
   const dispatch = useDispatch()
   const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
   const [skillsError, setSkillsError] = useState('')
@@ -111,7 +112,7 @@ const AddJob = ({ onClose }) => {
           </Grid>
         </Grid>
         <TextField size='small' required multiline rows={4} label={translation.description} variant='outlined' value={job['description']} name='description' onChange={handleJobChange} />
-        <SkillsSelect size='small' error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} />
+        {/* <SkillsSelect size='small' error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} /> */}
       </DialogContent>
       <DialogActionsContainer>
         <Button

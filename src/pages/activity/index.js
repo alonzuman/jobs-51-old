@@ -11,11 +11,14 @@ import PageHeader from '../../v2/organisms/PageHeader'
 import { Avatar } from '@material-ui/core'
 import PageSection from '../../v2/atoms/PageSection'
 import AreYouVolunteerDialog from '../../v2/layout/AreYouVolunteerDialog'
+import useCurrentUser from '../../hooks/useCurrentUser'
+import ActivitiesProgress from '../../v2/molecules/ActivitiesProgress'
 
 const Activity = ({ match }) => {
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
   const { region, loading: authLoading, firstName, avatar } = useSelector(state => state.auth)
+  const { activities } = useCurrentUser();
   const { pending, approved } = useSelector(state => state.auth.activities)
   const { isFetching, regionManagers, currentUid, all } = useSelector(state => state.activities.activities)
   const { uid } = match.params
@@ -41,7 +44,9 @@ const Activity = ({ match }) => {
         <PageHeader
           loading={authLoading}
           title={translation.activity}
-          secondary={<Avatar className='avatar__md' src={avatar}>{firstName?.charAt(0)}</Avatar>}
+          secondary={<ActivitiesProgress approved={activities.approved} pending={activities.pending}>
+            <Avatar className='avatar__md' src={avatar}>{firstName?.charAt(0)}</Avatar>
+          </ActivitiesProgress>}
           className='mb-1'
         />
       </PageSection>

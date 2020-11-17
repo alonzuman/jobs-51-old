@@ -2,7 +2,7 @@ import { db } from "../firebase";
 import { setFeedback } from "./feedback";
 import firebase from 'firebase'
 import store from '../store'
-import { ADDED_ACTIVITY_TYPE, ADDED_REGION, DELETED_ACTIVITY_TYPE, DELETED_REGION, DELETING_REGION, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_STATS, UPDATING_ACTIVITY_TYPES, UPDATING_LOCATIONS } from "../reducers/constants";
+import { ADDED_ACTIVITY_TYPE, ADDED_REGION, DELETED_ACTIVITY_TYPE, DELETED_REGION, DELETING_REGION, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_JOB_INDUSTRIES, FETCHING_LISTED_JOB_LOCATIONS, FETCHING_LISTED_JOB_SKILLS, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_JOB_INDUSTRIES, SET_LISTED_JOB_LOCATIONS, SET_LISTED_JOB_SKILLS, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_STATS, UPDATING_ACTIVITY_TYPES, UPDATING_LOCATIONS } from "../reducers/constants";
 const { translation } = store.getState().theme
 const Constants = db.collection('constants')
 
@@ -11,7 +11,6 @@ export const deleteRegion = region => async dispatch => {
     type: DELETING_REGION
   })
   try {
-    // TODO ALON send to back
     await Constants.doc('locations').set({
       regions: firebase.firestore.FieldValue.arrayRemove(region)
     }, { merge: true })
@@ -192,6 +191,46 @@ export const getActivityTypes = () => async dispatch => {
     dispatch({
       type: SET_ACTIVITY_TYPES,
       payload: { activityTypes }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ERROR
+    })
+    dispatch(setFeedback({
+      type: 'error',
+      msg: translation.serverError
+    }))
+  }
+}
+
+export const getJobsConstants = () => async dispatch => {
+  dispatch({
+    type: FETCHING_JOB_INDUSTRIES
+  })
+  dispatch({
+    type: FETCHING_LISTED_JOB_LOCATIONS
+  })
+  dispatch({
+    type: FETCHING_LISTED_JOB_SKILLS
+  })
+
+  try {
+    const industriesSnapshot = await Constants.doc('industries').get();
+    const listedJobLocationsSnapshot = await Constants.doc('listedJobLocations').get();
+    const listedJobSkillsSnapshot = await Constants.doc('listedJobSkills').get();
+
+    dispatch({
+      type: SET_JOB_INDUSTRIES,
+      payload: industriesSnapshot.data().all
+    })
+    dispatch({
+      type: SET_LISTED_JOB_LOCATIONS,
+      payload: listedJobLocationsSnapshot.data()
+    })
+    dispatch({
+      type: SET_LISTED_JOB_SKILLS,
+      payload: listedJobSkillsSnapshot.data()
     })
   } catch (error) {
     console.log(error)
