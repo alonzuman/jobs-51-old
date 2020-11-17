@@ -12,7 +12,7 @@ import useJobsConstants from '../../hooks/useJobsConstants'
 
 const AddJob = ({ onClose }) => {
   const { translation } = useSelector(state => state.theme)
-  const { loading } = useSelector(state => state.jobs)
+  const { isAdding } = useSelector(state => state.jobs)
   const { industries } = useJobsConstants();
   const dispatch = useDispatch()
   const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
@@ -112,18 +112,18 @@ const AddJob = ({ onClose }) => {
           </Grid>
         </Grid>
         <TextField size='small' required multiline rows={4} label={translation.description} variant='outlined' value={job['description']} name='description' onChange={handleJobChange} />
-        {/* <SkillsSelect size='small' error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} /> */}
+        <SkillsSelect size='small' error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} />
       </DialogContent>
       <DialogActionsContainer>
         <Button
-          disabled={isUploading}
+          disabled={isAdding || isUploading}
           className='button-style'
           variant='contained'
           color='primary'
           type='submit'
           size='large'
         >
-          {loading ? <CircularProgress className='button-spinner' /> : translation.post}
+          {isAdding ? <CircularProgress className='button-spinner' /> : translation.post}
         </Button>
       </DialogActionsContainer>
     </form>

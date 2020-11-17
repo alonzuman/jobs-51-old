@@ -2,13 +2,22 @@ const initialState = {
   job: {},
   jobs: [],
   savedJobs: [],
+  query: {},
   loading: false,
+  isFetching: false,
+  isFetched: false,
+  isAdding: false,
+  isAdded: false,
   isUpdating: false,
-  isDeleting: false
+  isUpdated: false,
+  isDeleting: false,
+  isDeleted: false,
 }
 
 // Actions
 export const LOADING = 'JOBS/LOADING';
+export const FETCHING_JOBS = 'JOBS/FETCHING_JOBS'
+export const ADDING_JOB = 'JOBS/ADDING_JOB'
 export const UPDATING = 'JOBS/UPDATING';
 export const DELETING = 'JOBS/DELETING';
 export const ERROR = 'JOBS/ERROR';
@@ -26,6 +35,18 @@ export const jobsReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case FETCHING_JOBS:
+      return {
+        ...state,
+        isFetching: true,
+        isFetched: false
+      }
+    case ADDING_JOB:
+      return {
+        ...state,
+        isAdding: true,
+        isAdded: false
+      }
     case LOADING:
       return {
         ...state,
@@ -52,8 +73,11 @@ export const jobsReducer = (state = initialState, action) => {
     case SET_ALL:
       return {
         ...state,
+        query: payload.query,
         jobs: [...payload.jobs],
-        loading: false
+        loading: false,
+        isFetching: false,
+        isFetched: true
       }
     case SET_SAVED_JOBS:
       return {
@@ -64,7 +88,8 @@ export const jobsReducer = (state = initialState, action) => {
     case ADD_ONE:
       return {
         jobs: [...state.jobs, payload.job],
-        loading: false
+        isAdding: false,
+        isAdded: true
       }
     case EMPTY_ALL:
       return {
@@ -73,11 +98,6 @@ export const jobsReducer = (state = initialState, action) => {
     case DELETE_ONE:
       return {
         jobs: [...state.jobs.filter(job => job.id !== payload.id)],
-        loading: false
-      }
-    case ERROR:
-      return {
-        ...state,
         loading: false
       }
     case ADD_SAVED_ONE:
@@ -92,6 +112,7 @@ export const jobsReducer = (state = initialState, action) => {
         savedJobs: [...state.savedJobs.filter(job => job.id !== payload)],
         loading: false
       }
+    case ERROR:
     default: return state
   }
 }

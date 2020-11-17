@@ -26,10 +26,16 @@ const Job = ({ match }) => {
   })
 
   useEffect(() => {
-    if (jid !== job?.id) {
+    if (jid !== job?.id && jid) {
       dispatch(getJob(jid))
     }
   }, [jid])
+
+  const subtitle = (
+    <>
+      {job?.company} {job?.company && job?.location && ','} {job?.location}
+    </>
+  )
 
   return (
     <Container>
@@ -38,7 +44,7 @@ const Job = ({ match }) => {
         loading={isLoading}
         job={job}
         title={job?.jobTitle}
-        subtitle={`${job?.company}, ${job?.location}`}
+        subtitle={subtitle}
       />
       {/* <JobPageBadges loading={isLoading} job={job} /> */}
       <JobPageDetails loading={isLoading} job={job} />

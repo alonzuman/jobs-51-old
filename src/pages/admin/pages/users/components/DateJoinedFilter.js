@@ -9,7 +9,6 @@ const DateJoinedFilter = () => {
   const { translation } = useSelector(state => state.theme);
   const { queryParams, handleQueryParamsChange } = useContext(UsersFilterContext);
 
-
   const today = new Date();
   const splittedToday = today.toString().split(' ')
   const todayInMiliseconds = new Date(`${splittedToday[0]} ${splittedToday[1]} ${splittedToday[2]} ${splittedToday[3]}`).getTime();

@@ -35,7 +35,7 @@ const JobPageUserDetails = ({ loading, job, editing }) => {
         <Divider className='mb-1' />
         <PageSectionTitle title={translation.whoPostedJob}/>
         <Link to={`/users/${job?.uid}`}>
-          <ListItem disableGutters className='mb-2' button>
+          <ListItem className='mb-2' button>
             <ListItemContent>
               <UserInfo>
                 <Typography variant='body1'>{job?.user?.firstName} {job?.user?.lastName}</Typography>

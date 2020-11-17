@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Badge, BottomNavigation, BottomNavigationAction } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import { checkPermissions } from '../../../utils'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -10,14 +9,14 @@ import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountO
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationIcon from '../../molecules/NotificationIcon'
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import useCurrentUser from '../../../hooks/useCurrentUser'
+import useTheme from '../../../hooks/useTheme'
 
-// TODO change to styled components
 const MobileNavbar = () => {
   const history = useHistory()
-  const { volunteer, role, uid } = useSelector(state => state.auth)
-  const { theme, translation } = useSelector(state => state.theme)
+  const { volunteer, role, uid } = useCurrentUser();
+  const { theme, translation } = useTheme();
   const [value, setValue] = useState(history.location.pathname);
-
 
   useEffect(() => {
     setValue(history.location.pathname)
@@ -40,12 +39,20 @@ const MobileNavbar = () => {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} style={navbarStyle}>
+      {checkPermissions(role) >= 2 &&
+        <BottomNavigationAction
+          label={translation.findJobs}
+          component={Link}
+          to='/home'
+          value='/home'
+          icon={<SearchIcon />}
+        />}
       <BottomNavigationAction
-        label={translation.findJobs}
+        label={translation.notifications}
         component={Link}
-        to='/home'
-        value='/home'
-        icon={<SearchIcon />}
+        to={`/${uid}/notifications`}
+        value={`/${uid}/notifications`}
+        icon={<NotificationIcon />}
       />
       {volunteer &&
         <BottomNavigationAction
@@ -55,13 +62,6 @@ const MobileNavbar = () => {
           value={`/${uid}/activity`}
           icon={<AssessmentOutlinedIcon />}
         />}
-      <BottomNavigationAction
-        label={translation.notifications}
-        component={Link}
-        to={`/${uid}/notifications`}
-        value={`/${uid}/notifications`}
-        icon={<NotificationIcon />}
-      />
       <BottomNavigationAction
         label={translation.profile}
         component={Link}

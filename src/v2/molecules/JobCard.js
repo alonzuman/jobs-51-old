@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardHeader, Avatar, CardActions, Card, Chip } from '@material-ui/core'
+import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Divider, ListItemSecondaryAction } from '@material-ui/core'
 import moment from 'moment'
 import 'moment/locale/he'
 import { Link } from 'react-router-dom';
@@ -10,19 +10,28 @@ const JobCard = ({ job }) => {
     return moment(job?.dateCreated).fromNow()
   }
 
+  const secondaryText = (
+    <>
+    {job?.company} {job?.company && job?.location && ','} {job?.location}
+    </>
+  )
+
   return (
-    <Card variant='outlined'>
-      <Link to={`/jobs/${job?.id}`}>
-        <CardHeader
-          avatar={<Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
-          title={job?.jobTitle}
-          subheader={`${job?.company}, ${job?.location}`}
+    <Link to={`/jobs/${job?.id}`}>
+      <ListItem button alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={job?.jobTitle}
+          secondary={secondaryText}
         />
-        <CardActions className='pt-0'>
-          <Chip variant='outlined' size='small' label={timeAgo()} color='primary' />
-        </CardActions>
-      </Link>
-    </Card>
+        <ListItemSecondaryAction>
+          <Chip variant='outlined' color='primary' size='small' label={timeAgo()} />
+        </ListItemSecondaryAction>
+      </ListItem>
+      <Divider />
+    </Link>
   )
 }
 

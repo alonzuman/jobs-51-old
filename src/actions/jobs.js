@@ -2,7 +2,7 @@ import { db } from '../firebase'
 import { setFeedback } from './feedback'
 import firebase from 'firebase'
 import store from '../store'
-import { ADD_ONE, ADD_SAVED_ONE, DELETE_ONE, DELETE_SAVED_ONE, DELETING, ERROR, LOADING, SET_ALL, SET_ONE, SET_SAVED_JOBS, UPDATING } from '../reducers/jobs'
+import { ADDING_JOB, ADD_ONE, ADD_SAVED_ONE, DELETE_ONE, DELETE_SAVED_ONE, DELETING, ERROR, FETCHING_JOBS, LOADING, SET_ALL, SET_ONE, SET_SAVED_JOBS, UPDATING } from '../reducers/jobs'
 const { translation } = store.getState().theme
 const Jobs = db.collection('jobs')
 
@@ -47,7 +47,7 @@ export const saveJob = (uid, jid, job) => async dispatch => {
 
     dispatch({
       type: SET_ONE,
-      payload: { ...job, savedIds: [...job.savedIds, uid] }
+      payload: { ...job, savedIds: [...job.savedIds || [], uid] }
     })
 
     dispatch(setFeedback({
@@ -94,7 +94,7 @@ export const unsaveJob = (uid, jid, job) => async dispatch => {
 
 export const addJob = (job) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: ADDING_JOB
   })
   try {
     const jobRef = Jobs.doc()
@@ -117,6 +117,9 @@ export const addJob = (job) => async dispatch => {
     }))
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       msg: translation.serverError,
       type: 'error'
@@ -172,8 +175,11 @@ export const getJobs = (query) => async dispatch => {
   dispatch({
     type: LOADING
   })
+  dispatch({
+    type: FETCHING_JOBS
+  })
   try {
-    const { skills, location, industry } = query
+    const { skills, location, industry, dateCreated } = query
     const skillsExists = skills?.length > 0
 
     let queryRef = Jobs;
@@ -190,6 +196,10 @@ export const getJobs = (query) => async dispatch => {
       queryRef = queryRef.where('industry', '==', industry)
     }
 
+    if (dateCreated) {
+      queryRef = queryRef.where('dateCreated', '>', parseInt(dateCreated))
+    }
+
     const snapshot = await queryRef.get()
 
     let jobs = []
@@ -198,11 +208,15 @@ export const getJobs = (query) => async dispatch => {
     dispatch({
       type: SET_ALL,
       payload: {
-        jobs
+        jobs,
+        query
       }
     })
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: ERROR
+    })
     dispatch(setFeedback({
       msg: translation.serverError,
       type: 'error'
@@ -228,9 +242,11 @@ export const getJob = (id) => async dispatch => {
       ...userSnapshot.data()
     }
 
-    const jobsSnapshot = await db.collection('jobs').where('industry', '==', industry).get()
     let similarJobs = []
-    jobsSnapshot.forEach(doc => similarJobs.push({ id: doc.id, ...doc.data() }))
+    if (industry) {
+      const jobsSnapshot = await db.collection('jobs').where('industry', '==', industry).get()
+      jobsSnapshot.forEach(doc => similarJobs.push({ id: doc.id, ...doc.data() }))
+    }
 
     job = {
       ...job,

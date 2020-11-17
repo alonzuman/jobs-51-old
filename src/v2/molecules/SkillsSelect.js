@@ -2,11 +2,12 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import useJobsConstants from '../../hooks/useJobsConstants';
+import useTheme from '../../hooks/useTheme';
 
 const SkillsSelect = ({ skills, setSkills, helperText, error, ...rest }) => {
-  const { translation } = useSelector(state => state.theme)
-  const { isFetching } = useSelector(state => state.constants)
-  const options = useSelector(state => state.constants?.skills?.all)
+  const { translation } = useTheme();
+  const { isFetching, skills: { all } } = useJobsConstants();
 
   const handleChange = (e, values) => {
     setSkills(values)
@@ -20,7 +21,7 @@ const SkillsSelect = ({ skills, setSkills, helperText, error, ...rest }) => {
       value={skills}
       onChange={handleChange}
       limitTags={2}
-      options={options}
+      options={all}
       getOptionLabel={v => v}
       renderInput={params => <TextField error={error} helperText={helperText} {...params} variant="outlined" label={translation.skills} />}
       {...rest}

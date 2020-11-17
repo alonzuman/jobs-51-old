@@ -30,6 +30,12 @@ const initialState = {
     all: []
   },
 
+  skills: {
+    isFetching: false,
+    isFetched: false,
+    all: []
+  },
+
   jobIndustries: {
     isFetching: false,
     isFetched: false,
@@ -54,6 +60,7 @@ export const FETCHING_STATS = 'CONSTANTS/FETCHING_STATS';
 export const FETCHING_LISTED_MEMBERS = 'CONSTANTS/FETCHING_LISTED_MEMBERS';
 export const FETCHING_LOCATIONS = 'CONSTANTS/FETCHING_LOCATIONS';
 export const FETCHING_ACTIVITY_TYPES = 'CONSTANTS/FETCHING_ACTIVITY_TYPES';
+export const FETCHING_SKILLS = 'CONSTANTS/FETCHING_SKILLS';
 export const FETCHING_JOB_INDUSTRIES = 'CONSTANTS/FETCHING_JOB_INDUSTRIES';
 export const FETCHING_LISTED_JOB_LOCATIONS = 'CONSTANTS/FETCHING_LISTED_JOB_LOCATIONS';
 export const FETCHING_LISTED_JOB_SKILLS = 'CONSTANTS/FETCHING_LISTED_JOB_SKILLS';
@@ -61,6 +68,7 @@ export const FETCHING_LISTED_JOB_SKILLS = 'CONSTANTS/FETCHING_LISTED_JOB_SKILLS'
 export const SET_STATS = 'CONSTANTS/SET_STATS';
 export const SET_LISTED_MEMBERS = 'CONSTANTS/SET_LISTED_MEMBERS';
 export const SET_LOCATIONS = 'CONSTANTS/SET_LOCATIONS';
+export const SET_SKILLS = 'CONSTANTS/SET_SKILLS';
 export const SET_ACTIVITY_TYPES = 'CONSTANTS/SET_ACTIVITY_TYPES';
 export const SET_JOB_INDUSTRIES = 'CONSTANTS/SET_JOB_INDUSTRIES';
 export const SET_LISTED_JOB_LOCATIONS = 'CONSTANTS/SET_LISTED_JOB_LOCATIONS';
@@ -114,6 +122,15 @@ export const constantsReducer = (state = initialState, action) => {
         ...state,
         activityTypes: {
           ...state.activityTypes,
+          isFetched: false,
+          isFetching: true
+        }
+      }
+    case FETCHING_SKILLS:
+      return {
+        ...state,
+        skills: {
+          ...state.skills,
           isFetched: false,
           isFetching: true
         }
@@ -188,6 +205,16 @@ export const constantsReducer = (state = initialState, action) => {
           ...payload.activityTypes,
           isFetching: false,
           isFetched: true,
+        }
+      }
+    case SET_SKILLS:
+      return {
+        ...state,
+        skills: {
+          ...state.skills,
+          all: [...payload],
+          isFetching: false,
+          isFetched: true
         }
       }
     case SET_JOB_INDUSTRIES:
@@ -291,31 +318,6 @@ export const constantsReducer = (state = initialState, action) => {
         },
       }
     case ERROR:
-      return {
-        ...state,
-        stats: {
-          ...state.stats,
-          isFetching: false,
-          isFetched: false,
-        },
-        listedMembers: {
-          ...state.listedMembers,
-          isFetching: false,
-          isFetched: false
-        },
-        locations: {
-          ...state.locations,
-          isFetching: false,
-          isFetched: false
-        },
-        activityTypes: {
-          ...state.activityTypes,
-          isFetching: false,
-          isFetched: false,
-          isUpdating: false,
-          isUpdated: false,
-        }
-      }
     default: return state;
   }
 }

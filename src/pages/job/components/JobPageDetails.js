@@ -6,10 +6,11 @@ import SkillsSelect from '../../../v2/molecules/SkillsSelect'
 import PageSection from '../../../v2/atoms/PageSection'
 import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
 import SubSection from '../../../v2/atoms/SubSection'
+import useJobsConstants from '../../../hooks/useJobsConstants'
 
 const JobPageDetails = ({ loading, job, editing, description, setDescription, skills, setSkills, industry, setIndustry, error, helperText }) => {
   const { translation } = useSelector(state => state.theme)
-  const industries = useSelector(state => state?.constants?.industries?.all)
+  const { industries } = useJobsConstants()
 
   if (loading) {
     return (
@@ -39,18 +40,18 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
         <Divider className='mb-1' />
         <PageSectionTitle title={translation.jobDescription} />
         <Typography className='mb-1 text__wrap' variant='body1'>{job?.description}</Typography>
-        {job?.skills?.length !== 0 &&
-          <SubSection>
+        {job?.skills && job?.skills?.length !== 0 &&
+          <PageSection disableGutters>
             <Typography className='mb-25' variant='subtitle1'>{translation.fieldsOfWork}</Typography>
             <Grid container spacing={1}>
               {job?.skills?.map((v, i) => <Grid item key={i}><Chip color='primary' size='small' variant='outlined' label={v} /></Grid>)}
             </Grid>
-          </SubSection>}
+          </PageSection>}
         {job?.industry &&
-          <SubSection>
+          <PageSection disableGutters>
             <Typography variant='subtitle1'>{translation.industry}</Typography>
             <Typography variant='body1'>{job?.industry}</Typography>
-          </SubSection>}
+          </PageSection>}
       </PageSection>
     )
   }

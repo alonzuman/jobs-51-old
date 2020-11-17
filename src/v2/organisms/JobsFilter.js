@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import qs from 'query-string'
-import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { Button, Dialog, DialogActions, DialogContent } from '@material-ui/core'
 import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import TuneIcon from '@material-ui/icons/Tune';
 import styled from 'styled-components'
-import LocationFilter from './LocationFilter'
-import SkillsFilter from './SkillsFilter'
-import useWindowSize from '../../hooks/useWindowSize'
-import IndustryFilter from './IndustryFilter'
 import DialogActionsContainer from '../atoms/DialogActionsContainer'
-import DateFilter from './DateFilter'
 import Transition from '../atoms/Transition'
+import useTheme from '../../hooks/useTheme';
+import useWindowSize from '../../hooks/useWindowSize';
+import { JobsFilterContext } from '../../contexts/JobsFilterContext';
+import LocationFilter from '../../pages/Jobs/components/LocationFilter';
+import IndustryFilter from '../../pages/Jobs/components/IndustryFilter';
+import SkillsFilter from '../../pages/Jobs/components/SkillsFilter';
+import DatePostedFilter from '../../pages/Jobs/components/DatePostedFilter';
 
 const Container = styled.div`
   display: flex;
@@ -27,64 +27,36 @@ const Container = styled.div`
 `
 
 const JobsFilter = () => {
-  const history = useHistory()
-  const { location, skills } = qs.parse(history.location.search)
-  const [isOpen, setIsOpen] = useState(false)
-  const { windowWidth } = useWindowSize()
-  const { translation, theme } = useSelector(state => state.theme)
-  const [selectedLocation, setSelectedLocation] = useState('')
-  const [selectedSkills, setSelectedSkills] = useState([])
-  const [selectedIndustry, setSelectedIndustry] = useState(translation.all)
-  const [selectedMinDate, setSelectedMinDate] = useState(0)
+  const { translation } = useTheme();
+  const { windowWidth } = useWindowSize();
+  const { clearFilters, handleSubmit } = useContext(JobsFilterContext)
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (typeof skills === 'string') {
-      setSelectedSkills([skills])
-    } else {
-      setSelectedSkills(skills || [])
-    }
-    setSelectedLocation(location || '')
-  }, [history.location.search])
-
-  const updateQuery = () => {
-    const query = {
-      location: selectedLocation,
-      skills: selectedSkills,
-      industry: selectedIndustry,
-      date: selectedMinDate
-    }
-
-    history.push({
-      pathname: '/jobs',
-      search: qs.stringify(query)
-    })
-
-    handleClose()
+  const handleOpen = () => setIsOpen(!isOpen)
+  const handleQuerySubmit = async () => {
+    await handleSubmit();
+    await handleOpen()
   }
-
-  const clearFilters = () => {
-    setSelectedLocation('')
-    setSelectedSkills([])
-    setSelectedIndustry(translation.all)
-    setSelectedMinDate(0)
-  }
-  const handleClose = () => setIsOpen(false)
 
   return (
-    <Container background={theme?.palette?.background?.main}>
-      {/* <Button className='mobile_full__width' color={skills || location ? 'primary' : 'default'} variant='outlined' onClick={() => setIsOpen(true)}>{translation.filterResults} <TuneIcon className='mr-1' /></Button> */}
-      <Dialog fullWidth TransitionComponent={Transition} fullScreen={windowWidth <= 768} dir='rtl' open={isOpen} onClose={handleClose}>
-        <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleClose} />
-        <DialogContent className='full_width__dialog'>
-          {/* <LocationFilter selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} /> */}
-          {/* <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} /> */}
-          {/* <IndustryFilter selectedIndustry={selectedIndustry} setSelectedIndustry={setSelectedIndustry} /> */}
-          {/* TODO ALON finish date filter */}
-          {/* <DateFilter selectedMinDate={selectedMinDate} setSelectedMinDate={setSelectedMinDate} /> */}
+    <Container>
+      <Button
+        size='large'
+        onClick={handleOpen}
+        variant='outlined'
+        className='mobile_full__width'
+      >{translation.filterResults}<TuneIcon className='mr-1' /></Button>
+      <Dialog dir='rtl' fullScreen={windowWidth <= 768} fullWidth TransitionComponent={Transition} open={isOpen} onClose={handleOpen}>
+        <CustomDialogHeader title={translation.filterResults} exitButton onClose={handleOpen} />
+        <DialogContent>
+          <LocationFilter />
+          <IndustryFilter />
+          {/* <SkillsFilter /> */}
+          <DatePostedFilter />
         </DialogContent>
-        <DialogActionsContainer border={theme?.palette?.border?.strong}>
-          <Button size='large' color='default' onClick={clearFilters}>{translation.clear}</Button>
-          <Button size='large' color='primary' variant='contained' onClick={updateQuery}>{translation.showResults}</Button>
+        <DialogActionsContainer>
+          <Button onClick={clearFilters} >{translation.clear}</Button>
+          <Button onClick={handleQuerySubmit} color='primary' variant='contained'>{translation.apply}</Button>
         </DialogActionsContainer>
       </Dialog>
     </Container>

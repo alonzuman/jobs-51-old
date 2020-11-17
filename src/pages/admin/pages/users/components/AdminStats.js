@@ -34,9 +34,6 @@ const AdminStats = () => {
   } else if (!isFetching && isFetched) {
     return (
       <PageSection disableGutters>
-        <PageSectionTitle
-          title={translation.generalStats}
-        />
         <Typography variant='subtitle1'>{translation.region} {region}</Typography>
         <List>
           <ListItem disableGutters>

@@ -1,6 +1,8 @@
 import store from '../store';
 const { theme, translation } = store.getState().theme
 
+export * from './constants';
+
 export const isAdmin = role => role === 'admin'
 export const isModerator = role => role === 'moderator'
 export const isManager = role => role === 'manager'

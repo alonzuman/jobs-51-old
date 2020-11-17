@@ -114,6 +114,7 @@ export const signInWithProvider = (provider) => async dispatch => {
       switch (error.code) {
         case 'auth/account-exists-with-different-credential': return translation.accountAlreadyExistsWithEmail;
         case 'auth/network-request-failed': return translation.serverError;
+        case 'auth/network-request-failed': return translation.networkErrorPleaseTryAgain;
         default: return translation.serverError
       }
     }

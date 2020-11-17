@@ -1,8 +1,42 @@
 import { db } from '../firebase'
+import jobsSeed from './jobsSeed.json';
 
 const Users = db.collection('users')
 const Activities = db.collection('activities')
 const Constants = db.collection('constants')
+const Jobs = db.collection('jobs')
+
+
+// export const seedJobs = async () => {
+//   try {
+//     console.log('seeding....')
+//     const liorUid = 'X5MHhBNQahSzwwfX2iopBGfIYOX2'
+//     const liorSnapshot = await Users.doc(liorUid).get()
+//     const { firstName, lastName, avatar, phone, role, serviceYear } = liorSnapshot.data()
+//     const lior = {
+//       firstName,
+//       lastName,
+//       avatar,
+//       phone,
+//       role,
+//       serviceYear
+//     }
+//     const promises = jobsSeed.forEach(job => {
+//       const newJob = {
+//         ...job,
+//         uid: liorUid,
+//         user: {
+//           ...lior
+//         }
+//       }
+//       Jobs.add(newJob)
+//     })
+
+//     await Promise.all(promises)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 // export const fixStats = async () => {
 //   let stats = {

@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, List, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import JobCard from './JobCard'
@@ -11,9 +11,9 @@ const JobsList = ({ jobs, loading }) => {
     return <CardsSkeletons count={1} />
   } else if (!loading && jobs?.length !== 0) {
     return (
-      <Grid container spacing={2}>
-        {jobs?.map((v, i) => <Grid item key={i} xs={12} md={12} lg={12}><JobCard job={v} /></Grid>)}
-      </Grid>
+      <List>
+        {jobs?.map(job => <JobCard key={job.id} job={job} />)}
+      </List>
     )
   } else {
     return <Typography className='p-0' variant='body1'>{translation?.couldntFindJobs}</Typography>
