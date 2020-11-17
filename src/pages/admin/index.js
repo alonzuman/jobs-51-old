@@ -14,10 +14,12 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import RegionStats from './pages/Users/components/RegionStats';
+import useCurrentUser from '../../hooks/useCurrentUser';
+import useTheme from '../../hooks/useTheme';
 
 const Admin = () => {
-  const { translation } = useSelector(state => state.theme);
-  const { role } = useSelector(state => state.auth);
+  const { translation } = useTheme();
+  const { role, region } = useCurrentUser()
 
   const generalPages = [
     { label: translation.allStats, icon: <ShowChartIcon />, link: '/admin/analytics', minRole: 2 },
@@ -32,7 +34,7 @@ const Admin = () => {
         <PageHeader title={translation.adminPage} className='mb-1' />
       </PageSection>
       <PageSection>
-        <RegionStats />
+        {region && <RegionStats />}
       </PageSection>
       <PageSection>
         <PageSectionTitle title={translation.general} />
