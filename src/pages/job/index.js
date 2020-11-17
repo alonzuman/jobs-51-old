@@ -33,7 +33,7 @@ const Job = ({ match }) => {
 
   const subtitle = (
     <>
-      {job?.company} {job?.company && job?.location && ','} {job?.location}
+      {job?.company}{job?.company && job?.location && ','} {job?.location}
     </>
   )
 

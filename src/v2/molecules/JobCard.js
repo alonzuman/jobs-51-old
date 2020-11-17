@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Divider, ListItemSecondaryAction } from '@material-ui/core'
+import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Divider, ListItemSecondaryAction, Typography } from '@material-ui/core'
 import moment from 'moment'
 import 'moment/locale/he'
 import { Link } from 'react-router-dom';
@@ -10,12 +10,6 @@ const JobCard = ({ job }) => {
     return moment(job?.dateCreated).fromNow()
   }
 
-  const secondaryText = (
-    <>
-    {job?.company} {job?.company && job?.location && ','} {job?.location}
-    </>
-  )
-
   return (
     <Link to={`/jobs/${job?.id}`}>
       <ListItem button alignItems='flex-start'>
@@ -24,11 +18,9 @@ const JobCard = ({ job }) => {
         </ListItemAvatar>
         <ListItemText
           primary={job?.jobTitle}
-          secondary={secondaryText}
+          secondary={`${job?.company}${job?.company && job?.location && ','} ${job?.location}`}
         />
-        <ListItemSecondaryAction>
-          <Chip variant='outlined' color='primary' size='small' label={timeAgo()} />
-        </ListItemSecondaryAction>
+        <Chip variant='outlined' color='primary' size='small' label={timeAgo()} />
       </ListItem>
       <Divider />
     </Link>

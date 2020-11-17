@@ -20,10 +20,11 @@ const LocationFilter = () => {
       <PageSectionTitle title={translation.filterByLocation} />
       <Grid container spacing={1}>
         {Object.keys(listedLocations)?.map(location => {
-          if (listedLocations[location] > 0) {
+          const count = listedLocations[location]
+          if (count > 0) {
             return (
               <Grid item key={location}>
-                <Chip label={location} onClick={() => handleClick(location)} color={query.location === location ? 'primary' : 'default'} />
+                <Chip label={`${location} (${count})`} onClick={() => handleClick(location)} color={query.location === location ? 'primary' : 'default'} />
               </Grid>
             )
           }

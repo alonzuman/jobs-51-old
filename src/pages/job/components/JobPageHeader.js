@@ -59,7 +59,7 @@ const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompa
             <TextField size='small' className='mxw-256' label={translation.jobTitle} variant='outlined' value={title} onChange={e => setTitle(e.target.value)} />
             <FlexFields>
               <TextField className='mxw-224 ml-5' label={translation.companyName} variant='outlined' size='small' value={company} onChange={e => setCompany(e.target.value)} />
-              <LocationSelect className='mnw-196' label={translation.location} size='small' location={subtitle} setLocation={setSubtitle} />
+              <LocationSelect className='mnw-196' label={translation.location} size='small' location={subtitle} setLocation={setSubtitle} freeSolo />
             </FlexFields>
           </TextContainer>
         </ItemsWrapper>

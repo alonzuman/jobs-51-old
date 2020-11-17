@@ -25,6 +25,7 @@ const Jobs = db.collection('jobs')
 //       const newJob = {
 //         ...job,
 //         uid: liorUid,
+//         dateCreated: Date.now(),
 //         user: {
 //           ...lior
 //         }
