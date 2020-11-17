@@ -143,3 +143,19 @@ export const formatDate = (date) => {
 export const isObjectEmpty = object => {
   return Object.keys(object).length === 0 && object.constructor === Object
 }
+
+export const numberWithCommas = number => {
+  if (number > 999) {
+    const splitNumber = number.toString().split('')
+    const fixedNumber = splitNumber.reverse().map((v, i) => {
+      if ((i + 1) % 3 === 0) {
+        return `,${v}`
+      } else {
+        return v
+      }
+    }).reverse().join('')
+    return fixedNumber;
+  } else {
+    return number;
+  }
+}

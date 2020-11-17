@@ -19,7 +19,7 @@ const RegionStats = () => {
         label: 'hi',
         data: [isFetched ? pendingActivityHoursByRegionCount[region] : 0, isFetched ? approvedActivityHoursByRegionCount[region] : 0],
         backgroundColor: [
-          theme.palette.border.main,
+          theme.palette.border.dark,
           theme.palette.primary.dark,
         ],
         borderWidth: 1,

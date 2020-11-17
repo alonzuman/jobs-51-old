@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { checkPermissions } from '../../utils';
 import PageSection from '../../v2/atoms/PageSection';
 import Container from '../../v2/atoms/Container';
-import AdminStats from './pages/Users/components/AdminStats';
 import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
 
 // Icons
