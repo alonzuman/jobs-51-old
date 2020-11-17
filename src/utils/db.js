@@ -6,6 +6,24 @@ const Activities = db.collection('activities')
 const Constants = db.collection('constants')
 const Jobs = db.collection('jobs')
 
+// export const fixUsersCount = async () => {
+//   try {
+//     const snap = await Users.where('volunteer', '==', true).get();
+//     let allUsers = [];
+//     snap.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }))
+//     const pendingVolunteersCount = snap.size
+
+//     console.log(pendingVolunteersCount)
+//     console.log(allUsers)
+
+//     Constants.doc('stats').set({
+//       volunteersCount: pendingVolunteersCount
+//     }, { merge: true })
+
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 // export const seedJobs = async () => {
 //   try {

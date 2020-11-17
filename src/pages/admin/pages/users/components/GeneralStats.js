@@ -19,7 +19,9 @@ const GeneralStats = () => {
       pendingActivityHoursByRegionCount,
       approvedActivityHoursByRegionCount,
       approvedActivityHoursCount,
-      pendingActivityHoursCount
+      pendingActivityHoursCount,
+      volunteersCount,
+      pendingUsersCount
     }
   } = useStats();
 
@@ -88,6 +90,19 @@ const GeneralStats = () => {
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
               <Typography variant='h1'>{numberWithCommas(pendingActivityHoursCount)}</Typography>
               <Typography variant='subtitle1'>{translation.pendingHours}</Typography>
+            </Box>
+          </Box>
+        </PageSection>
+        <PageSection spaceBottom disableGutters>
+          <PageSectionTitle title={translation.volunteers} />
+          <Box className='mt-1' display='flex' alignItems='center' justifyContent='space-around'>
+            <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
+              <Typography variant='h1'>{numberWithCommas(volunteersCount)}</Typography>
+              <Typography variant='subtitle1'>{translation.approvedVolunteers}</Typography>
+            </Box>
+            <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
+              <Typography variant='h1'>{numberWithCommas(pendingUsersCount)}</Typography>
+              <Typography variant='subtitle1'>{translation.pendingVolunteers}</Typography>
             </Box>
           </Box>
         </PageSection>
