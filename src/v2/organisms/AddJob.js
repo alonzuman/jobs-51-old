@@ -9,13 +9,14 @@ import SkillsSelect from '../molecules/SkillsSelect'
 import DialogActionsContainer from '../atoms/DialogActionsContainer'
 import CircularProgressWithLabel from '../atoms/CircularProgressWithLabel'
 import useJobsConstants from '../../hooks/useJobsConstants'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const AddJob = ({ onClose }) => {
   const { translation } = useSelector(state => state.theme)
   const { isAdding } = useSelector(state => state.jobs)
   const { industries } = useJobsConstants();
   const dispatch = useDispatch()
-  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
+  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useCurrentUser()
   const [skillsError, setSkillsError] = useState('')
   const [industry, setIndustry] = useState(industries[0])
   const [location, setLocation] = useState('')

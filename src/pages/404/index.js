@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import Container from '../../v2/atoms/Container'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const TextContainer = styled.div`
   margin-top: 120px;
@@ -14,7 +15,7 @@ const TextContainer = styled.div`
 `
 
 const PageDoesntExists = () => {
-  const { uid } = useSelector(state => state.auth);
+  const { uid } = useCurrentUser();
   const { translation } = useSelector(state => state.theme);
 
   return (

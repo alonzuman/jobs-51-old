@@ -6,6 +6,7 @@ import LocationSelect from '../molecules/LocationSelect';
 import CustomDialogHeader from '../molecules/CustomDialogHeader';
 import DialogActionsContainer from '../atoms/DialogActionsContainer';
 import { getLocations } from '../../actions';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const AreYouVolunteerDialog = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const AreYouVolunteerDialog = () => {
   const [stateVolunteer, setVolunteer] = useState(true);
   const [stateRegion, setRegion] = useState('')
   const { translation } = useSelector(state => state.theme)
-  const { isAuthenticated, messagesSeen, uid, region, volunteer } = useSelector(state => state.auth);
+  const { isAuthenticated, messagesSeen, uid, region, volunteer } = useCurrentUser();
   const { isUpdating } = useSelector(state => state.users)
   const { isFetching, isFetched, regions } = useSelector(state => state.constants?.locations);
   const dispatch = useDispatch();

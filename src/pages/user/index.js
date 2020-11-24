@@ -15,6 +15,8 @@ import { IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import useScrollPosition from '../../hooks/useScrollPosition'
+import useTheme from '../../hooks/useTheme'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 
 const User = ({ match }) => {
@@ -22,10 +24,10 @@ const User = ({ match }) => {
   const [isDeclining, setIsDeclining] = useState(false)
   const [editing, setEditing] = useState(false)
   const history = useHistory()
-  const { role } = useSelector(state => state.auth)
+  const { role } = useCurrentUser()
   const { user } = useSelector(state => state.users)
   const { isFetched, isFetching } = user;
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
   const { isScrolling } = useScrollPosition()
   const uid = match.params.id
   const dispatch = useDispatch()

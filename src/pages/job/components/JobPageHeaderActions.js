@@ -8,13 +8,14 @@ import { IconButton } from '@material-ui/core';
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import useCurrentUser from '../../../hooks/useCurrentUser'
 
 const ActionsContainer = styled.div`
 
 `
 
 const JobPageHeaderActions = ({ editing, job, handleEditing }) => {
-  const { uid, role } = useSelector(state => state.auth)
+  const { uid, role } = useCurrentUser()
 
   if (uid === job?.uid || checkPermissions(role) >= 3) {
     return (

@@ -11,10 +11,12 @@ import { setTheme, verifyUser } from './actions'
 import Container from './v2/atoms/Container'
 import { CircularProgress } from '@material-ui/core'
 import ProtectedRouter from './ProtectedRouter'
+import useCurrentUser from './hooks/useCurrentUser';
+import useTheme from './hooks/useTheme';
 
 function App() {
-  const { isFetching, isFetched } = useSelector(state => state.auth)
-  const { theme } = useSelector(state => state.theme)
+  const { isFetching, isFetched } = useCurrentUser();
+  const { theme } = useTheme();
   const dispatch = useDispatch()
 
   useEffect(() => {

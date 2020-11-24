@@ -13,6 +13,7 @@ import UserPageActions from './components/UserPageActions'
 import Container from '../../v2/atoms/Container'
 import EditUserActivities from './components/EditUserActivities'
 import { checkPermissions } from '../../utils'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const User = ({ match }) => {
   const [imageOpen, setImageOpen] = useState(false)
@@ -40,7 +41,7 @@ const User = ({ match }) => {
   const [role, setRole] = useState('')
   const [stateApproved, setApproved] = useState(0)
   const [statePending, setPending] = useState(0)
-  const { role: currentUserRole } = useSelector(state => state.auth)
+  const { role: currentUserRole } = useCurrentUser()
 
   const handleSubmit = async () => {
     const newUser = {

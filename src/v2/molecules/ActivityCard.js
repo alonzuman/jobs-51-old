@@ -6,6 +6,7 @@ import ActivityCardActions from './ActivityCardActions';
 import { Link } from 'react-router-dom';
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from 'styled-components';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const ListItemPrimaryText = styled.span`
   width: 100%;
@@ -23,7 +24,7 @@ const ActivityCard = ({ activity }) => {
   const { approved, description, total, user, type } = activity
   const [isApproved, setIsApproved] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { role, uid } = useSelector(state => state.auth)
+  const { role, uid } = useCurrentUser()
   const { day, month, number, year, monthNumber } = translateDate(activity.date)
   const isAdmin = checkPermissions(role) >= 3;
   const isUser = uid === activity?.uid;

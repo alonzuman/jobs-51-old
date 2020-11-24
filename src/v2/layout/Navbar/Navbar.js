@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux'
 import useWindowSize from '../../../hooks/useWindowSize'
 import MobileNavbar from './MobileNavbar'
 import DesktopNavbar from './DesktopNavbar'
+import useCurrentUser from '../../../hooks/useCurrentUser'
 
 const Navbar = () => {
-  const { isFetching, isFetched, isAuthenticated, role } = useSelector(state => state.auth)
+  const { isFetching, isFetched, isAuthenticated, role } = useCurrentUser()
   const { windowWidth: width } = useWindowSize()
 
   if (isFetched && isAuthenticated && role !== 'pending') {

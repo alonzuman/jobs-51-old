@@ -7,6 +7,7 @@ import StarsIcon from '@material-ui/icons/Stars';
 import { checkPermissions, roles } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PageSection from '../../../v2/atoms/PageSection'
+import useCurrentUser from '../../../hooks/useCurrentUser'
 
 const ActionsContainer = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const UserPageBadges = ({
   stateRole,
   setRole
 }) => {
-  const { role } = useSelector(state => state.auth)
+  const { role } = useCurrentUser()
   const { translation } = useSelector(state => state.theme)
   const { volunteer, lookingForJob, activities, role: userRole } = user
   const isPending = checkPermissions(user?.role) === 0;

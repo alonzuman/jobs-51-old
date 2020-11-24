@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { saveJob, unsaveJob } from '../../actions';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const SaveJobButton = ({ className, job }) => {
   const dispatch = useDispatch()
-  const { uid } = useSelector(state => state.auth)
+  const { uid } = useCurrentUser()
   const isSaved = job?.savedIds?.includes(uid)
 
   const handleFavorite = () => {

@@ -84,11 +84,11 @@ const GeneralStats = () => {
           <PageSectionTitle title={translation.totalActivityHours} />
           <Box className='mt-1' display='flex' alignItems='center' justifyContent='space-around'>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{numberWithCommas(approvedActivityHoursCount)}</Typography>
+              <Typography variant='h1'>{approvedActivityHoursCount}</Typography>
               <Typography variant='subtitle1'>{translation.approvedHours}</Typography>
             </Box>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{numberWithCommas(pendingActivityHoursCount)}</Typography>
+              <Typography variant='h1'>{pendingActivityHoursCount}</Typography>
               <Typography variant='subtitle1'>{translation.pendingHours}</Typography>
             </Box>
           </Box>

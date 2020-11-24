@@ -10,13 +10,14 @@ import CircularSpinnerWithContainer from '../atoms/CircularSpinnerWithContainer'
 // Pages
 import PendingApproval from '../../pages/PendingApproval'
 import NoAccessPage from '../../pages/403'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const Container = styled.div`
   direction: rtl;
 `
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { role, uid, isAuthenticated } = useSelector(state => state.auth)
+  const { role, uid, isAuthenticated } = useCurrentUser()
   const { isFetched } = useSelector(state => state.notifications)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser

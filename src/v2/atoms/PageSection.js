@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import useTheme from '../../hooks/useTheme'
 
 const Section = styled.div`
   padding: ${props => props.disableGutters ? '' : '0 16px'};
@@ -18,7 +19,7 @@ const Section = styled.div`
 `
 
 const PageSection = ({ children, disableGutters, spaceBottom, sticky, transparent, ...rest }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
 
   return (
     <Section

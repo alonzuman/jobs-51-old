@@ -5,6 +5,7 @@ import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 import styled from 'styled-components'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const ActivityCardActionsContainer = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const ActivityCardActions = ({ closeActions, activity, handleApproved }) => {
   const [approved, setApproved] = useState(activity.approved)
   const [disabled, setDisabled] = useState(false)
   const [approvalOpen, setApprovalOpen] = useState(false)
-  const { role, avatar, firstName, lastName, uid } = useSelector(state => state.auth)
+  const { role, avatar, firstName, lastName, uid } = useCurrentUser()
   const { translation } = useSelector(state => state.theme)
   const { isUpdating } = useSelector(state => state.activities.activities)
   const dispatch = useDispatch()

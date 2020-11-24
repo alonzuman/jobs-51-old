@@ -14,10 +14,11 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import InfoIcon from '@material-ui/icons/Info';
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const Profile = () => {
   const { translation, theme } = useSelector(state => state.theme)
-  const { loading, uid, avatar, firstName } = useSelector(state => state.auth)
+  const { loading, uid, avatar, firstName } = useCurrentUser()
   const dispatch = useDispatch()
 
   const handleToggleTheme = () => {

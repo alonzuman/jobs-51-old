@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close'
 import { useSelector } from 'react-redux';
+import useTheme from '../../hooks/useTheme';
 
 const DialogHeader = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const DialogHeader = styled.div`
 `
 
 const CustomDialogHeader = ({ title, exitButton, onClose }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
 
   return (
     <DialogHeader border={theme?.palette?.border?.strong}>

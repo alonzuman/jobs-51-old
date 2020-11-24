@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { Avatar, Badge, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import DesktopNavbarMenu from './DesktopNavbarMenu';
+import useTheme from '../../../hooks/useTheme';
+import useCurrentUser from '../../../hooks/useCurrentUser';
 
 const Container = styled.div`
   top: 0;
@@ -20,10 +22,10 @@ const Wrapper = styled.div`
 `
 
 const DesktopNavbar = ({ value }) => {
-  const { avatar, uid } = useSelector(state => state.auth)
+  const { avatar, uid } = useCurrentUser()
   const [anchorEl, setAnchorEl] = useState(null)
   const [hover, setHover] = useState(false)
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
   const { unseen } = useSelector(state => state.notifications);
 
   const handleHover = () => setHover(!hover)

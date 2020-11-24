@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 import AuthDialog from '../../v2/layout/AuthDialog'
 import ShaldagLogo from '../../assets/art/ShaldagLogo'
 import Container from '../../v2/atoms/Container'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const LandingPage = () => {
   const { translation } = useSelector(state => state.theme)
-  const { isFetching, uid, isAuthenticated } = useSelector(state => state.auth)
+  const { isFetching, uid, isAuthenticated } = useCurrentUser()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleDialog = () => setIsOpen(!isOpen)

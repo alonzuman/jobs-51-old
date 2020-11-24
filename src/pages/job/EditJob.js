@@ -14,12 +14,13 @@ import JobPageUserDetails from './components/JobPageUserDetails'
 import { useHistory } from 'react-router-dom'
 import ApprovalDialog from '../../v2/layout/ApprovalDialog'
 import JobActions from './components/JobActions'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 const EditJob = ({ match }) => {
   const dispatch = useDispatch()
   const { translation } = useSelector(state => state.theme)
   const { loading, job, isUpdating, isDeleting } = useSelector(state => state.jobs)
-  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useSelector(state => state.auth)
+  const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useCurrentUser()
   const isLoading = loading || !job
   const jid = match.params.jid
   const history = useHistory()

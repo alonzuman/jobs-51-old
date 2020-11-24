@@ -345,6 +345,10 @@
     "pastDay": "ביממה האחרונה",
     "pastWeek": "בשבוע האחרון",
     "pastMonth": "בחודש האחרון"
+  },
+  "analytics": {
+    "updateUsersCount": "עדכון משתמשים",
+    "updateActivitiesCount": "עדכון שעות פעילות"
   }
 }
 

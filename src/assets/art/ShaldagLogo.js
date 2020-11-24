@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import useTheme from '../../hooks/useTheme';
 
 const ShaldagLogo = ({ height = 134, width = 279 }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
 
   return (
     <svg style={{direction: 'ltr'}} width={width} height={height} viewBox="0 0 279 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">

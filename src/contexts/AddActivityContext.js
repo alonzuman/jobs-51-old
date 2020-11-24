@@ -1,13 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../actions';
+import useCurrentUser from '../hooks/useCurrentUser';
 import { formatDate } from '../utils';
 
 export const AddActivityContext = createContext({})
 
 const AddActivityProvider = ({ children, onClose }) => {
   const { translation } = useSelector(state => state.theme)
-  const { uid, firstName, lastName, avatar, region, phone } = useSelector(state => state.auth)
+  const { uid, firstName, lastName, avatar, region, phone } = useCurrentUser()
   const [activity, setActivity] = useState({
     type: '',
     description: '',

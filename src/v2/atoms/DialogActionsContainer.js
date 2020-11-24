@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import useTheme from '../../hooks/useTheme'
 
 const Container = styled.div`
   position: sticky;
@@ -13,7 +14,7 @@ const Container = styled.div`
 `
 
 const DialogActionsContainer = ({ children, border = true, ...rest }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
   return <Container {...rest} border={border ? theme?.palette?.border?.strong : 'none'}>{children}</Container>
 }
 

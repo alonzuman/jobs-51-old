@@ -21,18 +21,6 @@ export const checkPermissions = (role) => {
   }
 }
 
-export const activityTypeColor = (type) => {
-  if (theme) {
-    switch (type) {
-      case 'עידוד לשירות משמעותי': return '#4caf50';
-      case 'אירוע עמותה': return '#009688';
-      case 'ליווי קשישים וניצולי שואה': return '#1de9b6';
-      case 'אירוע שיא': return '#ff9800';
-      default: return `${theme?.palette?.primary?.main}`
-    }
-  }
-}
-
 export const calcHours = (startHour, endHour, date) => {
   const startHourArr = startHour.split(':')
   const endHourArr = endHour.split(':')

@@ -6,9 +6,9 @@ const Activities = db.collection('activities')
 const Constants = db.collection('constants')
 const Jobs = db.collection('jobs')
 
-// export const fixUsersCount = async () => {
+// export const updateUsersCount = async () => {
 //   try {
-//     const snap = await Users.where('volunteer', '==', true).get();
+//     const snap = await Users.where('volunteer', '==', true).limit(10).get();
 //     let allUsers = [];
 //     snap.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }))
 //     const pendingVolunteersCount = snap.size
@@ -25,130 +25,96 @@ const Jobs = db.collection('jobs')
 //   }
 // }
 
-// export const seedJobs = async () => {
-//   try {
-//     console.log('seeding....')
-//     const liorUid = 'X5MHhBNQahSzwwfX2iopBGfIYOX2'
-//     const liorSnapshot = await Users.doc(liorUid).get()
-//     const { firstName, lastName, avatar, phone, role, serviceYear } = liorSnapshot.data()
-//     const lior = {
-//       firstName,
-//       lastName,
-//       avatar,
-//       phone,
-//       role,
-//       serviceYear
-//     }
-//     const promises = jobsSeed.forEach(job => {
-//       const newJob = {
-//         ...job,
-//         uid: liorUid,
-//         dateCreated: Date.now(),
-//         user: {
-//           ...lior
-//         }
-//       }
-//       Jobs.add(newJob)
-//     })
+export const fixStats = async () => {
+  let stats = {
+    approvedActivityHoursByRegionCount: {},
+    pendingActivityHoursByRegionCount: {},
+    volunteersByRegionCount: {},
+    approvedActivityHoursCount: 0,
+    pendingActivityHoursCount: 0,
+    pendingUsersCount: 0,
+    volunteersCount: 0
+  };
 
-//     await Promise.all(promises)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+  let unmarkedActivities = [];
+  let unmarkedUsers = [];
 
-// export const fixStats = async () => {
-//   let stats = {
-//     approvedActivityHoursByRegionCount: {},
-//     pendingActivityHoursByRegionCount: {},
-//     volunteersByRegionCount: {},
-//     approvedActivityHoursCount: 0,
-//     pendingActivityHoursCount: 0,
-//     pendingUsersCount: 0,
-//     volunteersCount: 0
-//   };
+  try {
+    const allUsers = await Users.get()
+    const allActivities = await Activities.get()
 
-//   let unmarkedActivities = [];
-//   let unmarkedUsers = [];
+    // Fix stats activities count
+    allActivities.forEach(doc => {
+      const { approved, total, region } = doc.data();
 
-//   try {
-//     const allUsers = await Users.limit(5).get()
-//     // const allUsers = await Users.get()
-//     const allActivities = await Activities.limit(5).get()
-//     // const allActivities = await Activities.get()
+      if (region === '') {
+        unmarkedActivities.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      } else if (approved && region) {
+        stats = {
+          ...stats,
+          approvedActivityHoursCount: stats.approvedActivityHoursCount + total,
+          approvedActivityHoursByRegionCount: {
+            ...stats.approvedActivityHoursByRegionCount,
+            [region]: (stats.approvedActivityHoursByRegionCount[region] || 0) + total
+          }
+        }
+      } else {
+        stats = {
+          ...stats,
+          pendingActivityHoursCount: stats.pendingActivityHoursCount + total,
+          pendingActivityHoursByRegionCount: {
+            ...stats.pendingActivityHoursByRegionCount,
+            [region]: (stats.pendingActivityHoursByRegionCount[region] || 0) + total
+          }
+        }
+      }
+    })
 
-//     // Fix stats activities count
-//     allActivities.forEach(doc => {
-//       const { approved, total, region } = doc.data();
+    // Fix stats users count
+    allUsers.forEach(doc => {
+      const { role, volunteer, region } = doc.data();
 
-//       if (region === '') {
-//         unmarkedActivities.push({
-//           id: doc.id,
-//           ...doc.data()
-//         })
-//       } else if (approved && region) {
-//         stats = {
-//           ...stats,
-//           approvedActivityHoursCount: stats.approvedActivityHoursCount + total,
-//           approvedActivityHoursByRegionCount: {
-//             ...stats.approvedActivityHoursByRegionCount,
-//             [region]: (stats.approvedActivityHoursByRegionCount[region] || 0) + total
-//           }
-//         }
-//       } else {
-//         stats = {
-//           ...stats,
-//           pendingActivityHoursCount: stats.pendingActivityHoursCount + total,
-//           pendingActivityHoursByRegionCount: {
-//             ...stats.pendingActivityHoursByRegionCount,
-//             [region]: (stats.pendingActivityHoursByRegionCount[region] || 0) + total
-//           }
-//         }
-//       }
-//     })
+      if (region && role !== 0 && volunteer) {
+        stats = {
+          ...stats,
+          volunteersCount: stats.volunteersCount + 1,
+          volunteersByRegionCount: {
+            ...stats.volunteersByRegionCount,
+            [region]: (stats.volunteersByRegionCount[region] || 0) + 1
+          }
+        }
+      } else if (role === 0) {
+        stats = {
+          ...stats,
+          pendingUsersCount: stats.pendingUsersCount + 1,
+        }
+      } else {
+        unmarkedUsers.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      }
+    })
 
-//     // Fix stats users count
-//     allUsers.forEach(doc => {
-//       const { role, volunteer, region } = doc.data();
+    await Constants.doc('stats').set({
+      ...stats
+    }, { merge: true })
 
-//       if (region && role !== 0 && volunteer) {
-//         stats = {
-//           ...stats,
-//           volunteersCount: stats.volunteersCount + 1,
-//           volunteersByRegionCount: {
-//             ...stats.volunteersByRegionCount,
-//             [region]: (stats.volunteersByRegionCount[region] || 0) + 1
-//           }
-//         }
-//       } else if (role === 0) {
-//         stats = {
-//           ...stats,
-//           pendingUsersCount: stats.pendingUsersCount + 1,
-//         }
-//       } else {
-//         unmarkedUsers.push({
-//           id: doc.id,
-//           ...doc.data()
-//         })
-//       }
-//     })
+    await Constants.doc('problematicDocs').set({
+      unmarkedUsers,
+      unmarkedActivities
+    }, { merge: true })
 
-//     await Constants.doc('stats').set({
-//       ...stats
-//     }, { merge: true })
-
-//     await Constants.doc('problematicDocs').set({
-//       unmarkedUsers,
-//       unmarkedActivities
-//     }, { merge: true })
-
-//     console.log('unmarkedUsers: ', unmarkedUsers)
-//     console.log('unmarkedActivities: ', unmarkedActivities)
-//     console.log(stats)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+    console.log('unmarkedUsers: ', unmarkedUsers)
+    console.log('unmarkedActivities: ', unmarkedActivities)
+    console.log(stats)
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // export const fixUserActivityHoursCount = async () => {
 //   try {

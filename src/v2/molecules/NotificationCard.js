@@ -7,6 +7,7 @@ import 'moment/locale/he'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const ListItemPrimaryText = styled.span`
   display: flex;
@@ -17,7 +18,7 @@ const ListItemPrimaryText = styled.span`
 
 const NotificationCard = ({ notification }) => {
   const { translation } = useSelector(state => state.theme)
-  const { uid } = useSelector(state => state.auth)
+  const { uid } = useCurrentUser()
   const { seen, type, activity, notificationBy } = notification;
   const [isSeen, setIsSeen] = useState(false)
   const dispatch = useDispatch()

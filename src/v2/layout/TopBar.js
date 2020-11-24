@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import useTheme from '../../hooks/useTheme'
 import useWindowSize from '../../hooks/useWindowSize'
 
 const Container = styled.div`
@@ -20,7 +21,7 @@ const Container = styled.div`
 `
 
 const TopBar = ({ sticky, bottomSpacing = true, disableGutters = false, children, ...rest }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
   const { windowWidth: width } = useWindowSize()
 
   return (

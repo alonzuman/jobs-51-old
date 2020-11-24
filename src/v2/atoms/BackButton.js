@@ -4,6 +4,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import useTheme from '../../hooks/useTheme';
 
 const Container = styled.div`
   position: ${props => props.sticky ? 'sticky' : 'relative'};
@@ -15,7 +16,7 @@ const Container = styled.div`
 `
 
 const BackButton = ({ sticky = true, backLink = '', isScrolling = false, ...rest }) => {
-  const { theme } = useSelector(state => state.theme)
+  const { theme } = useTheme();
   const history = useHistory()
   const handleClick = () => {
     if (backLink) {

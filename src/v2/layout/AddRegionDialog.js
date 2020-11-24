@@ -10,7 +10,7 @@ import DialogActionsContainer from '../atoms/DialogActionsContainer'
 const AddRegionDialog = ({ isOpen, onClose }) => {
   const { translation } = useSelector(state => state.theme);
   const { isUpdating } = useSelector(state => state.users);
-  const { uid } = useSelector(state => state.auth);
+  const { uid } = useCurrentUser();
   const { regions } = useSelector(state => state.constants);
   const [error, setError] = useState('')
   const [region, setRegion] = useState('');

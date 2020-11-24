@@ -2,6 +2,7 @@ import { Button, CircularProgress, Divider } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import useCurrentUser from '../../../hooks/useCurrentUser'
 import useWindowSize from '../../../hooks/useWindowSize'
 import { checkPermissions } from '../../../utils'
 
@@ -30,7 +31,7 @@ const Container = styled.div`
 const UserPageActions = ({ updateAction, deleteAction, editing }) => {
   const { translation, theme } = useSelector(state => state.theme)
   const { isFetching, isUpdating, isDeleting } = useSelector(state => state?.users?.user);
-  const { role } = useSelector(state => state.auth)
+  const { role } = useCurrentUser()
   const { windowWidth } = useWindowSize()
 
   if (isFetching || !editing) {

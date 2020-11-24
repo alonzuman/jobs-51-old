@@ -17,7 +17,7 @@ import ActivitiesProgress from '../../v2/molecules/ActivitiesProgress'
 const Activity = ({ match }) => {
   const [addingActivity, setAddingActivity] = useState(false)
   const { translation } = useSelector(state => state.theme)
-  const { region, loading: authLoading, firstName, avatar } = useSelector(state => state.auth)
+  const { region, loading: authLoading, firstName, avatar } = useCurrentUser()
   const { activities } = useCurrentUser();
   const { pending, approved } = useSelector(state => state.auth.activities)
   const { isFetching, regionManagers, currentUid, all } = useSelector(state => state.activities.activities)

@@ -6,11 +6,12 @@ import Transition from '../atoms/Transition';
 import EmailSignIn from '../organisms/EmailSignIn';
 import EmailSignUp from '../organisms/EmailSignUp';
 import SocialMediaSignIn from '../organisms/SocialMediaSignIn';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const AuthDialog = ({ open, onClose }) => {
   const [signingIn, setSigningIn] = useState(true)
   const { translation } = useSelector(state => state.theme)
-  const { loading } = useSelector(state => state.auth)
+  const { loading } = useCurrentUser()
 
   const handleSigningIn = () => setSigningIn(!signingIn)
 
