@@ -689,16 +689,10 @@ a:hover {
 .MuiFab-root {
   position: fixed!important;
   bottom: 5.5rem!important;
-  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  bottom: calc(5.5rem + env(safe-area-inset-bottom))!important;
   margin: 0 auto!important;
   left: 50%!important;
   box-shadow: 0 0 10px #00000005!important;
   transform: translate(-50%, 0)!important;
   z-index: 99!important;
-}
-
-@media (min-width: 768px) {
-  .MuiFab-root {
-    bottom: 2.5rem!important;
-  }
 }
