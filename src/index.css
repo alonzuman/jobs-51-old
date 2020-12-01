@@ -47,6 +47,7 @@ a:hover {
 .MuiBottomNavigationAction-root {
   padding: 16px 8px!important;
   min-width: 0!important;
+  transition: .15s ease-in-out padding;
   padding-bottom: calc(16px + env(safe-area-inset-bottom))!important;
 }
 
