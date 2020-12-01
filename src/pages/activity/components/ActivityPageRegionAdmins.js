@@ -1,7 +1,7 @@
 import { Avatar, Typography } from '@material-ui/core'
 import { AvatarGroup, Skeleton } from '@material-ui/lab'
 import React from 'react'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 

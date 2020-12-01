@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 
 // Actions
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,7 +12,7 @@ import JobPageHeader from './components/JobPageHeader'
 import JobPageJobsCarousel from './components/JobPageJobsCarousel'
 import JobPageUserDetails from './components/JobPageUserDetails'
 import { useHistory } from 'react-router-dom'
-import ApprovalDialog from '../../v2/layout/ApprovalDialog'
+import ApprovalDialog from '../../components/layout/ApprovalDialog'
 import JobActions from './components/JobActions'
 import useCurrentUser from '../../hooks/useCurrentUser'
 

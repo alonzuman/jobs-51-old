@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { checkPermissions } from '../../../utils'
-import SaveJobButton from '../../../v2/molecules/SaveJobButton'
+import SaveJobButton from '../../../components/molecules/SaveJobButton'
 import styled from 'styled-components'
 import { IconButton } from '@material-ui/core';
 

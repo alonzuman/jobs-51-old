@@ -2,8 +2,8 @@ import React from 'react'
 import useCurrentUser from '../../../../../hooks/useCurrentUser';
 import useStats from '../../../../../hooks/useStats';
 import useTheme from '../../../../../hooks/useTheme';
-import PageSection from '../../../../../v2/atoms/PageSection';
-import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle';
+import PageSection from '../../../../../components/atoms/PageSection';
+import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle';
 import { Bar } from 'react-chartjs-2';
 import { Skeleton } from '@material-ui/lab';
 

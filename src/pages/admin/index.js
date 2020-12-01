@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import PageHeader from '../../v2/organisms/PageHeader';
+import PageHeader from '../../components/organisms/PageHeader';
 import { Divider, ListItem, List, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { checkPermissions } from '../../utils';
-import PageSection from '../../v2/atoms/PageSection';
-import Container from '../../v2/atoms/Container';
-import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
+import PageSection from '../../components/atoms/PageSection';
+import Container from '../../components/atoms/Container';
+import PageSectionTitle from '../../components/atoms/PageSectionTitle';
 
 // Icons
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';

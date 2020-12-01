@@ -22,9 +22,9 @@ import GeneralManagement from './pages/Admin/pages/GeneralManagement'
 import Region from './pages/Region'
 
 // Components
-import Feedback from './v2/atoms/Feedback'
-import Navbar from './v2/layout/Navbar/Navbar'
-import ProtectedRoute from './v2/layout/ProtectedRoute'
+import Feedback from './components/atoms/Feedback'
+import Navbar from './components/layout/Navbar/Navbar'
+import ProtectedRoute from './components/layout/ProtectedRoute'
 import Analytics from './pages/Analytics/Analytics';
 
 const ProtectedRouter = () => {

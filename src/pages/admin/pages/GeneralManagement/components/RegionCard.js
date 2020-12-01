@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { EditRegionsContext } from './EditRegionsContext';
-import ApprovalDialog from '../../../../../v2/layout/ApprovalDialog';
+import ApprovalDialog from '../../../../../components/layout/ApprovalDialog';
 import { useSelector } from 'react-redux';
 
 const RegionCard = ({ region }) => {

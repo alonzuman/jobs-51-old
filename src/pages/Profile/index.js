@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { setTheme, signOut } from '../../actions'
-import PageHeader from '../../v2/organisms/PageHeader'
-import PageSection from '../../v2/atoms/PageSection'
-import NotificationIcon from '../../v2/molecules/NotificationIcon'
-import Container from '../../v2/atoms/Container'
+import PageHeader from '../../components/organisms/PageHeader'
+import PageSection from '../../components/atoms/PageSection'
+import NotificationIcon from '../../components/molecules/NotificationIcon'
+import Container from '../../components/atoms/Container'
 
 // Icons
 import Brightness4Icon from '@material-ui/icons/Brightness4';

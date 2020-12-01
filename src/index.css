@@ -47,6 +47,7 @@ a:hover {
 .MuiBottomNavigationAction-root {
   padding: 16px 8px!important;
   min-width: 0!important;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom))!important;
 }
 
 .padding-bottom-24 {
@@ -682,17 +683,6 @@ a:hover {
 .desktop__menu {
   z-index: 1102!important;
   border-radius: 1rem!important;
-}
-
-/* IPHONE X ONLY */
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 812px)
-and (-webkit-device-pixel-ratio : 3) {
-  .MuiBottomNavigationAction-root {
-    padding-bottom: 32px!important;
-    padding-top: 8px!important;
-  }
 }
 
 .MuiFab-root {

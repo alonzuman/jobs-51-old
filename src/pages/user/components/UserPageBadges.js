@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import StarsIcon from '@material-ui/icons/Stars';
 import { checkPermissions, roles } from '../../../utils'
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import useCurrentUser from '../../../hooks/useCurrentUser'
 
 const ActionsContainer = styled.div`

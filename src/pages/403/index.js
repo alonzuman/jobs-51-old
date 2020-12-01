@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 
 const NoAccessPage = () => {
   const { translation } = useSelector(state => state.theme)

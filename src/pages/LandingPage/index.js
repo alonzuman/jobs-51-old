@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Button, Typography, Box } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import AuthDialog from '../../v2/layout/AuthDialog'
+import AuthDialog from '../../components/layout/AuthDialog'
 import ShaldagLogo from '../../assets/art/ShaldagLogo'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 import useCurrentUser from '../../hooks/useCurrentUser'
 
 const LandingPage = () => {

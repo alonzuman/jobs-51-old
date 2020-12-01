@@ -1,12 +1,12 @@
 import React from 'react'
-import PageHeader from '../../v2/organisms/PageHeader'
+import PageHeader from '../../components/organisms/PageHeader'
 
 // Icons
-import Container from '../../v2/atoms/Container';
+import Container from '../../components/atoms/Container';
 import { useSelector } from 'react-redux';
 import NotificationsList from './components/NotificationsList';
-import PageSection from '../../v2/atoms/PageSection';
-import PageSectionTitle from '../../v2/atoms/PageSectionTitle';
+import PageSection from '../../components/atoms/PageSection';
+import PageSectionTitle from '../../components/atoms/PageSectionTitle';
 
 const Notifications = ({ match }) => {
   const { translation } = useSelector(state => state.theme)

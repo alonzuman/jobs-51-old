@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { roles } from '../../../../../utils'
-import PageSection from '../../../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle'
 import { UsersFilterContext } from './UsersFilterContext'
 
 const RoleFilter = () => {

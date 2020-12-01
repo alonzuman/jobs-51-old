@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
-import JobCard from '../../../v2/molecules/JobCard'
+import JobCard from '../../../components/molecules/JobCard'
 import useWindowSize from '../../../hooks/useWindowSize'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 
 const UserPageJobsCarousel = ({ user, loading }) => {
   const { translation } = useSelector(state => state.theme)

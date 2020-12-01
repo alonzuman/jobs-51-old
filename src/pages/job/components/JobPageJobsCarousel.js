@@ -3,9 +3,9 @@ import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import JobCard from '../../../v2/molecules/JobCard'
+import JobCard from '../../../components/molecules/JobCard'
 import useWindowSize from '../../../hooks/useWindowSize'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import styled from 'styled-components'
 
 const Container = styled.div`

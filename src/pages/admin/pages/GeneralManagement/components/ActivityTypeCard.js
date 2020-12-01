@@ -1,7 +1,7 @@
 import { IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import ApprovalDialog from '../../../../../v2/layout/ApprovalDialog';
+import ApprovalDialog from '../../../../../components/layout/ApprovalDialog';
 import { deleteActivityType } from '../../../../../actions/constants';
 
 // Icons

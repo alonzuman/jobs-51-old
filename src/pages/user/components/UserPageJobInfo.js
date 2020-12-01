@@ -2,13 +2,13 @@ import { Chip, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, TextFi
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SkillsSelect from '../../../v2/molecules/SkillsSelect'
+import SkillsSelect from '../../../components/molecules/SkillsSelect'
 import WorkIcon from '@material-ui/icons/Work';
 import InfoContainer from './InfoContainer'
 import GradeIcon from '@material-ui/icons/Grade';
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import useWindowSize from '../../../hooks/useWindowSize'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 
 const UserPageJobInfo = ({ user, editing, loading, lastPosition, setLastPosition, skills, setSkills }) => {
   const { translation } = useSelector(state => state.theme)

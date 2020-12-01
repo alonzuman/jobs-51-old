@@ -1,6 +1,6 @@
 import React from 'react'
 import { Skeleton } from '@material-ui/lab'
-import PageHeader from '../../../v2/organisms/PageHeader'
+import PageHeader from '../../../components/organisms/PageHeader'
 import { userSecondayText } from '../../../utils';
 import { useSelector } from 'react-redux';
 import { Avatar, IconButton, TextField, Typography } from '@material-ui/core';
@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close';
-import PageSection from '../../../v2/atoms/PageSection';
+import PageSection from '../../../components/atoms/PageSection';
 
 const ActionsWrapper = styled.div`
   margin-bottom: 32px;

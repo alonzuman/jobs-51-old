@@ -3,8 +3,8 @@ import { Skeleton } from '@material-ui/lab'
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLocations } from '../../../../../actions'
-import PageSection from '../../../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle'
 import { UsersFilterContext } from './UsersFilterContext'
 
 const RegionFilter = () => {

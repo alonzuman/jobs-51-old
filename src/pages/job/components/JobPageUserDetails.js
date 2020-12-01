@@ -2,10 +2,10 @@ import { Avatar, Divider, ListItem, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import { Link } from 'react-router-dom'
 import { Skeleton } from '@material-ui/lab'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 
 const ListItemContent = styled.div`
   display: flex;

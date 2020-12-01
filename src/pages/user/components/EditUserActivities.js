@@ -2,9 +2,9 @@ import { Divider, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import LocationSelect from '../../../v2/molecules/LocationSelect'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import LocationSelect from '../../../components/molecules/LocationSelect'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 
 const EditUserActivities = ({
   isVolunteer,

@@ -1,10 +1,10 @@
 import { Button, Divider } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 import { Link } from 'react-router-dom'
-import ActivitiesList from '../../../v2/organisms/ActivitiesList'
+import ActivitiesList from '../../../components/organisms/ActivitiesList'
 import { Skeleton } from '@material-ui/lab'
 
 const UserPageActivities = ({ user, loading, editing }) => {

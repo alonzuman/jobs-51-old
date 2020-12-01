@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getListedMembers } from '../../../../../actions/constants'
 import { onlyUnique } from '../../../../../utils'
-import PageSection from '../../../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle'
 import { UsersFilterContext } from './UsersFilterContext'
 
 const Container = styled.div`

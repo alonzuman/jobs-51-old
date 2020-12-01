@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { JobsFilterContext } from '../../../contexts/JobsFilterContext'
 import useTheme from '../../../hooks/useTheme'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 import { DAY, WEEK, MONTH } from '../../../utils/index';
 import { Chip, Grid } from '@material-ui/core'
 

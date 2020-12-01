@@ -2,10 +2,10 @@ import { Divider, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import ActivitiesList from '../../../v2/organisms/ActivitiesList'
-import CardsSkeletons from '../../../v2/organisms/CardsSkeletons'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
+import ActivitiesList from '../../../components/organisms/ActivitiesList'
+import CardsSkeletons from '../../../components/organisms/CardsSkeletons'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
 
 const ActivityPageActivitiesList = ({ activities, loading, region }) => {
   const { translation } = useSelector(state => state.theme)

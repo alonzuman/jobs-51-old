@@ -2,10 +2,10 @@ import { Chip, Divider, FormControl, Grid, MenuItem, Select, TextField, Typograp
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SkillsSelect from '../../../v2/molecules/SkillsSelect'
-import PageSection from '../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle'
-import SubSection from '../../../v2/atoms/SubSection'
+import SkillsSelect from '../../../components/molecules/SkillsSelect'
+import PageSection from '../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
+import SubSection from '../../../components/atoms/SubSection'
 import useJobsConstants from '../../../hooks/useJobsConstants'
 
 const JobPageDetails = ({ loading, job, editing, description, setDescription, skills, setSkills, industry, setIndustry, error, helperText }) => {

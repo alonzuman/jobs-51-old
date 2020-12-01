@@ -8,7 +8,7 @@ import DirectionProvider from './contexts/DirectionContext'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { setTheme, verifyUser } from './actions'
 
-import Container from './v2/atoms/Container'
+import Container from './components/atoms/Container'
 import { CircularProgress } from '@material-ui/core'
 import ProtectedRouter from './ProtectedRouter'
 import useCurrentUser from './hooks/useCurrentUser';

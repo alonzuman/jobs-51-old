@@ -1,9 +1,9 @@
 import { IconButton, List, Typography } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Container from '../../../../v2/atoms/Container'
-import PageSection from '../../../../v2/atoms/PageSection'
-import PageHeader from '../../../../v2/organisms/PageHeader'
+import Container from '../../../../components/atoms/Container'
+import PageSection from '../../../../components/atoms/PageSection'
+import PageHeader from '../../../../components/organisms/PageHeader'
 import ActivityTypeCard from './components/ActivityTypeCard'
 import styled from 'styled-components'
 import AddActivityType from './components/AddActivityType'
@@ -14,7 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { getActivityTypes } from '../../../../actions/constants'
 import EditRegions from './components/EditRegions'
 import EditRegionsProvider from './components/EditRegionsContext'
-import PageSectionTitle from '../../../../v2/atoms/PageSectionTitle'
+import PageSectionTitle from '../../../../components/atoms/PageSectionTitle'
 
 const GeneralManagement = () => {
   const { translation } = useSelector(state => state.theme)

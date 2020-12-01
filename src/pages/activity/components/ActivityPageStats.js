@@ -1,5 +1,5 @@
 import React from 'react'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 import { Skeleton } from '@material-ui/lab'
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';

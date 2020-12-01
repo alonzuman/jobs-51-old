@@ -3,7 +3,7 @@ import { Skeleton } from '@material-ui/lab'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ImageLightbox from '../layout/ImageLightbox'
-import BackButton from '../../v2/atoms/BackButton'
+import BackButton from '../../components/atoms/BackButton'
 
 const Container = styled.div`
   display: flex;

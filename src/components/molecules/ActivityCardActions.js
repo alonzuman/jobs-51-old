@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Box } from '@material-ui/core'
 import { checkPermissions } from '../../utils'
 import { approveActivity, deleteActivity, unApproveActivity } from '../../actions'
-import ApprovalDialog from '../../v2/layout/ApprovalDialog'
+import ApprovalDialog from '../../components/layout/ApprovalDialog'
 import styled from 'styled-components'
 import useCurrentUser from '../../hooks/useCurrentUser'
 

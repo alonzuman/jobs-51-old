@@ -4,7 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import useWindowSize from '../../../hooks/useWindowSize'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 
 const ActionsContainer = styled.div`
   position: fixed;

@@ -1,11 +1,11 @@
 import React from 'react'
-import PageHeader from '../../../v2/organisms/PageHeader'
+import PageHeader from '../../../components/organisms/PageHeader'
 import { Avatar, TextField, Typography } from '@material-ui/core'
 import JobPageHeaderActions from './JobPageHeaderActions'
 import styled from 'styled-components'
-import LocationSelect from '../../../v2/molecules/LocationSelect'
+import LocationSelect from '../../../components/molecules/LocationSelect'
 import { useSelector } from 'react-redux'
-import PageSection from '../../../v2/atoms/PageSection'
+import PageSection from '../../../components/atoms/PageSection'
 
 const Container = styled.div`
   display: flex;

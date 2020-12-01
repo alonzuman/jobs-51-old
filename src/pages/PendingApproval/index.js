@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { Typography, Button } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOut } from '../../actions'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 
 const PendingApproval = () => {
   const dispatch = useDispatch()

@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 import { JobsFilterContext } from '../../../contexts/JobsFilterContext';
 import useJobsConstants from '../../../hooks/useJobsConstants'
 import useTheme from '../../../hooks/useTheme';
-import PageSection from '../../../v2/atoms/PageSection';
-import PageSectionTitle from '../../../v2/atoms/PageSectionTitle';
+import PageSection from '../../../components/atoms/PageSection';
+import PageSectionTitle from '../../../components/atoms/PageSectionTitle';
 
 const IndustryFilter = () => {
   const { translation } = useTheme();

@@ -1,7 +1,7 @@
 import { Button, CircularProgress, FormGroup, IconButton, List, ListItem, ListItemText, TextField } from '@material-ui/core'
 import React, { useContext } from 'react'
-import PageSection from '../../../../../v2/atoms/PageSection'
-import PageSectionTitle from '../../../../../v2/atoms/PageSectionTitle'
+import PageSection from '../../../../../components/atoms/PageSection'
+import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle'
 import { EditRegionsContext } from './EditRegionsContext'
 import RegionCard from './RegionCard'
 import EditIcon from '@material-ui/icons/Edit';

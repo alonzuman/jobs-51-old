@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSavedJobs } from '../../actions'
-import Container from '../../v2/atoms/Container'
-import PageSection from '../../v2/atoms/PageSection'
-import JobsList from '../../v2/molecules/JobsList'
-import PageHeader from '../../v2/organisms/PageHeader'
+import Container from '../../components/atoms/Container'
+import PageSection from '../../components/atoms/PageSection'
+import JobsList from '../../components/molecules/JobsList'
+import PageHeader from '../../components/organisms/PageHeader'
 
 const Saved = ({ match }) => {
   const { translation } = useSelector(state => state.theme)

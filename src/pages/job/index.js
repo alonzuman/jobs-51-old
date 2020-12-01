@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 
 // Actions
 import { useDispatch, useSelector } from 'react-redux'

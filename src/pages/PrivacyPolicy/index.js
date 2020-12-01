@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography } from '@material-ui/core'
-import PageHeader from '../../v2/organisms/PageHeader'
-import Container from '../../v2/atoms/Container'
+import PageHeader from '../../components/organisms/PageHeader'
+import Container from '../../components/atoms/Container'
 
 const PrivacyPolicy = () => {
   const { translation } = useSelector(state => state.theme)

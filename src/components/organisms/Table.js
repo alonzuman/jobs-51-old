@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer, Typography, CircularProgress } from '@material-ui/core'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 
 const UsersTable = ({ data, loading }) => {
   const { translation } = useSelector(state => state.theme)

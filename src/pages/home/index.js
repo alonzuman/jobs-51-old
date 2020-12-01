@@ -1,10 +1,10 @@
 import { Button, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import Container from '../../v2/atoms/Container'
+import Container from '../../components/atoms/Container'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import AddJobDialog from '../../v2/layout/AddJobDialog'
+import AddJobDialog from '../../components/layout/AddJobDialog'
 import ShaldagLogo from '../../assets/art/ShaldagLogo'
 
 const HomeSection = styled.div`
