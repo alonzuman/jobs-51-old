@@ -1,18 +1,15 @@
-import { Avatar, Button, CircularProgress, Divider, FormControl, ListItem, ListItemIcon, List, Switch, Typography, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
+import { Avatar, Button, CircularProgress, Divider, ListItem, ListItemIcon, List, Switch, Typography, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { setTheme, signOut } from '../../actions'
 import PageHeader from '../../components/organisms/PageHeader'
 import PageSection from '../../components/atoms/PageSection'
-import NotificationIcon from '../../components/molecules/NotificationIcon'
 import Container from '../../components/atoms/Container'
 
 // Icons
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import InfoIcon from '@material-ui/icons/Info';
 import useCurrentUser from '../../hooks/useCurrentUser'
 

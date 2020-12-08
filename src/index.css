@@ -696,3 +696,8 @@ a:hover {
   transform: translate(-50%, 0)!important;
   z-index: 99!important;
 }
+
+.activitiesProgress__small {
+  height: 48px;
+  width: 48px;
+}

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userSecondayText } from '../../utils'
 import styled from 'styled-components'
+import ActivitiesProgress from './ActivitiesProgress'
 
 const ListItemPrimaryText = styled.span`
   display: flex;
@@ -26,7 +27,9 @@ const UserCard = ({ user }) => {
     <Link className="full__width" to={`/users/${user?.uid}`}>
       <ListItem button>
         <ListItemAvatar>
-          <Avatar alt={`${user?.firstName}`} src={user?.avatar}>{user?.firstName.charAt(0)}</Avatar>
+          <ActivitiesProgress size={48} approved={user?.activities?.approved} pending={user?.activities?.pending}>
+            <Avatar alt={`${user?.firstName}`} src={user?.avatar}>{user?.firstName.charAt(0)}</Avatar>
+          </ActivitiesProgress>
         </ListItemAvatar>
         <ListItemText
           primary={listItemPrimaryText}

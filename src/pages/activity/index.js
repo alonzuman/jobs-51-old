@@ -20,7 +20,7 @@ const Activity = ({ match }) => {
   const { region, loading: authLoading, firstName, avatar } = useCurrentUser()
   const { activities } = useCurrentUser();
   const { pending, approved } = useSelector(state => state.auth.activities)
-  const { isFetching, regionManagers, currentUid, all } = useSelector(state => state.activities.activities)
+  const { isFetching, currentUid, all } = useSelector(state => state.activities.activities)
   const { uid } = match.params
   const handleAddActivity = () => setAddingActivity(true)
   const dispatch = useDispatch()

@@ -16,7 +16,6 @@ const RegionStats = () => {
     labels: [translation.pendingHours, translation.approvedHours],
     datasets: [
       {
-        label: 'hi',
         data: [isFetched ? pendingActivityHoursByRegionCount[region] : 0, isFetched ? approvedActivityHoursByRegionCount[region] : 0],
         backgroundColor: [
           theme.palette.border.dark,
@@ -46,9 +45,9 @@ const RegionStats = () => {
     )
   } else if (isFetched) {
     return (
-      <PageSection disableGutters>
+      <PageSection disableGutters className='regionStats'>
         <PageSectionTitle title={`${translation.generalStats} ${translation.region} ${region}`} />
-        <Bar data={data} options={options} />
+        <Bar height={96} data={data} options={options} />
       </PageSection>
     )
   } else {
