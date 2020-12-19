@@ -3,8 +3,11 @@ import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Divider, ListItem
 import moment from 'moment'
 import 'moment/locale/he'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import IndustryIcons from '../atoms/IndustryIcons';
 
 const JobCard = ({ job }) => {
+
   const timeAgo = () => {
     moment.locale('he')
     return moment(job?.dateCreated).fromNow()
@@ -14,7 +17,7 @@ const JobCard = ({ job }) => {
     <Link to={`/jobs/${job?.id}`}>
       <ListItem button alignItems='flex-start'>
         <ListItemAvatar>
-          <Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>
+          {job?.industry ? <IndustryIcons type={job?.industry} /> : <Avatar src={job?.image} alt={job?.company}>{job?.company[0]?.toUpperCase()}</Avatar>}
         </ListItemAvatar>
         <ListItemText
           primary={job?.jobTitle}

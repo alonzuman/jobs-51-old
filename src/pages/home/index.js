@@ -40,15 +40,15 @@ const Home = () => {
         <LogoContainer>
           <ShaldagLogo />
         </LogoContainer>
-        <Typography className='text__center mt-1' variant='h1'>{translation.homeText1}</Typography>
-        <Typography className='text__center' variant='body1'>{translation.landingPageText1}</Typography>
+        <Typography className='text__center mxw-512 mt-1' variant='body1'>{translation.homeText2}</Typography>
+        <Typography className='text__center mxw-512 mt-1' variant='body1'>{translation.homeText3}</Typography>
         <ButtonsContainer>
           <Link to='/jobs'>
-            <Button className='mt-1' variant='contained' color='primary'>
+            <Button size='large' className='mt-1' variant='contained' color='primary'>
               {translation.lookingForAJob}
             </Button>
           </Link>
-          <Button onClick={handleAddingJob} className='mt-1 mr-5' variant='outlined' color='primary'>
+          <Button size='large' onClick={handleAddingJob} className='mt-1 mr-5' variant='outlined' color='primary'>
             {translation.addJob}
           </Button>
         </ButtonsContainer>

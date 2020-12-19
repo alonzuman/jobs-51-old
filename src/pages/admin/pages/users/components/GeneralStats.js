@@ -7,7 +7,7 @@ import PageSectionTitle from '../../../../../components/atoms/PageSectionTitle';
 import { Bar } from 'react-chartjs-2';
 import { Skeleton } from '@material-ui/lab';
 import { Box, Divider, Typography } from '@material-ui/core';
-import { numberWithCommas } from '../../../../../utils';
+import { roundValue } from '../../../../../utils';
 
 const GeneralStats = () => {
   const { region } = useCurrentUser();
@@ -84,11 +84,11 @@ const GeneralStats = () => {
           <PageSectionTitle title={translation.totalActivityHours} />
           <Box className='mt-1' display='flex' alignItems='center' justifyContent='space-around'>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{approvedActivityHoursCount}</Typography>
+              <Typography variant='h1'>{roundValue(approvedActivityHoursCount)}</Typography>
               <Typography variant='subtitle1'>{translation.approvedHours}</Typography>
             </Box>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{pendingActivityHoursCount}</Typography>
+              <Typography variant='h1'>{roundValue(pendingActivityHoursCount)}</Typography>
               <Typography variant='subtitle1'>{translation.pendingHours}</Typography>
             </Box>
           </Box>
@@ -97,11 +97,11 @@ const GeneralStats = () => {
           <PageSectionTitle title={translation.volunteers} />
           <Box className='mt-1' display='flex' alignItems='center' justifyContent='space-around'>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{numberWithCommas(volunteersCount)}</Typography>
+              <Typography variant='h1'>{volunteersCount}</Typography>
               <Typography variant='subtitle1'>{translation.approvedVolunteers}</Typography>
             </Box>
             <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-              <Typography variant='h1'>{numberWithCommas(pendingUsersCount)}</Typography>
+              <Typography variant='h1'>{pendingUsersCount}</Typography>
               <Typography variant='subtitle1'>{translation.pendingVolunteers}</Typography>
             </Box>
           </Box>

@@ -132,18 +132,16 @@ export const isObjectEmpty = object => {
   return Object.keys(object).length === 0 && object.constructor === Object
 }
 
-export const numberWithCommas = number => {
-  if (number > 999) {
-    const splitNumber = number.toString().split('')
-    const fixedNumber = splitNumber.reverse().map((v, i) => {
-      if ((i + 1) % 3 === 0) {
-        return `,${v}`
-      } else {
-        return v
-      }
-    }).reverse().join('')
-    return fixedNumber;
+export const roundValue = (val) => {
+console.log(val);
+
+  if (val >= 1000000) {
+    const rounded = (val / 1000000).toFixed(2);
+    return `${rounded}m`
+  } else if (val >= 1000) {
+    const rounded = (val / 1000).toFixed(2);
+    return `${rounded}k`
   } else {
-    return number;
+    return val.toFixed(2);
   }
 }
