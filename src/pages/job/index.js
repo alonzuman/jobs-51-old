@@ -11,6 +11,7 @@ import JobPageHeader from './components/JobPageHeader'
 import JobPageJobsCarousel from './components/JobPageJobsCarousel'
 import JobPageUserDetails from './components/JobPageUserDetails'
 import { useHistory } from 'react-router-dom'
+import JobPageImages from './components/JobPageImages'
 // import JobActions from './components/JobActions'
 
 const Job = ({ match }) => {
@@ -47,6 +48,7 @@ const Job = ({ match }) => {
         subtitle={subtitle}
       />
       <JobPageDetails loading={isLoading} job={job} />
+      <JobPageImages images={job?.images} />
       {/* <JobActions editing={false} job={job} loading={isLoading} /> */}
       <JobPageUserDetails loading={isLoading} job={job} />
       <JobPageJobsCarousel loading={isLoading} jobs={job?.similarJobs?.filter(v => v.id !== jid)} />
