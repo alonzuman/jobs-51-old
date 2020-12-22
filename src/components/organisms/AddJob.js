@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem, Typography, DialogContent } from '@material-ui/core'
+import { TextField, Button, Grid, CircularProgress, Select, FormControl, InputLabel, MenuItem, Typography, DialogContent, Box } from '@material-ui/core'
 import FileUploader from '../atoms/FileUploader'
 import { useSelector, useDispatch } from 'react-redux'
 import { addJob } from '../../actions'
@@ -10,8 +10,10 @@ import DialogActionsContainer from '../atoms/DialogActionsContainer'
 import CircularProgressWithLabel from '../atoms/CircularProgressWithLabel'
 import useJobsConstants from '../../hooks/useJobsConstants'
 import useCurrentUser from '../../hooks/useCurrentUser'
+import FilesUploader from '../atoms/FilesUploader'
 
 const AddJob = ({ onClose }) => {
+  const fileName = uuidv4();
   const { translation } = useSelector(state => state.theme)
   const { isAdding } = useSelector(state => state.jobs)
   const { industries } = useJobsConstants();
@@ -21,8 +23,9 @@ const AddJob = ({ onClose }) => {
   const [industry, setIndustry] = useState(industries[0])
   const [location, setLocation] = useState('')
   const [isUploading, setIsUploading] = useState(false)
-  const [progress, setProgress] = useState(0)
+  // const [progress, setProgress] = useState(0)
   const [image, setImage] = useState('')
+  const [images, setImages] = useState([]);
   const [skills, setSkills] = useState([])
   const [job, setJob] = useState({
     jobTitle: '',
@@ -49,6 +52,7 @@ const AddJob = ({ onClose }) => {
       location,
       skills,
       uid,
+      images,
       user: {
         firstName: firstName || '',
         lastName: lastName || '',
@@ -69,19 +73,12 @@ const AddJob = ({ onClose }) => {
     }
   }
 
-  const thumbnailStyle = {
-    width: '36px',
-    height: '36px',
-    objectFit: 'cover',
-    margin: '0 1rem'
-  }
-
   return (
     <form className='flex flex__column full__height' onSubmit={handleJobSubmit}>
       <DialogContent className='flex__4'>
-        {isUploading && <CircularProgressWithLabel value={progress} />}
-        {!isUploading && <FileUploader fileName={uuidv4()} folder='job-images' setImageUrl={setImage} setIsUploading={setIsUploading} setProgress={setProgress} />}
-        {image.trim().length > 0 && <img style={thumbnailStyle} src={image} alt='Company avatar' />}
+        <Box marginBottom={1}>
+          <FilesUploader fileName={fileName} folder='job-images' images={images} setImages={setImages} />
+        </Box>
         <TextField label={translation.jobTitle} placeholder={translation.jobTitlePlaceholder} className='w-264' size='small' variant='outlined' name='jobTitle' value={job['jobTitle']} onChange={handleJobChange} />
         <Grid container spacing={1} className='flex align__end'>
           <Grid item xs={6}>

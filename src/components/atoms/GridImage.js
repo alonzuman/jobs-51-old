@@ -6,13 +6,14 @@ const Image = styled.img`
   object-fit: cover;
   height: 100%;
   width: 100%;
+  max-height: 328px;
   transition: all .15s ease-in-out;
   border-radius: 16px;
   padding: 4px;
   cursor: pointer;
 
   &:hover {
-    filter: brightness(.5);
+    filter: brightness(.9);
   }
 `
 

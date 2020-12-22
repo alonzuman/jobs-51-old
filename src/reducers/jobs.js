@@ -128,7 +128,7 @@ export const jobsReducer = (state = initialState, action) => {
     case ADD_SAVED_ONE:
       return {
         ...state,
-        savedJobs: [...state.savedJobs, payload],
+        savedJobs: [...state?.savedJobs, payload],
         loading: false
       }
     case DELETE_SAVED_ONE:

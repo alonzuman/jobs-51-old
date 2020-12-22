@@ -77,6 +77,8 @@
   "orWithEmail": "או התחברו באמצעות כתובת דוא״ל",
   "images": "תמונות",
   "image": "תמונה",
+  "uploadPhotos": "העלאת תמונות",
+  "areYouSureDeletePhoto": "האם את/ה בטוח/ה שברצונכם למחוק תמונה זו?",
   "accountAlreadyExistsWithEmail": "קיים כבר משתמש עם כתובת הדוא״ל הזו",
   "findJob": "מאגר עבודות",
   "findAJob": "מציאת משרה",
