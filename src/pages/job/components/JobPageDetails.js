@@ -43,7 +43,7 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
     return (
       <PageSection>
         <Divider className='mb-1' />
-        <Typography variant='h4' className='mb-1 primary__color'>{translation.postedTime} {timeAgo()}</Typography>
+        <Typography variant='h4' className='mb-1 primary__color'>{timeAgo()}</Typography>
         <PageSectionTitle title={translation.jobDescription} />
         <Typography className='mb-1 text__wrap' variant='body1'>{job?.description}</Typography>
         {job?.skills && job?.skills?.length !== 0 &&
