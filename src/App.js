@@ -13,8 +13,10 @@ import { CircularProgress } from '@material-ui/core'
 import ProtectedRouter from './ProtectedRouter'
 import useCurrentUser from './hooks/useCurrentUser';
 import useTheme from './hooks/useTheme';
+import useServiceWorker from './hooks/useServiceWorker';
 
 function App() {
+  useServiceWorker();
   const { isFetching, isFetched } = useCurrentUser();
   const { theme } = useTheme();
   const dispatch = useDispatch()
