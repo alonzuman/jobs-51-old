@@ -36,7 +36,7 @@ const JobPageJobsCarousel = ({ loading, jobs }) => {
         <Typography className='pr-1' variant='h2'>{translation.similarJobs}</Typography>
         <SwiperContainer>
           <Swiper spaceBetween={16} slidesPerView={slidesPerView}>
-            {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard job={v} /></SwiperSlide>)}
+            {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard showBorder={false} job={v} /></SwiperSlide>)}
           </Swiper>
         </SwiperContainer>
       </Container>

@@ -5,7 +5,7 @@ import 'moment/locale/he'
 import { Link } from 'react-router-dom';
 import IndustryIcons from '../atoms/IndustryIcons';
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, showBorder = true }) => {
   const timeAgo = () => {
     moment.locale('he')
     return moment(job?.dateCreated).fromNow()
@@ -25,7 +25,7 @@ const JobCard = ({ job }) => {
         />
         <Chip variant='outlined' color='primary' size='small' label={timeAgo()} />
       </ListItem>
-      <Divider />
+      {showBorder && <Divider />}
     </Link>
   )
 }

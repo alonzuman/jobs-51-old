@@ -30,7 +30,7 @@ const UserPageJobsCarousel = ({ user, loading }) => {
       <PageSection>
         <PageSectionTitle title={`${translation.jobsBy} ${user?.firstName} (${user?.jobs?.length})`} />
         <Swiper spaceBetween={16} slidesPerView={slidesPerView()}>
-          {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard job={v} /></SwiperSlide>)}
+          {jobs?.map((v, i) => <SwiperSlide key={i}><JobCard showBorder={false} job={v} /></SwiperSlide>)}
         </Swiper>
         <Divider className='mt-1' />
       </PageSection>

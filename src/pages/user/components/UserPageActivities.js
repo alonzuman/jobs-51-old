@@ -9,6 +9,9 @@ import { Skeleton } from '@material-ui/lab'
 
 const UserPageActivities = ({ user, loading, editing }) => {
   const { translation } = useSelector(state => state.theme)
+  const { volunteer } = user;
+
+  if (!volunteer) return null;
 
   if (loading) {
     return (
