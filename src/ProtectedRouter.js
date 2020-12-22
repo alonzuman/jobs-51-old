@@ -64,9 +64,6 @@ const ProtectedRouter = () => {
         <ProtectedRoute exact requiredRole='admin' path='/admin/general-management' component={GeneralManagement} />
         <ProtectedRoute exact requiredRole='admin' path='/admin/analytics' component={Analytics} />
 
-        {/* Notifications */}
-        <ProtectedRoute exact requiredRole='user' path='/:uid/notifications' component={Notifications} />
-
         {/* Static */}
         <ProtectedRoute exact path='/privacy-policy' component={PrivacyPolicy} />
 

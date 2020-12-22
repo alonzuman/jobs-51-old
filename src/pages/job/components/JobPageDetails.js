@@ -5,12 +5,17 @@ import { useSelector } from 'react-redux'
 import SkillsSelect from '../../../components/molecules/SkillsSelect'
 import PageSection from '../../../components/atoms/PageSection'
 import PageSectionTitle from '../../../components/atoms/PageSectionTitle'
-import SubSection from '../../../components/atoms/SubSection'
+import moment from 'moment'
 import useJobsConstants from '../../../hooks/useJobsConstants'
 
 const JobPageDetails = ({ loading, job, editing, description, setDescription, skills, setSkills, industry, setIndustry, error, helperText }) => {
   const { translation } = useSelector(state => state.theme)
   const { industries } = useJobsConstants()
+
+  const timeAgo = () => {
+    moment.locale('he')
+    return moment(job?.dateCreated).fromNow()
+  }
 
   if (loading) {
     return (
@@ -38,6 +43,7 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
     return (
       <PageSection>
         <Divider className='mb-1' />
+        <Typography variant='h4' className='mb-1 primary__color'>{translation.postedTime} {timeAgo()}</Typography>
         <PageSectionTitle title={translation.jobDescription} />
         <Typography className='mb-1 text__wrap' variant='body1'>{job?.description}</Typography>
         {job?.skills && job?.skills?.length !== 0 &&

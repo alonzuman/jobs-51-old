@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core'
+import { Box, Button, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Container from '../../components/atoms/Container'
@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AddJobDialog from '../../components/layout/AddJobDialog'
 import ShaldagLogo from '../../assets/art/ShaldagLogo'
+import JobsArt from '../../assets/art/JobsArt'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const HomeSection = styled.div`
   padding: 16px;
@@ -29,12 +31,13 @@ const ButtonsContainer = styled.div`
 
 const Home = () => {
   const { translation } = useSelector(state => state.theme)
+  const { windowHeight } = useWindowSize();
   const [isAddingJob, setIsAddingJob] = useState(false)
 
   const handleAddingJob = () => setIsAddingJob(!isAddingJob)
 
   return (
-    <Container>
+    <Box height={windowHeight} display='flex' flexDirection='column' maxWidth={768} margin='0 auto' padding={2}>
       <AddJobDialog open={isAddingJob} onClose={handleAddingJob} />
       <HomeSection className='flex flex__column align__center justify__center'>
         <LogoContainer>
@@ -52,8 +55,11 @@ const Home = () => {
             {translation.addJob}
           </Button>
         </ButtonsContainer>
+        <Box height='100%' maxHeight={256} maxWidth={512} width='100%' bottom={64} right={0} padding={4}>
+          <JobsArt />
+        </Box>
       </HomeSection>
-    </Container>
+    </Box>
   )
 }
 

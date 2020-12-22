@@ -37,7 +37,7 @@ const Jobs = () => {
           <JobsFilter />
         </PageSection>
         <PageSection>
-          <JobsList loading={isFetching} jobs={jobs} />
+          <JobsList isFetching={isFetching} isFetched={isFetched} jobs={jobs} />
           <LoadMoreButton
             loading={isFetchingMore}
             action={getJobs}

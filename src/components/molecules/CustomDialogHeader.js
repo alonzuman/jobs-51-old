@@ -14,13 +14,13 @@ const DialogHeader = styled.div`
   min-height: 65px;
 `
 
-const CustomDialogHeader = ({ title, exitButton, onClose }) => {
+const CustomDialogHeader = ({ title, onClose }) => {
   const { theme } = useTheme();
 
   return (
     <DialogHeader border={theme?.palette?.border?.strong}>
       <DialogTitle>{title}</DialogTitle>
-      {exitButton && <IconButton size='small' className='ml-5' onClick={onClose}><CloseIcon /></IconButton>}
+      {onClose && <IconButton size='small' className='ml-5' onClick={onClose}><CloseIcon /></IconButton>}
     </DialogHeader>
   )
 }

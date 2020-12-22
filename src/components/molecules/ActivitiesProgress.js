@@ -15,7 +15,7 @@ const AvatarContainer = styled.div`
   right: 4px;
 `
 
-const ActivitiesProgress = ({ approved, pending, children, size = 64 }) => {
+const ActivitiesProgress = ({ approved, pending, children, size = 64, onClick }) => {
   const { theme, translation } = useSelector(state => state.theme);
   const remainder = 100 - (approved + pending);
 
@@ -59,7 +59,7 @@ const ActivitiesProgress = ({ approved, pending, children, size = 64 }) => {
   }
 
   return (
-    <DoughnutContainer>
+    <DoughnutContainer onClick={onClick}>
       <Doughnut height={size} width={size} borderColor='#000' options={options} data={data} />
       <AvatarContainer>
         {children}

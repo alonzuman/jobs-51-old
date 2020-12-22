@@ -47,6 +47,12 @@ const dark = {
       color: "#f7f7f7",
       margin: "16px 0 8px 0"
     },
+    h4: {
+      fontSize: "1rem",
+      fontWeight: 500,
+      color: "#f7f7f7",
+      margin: "8px 0"
+    },
     subtitle1: {
       fontSize: ".75rem",
       color: "#f7f7f7"

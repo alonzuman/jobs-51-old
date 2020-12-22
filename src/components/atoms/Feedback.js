@@ -23,14 +23,13 @@ const Feedback = () => {
   if (isOn) {
     return (
       <Container onClick={handleClose}>
-        {isOn &&
         <Alert className='full__width' severity={type} onClose={handleClose}>
           {msg}
-        </Alert>}
+        </Alert>
       </Container>
     )
   } else {
-    return <div />
+    return null
   }
 }
 

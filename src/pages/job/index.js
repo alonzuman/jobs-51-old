@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJob } from '../../actions'
 
 // Sections
-import JobPageBadges from './components/JobPageBadges'
 import JobPageDetails from './components/JobPageDetails'
 import JobPageHeader from './components/JobPageHeader'
 import JobPageJobsCarousel from './components/JobPageJobsCarousel'
 import JobPageUserDetails from './components/JobPageUserDetails'
 import { useHistory } from 'react-router-dom'
-import JobActions from './components/JobActions'
+// import JobActions from './components/JobActions'
 
 const Job = ({ match }) => {
   const dispatch = useDispatch()
@@ -46,7 +45,6 @@ const Job = ({ match }) => {
         title={job?.jobTitle}
         subtitle={subtitle}
       />
-      {/* <JobPageBadges loading={isLoading} job={job} /> */}
       <JobPageDetails loading={isLoading} job={job} />
       {/* <JobActions editing={false} job={job} loading={isLoading} /> */}
       <JobPageUserDetails loading={isLoading} job={job} />

@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import qs from 'query-string'
-import { Button, Dialog, DialogActions, DialogContent } from '@material-ui/core'
+import React, { useContext, useState } from 'react'
+import { Button, Dialog, DialogContent } from '@material-ui/core'
 import CustomDialogHeader from '../molecules/CustomDialogHeader'
 import TuneIcon from '@material-ui/icons/Tune';
 import styled from 'styled-components'
@@ -11,7 +10,6 @@ import useWindowSize from '../../hooks/useWindowSize';
 import { JobsFilterContext } from '../../contexts/JobsFilterContext';
 import LocationFilter from '../../pages/Jobs/components/LocationFilter';
 import IndustryFilter from '../../pages/Jobs/components/IndustryFilter';
-import SkillsFilter from '../../pages/Jobs/components/SkillsFilter';
 import DatePostedFilter from '../../pages/Jobs/components/DatePostedFilter';
 
 const Container = styled.div`

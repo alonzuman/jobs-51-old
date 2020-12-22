@@ -51,6 +51,12 @@ const light = {
       color: "#3B3439",
       margin: "16px 0 8px 0"
     },
+    h4: {
+      fontSize: "1rem",
+      fontWeight: 500,
+      color: "#3B3439",
+      margin: "8px 0"
+    },
     subtitle1: {
       fontSize: ".75rem",
       color: "#9c9c9c"

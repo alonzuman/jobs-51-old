@@ -8,11 +8,10 @@ import { getUserActivities } from '../../actions'
 import ActivityPageActivitiesList from './components/ActivityPageActivitiesList'
 import Container from '../../components/atoms/Container'
 import PageHeader from '../../components/organisms/PageHeader'
-import { Avatar } from '@material-ui/core'
 import PageSection from '../../components/atoms/PageSection'
 import AreYouVolunteerDialog from '../../components/layout/AreYouVolunteerDialog'
 import useCurrentUser from '../../hooks/useCurrentUser'
-import ActivitiesProgress from '../../components/molecules/ActivitiesProgress'
+import ActivityPageAvatar from './components/ActivityPageAvatar'
 
 const Activity = ({ match }) => {
   const [addingActivity, setAddingActivity] = useState(false)
@@ -44,9 +43,7 @@ const Activity = ({ match }) => {
         <PageHeader
           loading={authLoading}
           title={translation.activity}
-          secondary={<ActivitiesProgress approved={activities.approved} pending={activities.pending}>
-            <Avatar className='avatar__md' src={avatar}>{firstName?.charAt(0)}</Avatar>
-          </ActivitiesProgress>}
+          secondary={<ActivityPageAvatar />}
           className='mb-1'
         />
       </PageSection>

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteJob, getJob, updateJob } from '../../actions'
 
 // Sections
-import JobPageBadges from './components/JobPageBadges'
 import JobPageDetails from './components/JobPageDetails'
 import JobPageHeader from './components/JobPageHeader'
 import JobPageJobsCarousel from './components/JobPageJobsCarousel'

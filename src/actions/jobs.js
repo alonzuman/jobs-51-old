@@ -8,7 +8,7 @@ const Jobs = db.collection('jobs')
 
 export const getSavedJobs = (uid) => async dispatch => {
   dispatch({
-    type: LOADING
+    type: FETCHING_JOBS
   })
   try {
     const jobsSnapshot = await Jobs.where('savedIds', 'array-contains', uid).orderBy('dateCreated', 'desc').get()

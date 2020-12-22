@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress, Divider, ListItem, ListItemIcon, List, Switch, Typography, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
+import { Button, CircularProgress, Divider, ListItem, ListItemIcon, List, Switch, Typography, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -12,10 +12,11 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import InfoIcon from '@material-ui/icons/Info';
 import useCurrentUser from '../../hooks/useCurrentUser'
+import ActivityPageAvatar from '../Activity/components/ActivityPageAvatar'
 
 const Profile = () => {
   const { translation, theme } = useSelector(state => state.theme)
-  const { loading, uid, avatar, firstName } = useCurrentUser()
+  const { loading, uid } = useCurrentUser()
   const dispatch = useDispatch()
 
   const handleToggleTheme = () => {
@@ -33,7 +34,7 @@ const Profile = () => {
       <Container>
         <PageSection>
           <PageHeader
-            secondary={<Link to={`/users/${uid}`}><Avatar className='avatar__md' src={avatar} alt={firstName}>{firstName.charAt(0)}</Avatar></Link>}
+            secondary={<ActivityPageAvatar />}
             spaceTop
             spaceBottom
             title={translation.profile}

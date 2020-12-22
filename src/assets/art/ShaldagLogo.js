@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import useTheme from '../../hooks/useTheme';
 
 const ShaldagLogo = ({ height = 134, width = 279 }) => {
@@ -15,10 +14,10 @@ const ShaldagLogo = ({ height = 134, width = 279 }) => {
             <path d="M213.921616,135.216892 C239.041563,128.374331 261.275445,116.207246 280.623261,98.7156389 C280.335407,112.265713 280.335407,124.432798 280.623261,135.216892 L213.921616,135.216892 Z" id="Path-3"></path>
           </g>
           <text id="עמותת" fontFamily="Assistant-SemiBold, Assistant" fontSize="24" fontWeight="500" fill={theme.palette.secondary.main}>
-            <tspan x="111.528" y="129">עמותת</tspan>
+            <tspan x="118" y="129">עמותת</tspan>
           </text>
           <text id="יוצאי-שלדג" fontFamily="Assistant-Regular, Assistant" fontSize="24" fontWeight="normal" fill={theme.palette.primary.main}>
-            <tspan x="9.992" y="129">יוצאי שלדג</tspan>
+            <tspan x="10" y="129">יוצאי שלדג</tspan>
           </text>
         </g>
       </g>

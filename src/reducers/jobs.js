@@ -107,7 +107,8 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         savedJobs: [...payload.jobs],
-        loading: false
+        isFetching: false,
+        isFetched: true
       }
     case ADD_ONE:
       return {

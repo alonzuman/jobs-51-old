@@ -7,10 +7,10 @@ import { Link, useHistory } from 'react-router-dom'
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import SearchIcon from '@material-ui/icons/Search';
-import NotificationIcon from '../../molecules/NotificationIcon'
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import useCurrentUser from '../../../hooks/useCurrentUser'
 import useTheme from '../../../hooks/useTheme'
+import { FavoriteBorderOutlined } from '@material-ui/icons';
 
 const MobileNavbar = () => {
   const history = useHistory()
@@ -18,9 +18,11 @@ const MobileNavbar = () => {
   const { theme, translation } = useTheme();
   const [value, setValue] = useState(history.location.pathname);
 
-  useEffect(() => {
-    setValue(history.location.pathname)
-  }, [history.location.pathname])
+  history.listen(location => {
+    const { pathname } = location;
+    console.log(pathname)
+    setValue(pathname)
+  })
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -47,13 +49,14 @@ const MobileNavbar = () => {
           value='/home'
           icon={<SearchIcon />}
         />}
-      <BottomNavigationAction
-        label={translation.notifications}
-        component={Link}
-        to={`/${uid}/notifications`}
-        value={`/${uid}/notifications`}
-        icon={<NotificationIcon />}
-      />
+      {checkPermissions(role) >= 3 &&
+        <BottomNavigationAction
+          label={translation.savedJobs}
+          component={Link}
+          to={`/${uid}/saved`}
+          value={`/${uid}/saved`}
+          icon={<FavoriteBorderOutlined />}
+        />}
       {volunteer &&
         <BottomNavigationAction
           label={translation.activity}

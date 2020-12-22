@@ -9,7 +9,7 @@ import PageHeader from '../../components/organisms/PageHeader'
 const Saved = ({ match }) => {
   const { translation } = useSelector(state => state.theme)
   const { uid } = match.params
-  const { loading, savedJobs, currentUid } = useSelector(state => state.jobs)
+  const { isFetching, isFetched, savedJobs, currentUid } = useSelector(state => state.jobs)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -21,9 +21,11 @@ const Saved = ({ match }) => {
   return (
     <Container>
       <PageSection>
-        <PageHeader backButton title={translation.savedJobs} loading={loading} />
+        <PageHeader title={translation.savedJobs} loading={isFetching} />
       </PageSection>
-      <JobsList loading={loading} jobs={savedJobs} />
+      <PageSection>
+        <JobsList isFetched={isFetched} isFetching={isFetching} jobs={savedJobs} type='saved' />
+      </PageSection>
     </Container>
   )
 }

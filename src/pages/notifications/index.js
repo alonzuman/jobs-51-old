@@ -12,30 +12,25 @@ const Notifications = ({ match }) => {
   const { translation } = useSelector(state => state.theme)
   const { all, isFetching } = useSelector(state => state.notifications)
 
-  const newNotifications = all?.filter (v => !v.seen)
+  const newNotifications = all?.filter(v => !v.seen)
   const oldNotifications = all?.filter(v => v.seen)
 
   if (isFetching) {
     return (
       <Container>
         <PageSection>
-          <PageHeader loading/>
+          <PageHeader loading />
         </PageSection>
       </Container>
     )
   } else {
     return (
-      <Container>
-        <PageSection>
-          <PageHeader
-            title={translation.notifications}
-          />
-        </PageSection>
-        <PageSection>
+      <Container paddingBottom='16'>
+        <PageSection transparent>
           <PageSectionTitle subtitle={translation.newNotifications} />
           <NotificationsList loading={isFetching} all={newNotifications} />
         </PageSection>
-        <PageSection>
+        <PageSection transparent>
           <PageSectionTitle subtitle={translation.oldNotifications} />
           <NotificationsList loading={isFetching} all={oldNotifications} />
         </PageSection>
