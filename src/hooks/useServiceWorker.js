@@ -5,7 +5,7 @@ const useServiceWorker = () => {
   useEffect(() => {
     serviceWorker.register({
       onUpdate: () => {
-        console.log('update available');
+        console.log('Updating');
         return window.location.reload();
       }
     })

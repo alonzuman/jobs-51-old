@@ -20,7 +20,6 @@ const MobileNavbar = () => {
 
   history.listen(location => {
     const { pathname } = location;
-    console.log(pathname)
     setValue(pathname)
   })
 
