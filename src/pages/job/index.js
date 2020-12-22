@@ -43,6 +43,7 @@ const Job = ({ match }) => {
         loading={isLoading}
         job={job}
         title={job?.jobTitle}
+        image={job?.image}
         subtitle={subtitle}
       />
       <JobPageDetails loading={isLoading} job={job} />

@@ -44,7 +44,7 @@ const FlexFields = styled.div`
   align-items: center;
 `
 
-const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompany, title, setTitle, subtitle, setSubtitle, avatar, setAvatar, ...rest }) => {
+const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompany, title, setTitle, subtitle, setSubtitle, image, ...rest }) => {
   const { translation } = useSelector(state => state.theme)
 
   if (editing) {
@@ -74,7 +74,7 @@ const JobPageHeader = ({ editing, loading, job, handleEditing, company, setCompa
           subtitleType='location'
           title={title}
           subtitle={subtitle}
-          secondary={<Avatar className='avatar__md clickable' src={avatar}>{company?.charAt(0)}</Avatar>}
+          secondary={<Avatar className='avatar__md clickable' src={image}>{company?.charAt(0)}</Avatar>}
           action={<JobPageHeaderActions editing={editing} job={job} handleEditing={handleEditing} />}
           {...rest}
         />
