@@ -2,7 +2,7 @@ import { db } from "../firebase";
 import { setFeedback } from "./feedback";
 import firebase from 'firebase'
 import store from '../store'
-import { ADDED_ACTIVITY_TYPE, ADDED_REGION, DELETED_ACTIVITY_TYPE, DELETED_REGION, DELETING_REGION, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_JOB_INDUSTRIES, FETCHING_LISTED_JOB_LOCATIONS, FETCHING_LISTED_JOB_SKILLS, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_SKILLS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_JOB_INDUSTRIES, SET_LISTED_JOB_LOCATIONS, SET_LISTED_JOB_SKILLS, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_SKILLS, SET_STATS, UPDATING_ACTIVITY_TYPES, UPDATING_LOCATIONS } from "../reducers/constants";
+import { ADDED_ACTIVITY_TYPE, ADDED_REGION, DELETED_ACTIVITY_TYPE, DELETED_REGION, DELETING_REGION, ERROR, FETCHING_ACTIVITY_TYPES, FETCHING_CATEGORIES_OBJECT, FETCHING_JOB_INDUSTRIES, FETCHING_LISTED_JOB_LOCATIONS, FETCHING_LISTED_JOB_SKILLS, FETCHING_LISTED_MEMBERS, FETCHING_LOCATIONS, FETCHING_SKILLS, FETCHING_STATS, SET_ACTIVITY_TYPES, SET_CATEGORIES_OBJECT, SET_JOB_INDUSTRIES, SET_LISTED_JOB_LOCATIONS, SET_LISTED_JOB_SKILLS, SET_LISTED_MEMBERS, SET_LOCATIONS, SET_SKILLS, SET_STATS, UPDATING_ACTIVITY_TYPES, UPDATING_LOCATIONS } from "../reducers/constants";
 const { translation } = store.getState().theme
 const Constants = db.collection('constants')
 
@@ -219,6 +219,7 @@ export const getJobsConstants = () => async dispatch => {
     const industriesSnapshot = await Constants.doc('industries').get();
     const listedJobLocationsSnapshot = await Constants.doc('listedJobLocations').get();
     const listedJobSkillsSnapshot = await Constants.doc('listedJobSkills').get();
+    const categoriesSnapshot = await Constants.doc('industriesObject').get()
 
     dispatch({
       type: SET_JOB_INDUSTRIES,
@@ -231,6 +232,10 @@ export const getJobsConstants = () => async dispatch => {
     dispatch({
       type: SET_LISTED_JOB_SKILLS,
       payload: listedJobSkillsSnapshot.data()
+    });
+    dispatch({
+      type: SET_CATEGORIES_OBJECT,
+      payload: categoriesSnapshot.data()
     })
   } catch (error) {
     console.log(error)

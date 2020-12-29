@@ -1,4 +1,4 @@
-import { Chip, Divider, FormControl, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import { Chip, Divider, FormControl, Grid, Link, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -16,6 +16,8 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
     moment.locale('he')
     return moment(job?.dateCreated).fromNow()
   }
+
+  const handleLinkClick = () => window.open(job?.href, '_blank');
 
   if (loading) {
     return (
@@ -57,6 +59,11 @@ const JobPageDetails = ({ loading, job, editing, description, setDescription, sk
           <PageSection disableGutters>
             <Typography variant='subtitle1'>{translation.industry}</Typography>
             <Typography variant='body1'>{job?.industry}</Typography>
+          </PageSection>}
+          {job?.href &&
+          <PageSection disableGutters spaceBottom>
+            <Typography variant='subtitle1'>{translation.href}</Typography>
+            <Link style={{ cursor: 'pointer' }} onClick={handleLinkClick}>{job?.href}</Link>
           </PageSection>}
       </PageSection>
     )

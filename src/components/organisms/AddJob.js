@@ -11,6 +11,7 @@ import CircularProgressWithLabel from '../atoms/CircularProgressWithLabel'
 import useJobsConstants from '../../hooks/useJobsConstants'
 import useCurrentUser from '../../hooks/useCurrentUser'
 import FilesUploader from '../atoms/FilesUploader'
+import { Title } from '@material-ui/icons'
 
 const AddJob = ({ onClose }) => {
   const fileName = uuidv4();
@@ -19,7 +20,7 @@ const AddJob = ({ onClose }) => {
   const { industries } = useJobsConstants();
   const dispatch = useDispatch()
   const { uid, firstName, lastName, avatar: userAvatar, role, email, phone, serviceYear } = useCurrentUser()
-  const [skillsError, setSkillsError] = useState('')
+  const [errors, setErrors] = useState({})
   const [industry, setIndustry] = useState(industries[0])
   const [location, setLocation] = useState('')
   const [isUploading, setIsUploading] = useState(false)
@@ -43,6 +44,13 @@ const AddJob = ({ onClose }) => {
     })
   }
 
+  const setFieldError = (field) => {
+    return setErrors({
+      errors,
+      [field]: translation.categoryError
+    })
+  }
+
   const handleJobSubmit = async e => {
     e.preventDefault()
     const jobToAdd = {
@@ -63,13 +71,14 @@ const AddJob = ({ onClose }) => {
         serviceYear: serviceYear || ''
       }
     }
-    if (skills.length === 0) {
-      setSkillsError(translation.categoryError)
-    } else {
-      await dispatch(addJob(jobToAdd))
-      if (onClose) {
-        onClose()
-      }
+
+    if (job.jobTitle.length === 0) return setFieldError('jobTitle')
+    if (!location) return setFieldError('location')
+    if (skills.length === 0) return setFieldError('skills')
+
+    await dispatch(addJob(jobToAdd))
+    if (onClose) {
+      return onClose()
     }
   }
 
@@ -79,7 +88,7 @@ const AddJob = ({ onClose }) => {
         <Box marginBottom={1}>
           <FilesUploader fileName={fileName} folder='job-images' images={images} setImages={setImages} />
         </Box>
-        <TextField label={translation.jobTitle} placeholder={translation.jobTitlePlaceholder} className='w-264' size='small' variant='outlined' name='jobTitle' value={job['jobTitle']} onChange={handleJobChange} />
+        <TextField error={Boolean(errors.jobTitle)} helperText={Boolean(errors.jobTitle)} label={translation.jobTitle} placeholder={translation.jobTitlePlaceholder} className='w-264' size='small' variant='outlined' name='jobTitle' value={job['jobTitle']} onChange={handleJobChange} />
         <Grid container spacing={1} className='flex align__end'>
           <Grid item xs={6}>
             <TextField size='small' required label={translation.companyName} variant='outlined' value={job['company']} name='company' onChange={handleJobChange} />
@@ -95,7 +104,7 @@ const AddJob = ({ onClose }) => {
         </Grid>
         <Grid container spacing={1}>
           <Grid item xs={6}>
-            <LocationSelect size='small' location={location} setLocation={setLocation} />
+            <LocationSelect size='small' location={location} setLocation={setLocation} error={Boolean(errors.location)} helperText={errors.location} />
           </Grid>
           <Grid item xs={6}>
             <TextField size='small' required label={translation.contactPerson} variant='outlined' value={job['contactPerson']} name='contactPerson' onChange={handleJobChange} />
@@ -110,7 +119,8 @@ const AddJob = ({ onClose }) => {
           </Grid>
         </Grid>
         <TextField size='small' required multiline rows={4} label={translation.description} variant='outlined' value={job['description']} name='description' onChange={handleJobChange} />
-        <SkillsSelect size='small' error={Boolean(skillsError)} helperText={skillsError} skills={skills} setSkills={setSkills} />
+        <TextField size='small' label={translation.href} variant='outlined' value={job['href']} name='href' onChange={handleJobChange} />
+        <SkillsSelect size='small' error={Boolean(errors.skills)} helperText={errors.skills} skills={skills} setSkills={setSkills} />
       </DialogContent>
       <DialogActionsContainer>
         <Button

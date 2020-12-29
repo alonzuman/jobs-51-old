@@ -4,11 +4,12 @@ import { getJobsConstants, getSkills } from '../actions';
 
 const useJobsConstants = () => {
   const dispatch = useDispatch()
-  const { listedJobLocations, listedJobSkills, jobIndustries, skills } = useSelector(state => state.constants);
+  const { categoriesObject, listedJobLocations, listedJobSkills, jobIndustries, skills } = useSelector(state => state.constants);
   const { isFetching: locationsFetching, isFetched: locationsFetched, all: listedLocations } = listedJobLocations;
   const { isFetching: listedSkillsFetching, isFetched: listedSkillsFetched, all: listedSkills } = listedJobSkills;
   const { isFetching: skillsFetching, isFetched: skillsFetched, all: allSkills } = skills;
   const { isFetching: industriesFetching, isFetched: industriesFetched, all: industries } = jobIndustries;
+  const { isFetching: categoriesFetching, isFetched: categoriesFetched, all: categories } = categoriesObject;
 
   const isFetching = locationsFetching || listedSkillsFetching || industriesFetching || skillsFetching;
   const isFetched = locationsFetched || listedSkillsFetched || industriesFetched || skillsFetched;
@@ -31,7 +32,8 @@ const useJobsConstants = () => {
     listedLocations,
     listedSkills,
     industries,
-    skills
+    skills,
+    categories
   }
 }
 

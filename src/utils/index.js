@@ -133,7 +133,7 @@ export const isObjectEmpty = object => {
 }
 
 export const roundValue = (val) => {
-console.log(val);
+  console.log(val);
 
   if (val >= 1000000) {
     const rounded = (val / 1000000).toFixed(2);
@@ -144,4 +144,26 @@ console.log(val);
   } else {
     return val.toFixed(2);
   }
+}
+
+export const checkProfileStrength = user => {
+  let strength = 0;
+
+  if (user.phone) {
+    strength += 5
+  }
+
+  if (user.avatar) {
+    strength += 1
+  }
+
+  if (user.lookingForJob) {
+    strength += 5
+  }
+
+  if (user.lastPosition) {
+    strength += 5
+  }
+
+  return strength;
 }

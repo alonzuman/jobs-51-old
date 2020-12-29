@@ -701,3 +701,7 @@ a:hover {
   height: 48px;
   width: 48px;
 }
+
+.job__CTA {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom))!important;
+}

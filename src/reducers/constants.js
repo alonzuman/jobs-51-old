@@ -53,6 +53,12 @@ const initialState = {
     isFetched: false,
     all: {}
   },
+
+  categoriesObject: {
+    isFetched: false,
+    isFetching: false,
+    all: {}
+  }
 }
 
 // Actions
@@ -64,6 +70,8 @@ export const FETCHING_SKILLS = 'CONSTANTS/FETCHING_SKILLS';
 export const FETCHING_JOB_INDUSTRIES = 'CONSTANTS/FETCHING_JOB_INDUSTRIES';
 export const FETCHING_LISTED_JOB_LOCATIONS = 'CONSTANTS/FETCHING_LISTED_JOB_LOCATIONS';
 export const FETCHING_LISTED_JOB_SKILLS = 'CONSTANTS/FETCHING_LISTED_JOB_SKILLS';
+export const FETCHING_CATEGORIES_OBJECT = 'CONSTANTS/FETCHING_CATEGORIES_OBJECT';
+export const FETCHED_CATEGORIES_OBJECT = 'CONSTANTS/FETCHED_CATEGORIES_OBJECT';
 
 export const SET_STATS = 'CONSTANTS/SET_STATS';
 export const SET_LISTED_MEMBERS = 'CONSTANTS/SET_LISTED_MEMBERS';
@@ -73,6 +81,7 @@ export const SET_ACTIVITY_TYPES = 'CONSTANTS/SET_ACTIVITY_TYPES';
 export const SET_JOB_INDUSTRIES = 'CONSTANTS/SET_JOB_INDUSTRIES';
 export const SET_LISTED_JOB_LOCATIONS = 'CONSTANTS/SET_LISTED_JOB_LOCATIONS';
 export const SET_LISTED_JOB_SKILLS = 'CONSTANTS/SET_LISTED_JOB_SKILLS';
+export const SET_CATEGORIES_OBJECT = 'CONSTANTS/SET_CATEGORIES_OBJECT';
 
 export const UPDATING_ACTIVITY_TYPES = 'CONSTANTS/UPDATING_ACTIVITY_TYPES';
 export const UPDATING_LOCATIONS = 'CONSTANTS/UPDATING_LOCATIONS';
@@ -162,6 +171,15 @@ export const constantsReducer = (state = initialState, action) => {
           isFetching: true
         }
       }
+    case FETCHING_CATEGORIES_OBJECT:
+      return {
+        ...state,
+        categoriesObject: {
+          ...state.categoriesObject,
+          isFetched: false,
+          isFetching: true
+        }
+      }
 
     case SET_STATS:
       return {
@@ -242,6 +260,16 @@ export const constantsReducer = (state = initialState, action) => {
         ...state,
         listedJobSkills: {
           ...state.listedJobSkills,
+          all: { ...payload },
+          isFetching: false,
+          isFetched: true
+        }
+      }
+    case SET_CATEGORIES_OBJECT:
+      return {
+        ...state,
+        categoriesObject: {
+          ...state.categoriesObject,
           all: { ...payload },
           isFetching: false,
           isFetched: true
