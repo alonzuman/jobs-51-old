@@ -22,6 +22,10 @@ const SocialMediaSignIn = () => {
         {translation.signInWithFacebook}
         <i className="fab mt-25 fa-facebook-f button-icon"></i>
       </Button>
+      <Button size='large' variant='outlined' className='button-style full-width' color='default' onClick={handleGoogleSignIn}>
+        {translation.signInWithGoogle}
+        <i className="fab mt-25 fa-google button-icon"></i>
+      </Button>
     </Container>
   )
 }
